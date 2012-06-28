@@ -1,0 +1,64 @@
+\chapter{Quantum Tomography}
+
+\section{Introduction}
+
+Quantum computing and quantum communication are rapidly exploding areas of modern computer science.
+
+Even though large classes of algorithms can be implemented efficiently using quantum computers, there is an important limitation that is a barrier to progress towards studying large quantum computers: state reconstruction. The hearth of this problem lies the fact that the end result of a quantum computation is a quantum state, and quantum states cannot be directly observed. In order to figure out what state a quantum computer produced as the result of computation one has to make a \emph{measurement} on it. A measurement in quantum physics has two characteristics: Firstly, even if the state of the system on which the measurement is made and the measurement itself are fully known, the outcome of a measurement is generally non-deterministic. It is also true therefore that, in most cases, a single measurement doesn't provide full information about the state of the system, so repeated measurements are needed. Secondly, a measurement destroys, or at the very least modifies the quantum state itself. This means that there is only a limited amount of information one can observe about the quantum state in any experiment. To overcome these problems physicists studying quantum systems usually produce several independent copies of the same system (equivalent to ``running'' a quantum computer several times), and make measurements on each of the independent copies. Reconstructing the state on the basis of this batch of non-deterministic measurement outcomes is a statistical inference problem known generally as \emph{state reconstruction} or \emph{quantum state tomography}.
+
+Technological and implementational constraints aside, a barrier in studying large, multipartite quantum systems today is that the number of independent copies required to accurately reconstruct the state via quantum tomography grows at least exponentially with the size (number of qubits) of the system. So even though a classically NP-complete algorithm can be implemented using polynomial number of quantum operations, reading out the result can still take exponentially long. Fortunately, in future practical applications of quantum computers, such as finding prime factors, rich prior information is available about the structure of the results, which can be exploited to speed up the tomography process.
+
+However, in current experimental quantum physics, when researchers invent, for example, a novel physical implementation of a quantum gate, they have to demonstrate that in multiple situations their equipment produces a state that resembles the theoretically predicted state with high fidelity. Often these implementations are imperfect and the produced state isn't quite exactly the desired state. To be able to measure the success of their implementations, experimenters often have to perform full quantum tomography, or quantum hypothesis testing \cite{ }, which is equally resource-intensive. Therefore any method that speeds these processes up may be of great practical importance.
+
+In this part of the thesis I will formally introduce the problem of quantum state tomography, provide Bayesian analysis of the problem and then propose a 
+
+\section{Overview of quantum statistics}
+
+quantum states
+
+An example of a simple, two-dimensional quantum state is the polarisation state of a single photon. A photon's polarisation is described by two components: its linear polarisation, that is whether it's polarised horizontally (denoted as $\vert H\rangle$), vertically ($\vert V \rangle$) or at an angle in between. Light can also have circular polarisation. The two extremes are left ($\vert R\rangle$) and right ($\vert R\rangle$) circular polarisation. A combination of linear and circular polarisation can be represented by a unit-length complex number $\vert\phi\rangle=a + b i$
+
+The polarisation state of a photon is indeed one of the most widely used physical model system used to demonstrate quantum phenomena on, and throughout this section I will use photons as an example to illustrate physical analogues of mathematical formalism. Other examples of quantum systems include \cite{} For recent reviews on the current state of experimental quantum physics see \cite{ }.
+
+The quantum state of a system cannot be directly observed, only via measurements performed on the system. Measurements in quantum physics have two distinctive features: the outcome is non-deterministic and performing a measurement alters the state of the system on which the measurement was performed.
+
+An example of a measurement in case of a photon would be letting it pass through a linear polarising filter. Depending on the state of the photon $\vert\phi\rangle$ and the measurement describing the filter $M_0,M_1$, the photon either `bounces back' from the filter or with a certain probability passes trough. By placing a photodetector after the polar filter one can record which one of these two outcomes happened. The probability of the two outcomes is governed by the state of the photon and the measurement itself.
+
+Crucially, measuring a quantum system alters the state.	This phenomenon is sometimes 
+
+For our purposes of quantum tomography we assume, that after one measurement has been made on a system, it's state is destroyed and we cannot use it anymore. Therefore after each measurement, once the outcome is recorded, the measured system is discarded, and a new, independent copy of the system is generated. 
+
+There are alternative approaches that use a sequence of measurements that only partially destroy the state; these approaches are referred to as weak or continuous measurement\cite{ }, and quantum control\cite{ }. Weak measurements are of high importance in quantum cryptanalysis\cite{ }. 
+
+In the previous paragraphs we have seen that quantum measurements are inherently non-deterministic in nature. But in some cases there is another source of uncertainty effecting the outcome of out measurements. We will call this other source classical uncertainty, and when both kinds of uncertainties are present, we will say that the quantum system is in a \emph{mixed state}. As an example, a quantum system in a mixed state can be a noisy source of photons that 50\% of the time produces a horizontally polarised photon, 50\% of the time a vertically polarised one, randomly.
+
+Let us now assume that we are given two such noisy sources. One produces state $\vert H \rangle$ with probability $\frac{1}{2}$ and $\vert V \rangle$ with probability $\frac{1}{2}$. The second experiment produces state $\frac{1}{\sqrt{2}}\vert H \rangle + \frac{1}{\sqrt{2}} \vert V \rangle$ or 
+$\frac{1}{\sqrt{2}}\vert H \rangle - \frac{1}{\sqrt{2}} \vert V \rangle$ randomly.
+Let's see what happens if we perform a measurement $\langle \phi \vert_0,\langle \phi \vert_0$ on the two noisy systems.
+
+\begin{equation}
+e = mc^2
+\end{equation}
+
+In both cases the probability of observing $0$ and $1$ is the same for both sources, and is a function of the measurement. We can therefore conclude that no matter what measurements we perform, there is no way to tell apart the two sources on the basis of observations. We therefore may call these two sources \emph{observationally equivalent}.  In more general terms, classical and quantum uncertainty cannot be disambiguated by observing a system. We can therefore define a equivalence classes of systems, and parametrise them via the so called density matrix $\rho$.
+
+As we have seen, the two noisy systems in the previous example were equivalent, and indeed they had we can describe them by the same density matrix $\rho=\frac{1}{2}I$. In the context of photon sources, such light source is called \emph{unpolarised}. There are several 'different' unpolarised light sources, but these are all equivalent observationally.
+
+
+
+\paragraph{Born rule}
+
+\paragraph{Bloch sphere representation} The centre of the Bloch sphere is the perfectly mixed state, whose density operator is proportional to identity $\rho=\frac{1}{D}I$. The surface of the sphere contains pure states. Of particular significance are 
+
+\subsection{Inference in quantum tomography}
+
+In theprevious section I described how the outcome of a measurement depends on the measurement and the state of the system. In quantum tomography are given a sequence of copies of an unknown state $\rho$, perform a known measurements on each of these copies and observe their outcomes. Determining the state from observations is a classical statistical inference problem.
+
+The first approaches to solving this inference problem tried directly 'inverting' the Born rule.	
+
+\subsection{optimal experiment design and active tomography}
+
+\section{Adaptive Bayesian Quantum Tomography}
+
+\section{Results}
+

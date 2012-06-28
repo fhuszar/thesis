@@ -1,0 +1,71 @@
+
+\part{Information geometry of probability distributions}
+
+\chapter{An introduction to scoring rules}
+
+In this section I describe scoring rules that can be used to assess the predictive performance of a probabilistic forecasting model. Later, as we will see, I will discuss how scoring rules allow for defining geometry of probabilistic models.
+
+Let's say we want to have build a probabilistic forecaster that predicts the value of a random quantity $/X$. We can describe any such probabilistic forecaster as a probability distribution $P(x)$ over the space of possible outcomes $\Xe$. After observing the outcome $X=x$ we want to assess how good our predictions were: scoring rule is a general term for a function that quantifies this: if the outcome was $X=x$, and our prediction was $P$ we incur a score $S(x,P)$. A score by convention is interpreted as a loss, so lower values are better. A widespread example of scoring rules is the logarithmic score, or simply the log score: $S_{\log}(x,P) = -\log P(\x)$. When comparing multiple probabilistic models, the score is often referred to as the negative log likelihood. I will give further examples of scoring rules in section \ref{}. Matematically scoring rule is any measurable function that maps an outcome-probability distribution pair onto real numbers: $s:\Xe\times\probmeasures{\Xe}\mapsto\mathcal{R}\cup\{\infty\}$.
+
+\section{Information quantities}
+ A scoring rule allows us to define the following, useful quantities:
+
+The first quantity is the generalised entropy of a distribution
+\begin{equation}
+	S[P] = \expect{x\sim P} S(x,P)\mbox{,}
+\end{equation}
+that measures how hard is it to predict the outcome on average, when true distribution $P$ is used as the forecasting model.
+
+A further quantity of interest is the divergence between two distributions $P$ and $Q$, defined as
+\begin{equation}
+	d[P] = \expect{x\sim P} S(x,Q) - \expect{x\sim P} S(x,Q)\mbox{,}
+\end{equation}
+which measures how much worse we are at forecasting a quantity $X$ sampled from a distribution $P$ when instead of using the true distribution $P$, we use an alternative model, $Q$. Ideally, you would expect that using the true model should always be better or at least as good as using any alternative model $Q$, but this is not automatically true for all scoring rules. A scoring rule that has this property is called a proper scoring rule.
+
+Definition with respect to a class of models $\Qe$, if  has this property, in other words if $d(P\|Q)\geq 0$ for all $P,Q\in\Qe$.
+
+Furthermore, if the inequality is always strict, the scoring rule is called strictly proper
+
+Definition with respect to a class of models $\Qe$, if  has this property, in other words if $d(P\|Q)>0$ for all $P,Q\in\Qe$.
+
+Example The log score is strictly proper for the class of continuous probability densities.
+
+\section{Examples of proper scoring rules}
+
+\subsection{The pseudolikelihood}
+
+Example: Markov random fields
+
+Example: Population genetics, infinite sites model
+
+\subsection{Local proper scoring rules}
+
+\subsection{Brier score}
+
+\subsection{kernel scoring rule}
+
+\chapter{Visualising information geometries}
+
+\chapter[score matching]{Score matching}
+
+\section{Infinite dimensional sampling spaces}
+
+\chapter[approximate inference]{The role of information geometry in approximate Bayesian inference}
+
+\chapter{Information-greedy Bayesian active learning}
+
+
+\subsection{Model fitting}
+Maximum likelihood, and related methods
+\subsubsection{Herding as scoring rule minimisation}
+Introduce herding as a form of maximising average proper scoring rules.
+\subsection{Approximate Bayesian inference}
+\subsubsection{Overview of existing approaches based on KL divergence and alpha divergence}
+variational, EP, power-EP, a generalisation of power-EP to general Bregman divergences
+\subsubsection{Loss-calibrated approximate inference}
+loss-calibrated Bayesian inference, examples of increasing sophistication from nuclear power plant toy example to something vaguely useful, such as loss-calibrated filtering
+\subsection{Bayesian experiment design}
+\subsubsection{General case}
+A criterion for active learning based on proper scoring rules, decision-theoretic active learning and entropy minimisation as special cases.
+\subsubsection{Shannon's entropy case}
+derivation of the BALD criterion and exploration of its properties.
