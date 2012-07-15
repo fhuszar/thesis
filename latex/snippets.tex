@@ -1,0 +1,25 @@
+\section{Differentiable approximate geodesic calculations}
+
+In order to perform embedding of a two-dimensional manifold into a three dimensional space, we would like to match geodesic distances in the embedding with that on the target manifold. Because we do not explicitly represent the manifold in the embedding, only via a set of points, we have to resort to approximations to geodesic distances. ISOMAP \cite{Tenenbaum} is a method designed to approximate geodesic distances from observed points in Euclidean spaces. It works as follows:
+
+\begin{enumerate}
+	\item compute pairwise Euclidean distances between points on the manifold.
+	\item Construct a sparse graph via $k$-nearest neighbours
+	\item Compute shortest paths between pairs of points, these will approximate geodesics
+	\item Output the matrix with length of approximate geodesics as geodesic distances
+\end{enumerate}
+
+We would like to optimise the location of points, with respect to an objective function that depends on the approximated geodesic distances. The problem becomes that in the ISOMAP algorithm estimated geodesics are a non-differentiable, and indeed not even continuous function of the location of points. There are two steps where discontinuity enters to the calculations. Firsty, the construction of the sparse graph via nearest neighbour technique, where certain edges are cut from the graph. Secondly, the length of the shortest path in a graph is a discontinuous function of the weight matrix. To overcome these limitations and allow for constructing a differentiable objective for numerical manifold embedding, we will approximate both of these discontinuous steps by applying continuous and differentiable functions.
+
+\section{Differentiable shortest path calculations}
+
+I start by  at Floyd-Warshall algorithm a particular sequential algorithm for computing shortest paths in weighted graphs.
+
+The algorithm is very simple, and the only matematical operations in it are addition and taking the minimum of two variables. If it weren't for this latter operation, the algorithm would be differentiable with respect to its inputs. Therefore our approach is going to be to replace the $\min$ function with a differentiable alternative, called $softmin$.
+
+\begin{equation}
+	\softmin_{\sharpness}(a,b) = \frac{a\exp(-\sharpness a) + b\exp(-\sharpness b)}{\exp(-\sharpness a)+\exp(-\sharpness b)}
+\end{equation}
+
+Reverse differentiating the soft-Floyd-Warshall (sFW) algorithm.
+

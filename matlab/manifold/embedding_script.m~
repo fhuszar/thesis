@@ -1,0 +1,13 @@
+% setting parameters
+
+params.n1 = 10;
+params.n2 = 10;
+params.min_theta1 = -1;
+params.max_theta1 = 1;
+params.min_theta2 = 0.2;
+params.max_theta2 = 1;
+
+n_lambdas = 10;
+lambdas = li
+lambdas = 
+for i=1:n_lambdas

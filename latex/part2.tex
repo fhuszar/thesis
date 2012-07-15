@@ -3,24 +3,24 @@
 
 \chapter{An introduction to scoring rules}
 
-In this section I describe scoring rules that can be used to assess the predictive performance of a probabilistic forecasting model. Later, as we will see, I will discuss how scoring rules allow for defining geometry of probabilistic models.
+In this section I describe scoring rules that can be used to assess the performance of probabilistic forecasting models. The scoring rule framework allows us to define useful generalisations of well-known information quantities, such as entropy, mutual information and divergence.  scoring rules allow for defining geometry of probabilistic models.
 
-Let's say we want to have build a probabilistic forecaster that predicts the value of a random quantity $/X$. We can describe any such probabilistic forecaster as a probability distribution $P(x)$ over the space of possible outcomes $\Xe$. After observing the outcome $X=x$ we want to assess how good our predictions were: scoring rule is a general term for a function that quantifies this: if the outcome was $X=x$, and our prediction was $P$ we incur a score $S(x,P)$. A score by convention is interpreted as a loss, so lower values are better. A widespread example of scoring rules is the logarithmic score, or simply the log score: $S_{\log}(x,P) = -\log P(\x)$. When comparing multiple probabilistic models, the score is often referred to as the negative log likelihood. I will give further examples of scoring rules in section \ref{}. Matematically scoring rule is any measurable function that maps an outcome-probability distribution pair onto real numbers: $s:\Xe\times\probmeasures{\Xe}\mapsto\mathcal{R}\cup\{\infty\}$.
+Let's say we want to have build a probabilistic forecaster that predicts the value of a random quantity $\X$. We can describe any such probabilistic forecaster as a probability distribution $P(x)$ over the space of possible outcomes $\Xe$. After observing the outcome $X=x$ we want to assess how good our predictions were: scoring rule is a general term for a function that quantifies this: if the outcome was $X=x$, and our prediction was $P$ we incur a score $S(x,P)$. A score by convention is interpreted as a loss, so lower values are better. A widespread example of scoring rules is the logarithmic score, or simply the log score: $S_{\log}(x,P) = -\log P(\x)$. When comparing multiple probabilistic models, the score is often referred to as the negative log likelihood. I will give further examples of scoring rules in section \ref{}. Matematically scoring rule is any measurable function that maps an outcome-probability distribution pair onto real numbers: $s:\Xe\times\probmeasures{\Xe}\mapsto\mathcal{R}\cup\{\infty\}$.
 
 \section{Information quantities}
- A scoring rule allows us to define the following, useful quantities:
+A scoring rule allows us to define the following, useful quantities:
 
 The first quantity is the generalised entropy of a distribution
 \begin{equation}
 	S[P] = \expect{x\sim P} S(x,P)\mbox{,}
 \end{equation}
-that measures how hard is it to predict the outcome on average, when true distribution $P$ is used as the forecasting model.
+that measures how hard is it to predict the outcome on average, when true distribution $P$ itself is used as the forecasting model.
 
 A further quantity of interest is the divergence between two distributions $P$ and $Q$, defined as
 \begin{equation}
 	d[P] = \expect{x\sim P} S(x,Q) - \expect{x\sim P} S(x,Q)\mbox{,}
 \end{equation}
-which measures how much worse we are at forecasting a quantity $X$ sampled from a distribution $P$ when instead of using the true distribution $P$, we use an alternative model, $Q$. Ideally, you would expect that using the true model should always be better or at least as good as using any alternative model $Q$, but this is not automatically true for all scoring rules. A scoring rule that has this property is called a proper scoring rule.
+which measures how much worse we are at forecasting a quantity $\X$ sampled from a distribution $P$ when instead of using the true distribution $P$, we use an alternative model, $Q$. Ideally, you would expect that using the true model should always be better or at least as good as using any alternative model $Q$, but this is not automatically true for all scoring rules. A scoring rule that has this property is called a proper scoring rule.
 
 Definition with respect to a class of models $\Qe$, if  has this property, in other words if $d(P\|Q)\geq 0$ for all $P,Q\in\Qe$.
 
@@ -44,13 +44,132 @@ Example: Population genetics, infinite sites model
 
 \subsection{kernel scoring rule}
 
+\paragraph{Note: MMD can be derived from a  loss-calibrated viewpoint}
+
+Let's say your task is to estimate value of a functions $f\in{\Fe}$ evaluated at $\theta$. The action can be interpreted as a functional $a:\Fe\mapsto\Reals$, that gives the estimated value of $f(\theta)$ for any function $f\in\Fe$. The loss $\loss$ you incur is equal to the maximal squared error you incur on any of these functions.
+
+\begin{equation}
+\loss(\theta, \action) \sup_{f\in\Fe}\left( f(\theta) - \action(f)\right)^2
+\end{equation}
+
+Given a probabilistic forecast $p$ over $\theta$, the Bayes optimal decision $\action(f)$ simply computes the mean of $f$ under the distribution $p$:
+
+\begin{equation}
+ \action^{*}_{p} = \int f(\theta)p(\theta)\,d\theta
+\end{equation}
+
+Thus, we can define the following scoring rule $S$:
+
+\begin{equation}
+	S(\theta,p) = \sup_{f\in\Fe}\left( f(\theta) - \int f(\theta)p(\theta)\,d\theta \right)^2
+\end{equation}
+
+When $\Fe$ is chosen to be the unit ball in a reproducing kernel Hilbert space $\He$ defined by a positive definite kernel $k$, this scoring rule will be equivalent to the kernel scoring rule for probability distributions:
+
+
+\subsection{Scoring rules based on general decision problems}
+
+The scoring rule framework is very flexible, in fact for every Bayes decision problem it is possible to derive a corresponding scoring rule as we will show in this section.
+
+Let us assume we are faced with a decision problem of the following form: We have to decide to take one of several possible actions $\action\in\actionset$. The loss/utility of our action will depend on the action we have chosen and on the state of the environment $\X$, the value of which is unknown to us. If the environment is in state $\X$, and we choose action $action$, we incur a loss $\loss(\X,\action)$. Let us assume we have a probabilistic forecast or belief $P(\x)$ about the state of the environment. Given this we can choose an action that minimises our expected loss:
+
+\begin{align}
+	\action^{*}_{P} = \argmax_{\action\in\actionset} \expect{\x\sim P} \loss(\x,\action)
+\end{align}
+
+When we observe the value of $\X$ we can score the probabilistic forecast, by evaluating the loss incurred by using this optimal action $\action^{*}_{P}$ in state $\X$.
+
+\begin{align}
+	\score(\x,P) = \loss(\x,\action^{*}_{P})
+\end{align}
+
+\chapter{Information geometry}
+
+\cite{Dawid} showed that 
+
 \chapter{Visualising information geometries}
+
+In this section I aim to develop an understanding of the differences between various scoring rules and corresponding divergence metrics by visualising the manifold structure they give rise to. For the purposes of illustration here I concentrate only on two-parameter families of distributions such as Gaussian distributions, as these define two-dimensional manifolds which can then be shown in a two dimensional pages of a thesis.
+
+Our goal is to create a two-dimensional map of particular manifolds in such a way that distances measured between points on the map correspond to geodesic distances measured along manifold as precisely as possible. First, it is important to understand that a perfect embedding of this sort does not always exists.
+
+Take the surface of a three-dimensional ball as an example. The sphere is a two-dimensional manifold, which can be parametrised by longitude and latitude. Still, it is impossible to stretch this surface out and represent it faithfully in two dimensional Cartesian coordinate system. This problem -- representing the surface of a three-dimensional object as part of a two-dimensional plane -- is in fact at the core of cartography, and is called \emph{map projection}. When drawing a full map of the surface of the Earth, usually the manifold has to be cut at certain places, but even then, the embedding is only approximate. There are various map projections used in cartography, and the purpose for which the map is used dictates what kind of distortions are tolerable, and what is not.
+
+Understanding that a perfect map of two-dimensional statistical manifolds cannot necessarily be produced, we will resort to approximate embedding techniques developed in the machine learning community. These approximate embedding procedures numerically find a \emph{stretched} manifold in two dimensions that best represents distances on the statistical manifold defined by a particular scoring rule and divergence.
+
+Using numerical isometric embedding techniques developed in the machine learning community, it is possible to visualise the differences between geometries induced by various scoring rules. To do this here we use a techniques called ISOMAP \cite{isomap}.
+
+\begin{enumerate}
+\item take a set of probability distributions, preferably so that they relatively densely cover an interesting part of the manifold
+\item compute pairwise symmetrised divergence matrix between the selected distributions
+\item compute approximate geodesics
+\item use metric multidimensional scaling technique embed distributions as points a two-dimensional space
+\end{enumerate}
+
+\subsection{Visualising the Shannon-information geometry}
+
+The most widely used divergence in statistics and machine learning is without doubt the Kullback-Leibler divergence. Here I show the geometry it induces on various parametric families of distributions.
+
+Let us start with a very simple, single parameter distribution, the Bernoulli. A Bernoulli distribution describes a binary random variable, where the parameter controls the probability of taking value $1$. In Figure \ref{fig:Bernoulli_manifold} I illustrate the differences between the KL divergence, and the Brier divergence, which corresponds simply to the Euclidean distance between parameter values. As we can see the KL divergence is more sensitive to differences in small (close to 0) and large (close to 1) probabilities, but puts less emphasis on.
+
+When using the KL divergence or the log-score in practical situations, such as in classification, we should therefore expect that much of the statistical power is going to be spent on faithfully matching small probabilities. This is not always desirable: Imagine we were to model the probability that users click on certain news articles on an on-line news website. In this application, most potential clicks have negligible probability, but some user-article combinations may have probabilities closer to $0.5$. If we are to build a recommender system based on this analysis, it is these large probabilities that will be of importance. In this case we are better off using the Brier-score, rather than the log-score which spends serious effort in modelling how small are the small probabilities exactly.
+
+Gaussian distributions are probably the most important family of distributions due to their convenient analytical properties. \TODO{further blah blah about this}
+The KL divergence between two univariate Gaussian distributions is available in a closed form and is given by the following formula:
+
+\begin{equation}
+	\KL{\Normal_{\mu_1,\sigma_1}}{\Normal_{\mu_2,\sigma_2}} = \frac{\left(\mu_1 - \mu_2\right)^2}{2\sigma_2^2} + \frac{1}{2}\left(\frac{\sigma_1^2}{\sigma_2^2} - 1 - \log\frac{\sigma_1^2}{\sigma_2^2}\right)
+\end{equation}
+
+
+Figure \ref{fig:normals_manifold} illustrates the manifold structure of normal distributions induced by the KL divergence. We can observe that assuming $p$ and $q$ have the same mean, the larger their variance, the easier it becomes to distinguish between them.
+
+We can look at the geometry Shannon's entropy induces within another two-parameter family of continuous distributions, Gamma distributions. Gamma distributions are strictly positive, their probability density function of Gamma distributions is as follows:
+
+\begin{equation}
+(x) = \beta^{\alpha}\frac{1}{\Gamma(\alpha)} x^{\alpha-1} \exp(-\beta x)
+\end{equation}
+
+where $\alpha,\beta > 0$ are called shape and rate parameters respectively. Special cases of Gamma distributions are exponential distributions when $\alpha=1$.
+
+The KL divergence between Gamma distributions can be computed in closed form and is given by the following formula:
+
+\begin{equation}
+	\KL{\Gamma_{\alpha_1,\beta_1}}{\Gamma_{\alpha_2,\beta_2}} = \left(\alpha_1 - \alpha_2\right)\psi\left(\alpha_1\right) - \log\frac{\Gamma(\alpha_1)}{\Gamma(\alpha_2)} + \alpha_1\log\frac{\beta_1}{\beta_2} + \alpha_1\frac{\beta_2 - \beta_1}{\beta_1} \label{eqn:KL_Gamma}
+\end{equation}
+
+Figure \ref{fig:Gama_embedding} shows the manifold of Gamma distributions for parameters $a \leq \alpha \leq b, c\leq \beta \leq d$. As we can see this manifold is less symmetric than that of the Gaussians.
+
+For large values of $\alpha$ the standard deviation of the distribution shrinks, and by the central limit theorem, the distribution converges to a Gaussian. We can illustrate this convergence in the manifold structure. For this we first reparametrise the Gamma distribution in terms of its mean and standard deviation. The mean and standard deviation of a Gamma distribution with parameters $\alpha$ and $\beta$ are given by the following formulae:
+
+\begin{align}
+	\mu &= \frac{\alpha}{\beta}\\
+	\sigma^2 &= \frac{\alpha}{\beta^2}
+\end{align}
+
+Solving for $\alpha$ and $\beta$ in these equations we get
+
+\begin{align}
+	\alpha &= \frac{\mu^2}{\sigma^2}\\
+	\beta &= \frac{\mu}{\sigma^2}
+\end{align}
+
+Plugging these into Eqn.\ \eqref{eqn:KL_Gamma} we can now map Gamma distributions with particular mean and variance. Figure 1 compares Normal and Gamma distributions with mean $\mu\in[0.5,1.5]$ and standard deviation $\sigma\in[0.1,1]$. We can observe that as the variance increases, the manifold of Gamma distributions shows a fan-like structure very similarly that of Normal distributions. However, for larger variance, the distributions look less Gaussian, and the manifold becomes more asymmetric. The effect of the central limit theorem would perhaps be even more prominent for smaller values of $\sigma$, but for those cases that case Eqn.\ \eqref{eqn:KL_Gamma} becomes numerically imprecise, as it relies on look-up-table implementation of the Gamma ($\Gamma$) and bigamma ($\psi$) functions.
+
+\subsection{Visualising geometries induced by divergences other than KL}
+
+
+
+
 
 \chapter[score matching]{Score matching}
 
+Not all manifolds can be faithfully embedded in a two-dimensional space this way. For example the surface of a two-dimensional sphere is a two dimensional Riemannian manifold, which is can perfectly isometrically represented in a three-dimensional space, but is distorted when embedded into two dimensions.
+
+
 \section{Infinite dimensional sampling spaces}
 
-\chapter[approximate inference]{The role of information geometry in approximate Bayesian inference}
+\input{approximateinference}
 
 \chapter{Information-greedy Bayesian active learning}
 

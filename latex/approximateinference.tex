@@ -1,0 +1,61 @@
+\chapter[approximate inference]{The role of information geometry in approximate Bayesian analysis}
+
+\section{Introduction}
+
+In practically interesting Bayesian models, the posterior is often computationally intractable to obtain and therefore one has to resort to approximate inference techniques. The most popular approximation methods are variational inference and Markov chain Monte Carlo.
+
+Variational methods operate by minimising an information theoretic divergence between a simple, often exponential family, distribution and the true posterior. The divergence is often chosen to be a form of Kullback-Leibler divergence, as it allows easy rearrangement of terms and makes local message-passing style computations possible. In section \ref{sec:losscalibrated} argue that when Bayesian inference is performed to solve a particular decision problem, these algorithms are sub-optimal as they are ignorant of the structure of losses. We devised a framework we termed loss-calibrated approximate inference \cite{}, which generalises traditional variational approaches by minimising generalised divergences based on scoring rules. I will demonstrate this framework on a loss-critical toy problem and on a well-known nonparametric Bayesian model, Gaussian process regression.
+
+Monte Carlo methods produce random samples (approximately) drawn from the posterior, which then allows for approximating relevant integrals over the posterior. Monte Carlo techniques are applicable to a wide variety of interesting Bayesian models, and allow for an intuitive trade-off between computation time and accuracy. However, just as most variational approaches, Monte Carlo techniques are also ignorant of the decisions and losses involved in a decision problem. In section \ref{sec:} I introduce a new class of approximate inference algorithms that I call loss-calibrated quasi-Monte Carlo methods. These algorithms produce a deterministic sequence of pseudo-samples in such a way, that the divergence between the empirical distribution of pseudosamples is minimised from the target distribution. I show how kernel herding, a recent algorithm proposed by \cite{kernelherding} can be seen as a special case of loss-calibrated quasi-Monte Carlo, and point out the connection between this method and Bayesian Quadrature.
+
+We can also argue, that when we cannot perform inference exactly, the usual practice of performing approximate inference and then using the approximate posterior to calculate a decision is weakly motivated. One may want to instead directly approximate the optimal decision, without producing a direct estimate of the posterior. Following our work published in \cite{Simonspaper}, I introduce approximate Bayesian decision theory, and derive an Expectation-Maximisation style variational algorithm for solving it. We illustrate the framework on Gaussian process classification, and present experimental comparisons to standard approaches based on approximate inference.
+
+The work presented in this chapter on loss-calibrated approximate inference and approximate decision theory is joint work with Simon Lacoste-Julien and Zoubin Ghahramani, and most of the results presented here have been published in \cite{losscalibrated}.
+The work presented on the equivalence between optimally weighted kernel herding and Bayesian Quadrature is joint work with David Duvenaud, and has been published \cite{losscalibrated}.
+
+\section{Loss-calibrated approximate inference}
+
+Although often overlooked, the main theoretical motivations for the Bayesian paradigm are rooted in Bayesian decision theory~\cite{berger85decision}, which provides a well-defined theoretical framework for rational decision making under uncertainty about a hidden parameter $\theta$. The ingredients of Bayesian decision theory are (see Ch.~2 of~\cite{robert01choice} or Ch.~1 of~\cite{berger85decision} for example):
+\vspace{-.3cm}
+\begin{itemize}
+  \item a (statistical) loss $\loss(\theta,\action)$ which gives the cost of taking action $\action \in \actionset$ when the world state is $\theta \in \Theta$; %\footnote{Note that $\theta$ is not assumed to be finite dimensional; in the most general setting, it could fully specify an arbitrary distribution over $\mathcal{O}$.};
+  \item an observation model $p(\dataset|\theta)$ which gives the probability of observing $\dataset \in \mathcal{O}$ assuming that the world state is $\theta$;
+  \item a prior belief $p(\theta)$ over world states.
+\end{itemize}
+
+The loss $\loss$ describes the decision task that we are interested in, whereas the observation model and the prior represent our beliefs about the world. Given these components, the ultimate objective for evaluating a possible action $\action$ after observing $\dataset$ is the \emph{expected posterior loss} (also called the \emph{posterior risk}~\cite{schervish95theory})
+
+\begin{equation}
+	\risk_{p_\dataset}(\action) \doteq \int_\Theta \loss(\theta, a) \, p(\theta|\dataset) d\theta
+\end{equation}
+
+In the Bayesian framework, the optimal action $\action_{p_\dataset}$ is the one that minimizes $\risk_{p_\dataset}$.
+
+
+
+In this framework it is therefore easy to see that Bayesian decision making decomposes into two separate computation. First, a posterior $p_\dataset$ is inferred from observed data $\dataset$, then the optimal action is selected by minimising risk under this posterior.
+
+In many practically relevant cases computing the posterior is not analytically tractable. There are two reasons. Either the marginal likelihood $ $
+cannot be computed analytically in closed form, or there is a closed form expression for the posterior, but its complexity increases exponentially with the amount of observed data, as in the case of for example switching state space models. Either way, it is usual practice to approximate the intractable posterior by something simpler, an approximate distribution $q$. The approximate distribution is often chosen from an exponential family of distributions $\Qe$, and it is also often common practice to choose $q$ such that it factorises over multivariate quantities.
+
+\paragraph{Overview of KL minimisation in one way Variational methods}
+
+\paragraph{Overview of EP and minimizing KL in other way}
+
+\paragraph{But none of these takes into account the structure of the decision problem}
+
+\paragraph{Toy example}
+
+\paragraph{Framework}
+
+\paragraph{Example: Gaussian process regression}
+
+In this case we do not actually need to perform approximate inference, as the posterior is Gaussian and available in closed form. However it allows us to express the quantities relevant for loss-calibrated approximate inference.
+
+Gaussian process regression.
+
+\section{Loss-calibrated quasi-Monte-Carlo}
+
+\paragraph{Monte Carlo, powerful but}
+
+

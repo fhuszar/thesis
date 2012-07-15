@@ -1,0 +1,7 @@
+function d = div_KL(theta1,theta2)
+    mu1 = theta1(1);
+    mu2 = theta2(1);
+    s1 = theta1(2);
+    s2 = theta2(2);
+    
+    (mu1 - mu2)^2/2/s2^2 + (s1/s2)

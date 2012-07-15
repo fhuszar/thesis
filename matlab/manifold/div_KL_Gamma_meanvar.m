@@ -1,0 +1,16 @@
+function d = div_KL_Gamma_meanvar(theta1,theta2)
+    m1 = theta1(1);
+    s1 = theta2(1);
+    m2 = theta1(2);
+    s2 = theta2(2);
+    
+    a1 = m1^2/s1^2;
+    b1 = m1/s1^2;
+    a2 = m2^2/s2^2;
+    b2 = m2/s2^2;
+   
+    d = (a1 - a2)*psi(a1) -...
+        gammaln(a1) + gammaln(a2)...
+        + a2*(log(b1) - log(b2))...
+        + a1*(b2 - b1)/b1;
+    
