@@ -1,21 +1,32 @@
-\newcommand{\TODO}[1]{{\textbf #1}}
+\newcommand{\TODO}[1]{\textbf{TODO: #1}}
 
+\newcommand{\E}[2]{\mathbb{E}_{#1}\left[ #2 \right]}
+\newcommand{\expect}[1]{\mathbb{E}_{#1}}
+\newcommand{\independent}{\perp\!\!\!\perp}
 
+\newcommand{\score}{S}
+\newcommand{\diffscore}{s}
+\newcommand{\genentropy}[2]{\mathbb{H}_{#1}\left[#2\right]}
+\newcommand{\divergence}[3]{d_{#1}\left[#2\middle\|#3\right]}
+\newcommand{\KL}[2]{d_{KL}\left[#1\middle\|#2\right]}
+\newcommand{\MMD}[2]{d_{MMD}\left[#1\middle\|#2\right]}
+\newcommand{\information}[3]{\mathbb{I}_{#1}\left[#2,#3\right]}
 
 \newcommand{\x}{x}
 \newcommand{\X}{X}
 \newcommand{\Xe}{\mathcal{X}}
+\newcommand{\Ye}{\mathcal{Y}}
 \newcommand{\Qe}{\mathcal{Q}}
 \newcommand{\Fe}{\mathcal{F}}
 \newcommand{\He}{\mathcal{H}}
+\newcommand{\Hnorm}[1]{\|#1\|_{\He}}
+\newcommand{\scalar}[2]{\left\langle#1,#2\right\rangle}
 \newcommand{\Normal}{\mathcal{N}}
 \newcommand{\Reals}{\mathbb{R}}
 \newcommand{\probmeasures}[1]{\mathcal{M}^{1}_{#1}}
-\newcommand{\expect}[1]{\mathbb{E}_{#1}}
 
-\newcommand{\KL}[2]{d_{KL}\left[#1\middle\|#2\right]}
 
-\newcommand{\score}{S}
+
 \newcommand{\loss}{\ell}
 \newcommand{\action}{a}
 \newcommand{\actionset}{\mathcal{A}}
