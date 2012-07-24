@@ -25,6 +25,8 @@ Given a scoring rule $\score:\Xe\times\probmeasures{\Xe}\mapsto\Reals$, let us d
 	\end{equation}
 \end{definition}
 
+\TODO{Mention Bregman divergences \cite{http://bit.ly/Ojhpw4}}.
+
 The divergence measures how much worse we are at forecasting a quantity $\X$ sampled from a distribution $P$ when instead of using the true distribution $P$, we use an alternative probability distribution, $Q$. Ideally, we would like to see that using the true model $P$ should always be better or at least as good as using any alternative model $Q$, but this is not automatically true for all scoring rules. A scoring rule that has this property is called a \emph{proper scoring rule}.
 
 \begin{definition}[Proper scoring rule]
@@ -136,11 +138,36 @@ As a consequence, Shannon's information is actually symmetric. The Shannon infor
 For completeness, we note here that some authors have generalised Shannon's mutual information along the lines of \eqref{eqn:mutualinfo_as_KLdivergence}, by replacing the KL divergence with a more general divergence $d$:
 
 \begin{equation}
-	\mathbb{J}_{d}(X,Y) = \mbox{d}\left[ P(x,y) \middle\| P_{X}(x)P_{Y}(y) \right]
+	\mathbb{J}_{d}(X,Y) = \mbox{d}\left[ P(x,y) \middle\| P_{X}(x)P_{Y}(y) \right]\label{mutualinfo_generalisations}
 \end{equation}
 
 Examples of information functionals defined this way are \cite{}.
 On one hand, an information functional like $\mathbb{J}$ has several nice properties, most notably that it is always symmetric. On the other hand, in the general case we loose the intuitive meaning of information as ``the extent to which observing the value of one variable is useful for predicting the value of the other one''. Furthermore, if we wanted to use a divergence function corresponding to a scoring rule, the scoring rule should be defined over the joint space $\Xe\times\Ye$, which is often not desired.
+
+\subsection{The Brier score}
+
+Another widely used scoring rule is the so-called \emph{Brier score} or quadratic score, originally introduced in \cite{Brier1950}. It is used in \TODO{where?}.
+
+\begin{align}
+	\score_{Brier}(x,P) &= \expect{x' \sim P} P(x') - 2P(x)\\
+		&= \customnorm{P}{2}^{2} - 2P(x) \\
+		&= \customnorm{P - \delta_{x}}{2}^2
+\end{align}
+
+\begin{align}
+	\genentropy{Brier}{P} &= \expect{x \sim P}\left[\expect{x' \sim P} P(x') - 2P(x)\right]\\
+		&= -\expect{x \sim P} P(x)\\
+		&= -\customnorm{P}{2}^2
+\end{align}
+
+And the Brier divergence function becomes simply the squared norm of the difference between the distribution functions.
+
+\begin{align}
+	\divergence{Brier}{P}{Q} &= \expect{x \sim Q}\left[\customnorm{P}{2}^2 - 2P(x)\right] - \genentropy{Brier}{P} \\
+		&= \customnorm{P}{2}^2 -2 \expect{x \sim Q} P(x) + \customnorm{P}{2}^2 \\
+		&= \customnorm{P}{2}^2 - 2\scalar{P}{Q} + \customnorm{P}{2}^2\\
+		&= \customnorm{P-Q}{2}^2
+\end{align}
 
 \subsection{The pseudolikelihood}
 
@@ -212,15 +239,16 @@ A particularly interesting case is when the function class $\Fe$ is functions of
 \TODO{do we need the square? Yes we do, and we have to explain why}
 
 \begin{align}
-\divergence{MMD,\He}{p}{q}^2 &= \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left\vert\int f(x) p(x) dx - \int f(x) q(x) dx\right\vert^2\label{eqn:rkhs-mmd}\\
-	&=  \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left\vert\int \scalar{f}{k(\cdot,x)} p(x) dx - \int \scalar{f}{k(\cdot,x)} q(x) dx\right\vert^2\\
-	&=  \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left\vert \scalar{f}{\int k(\cdot,x) p(x) dx - \int k(\cdot,x) q(x) dx}\right\vert^2\\
-	&=  \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\scalar{f}{\mu_{p} - \mu_{q}}^2\\
-	&=  \Hnorm{\mu_{p} - \mu_{q}}^2\\ 
-	&=  \iint k(x,y) p(x) p(y) dx dy	-2 \iint k(x,y) p(x) q(y) dx dy + \iint k(x,y) q(x) q(y) dx dy,\label{eqn:rkhs-mmd-lastline}
+\divergence{k}{P}{Q} &\defeq \mbox{MMD}^2\left(P,Q\right)\\
+	&= \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left( \expect{x\sim P} f(x) - \expect{x\sim Q} f(x) \right)^2\label{eqn:rkhs-mmd}\\
+	&=  \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left\vert \expect{x\sim P}\scalar{f}{k(\cdot,x)} - \expect{x\sim Q} \scalar{f}{k(\cdot,x)} \right\vert^2\\
+	&=  \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left\vert \scalar{f}{\expect{x\sim P} k(\cdot,x) - \expect{x\sim Q}\int k(\cdot,x)}\right\vert^2\\
+	&=  \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\scalar{f}{\mu_{P} - \mu_{Q}}^2\\
+	&=  \Hnorm{\mu_{P} - \mu_{Q}}^2\\
+	&=  \expect{x,x'\sim P} k(x,x')	- 2 \expect{x\sim P}\expect{x'\sim Q} k(x,x') + \expect{x,x'\sim Q} k(x,x'),\label{eqn:rkhs-mmd-lastline}
 \end{align}
 
-In the derivation above $\mu_p(\cdot) = \int k(\cdot,x) p(x) dx$ is the so called mean element or RKHS embedding of the probability distributions $p$. The most interesting kernels for the purposes of Hilbert-space embedding of distributions are those called \emph{characteristic} \cite{}. If the kernel $k$ is characteristic, the mapping from Borel probability measures to mean elements in a characteristic RKHS is injective, that is $\mu_p = \mu_q \iff p = q$. This also means that for characteristic Hilbert spaces $\divergence{MMD,\He}{p}{q} = 0 \iff p=q$ holds.
+In the derivation above $\mu_p(\cdot) = \int k(\cdot,x) p(x) dx$ is the so called mean element or RKHS embedding of the probability distributions $p$. The most interesting kernels for the purposes of Hilbert-space embedding of distributions are those called \emph{characteristic} \cite{}. If the kernel $k$ is characteristic, the mapping from Borel probability measures to mean elements in a characteristic RKHS is injective, that is $\mu_p = \mu_q \iff p = q$. This also means that for characteristic Hilbert spaces $\divergence{k}{P}{Q} = 0 \iff Q=P$ holds.
 
 The mean embedding $\mu_p$ can be thought of as a generalisation of characteristic functions \cite{}. The characteristic function of a probability distribution p over the real line is defined as follows:
 
@@ -232,41 +260,131 @@ where $i$ is the imaginary number $i=\sqrt{-1}$. The characteristic function is 
 
 The maximum mean discrepancy with characteristic kernels has been applied in various contexts in machine learning. One of the first of these recent application were two-sample tests. In two-sample testing we are provided i.\,i.\,d.\ samples from two distributions, and we have to determine whether the two distributions are the same or not. \cite{} developed and analysed empirical estimators of MMD for this problem. Herding \cite{}, a method for generating pseudosamples has been shown to minimise MMD between a target distribution and the empirical distribution of pseudo-samples. Lastly, in kernel moment matching \cite{SmolaShaweTaylor} MMD is used for density estimation: parameters of a parametric density model are set by minimising MMD from the empirical distribution of data. This is a special case of score matching, as we will see shortly.
 
-MMD in fact is a Bregman divergence of the form, that corresponds to the following scoring rule:
+The squared MMD in fact conforms to our definition of a generalised divergence in equation \eqref{eqn:def_divergence}, and corresponds to the following scoring rule:
 
 \begin{align}
-	s_{MMD,k}(x,q) &= k(x,x) - 2 \int k(x,y) q(y) dy + \iint k(y,z) q(y) q(z) dy dz\\
-		&=  \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left\vert f(x)- \int f(y) q(y) dy\right\vert^2
+	\score_{k}(x,P) &\defeq k(x,x) - 2 \expect{x'\sim P} k(x,x') + \expect{x',x''\sim Q}k(x',x'')\\
+		&=  \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left( f(x)- \expect{x\sim Q} f(y) \right)^2
 \end{align}
+
+This scoring rule is analogous to the kernel scoring rule introduced originally in \cite{DawidAncientpaper}. The difference is scaling by a factor of two, and the leading $k(x,x)$ term. These differences do not make any practical difference: scoring rules that are equal up to scaling and an additive term that depends only on $x$ but not on the distribution $P$ give rise to exactly the same generalised entropy and divergence functionals.
+
+\cite{GneitingRaftery} give a proof of the propriety of this scoring rule for Borel probability measures for which the expectation $\expect{x,x'\sim P} k(x,x')$ is finite. The scoring rule is also strictly proper whenever the kernel is characteristic \cite{Sripedimbudur}. \cite{GneitingRaftery} showed particular examples of scoring rules, among them the Brier score (see section \ref{sec:Brier_score}), that can be interpreted as special cases of the kernel scoring rule.
 
 The generalised entropy defined by this scoring rule becomes:
 
 \begin{equation}
-	S_{MMD,k}[q] = \int k(x,x) q(x) dx - \iint k(x,y) q(x) q(y) dx dy
+	\genentropy{k}{Q} \defeq \expect{x\sim Q} k(x,x) - \expect{x,x'\sim Q} k(x,x')
 \end{equation}
 
-This entropy function is very general, and has several favourable properties in comparison to Shannon's entropy. Firstly, if we assume that the kernel $k$ is non-negative and bounded, then the entropy functional is also non-negative and bounded. Secondly, The only requirement for the distribution $q$ is that we can compute expectations with respect to it. This means that every probability distribution, and indeed every Borel measure, has a well-defined entropy of this form. This is not true for the Shannon's differential entropy, where the entropy of atomic distributions or mixtures of atomic and continuous distributions is not well defined. Thirdly, the entropy function has the kernel as free parameter, which is a curse and a blessing at the same time \TODO{check idiom}. On the one hand this gives us extra flexibility: even if we commit to the square exponential kernel, we can fine-tune the entropy function to our needs by adjusting the length-scale parameter \cite{tailoring}. On the other hand there is no general principled way of choosing the kernel or it's parameters if we are unsure what it should be.
+This entropy function is very general, and has several favourable properties in comparison to Shannon's entropy.
 
-The divergence between two distributions $p$ and $q$ under the kernel scoring rule becomes the maximum mean discrepancy.
+Firstly, if we assume that the kernel $k$ is bounded, then the entropy functional is also bounded. If we further assume that the kernel satisfies $\forall x,y: k(x,x)\geq k(x,y)$, then the score is also non-negative. Irrespective of kernel choice, the entropy is zero for delta distributions, that is when the distribution $Q$ is concentrated on a single point. If the kernel satisfies the strict inequality $\forall x,y: k(x,x) > k(x,y)$, the kernel is positive for any other distribution.
+
+Secondly, The only requirement for the distribution $Q$ is that we can compute expectations with respect to it. This means that any probability distribution, and indeed any Borel measure, has a well-defined entropy of this form. This is not true for the Shannon's differential entropy, where the entropy of atomic distributions or mixtures of atomic and continuous distributions is not well defined. This property is going to be useful in applications to quasi-Monte Carlo in chapter \ref{sec:quasiMC}.
+
+Thirdly, the entropy function has the kernel as free parameter, which is a mixed blessing. On one hand, this provides extra flexibility: even if we commit to a particular family of kernels, like the square exponential, we can fine-tune the entropy function to our needs by adjusting parameters, such as the length-scale parameter \cite{tailoring}. On the other hand there is no principled, general way of choosing the kernel or it's parameters if we are unsure what it should be.
+
+The divergence between two distributions $p$ and $q$ under the kernel scoring rule becomes the squared maximum mean discrepancy defined in equation \eqref{eqn:rkhs-mmd}.
 
 \begin{align}
-	\divergence{MMD,k}{p}{q} &= \E{x\sim p}{s(x,q)} - \E{x\sim p}{s(x,p)}\\ 
-		&= \int k(x,x) p(x) dx - 2 \int k(x,y) p(x) q(y) dy dx + \iint k(y,z) q(y) q(z) dy dz\\
-		&- \left( \int k(x,x) p(x) dx - \iint k(x,y) p(x) p(y) dx dy\right)\\
-		&=  \iint k(x,y) p(x) p(y) dx dy	-2 \iint k(x,y) p(x) q(y) dx dy + \iint k(x,y) q(x) q(y) dx dy
+	\divergence{S_k}{P}{Q} &= \E{x\sim P}{\score_{k}(x,Q)} - \E{x\sim P}{\score_k(x,Q)}\\ 
+		&= \expect{x\sim P} k(x,x) - 2 \expect{x\sim P}\expect{x' \sim Q} k(x,x') + \expect{x,x'\sim Q} k(x,x')\\
+		&- \left( \expect{x \sim P} k(x,x) - \expect{x,x'\sim P} k(x,x') \right)\\
+		&=  \expect{x,x'\sim P} k(x,x')	- 2 \expect{x\sim P}\expect{x'\sim Q} k(x,x') + \expect{x,x'\sim Q} k(x,x')\\
+		&= \divergence{k}{P}{Q}
 \end{align}
 
-\paragraph{kernel value of information}
+We can use the generalised entropy and divergence defined by the kernel scoring rule to define the value of information a random variable provides about another one:
 
 \begin{align}
 	\information{k}{X}{Y} &= \expect{y\sim P_{Y}} \divergence{k}{P_{X}}{P_{X\vert Y=y}}\\
-		&=  \expect{y\sim P_{Y}} \Hnorm{ \mu_{X \vert Y=y} - \mu_X }^2\\
+		&=  \expect{y\sim P_{Y}} \Hnorm{ \mu_{X \vert Y=y} - \mu_X }^2 \label{eqn:kernel_information}\\
 		&= k(P_{X},P_{X}) - 2*\expect{y\sim P_{Y}}k(P_{X},P_{X\vert Y=y}) + \expect{y\sim P_{Y}} k(P_{X\vert Y=y},P_{X\vert Y=y})\\
 		&= \expect{y\sim P_{Y}} \expect{P_{x_1,x_2 \sim P_{X\vert Y=y}}}k(x_1,x_2) - \expect{x_1,x_2\sim P_{X}}k(x_1,x_2)
 \end{align}
 
+To my knowledge, this kernel-based measure of information has not been used in the machine learning or statistics literature before. It is interesting to contrast this to other kernel measures of dependence developed recently in statistics. These are largely based on the cross-covariance operator between Hilbert space embedding of the two distributions.
 
-\paragraph{Note: MMD can be derived from a loss-calibrated viewpoint}
+\begin{definition}[kernel Cross-covariance operator]
+	Let $X$ and $Y$ be two random variables with joint distribution $P\in\probmeasures{\Xe\times\Ye}$, and marginals $P_X$ and $P_Y$. Let $k_{\Xe}:\Xe\times\Xe\mapsto\Complex$ and $k_{\Ye}:\Ye\times\Ye\mapsto\Complex$ be positive definite kernels with associated reproducing kernel Hilbert spaces $\He_\Xe$ and $\He_\Ye$, respectively. Let us define the kernel cross-covariance operator $C_{XY}$ between $X$ and $Y$ so that for all $f\in\He_\Xe$ and $g\in\He_\Ye$
+	\begin{equation}
+		\scalar{f}{C_{XY}g}_{\He_\Xe} = \expect{(x,y) \sim P} \left( f(x) - \expect{x'\sim P_X} f(x')\right) \left( g(y) - \expect{y' \sim P_Y} g(y')\right)
+	\end{equation}
+\end{definition}
+
+\TODO{Figure out if there is any connection between COCO and my criterion, maybe with a stupid choice of $k_{\Ye}$}
+Based on the cross-covariance operator, we can define various measures of dependence or information, the simplest of which is constrained covariance, or COCO:
+
+\begin{definition}[Constrained covariance, see \cite{Mourier1953,Gretton2005}]
+	In the same notation as above let us define define the constrained covariance between $X$ and $Y$, $COCO_{XY}$, as
+	\begin{equation}
+		COCO_{XY}=\sup_{\substack{f\in\He_\Xe, g\in\He_\Ye \\\customnorm{f}{\He_\Xe}=1,\customnorm{g}{\He_\Ye}=1}} \cov{(x,y)\sim P}{f(x)}{g(y)}
+	\end{equation}
+	It can be shown that, $COCO$ is the matrix norm of the cross-covariance operator:
+	\begin{equation}
+		COCO_{XY} = \customnorm{C_{XY}}{2},
+	\end{equation}
+	where $\customnorm{\cdot}{2}$ denotes the matrix norm, that is the modulus of largest eigenvalue. \TODO{Check if statements are correct}
+\end{definition}
+
+COCO is only one of several independence measures that have been developed based on kernels, see \cite{HSIC} for an overview of variants. Just as generalisations of Shannon's mutual information (eqn.\ \eqref{mutualinfo_generalisations}), these measures of dependence have several useful properties. They are symmetric, and can be effectively estimated from empirical data \cite{}.
+
+However, as with eqn.\ \eqref{mutualinfo_generalisations}, COCO and its variants do not have an interpretation as ``the extent to which knowing $Y$ is useful for predicting $X$''. Also, they require a kernel on both $\Xe$ and $\Ye$, and properties of the functional depend on both choices of kernels. In contrast \eqref{mutualinfo_generalisations} only requires a kernel over $X$.
+
+\subsection{Scoring rules based on general decision problems}
+
+The scoring rule framework is very flexible, in fact for every Bayesian decision problem it is possible to derive a corresponding scoring rule as we will show in this section.
+
+Let us assume we are faced with a decision problem of the following form: We have to decide to take one of several possible actions $\action\in\actionset$. The loss/utility of our action will depend on the action we have chosen and on the state of the environment $\X$, the value of which is unknown to us. If the environment is in state $\X=\x$, and we choose action $\action$, we incur a loss $\loss(\x,\action)$.
+Let us assume we have a probabilistic forecast or belief $P$ about the state of the environment $\X$. Given this we can choose an action that minimises the expected loss:
+
+\begin{align}
+	\action^{*}_{P} = \argmin_{\action\in\actionset} \expect{\x \sim P} \loss(\x,\action)
+\end{align}
+
+When we observe the value of $X$ we can score the probabilistic forecast, by evaluating the loss incurred by using this optimal action $\action^{*}_{P}$ in state $\X=\x$.
+
+\begin{align}
+	\score_{\loss}(\x,P) = \loss(\x,\action^{*}_{P})
+\end{align}
+
+As scoring rule of this form defines a generalised entropy, otherwise known as the Bayes-risk of the decision problem:
+
+\begin{align}
+	\genentropy{\loss}{P} \defeq &\expect{x\sim P} \loss(\x,\action^{*}_{P})\\
+		= &\min_{\action\in\actionset} \expect{x\sim P} \loss(\x,\action)
+\end{align}
+
+The associated divergence can be interpreted as the excess loss we incur by using the subomptimal action $\action^{*}_{Q}$ computed on the basis of $Q$, when in fact the true distribution of $X$ is $P$:
+
+\begin{align}
+	\divergence{\loss}{P}{Q} = \expect{x\sim P} \loss(\x,\action^{*}_{Q}) - \min_{\action \in \actionset}\expect{x\sim P} \loss(\x,\action)
+\end{align}
+
+This divergence $d_\loss$ is a Bregman divergence.
+
+Several scoring rules can be interpreted as special cases of this loss-calibrated framework.
+
+\subsubsection{Brier score}
+
+
+
+\subsection{log-score and Shannon entropy}
+
+Shannon's entropy has an intuitive operational meaning as minimum description length. We are given a random variable $X$ with distribution $P$ over a finite, discrete dictionary $\Xe$. We would like to encode symbols in $\Xe$ by binary sequences, in such a way, that any sequence composed by concatenating codewords is uniquely decodable. It can be shown that the expected code-length of any uniquely decodable code $f:\Xe\mapsto\{0,1\}^{*}$ under the distribution $P$ is lower bounded by the entropy of $P$:
+
+\begin{equation}
+	\expect{x \sim P} \vert f(x) \vert \geq \genentropy{Shannon}{P}.
+\end{equation}
+
+\TODO{log score with base 2}
+
+Let us consider the following decision problem: Let $\actionset$ be the set of all uniquely decodable binary codes, so that $a:\Xe\mapsto\{0,1\}^{*}$ maps $X$ to a binary codeword of variable length. Let the loss $\loss$ be the length of the codeword assigned to $X$: $\loss(x,a) = \vert a(x)\vert$.
+
+The scoring rule defined by this decision problem is approximately the same as the log-score.
+
+\subsubsection{kernel scoring rule}
 
 Let's say your task is to estimate value of a functions $f\in{\Fe}$ evaluated at $\theta$. The action can be interpreted as a functional $a:\Fe\mapsto\Reals$, that gives the estimated value of $f(\theta)$ for any function $f\in\Fe$. The loss $\loss$ you incur is equal to the maximal squared error you incur on any of these functions.
 
@@ -288,19 +406,3 @@ Thus, we can define the following scoring rule $S$:
 
 When $\Fe$ is chosen to be the unit ball in a reproducing kernel Hilbert space $\He$ defined by a positive definite kernel $k$, this scoring rule will be equivalent to the kernel scoring rule for probability distributions:
 
-
-\subsection{Scoring rules based on general decision problems}
-
-The scoring rule framework is very flexible, in fact for every Bayesian decision problem it is possible to derive a corresponding scoring rule as we will show in this section.
-
-Let us assume we are faced with a decision problem of the following form: We have to decide to take one of several possible actions $\action\in\actionset$. The loss/utility of our action will depend on the action we have chosen and on the state of the environment $\X$, the value of which is unknown to us. If the environment is in state $\X$, and we choose action $action$, we incur a loss $\loss(\X,\action)$. Let us assume we have a probabilistic forecast or belief $P(\x)$ about the state of the environment. Given this we can choose an action that minimises our expected loss:
-
-\begin{align}
-	\action^{*}_{P} = \argmax_{\action\in\actionset} \expect{\x\sim P} \loss(\x,\action)
-\end{align}
-
-When we observe the value of $\X$ we can score the probabilistic forecast, by evaluating the loss incurred by using this optimal action $\action^{*}_{P}$ in state $\X$.
-
-\begin{align}
-	\score(\x,P) = \loss(\x,\action^{*}_{P})
-\end{align}

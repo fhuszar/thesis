@@ -17,7 +17,19 @@ Using numerical isometric embedding techniques developed in the machine learning
 
 \subsection{Visualising the Shannon-information geometry}
 
-The most widely used divergence in statistics and machine learning is without doubt the Kullback-Leibler divergence. Here I show the geometry it induces on various parametric families of distributions.
+\begin{figure}
+	\includegraphics[width=\columnwidth]{figs/embeddings/Normal_KL}
+	\caption{Map of Normal distributions on the statistical manifold defined by the log-score, or KL divergence. Dots of the same color show Normal distributions with the same standard deviation. It can be clearly seen that distributions with lower standard deviation are spread out more than those with a higher standard deviation, giving rise to a fan-like structure.}
+\end{figure}
+
+\begin{figure}
+	\includegraphics[width=0.45\columnwidth]{figs/embeddings/Gamma_KL_meanvar}
+	\hspace{.1\columnwidth}
+	\includegraphics[width=0.45\columnwidth]{figs/embeddings/Normal_KL_nocolorbar}
+	\caption{Comparing the statistical manifolds defined by the KL divergence between Gamma \emph{(left)} and Normal \emph{(right)} distributions. Here the mean and variance of each point on the left is matched to the corresponding point on the right (see text for details).  For large values of variance (yellow and red) the two manifolds are very dissimilar, the Gaussian one is symmetric, while the Gamma one is asymmetric. However, as variance decreases (blue), by the central limit theorem Gamma distributions are more alike Gaussians of the same mean and variance, thus the manifold conforms to the fan-like shape that is characteristic of Gaussian distributions.}	
+\end{figure}
+
+The most widely used divergence in statistics and machine learning is without doubt the Kullback-Leibler divergence. In his sec I show the geometry it induces on various parametric families of distributions.
 
 Let us start with a very simple, single parameter distribution, the Bernoulli. A Bernoulli distribution describes a binary random variable, where the parameter controls the probability of taking value $1$. In Figure \ref{fig:Bernoulli_manifold} I illustrate the differences between the KL divergence, and the Brier divergence, which corresponds simply to the Euclidean distance between parameter values. As we can see the KL divergence is more sensitive to differences in small (close to 0) and large (close to 1) probabilities, but puts less emphasis on.
 
