@@ -1,5 +1,3 @@
-\chapter[approximate inference]{The role of information geometry in approximate Bayesian analysis}
-
 \section{Introduction}
 
 In practically interesting Bayesian models, the posterior is often computationally intractable to obtain and therefore one has to resort to approximate inference techniques. The most popular approximation methods are variational inference and Markov chain Monte Carlo.
@@ -18,8 +16,8 @@ The work presented on the equivalence between optimally weighted kernel herding 
 Although often overlooked, the main theoretical motivations for the Bayesian paradigm are rooted in Bayesian decision theory~\cite{berger85decision}, which provides a well-defined theoretical framework for rational decision making under uncertainty about a hidden parameter $\theta$. The ingredients of Bayesian decision theory are (see Ch.~2 of~\cite{robert01choice} or Ch.~1 of~\cite{berger85decision} for example):
 \vspace{-.3cm}
 \begin{itemize}
-  \item a (statistical) loss $\loss(\theta,\action)$ which gives the cost of taking action $\action \in \actionset$ when the world state is $\theta \in \Theta$; %\footnote{Note that $\theta$ is not assumed to be finite dimensional; in the most general setting, it could fully specify an arbitrary distribution over $\mathcal{O}$.};
-  \item an observation model $p(\dataset|\theta)$ which gives the probability of observing $\dataset \in \mathcal{O}$ assuming that the world state is $\theta$;
+  \item a loss $\loss(\theta,\action)$ which gives the cost of taking action $\action \in \actionset$ when the world state is $\theta \in \Theta$; %\footnote{Note that $\theta$ is not assumed to be finite dimensional; in the most general setting, it could fully specify an arbitrary distribution over $\mathcal{O}$.};
+  \item an observation model $p(\dataset|\theta)$ which gives the probability of observing some data or dataset $\dataset \in \mathcal{O}$ assuming that the world state is $\theta$;
   \item a prior belief $p(\theta)$ over world states.
 \end{itemize}
 
@@ -38,7 +36,27 @@ In this framework it is therefore easy to see that Bayesian decision making deco
 In many practically relevant cases computing the posterior is not analytically tractable. There are two reasons. Either the marginal likelihood $ $
 cannot be computed analytically in closed form, or there is a closed form expression for the posterior, but its complexity increases exponentially with the amount of observed data, as in the case of for example switching state space models. Either way, it is usual practice to approximate the intractable posterior by something simpler, an approximate distribution $q$. The approximate distribution is often chosen from an exponential family of distributions $\Qe$, and it is also often common practice to choose $q$ such that it factorises over multivariate quantities.
 
-\paragraph{Overview of KL minimisation in one way Variational methods}
+Variational methods find the optimal approximation $q^{*}$ by maximising a lower bound to the marginal likelihood as follows.
+
+\begin{align}
+	\log p(\dataset) &= \log \int p(\dataset\vert\theta)p(\theta) d\theta\\
+		&=\log \int \frac{p(\dataset\vert\theta)p(\theta)}{q(\theta)}q(\theta) d\theta\\
+		&\geq \int \log \frac{p(\dataset\vert\theta)p(\theta)}{q(\theta)} q(\theta) d\theta\\
+		&= \log p(\dataset) - \KL{p_{\dataset}}{q}
+\end{align}
+
+by minimising the Kullback-Leibler divergence (Eqn.\ \eqref{eqn:KL_divergence}) between the approximate distribution $q$ and the true posterior $p_{\dataset}$. The KL divergence is non-symmetric, therefore the order of arguments matter. As I argued in section \ref{sec:scoring_rules}, in the scoring rule interpretation suggests that the \emph{right} way to use divergence is when it's first argument is the true distribution we want to approximate, and the second argument the approximation $q$. So we can conclude that variational Bayesian inference minimises KL divergence in the wrong direction. This has been noted previously by \cite{CsatoOpper,Minka} and many other authors. This does not mean that variational inference does not work, it just means that by performing variational inference we loose the intuitive meaning of KL divergences.
+
+We can try to generalise variational inference to general scoring rules along two lines. Firstly, the log likelihood can be replaced by the average score 
+ 
+
+However, generally, Bregman divergences are convex in their first parameter and not generally in the second, so a variational lower bound only holds if there is a 
+Several approaches therefore tried to fix this conceptual issue, and minimise the divergence in the other direction. This is unfortunately very hard, as computing the divergence $\divergence{\score}{p_{\dataset}}{q}$ requires an integral over the posterior $p_{\dataset}$, which is normally intractable, and this is why we perform approximate inference in the first place.
+
+Assumed density filtering, and its generalisation, expectation propagation (EP) try to approximate the ideal method of minimising $\KL{p_{\dataset}}{q}$ as follows. EP assumes the posterior can be written 
+
+	
+
 
 \paragraph{Overview of EP and minimizing KL in other way}
 
@@ -57,5 +75,7 @@ Gaussian process regression.
 \section{Loss-calibrated quasi-Monte-Carlo}
 
 \paragraph{Monte Carlo, powerful but}
+
+\section{Approximate Bayesian decision theory}
 
 

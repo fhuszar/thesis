@@ -2,19 +2,25 @@
 
 \newcommand{\defeq}{\vcentcolon=}
 
+\newcommand{\trace}[1]{\mbox{trace}\,#1}
+
+\newcommand{\hamiltonian}{H}
 \newcommand{\E}[2]{\mathbb{E}_{#1}\left[ #2 \right]}
 \newcommand{\expect}[1]{\mathbb{E}_{#1}}
-\newcommand{\cov}[3]{\mathbb{C}\mbox{ov}_{#1}{#2}{#3}}
+\newcommand{\cov}[3]{\mathbb{C}\mbox{ov}_{#1}\left[{#2},{#3}\right]}
+\newcommand{\var}[1]{\mathbb{V}_{#1}}
 \newcommand{\independent}{\perp\!\!\!\perp}
 
+\newcommand{\model}{\mathcal{M}}
 \newcommand{\score}{S}
 \newcommand{\diffscore}{s}
 \newcommand{\genentropy}[2]{\mathbb{H}_{#1}\left[#2\right]}
 \newcommand{\divergence}[3]{d_{#1}\left[#2\middle\|#3\right]}
 \newcommand{\KL}[2]{d_{KL}\left[#1\middle\|#2\right]}
 \newcommand{\MMD}[2]{d_{MMD}\left[#1\middle\|#2\right]}
-\newcommand{\information}[3]{\mathbb{I}_{#1}\left[#2,#3\right]}
+\newcommand{\information}[3]{\mathbb{I}_{#1}\left[#2\leftarrow#3\right]}
 
+\newcommand{\iid}{i.\,i.\,d.\ }
 \newcommand{\x}{x}
 \newcommand{\X}{X}
 \newcommand{\Xe}{\mathcal{X}}

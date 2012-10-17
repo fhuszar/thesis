@@ -44,6 +44,49 @@ The divergence measures how much worse we are at forecasting a quantity $\X$ sam
 
 The divergence is a measure of the difference between two distributions $P$ and $Q$. Even if the scoring rule is proper, and therefore $\divergence{s}{P}{Q} \geq 0$ always holds, the divergence is normally non-symmetric, that is $\divergence{\score}{P}{Q} \neq \divergence{\score}{Q}{P}$. Divergences are often used to match or approximate some \emph{true} or \emph{ideal} distribution with something \emph{approximate}, so that the divergence between the truth and the approximation is minimal. As we can measure divergence in both ways, there is a question of which direction of divergence is to be calculated.
 
+The divergence defined in \eqref{eqn:def_divergence} is a special case of Bregman divergences:
+
+\begin{definition}[Bregman divergence]
+	Let $H$ be a differentiable, strictly concave function on a convex domain $\Theta$. For $P,Q\in\Theta$ 
+	\begin{align}
+		\divergence{Bregman,H}{P}{Q} = H(P) - H(Q) + \scalar{\nabla H(Q)}{Q-P}
+	\end{align}
+\end{definition}
+
+
+\begin{statement}[Generalised divergences $d_{\score}$ for strictly proper $\score$ are Bregman divergences]
+	Let $S$ be a strictly proper scoring rule, with generalised entropy $\genentropy{\score}{P}$. If $\genentropy{\score}{P}$ is differentiable with respect to $P$, then the generalised divergence $\divergence{\score}{P}{Q} = \expect{x\sim P}\score(x,Q) - \genentropy{\score}{P}$ is a Bregman divergence with $H(\cdot) = \genentropy{\score}{\cdot}$.
+\begin{proof}
+	Review the definition of the entropy $\genentropy{\score}{P}$:
+		\begin{equation}
+			\genentropy{S}{P} = \expect{x \sim P}S(x,P) = \scalar{P}{S(\cdot,P)}
+		\end{equation}
+		Using this notation
+		\begin{align}
+			\nabla\genentropy{S}{P} &=  \nabla\scalar{P}{S(\cdot,P)}\\
+				&= S(\cdot,P) + \scalar{P}{\nabla S(\cdot,P)}
+		\end{align}
+	The second term $\scalar{P}{\nabla S(\cdot,P)}=0$ because of strictly proper property of $S$. Thus
+ 		\begin{align}
+ 		 	\divergence{Bregman,\mathbb{H}_{S}}{P}{Q}&= \genentropy{S}{Q}  + \scalar{\nabla \genentropy{S}{Q}}{P-Q} -  \genentropy{S}{P} \\
+ 		 		&= \genentropy{S}{Q} + \scalar{S(\cdot,Q)}{P - Q} -  \genentropy{S}{P}\\
+ 		 		&= \scalar{S(\cdot,Q)}{P} - \genentropy{S}{P}\\
+ 		 		&= \divergence{S}{P}{Q}
+ 		\end{align}
+ 		Concavity of $\genentropy{\score}{P}$ also follows from strictly proper property $\divergence{S}{P}{Q}>0,P\neq Q$.
+\end{proof}
+\end{statement}
+
+\begin{figure}
+\begin{center}
+	\includegraphics[width=0.8\columnwidth]{figs/embeddings/Bregman}
+\end{center}
+\caption{Pictorial illustration of Bregman divergences. Peter and Quentin are points who live on a convex hill, whose surface is described by the concave function $H(p)$. Peter lives at $(Q,H(P))$, Quentin at $(Q,H(Q))$. Because the hill is convex and they are both points, they cannot normally see each other, unless $P=Q$. Anyone above the tangential line $H[Q] + \dot{H}(Q)(\cdot-Q)$ can see Quentin, but Peter is normally below this line. If Peter wants to see Quentin, he has to jump up. The Bregman divergence $\divergence{H}{P}{Q}$ measures how high Peter has to jump to see Quentin. In this example $H$ was chosen to be the Brier (quadratic) entropy, so here the divergence is symmetric, but this is not generally the case.}
+\end{figure}
+
+An intuitive explanation of Bregman divergences is given in Figure \ref{fig:Bregman}.
+
+\cite{http://bulletin.pan.pl/(58-1)183.pdf,http://www.ucl.ac.uk/statistics/research/pdfs/rr268.pdf} 
 Definition \eqref{eqn:def_divergence} suggests that the the first argument, $P$, should take the role of the true distribution, and $Q$ the approximate. \TODO{elaborate on this.}
 
 So far we have only introduced quantities describing a single random variable, and comparing probability distributions over the same variable. We can extend the scoring rule framework to define information quantities that describe the relationship between multiple variables. A particularly useful quantity is the value of information, that measures the dependence between.
@@ -91,37 +134,37 @@ It also follows that the value of information defined by strictly proper scoring
 
 \section{Examples of scoring rules}
 
-After having discussed general properties of scoring rules and information quantities based on them, let us look at particular examples of scoring rule and the entropies and divergences they define.
+After having discussed general properties of scoring rules and information quantities based on them, let us look at particular examples of scoring rule and the entropies and divergences they define. I will review three widely used scoring rules, the logarithmic, Brier (quadratic) and spherical scores. Then I present the kernel scoring rule, and point out its connections to the maximum mean discrepancy, a divergence measure that gained popularity recently in the machine learning community. Then I define a novel scoring rule, called \emph{kernel spherical scoring rule}, examine its properties, and provide a proof that it is strictly proper. Finally, I show the connections between scoring rules and Bayesian decision theory, and explain how decision problems give rise to scoring rules and associated information quantities.
 
-\subsection{The log score}
+\subsection{The logarithmic score}
 
-The most straightforward, and most widely used scoring rule is the log-score:
+The most straightforward, and most widely used scoring rule is the logarithmic score which is of the form:
 
 \begin{equation}
-	\score_{log}(x,p) = - \log p(x) 
+	\score_{log}(x,P) = - \log P(x) 
 \end{equation}
 
-Maximum likelihood estimation can be interpreted as score-matching with the log score:
+This score is widely used, most notably in maximum likelihood estimation of parametric models:
 
 \begin{equation}
-	\theta_{ML} = \argmax_{\theta} \sum_{n=1}^{N} \log p(x_i \vert \theta)
+	\theta_{ML} = \argmax_{\theta} \sum_{n=1}^{N} \log P(x_i \vert \theta)
 \end{equation}
 
 The associated entropy function is Shannon's differential entropy for continuous distributions
 
 \begin{equation}
-	\genentropy{log}{p} = - \int p(x) \log p(x) dx
+	\genentropy{Shannon}{P} = - \expect{x\sim P} \log P(x)
 \end{equation}
 
 The resulting divergence function is the Kullback-Leibler (KL) divergence, which is very widely used in approximate Bayesian inference:
 
 \begin{equation}
-	\KL{p}{q} = \int \frac{\log p(x)}{\log q(x)} p(x) dx
+	\KL{P}{Q} = \expect{x\sim P} \frac{\log P(x)}{\log Q(x)}
 \end{equation}
 
-The KL divergence is only well-defined when the distribution $q$ is absolutely continuous with respect to $p$. This is one of the most important limitations of the KL divergence for our purposes in later chapters: If $p$ is a continuous density, then $q$ has to be absolutely continuous as well for the KL divergence to be defined. Therefore we cannot compute the KL divergence of, say, an empirical distribution of samples from a continuous distribution. A related problem is that Shannon's entropy of atomic distributions or mixed atomic and continuous distributions is either not well defined, or is trivial and depends only on the relative weight of the atoms but ot on their locations.
+The KL divergence is only well-defined when the distribution $Q$ is absolutely continuous with respect to $P$. This is one of the most important limitations of the KL divergence for our purposes in later chapters: If $P$ is a continuous density, then $Q$ has to be continuous as well for the KL divergence to be defined. Therefore we cannot compute the KL divergence between, say, an empirical distribution of samples and a continuous distribution. A related problem is that Shannon's entropy of atomic distributions or mixed atomic and continuous distributions is either not well defined, or is trivial and depends only on the relative weight of the atoms but ot on their locations.
 
-These problems all stem from a property of the log-score, known as locality: The value of the scoring rule $s(x,p)$ only depends on the value of the density function evaluated at the point $x$. This is a unique property of the log score. Any strictly proper and strictly local scoring rule is analogous to the log-score.
+These problems all stem from a property of the logarithmic score, known as locality: The value of the scoring rule $\score(x,P)$ only depends on the value of the density function evaluated at the point $x$. This is a unique property of the logarithmic score. Any strictly proper local scoring rule is analogous to the logarithmic score. Note, that there are weaker definitions of locality of scoring rules, which hold scoring rules other than the logarithmic \cite{}.
 
 The value of information becomes Shannon's mutual information, a crucial quantity in channel coding \cite{}. Interestingly, Shannon's mutual information can be rewritten as the KL divergence between the joint distribution and the product of marginals:
 
@@ -144,31 +187,6 @@ For completeness, we note here that some authors have generalised Shannon's mutu
 Examples of information functionals defined this way are \cite{}.
 On one hand, an information functional like $\mathbb{J}$ has several nice properties, most notably that it is always symmetric. On the other hand, in the general case we loose the intuitive meaning of information as ``the extent to which observing the value of one variable is useful for predicting the value of the other one''. Furthermore, if we wanted to use a divergence function corresponding to a scoring rule, the scoring rule should be defined over the joint space $\Xe\times\Ye$, which is often not desired.
 
-\subsection{The Brier score}
-
-Another widely used scoring rule is the so-called \emph{Brier score} or quadratic score, originally introduced in \cite{Brier1950}. It is used in \TODO{where?}.
-
-\begin{align}
-	\score_{Brier}(x,P) &= \expect{x' \sim P} P(x') - 2P(x)\\
-		&= \customnorm{P}{2}^{2} - 2P(x) \\
-		&= \customnorm{P - \delta_{x}}{2}^2
-\end{align}
-
-\begin{align}
-	\genentropy{Brier}{P} &= \expect{x \sim P}\left[\expect{x' \sim P} P(x') - 2P(x)\right]\\
-		&= -\expect{x \sim P} P(x)\\
-		&= -\customnorm{P}{2}^2
-\end{align}
-
-And the Brier divergence function becomes simply the squared norm of the difference between the distribution functions.
-
-\begin{align}
-	\divergence{Brier}{P}{Q} &= \expect{x \sim Q}\left[\customnorm{P}{2}^2 - 2P(x)\right] - \genentropy{Brier}{P} \\
-		&= \customnorm{P}{2}^2 -2 \expect{x \sim Q} P(x) + \customnorm{P}{2}^2 \\
-		&= \customnorm{P}{2}^2 - 2\scalar{P}{Q} + \customnorm{P}{2}^2\\
-		&= \customnorm{P-Q}{2}^2
-\end{align}
-
 \subsection{The pseudolikelihood}
 
 The idea of maximum pseudolikelihood estimation was introduced originally by \cite{Besag1977} to estimate parameters of Gaussian random fields. Later it was popularised in the context if parameter estimation in Boltzmann machines \cite{Hyvarinnen} and Markov random fields. The pseudolikelihood is particularly useful for estimating parameters of statistical models with intractable normalisation constants.
@@ -182,7 +200,7 @@ Where $x_{\neg d}$ denotes the vector composed of all components of $x$ other th
 In the pseudo-likelihood each of the terms is the conditional probability over one variable conditioned on all the remaining variables. Such quantities can be computed by marginalising a single variable at a time, therefore by computing a one dimensional integral or sum
 
 \begin{equation}
-	p(x_d\vert x_{\neg d}) = \frac{p(x)}{\int p(x_d=y,x_{\neg d}) dy} = \frac{C \cdot p(x)}{\int C \cdot p(x_d=y,x_{\neg d}) dy}
+	p(x_d\vert x_{\neg d}) = \frac{P(x)}{\int P(X_d=y,x_{\neg d}) dy} = \frac{C \cdot P(x)}{\int C \cdot P(X_d=y,x_{\neg d}) dy}
 \end{equation}
 
 This can be computed even if the joint probability of all variables $P$ is known only up to a multiplicative constant $C$.
@@ -215,10 +233,93 @@ Here the $d^{\mbox{th}}$ term is a probability conditioned on $d-1$ variables, a
 \cite{} showed that pseudolikelihood estimation strictly proper for strictly postitive distributions. Moreover, for always positive distributions the following generalisation of the pseudolikelihood is also strictly proper scoring rule:
 
 \begin{equation}
-	\score_{\mbox{DLP12}}(x,P) = - \sum_{d=1}^{D} \score_d\left(x_d, P(x_d \vert x_{\neg d})\right),
+	\score_{\mbox{DLP12}}(x,P) = - \sum_{d=1}^{D} \score_d\left(x_d, P_{X_d \vert X_{\neg d}=x_{\neg d}}\right),
 \end{equation}
 
 Where $\score_d$ are strictly proper scoring rules for each dimension
+
+\subsection{The Brier (quadratic) score}
+
+Another widely used scoring rule is the so-called \emph{Brier score} or quadratic score, originally introduced in \cite{Brier1950}. It is used in \TODO{where?}
+
+We will define the Brier score in terms of the $L^2$ norm of the probability distribution, that is:
+
+\begin{equation}
+	\customnorm{P}{2} = \sqrt{\expect{x \sim P} P(x)}
+\end{equation}
+
+The above definition, albeit slightly informal, makes sense for most classes of probability distributions we are concerned with. For continuous distributions, $P(x)$ denotes the probability density, for discrete distributions $P(x)$ denotes the probability of outcome $x$. Using this notion we can define the Brier score as follows:
+
+\begin{align}
+	\score_{Brier}(x,P) &= \customnorm{P - \delta_{x}}{2}^2\\
+		&= \customnorm{P}{2}^{2} - 2P(x)  + 1\\
+		&= \expect{x' \sim P} P(x') - 2P(x) + 1\\
+\end{align}
+
+The score gives rise to the following entropy function.
+
+\begin{align}
+	\genentropy{Brier}{P} &= \expect{x \sim P}\left[\expect{x' \sim P} P(x') - 2P(x) + 1\right]\\
+		&= 1 -\expect{x \sim P} P(x)\\
+		&= 1 - \customnorm{P}{2}^2
+\end{align}
+
+For discrete distributions when $\dim \Xe = D$, the quadratic entropy function is bounded. It's maximum value is attained when $P$ is the $D$ dimensional uniform distribution, then it's maximal value is  $1 - \sum_{d=1}^{D}\frac{1}{D^2} = 1 - \frac{1}{D}$. The upper bound is $1$ if $\dim \Xe = \infty$. The entropy function is also non-negative for discrete distributions, with $\genentropy{Brier}{P}=0$ only for atomic distributions $P=\delta_{x_0}$.
+
+In uncountable domains, just like Shannon's entropy, The entropy function becomes unbounded from below. For atomic distributions it takes value $-\infty$. Unlike Shannon's entropy, it still is bounded from above.
+
+The Brier divergence function becomes simply the squared norm of the difference between the distribution functions.
+
+\begin{align}
+	\divergence{Brier}{P}{Q} &= \expect{x \sim Q}\left[\customnorm{P}{2}^2 - 2P(x) + 1\right] - \genentropy{Brier}{P} \\
+		&= \customnorm{P}{2}^2 -2 \expect{x \sim Q} P(x) + \customnorm{P}{2}^2 \\
+		&= \customnorm{P}{2}^2 - 2\scalar{P}{Q} + \customnorm{Q}{2}^2\\
+		&= \customnorm{P-Q}{2}^2
+\end{align}
+
+The value of information under the Brier score becomes the following straightforward quantity.
+
+\begin{align}
+	\information{Brier}{X}{Y} &= \expect{y \sim P_{Y}} \customnorm{P_X - P_{X\vert Y=y}}{2}^2\\
+\end{align}
+
+\subsection{Spherical and pseudo-spherical scoring rules}
+Another example of strictly proper scoring rules mentioned in \cite{http://arxiv.org/pdf/1104.2224.pdf, Dawid
+(2007)}, introduced in \cite{Good (1971), }. The spherical score is defined as follows.
+
+\begin{align}
+	\score_{spherical}(x,P) &= 1 -\frac{P(x)}{\customnorm{P}{2}}
+\end{align}
+
+This gives rise to the following entropy and divergence functions.
+
+\begin{align}
+	\genentropy{spherical}{P} &= 1 -\expect{x \sim P}\frac{P(x)}{\customnorm{P}{2}}\\
+		&= 1 -\customnorm{P}{2}
+\end{align}
+
+\begin{align}
+	\divergence{spherical}{P}{Q} &= -\expect{x \sim P}\frac{Q(x)}{\customnorm{Q}{2}} + \customnorm{P}{2}\\
+		&= \customnorm{P}{2} - \frac{\scalar{Q}{P}}{\customnorm{Q}{2}}\\
+		&= \customnorm{P}{2}\left( 1 - \cos(P,Q) \right),
+\end{align}
+where $\cos(P,Q) = \frac{\scalar{P}{Q}}{\customnorm{P}{2}\customnorm{Q}{2}}$ is the cosine similarity between $P$ and $Q$.
+
+An interesting property of the spherical score is that it is agnostic to scaling of $P$. That is $\score_{spherical}(x,c\cdot P) = \score_{spherical}(x,P) $. Similarly, $\divergence{spherical}{P}{c\cdot Q} = \divergence{spherical}{P}{Q}$. and $\divergence{spherical}{c\cdot P}{Q} = c \cdot \divergence{spherical}{P}{Q}$. This means that when approximating $P$ by $Q$ via minimising $\divergence{spherical}{P}{Q}$ we only need to know P and Q up to a normalising constant.
+
+The value of information under the spherical score is
+
+\begin{align}
+	\information{spherical}{X}{Y} &= \customnorm{P_X}{2}\expect{y \sim P_{Y}} \left( 1 - \cos(P_X,P_{X\vert Y=y}) \right)
+\end{align}
+
+Pseudo-spherical scoring rules are generalisations of the spherical score of the form: \TODO{check if formul\ae are correct}.
+
+\begin{align}
+	\genentropy{\gamma,pseudospherical}{P} &= -\customnorm{P}{\gamma}
+\end{align}
+
+For more details about pseudospherical scores see \cite{}.
 
 \subsection{The kernel scoring rule}
 
@@ -235,8 +336,6 @@ MMD measures the divergence between two distributions, $p$ and $q$. It belongs t
 Intuitively, if two distributions are close in the integral probability metric sense, then no matter which function $f$ we choose from function class $\mathcal{F}$, the difference in its integral over $p$ or $q$ should be small. This class of divergences include Wasserstein distance \cite{}, Dudley metric \cite{} and MMD, which differ in their choice of the function class $\Fe$.
 
 A particularly interesting case is when the function class $\Fe$ is functions of unit norm from a reproducing kernel Hilbert space (RKHS) $\He$. In this case, the MMD between two distributions can be conveniently expressed using expectations of the associated kernel $k(x, x')$ only \cite{Sriperumbudur2010}:
-
-\TODO{do we need the square? Yes we do, and we have to explain why}
 
 \begin{align}
 \divergence{k}{P}{Q} &\defeq \mbox{MMD}^2\left(P,Q\right)\\
@@ -274,7 +373,7 @@ This scoring rule is analogous to the kernel scoring rule introduced originally 
 The generalised entropy defined by this scoring rule becomes:
 
 \begin{equation}
-	\genentropy{k}{Q} \defeq \expect{x\sim Q} k(x,x) - \expect{x,x'\sim Q} k(x,x')
+	\genentropy{k}{P} \defeq \expect{x\sim P} k(x,x) - \expect{x,x'\sim P} k(x,x')
 \end{equation}
 
 This entropy function is very general, and has several favourable properties in comparison to Shannon's entropy.
@@ -294,6 +393,11 @@ The divergence between two distributions $p$ and $q$ under the kernel scoring ru
 		&=  \expect{x,x'\sim P} k(x,x')	- 2 \expect{x\sim P}\expect{x'\sim Q} k(x,x') + \expect{x,x'\sim Q} k(x,x')\\
 		&= \divergence{k}{P}{Q}
 \end{align}
+
+It is easy to show that the Brier (quadratic) score is a special case of the kernel score when the kernel is chosen to be the trivial $k(x,x') = \delta(x - x')$, where $\delta$ is the Dirac delta function. This insight allows us to understand why the Brier score is so impoverished when applied to continuous domains $\Xe$ such as the real line $\Reals$: Just as the KL divergence, it does not incorporate any notion of smoothness or similarity of neighbouring points. Two point masses on neighbouring points $x$ and $x+\epsilon$ are maximally dissimilar, irrespective of how small the difference $\epsilon$ is. The kernel scoring rule overcomes this strict limitation by allowing us to engineer a kernel with appropriate smoothness assumptions built in.
+
+ This makes it particularly hard to estimate Brier divergences from sampled data.
+
 
 We can use the generalised entropy and divergence defined by the kernel scoring rule to define the value of information a random variable provides about another one:
 
@@ -332,7 +436,104 @@ COCO is only one of several independence measures that have been developed based
 
 However, as with eqn.\ \eqref{mutualinfo_generalisations}, COCO and its variants do not have an interpretation as ``the extent to which knowing $Y$ is useful for predicting $X$''. Also, they require a kernel on both $\Xe$ and $\Ye$, and properties of the functional depend on both choices of kernels. In contrast \eqref{mutualinfo_generalisations} only requires a kernel over $X$.
 
-\subsection{Scoring rules based on general decision problems}
+\paragraph{The diversity operator} \TODO{find a better name for it}
+
+The kernel value of information $\information{k}{X}{Y}$ can also be interpreted as the norm of an operator, that we shall name the diversity operator.
+
+\begin{definition}
+Given two random variables $X$ and $Y$ with joint distribution $P$, and a positive definite kernel $k:\Xe\times\Xe\mapsto\Complex$ with associated Hilbert space $\He$, let us define the 'diversity operator' of Y over X, $D_{X\vert Y}:\He\mapsto\He$ such that for all $f,g\in\He$ 
+\begin{align}
+	\scalar{f}{D_{X\vert Y}g}_{\He} = \cov{y\sim P_Y}{\expect{X\vert Y=y} f}{\expect{X\vert Y=y} g}
+\end{align}
+Consequently for all $f\in\He$
+\begin{align}
+	\scalar{f}{D_{X\vert Y}f} = \var{y\sim P_Y} \left[ \expect{x\sim P_{X\vert Y=y}} f(x) \right]
+\end{align}
+\end{definition}
+
+
+\begin{statement}[Alternative definition of $D_{X\vert Y}$]
+$D_{X\vert Y}$ admits the following equivalent definition
+\begin{align}
+	D_{X\vert Y} = \expect{y\sim P_Y} \left(\mu_{X\vert Y=y} - \mu_{X}\right) \otimes \left(\mu_{X\vert Y=y}  - \mu_{X} \right)
+\end{align}
+
+\begin{proof}
+Let $f,g\in\He$, then
+\begin{align}
+	&\scalar{f}{ \left(\expect{y\sim P_Y}\left(\mu_{X\vert Y=y} - \mu_{X}\right) \otimes \left(\mu_{X\vert Y=y}  - \mu_{X} \right)\right) g}\\
+	=&\expect{y\sim P_Y}\scalar{f}{ \left(\left(\mu_{X\vert Y=y} - \mu_{X}\right) \otimes \left(\mu_{X\vert Y=y}  - \mu_{X} \right)\right) g}\\
+	=& \scalar{f}{\left(\mu_{X\vert Y=y} - \mu_{X}\right)}\scalar{g}{\left(\mu_{X\vert Y=y} - \mu_{X}\right)}\\
+	=& \expect{y\sim P_Y} \left(\expect{X\vert Y=y} f(x) - \expect{x\sim P_X}f(x)\right)\left(\expect{X\vert Y=y} g(x) - \expect{x\sim P_X}g(x)\right)\\
+	=& \cov{y\sim P_Y}{\expect{X\vert Y=y} f}{\expect{X\vert Y=y} g}
+\end{align}
+\end{proof}
+\end{statement}
+
+The information is the trace of this operator:
+
+\begin{align}
+	\information{k}{X}{Y} &= \expect{y \sim P_{Y}} \customnorm{P_X - P_{X\vert Y=y}}{2}^2\\
+		&= \expect{y \sim P_{Y}} \trace{\scalar{P_X - P_{X\vert Y=y}}{P_X - P_{X\vert Y=y}}}\\
+		&= \expect{y \sim P_{Y}} \trace{ ( P_X - P_{X\vert Y=y}) \otimes (P_X - P_{X\vert Y=y})}\\
+		&= \trace{ \expect{y \sim P_{Y}} ( P_X - P_{X\vert Y=y}) \otimes (P_X - P_{X\vert Y=y})} \\
+		&= \trace{I_{X\vert Y}}
+\end{align}
+
+See definition of HSIC in \cite{GreBouSmoSch05.pdf}
+
+\subsection{The spherical kernel score}
+
+Seeing how the Brier score is a special case of the kernel scoring rule, one might wonder whether the spherical scoring rule has a similar generalisation. It turns out it does, and it gives rise to a very intuitive divergence. Consider the following scoring rule
+
+\begin{align}
+	\score_{k,spherical}(x,P) &\defeq \Hnorm{\mu_{\delta_x}} - \frac{\mu_P(x)}{\Hnorm{\mu_P}}\\
+			& = \Hnorm{\mu_{\delta_x}}\left(1 - \cos(\mu_{\delta_x},\mu_{P})\right)\\
+		& =\sqrt{k(x,x)} - \frac{\expect{x'\sim P}k(x,x')}{\sqrt{\expect{x,x'\sim P}k(x,x')}},
+\end{align}
+
+The scoring rule gives rise to the following entropy functional:
+
+\begin{align}
+	\genentropy{k,spherical}{P} & = \expect{x\sim P}\Hnorm{\mu_{\delta_x}} - \Hnorm{\mu_P}\\
+		& = \expect{x\sim P}\sqrt{k(x,x)} - \sqrt{\expect{x,x'\sim P}k(x,x')}
+\end{align}
+
+Whenever $k(x,x)=c$ this entropy is non-negative, and bounded from above. For characteristic kernels it is only zero for delta distributions. The entropy is very scoring rule leads to the following divergence:
+
+\begin{align}
+	\divergence{k,spherical}{P}{Q} &= - \expect{x\sim Q}\frac{\mu_P}{\Hnorm{\mu_P}} + \Hnorm{\mu_P}\\
+		&= \Hnorm{\mu_P} \left( 1 - \cos(\mu_P, \mu_Q)\right)\\
+		&= \sqrt{\expect{x,x'\sim P}k(x,x')} - \frac{\expect{x\sim P}\expect{x'\sim Q}k(x,x')}{\sqrt{\expect{x,x'\sim Q}k(x,x')}}
+\end{align}
+
+Unlike MMD and $\divergence{k}{\cdot}{\cdot}$, this divergence is asymmetric because of the leading $\Hnorm{\mu_P}$ factor. Also, just like the spherical score, it is agnostic to scaling of $Q$, that is $\divergence{k,spherical}{P}{c\cdot Q} = \divergence{k,spherical}{P}{Q}$. Furthermore, $\divergence{k,spherical}{c\cdot P}{Q} = c \cdot \divergence{k,spherical}{P}{Q}$. Whenever the kernel is characteristic, this scoring rule is strictly proper with respect to Borel probability distributions, whose mean embedding $\mu_P(x)$ is bounded.
+
+\begin{theorem}[The spherical kernel score is strictly proper] 
+\begin{proof}
+	Suppose $P\neq Q$, then by the strict propriety of the kernel score
+	\begin{align}
+		0 &< \divergence{k}{P}{Q}\\
+		0 &< \Hnorm{\mu_P}^2 + \Hnorm{\mu_Q}^2 - 2\scalar{\mu_P}{\mu_Q} _{\He}\\
+		\scalar{\mu_P}{\mu_Q} &< \frac{1}{2}\left(\Hnorm{\mu_P}^2 + \Hnorm{\mu_Q}^2\right) \leq \Hnorm{\mu_P}\Hnorm{\mu_Q}\\
+		\cos(\mu_P,\mu_Q) = \frac{\scalar{\mu_P}{\mu_Q} _{\He}}{\Hnorm{\mu_P}\Hnorm{\mu_Q}} &< 1
+	\end{align}
+	Thus,
+	\begin{align}
+		\divergence{k,spherical}{P}{Q} = \Hnorm{\mu_P} \left( 1 - \cos(\mu_P, \mu_Q)\right) \geq 0
+	\end{align}
+\end{proof}
+\end{theorem}
+
+Just as it is the case with the Brier score and the kernel scoring rule, the spherical kernel rule reduces to the spherical score whenever the trivial kernel $k(x,x') = \delta_{x}(x')$ is used.
+
+\TODO{Figure out if this interpretation is useful:}
+
+\begin{equation}
+	1 - \cos(\mu_P,\mu_Q) = \expect{f\sim GP} 1\!\!1\left[ \mbox{sign}(\expect{x\sim P} f(x)) = \mbox{sign}(\expect{x\sim Q} f(x)) \right]
+\end{equation}
+
+\subsection{Scoring rules  and decision problems}
 
 The scoring rule framework is very flexible, in fact for every Bayesian decision problem it is possible to derive a corresponding scoring rule as we will show in this section.
 
@@ -362,15 +563,9 @@ The associated divergence can be interpreted as the excess loss we incur by usin
 	\divergence{\loss}{P}{Q} = \expect{x\sim P} \loss(\x,\action^{*}_{Q}) - \min_{\action \in \actionset}\expect{x\sim P} \loss(\x,\action)
 \end{align}
 
-This divergence $d_\loss$ is a Bregman divergence.
-
 Several scoring rules can be interpreted as special cases of this loss-calibrated framework.
 
-\subsubsection{Brier score}
-
-
-
-\subsection{log-score and Shannon entropy}
+\subsubsection{Logarithmic score and Shannon entropy}
 
 Shannon's entropy has an intuitive operational meaning as minimum description length. We are given a random variable $X$ with distribution $P$ over a finite, discrete dictionary $\Xe$. We would like to encode symbols in $\Xe$ by binary sequences, in such a way, that any sequence composed by concatenating codewords is uniquely decodable. It can be shown that the expected code-length of any uniquely decodable code $f:\Xe\mapsto\{0,1\}^{*}$ under the distribution $P$ is lower bounded by the entropy of $P$:
 
@@ -378,31 +573,33 @@ Shannon's entropy has an intuitive operational meaning as minimum description le
 	\expect{x \sim P} \vert f(x) \vert \geq \genentropy{Shannon}{P}.
 \end{equation}
 
-\TODO{log score with base 2}
+\TODO{define logarithmic score with base 2 logarithm so that this makes sense}
 
 Let us consider the following decision problem: Let $\actionset$ be the set of all uniquely decodable binary codes, so that $a:\Xe\mapsto\{0,1\}^{*}$ maps $X$ to a binary codeword of variable length. Let the loss $\loss$ be the length of the codeword assigned to $X$: $\loss(x,a) = \vert a(x)\vert$.
 
-The scoring rule defined by this decision problem is approximately the same as the log-score.
+The scoring rule defined by this decision problem is approximately the same as the logarithmic score.
 
-\subsubsection{kernel scoring rule}
+\subsubsection{Kernel scoring rule}
 
-Let's say your task is to estimate value of a functions $f\in{\Fe}$ evaluated at $\theta$. The action can be interpreted as a functional $a:\Fe\mapsto\Reals$, that gives the estimated value of $f(\theta)$ for any function $f\in\Fe$. The loss $\loss$ you incur is equal to the maximal squared error you incur on any of these functions.
+Let's say your task is to estimate value of a set of functions $f\in{\Fe}$ evaluated at $\X$. The action can be interpreted as a functional $a:\Fe\mapsto\Reals$, that gives an estimated value of $f(\X)$ for any function $f\in\Fe$. The loss $\loss$ you incur is equal to the maximal squared error you incur on any of these functions.
 
 \begin{equation}
 \loss(\theta, \action) \sup_{f\in\Fe}\left( f(\theta) - \action(f)\right)^2
 \end{equation}
 
-Given a probabilistic forecast $p$ over $\theta$, the Bayes optimal decision $\action(f)$ simply computes the mean of $f$ under the distribution $p$:
+Given a probabilistic forecast $P$ over $\X$, the Bayes optimal decision $\action(f)$ simply computes the mean of $f$ under the distribution $P$:
 
 \begin{equation}
- \action^{*}_{p} = \int f(\theta)p(\theta)\,d\theta
+ \action^{*}_{P} = \expect{x\sim P} f(x)
 \end{equation}
 
-Thus, we can define the following scoring rule $S$:
+Thus, we can define the following scoring rule $\score$:
 
 \begin{equation}
-	S(\theta,p) = \sup_{f\in\Fe}\left( f(\theta) - \int f(\theta)p(\theta)\,d\theta \right)^2
+	\score(\theta,P) = \loss(x,\action^{*}_{P} )
+		\sup_{f\in\Fe}\left( f(\theta) - \int f(\theta)p(\theta)\,d\theta \right)^2
 \end{equation}
 
-When $\Fe$ is chosen to be the unit ball in a reproducing kernel Hilbert space $\He$ defined by a positive definite kernel $k$, this scoring rule will be equivalent to the kernel scoring rule for probability distributions:
+When $\Fe$ is chosen to be the unit ball in a reproducing kernel Hilbert space $\He$ defined by a positive definite kernel $k$, this scoring rule will be equivalent to the kernel scoring rule for probability distributions.
 
+As the Brier score is a special case of the kernel scoring rule, it can also be derived from the same decision problem.

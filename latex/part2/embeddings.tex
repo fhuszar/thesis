@@ -1,19 +1,114 @@
-In this section I aim to develop an understanding of the differences between various scoring rules and corresponding divergence metrics by visualising the manifold structure they give rise to. For the purposes of illustration here I concentrate only on two-parameter families of distributions such as Gaussian distributions, as these define two-dimensional manifolds which can then be shown in a two dimensional pages of a thesis.
+\paragraph{Riemannian manifold, local metric, geodesic distance}.
 
-Our goal is to create a two-dimensional map of particular manifolds in such a way that distances measured between points on the map correspond to geodesic distances measured along manifold as precisely as possible. First, it is important to understand that a perfect embedding of this sort does not always exists.
 
-Take the surface of a three-dimensional ball as an example. The sphere is a two-dimensional manifold, which can be parametrised by longitude and latitude. Still, it is impossible to stretch this surface out and represent it faithfully in two dimensional Cartesian coordinate system. This problem -- representing the surface of a three-dimensional object as part of a two-dimensional plane -- is in fact at the core of cartography, and is called \emph{map projection}. When drawing a full map of the surface of the Earth, usually the manifold has to be cut at certain places, but even then, the embedding is only approximate. There are various map projections used in cartography, and the purpose for which the map is used dictates what kind of distortions are tolerable, and what is not.
+In this section I aim to develop an understanding of the differences between various scoring rules and corresponding divergence metrics by visualising the geometric structure they give rise to.
 
-Understanding that a perfect map of two-dimensional statistical manifolds cannot necessarily be produced, we will resort to approximate embedding techniques developed in the machine learning community. These approximate embedding procedures numerically find a \emph{stretched} manifold in two dimensions that best represents distances on the statistical manifold defined by a particular scoring rule and divergence.
+\TODO{A sentence about manifolds here} Our goal is to create a low-dimensional map of particular manifolds in such a way that distances measured between points on the map correspond to distances measured in the abstract geometry the scoring rule defines as precisely as possible. First, it is important to understand that a perfect embedding of this sort does not always exists.
 
-Using numerical isometric embedding techniques developed in the machine learning community, it is possible to visualise the differences between geometries induced by various scoring rules. To do this here we use a techniques called ISOMAP \cite{isomap}.
+Take the surface of a three-dimensional ball as an example. The sphere is a two-dimensional Riemannian manifold, which can be parametrised by two parameters, longitude and latitude. Still, it is impossible to stretch this surface out and represent it faithfully in two dimensional Cartesian coordinate system. This problem -- representing the surface of a three-dimensional object as part of a two-dimensional plane -- is in fact at the core of cartography, and is called \emph{map projection}. When drawing a full map of the surface of the Earth, usually the manifold has to be cut at certain places, but even then, the embedding is only approximate. There are various map projections used in cartography, and the purpose for which the map is used dictates what kind of distortions are tolerable, and what is not.
+
+Having understood that a perfect map of two-dimensional statistical manifolds cannot necessarily be produced, I will resort to approximate embedding techniques developed in the machine learning community. These approximate embedding procedures numerically find a \emph{stretched} manifold in two dimensions that best represents distances on the statistical manifold defined by a particular scoring rule and divergence.
+
+\section{Riemannian geometry}
+
+Strictly proper scoring rules and their associated divergence functions induce a geometry over probability distributions, that we will call the information geometry. Under suitable smoothness assumptions, probability distributions form a smooth Riemannian manifold \cite{Amari,Dawid}, on which the squared local distance is
+
+\begin{equation}
+	ds^2 = \frac{1}{2} \scalar{P}{\ddot{H}(P)P},
+\end{equation}
+Where $\ddot{H(P)}$ is the Hamiltonian of the entropy $H(P) = \mathbb{H}_{\score}$ at $P$. For discrete distributions, when $\Xe={1,2,\ldots}$, denoting $p_i\defeq P(X=i)$ we can write this squared distance as
+
+\begin{equation}
+	ds^2 = \frac{1}{2} \sum_{i,j} \frac{\partial^2 H}{\partial p_i\partial p_j} dp_{i} dp_{j}.
+\end{equation}
+
+\begin{definition}[Riemannian geodesic]
+	Let $P_1$ and $P_2$ be two probability distributions and $d_H$ a Bregman divergence. Let $\mathcal{P}=\{P(t),t\in[0,1]\}$ a smooth, differentiable path on the manifold such that $P(0)=P_1$ and $P(1)=P_2$. The length of the curve $\mathcal{P}$ is defined as
+	\begin{equation}
+		l(\mathcal{P}) = \int_{0}^{1} \sqrt{ \scalar{\dot{P}(t)}{\ddot{H}(P(t))\dot{P}(t)}} dt \label{eqn:Riemannian_length}
+	\end{equation}
+	A Riemannian geodesic between $P_1$ and $P_2$ is a path, whose length is minimal. The length of such a path is called the geodesic distance between $P_1$ and $P_2$.
+\end{definition}
+
+Geodesic distances in non-trivial, general Riemannian manifolds are hard to compute analytically. There are two main technical difficulties that arise:
+\begin{enumerate}
+	\item The integral defining the Riemannian length of a given path (eqn.\ \eqref{eqn:Riemannian_length}) can be hard to compute analytically, even if an analytical expression for the local squared distance $ds^2$ exists.
+	\item The geodesic distance between $P$ and $Q$ is the minimum of the length of any path that connects $P$ and $Q$. This minimisation over all paths is a non-trivial one and is very hard to carry out exactly, even if an analytical expression for the length existed.
+\end{enumerate}
+
+Therefore in the following chapter I will resort to numerical approximations. To solve the first problem, I note that geodesic distances between close distributions $P$ and $P+dP$ are the same as the local distance $ds$. Furthermore the local distance can be approximated by computing the square root of the symmetrised divergence between the two points, using the following observations.
+
+\begin{statement}[Taylor expansion of Bregman divergences] Let $H:\Theta\mapsto\Reals$ be a smooth, strictly concave function and $\divergence{H}{\cdot}{\cdot}$ the Bregman divergence it induces. For infinitesimally small $dP\in\Theta$ the following approximation holds:
+\begin{equation}
+	\divergence{H}{P}{P+ dP} = \frac{1}{2} \sum_{i,j} \frac{\partial^2 \mathbb{H}_{\score}}{\partial p_i\partial p_j} dp_{i} dp_{j} = 	\divergence{H}{P + dP}{P}
+\end{equation}
+\begin{proof}
+	We prove the left-hand equation first:
+	\begin{align}
+		\frac{\partial}{\partial q_i} \divergence{H}{P}{Q} &=  -\frac{\partial}{\partial q_i} H(Q) + 	\frac{\partial}{\partial q_i}\scalar{\nabla_{Q} H(Q)}{Q-P}\\
+			&=  - \frac{\partial}{\partial q_i} H(Q) + 	\frac{\partial}{\partial q_i}\sum_{j} \frac{\partial}{\partial q_j} H(Q) (q_j - p_j)\\
+			&= - \frac{\partial}{\partial q_i} H(Q)  + \frac{\partial}{\partial q_i} H(Q) + \sum_{j} \frac{\partial^2}{\partial q_i \partial q_j} H(Q) (q_j - p_j)\\
+			&= \sum_{j} \frac{\partial^2}{\partial q_i \partial q_j} H(Q) (q_j - p_j)
+	\end{align}
+	hence by first order Taylor expansion around $P$:
+	\begin{align}
+		\divergence{H}{P}{P+dP} &\approx  \divergence{H}{P}{P+dP}+ \frac{1}{2}\scalar{dP}{\left.\nabla_{Q}\divergence{H}{P}{Q}\right\rvert_{Q=P}}\\
+			&= \frac{1}{2} \sum_{i} dp_i \sum_{j} \frac{\partial^2 H(P)}{\partial p_i\partial p_j} dp_j \\
+			&= \frac{1}{2} \sum_{i,j} \frac{\partial^2 H(P)}{\partial p_i\partial p_j} dp_{i} dp_j
+	\end{align}
+	
+	Similarly in the other direction
+		\begin{align}
+				\frac{\partial}{\partial q_i} \divergence{H}{Q}{P} &=  \frac{\partial}{\partial q_i} H(Q) + 	\frac{\partial}{\partial q_i}\scalar{\nabla_{P} H(P)}{P - Q}\\
+					&=  \frac{\partial}{\partial q_i} H(Q) + \frac{\partial}{\partial q_i}\sum_{j} \frac{\partial}{\partial p_j} H(P) (p_j - q_j)\\
+					&=  \frac{\partial}{\partial q_i} H(Q)  - \frac{\partial}{\partial p_i} H(P)\\
+					&= \dot{H}(Q) - \dot{H}(P)
+		\end{align}
+		Note that for small deviation $dP$, the derivative can be written as
+		\begin{align}
+			\frac{\partial}{\partial dP} \divergence{H}{P+dP}{P} = \dot{H}(P+dP) - \dot{H}(P) \approx  \ddot{H}(P) dP
+		\end{align}
+		therefore, via Taylor expansion we get that for small $dP$
+		\begin{align}
+			\divergence{H}{P}{P+dP} &\approx \frac{1}{2} \scalar{dP}{\ddot{H}(P)dP}\\
+				&= \frac{1}{2} \sum_{i,j} \frac{\partial^2 H(P)}{\partial p_i\partial p_j} dp_{i} dp_j
+		\end{align}
+\end{proof}
+\end{statement}
+
+\begin{corollary}[Local approximation to geodesic distance]
+	The geodesic distance between distributions $P$ and $Q$ on the statistical manifold defined by the scoring rule $S$ can be approximated as follows.
+	\begin{equation}
+		\mbox{distance}(P,Q) \approx \sqrt{\divergence{S}{P}{Q} + \divergence{S}{Q}{P}} \label{eqn:local_approximation}
+	\end{equation}
+\end{corollary}
+
+Now that we have a decent local approximation to geodesic distances, we can approximate the length of longer, smooth paths on the manifold by approximating the path as a series of small segments, and then using the above approximation to compute the length of each segment.
+
+Now we have to solve the second problem of approximating the minimisation over all paths between $P$ and $Q$. To do this, we will use ideas from ISOMAP, an isometric embedding technique developed in the machine learning community \cite{Isomap}: we restrict the paths under consideration and only compute the minimum among those paths that travel trough a sequence of neighbouring points from a predefined set. This approximate shortest path can be computed in polynomial time in the number of nodes in the neighbourhood graph. The length of the paths can be approximated as the neighbours are assumed to be close enough for the local approximation to work.
+
+We will follow the following procedure to produce a map of the statistical manifold induced by scoring rules.
 
 \begin{enumerate}
-\item take a set of probability distributions, preferably so that they relatively densely cover an interesting part of the manifold
-\item compute pairwise symmetrised divergence matrix between the selected distributions
-\item compute approximate geodesics
-\item use metric multidimensional scaling technique embed distributions as points a two-dimensional space
+\item take a set of probability distributions, preferably such that they relatively densely cover an interesting region on the manifold. In most cases we will choose a square grid in an appropriately chosen parameter-space.
+\item compute approximate geodesics:
+\begin{enumerate}
+	\item construct a graph over the sampled distributions as nodes, such that we draw edges between each distribution and its $k$ nearest neighbours. The weight of each edge being the squareroot of the symmetrised divergence between the two distributions, as in Eqn.\ \eqref{eqn:local_approximation}.
+	\item compute the shortest path on the resulting graph between every pair of points on the graph
 \end{enumerate}
+\item use metric multidimensional scaling to embed the set of distributions as points a low-dimensional Euclidean space.
+\end{enumerate}
+
+\subsection{Bernoulli distributions}
+
+Let us first look at the simple and special case of one dimensional statistical manifolds of Bernoulli distributions (biased coinflips). Bernoulli random variables have a binary outcome, positive with probability $p$ and negative with probability $1-p$.
+
+One dimensional Riemannian manifolds are special, as these are always homeomorphic to either the real line $\Reals$, or the circle. In addition, one dimensional statistical manifolds induced by strictly proper scoring rules are always homeomorphic to the real line. So the only difference between various manifolds is how to real line is stretched and compressed at various parts.
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{figs/embeddings/Bernoulli}
+\caption{\TODO{to be replaced with nicer graphics} Illustration of the differences between the Brier, spherical, and KL divergences between Bernoulli distributions. The Brier divergence is equivalent to the Euclidean distance between parameter values, therefore when mapped by Brier divergence, parameters are evenly spaced on the real line \emph{(top, bottom)}. The KL divergence places emphasis on small differences between  small probabilities, therefore the manifold is stretched out as the parameter approaches $0$ and $1$. In fact the KL divergence is not bounded, and the manifold of Bernoulli distributions stretches to the entire real line. }
+\end{figure}
 
 \subsection{Visualising the Shannon-information geometry}
 
@@ -79,14 +174,28 @@ Plugging these into Eqn.\ \eqref{eqn:KL_Gamma} we can now map Gamma distribution
 
 \subsection{Visualising geometries induced by divergences other than KL}
 
+\begin{figure}
+	\includegraphics[width=.3\columnwidth]{figs/embeddings/Normal_kernel_1}
+	\hspace{0.02\columnwidth}
+	\includegraphics[width=.3\columnwidth]{figs/embeddings/Normal_kernel_2}
+	\hspace{0.02\columnwidth}
+	\includegraphics[width=.3\columnwidth]{figs/embeddings/Normal_kernel_3}
+	\caption{Map of the statistical manifold corresponding to the kernel score with a square exponential kernel. The lengthscale parameter was set to \emph{(from left to right)} $\ell=0.5,2,5$. For small lengthscales, the divergence is very sensitive to distributions with small standard deviation. As the lengthscale increases, this sensitivity is less and less dominant, and we start to observe comparable resolution amongst distributions with larger variance.}
+\end{figure}
 The main purpose of this section is to visualise differences between the geometries induced by various divergence measures over the same set of distributions. Here we will mainly focus on Gaussian distributions, as it is analytically convenient to compute various divergences between Gaussians in closed form.
 
 A particularly interesting divergence that we will use in subsequent chapters is that based on the kernel scoring rule, called the MMD (section \ref{sec:kernel_scoring}). The kernel scoring rule itself is very flexible, and its properties are dictated by the choice of kernel function.
 
 For several well-known kernels the MMD between two univariate Gaussians can be computed in closed form. For the squared exponential kernel $k(x,y)=\exp(-\frac{(x-y)^2}{\ell^2})$ the divergence is given by the following formula:
 
+\begin{align}
+	\scalar{\mu_{\Normal(\mu_1,\sigma_1)}}{\mu_{\Normal(\mu_2,\sigma_2)}}_{k_{\ell}} = \frac{\ell}{\sqrt{\ell^2 + \sigma_1^2 + \sigma_2^2}}\exp\left(-\frac{(\mu_1 - \mu_2)^2}{2(\ell^2 + \sigma_1^2 + \sigma_2^2)}\right)
+\end{align}	
+
+\TODO{correct expression below!!!}
+
 \begin{equation}
-	\MMD{\Normal_{\mu_1,\sigma_1}}{\Normal_{\mu_2,\sigma_2}} = \ell\left(\frac{1}{\ell+2\sigma_1} + \frac{1}{\ell+2\sigma_2} - \frac{2}{\ell+\sigma_1 + \sigma_2}\exp\left(-\frac{(\mu_1 - \mu_2)^2}{(\ell + \sigma_1 + \sigma_2)^2}\right)\right)
+	\divergence{k}{\Normal_{\mu_1,\sigma_1}}{\Normal_{\mu_2,\sigma_2}} = \ell\left(\frac{1}{\sqrt{\ell^2+2\sigma_1^2}} + \frac{1}{\sqrt{\ell^2+2\sigma_2^2}} - \frac{2}{\sqrt{\ell^2+\sigma_1^2 + \sigma_2^2}}\exp\left(-\frac{(\mu_1 - \mu_2)^2}{2(\ell^2 + \sigma_1^2 + \sigma_2^2)}\right)\right)
 \end{equation}
 
 Figure \ref{fig:Normals_MMD} illustrates the map according to the MMD divergence choosing various values for the lengthscale $\ell$.  \TODO{conclusions} We observe that the structure of the manifold induced by this divergence is qualitatively very similar to that induced by the KL divergence. However, using MMD with the squared exponential kernel allows us the extra flexibility of choosing a characteristic lengthscale, thereby modulating the sensitivity to small differences in variance and mean.
