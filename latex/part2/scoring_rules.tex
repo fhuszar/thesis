@@ -25,7 +25,7 @@ Given a scoring rule $\score:\Xe\times\probmeasures{\Xe}\mapsto\Reals$, let us d
 	\end{equation}
 \end{definition}
 
-\TODO{Mention Bregman divergences \cite{http://bit.ly/Ojhpw4}}.
+\TODO{Mention Bregman divergences \citep{http://bit.ly/Ojhpw4}}.
 
 The divergence measures how much worse we are at forecasting a quantity $\X$ sampled from a distribution $P$ when instead of using the true distribution $P$, we use an alternative probability distribution, $Q$. Ideally, we would like to see that using the true model $P$ should always be better or at least as good as using any alternative model $Q$, but this is not automatically true for all scoring rules. A scoring rule that has this property is called a \emph{proper scoring rule}.
 
@@ -86,7 +86,7 @@ The divergence defined in \eqref{eqn:def_divergence} is a special case of Bregma
 
 An intuitive explanation of Bregman divergences is given in Figure \ref{fig:Bregman}.
 
-\cite{http://bulletin.pan.pl/(58-1)183.pdf,http://www.ucl.ac.uk/statistics/research/pdfs/rr268.pdf} 
+\citep{Amari2010,Dawid2007}
 Definition \eqref{eqn:def_divergence} suggests that the the first argument, $P$, should take the role of the true distribution, and $Q$ the approximate. \TODO{elaborate on this.}
 
 So far we have only introduced quantities describing a single random variable, and comparing probability distributions over the same variable. We can extend the scoring rule framework to define information quantities that describe the relationship between multiple variables. A particularly useful quantity is the value of information, that measures the dependence between.
@@ -164,9 +164,9 @@ The resulting divergence function is the Kullback-Leibler (KL) divergence, which
 
 The KL divergence is only well-defined when the distribution $Q$ is absolutely continuous with respect to $P$. This is one of the most important limitations of the KL divergence for our purposes in later chapters: If $P$ is a continuous density, then $Q$ has to be continuous as well for the KL divergence to be defined. Therefore we cannot compute the KL divergence between, say, an empirical distribution of samples and a continuous distribution. A related problem is that Shannon's entropy of atomic distributions or mixed atomic and continuous distributions is either not well defined, or is trivial and depends only on the relative weight of the atoms but ot on their locations.
 
-These problems all stem from a property of the logarithmic score, known as locality: The value of the scoring rule $\score(x,P)$ only depends on the value of the density function evaluated at the point $x$. This is a unique property of the logarithmic score. Any strictly proper local scoring rule is analogous to the logarithmic score. Note, that there are weaker definitions of locality of scoring rules, which hold scoring rules other than the logarithmic \cite{}.
+These problems all stem from a property of the logarithmic score, known as locality: The value of the scoring rule $\score(x,P)$ only depends on the value of the density function evaluated at the point $x$. This is a unique property of the logarithmic score. Any strictly proper local scoring rule is analogous to the logarithmic score. Note, that there are weaker definitions of locality of scoring rules, which hold scoring rules other than the logarithmic \citep{Parry2012, Dawid2012}.
 
-The value of information becomes Shannon's mutual information, a crucial quantity in channel coding \cite{}. Interestingly, Shannon's mutual information can be rewritten as the KL divergence between the joint distribution and the product of marginals:
+The value of information becomes Shannon's mutual information, a crucial quantity in channel coding \citep{Shannon1948, MacKay2002}. Interestingly, Shannon's mutual information can be rewritten as the KL divergence between the joint distribution and the product of marginals:
 
 \begin{align}
 	\information{Shannon}{X}{Y} &= \genentropy{Shannon}{X} - \expect{y \sim P_{Y}} \genentropy{Shannon}{P_{X\vert Y=y}}\\
@@ -184,12 +184,12 @@ For completeness, we note here that some authors have generalised Shannon's mutu
 	\mathbb{J}_{d}(X,Y) = \mbox{d}\left[ P(x,y) \middle\| P_{X}(x)P_{Y}(y) \right]\label{mutualinfo_generalisations}
 \end{equation}
 
-Examples of information functionals defined this way are \cite{}.
+Examples of information functionals defined this way are \citep{Poczos2011}.
 On one hand, an information functional like $\mathbb{J}$ has several nice properties, most notably that it is always symmetric. On the other hand, in the general case we loose the intuitive meaning of information as ``the extent to which observing the value of one variable is useful for predicting the value of the other one''. Furthermore, if we wanted to use a divergence function corresponding to a scoring rule, the scoring rule should be defined over the joint space $\Xe\times\Ye$, which is often not desired.
 
 \subsection{The pseudolikelihood}
 
-The idea of maximum pseudolikelihood estimation was introduced originally by \cite{Besag1977} to estimate parameters of Gaussian random fields. Later it was popularised in the context if parameter estimation in Boltzmann machines \cite{Hyvarinnen} and Markov random fields. The pseudolikelihood is particularly useful for estimating parameters of statistical models with intractable normalisation constants.
+The idea of maximum pseudolikelihood estimation was introduced originally by \citep{Besag1977} to estimate parameters of Gaussian random fields. Later it was popularised in the context if parameter estimation general Markov random fields \citep{Comets1992} and in Boltzmann machines \citep{Hyvarinen2006}. The pseudolikelihood is particularly useful for estimating parameters of statistical models with intractable normalisation constants.
 
 \begin{equation}
 	\score_{\mbox{pseudo}}(x,P) = - \sum_{d=1}^{D} \log P(x_d\vert x_{\neg d}),
@@ -220,7 +220,7 @@ where $X = \sum_{x\in\{0,1\}^D}\exp(x^{T}Wx + b^{T}x)$ is the partition function
 		&= \frac{\exp\left( x_d \left( W_{d,d} + 2 W_{d,\neg d}^{T}x_{\neg d} + b_d \right)\right)}{\exp( W_{d,d} + 2 W_{d,\neg d}^{T}x_{\neg d} + b_{d}) + 1}\\
 \end{align}
 
-The pseudo-likelihood thus becomes a sum of easy-to-compute sigmoidal terms. These sigmoidal terms, and their derivatives with respect to parameters $W$ and $b$ can be computed in polynomial time, allowing for fast estimation algorithms. \cite{HyvarinnenNeuralComputation} showed that pseudolikelihood estimation is consistent for fully visible Boltzmann machines.
+The pseudo-likelihood thus becomes a sum of easy-to-compute sigmoidal terms. These sigmoidal terms, and their derivatives with respect to parameters $W$ and $b$ can be computed in polynomial time, allowing for fast estimation algorithms. \citep{Hyvarinen2006} showed that pseudolikelihood estimation is consistent for fully visible Boltzmann machines.
 
 The difference between the pseudolikelihood score and the log score becomes more apparent when rewriting the log score by the chain rule of joint probabilities:
 
@@ -230,7 +230,7 @@ The difference between the pseudolikelihood score and the log score becomes more
 
 Here the $d^{\mbox{th}}$ term is a probability conditioned on $d-1$ variables, and computing the $d^{\mbox{th}}$ term therefore would require $D-d$ dimensional integral. The pseudo-likelihood makes computations more efficient by conditioning on more variables than needed by the chain rule. The two scoring rules are equivalent if and only if the joint distribution $P$ conforms to a directed acyclic graphical model, i.\,e. there is a \emph{natural causal ordering} of variables $\pi:\{1\ldots D\}\mapsto\{1\ldots D\}$ such that $X_{\pi_d}\independent X_{\pi_{d+1}},\ldots,X_{\pi_D} \vert X_{\pi_1},\ldots,X_{\pi_{d-1}}$. 
 
-\cite{} showed that pseudolikelihood estimation strictly proper for strictly postitive distributions. Moreover, for always positive distributions the following generalisation of the pseudolikelihood is also strictly proper scoring rule:
+\citep{Csiszar2004} showed that pseudolikelihood estimation strictly proper for strictly postitive distributions. Moreover, for always positive distributions the following generalisation of the pseudolikelihood is also strictly proper scoring rule:
 
 \begin{equation}
 	\score_{\mbox{DLP12}}(x,P) = - \sum_{d=1}^{D} \score_d\left(x_d, P_{X_d \vert X_{\neg d}=x_{\neg d}}\right),
@@ -240,7 +240,7 @@ Where $\score_d$ are strictly proper scoring rules for each dimension
 
 \subsection{The Brier (quadratic) score}
 
-Another widely used scoring rule is the so-called \emph{Brier score} or quadratic score, originally introduced in \cite{Brier1950}. It is used in \TODO{where?}
+Another widely used scoring rule is the so-called \emph{Brier score} or quadratic score, originally introduced in \citep{Brier1950}. It was first applied to evaluating probabilistic weather forecasts and it is still used in meteorology \citep{Ferro2007} as well as in medicine \citep{Spiegelhalter2006} and epidemiology \citep{Redelmeier1991}.
 
 We will define the Brier score in terms of the $L^2$ norm of the probability distribution, that is:
 
@@ -284,8 +284,7 @@ The value of information under the Brier score becomes the following straightfor
 \end{align}
 
 \subsection{Spherical and pseudo-spherical scoring rules}
-Another example of strictly proper scoring rules mentioned in \cite{http://arxiv.org/pdf/1104.2224.pdf, Dawid
-(2007)}, introduced in \cite{Good (1971), }. The spherical score is defined as follows.
+Another example of strictly proper scoring rules, introduced in \citep{Good1971} is the spherical scoring rule \citep{Dawid2007,Dawid2012}. The spherical score is defined as follows:
 
 \begin{align}
 	\score_{spherical}(x,P) &= 1 -\frac{P(x)}{\customnorm{P}{2}}
@@ -319,23 +318,23 @@ Pseudo-spherical scoring rules are generalisations of the spherical score of the
 	\genentropy{\gamma,pseudospherical}{P} &= -\customnorm{P}{\gamma}
 \end{align}
 
-For more details about pseudospherical scores see \cite{}.
+For more details about pseudospherical scores see \citep{Gneiting2007} and \citep{Jose2008}.
 
 \subsection{The kernel scoring rule}
 
-To my knowledge, the kernel scoring rule first appeared in the statistics literature in \cite{Dawid}, who referred to it by the name \emph{kernel scoring rule}. Recently, essentially the same concept, but derived from different first principles, has become known in the machine learning community as \emph{maximum mean discrepancy} (MMD, \cite{}), and has been adopted in a variety of applications in machine learning and statistics, including two sample tests \cite{}, kernel moment matching \cite{} embedding of probability distributions \cite{} and the kernel-based message passing \cite{}.
+To my knowledge, the kernel scoring rule in its mathematical form first appeared in the statistics literature in \citep{Eaton1996}. Later it was referred to by the name \emph{kernel scoring rule} \citep{Dawid1999,Dawid2007,Gneiting2007}. Recently, essentially the same concept, but derived from different first principles, has become known in the machine learning community as \emph{maximum mean discrepancy} (MMD, \citep{Sriperumbudur2008}), and has been adopted in a variety of applications in machine learning and statistics, including two sample tests \citep{Gretton2012}, kernel moment matching \citep{Song2008}, embedding of probability distributions\citep{Smola2007} and the kernel-based message passing \citep{Fukumizu2010}.
 
-Here I am going to define the kernel scoring rule by first introducing the divergence it gives rise to, maximum mean discrepancy, following the definitions in \cite{twosample}.
+Here I am going to define the kernel scoring rule by first introducing the divergence it gives rise to, maximum mean discrepancy, following the definitions in \citep{Gretton2012}.
 
-MMD measures the divergence between two distributions, $p$ and $q$. It belongs to a rich class of divergences called integral probablity metrics\cite{http://arxiv.org/pdf/0901.2698.pdf}, which define the distance between  $p$ and $q$, with respect to a class of integrand functions $\mathcal{F}$ as follows:
+MMD measures the divergence between two distributions, $p$ and $q$. It belongs to a rich class of divergences called integral probablity metrics \citep{Sriperumbudur2009}, which define the distance between  $p$ and $q$, with respect to a class of integrand functions $\mathcal{F}$ as follows:
 %
 \begin{align}
 	\divergence{\Fe}{p}{q} = \sup_{f\in\Fe}\left\vert\int f(x) p(x) dx - \int f(x) q(x) dx \right\vert
 \end{align}
 	
-Intuitively, if two distributions are close in the integral probability metric sense, then no matter which function $f$ we choose from function class $\mathcal{F}$, the difference in its integral over $p$ or $q$ should be small. This class of divergences include Wasserstein distance \cite{}, Dudley metric \cite{} and MMD, which differ in their choice of the function class $\Fe$.
+Intuitively, if two distributions are close in the integral probability metric sense, then no matter which function $f$ we choose from function class $\mathcal{F}$, the difference in its integral over $p$ or $q$ should be small. This class of divergences include Wasserstein distance \citep{Barrio1999}, Dudley metric \citep{Dudley1974} and MMD, which differ in their choice of the function class $\Fe$.
 
-A particularly interesting case is when the function class $\Fe$ is functions of unit norm from a reproducing kernel Hilbert space (RKHS) $\He$. In this case, the MMD between two distributions can be conveniently expressed using expectations of the associated kernel $k(x, x')$ only \cite{Sriperumbudur2010}:
+A particularly interesting case is when the function class $\Fe$ is functions of unit norm from a reproducing kernel Hilbert space (RKHS) $\He$. In this case, the MMD between two distributions can be conveniently expressed using expectations of the associated kernel $k(x, x')$ only \citep{Sriperumbudur2010}:
 
 \begin{align}
 \divergence{k}{P}{Q} &\defeq \mbox{MMD}^2\left(P,Q\right)\\
@@ -347,9 +346,9 @@ A particularly interesting case is when the function class $\Fe$ is functions of
 	&=  \expect{x,x'\sim P} k(x,x')	- 2 \expect{x\sim P}\expect{x'\sim Q} k(x,x') + \expect{x,x'\sim Q} k(x,x'),\label{eqn:rkhs-mmd-lastline}
 \end{align}
 
-In the derivation above $\mu_p(\cdot) = \int k(\cdot,x) p(x) dx$ is the so called mean element or RKHS embedding of the probability distributions $p$. The most interesting kernels for the purposes of Hilbert-space embedding of distributions are those called \emph{characteristic} \cite{}. If the kernel $k$ is characteristic, the mapping from Borel probability measures to mean elements in a characteristic RKHS is injective, that is $\mu_p = \mu_q \iff p = q$. This also means that for characteristic Hilbert spaces $\divergence{k}{P}{Q} = 0 \iff Q=P$ holds.
+In the derivation above $\mu_p(\cdot) = \int k(\cdot,x) p(x) dx$ is the so called mean element or RKHS embedding of the probability distributions $p$. The most interesting kernels for the purposes of Hilbert-space embedding of distributions are those called \emph{characteristic} \citep{Sriperumbudur2008}. If the kernel $k$ is characteristic, the mapping from Borel probability measures to mean elements in a characteristic RKHS is injective, that is $\mu_p = \mu_q \iff p = q$. This also means that for characteristic Hilbert spaces $\divergence{k}{P}{Q} = 0 \iff Q=P$ holds.
 
-The mean embedding $\mu_p$ can be thought of as a generalisation of characteristic functions \cite{}. The characteristic function of a probability distribution p over the real line is defined as follows:
+The mean embedding $\mu_p$ can be thought of as a generalisation of characteristic functions \citep{Ord1999}. The characteristic function of a probability distribution p over the real line is defined as follows:
 
 \begin{equation}
 \phi_p(t) = \E{x\sim p}{e^{ i t x}} = \int e^{i t x} p(x) dx,
@@ -357,7 +356,7 @@ The mean embedding $\mu_p$ can be thought of as a generalisation of characterist
 
 where $i$ is the imaginary number $i=\sqrt{-1}$. The characteristic function is known to uniquely characterise any Borel probability measure on the real line. Indeed, it corresponds to an RKHS-embedding with the fourier kernel $k_{Fourier}(x,y) = \exp(ixy)$, which is an example of characteristic kernels. Note, that the final formula \ref{eqn:rkhs-mmd-lastline} assumed a real valued kernel function, therefore it is not valid for the Fourier kernel. Other, practically more relevant examples of characteristic kernels include the squared exponential, and the Laplacian kernels (see chapter \ref{sec:kernels}). As a counterexample, polynomial kernels, and in general kernels corresponding to finite dimensional Hilbert spaces are not characteristic.
 
-The maximum mean discrepancy with characteristic kernels has been applied in various contexts in machine learning. One of the first of these recent application were two-sample tests. In two-sample testing we are provided i.\,i.\,d.\ samples from two distributions, and we have to determine whether the two distributions are the same or not. \cite{} developed and analysed empirical estimators of MMD for this problem. Herding \cite{}, a method for generating pseudosamples has been shown to minimise MMD between a target distribution and the empirical distribution of pseudo-samples. Lastly, in kernel moment matching \cite{SmolaShaweTaylor} MMD is used for density estimation: parameters of a parametric density model are set by minimising MMD from the empirical distribution of data. This is a special case of score matching, as we will see shortly.
+The maximum mean discrepancy with characteristic kernels has been applied in various contexts in machine learning. One of the first of these recent application were two-sample tests. In two-sample testing we are provided i.\,i.\,d.\ samples from two distributions, and we have to determine whether the two distributions are the same or not. \citep{Gretton2012,Gretton2009} developed and analysed empirical estimators of MMD for this problem. Herding \citep{Welling2009,Chen2012}, a method for generating pseudosamples has been shown to minimise MMD between a target distribution and the empirical distribution of pseudo-samples. Lastly, in kernel moment matching \citep{Song2008} MMD is used for density estimation: parameters of a parametric density model are set by minimising MMD from the empirical distribution of data. This is a special case of score matching, as we will see shortly.
 
 The squared MMD in fact conforms to our definition of a generalised divergence in equation \eqref{eqn:def_divergence}, and corresponds to the following scoring rule:
 
@@ -366,9 +365,9 @@ The squared MMD in fact conforms to our definition of a generalised divergence i
 		&=  \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left( f(x)- \expect{x\sim Q} f(y) \right)^2
 \end{align}
 
-This scoring rule is analogous to the kernel scoring rule introduced originally in \cite{DawidAncientpaper}. The difference is scaling by a factor of two, and the leading $k(x,x)$ term. These differences do not make any practical difference: scoring rules that are equal up to scaling and an additive term that depends only on $x$ but not on the distribution $P$ give rise to exactly the same generalised entropy and divergence functionals.
+This scoring rule is analogous to the kernel scoring rule introduced originally in \citep{DawidAncientpaper}. The difference is scaling by a factor of two, and the leading $k(x,x)$ term. These differences do not make any practical difference: scoring rules that are equal up to scaling and an additive term that depends only on $x$ but not on the distribution $P$ give rise to exactly the same generalised entropy and divergence functionals.
 
-\cite{GneitingRaftery} give a proof of the propriety of this scoring rule for Borel probability measures for which the expectation $\expect{x,x'\sim P} k(x,x')$ is finite. The scoring rule is also strictly proper whenever the kernel is characteristic \cite{Sripedimbudur}. \cite{GneitingRaftery} showed particular examples of scoring rules, among them the Brier score (see section \ref{sec:Brier_score}), that can be interpreted as special cases of the kernel scoring rule.
+\citep{Gneiting2007} give a proof of the propriety of this scoring rule for Borel probability measures for which the expectation $\expect{x,x'\sim P} k(x,x')$ is finite. The scoring rule is also strictly proper whenever the kernel is characteristic \citep{Sripedimbudur}. \citep{Gneiting2007} showed particular examples of scoring rules, among them the Brier score (see section \ref{sec:Brier_score}), that can be interpreted as special cases of the kernel scoring rule.
 
 The generalised entropy defined by this scoring rule becomes:
 
@@ -382,7 +381,7 @@ Firstly, if we assume that the kernel $k$ is bounded, then the entropy functiona
 
 Secondly, The only requirement for the distribution $Q$ is that we can compute expectations with respect to it. This means that any probability distribution, and indeed any Borel measure, has a well-defined entropy of this form. This is not true for the Shannon's differential entropy, where the entropy of atomic distributions or mixtures of atomic and continuous distributions is not well defined. This property is going to be useful in applications to quasi-Monte Carlo in chapter \ref{sec:quasiMC}.
 
-Thirdly, the entropy function has the kernel as free parameter, which is a mixed blessing. On one hand, this provides extra flexibility: even if we commit to a particular family of kernels, like the square exponential, we can fine-tune the entropy function to our needs by adjusting parameters, such as the length-scale parameter \cite{tailoring}. On the other hand there is no principled, general way of choosing the kernel or it's parameters if we are unsure what it should be.
+Thirdly, the entropy function has the kernel as free parameter, which is a mixed blessing. On one hand, this provides extra flexibility: even if we commit to a particular family of kernels, like the square exponential, we can fine-tune the entropy function to our needs by adjusting parameters, such as the length-scale parameter \citep{tailoring}. On the other hand there is no principled, general way of choosing the kernel or it's parameters if we are unsure what it should be.
 
 The divergence between two distributions $p$ and $q$ under the kernel scoring rule becomes the squared maximum mean discrepancy defined in equation \eqref{eqn:rkhs-mmd}.
 
@@ -420,7 +419,7 @@ To my knowledge, this kernel-based measure of information has not been used in t
 \TODO{Figure out if there is any connection between COCO and my criterion, maybe with a stupid choice of $k_{\Ye}$}
 Based on the cross-covariance operator, we can define various measures of dependence or information, the simplest of which is constrained covariance, or COCO:
 
-\begin{definition}[Constrained covariance, see \cite{Mourier1953,Gretton2005}]
+\begin{definition}[Constrained covariance, see \citep{Mourier1953,Gretton2005}]
 	In the same notation as above let us define define the constrained covariance between $X$ and $Y$, $COCO_{XY}$, as
 	\begin{equation}
 		COCO_{XY}=\sup_{\substack{f\in\He_\Xe, g\in\He_\Ye \\\customnorm{f}{\He_\Xe}=1,\customnorm{g}{\He_\Ye}=1}} \cov{(x,y)\sim P}{f(x)}{g(y)}
@@ -432,7 +431,7 @@ Based on the cross-covariance operator, we can define various measures of depend
 	where $\customnorm{\cdot}{2}$ denotes the matrix norm, that is the modulus of largest eigenvalue. \TODO{Check if statements are correct}
 \end{definition}
 
-COCO is only one of several independence measures that have been developed based on kernels, see \cite{HSIC} for an overview of variants. Just as generalisations of Shannon's mutual information (eqn.\ \eqref{mutualinfo_generalisations}), these measures of dependence have several useful properties. They are symmetric, and can be effectively estimated from empirical data \cite{}.
+COCO is only one of several independence measures that have been developed based on kernels, see \citep{HSIC} for an overview of variants. Just as generalisations of Shannon's mutual information (eqn.\ \eqref{mutualinfo_generalisations}), these measures of dependence have several useful properties. They are symmetric, and can be effectively estimated from empirical data \citep{}.
 
 However, as with eqn.\ \eqref{mutualinfo_generalisations}, COCO and its variants do not have an interpretation as ``the extent to which knowing $Y$ is useful for predicting $X$''. Also, they require a kernel on both $\Xe$ and $\Ye$, and properties of the functional depend on both choices of kernels. In contrast \eqref{mutualinfo_generalisations} only requires a kernel over $X$.
 
@@ -480,7 +479,7 @@ The information is the trace of this operator:
 		&= \trace{I_{X\vert Y}}
 \end{align}
 
-See definition of HSIC in \cite{GreBouSmoSch05.pdf}
+See definition of HSIC in \citep{GreBouSmoSch05.pdf}
 
 \subsection{The spherical kernel score}
 

@@ -1,22 +1,69 @@
-\section{Introduction}
+%!TEX root = ../main.tex
 
-In practically interesting Bayesian models, the posterior is often computationally intractable to obtain and therefore one has to resort to approximate inference techniques. The most popular approximation methods are variational inference and Markov chain Monte Carlo.
+In practically interesting Bayesian models, the posterior distribution is often computationally intractable to obtain and therefore one has to resort to approximate inference techniques. The most popular approximation methods are variational inference and Markov chain Monte Carlo.
 
-Variational methods operate by minimising an information theoretic divergence between a simple, often exponential family, distribution and the true posterior. The divergence is often chosen to be a form of Kullback-Leibler divergence, as it allows easy rearrangement of terms and makes local message-passing style computations possible. In section \ref{sec:losscalibrated} argue that when Bayesian inference is performed to solve a particular decision problem, these algorithms are sub-optimal as they are ignorant of the structure of losses. We devised a framework we termed loss-calibrated approximate inference \cite{}, which generalises traditional variational approaches by minimising generalised divergences based on scoring rules. I will demonstrate this framework on a loss-critical toy problem and on a well-known nonparametric Bayesian model, Gaussian process regression.
+Variational methods operate by minimising an information theoretic divergence between a simple distribution, often of exponential family, and the true posterior. The divergence is often chosen to be a form of Kullback-Leibler divergence, as it allows easy rearrangement of terms and makes local message-passing style computations possible. In section \ref{sec:losscalibrated} argue that when Bayesian inference is performed to solve a particular decision problem, these algorithms are sub-optimal as they are ignorant of the structure of losses. We devised a framework we termed loss-calibrated approximate inference \cite{}, which generalises traditional variational approaches by minimising generalised divergences based on scoring rules. I will demonstrate this framework on a loss-critical toy problem and on a well-known nonparametric Bayesian model, Gaussian process regression.
 
-Monte Carlo methods produce random samples (approximately) drawn from the posterior, which then allows for approximating relevant integrals over the posterior. Monte Carlo techniques are applicable to a wide variety of interesting Bayesian models, and allow for an intuitive trade-off between computation time and accuracy. However, just as most variational approaches, Monte Carlo techniques are also ignorant of the decisions and losses involved in a decision problem. In section \ref{sec:} I introduce a new class of approximate inference algorithms that I call loss-calibrated quasi-Monte Carlo methods. These algorithms produce a deterministic sequence of pseudo-samples in such a way, that the divergence between the empirical distribution of pseudosamples is minimised from the target distribution. I show how kernel herding, a recent algorithm proposed by \cite{kernelherding} can be seen as a special case of loss-calibrated quasi-Monte Carlo, and point out the connection between this method and Bayesian Quadrature.
-
-We can also argue, that when we cannot perform inference exactly, the usual practice of performing approximate inference and then using the approximate posterior to calculate a decision is weakly motivated. One may want to instead directly approximate the optimal decision, without producing a direct estimate of the posterior. Following our work published in \cite{Simonspaper}, I introduce approximate Bayesian decision theory, and derive an Expectation-Maximisation style variational algorithm for solving it. We illustrate the framework on Gaussian process classification, and present experimental comparisons to standard approaches based on approximate inference.
+Monte Carlo methods produce random samples (approximately) drawn from the posterior, which then allow for approximating relevant integrals over the posterior. Monte Carlo techniques are applicable to a wide variety of interesting Bayesian models, and allow for an intuitive trade-off between computation time and accuracy. However, just as most variational approaches, Monte Carlo techniques are also ignorant of the decisions and losses involved in a decision problem. In section \ref{sec:} I introduce a new class of approximate inference algorithms that I call loss-calibrated quasi-Monte Carlo methods. These algorithms produce a deterministic sequence of pseudo-samples in such a way, that the divergence between the empirical distribution of pseudosamples is minimised from the target distribution. I show how kernel herding, a recent algorithm proposed by \cite{kernelherding} can be seen as a special case of loss-calibrated quasi-Monte Carlo, and point out the connection between this method and Bayesian Quadrature.
 
 The work presented in this chapter on loss-calibrated approximate inference and approximate decision theory is joint work with Simon Lacoste-Julien and Zoubin Ghahramani, and most of the results presented here have been published in \cite{losscalibrated}.
 The work presented on the equivalence between optimally weighted kernel herding and Bayesian Quadrature is joint work with David Duvenaud, and has been published \cite{losscalibrated}.
 
 \section{Loss-calibrated approximate inference}
 
-Although often overlooked, the main theoretical motivations for the Bayesian paradigm are rooted in Bayesian decision theory~\cite{berger85decision}, which provides a well-defined theoretical framework for rational decision making under uncertainty about a hidden parameter $\theta$. The ingredients of Bayesian decision theory are (see Ch.~2 of~\cite{robert01choice} or Ch.~1 of~\cite{berger85decision} for example):
+\TODO{General paragraph about Bayesian inference}
+
+In many practically relevant cases computing the posterior is not analytically tractable. This is predominantly due to the fact that the integral defining the marginal likelihood $\int p(\dataset\vert\theta)p(\theta)d\theta$ cannot be computed analytically in closed form, and therefore the normalisation of the posterior cannot be computed. But sometimes the complexity of evaluating even the unnormalised posterior increases exponentially with the amount of observed data, as in the case of for example switching state space models. In either case, it is usual practice to approximate the intractable posterior by something simpler, an approximate distribution $q$. The problem of finding an approximate posterior $q$ is referred to as approximate inference.
+
+Over the years, two dominant branches of approximate inference emerged. The first branch, that I will refer to as parametric approximation schemes, includes variational inference, Laplace approximation and expectation propagation. The common theme in these techniques is that the complicated posterior is replaced by an approximate distribution chosen from a particular parametric family of distributions, usually from an exponential family. These methods differ in their objective functions they minimise, which measure discrepancy between the target posterior distribution and the approximation $q$.
+
+\subsection{Overview of variational methods and expectation propagation}
+
+Variational methods to approximate inference find the optimal approximation $q^{*}$ to the posterior by maximising a lower bound to the marginal likelihood as follows.
+
+\begin{align}
+	\log p(\dataset) &= \log \int p(\dataset\vert\theta)p(\theta) d\theta\\
+		&=\log \int \frac{p(\dataset\vert\theta)p(\theta)}{q(\theta)}q(\theta) d\theta\\
+		&\geq \int \log \frac{p(\dataset\vert\theta)p(\theta)}{q(\theta)} q(\theta) d\theta\\
+		&= \log p(\dataset) - \KL{p_{\dataset}}{q}
+\end{align}
+
+by minimising the Kullback-Leibler divergence (Eqn.\ \eqref{eqn:KL_divergence}) between the approximate distribution $q$ and the true posterior $p_{\dataset}$. A common practice in approximate inference is to choose the approximate posterior distribution $q$ from an exponential family of distributions $\Qe$, and it is also often common practice to choose $q$ such that it factorises over multivariate quantities. When these assumptions are made, the solution to the above optimisation can often be expressed in closed form, or efficient iterative algorithms exist for finding a locally optimal solution numerically.
+
+The KL divergence is non-symmetric, therefore the order of arguments matter. Variational methods minimise $\KL{q}{p_{\dataset}}$, that is with the approximate distribution being the first argument. On the one hand, this is highly convenient as computing the divergence in this direction requires integration only over $q$, which is assumed simpler than the real posterior $p_{\dataset}$.On the other hand, as I argued in section \ref{sec:scoring_rules}, in the scoring rule interpretation suggests that the \emph{right} way to use divergence is $\KL{p_{\dataset}}{q}$, i.\,e.\ when its first argument is the true distribution we want to approximate, and the second argument some approximation $q$. This has been pointed out previously by \cite{Csato2002,Minka2001} and many other authors. This does not mean that variational inference does not work, it just means that by performing variational inference we loose some of the intuitive interpretation of KL divergence as Bregman divergence under the logarithmic loss.
+
+Several approaches therefore tried to fix this conceptual issue, and minimise KL divergence in the opposite direction. This is unfortunately a challenge, as computing the divergence $\divergence{\score}{p_{\dataset}}{q}$ always requires an integral over the posterior $p_{\dataset}$, which is normally intractable, and this is why we perform approximate inference in the first place.
+
+Assumed density filtering, and its generalisation, expectation propagation (EP) try to approximate the ideal method of minimising $\KL{p_{\dataset}}{q}$ as follows. EP assumes the posterior can be written as a product of factors as such:
+
+\begin{equation}
+	p_{\dataset}(\theta) = \frac{1}{Z} \prod t_i(\theta)
+\end{equation}
+
+The terms $t_i$ are assumed simple, and in most cases depend only on a few components of the multivariate parameter vector $\theta$. What makes the posterior intractable is the normalisation constant $Z$, computing which would involve a very expensive integral. Expectation propagation approximates the posterior by substituting approximate factors $\tilde{t}_i$ for original factors $t_i$, in such a way that the product of approximate factors
+
+\begin{equation}
+	q(\theta) = \prod \tilde{t}_i(\theta)
+\end{equation}
+
+is tractable. The approximate factors are improved one-by-one using the following objective function:
+
+\begin{equation}
+	\tilde{t}_i^{new} = \argmin_{t \in \text{approximate family}} \KL{\frac{1}{\int q(\theta)\frac{t_i(\theta)}{\tilde{t}_i(\theta)} d\theta}q(\theta)\frac{t_i(\theta)}{\tilde{t}_i(\theta)}}{q(\theta)\frac{t_i(\theta)}{t(\theta)}}
+\end{equation}
+
+Essentially, in each iteration the algorithm replaces one of the approximate factors in the approximate posterior $q$ with the real factor to construct a one-step-closer-to-exact approximation to the posterior $\tilde{q}$. Then it uses this $\tilde{q}$ as the target distribution and computes a new approximation by minimising KL divergence. This step is repeated until convergence, that is until no approximate factors can be further improved by the KL divergence metric.
+
+Thus in expectation-propagation, the KL divergence is used in the right direction that is well motivated by the theory of scoring rules and Bregman divergences. However, as computing KL divergence in the right direction is intractable it has to use a roundabout method.
+
+\subsection{Loss-calibrated approximate inference}
+
+Although often overlooked, the main theoretical motivations for the Bayesian paradigm are rooted in Bayesian decision theory~\cite{berger85decision}, which provides a well-defined theoretical framework for rational decision making under uncertainty about a hidden parameter $\theta$. Approximate inference is concerned with approximating the posterior, but often ignores the fact that the posterior is then used in a wider context to make optimal decisions. In this section I review the theory of Bayesian decisions, and then devise a framework for addressing questions that arise when using approximate inference in the context of optimal decision making.
+
+The ingredients of Bayesian decision theory are (see Ch.~2 of~\cite{robert01choice} or Ch.~1 of~\cite{berger85decision} for example):
 \vspace{-.3cm}
 \begin{itemize}
-  \item a loss $\loss(\theta,\action)$ which gives the cost of taking action $\action \in \actionset$ when the world state is $\theta \in \Theta$; %\footnote{Note that $\theta$ is not assumed to be finite dimensional; in the most general setting, it could fully specify an arbitrary distribution over $\mathcal{O}$.};
+  \item a loss $\loss(\theta,\action)$ which quantifies the cost of taking action $\action \in \actionset$ when the world state is $\theta \in \Theta$; %\footnote{Note that $\theta$ is not assumed to be finite dimensional; in the most general setting, it could fully specify an arbitrary distribution over $\mathcal{O}$.};
   \item an observation model $p(\dataset|\theta)$ which gives the probability of observing some data or dataset $\dataset \in \mathcal{O}$ assuming that the world state is $\theta$;
   \item a prior belief $p(\theta)$ over world states.
 \end{itemize}
@@ -29,42 +76,42 @@ The loss $\loss$ describes the decision task that we are interested in, whereas 
 
 In the Bayesian framework, the optimal action $\action_{p_\dataset}$ is the one that minimizes $\risk_{p_\dataset}$.
 
+In this framework it is therefore easy to see that Bayesian decision making decomposes into two consecutive steps of computation. First, a posterior $p_\dataset$ is inferred from observed data $\dataset$, then the optimal action is selected by minimising risk under this posterior. Crucially, the first step is independent of losses, the posterior can be computed irrespective of how the loss $\loss$ is defined. In fact, once we have computed the posterior, the same distribution can be used to solve different decision problems with different losses involved. This independent breakdown of computation is what makes the posterior distribution such an important object in Bayesian statistics.
 
+But when the posterior is intractable to compute and approximations are needed - as it is the case most of the time - additional questions arise. Is this two-step breakdown of computations to inference and then risk minimisation still a sensible thing to do? How should we decide what approximate inference method to use? Can we still re-use the same approximate posterior with different loss functions just as we can if no approximations are needed. Is the choice of approximate inference technique independent of the loss function? This chapter introduces loss-calibrated approximate Bayesian inference is a theoretical framework for addressing these questions.
 
-In this framework it is therefore easy to see that Bayesian decision making decomposes into two separate computation. First, a posterior $p_\dataset$ is inferred from observed data $\dataset$, then the optimal action is selected by minimising risk under this posterior.
+To illustrate the role and behaviour ot approximate inference in a Bayesian decision problem consider the following simple problem. Suppose that we control a nuclear power-plant which has an unknown temperature $\theta$ that we model with Bayesian inference based on some measurements $\mathcal{D}$.
+The plant is in danger of over-heating, and as the operator, we can take two actions: either shut it down or keep it running. Keeping it running while the temperature is above a critical threshold $T_\mathrm{crit}$ will cause a nuclear meltdown, incurring a large loss $L(\theta>T_\mathrm{crit},\mbox{'on'})$. On the other hand, shutting down the power plant incurs a moderate loss $L(\mbox{'off'})$, irrespective of the temperature. 
+%Given our posterior $p_\dataset$ and the losses, we want to compute the Bayes-optimal action that minimizes the posterior risk. 
+Suppose that our current observations yielded a complicated multi-modal posterior $p_\dataset(\theta)$ (\ref{fig:toy}, solid curve) that we do not have comutational resources to represent. Thus we chose to approximate it with a simple Gaussian distribution.
 
-In many practically relevant cases computing the posterior is not analytically tractable. There are two reasons. Either the marginal likelihood $ $
-cannot be computed analytically in closed form, or there is a closed form expression for the posterior, but its complexity increases exponentially with the amount of observed data, as in the case of for example switching state space models. Either way, it is usual practice to approximate the intractable posterior by something simpler, an approximate distribution $q$. The approximate distribution is often chosen from an exponential family of distributions $\Qe$, and it is also often common practice to choose $q$ such that it factorises over multivariate quantities.
+Now consider how various approaches to approximate inference would perform in terms of their Bayesian posterior risk. Minimizing $\KL{q}{p_\dataset}$, as in variational inference, yields candidate $q_1$ which concentrates around the largest mode, ignoring entirely the second small mode around the critical temperature \ref{fig:toy}, dotted curve). Minimizing $\KL{p_\dataset}{q}$ gives a more global approximation: $q_2$ matches moments of the posterior, but still underestimates the probability of the temperature being above $T_\mathrm{crit}$, thereby leading to a suboptimal decision \ref{fig:toy}, dashed curve).
 
-Variational methods find the optimal approximation $q^{*}$ by maximising a lower bound to the marginal likelihood as follows.
+\TODO{Rewrite as divergences have not been definded yet} $q_3$ is one of the minimizers of $d_L(p_\dataset \| q)$ in this setting, resulting in the same decision as $p_\dataset$ \ref{fig:toy}, dash-dotted curve). Note that $q_3$ does not model all aspects of the posterior, but it estimates the Bayes-decision well. Because there are only two possible actions in this setup, the set $\mathcal{Q}$ is split in only two halves by the function $d_L(p_\dataset,q)$ and so there are infinitely many $q_\mathrm{opt}$'s that are equivalent in terms of their risk. In contrast, in the predictive setting of section~\ref{ss:predictive} where in addition we assume $\mathcal{X}$ and $p(x)$ to be continuous, we could obtain a finer resolution $d_L(p_\dataset \| q)$ which can potentially yield a unique optimizer.
 
-\begin{align}
-	\log p(\dataset) &= \log \int p(\dataset\vert\theta)p(\theta) d\theta\\
-		&=\log \int \frac{p(\dataset\vert\theta)p(\theta)}{q(\theta)}q(\theta) d\theta\\
-		&\geq \int \log \frac{p(\dataset\vert\theta)p(\theta)}{q(\theta)} q(\theta) d\theta\\
-		&= \log p(\dataset) - \KL{p_{\dataset}}{q}
-\end{align}
+This simple example already highlighted some features of the loss-calibrated framework. First of all, it is clear, that even in a simple example the choice of approximate inference methods matters, and has a great influence on risks and the final decisions made. In this case minimising $\KL{p_\dataset}{q}$ yielded a solution superior to minimising the variational criterion $\KL{q}{p_\dataset}$, but we could just as well construct another example, where it is the other way around. Even though $\KL{p_\dataset}{q}$ is thought of as the more principled method, in the context of this decision problem neither of them is clearly better or more principled than the other.
 
-by minimising the Kullback-Leibler divergence (Eqn.\ \eqref{eqn:KL_divergence}) between the approximate distribution $q$ and the true posterior $p_{\dataset}$. The KL divergence is non-symmetric, therefore the order of arguments matter. As I argued in section \ref{sec:scoring_rules}, in the scoring rule interpretation suggests that the \emph{right} way to use divergence is when it's first argument is the true distribution we want to approximate, and the second argument the approximation $q$. So we can conclude that variational Bayesian inference minimises KL divergence in the wrong direction. This has been noted previously by \cite{CsatoOpper,Minka} and many other authors. This does not mean that variational inference does not work, it just means that by performing variational inference we loose the intuitive meaning of KL divergences.
+\subsection{The loss-calibrated approximate inference framework}
 
-We can try to generalise variational inference to general scoring rules along two lines. Firstly, the log likelihood can be replaced by the average score 
- 
+In practice, one usually treats the approximate $q$ as if it was the true posterior and chooses the action that minimizes what we will call the \emph{$q$-risk}:
+\begin{equation} \label{e:q-risk}
+    \mathcal{R}_q(h) \doteq \int_\Theta q(\theta) L(\theta,h) d\theta ,
+\end{equation}
+obtaining a \emph{$q$-optimal} action $h_q$:
+\begin{equation}
+    h_q \doteq \argmin{h \in \mathcal{H}} \mathcal{R}_q(h).
+\end{equation}
+In this paper, we will assume that computing exactly the $q$-optimal action $h_q$ for $q \in \mathcal{Q}$ is tractable, and focus on the problem of choosing a suitable $q$ to approximate the posterior $p_\dataset$ \emph{in order to yield a decision $h_q$ with low posterior risk $\mathcal{R}_{p_\dataset}(h_q)$}, mimicking the standard methodology but crystallizing the decision theoretic goal. Given this approach, a (usually non-unique) optimal $q \in \mathcal{Q}$ is clearly:
+\begin{equation}
+    q_\mathrm{opt} = \argmin{q \in \mathcal{Q}} \mathcal{R}_{p_\dataset}(h_q),
+\end{equation}
+though a practical algorithm might only be able to find an approximate minimizer to this quantity. In the case where $p_\dataset\in\mathcal{Q}$, $p_\dataset$ is obviously optimal according to this criterion.
 
-However, generally, Bregman divergences are convex in their first parameter and not generally in the second, so a variational lower bound only holds if there is a 
-Several approaches therefore tried to fix this conceptual issue, and minimise the divergence in the other direction. This is unfortunately very hard, as computing the divergence $\divergence{\score}{p_{\dataset}}{q}$ requires an integral over the posterior $p_{\dataset}$, which is normally intractable, and this is why we perform approximate inference in the first place.
-
-Assumed density filtering, and its generalisation, expectation propagation (EP) try to approximate the ideal method of minimising $\KL{p_{\dataset}}{q}$ as follows. EP assumes the posterior can be written 
-
-	
-
-
-\paragraph{Overview of EP and minimizing KL in other way}
-
-\paragraph{But none of these takes into account the structure of the decision problem}
-
-\paragraph{Toy example}
-
-\paragraph{Framework}
+We could interpret the above criterion as minimizing the following asymmetric non-negative discrepancy measure between distributions:
+\begin{equation} \label{e:d_L}
+    d_L(p\|q) \doteq \mathcal{R}_{p}(h_q) - \mathcal{R}_{p}(h_p).
+\end{equation}
+Interestingly, the Kullback-Leibler divergence $KL(p\|q)$ can be interpreted as a special case of $d_L$ for the task of posterior density estimation over $\Theta$. In this task, an action $h$ is a density over $\Theta$ and the standard density estimation statistical loss is $L(\theta,h) = -\log h(\theta)$. The $q$-risk $R_q(h)$ then becomes the cross-entropy $H(q,h)=-\int_\Theta q(\theta) \log(h(\theta)) d\theta$, and so $h_q = q$ assuming that $q \in \mathcal{H}$. Under these assumptions, we obtain that $KL(p\|q) = d_L(p\|q)$ and so as was already known in statistics, $KL(p_\dataset\|\cdot)$ appears ``loss-calibrated'' for the task of posterior density estimation in our approximation framework. But this begs the natural question of whether minimizing $d_L$ for a particular loss $L$ provides optimal performance under other losses. We will show in \ref{ss:GPR} that even in the simple Gaussian linear regression setting, minimizing the KL divergence can be suboptimal in the squared loss sense, thus motivating us to seek loss-calibrated alternatives.
 
 \paragraph{Example: Gaussian process regression}
 

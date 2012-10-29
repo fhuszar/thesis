@@ -23,7 +23,7 @@ The above equation is an unbiased estimating equation, and under suitable regula
 \end{equation}
 \end{definition}
 
-Score matching has been used to fit parametric models . Maximum likelihood estimation is a typical example when the scoring rule is chosen to be the logarithmic score. In \cite{kernelmomentmatching}, the kernel scoring rule is used to fit parametric distributions; the technique is referred to as kernel moment matching. Score matcing with the Brier and spherical scores is used in meteorology and \TODO{Where exactly?}.
+Score matching has been used to fit parametric models . Maximum likelihood estimation is a typical example when the scoring rule is chosen to be the logarithmic score. In \citep{kernelmomentmatching}, the kernel scoring rule is used to fit parametric distributions; the technique is referred to as kernel moment matching. Score matcing with the Brier and spherical scores is used in meteorology and \TODO{Where exactly?}.
 
 However, the \iid case is not the only limiting behaviour that is interesting. Often we want to score non-\iid sequences of variables. Examples include:
 \begin{enumerate}
@@ -76,18 +76,18 @@ The first example, \emph{maximum product of spacings (MPS) estimation} is not no
 	\end{equation}
 \end{definition}
 
-It is shown in \cite{http://fir.nes.ru/tildegkosenok/MPS.pdf} that subject to smoothness assumptions, MPS estimation, which minimises $R^{PS}_N$ is consistent when $y_n$ are sampled \iid from a distribution. That is
+It is shown in \citep{http://fir.nes.ru/tildegkosenok/MPS.pdf} that subject to smoothness assumptions, MPS estimation, which minimises $R^{PS}_N$ is consistent when $y_n$ are sampled \iid from a distribution. That is
 \begin{align}
 \argmin_{\theta}R^{PS}_{N}(y_1,\ldots,y_N,\Pi_{\theta^{*}}) \stackrel[N\rightarrow\infty]{P_{\theta^{*}}}{\longrightarrow} \theta^{*}
 \end{align}
 
-Furthermore, the estimator is often statistically more efficient than maximum likelihood estimation (MLE) \cite{http://fir.nes.ru/tildegkosenok/MPS.pdf}. The drawback of the product of spacings score is that it does not readily generalise to multivariate distributions, and it requires the knowledge of the cumulative distribution function to be calculated.
+Furthermore, the estimator is often statistically more efficient than maximum likelihood estimation (MLE) \citep{http://fir.nes.ru/tildegkosenok/MPS.pdf}. The drawback of the product of spacings score is that it does not readily generalise to multivariate distributions, and it requires the knowledge of the cumulative distribution function to be calculated.
 
 \subsection{Decision theoretic scoring and $F_{\beta}$ scores}
 
 Further examples of scores that do not decompose as in \eqref{eqn:decompose} can be constructed on decision theoretic grounds when the action and the loss that we minimise itself depends on multiple outcomes. For example in a binary case we may want to penalise imbalanced forecasters, so we prefer forecasters that produce about as many false positives as false negatives while at the same time minimise the total number of false predictions.
 
-Most of these complicated objectives can be achieved by optimising something like the $F_{\beta}$ score, which is applied in a variety of statistical applications \cite{}:
+Most of these complicated objectives can be achieved by optimising something like the $F_{\beta}$ score, which is applied in a variety of statistical applications \citep{}:
 
 \begin{equation}
 	F_\beta = (1-\beta^2)\frac{\mbox{precision}\cdot\mbox{recall}}{\beta^2 \mbox{precision} + \mbox{recall}}
@@ -119,7 +119,7 @@ By De Finetti's theorem, exchangeable sequences of random variables have a repre
 
 We can observe that even though conditioned on $\theta$ subsequent $y_n$ variables are independent, marginally they are dependent, therefore the evidence does not decompose into a sum of terms per data-point as it would for marginally \iid models.
 
-The evidence is accepted as a very robust criterion for Bayesian model selection and is thought to be particularly robust against over-fitting. On the other hand it is often intractable to compute exactly for complicated models, and one has to rely on various approximations such as the Bayesian information criterion (BIC)\cite{}, Akaike information criterion (AIC)\cite{}, variational lower bounds, or expectation-propagation (EP)\cite{}.
+The evidence is accepted as a very robust criterion for Bayesian model selection and is thought to be particularly robust against over-fitting. On the other hand it is often intractable to compute exactly for complicated models, and one has to rely on various approximations such as the Bayesian information criterion (BIC)\citep{}, Akaike information criterion (AIC)\citep{}, variational lower bounds, or expectation-propagation (EP)\citep{}.
 
 We can generalise Bayesian model selection by replacing the log-score with another family of marginal scoring rulea, such as the quadratic kernel rule from Eqn.\ \eqref{eqn:kernel_scoring}. When we use the kernel scoring rule for Bayesian model selection, it decomposes clearly into two terms, which intuitively represent the trade-off between accuracy and model flexibility.
 
@@ -130,7 +130,7 @@ We can generalise Bayesian model selection by replacing the log-score with anoth
 		&= \underbrace{\expect{\theta\sim p_{\theta\vert\model}} \divergence{k}{\delta_{y}}{p_{X\vert\theta}} }_{\mbox{average accuracy}} -  \underbrace{\information{k}{X}{\theta}}_{\mbox{diversity}}
 \end{align}
 
-After \cite{} one may call this the ambiguity decomposition of the quadratic kernel score. As the Brier score is a special case of the kernel scoring rule, it naturally admits the same decomposition. The decomposition suggests that a good model is
+After \citep{} one may call this the ambiguity decomposition of the quadratic kernel score. As the Brier score is a special case of the kernel scoring rule, it naturally admits the same decomposition. The decomposition suggests that a good model is
 \begin{description}
 	\item[accurate:] it forecasts observed data relatively accurately on average for all parameters, and
 	\item[diverse:] it is capable of expressing a diverse range of behaviours via its parameters
@@ -146,11 +146,11 @@ R(y_{I_N},\Pi) = - \frac{1}{\vert I_N \vert} \sum_{n\in{I_N}}\log P_{Y_n\vert Y_
 
 We already noted that the pseudo-likelihood score is strictly proper, so under multiple sampling from the same size marginal, pseudo-likelihood it is typically consistent. But we can also study the limit as larger and larger marginals are considered.
 
-The most typical application of pseudo-likelihood estimation is parameter estimation in Markov random fields. A finite graph Markov-random field is a stochastic process, where each variable is conditionally independent of the rest of the trajectory given a finite number of other variables, known as the Markov-blanket of the variable. A common example of a finite graph Markov random field is the two-dimensional square lattice Isling model \cite{Dawid's paper}. This model and its generalisations have found several applications in computer vision and image processing \cite{}.
+The most typical application of pseudo-likelihood estimation is parameter estimation in Markov random fields. A finite graph Markov-random field is a stochastic process, where each variable is conditionally independent of the rest of the trajectory given a finite number of other variables, known as the Markov-blanket of the variable. A common example of a finite graph Markov random field is the two-dimensional square lattice Isling model \citep{Dawid's paper}. This model and its generalisations have found several applications in computer vision and image processing \citep{}.
  
-Typically when studying consistency properties of pseudo-likelhiood, authors show that the pseudo-likelihood score is strictly proper and thus pseudo-likelihood estimation is consistent under repeated sampling from a finite dimensional Markov random field. In this chapter we are interested in consistency of estimation from a single draw from an infinite MRF, in the limit as larger and larger sub-graphs are observed. It turns out pseudo-likelihood estimation is consistent in this stricter sense, too \cite{GemanGraffigne}, therefore we can call it a very strictly proper scoring rule.
+Typically when studying consistency properties of pseudo-likelhiood, authors show that the pseudo-likelihood score is strictly proper and thus pseudo-likelihood estimation is consistent under repeated sampling from a finite dimensional Markov random field. In this chapter we are interested in consistency of estimation from a single draw from an infinite MRF, in the limit as larger and larger sub-graphs are observed. It turns out pseudo-likelihood estimation is consistent in this stricter sense, too \citep{GemanGraffigne}, therefore we can call it a very strictly proper scoring rule.
 
-Pseudo-likelihood estimation can be used in other cases where computing the logarithmic score is intractable, such as estimating phylogenetic trees in models such as the infinite sites model \cite{something, something} . In this application the observed data are a set of related genomes, that are thought to have evolved from a common ancestor genome through a process of random mutations and recombinations and can therefore be related via a phylogenetic tree. The task is to infer the latent phylogenetic tree underlying the data, and to estimate model parameters such as the relative rate of mutation and recombination events.
+Pseudo-likelihood estimation can be used in other cases where computing the logarithmic score is intractable, such as estimating phylogenetic trees in models such as the infinite sites model \citep{something, something} . In this application the observed data are a set of related genomes, that are thought to have evolved from a common ancestor genome through a process of random mutations and recombinations and can therefore be related via a phylogenetic tree. The task is to infer the latent phylogenetic tree underlying the data, and to estimate model parameters such as the relative rate of mutation and recombination events.
 
 This estimation problem is hard because of the exponential number of phylogenetic trees consistent with any one dataset. Computing the marginal likelihood (or logarithmic score, as in Eqn.\ \eqref{eqn:marginal_log_score}) is intractable as it involves computing a non-trivial sum over phylogenetic trees. However, computing the conditional distribution of just one gene (or segregating site on the DNA), conditioned on the observed values of other genes can be performed relatively efficiently in certain models, and thus pseudo-likelihood estimation may be efficiently applied to these models. It is an open question whether pseudo-likelihood estimation, or indeed maximum likelihood estimation is consistent in the limit of increasing number of alleles and species.
 
@@ -171,6 +171,6 @@ Similarly, let us define the divergence between two processes $\Pi$ and $\Xi$ as
 \end{equation}
 \end{definition}
 
-In general the quantities defined above are random quantities. When the scoring rule $R$ is the logarithmic score, and $\Pi$ is a stationary stochastic process, the Shannon-McMillan-Breiman theorem ensures that the entropy defined this way converges almost surely to deterministic value \cite{}, called the source entropy of the probabilistic source $\Pi$. Under the same conditions the divergence $\divergence{R}{\Pi}{\Xi}$ also converges and is strictly positive for $\Pi \neq \Xi$.
+In general the quantities defined above are random quantities. When the scoring rule $R$ is the logarithmic score, and $\Pi$ is a stationary stochastic process, the Shannon-McMillan-Breiman theorem ensures that the entropy defined this way converges almost surely to deterministic value \citep{}, called the source entropy of the probabilistic source $\Pi$. Under the same conditions the divergence $\divergence{R}{\Pi}{\Xi}$ also converges and is strictly positive for $\Pi \neq \Xi$.
 
 We can conclude that in certain special cases the entropy and divergence quantities defined in definition \ref{thm:process_entropy_divergence} make sense and are useful, but very likely these generalisations are too general for practical purposes.
