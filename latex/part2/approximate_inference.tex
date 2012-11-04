@@ -116,13 +116,56 @@ Interestingly, the Kullback-Leibler divergence $KL(p\|q)$ can be interpreted as 
 \paragraph{Example: Gaussian process regression}
 
 In this case we do not actually need to perform approximate inference, as the posterior is Gaussian and available in closed form. However it allows us to express the quantities relevant for loss-calibrated approximate inference.
-
+§
 Gaussian process regression.
 
 \section{Loss-calibrated quasi-Monte-Carlo}
 
-\paragraph{Monte Carlo, powerful but}
+\paragraph{Monte Carlo - about two paragraphs}
+A popular alternative to parametric approximation schemes, such as variational inference and expectation propagation are Monte Carlo methods.
 
-\section{Approximate Bayesian decision theory}
+Monte Carlo methods produce random samples from the posterior distribution $p_\dataset$ and then approximate relevant integrals by taking the empirical means over these samples. Subject to smoothness conditions, this non-deterministic estimate of any integral converges at a rate $\mathcal{O}(\frac{1}{\sqrt{N}})$, where $N$ is the number of samples. This convergence is guaranteed by the law of large numbers. An appealing property of Monte Carlo methods is that in theory an arbitrarily precise estimate can be obtained by just increasing the number of samples. In this sense, Monte Carlo approximation is non-parametric: the number of parameters that describe the approximate distribution is not fixed ahead of time, and can be arbitrarily large.
 
+When exact sampling from $p_\dataset$ is impossible or impractical, Markov chain Monte Carlo (MCMC) methods are often used. MCMC methods only require knowing the target distribution up to a constant factor. Practically this means that even if the normalisation constant of the posterior is intractable, MCMC techniques can still be used to generate samples from it.
+
+Various variants of MCMC methods can be applied to almost any problem but the convergence rate of the estimate depends on several factors and is hard to estimate \citep{CowlesCarlin96}. Typically, MCMC techniques introduce positive correlation between subsequent samples, and thus are less effective than exact Monte Carlo sampling. For an overview of various Monte Carlo techiques, see \citep{Murray2007}.
+
+Monte Carlo methods are very general, they guarantee convergence for any measurable integral. Hence, convergence is also guaranteed in the KL divergence sense, and as the posterior risk is expressed as an integral, they also ensure convergence in $d_\loss(\cdot\|\cdot)$ for any loss function $\ell$. However, the rate of convergence cannot be fine-tuned to a particular divergence measure. One might hope that if the loss function $\ell$ is known ahead of time, a faster convergence rate can be achieved, maybe at the cost of slowing down convergence on integrals that are irrelevant to the decision problem.
+
+\paragraph{revisit toy example} Let us consider the power plant example from the previous section. To be able to make a decision, the only thing we need to know is the probability of the temperature exceeding the critical temperature. Thus, when the distribution is approximated via Monte Carlo, the only summary statistic we care about is the fraction of samples that are above the critical temperature.
+
+The probability of interest can be written as the expectation of the indicator function that takes value $1$ if the temperature exceeds the critical one and $0$ otherwise. This indicator function is measurable, therefore an $\mathcal{O}(\frac{1}{\sqrt{N}})$ convergence is guaranteed by exact MCMC sampling.
+However, it is easy to construct an ideal series of $N$ `pseudo-samples' where the error is upper bounded by $\frac{1}{N}$. (The problem is equivalent to approximating the probability with a series of rational numbers). This ideal set of $N$ pseudosamples may of course be a terrible general approximation to the full probability distribution $p_\dataset$, but from the perspective of the decision problem it converges much faster than the random Monte Carlo samples.
+
+\TODO{illustrate this on figures: Fig 1: same as in previous section. Fig 2: approximating the probability with random MCMC and with optimal QMC}
+
+\paragraph{Quasi monte Carlo approaches}
+
+ The focus of this chapter are quasi-Monte Carlo methods that -- instead of sampling randomly -- produce a set of pseudo-samples in a deterministic fashion. These methods operate by directly minimising some sort of discrepancy between the empirical distribution of pseudo-samples and the target distribution. Whenever these methods are applicable, they achieve convergence rates superior to the $\mathcal{O}(\frac{1}{\sqrt{N}})$ rate typical of random sampling.
+
+TODO{review existing quasi-Monte-Carlo methods: Sobol sequences, Halton sequence}
+
+The quasi-Monte-Carlo methods reviewed here often achieve faster convergence rates than traditional random Monte Carlo, but they are general-purpose sampling tools: they cannot be fine-tuned to particular decision problems we may want to use them for. Here I will introduce a class of quasi-Monte-Carlo methods that I will call loss-calibrated QMC. 
+
+Quasi-Monte-Carlo can be interpreted as a special case of approximate inference, where the approximating family is the family of empirical distributions
+\begin{equation}
+	q(x ; x_1,\ldots,x_N) = \frac{1}{N} \sum_{n=1}^{N} \delta(x - x_n)\mbox{,}
+\end{equation}
+or weighted empirical distributions
+\begin{equation}
+	q(x ; x_1,\ldots,x_N,w_1,\ldots,w_N) = \sum_{n=1}^{N} w_n \delta(x - x_n)\mbox{.}
+\end{equation}
+
+Finding the optimal loss-calibrated sample set can then be achieved by minimising the loss-calibrated divergence $d_\loss$ between the target distribution $p_\dataset$ and the approximation $q$:
+
+\begin{equation}
+	\{x_1,\ldots,x_N\}_{n=1}^{N} = \argmin_{\{x_1,\ldots,x_N\}_{n=1}^{N}} \divergence{\loss}{p_\dataset}{q(x ; x_1,\ldots,x_N)} \label{eqn:loss_calibrated_nonsequential}
+\end{equation}
+It is important to note, that the above procedure does not make sense for general Bregman divergences. For example, the KL divergence $\KL{p}{q}$ requires the approximate distribution $q$ to be absolutely continuous with respect to the target distribution $p$, which, unless the target distribution is also discrete, cannot be satisfied if $q$ is atomic.
+
+The minimisation in Equation \eqref{eqn:loss_calibrated_nonsequential} is 
+\paragraph{Myopic sequential loss-calibrated Quasi Monte Carlo}
+
+
+In most cases - just as loss-calibrated approximate inference in general, algorithmic implementations of loss-calibrated QMC requires the ability to evaluate certain integrals over the target distribution easily, therefore practical applications of loss-calibrated QMC in the form presented here are limited. Nevertheles, the framework may provide useful blueprint for designing sampling algotithms that are more tailored to particular decision scenarios.
 
