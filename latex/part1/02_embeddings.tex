@@ -26,13 +26,13 @@ The local distance between distributions is therefore controlled by the curvatur
 
 \begin{statement}[Taylor expansion of Bregman divergences] Let $H:\Theta\mapsto\Reals$ be a smooth, strictly concave function and $\divergence{H}{\cdot}{\cdot}$ the Bregman divergence it induces. For infinitesimally small $dP\in\Theta$ the following approximation holds:
 \begin{equation}
-	\divergence{H}{P}{P+ dP} \approx \frac{1}{2} \sum_{i,j} \frac{\partial^2 \mathbb{H}_{\score}}{\partial p_i\partial p_j} dp_{i} dp_{j} \approx 	\divergence{H}{P + dP}{P}
+	\divergence{H}{P}{P+ dP} \approx \frac{1}{2} \sum_{i,j} \frac{\partial^2 \mathbb{H}_{\score}}{\partial p_i\partial p_j} dp_{i} dp_{j} \approx   \divergence{H}{P + dP}{P}
 \end{equation}
 \begin{proof}
 	We prove the left-hand equation first:
 	\begin{align}
-		\frac{\partial}{\partial q_i} \divergence{H}{P}{Q} &=  -\frac{\partial}{\partial q_i} H(Q) + 	\frac{\partial}{\partial q_i}\scalar{\nabla_{Q} H(Q)}{Q-P}\\
-			&=  - \frac{\partial}{\partial q_i} H(Q) + 	\frac{\partial}{\partial q_i}\sum_{j} \frac{\partial}{\partial q_j} H(Q) (q_j - p_j)\\
+		\frac{\partial}{\partial q_i} \divergence{H}{P}{Q} &=  -\frac{\partial}{\partial q_i} H(Q) +    \frac{\partial}{\partial q_i}\scalar{\nabla_{Q} H(Q)}{Q-P}\\
+			&=  - \frac{\partial}{\partial q_i} H(Q) +  \frac{\partial}{\partial q_i}\sum_{j} \frac{\partial}{\partial q_j} H(Q) (q_j - p_j)\\
 			&= - \frac{\partial}{\partial q_i} H(Q)  + \frac{\partial}{\partial q_i} H(Q) + \sum_{j} \frac{\partial^2}{\partial q_i \partial q_j} H(Q) (q_j - p_j)\\
 			&= \sum_{j} \frac{\partial^2}{\partial q_i \partial q_j} H(Q) (q_j - p_j)
 	\end{align}
@@ -45,7 +45,7 @@ The local distance between distributions is therefore controlled by the curvatur
 	
 	Similarly in the other direction
 		\begin{align}
-				\frac{\partial}{\partial q_i} \divergence{H}{Q}{P} &=  \frac{\partial}{\partial q_i} H(Q) + 	\frac{\partial}{\partial q_i}\scalar{\nabla_{P} H(P)}{P - Q}\\
+				\frac{\partial}{\partial q_i} \divergence{H}{Q}{P} &=  \frac{\partial}{\partial q_i} H(Q) +     \frac{\partial}{\partial q_i}\scalar{\nabla_{P} H(P)}{P - Q}\\
 					&=  \frac{\partial}{\partial q_i} H(Q) + \frac{\partial}{\partial q_i}\sum_{j} \frac{\partial}{\partial p_j} H(P) (p_j - q_j)\\
 					&=  \frac{\partial}{\partial q_i} H(Q)  - \frac{\partial}{\partial p_i} H(P)\\
 					&= \dot{H}(Q) - \dot{H}(P)
@@ -179,7 +179,7 @@ The above formula can be derived from the following general expression for the i
 \begin{align}
 	\scalar{\mu_{\Normal(\mu_1,\sigma_1)}}{\mu_{\Normal(\mu_2,\sigma_2)}}_{k_{\ell}} &= \expect{x\sim \Normal(\mu_1,\sigma_1)}\expect{x' \sim \Normal(\mu_1,\sigma_1)} k_{\ell}(x,x')\\
 	&= \frac{1}{\sqrt{\ell^2 + \sigma_1^2 + \sigma_2^2}}\exp\left(-\frac{(\mu_1 - \mu_2)^2}{2(\ell^2 + \sigma_1^2 + \sigma_2^2)}\right)
-\end{align}	
+\end{align} 
 
 The first fact one may observe is that unlike the KL divergence, the kernel divergence is bounded from above by $\nicefrac{2}{\ell}$. This upper bound is approached when computing divergence between two infinitesimally narrow Gaussians $\sigma_1,\sigma_2\approx 0$ that are far apart $\vert \mu_1 - \mu_2 \vert > 0$. The divergence is also bounded from below by $0$ and it is $0$ exactly when the two distributions are identical, confirming that this kernel function gives rise to a strictly proper scoring rule.
 
@@ -203,7 +203,7 @@ These figures highlight how the choice of the kernel allows us to fine-tune prop
 
 \begin{figure} % zero-mean Normals KL, kernel, Brier
 \begin{center}
- %\input{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_varonly_comparison.tikz}
+ \includegraphics{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_varonly_comparison.pdf}
  \end{center}
 \caption{ Illustration of the differences between the statistical manifolds of Normal distributions induced by the KL, Brier and kernel divergences. Each horizontal line of points shows the one-dimensional manifold of zero-mean Gaussians. The dots correspond to distributions with logarithmically spaced variance between $\sigma_{min}=0.05$ and $\sigma_{max}=1$. When mapped according to the KL divergence, these distributions become evenly spaced \emph{(top,bottom)}. Compared to the KL, the Brier score \emph{(second from bottom)} places more emphasis on disriminating between narrower distributions. In this range $0.05 \leq \sigma \leq 1$ the kernel divergence with bandwidth $\ell=0.1$ \emph{(third from bottom)} approximately mimics the behaviour of the KL divergence. As we use the kernel score with increasing brandwith \emph{(from bottom to top)}, we can see that the focus shifts from narrow distributions towards distributions with larger variance.}
 \label{fig:Normal_varonly_comparison}
@@ -218,7 +218,7 @@ These figures highlight how the choice of the kernel allows us to fine-tune prop
 \end{figure}
 
 
-\begin{figure} % large 2D comparison plots
+\begin{figure} % kernel vs spherical kernel between Normals
 	\begin{center}
 	\begin{tabular}{ccc}
 	quadratic & & spherical\\
@@ -230,29 +230,6 @@ These figures highlight how the choice of the kernel allows us to fine-tune prop
 	\end{center}
 	\caption{Maps of the statistical manifold induced by the (quadratic) kernel score and the spherical kernel score over Gaussian distributions for different setting of the kernel bandwidth parameter. The two panels in the top row $\ell\rightarrow 0$ correspond to the limiting cases of the Brier score and the spherical score. It can be seen that as the bandwidth increases, both scores shift their sensitivity to distributions with higher variance (red). For equal bandwidth, the spherical kernel score is more sensitive to distributions with larger standard deviation.}
 \end{figure}
-
-
-\subsection{Reactor example}
-
-Not all scoring rules give rise to smooth manifolds. As an extreme example, consider the following decision problem:
-
-You are uncertain about the temperature of the reactor in a power plant. If the temperature is too high, above a critical temperature $T_{crit}$, the reactor may melt down causing you a loss of \$10 billion. You may choose to shut down the reactor, which costs you \$1 million of lost revenue, irrespective of whether the reactor was indeed overheated or not. You make a probabilistic forecast about the reactor's temperature, and want to make a decision based on that.
-
-This decision rule segments probabilistic forecasts into only two subsets: those which would result in a ``shut down'' decision, and those that result in a ``keep on going''. 
-
-\begin{equation}
-	\divergence{reactor}{p}{q} = \left\{
-	\begin{array}{cc} 
-	    \begin{array}{cc}
-	      0        & p(\{t\geq T_{crit}\}) \geq \ell \mbox{ and } q(\{t\geq T_{crit}\}) \geq \ell\\
-	      \ell_1 & p(\{t\geq T_{crit}\})  \geq \ell \mbox{ and } q(\{t\geq T_{crit}\}) \leq \ell\\
-	      \ell_2 & p(\{t\geq T_{crit}\})  \leq \ell \mbox{ and } q(\{t\geq T_{crit}\}) \geq \ell
-	    \end{array}
-	\end{array}
-	\right.
-\end{equation}
-
-This divergence therefore does not give rise to a smooth manifold. Figure \ref{fig two_points} shows a map of Gaussian distributions with respect to the KL divergence. The way $\divergence{reactor}{\cdot}{\cdot}$ segments distributions into ``shut down'' or ``keep on going'' types is also shown. We can make the KL divergence more sensitive to the decision problem at hand by considering a convex combination between $\KL{\cdot}{\cdot}$ and $\divergence{reactor}{\cdot}{\cdot}$.
 
 \subsection{Gamma distributions}
 
@@ -270,9 +247,9 @@ The KL divergence between Gamma distributions can be computed in closed form and
 	\KL{\Gamma_{\alpha_1,\beta_1}}{\Gamma_{\alpha_2,\beta_2}} = \left(\alpha_1 - \alpha_2\right)\psi\left(\alpha_1\right) - \log\frac{\Gamma(\alpha_1)}{\Gamma(\alpha_2)} + \alpha_1\log\frac{\beta_1}{\beta_2} + \alpha_1\frac{\beta_2 - \beta_1}{\beta_1} \label{eqn:KL_Gamma}
 \end{equation}
 
-\begin{figure} % Gamma
+\begin{figure} % Gamma distribution - Shannon information statistical manifold
 	\begin{center}
-	%\input{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Gamma_meanvar.tikz}
+	\includegraphics{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Gamma_meanvar.pdf}
 	\end{center}
 	\caption{Map of Gamma distributions on the statistical manifold induced by the logarithmic score and KL divergence. To be comparable to the manifold of Normal distributions in Figure \ref{fig:Normal_meanvar}, the distributions are parametrised by their mean and standard deviation. Distributions are chosen from a uniform grid in this non-standard parameter-space, with their mean ranging between $1$ and $2$, and standard deviation between $0.1$ and $1$. For large values of variance \emph{(yellow and red)} the manifold is asymmetric and dissimilar to that of Normal distributions. However, as variance decreases \emph{(blue)}, by the central limit theorem Gamma distributions approach Gaussians of the same mean and variance, thus the manifold conforms to the fan-like shape that is characteristic of Gaussian distributions.}
 \end{figure}
@@ -294,3 +271,26 @@ Solving for $\alpha$ and $\beta$ in these equations we get
 \end{align}
 
 Plugging these into Eqn.\ \eqref{eqn:KL_Gamma} we can now map Gamma distributions with particular mean and variance. Figure 1 compares Normal and Gamma distributions with mean $\mu\in[0.5,1.5]$ and standard deviation $\sigma\in[0.1,1]$. We can observe that as the variance increases, the manifold of Gamma distributions shows a fan-like structure very similarly that of Normal distributions. However, for larger variance, the distributions look less Gaussian, and the manifold becomes more asymmetric. The effect of the central limit theorem would perhaps be even more prominent for smaller values of $\sigma$, but for those cases that case Eqn.\ \eqref{eqn:KL_Gamma} becomes numerically imprecise, as it relies on look-up-table implementation of the Gamma ($\Gamma$) and bigamma ($\psi$) functions.
+
+% \subsection{Reactor example}
+
+% Not all scoring rules give rise to smooth manifolds. As an extreme example, consider the following decision problem:
+
+% You are uncertain about the temperature of the reactor in a power plant. If the temperature is too high, above a critical temperature $T_{crit}$, the reactor may melt down causing you a loss of \$10 billion. You may choose to shut down the reactor, which costs you \$1 million of lost revenue, irrespective of whether the reactor was indeed overheated or not. You make a probabilistic forecast about the reactor's temperature, and want to make a decision based on that.
+
+% This decision rule segments probabilistic forecasts into only two subsets: those which would result in a ``shut down'' decision, and those that result in a ``keep on going''. 
+
+% \begin{equation}
+%   \divergence{reactor}{p}{q} = \left\{
+%   \begin{array}{cc} 
+%       \begin{array}{cc}
+%         0        & p(\{t\geq T_{crit}\}) \geq \ell \mbox{ and } q(\{t\geq T_{crit}\}) \geq \ell\\
+%         \ell_1 & p(\{t\geq T_{crit}\})  \geq \ell \mbox{ and } q(\{t\geq T_{crit}\}) \leq \ell\\
+%         \ell_2 & p(\{t\geq T_{crit}\})  \leq \ell \mbox{ and } q(\{t\geq T_{crit}\}) \geq \ell
+%       \end{array}
+%   \end{array}
+%   \right.
+% \end{equation}
+
+% This divergence therefore does not give rise to a smooth manifold. Figure \ref{fig two_points} shows a map of Gaussian distributions with respect to the KL divergence. The way $\divergence{reactor}{\cdot}{\cdot}$ segments distributions into ``shut down'' or ``keep on going'' types is also shown. We can make the KL divergence more sensitive to the decision problem at hand by considering a convex combination between $\KL{\cdot}{\cdot}$ and $\divergence{reactor}{\cdot}{\cdot}$.
+

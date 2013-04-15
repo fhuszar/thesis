@@ -1,0 +1,643 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"reg",
+				"regr_az"
+			],
+			[
+				"acto",
+				"actor_id"
+			],
+			[
+				"scoring",
+				"scoring_target"
+			],
+			[
+				"actor",
+				"actor_json"
+			],
+			[
+				"hash",
+				"hashtag_data"
+			],
+			[
+				"mention",
+				"mention_normalised"
+			],
+			[
+				"influe",
+				"influence_graph_normalised"
+			],
+			[
+				"infl",
+				"influence_graph_normalised"
+			],
+			[
+				"topic_score",
+				"topic_score_normalised"
+			],
+			[
+				"resolved",
+				"url_resolved"
+			],
+			[
+				"tweet",
+				"tweet_retweeted_count"
+			],
+			[
+				"retweet",
+				"retweeted_status"
+			],
+			[
+				"raw_te",
+				"raw_tweets_sample"
+			],
+			[
+				"retwee",
+				"retweet_count"
+			],
+			[
+				"topic",
+				"topic2_score"
+			],
+			[
+				"NORM",
+				"NORM_GRADIENT"
+			],
+			[
+				"mean",
+				"meanoutput"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 67.0,
+		"selected_items":
+		[
+			[
+				"sy py",
+				"Set Syntax: Python"
+			],
+			[
+				"inde spa",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"inspac",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"synsql",
+				"Set Syntax: SQL"
+			],
+			[
+				"indesa",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"indespa",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"sy sql",
+				"Set Syntax: SQL"
+			],
+			[
+				"sys",
+				"Set Syntax: SQL"
+			],
+			[
+				"LOWER",
+				"Convert Case: Lower Case"
+			],
+			[
+				"INDE SPA",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"sysql",
+				"Set Syntax: SQL"
+			],
+			[
+				"inde space",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"sy s",
+				"Set Syntax: SQL"
+			],
+			[
+				"in spac",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"upper",
+				"Convert Case: Upper Case"
+			],
+			[
+				"sy json",
+				"Set Syntax: JSON"
+			],
+			[
+				"inspa",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"IND ",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"inde",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"ind tab",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"ind sp",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"sy sq",
+				"Set Syntax: SQL"
+			],
+			[
+				"syn sql",
+				"Set Syntax: SQL"
+			],
+			[
+				"inde spac",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"SYN SQL",
+				"Set Syntax: SQL"
+			],
+			[
+				"sy spa",
+				"Set Syntax: Java Server Page (JSP)"
+			],
+			[
+				"inden space",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"SY SQ",
+				"Set Syntax: SQL"
+			],
+			[
+				"inde sp",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"synta sql",
+				"Set Syntax: SQL"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"maven ",
+				"Maven: Run ..."
+			],
+			[
+				"maven t",
+				"Maven: Test"
+			],
+			[
+				"mvnt",
+				"Maven: Test"
+			],
+			[
+				"mvn t",
+				"Maven: Test"
+			],
+			[
+				"save all",
+				"File: Save All"
+			],
+			[
+				"mvnts",
+				"Maven: Test"
+			],
+			[
+				"mvntst",
+				"Maven: Test"
+			],
+			[
+				"mav test",
+				"Maven: Test"
+			],
+			[
+				"mav",
+				"Maven: Test"
+			],
+			[
+				"mave",
+				"Maven: Test"
+			],
+			[
+				"mvn",
+				"Maven: Test"
+			],
+			[
+				"maven",
+				"Maven: Test"
+			],
+			[
+				"ma",
+				"Maven: Run clean install"
+			],
+			[
+				"git",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: List Packages"
+			],
+			[
+				"indeta",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"sypy",
+				"Set Syntax: Python"
+			],
+			[
+				"syn javas",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ind ta",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"sy jsr",
+				"Set Syntax: JavaScript (Rails)"
+			],
+			[
+				"sy java",
+				"Set Syntax: Java"
+			],
+			[
+				"SY BASH",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"in ta",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"indent ta",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"synpy",
+				"Set Syntax: Python"
+			],
+			[
+				"convert tab",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"convert spa",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"pack ins",
+				"Package Control: Install Package"
+			],
+			[
+				"syn py",
+				"Set Syntax: Python"
+			],
+			[
+				"spaces",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"mvn ",
+				"Maven: Run ..."
+			],
+			[
+				"pain",
+				"Package Control: Install Package"
+			],
+			[
+				"pa ins",
+				"Package Control: Install Package"
+			],
+			[
+				"packa instal",
+				"Package Control: Install Package"
+			],
+			[
+				"PACK IN ",
+				"Package Control: Install Package"
+			],
+			[
+				"pac ins",
+				"Package Control: Install Package"
+			],
+			[
+				"inden",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"indent",
+				"Indentation: Convert to Tabs"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/fhuszar/peerindex/datascience/scoretraining/data/azeem_target.tsv",
+		"/Users/fhuszar/peerindex/datascience/jite/train_model.py",
+		"/Users/fhuszar/peerindex/datascience/getfollowers/hivescripts.sql",
+		"/Users/fhuszar/peerindex/datascience/getfollowers/countries.tsv",
+		"/Users/fhuszar/peerindex/datascience/getfollowers/specific_topic",
+		"/Users/fhuszar/peerindex/datapipeline/ls",
+		"/Users/fhuszar/peerindex/datapipeline/batch-pipeline/src/main/resources/hive/hql-daily/02-INSERT-action-to-influence_graph.hql",
+		"/Users/fhuszar/peerindex/datapipeline/batch-pipeline/src/main/resources/hive/hql-daily/02-INSERT-user_info_update-to-user_info.hql",
+		"/Users/fhuszar/foo/foo.txt",
+		"/Users/fhuszar/Downloads/50e39dd0-7faf-446f-86a8-5da1a8e1cd63.json",
+		"/Users/fhuszar/peerindex/datapipeline/batch-pipeline/src/test/resources/url_topics/dt=20130214/part-000.json",
+		"/Users/fhuszar/peerindex/datapipeline/mockdata/url_topics/dt=20130214/part-000.json",
+		"/Users/fhuszar/peerindex/datapipeline/batch-pipeline/src/test/resources/action/dt=20130214/part-000.json",
+		"/Users/fhuszar/peerindex/datapipeline/hivescripts/action.hql",
+		"/Users/fhuszar/peerindex/stream/hivescripts/create_tables.hql.sql",
+		"/Users/fhuszar/peerindex/stream/datamodel/and",
+		"/Users/fhuszar/peerindex/stream/datamodel/i",
+		"/Users/fhuszar/peerindex/stream/datamodel/love",
+		"/Users/fhuszar/peerindex/stream/datamodel/him",
+		"/Users/fhuszar/peerindex/stream/datamodel/more",
+		"/Users/fhuszar/peerindex/stream/datamodel/than",
+		"/Users/fhuszar/peerindex/stream/datamodel/ever.\",\"verified\":false,\"contributors_enabled\":false,\"profile_sidebar_border_color\":\"AB4ED9\",\"name\":\"Sarah\",\"profile_background_color\"",
+		"/Users/fhuszar/peerindex/stream/datamodel/Mar",
+		"/Users/fhuszar/peerindex/stream/datamodel/06",
+		"/Users/fhuszar/peerindex/stream/datamodel/04",
+		"/Users/fhuszar/peerindex/stream/datamodel/milk",
+		"/Users/fhuszar/peerindex/stream/datamodel/with",
+		"/Users/fhuszar/peerindex/stream/datamodel/@TheRealHartmann",
+		"/Users/fhuszar/peerindex/stream/datamodel/👌❤\",\"geo\":null,\"retweeted\":false,\"in_reply_to_screen_name\":null,\"truncated\":false,\"lang\":\"en\",\"entities\":{\"urls\":[],\"hashtags\":[],\"user_mentions\":[{\"id\"",
+		"/Users/fhuszar/peerindex/stream/datamodel/Hartman\",\"indices\":[23,39],\"screen_name\":\"TheRealHartmann\",\"id_str\":\"795056388\"}]},\"in_reply_to_status_id_str\":null,\"id\"",
+		"/Users/fhuszar/peerindex/stream/datamodel/href=\\\"http",
+		"/Users/fhuszar/peerindex/stream/datamodel/rel=\\\"nofollow\\\">Twitter",
+		"/Users/fhuszar/peerindex/stream/datamodel/for",
+		"/Users/fhuszar/peerindex/stream/datamodel/iPhone</a>\",\"in_reply_to_user_id_str\":null,\"favorited\":false,\"in_reply_to_status_id\":null,\"retweet_count\"",
+		"/Users/fhuszar/peerindex/stream/datamodel/Jan",
+		"/Users/fhuszar/peerindex/stream/datamodel/11",
+		"/Users/fhuszar/peerindex/stream/datamodel/16",
+		"/Users/fhuszar/peerindex/stream/datamodel/+0000",
+		"/Users/fhuszar/peerindex/stream/datamodel/2011\",\"default_profile_image\":false,\"followers_count\":277,\"profile_image_url_https\":\"https:/si0.twimg.com/profile_images/3038748500/a86b7994310266a4fb14d19a6e202d6c_normal.jpeg\",\"geo_enabled\":false,\"profile_background_image_url\":\"http:/a0.twimg.com/profile_background_images/489054432/marylin.jpg\",\"profile_background_image_url_https\":\"https:/si0.twimg.com/profile_background_images/489054432/marylin.jpg\",\"follow_request_sent\":null,\"url\":null,\"utc_offset\":null,\"time_zone\":null,\"notifications\":null,\"profile_use_background_image\":true,\"friends_count\":277,\"profile_sidebar_fill_color\":\"0A0108\",\"screen_name\":\"S_gazerro720\",\"id_str\":\"261537894\",\"profile_image_url\":\"http:/a0.twimg.com/profile_images/3038748500/a86b7994310266a4fb14d19a6e202d6c_normal.jpeg\",\"listed_count\":0,\"is_translator\":false},\"coordinates\":null,\"_peerindex\":{\"topic\":[{\"id\":0,\"score\":0.0},{\"id\":1,\"score\":1.0},{\"id\":2,\"score\":2.0},{\"id\":3,\"score\":0.0},{\"id\":4,\"score\":1.0},{\"id\":5,\"score\":2.0},{\"id\":6,\"score\":0.0},{\"id\":7,\"score\":1.0},{\"id\":8,\"score\":2.0},{\"id\":9,\"score\":0.0},{\"id\":10,\"score\":1.0},{\"id\":11,\"score\":2.0},{\"id\":12,\"score\":0.0},{\"id\":13,\"score\":1.0},{\"id\":14,\"score\":2.0},{\"id\":15,\"score\":0.0},{\"id\":16,\"score\":1.0},{\"id\":17,\"score\":2.0},{\"id\":18,\"score\":0.0},{\"id\":19,\"score\":1.0},{\"id\":20,\"score\":2.0},{\"id\":21,\"score\":0.0},{\"id\":22,\"score\":1.0},{\"id\":23,\"score\":2.0},{\"id\":24,\"score\":0.0},{\"id\":25,\"score\":1.0},{\"id\":26,\"score\":2.0},{\"id\":27,\"score\":0.0},{\"id\":28,\"score\":1.0},{\"id\":29,\"score\":2.0},{\"id\":30,\"score\":0.0},{\"id\":31,\"score\":1.0},{\"id\":32,\"score\":2.0},{\"id\":33,\"score\":0.0},{\"id\":34,\"score\":1.0},{\"id\":35,\"score\":2.0},{\"id\":36,\"score\":0.0},{\"id\":37,\"score\":1.0},{\"id\":38,\"score\":2.0},{\"id\":39,\"score\":0.0},{\"id\":40,\"score\":1.0},{\"id\":41,\"score\":2.0},{\"id\":42,\"score\":0.0},{\"id\":43,\"score\":1.0},{\"id\":44,\"score\":2.0},{\"id\":45,\"score\":0.0},{\"id\":46,\"score\":1.0},{\"id\":47,\"score\":2.0},{\"id\":48,\"score\":0.0},{\"id\":49,\"score\":1.0},{\"id\":50,\"score\":2.0},{\"id\":51,\"score\":0.0},{\"id\":52,\"score\":1.0},{\"id\":53,\"score\":2.0},{\"id\":54,\"score\":0.0},{\"id\":55,\"score\":1.0},{\"id\":56,\"score\":2.0},{\"id\":57,\"score\":0.0},{\"id\":58,\"score\":1.0},{\"id\":59,\"score\":2.0},{\"id\":60,\"score\":0.0},{\"id\":61,\"score\":1.0},{\"id\":62,\"score\":2.0},{\"id\":63,\"score\":0.0},{\"id\":64,\"score\":1.0},{\"id\":65,\"score\":2.0},{\"id\":66,\"score\":0.0},{\"id\":67,\"score\":1.0},{\"id\":68,\"score\":2.0},{\"id\":69,\"score\":0.0},{\"id\":70,\"score\":1.0},{\"id\":71,\"score\":2.0},{\"id\":72,\"score\":0.0},{\"id\":73,\"score\":1.0},{\"id\":74,\"score\":2.0},{\"id\":75,\"score\":0.0},{\"id\":76,\"score\":1.0},{\"id\":77,\"score\":2.0},{\"id\":78,\"score\":0.0},{\"id\":79,\"score\":1.0},{\"id\":80,\"score\":2.0},{\"id\":81,\"score\":0.0},{\"id\":82,\"score\":1.0},{\"id\":83,\"score\":2.0},{\"id\":84,\"score\":0.0},{\"id\":85,\"score\":1.0},{\"id\":86,\"score\":2.0},{\"id\":87,\"score\":0.0},{\"id\":88,\"score\":1.0},{\"id\":89,\"score\":2.0},{\"id\":90,\"score\":0.0},{\"id\":91,\"score\":1.0},{\"id\":92,\"score\":2.0},{\"id\":93,\"score\":0.0},{\"id\":94,\"score\":1.0},{\"id\":95,\"score\":2.0},{\"id\":96,\"score\":0.0},{\"id\":97,\"score\":1.0},{\"id\":98,\"score\":2.0},{\"id\":99,\"score\":0.0},{\"id\":100,\"score\":1.0},{\"id\":101,\"score\":2.0},{\"id\":102,\"score\":0.0},{\"id\":103,\"score\":1.0},{\"id\":104,\"score\":2.0},{\"id\":105,\"score\":0.0},{\"id\":106,\"score\":1.0},{\"id\":107,\"score\":2.0},{\"id\":108,\"score\":0.0},{\"id\":109,\"score\":1.0},{\"id\":110,\"score\":2.0},{\"id\":111,\"score\":0.0},{\"id\":112,\"score\":1.0},{\"id\":113,\"score\":2.0},{\"id\":114,\"score\":0.0},{\"id\":115,\"score\":1.0},{\"id\":116,\"score\":2.0},{\"id\":117,\"score\":0.0},{\"id\":118,\"score\":1.0},{\"id\":119,\"score\":2.0},{\"id\":120,\"score\":0.0},{\"id\":121,\"score\":1.0},{\"id\":122,\"score\":2.0},{\"id\":123,\"score\":0.0},{\"id\":124,\"score\":1.0},{\"id\":125,\"score\":2.0},{\"id\":126,\"score\":0.0},{\"id\":127,\"score\":1.0},{\"id\":128,\"score\":2.0},{\"id\":129,\"score\":0.0},{\"id\":130,\"score\":1.0},{\"id\":131,\"score\":2.0},{\"id\":132,\"score\":0.0},{\"id\":133,\"score\":1.0},{\"id\":134,\"score\":2.0},{\"id\":135,\"score\":0.0},{\"id\":136,\"score\":1.0},{\"id\":137,\"score\":2.0},{\"id\":138,\"score\":0.0},{\"id\":139,\"score\":1.0},{\"id\":140,\"score\":2.0},{\"id\":141,\"score\":0.0},{\"id\":142,\"score\":1.0},{\"id\":143,\"score\":2.0},{\"id\":144,\"score\":0.0},{\"id\":145,\"score\":1.0},{\"id\":146,\"score\":2.0},{\"id\":147,\"score\":0.0},{\"id\":148,\"score\":1.0},{\"id\":149,\"score\":2.0},{\"id\":150,\"score\":0.0},{\"id\":151,\"score\":1.0},{\"id\":152,\"score\":2.0},{\"id\":153,\"score\":0.0},{\"id\":154,\"score\":1.0},{\"id\":155,\"score\":2.0},{\"id\":156,\"score\":0.0},{\"id\":157,\"score\":1.0},{\"id\":158,\"score\":2.0},{\"id\":159,\"score\":0.0},{\"id\":160,\"score\":1.0},{\"id\":161,\"score\":2.0},{\"id\":162,\"score\":0.0},{\"id\":163,\"score\":1.0},{\"id\":164,\"score\":2.0},{\"id\":165,\"score\":0.0},{\"id\":166,\"score\":1.0},{\"id\":167,\"score\":2.0},{\"id\":168,\"score\":0.0},{\"id\":169,\"score\":1.0},{\"id\":170,\"score\":2.0},{\"id\":171,\"score\":0.0},{\"id\":172,\"score\":1.0},{\"id\":173,\"score\":2.0},{\"id\":174,\"score\":0.0},{\"id\":175,\"score\":1.0},{\"id\":176,\"score\":2.0},{\"id\":177,\"score\":0.0},{\"id\":178,\"score\":1.0},{\"id\":179,\"score\":2.0},{\"id\":180,\"score\":0.0},{\"id\":181,\"score\":1.0},{\"id\":182,\"score\":2.0},{\"id\":183,\"score\":0.0},{\"id\":184,\"score\":1.0},{\"id\":185,\"score\":2.0},{\"id\":186,\"score\":0.0},{\"id\":187,\"score\":1.0},{\"id\":188,\"score\":2.0},{\"id\":189,\"score\":0.0},{\"id\":190,\"score\":1.0},{\"id\":191,\"score\":2.0},{\"id\":192,\"score\":0.0},{\"id\":193,\"score\":1.0},{\"id\":194,\"score\":2.0},{\"id\":195,\"score\":0.0},{\"id\":196,\"score\":1.0},{\"id\":197,\"score\":2.0},{\"id\":198,\"score\":0.0},{\"id\":199,\"score\":1.0},{\"id\":200,\"score\":2.0},{\"id\":201,\"score\":0.0},{\"id\":202,\"score\":1.0},{\"id\":203,\"score\":2.0},{\"id\":204,\"score\":0.0},{\"id\":205,\"score\":1.0},{\"id\":206,\"score\":2.0},{\"id\":207,\"score\":0.0},{\"id\":208,\"score\":1.0},{\"id\":209,\"score\":2.0},{\"id\":210,\"score\":0.0},{\"id\":211,\"score\":1.0},{\"id\":212,\"score\":2.0},{\"id\":213,\"score\":0.0},{\"id\":214,\"score\":1.0},{\"id\":215,\"score\":2.0},{\"id\":216,\"score\":0.0},{\"id\":217,\"score\":1.0},{\"id\":218,\"score\":2.0},{\"id\":219,\"score\":0.0},{\"id\":220,\"score\":1.0},{\"id\":221,\"score\":2.0},{\"id\":222,\"score\":0.0},{\"id\":223,\"score\":1.0},{\"id\":224,\"score\":2.0},{\"id\":225,\"score\":0.0},{\"id\":226,\"score\":1.0},{\"id\":227,\"score\":2.0},{\"id\":228,\"score\":0.0},{\"id\":229,\"score\":1.0},{\"id\":230,\"score\":2.0},{\"id\":231,\"score\":0.0},{\"id\":232,\"score\":1.0},{\"id\":233,\"score\":2.0},{\"id\":234,\"score\":0.0},{\"id\":235,\"score\":1.0},{\"id\":236,\"score\":2.0},{\"id\":237,\"score\":0.0},{\"id\":238,\"score\":1.0},{\"id\":239,\"score\":2.0},{\"id\":240,\"score\":0.0},{\"id\":241,\"score\":1.0},{\"id\":242,\"score\":2.0},{\"id\":243,\"score\":0.0},{\"id\":244,\"score\":1.0},{\"id\":245,\"score\":2.0},{\"id\":246,\"score\":0.0},{\"id\":247,\"score\":1.0},{\"id\":248,\"score\":2.0},{\"id\":249,\"score\":0.0},{\"id\":250,\"score\":1.0},{\"id\":251,\"score\":2.0},{\"id\":252,\"score\":0.0},{\"id\":253,\"score\":1.0},{\"id\":254,\"score\":2.0},{\"id\":255,\"score\":0.0},{\"id\":256,\"score\":1.0},{\"id\":257,\"score\":2.0},{\"id\":258,\"score\":0.0},{\"id\":259,\"score\":1.0},{\"id\":260,\"score\":2.0},{\"id\":261,\"score\":0.0},{\"id\":262,\"score\":1.0},{\"id\":263,\"score\":2.0},{\"id\":264,\"score\":0.0},{\"id\":265,\"score\":1.0},{\"id\":266,\"score\":2.0},{\"id\":267,\"score\":0.0},{\"id\":268,\"score\":1.0},{\"id\":269,\"score\":2.0},{\"id\":270,\"score\":0.0},{\"id\":271,\"score\":1.0},{\"id\":272,\"score\":2.0},{\"id\":273,\"score\":0.0},{\"id\":274,\"score\":1.0},{\"id\":275,\"score\":2.0},{\"id\":276,\"score\":0.0},{\"id\":277,\"score\":1.0},{\"id\":278,\"score\":2.0},{\"id\":279,\"score\":0.0},{\"id\":280,\"score\":1.0},{\"id\":281,\"score\":2.0},{\"id\":282,\"score\":0.0},{\"id\":283,\"score\":1.0},{\"id\":284,\"score\":2.0},{\"id\":285,\"score\":0.0},{\"id\":286,\"score\":1.0},{\"id\":287,\"score\":2.0},{\"id\":288,\"score\":0.0},{\"id\":289,\"score\":1.0},{\"id\":290,\"score\":2.0},{\"id\":291,\"score\":0.0},{\"id\":292,\"score\":1.0},{\"id\":293,\"score\":2.0},{\"id\":294,\"score\":0.0},{\"id\":295,\"score\":1.0},{\"id\":296,\"score\":2.0},{\"id\":297,\"score\":0.0},{\"id\":298,\"score\":1.0},{\"id\":299,\"score\":2.0},{\"id\":300,\"score\":0.0},{\"id\":301,\"score\":1.0},{\"id\":302,\"score\":2.0},{\"id\":303,\"score\":0.0},{\"id\":304,\"score\":1.0},{\"id\":305,\"score\":2.0},{\"id\":306,\"score\":0.0},{\"id\":307,\"score\":1.0},{\"id\":308,\"score\":2.0},{\"id\":309,\"score\":0.0},{\"id\":310,\"score\":1.0},{\"id\":311,\"score\":2.0},{\"id\":312,\"score\":0.0},{\"id\":313,\"score\":1.0},{\"id\":314,\"score\":2.0},{\"id\":315,\"score\":0.0},{\"id\":316,\"score\":1.0},{\"id\":317,\"score\":2.0},{\"id\":318,\"score\":0.0},{\"id\":319,\"score\":1.0},{\"id\":320,\"score\":2.0},{\"id\":321,\"score\":0.0},{\"id\":322,\"score\":1.0},{\"id\":323,\"score\":2.0},{\"id\":324,\"score\":0.0},{\"id\":325,\"score\":1.0},{\"id\":326,\"score\":2.0},{\"id\":327,\"score\":0.0},{\"id\":328,\"score\":1.0},{\"id\":329,\"score\":2.0},{\"id\":330,\"score\":0.0},{\"id\":331,\"score\":1.0},{\"id\":332,\"score\":2.0},{\"id\":333,\"score\":0.0},{\"id\":334,\"score\":1.0},{\"id\":335,\"score\":2.0},{\"id\":336,\"score\":0.0},{\"id\":337,\"score\":1.0},{\"id\":338,\"score\":2.0},{\"id\":339,\"score\":0.0},{\"id\":340,\"score\":1.0},{\"id\":341,\"score\":2.0},{\"id\":342,\"score\":0.0},{\"id\":343,\"score\":1.0},{\"id\":344,\"score\":2.0},{\"id\":345,\"score\":0.0},{\"id\":346,\"score\":1.0},{\"id\":347,\"score\":2.0},{\"id\":348,\"score\":0.0},{\"id\":349,\"score\":1.0},{\"id\":350,\"score\":2.0},{\"id\":351,\"score\":0.0},{\"id\":352,\"score\":1.0},{\"id\":353,\"score\":2.0},{\"id\":354,\"score\":0.0},{\"id\":355,\"score\":1.0},{\"id\":356,\"score\":2.0},{\"id\":357,\"score\":0.0},{\"id\":358,\"score\":1.0},{\"id\":359,\"score\":2.0},{\"id\":360,\"score\":0.0},{\"id\":361,\"score\":1.0},{\"id\":362,\"score\":2.0},{\"id\":363,\"score\":0.0},{\"id\":364,\"score\":1.0},{\"id\":365,\"score\":2.0},{\"id\":366,\"score\":0.0},{\"id\":367,\"score\":1.0},{\"id\":368,\"score\":2.0},{\"id\":369,\"score\":0.0},{\"id\":370,\"score\":1.0},{\"id\":371,\"score\":2.0},{\"id\":372,\"score\":0.0},{\"id\":373,\"score\":1.0},{\"id\":374,\"score\":2.0},{\"id\":375,\"score\":0.0},{\"id\":376,\"score\":1.0},{\"id\":377,\"score\":2.0},{\"id\":378,\"score\":0.0},{\"id\":379,\"score\":1.0},{\"id\":380,\"score\":2.0},{\"id\":381,\"score\":0.0},{\"id\":382,\"score\":1.0},{\"id\":383,\"score\":2.0},{\"id\":384,\"score\":0.0},{\"id\":385,\"score\":1.0},{\"id\":386,\"score\":2.0},{\"id\":387,\"score\":0.0},{\"id\":388,\"score\":1.0},{\"id\":389,\"score\":2.0},{\"id\":390,\"score\":0.0},{\"id\":391,\"score\":1.0},{\"id\":392,\"score\":2.0},{\"id\":393,\"score\":0.0},{\"id\":394,\"score\":1.0},{\"id\":395,\"score\":2.0},{\"id\":396,\"score\":0.0},{\"id\":397,\"score\":1.0},{\"id\":398,\"score\":2.0},{\"id\":399,\"score\":0.0},{\"id\":400,\"score\":1.0},{\"id\":401,\"score\":2.0},{\"id\":402,\"score\":0.0},{\"id\":403,\"score\":1.0},{\"id\":404,\"score\":2.0},{\"id\":405,\"score\":0.0},{\"id\":406,\"score\":1.0},{\"id\":407,\"score\":2.0},{\"id\":408,\"score\":0.0},{\"id\":409,\"score\":1.0},{\"id\":410,\"score\":2.0},{\"id\":411,\"score\":0.0},{\"id\":412,\"score\":1.0},{\"id\":413,\"score\":2.0},{\"id\":414,\"score\":0.0},{\"id\":415,\"score\":1.0},{\"id\":416,\"score\":2.0},{\"id\":417,\"score\":0.0},{\"id\":418,\"score\":1.0},{\"id\":419,\"score\":2.0},{\"id\":420,\"score\":0.0},{\"id\":421,\"score\":1.0},{\"id\":422,\"score\":2.0},{\"id\":423,\"score\":0.0},{\"id\":424,\"score\":1.0},{\"id\":425,\"score\":2.0},{\"id\":426,\"score\":0.0},{\"id\":427,\"score\":1.0},{\"id\":428,\"score\":2.0},{\"id\":429,\"score\":0.0},{\"id\":430,\"score\":1.0},{\"id\":431,\"score\":2.0},{\"id\":432,\"score\":0.0},{\"id\":433,\"score\":1.0},{\"id\":434,\"score\":2.0},{\"id\":435,\"score\":0.0},{\"id\":436,\"score\":1.0},{\"id\":437,\"score\":2.0},{\"id\":438,\"score\":0.0},{\"id\":439,\"score\":1.0},{\"id\":440,\"score\":2.0},{\"id\":441,\"score\":0.0},{\"id\":442,\"score\":1.0},{\"id\":443,\"score\":2.0},{\"id\":444,\"score\":0.0},{\"id\":445,\"score\":1.0},{\"id\":446,\"score\":2.0},{\"id\":447,\"score\":0.0},{\"id\":448,\"score\":1.0},{\"id\":449,\"score\":2.0},{\"id\":450,\"score\":0.0},{\"id\":451,\"score\":1.0},{\"id\":452,\"score\":2.0},{\"id\":453,\"score\":0.0},{\"id\":454,\"score\":1.0},{\"id\":455,\"score\":2.0},{\"id\":456,\"score\":0.0},{\"id\":457,\"score\":1.0},{\"id\":458,\"score\":2.0},{\"id\":459,\"score\":0.0},{\"id\":460,\"score\":1.0},{\"id\":461,\"score\":2.0},{\"id\":462,\"score\":0.0},{\"id\":463,\"score\":1.0},{\"id\":464,\"score\":2.0},{\"id\":465,\"score\":0.0},{\"id\":466,\"score\":1.0},{\"id\":467,\"score\":2.0},{\"id\":468,\"score\":0.0},{\"id\":469,\"score\":1.0},{\"id\":470,\"score\":2.0},{\"id\":471,\"score\":0.0},{\"id\":472,\"score\":1.0},{\"id\":473,\"score\":2.0},{\"id\":474,\"score\":0.0},{\"id\":475,\"score\":1.0},{\"id\":476,\"score\":2.0},{\"id\":477,\"score\":0.0},{\"id\":478,\"score\":1.0},{\"id\":479,\"score\":2.0},{\"id\":480,\"score\":0.0},{\"id\":481,\"score\":1.0},{\"id\":482,\"score\":2.0},{\"id\":483,\"score\":0.0},{\"id\":484,\"score\":1.0},{\"id\":485,\"score\":2.0},{\"id\":486,\"score\":0.0},{\"id\":487,\"score\":1.0},{\"id\":488,\"score\":2.0},{\"id\":489,\"score\":0.0},{\"id\":490,\"score\":1.0},{\"id\":491,\"score\":2.0},{\"id\":492,\"score\":0.0},{\"id\":493,\"score\":1.0},{\"id\":494,\"score\":2.0},{\"id\":495,\"score\":0.0},{\"id\":496,\"score\":1.0},{\"id\":497,\"score\":2.0},{\"id\":498,\"score\":0.0},{\"id\":499,\"score\":1.0},{\"id\":500,\"score\":2.0},{\"id\":501,\"score\":0.0},{\"id\":502,\"score\":1.0},{\"id\":503,\"score\":2.0},{\"id\":504,\"score\":0.0},{\"id\":505,\"score\":1.0},{\"id\":506,\"score\":2.0},{\"id\":507,\"score\":0.0},{\"id\":508,\"score\":1.0},{\"id\":509,\"score\":2.0},{\"id\":510,\"score\":0.0},{\"id\":511,\"score\":1.0},{\"id\":512,\"score\":2.0},{\"id\":513,\"score\":0.0},{\"id\":514,\"score\":1.0},{\"id\":515,\"score\":2.0},{\"id\":516,\"score\":0.0},{\"id\":517,\"score\":1.0},{\"id\":518,\"score\":2.0},{\"id\":519,\"score\":0.0},{\"id\":520,\"score\":1.0},{\"id\":521,\"score\":2.0},{\"id\":522,\"score\":0.0},{\"id\":523,\"score\":1.0},{\"id\":524,\"score\":2.0},{\"id\":525,\"score\":0.0},{\"id\":526,\"score\":1.0},{\"id\":527,\"score\":2.0},{\"id\":528,\"score\":0.0},{\"id\":529,\"score\":1.0},{\"id\":530,\"score\":2.0},{\"id\":531,\"score\":0.0},{\"id\":532,\"score\":1.0},{\"id\":533,\"score\":2.0},{\"id\":534,\"score\":0.0},{\"id\":535,\"score\":1.0},{\"id\":536,\"score\":2.0},{\"id\":537,\"score\":0.0},{\"id\":538,\"score\":1.0},{\"id\":539,\"score\":2.0},{\"id\":540,\"score\":0.0},{\"id\":541,\"score\":1.0},{\"id\":542,\"score\":2.0},{\"id\":543,\"score\":0.0},{\"id\":544,\"score\":1.0},{\"id\":545,\"score\":2.0},{\"id\":546,\"score\":0.0},{\"id\":547,\"score\":1.0},{\"id\":548,\"score\":2.0},{\"id\":549,\"score\":0.0},{\"id\":550,\"score\":1.0},{\"id\":551,\"score\":2.0},{\"id\":552,\"score\":0.0},{\"id\":553,\"score\":1.0},{\"id\":554,\"score\":2.0},{\"id\":555,\"score\":0.0},{\"id\":556,\"score\":1.0},{\"id\":557,\"score\":2.0},{\"id\":558,\"score\":0.0},{\"id\":559,\"score\":1.0},{\"id\":560,\"score\":2.0},{\"id\":561,\"score\":0.0},{\"id\":562,\"score\":1.0},{\"id\":563,\"score\":2.0},{\"id\":564,\"score\":0.0},{\"id\":565,\"score\":1.0},{\"id\":566,\"score\":2.0},{\"id\":567,\"score\":0.0},{\"id\":568,\"score\":1.0},{\"id\":569,\"score\":2.0},{\"id\":570,\"score\":0.0},{\"id\":571,\"score\":1.0},{\"id\":572,\"score\":2.0},{\"id\":573,\"score\":0.0},{\"id\":574,\"score\":1.0},{\"id\":575,\"score\":2.0},{\"id\":576,\"score\":0.0},{\"id\":577,\"score\":1.0},{\"id\":578,\"score\":2.0},{\"id\":579,\"score\":0.0},{\"id\":580,\"score\":1.0},{\"id\":581,\"score\":2.0},{\"id\":582,\"score\":0.0},{\"id\":583,\"score\":1.0},{\"id\":584,\"score\":2.0},{\"id\":585,\"score\":0.0},{\"id\":586,\"score\":1.0},{\"id\":587,\"score\":2.0},{\"id\":588,\"score\":0.0},{\"id\":589,\"score\":1.0},{\"id\":590,\"score\":2.0},{\"id\":591,\"score\":0.0},{\"id\":592,\"score\":1.0},{\"id\":593,\"score\":2.0},{\"id\":594,\"score\":0.0},{\"id\":595,\"score\":1.0},{\"id\":596,\"score\":2.0},{\"id\":597,\"score\":0.0},{\"id\":598,\"score\":1.0},{\"id\"",
+		"/dev/fd/63",
+		"/Users/fhuszar/peerindex/stream/datamodel/2013\",\"in_reply_to_user_id\":null,\"id_str\":\"289764586591232002\",\"place\":null,\"user\":{\"location\":\"\",\"default_profile\":false,\"statuses_count\":6670,\"profile_background_tile\":true,\"lang\":\"en\",\"profile_link_color\":\"D62B80\",\"profile_banner_url\":\"https:/si0.twimg.com/profile_banners/261537894/1348088989\",\"id\":261537894,\"following\":null,\"favourites_count\":1257,\"protected\":false,\"profile_text_color\"",
+		"/Users/fhuszar/peerindex/stream/datamodel/1",
+		"/Users/fhuszar/peerindex/stream/datamodel/@frank_ocean",
+		"/Users/fhuszar/peerindex/stream/datamodel/fan",
+		"/Users/fhuszar/peerindex/stream/datamodel/he",
+		"/Users/fhuszar/peerindex/stream/datamodel/is",
+		"/Users/fhuszar/peerindex/stream/datamodel/my",
+		"/Users/fhuszar/peerindex/stream/datamodel/life",
+		"/Users/fhuszar/peerindex/stream/datamodel/{\"contributors\"",
+		"/Users/fhuszar/peerindex/emrstreaming/ferenc.hive",
+		"/Applications/eclipse/Eclipse.app/Contents/Info.plist",
+		"/Users/fhuszar/peerindex/datascience/gender/name_age.py",
+		"/Users/fhuszar/peerindex/datascience/ratemymates/tmp",
+		"/Users/fhuszar/hacked.json"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"countries.tsv",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"*.",
+			"Regr",
+			"regr",
+			"preference",
+			"fileitem",
+			"activity",
+			"}",
+			"{",
+			":",
+			"\"",
+			"\"country\"",
+			"\"channel\"",
+			"\"count\"",
+			":",
+			"actor_info",
+			"twitter",
+			", ",
+			"GENDER",
+			"encode",
+			"network",
+			"benchmark_topic.score",
+			"score",
+			"RUN_DATE",
+			"RUN_FOR",
+			"today",
+			"updated",
+			"previous",
+			"USER_ACTION_DECAY",
+			"RUN_DATE",
+			"RUN_FOR",
+			"today",
+			"yesterday",
+			"hiveconf",
+			"hiveconf:USER_ACTION_DECAY",
+			"hiveconf",
+			"today",
+			"yesterday",
+			"INFLUENCE_RETWEETS_DECAY",
+			"'",
+			"hiveconf",
+			"RUN_DATE",
+			"gnip",
+			"as",
+			"AS",
+			"as",
+			"AS",
+			"as",
+			"C",
+			"{}",
+			"json",
+			"influencer_in",
+			"19",
+			"score\":19",
+			"score",
+			"()\n",
+			"split",
+			"glob",
+			"'\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			],
+			[
+				2,
+				0,
+				3,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.0593772821324,
+			0.881743701315,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 280.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"facebookscorer",
+				"src/main/java/net/peerindex/businesslogic/facebook/FacebookScorer.java"
+			],
+			[
+				"scoringut",
+				"src/main/java/net/peerindex/businesslogic/scoring/ScoringUtils.java"
+			],
+			[
+				"scoringutil",
+				"src/main/java/net/peerindex/businesslogic/scoring/ScoringUtils.java"
+			],
+			[
+				"topicinfo",
+				"src/main/java/net/peerindex/model/TopicInfo.java"
+			],
+			[
+				"topicnames",
+				"src/main/java/net/peerindex/model/TopicNames.java"
+			],
+			[
+				"testrestco",
+				"src/test/java/net/peerindex/api/TestRESTController.java"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 253.0,
+	"status_bar_visible": true
+}

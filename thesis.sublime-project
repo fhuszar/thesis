@@ -1,0 +1,40 @@
+{
+  "folders": [
+    {
+      "path": "latex",
+      "name": "LaTeX files",
+      "file_exclude_patterns": [
+        "*.pdf",
+        "*.aux",
+        "*.auxlock",
+        "*.fls",
+        "*.bbl",
+        "*.blg",
+        "*.dvi",
+        "*.fdb_latexmk",
+        "*.glg",
+        "*.glo",
+        "*.gls",
+        "*.idx",
+        "*.ilg",
+        "*.ind",
+        "*.ist",
+        "*.lof",
+        "*.log",
+        "*.lot",
+        "*.nav",
+        "*.nlo",
+        "*.out",
+        "*.pdfsync",
+        "*.ps",
+        "*.snm",
+        "*.synctex.gz",
+        "*.toc",
+        "*.vrb",
+        "*.maf",
+        "*.mtc",
+        "*.mtc0"
+      ]
+    }
+  ]
+}
