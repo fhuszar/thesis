@@ -1,0 +1,13 @@
+% setting parameters
+
+params.n1 = 2;
+params.n2 = 2;
+params.min_theta1 = 0;
+params.max_theta1 = 1;
+params.min_theta2 = 1;
+params.max_theta2 = 2;
+
+div = @div_Brier_Normal;
+[X,thetas,parallel_edges,D,P] = embed_manifold(params,div);
+
+draw_results(X,thetas,parallel_edges)

@@ -1,0 +1,19 @@
+function compiletikz(filename)
+
+if ~exist('compiletikz_header')
+    f = fopen('compiletikz_header','w');
+    fprintf(f,'\\documentclass[tikz]{standalone}\n');
+    fprintf(f,'\\usepackage{pgfplots}\n');
+    fprintf(f,'\\begin{document}\n');
+    fclose(f);
+end
+
+if ~exist('compiletikz_footer')
+    f = fopen('compiletikz_footer','w');
+    fprintf(f,'\n\\end{document}\n');
+    fclose(f);
+end
+
+['cat compiletikz_header ' filename ' compiletikz_footer | /usr/texbin/pdflatex -halt-on-error ']
+
+%system(['cat compiletikz_header ' filename ' compiletikz_footer | /usr/texbin/pdflatex'])

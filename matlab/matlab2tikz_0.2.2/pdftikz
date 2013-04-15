@@ -1,0 +1,4 @@
+#! /bin/sh
+
+cat pdftikz_header $1 pdftikz_footer
+

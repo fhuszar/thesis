@@ -1,0 +1,53 @@
+params.n = 31;
+params.min_theta = 0.05;
+params.max_theta = 1;
+figure(1)
+clf
+hold on;
+
+divergence = @(x,y) div_KL_Normal([0,x],[0,y]);
+[X,thetas] = embed_manifold_1D(params,divergence,true);
+%normalise X
+X_KL = (X - min(X))/(max(X)-min(X));
+
+divergence = @(x,y) div_Brier_Normal([0,x],[0,y]);
+X = embed_manifold_1D(params,divergence,true);
+%normalise X
+X_Brier = (X - min(X))/(max(X)-min(X));
+
+ells = [0.1,0.2,0.5,1];
+
+X_kernel = cell(length(ells),1);
+for i = 1:length(ells)
+    ell = ells(i);
+    divergence = @(x,y) div_kernel_Normal([0,x],[0,y],ell);
+    X = embed_manifold_1D(params,divergence,true);
+    %normalise X
+    X_kernel{i} = (X - min(X))/(max(X)-min(X));
+end
+
+figure(1)
+
+X=zeros(length(ells)+3,params.n);
+X(1,:) = X_KL;
+X(2,:) = X_Brier;
+for i=1:length(ells)
+    X(2+i,:) = X_kernel{i};
+end
+X(end,:) = X_KL;
+draw_comparison_chart(X)
+set(gca,'YTick',1:size(X,1));
+set(gca,'YTickLabel',{'KL','Brier','kernel, \(\ell=0.1\)','kernel, \(\ell=0.2\)','kernel, \(\ell=0.5\)','kernel, \(\ell=1.0\)','KL'})
+set(gca, 'XTick', [0,X(1,8),X(1,24),1]);
+set(gca,'XTickLabel', {0.05,0.1,0.5,1})
+
+figure(2)
+clf
+hold on;
+t = (thetas(1:end-1) + thetas(2:end))/2;
+plot(t,bsxfun(@rdivide,diff(X(1,:)'),diff(X(1,:)')),':k','LineWidth',1.5)
+plot(t,bsxfun(@rdivide,diff(X(2:2+length(ells),:)'),diff(X(1,:)')),'LineWidth',1.5)
+legend({'KL','Brier','kernel, \(\ell=0.1\)','kernel, \(\ell=0.2\)','kernel, \(\ell=0.5\)','kernel, \(\ell=1.0\)'},'Location','NorthWest');
+set(gca,'XTick',[0.05,0.1,0.2,0.5,1])
+xlim([0.05,1])
+figure(1)

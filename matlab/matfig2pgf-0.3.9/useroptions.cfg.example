@@ -1,0 +1,22 @@
+% User defined default Matfig2PGF options
+% Lines starting with a % or # are comments.
+% Uncomment the options you would like to change.
+
+% figwidth = 10
+% fontname = Times
+% fontsize = 10
+% drawfigoutline = false
+% reducedlineerror = 0.1
+% minlinewidth = 0.5
+% includedraftcode = true
+% textprecode = 
+% textpostcode = 
+% mathprecode = $
+% mathpostcode = $
+% snapdistance = 0.1
+% snapleft = 4
+% snapright = 0.8
+% snapbottom = 3
+% snaptop = 0.8
+% converttexttolatex = true
+% keepresizedfigure = false

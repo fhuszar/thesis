@@ -1,0 +1,168 @@
+Matfig2PGF v0.3.9
+
+-----------------
+Table of Contents
+-----------------
+ 1. Introduction
+ 2. Requirements
+ 3. Upgrading
+ 4. Usage
+ 5. Contact
+ 6. Changelog
+
+---------------
+1) Introduction
+---------------
+
+Matfig2PGF is a MATLAB <http://www.mathworks.com/> script that allows users
+to convert MATLAB figures to PGF <http://sourceforge.net/projects/pgf/>.
+PGF figures can be included in a LaTeX document using the PGF macro package.
+The PGF package works with most important LaTeX backends (such as pdfTeX
+and Dvips). Using Matfig2PGF all text in the figure is typeset by LaTeX, so
+it blends in nicely with the rest of the document.
+
+Features:
+- 2D plots
+- subplots
+- histograms
+- linear and logarithmic axes
+- grids
+- legends
+- line styles and plot marks
+- resulting pgf file can be used in LaTeX and pdfLaTeX
+
+
+---------------
+2) Requirements
+---------------
+Matfig2PGF has been tested with the following MATLAB versions. Other versions
+might or might not work, please let me know.
+- MATLAB R2007b
+
+To compile a LaTeX document with a PGF figure the following package is
+required:
+- PGF package <http://sourceforge.net/projects/pgf/>
+
+
+------------
+3) Upgrading
+------------
+If you are upgrading from version 0.2 or older you must remove it completely
+before installing the new version. If you created a custom
+matfig2pgf_options.m it must be removed too. User defined default options
+are now read from useroptions.cfg. See useroptions.cfg.example for the
+format.
+
+
+--------
+4) Usage
+--------
+
+In order to use Matfig2PGF the m-file matfig2pgf.m must be placed in the
+MATLAB search path (see
+http://www.mathworks.com/access/helpdesk/help/techdoc/matlab_env/f10-26235.html
+for more information). Now Matfig2PGF is ready to use. Type:
+'help matfig2pgf' to see how to use Matfig2PGF to convert MATLAB figures to
+PGF files.
+
+Matfig2PGF can add a menu item to all figure windows. See
+'help matfig2pgf_menu' for more information.
+
+After the PGF file has been created it can be included in a LaTeX document.
+A minimal example LaTeX document is listed below.
+
+\documentclass{article}
+
+\usepackage{pgf}
+\usepackage{pgffor}
+\usepgflibrary{plothandlers}
+
+% Or, for older PGF versions (<= 1.01)
+%\usepackage{pgf}
+%\usepackage{pgffor}
+%\usepackage{pgflibraryplothandlers}
+
+\begin{document}
+  \begin{figure}
+    \centering
+    \input{figure.pgf}
+    \caption{Figure created by Matfig2PGF}
+  \end{figure}	
+\end{document}
+
+
+----------
+5) Contact
+----------
+Author: Paul Wagenaars
+E-mail: paul@wagenaars.org
+
+
+------------
+6) Changelog
+------------
+v0.3.9 (2009-05-21)
+- Fixed: XAxisLocation property was ignored
+
+v0.3.8 (2008-12-24)
+- Fixed: YAxisLocation property was ignored (e.g. used by plotyy)
+- Fixed: Background color of 'none' wasn't handled properly (e.g. used by
+         plotyy)
+- Fixed: XColor and YColor properties of axes were ignored
+- Fixed: Color property of text objects was ignored
+
+v0.3.7 (2008-08-09)
+Many thank to Nico Schlömer for submitted these patches.
+- Fixed: updated draw_patch function. Contour plots should now be handled
+         better.
+- Fixed: some smaller bugs.
+
+v0.3.6 (2008-07-06)
+- Fixed: tick markers where drawn when box was set 'off'.
+- Fixed: lines crossing the visible axis area, but without point within the
+         visible area where not printed.
+
+v0.3.5 (2008-03-30)
+- Fixed: line reduction/decimation did not work properly in certain
+         situations.
+- Added: support for contour plots. Many thanks to Felix Heß for submitting
+         this patch.
+
+v0.3.4 (2008-01-19)
+- Added: options to adjust font size of axes and tick labels in the LaTeX
+         output.
+
+v0.3.3 (2007-12-07)
+- Fixed: non-numeric tick labels were not handled properly.
+- Fixed: some labels contain only whitespace, these are now skipped too
+- Fixed: labels of log-axes with manual tick label were not handled
+         properly.
+- Fixed: text with units not specified in 'data' or 'normalized'
+         coordinates were not handled properly.
+
+v0.3.2 (2007-8-11)
+- Fixed: patch object drawn with area command was not drawn correctly
+
+v0.3.1 (2007-7-1)
+- Fixed: small error in help comment
+- New: Patch objects now support 'FaceColor' 'flat' (which is default for
+       Matlab function hist()).
+
+v0.3 (2006-12-30)
+- Changed: Redone options implementation. Default user options are no
+           longer stored in matfig2pgf_options.m. From now on they are
+           stored in useroptions.cfg.
+- New: Added Matfig2pgf menu item to figure windows for easy saving.
+- New: Added window to choose options more easily.
+
+v0.2 (2006-11-26)
+- Fixed: Snap_axes_borders sometimes did not snap all axes objects.
+- Changed: The borders of legends are no longer snapped.
+- Changed: snapdistances are now specified in terms of the font size.
+- Changed: snapdistances are now specified seperately for the left, right,
+           top and bottom border.
+- New: Possibility to disables figure resizing by setting 'figwidth',
+       'fontsize' and 'snapdistance' to zero.
+
+v0.1 (2006-11-11)
+- Initial release

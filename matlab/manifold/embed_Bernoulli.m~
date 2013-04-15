@@ -1,0 +1,24 @@
+params.n = 33;
+params.min_theta = 1e-3;
+params.max_theta = 1-1e-3;
+figure(1)
+clf
+hold on;
+
+divergence = @div_Brier_Bernoulli;
+[X,theta] = embed_manifold_1D(params,divergence);
+%normalise X
+X_Brier = (X - min(X))/(max(X)-min(X));
+
+divergence = @div_spherical_Bernoulli;
+[X,theta] = embed_manifold_1D(params,divergence);
+%normalise X
+X_spherical = (X - min(X))/(max(X)-min(X));
+
+divergence = @div_KL_Bernoulli;
+[X,theta] = embed_manifold_1D(params,divergence);
+%normalise X
+X_KL = (X - min(X))/(max(X)-min(X));
+
+
+

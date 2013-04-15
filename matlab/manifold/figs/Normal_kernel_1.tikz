@@ -1,0 +1,3386 @@
+% This file was created by matlab2tikz v0.2.2.
+% Copyright (c) 2008--2012, Nico Schlömer <nico.schloemer@gmail.com>
+% All rights reserved.
+% 
+% The latest updates can be retrieved from
+%   http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz
+% where you can also make suggestions and rate matlab2tikz.
+% 
+% 
+% 
+\begin{tikzpicture}
+
+% Axis at [0.13 0.11 0.78 0.63]
+\begin{axis}[%
+view={0}{90},
+width=5.16666666666667in,
+height=3.45508948545861in,
+scale only axis,
+xmin=-5.93005819175071, xmax=5.9295561095913,
+ymin=-4.61948414087574, ymax=3.31136011863937,
+hide x axis,
+hide y axis]
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-3.95083519048286,3.31136011863937)(-2.49467221350795,1.39621364847782) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-2.49467221350795,1.39621364847782)(-1.83163986957495,0.752937528521295) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.83163986957495,0.752937528521295)(-1.38396931642502,0.509406815041232) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.38396931642502,0.509406815041232)(-1.08428820188421,0.409011712623786) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.08428820188421,0.409011712623786)(-0.870704799356933,0.367871588697994) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.870704799356933,0.367871588697994)(-0.715159237271229,0.363678290565652) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.715159237271229,0.363678290565652)(-0.593524597511607,0.37579937198332) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.593524597511607,0.37579937198332)(-0.5006055910957,0.40359965939978) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.5006055910957,0.40359965939978)(-0.428359819230203,0.441830073777339) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.428359819230203,0.441830073777339)(-0.368024592562462,0.47789612157128) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.368024592562462,0.47789612157128)(-0.319014150805705,0.513057384459856) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.319014150805705,0.513057384459856)(-0.278686492137433,0.544845726668067) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.278686492137433,0.544845726668067)(-0.241726908879884,0.580873753859454) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.241726908879884,0.580873753859454)(-0.214090405301393,0.613419813022804) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-3.95083519048286,3.31136011863937)(-4.5960224847749,2.04463712892086) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-2.49467221350795,1.39621364847782)(-2.62415735497511,0.773459757196738) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-4.5960224847749,2.04463712892086)(-2.62415735497511,0.773459757196738) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.83163986957495,0.752937528521295)(-1.82495087859797,0.353731646477777) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-2.62415735497511,0.773459757196738)(-1.82495087859797,0.353731646477777) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.38396931642502,0.509406815041232)(-1.3384138991781,0.23163937939576) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.82495087859797,0.353731646477777)(-1.3384138991781,0.23163937939576) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.08428820188421,0.409011712623786)(-1.02775120934224,0.191476326573031) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.3384138991781,0.23163937939576)(-1.02775120934224,0.191476326573031) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.870704799356933,0.367871588697994)(-0.811797405099068,0.199688834066606) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.02775120934224,0.191476326573031)(-0.811797405099068,0.199688834066606) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.715159237271229,0.363678290565652)(-0.657404629548919,0.231462872489683) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.811797405099068,0.199688834066606)(-0.657404629548919,0.231462872489683) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.593524597511607,0.37579937198332)(-0.539393126004444,0.272164029596357) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.657404629548919,0.231462872489683)(-0.539393126004444,0.272164029596357) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.5006055910957,0.40359965939978)(-0.451393671867092,0.318535624821582) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.539393126004444,0.272164029596357)(-0.451393671867092,0.318535624821582) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.428359819230203,0.441830073777339)(-0.38731968588882,0.368178601168093) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.451393671867092,0.318535624821582)(-0.38731968588882,0.368178601168093) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.368024592562462,0.47789612157128)(-0.332599205064545,0.415943254353583) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.38731968588882,0.368178601168093)(-0.332599205064545,0.415943254353583) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.319014150805705,0.513057384459856)(-0.2868890661178,0.459834044868199) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.332599205064545,0.415943254353583)(-0.2868890661178,0.459834044868199) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.278686492137433,0.544845726668067)(-0.249984704240218,0.499810078105791) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.2868890661178,0.459834044868199)(-0.249984704240218,0.499810078105791) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.241726908879884,0.580873753859454)(-0.215390933831801,0.543423816300112) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.249984704240218,0.499810078105791)(-0.215390933831801,0.543423816300112) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.214090405301393,0.613419813022804)(-0.191140275530731,0.580703360000451) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.215390933831801,0.543423816300112)(-0.191140275530731,0.580703360000451) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-4.5960224847749,2.04463712892086)(-4.90244753451138,0.38067795020024) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-2.62415735497511,0.773459757196738)(-2.61224096272359,0.0278534691563421) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-4.90244753451138,0.38067795020024)(-2.61224096272359,0.0278534691563421) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.82495087859797,0.353731646477777)(-1.73393792578895,-0.0818873612121869) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-2.61224096272359,0.0278534691563421)(-1.73393792578895,-0.0818873612121869) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.3384138991781,0.23163937939576)(-1.23800415664711,-0.0630088452604565) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.73393792578895,-0.0818873612121869)(-1.23800415664711,-0.0630088452604565) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.02775120934224,0.191476326573031)(-0.930073531027754,-0.0118610521766265) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.23800415664711,-0.0630088452604565)(-0.930073531027754,-0.0118610521766265) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.811797405099068,0.199688834066606)(-0.724465316089991,0.0505520194776895) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.930073531027754,-0.0118610521766265)(-0.724465316089991,0.0505520194776895) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.657404629548919,0.231462872489683)(-0.578874880800122,0.115916061587467) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.724465316089991,0.0505520194776895)(-0.578874880800122,0.115916061587467) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.539393126004444,0.272164029596357)(-0.471083887102138,0.182327123100304) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.578874880800122,0.115916061587467)(-0.471083887102138,0.182327123100304) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.451393671867092,0.318535624821582)(-0.392948856127118,0.244896536933399) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.471083887102138,0.182327123100304)(-0.392948856127118,0.244896536933399) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.38731968588882,0.368178601168093)(-0.336791507239839,0.305436023843987) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.392948856127118,0.244896536933399)(-0.336791507239839,0.305436023843987) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.332599205064545,0.415943254353583)(-0.287859559050402,0.360981528756107) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.336791507239839,0.305436023843987)(-0.287859559050402,0.360981528756107) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.2868890661178,0.459834044868199)(-0.24848387940555,0.414245735335172) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.287859559050402,0.360981528756107)(-0.24848387940555,0.414245735335172) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.249984704240218,0.499810078105791)(-0.218149514294492,0.458213246421606) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.24848387940555,0.414245735335172)(-0.218149514294492,0.458213246421606) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.215390933831801,0.543423816300112)(-0.187963396584915,0.507276677323536) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.218149514294492,0.458213246421606)(-0.187963396584915,0.507276677323536) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.191140275530731,0.580703360000451)(-0.167294549344532,0.550140739125387) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.187963396584915,0.507276677323536)(-0.167294549344532,0.550140739125387) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-4.90244753451138,0.38067795020024)(-4.63314155427237,-1.32103987365299) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-2.61224096272359,0.0278534691563421)(-2.384673029727,-0.733060975053359) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-4.63314155427237,-1.32103987365299)(-2.384673029727,-0.733060975053359) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.73393792578895,-0.0818873612121869)(-1.53420264481895,-0.506219001473256) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-2.384673029727,-0.733060975053359)(-1.53420264481895,-0.506219001473256) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.23800415664711,-0.0630088452604565)(-1.07622918021037,-0.328989727656816) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.53420264481895,-0.506219001473256)(-1.07622918021037,-0.328989727656816) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.930073531027754,-0.0118610521766265)(-0.79364023078652,-0.190781864964185) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.07622918021037,-0.328989727656816)(-0.79364023078652,-0.190781864964185) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.724465316089991,0.0505520194776895)(-0.611206928473494,-0.0777149788799894) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.79364023078652,-0.190781864964185)(-0.611206928473494,-0.0777149788799894) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.578874880800122,0.115916061587467)(-0.483944871571785,0.0227755083334864) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.611206928473494,-0.0777149788799894)(-0.483944871571785,0.0227755083334864) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.471083887102138,0.182327123100304)(-0.391810514306981,0.108794677784619) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.483944871571785,0.0227755083334864)(-0.391810514306981,0.108794677784619) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.392948856127118,0.244896536933399)(-0.325638778295385,0.185424680755041) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.391810514306981,0.108794677784619)(-0.325638778295385,0.185424680755041) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.336791507239839,0.305436023843987)(-0.277355164950458,0.252380396044417) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.325638778295385,0.185424680755041)(-0.277355164950458,0.252380396044417) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.287859559050402,0.360981528756107)(-0.238721812047798,0.314115970591155) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.277355164950458,0.252380396044417)(-0.238721812047798,0.314115970591155) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.24848387940555,0.414245735335172)(-0.206945544470335,0.373326974885842) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.238721812047798,0.314115970591155)(-0.206945544470335,0.373326974885842) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.218149514294492,0.458213246421606)(-0.180953410652589,0.420948681777746) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.206945544470335,0.373326974885842)(-0.180953410652589,0.420948681777746) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.187963396584915,0.507276677323536)(-0.157262237350692,0.476755361266574) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.180953410652589,0.420948681777746)(-0.157262237350692,0.476755361266574) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.167294549344532,0.550140739125387)(-0.139172901147175,0.521869071750571) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.157262237350692,0.476755361266574)(-0.139172901147175,0.521869071750571) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-4.63314155427237,-1.32103987365299)(-3.84652700933849,-2.76013728788402) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-2.384673029727,-0.733060975053359)(-1.95699915822046,-1.37619336734733) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-3.84652700933849,-2.76013728788402)(-1.95699915822046,-1.37619336734733) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.53420264481895,-0.506219001473256)(-1.23573306395206,-0.863261693480504) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.95699915822046,-1.37619336734733)(-1.23573306395206,-0.863261693480504) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.07622918021037,-0.328989727656816)(-0.856188075487727,-0.552145344104956) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.23573306395206,-0.863261693480504)(-0.856188075487727,-0.552145344104956) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.79364023078652,-0.190781864964185)(-0.626245252594373,-0.337398648219913) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.856188075487727,-0.552145344104956)(-0.626245252594373,-0.337398648219913) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.611206928473494,-0.0777149788799894)(-0.47657383881101,-0.178699669826848) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.626245252594373,-0.337398648219913)(-0.47657383881101,-0.178699669826848) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.483944871571785,0.0227755083334864)(-0.376163842203264,-0.052790218372813) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.47657383881101,-0.178699669826848)(-0.376163842203264,-0.052790218372813) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.391810514306981,0.108794677784619)(-0.302939529928837,0.0520402374970869) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.376163842203264,-0.052790218372813)(-0.302939529928837,0.0520402374970869) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.325638778295385,0.185424680755041)(-0.251622816379302,0.13743335660078) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.302939529928837,0.0520402374970869)(-0.251622816379302,0.13743335660078) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.277355164950458,0.252380396044417)(-0.214473577030558,0.209777136571356) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.251622816379302,0.13743335660078)(-0.214473577030558,0.209777136571356) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.238721812047798,0.314115970591155)(-0.183749621182142,0.278195791053165) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.214473577030558,0.209777136571356)(-0.183749621182142,0.278195791053165) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.206945544470335,0.373326974885842)(-0.160433372857158,0.339839467626678) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.183749621182142,0.278195791053165)(-0.160433372857158,0.339839467626678) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.180953410652589,0.420948681777746)(-0.139891298087237,0.392357563444266) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.160433372857158,0.339839467626678)(-0.139891298087237,0.392357563444266) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.157262237350692,0.476755361266574)(-0.122165345932033,0.450316580860818) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.139891298087237,0.392357563444266)(-0.122165345932033,0.450316580860818) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.139172901147175,0.521869071750571)(-0.107918433723864,0.50012909314646) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.122165345932033,0.450316580860818)(-0.107918433723864,0.50012909314646) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-3.84652700933849,-2.76013728788402)(-2.73863368365096,-3.7848905217299) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.95699915822046,-1.37619336734733)(-1.38201080488982,-1.8561489747996) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-2.73863368365096,-3.7848905217299)(-1.38201080488982,-1.8561489747996) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.23573306395206,-0.863261693480504)(-0.862290657753627,-1.12895576910006) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.38201080488982,-1.8561489747996)(-0.862290657753627,-1.12895576910006) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.856188075487727,-0.552145344104956)(-0.592443041504695,-0.71733552290019) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.862290657753627,-1.12895576910006)(-0.592443041504695,-0.71733552290019) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.626245252594373,-0.337398648219913)(-0.432539841996694,-0.445517813391856) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.592443041504695,-0.71733552290019)(-0.432539841996694,-0.445517813391856) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.47657383881101,-0.178699669826848)(-0.327240394400411,-0.254960550790778) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.432539841996694,-0.445517813391856)(-0.327240394400411,-0.254960550790778) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.376163842203264,-0.052790218372813)(-0.257431809751207,-0.107985532204908) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.327240394400411,-0.254960550790778)(-0.257431809751207,-0.107985532204908) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.302939529928837,0.0520402374970869)(-0.206992425143757,0.0084433384965104) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.257431809751207,-0.107985532204908)(-0.206992425143757,0.0084433384965104) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.251622816379302,0.13743335660078)(-0.171889872651482,0.102797794327137) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.206992425143757,0.0084433384965104)(-0.171889872651482,0.102797794327137) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.214473577030558,0.209777136571356)(-0.146738900430769,0.180029640751974) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.171889872651482,0.102797794327137)(-0.146738900430769,0.180029640751974) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.183749621182142,0.278195791053165)(-0.125039707218009,0.251891672753696) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.146738900430769,0.180029640751974)(-0.125039707218009,0.251891672753696) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.160433372857158,0.339839467626678)(-0.109561002397008,0.316304550834902) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.125039707218009,0.251891672753696)(-0.109561002397008,0.316304550834902) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.139891298087237,0.392357563444266)(-0.0955932769191991,0.370807553263891) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.109561002397008,0.316304550834902)(-0.0955932769191991,0.370807553263891) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.122165345932033,0.450316580860818)(-0.0835082803411003,0.430695489722059) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0955932769191991,0.370807553263891)(-0.0835082803411003,0.430695489722059) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.107918433723864,0.50012909314646)(-0.0732188622080469,0.483287866408972) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0835082803411003,0.430695489722059)(-0.0732188622080469,0.483287866408972) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-2.73863368365096,-3.7848905217299)(-1.42788805801623,-4.4099414963467) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.38201080488982,-1.8561489747996)(-0.719968568974269,-2.14253393259474) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.42788805801623,-4.4099414963467)(-0.719968568974269,-2.14253393259474) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.862290657753627,-1.12895576910006)(-0.446757551775814,-1.28928738112166) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.719968568974269,-2.14253393259474)(-0.446757551775814,-1.28928738112166) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.592443041504695,-0.71733552290019)(-0.305024271687171,-0.817177004740914) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.446757551775814,-1.28928738112166)(-0.305024271687171,-0.817177004740914) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.432539841996694,-0.445517813391856)(-0.219754461070501,-0.512098736783075) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.305024271687171,-0.817177004740914)(-0.219754461070501,-0.512098736783075) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.327240394400411,-0.254960550790778)(-0.167052246256312,-0.300608805389039) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.219754461070501,-0.512098736783075)(-0.167052246256312,-0.300608805389039) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.257431809751207,-0.107985532204908)(-0.131760986961773,-0.142486327763894) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.167052246256312,-0.300608805389039)(-0.131760986961773,-0.142486327763894) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.206992425143757,0.0084433384965104)(-0.105146472956448,-0.0176675964087889) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.131760986961773,-0.142486327763894)(-0.105146472956448,-0.0176675964087889) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.171889872651482,0.102797794327137)(-0.0873706906820867,0.0814614656547614) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.105146472956448,-0.0176675964087889)(-0.0873706906820867,0.0814614656547614) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.146738900430769,0.180029640751974)(-0.0747807143308046,0.161804944525026) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0873706906820867,0.0814614656547614)(-0.0747807143308046,0.161804944525026) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.125039707218009,0.251891672753696)(-0.0641119799901358,0.236737362405633) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0747807143308046,0.161804944525026)(-0.0641119799901358,0.236737362405633) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.109561002397008,0.316304550834902)(-0.0551391237698735,0.301697277122478) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0641119799901358,0.236737362405633)(-0.0551391237698735,0.301697277122478) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0955932769191991,0.370807553263891)(-0.0481545192693127,0.357521808054785) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0551391237698735,0.301697277122478)(-0.0481545192693127,0.357521808054785) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0835082803411003,0.430695489722059)(-0.0427229536269612,0.419108017667408) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0481545192693127,0.357521808054785)(-0.0427229536269612,0.419108017667408) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0732188622080469,0.483287866408972)(-0.0386424424507753,0.473927667699498) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0427229536269612,0.419108017667408)(-0.0386424424507753,0.473927667699498) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.42788805801623,-4.4099414963467)(0.00864750209569024,-4.61948414087574) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.719968568974269,-2.14253393259474)(0.000357646349827829,-2.23934934075171) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.00864750209569024,-4.61948414087574)(0.000357646349827829,-2.23934934075171) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.446757551775814,-1.28928738112166)(0.00107129478556572,-1.34388085738671) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.000357646349827829,-2.23934934075171)(0.00107129478556572,-1.34388085738671) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.305024271687171,-0.817177004740914)(0.000477435506785667,-0.850674235739861) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.00107129478556572,-1.34388085738671)(0.000477435506785667,-0.850674235739861) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.219754461070501,-0.512098736783075)(0.000202569917885269,-0.534045672374294) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.000477435506785667,-0.850674235739861)(0.000202569917885269,-0.534045672374294) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.167052246256312,-0.300608805389039)(-0.000215760546838065,-0.316988572123696) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.000202569917885269,-0.534045672374294)(-0.000215760546838065,-0.316988572123696) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.131760986961773,-0.142486327763894)(6.96340423041551e-05,-0.154387394838987) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.000215760546838065,-0.316988572123696)(6.96340423041551e-05,-0.154387394838987) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.105146472956448,-0.0176675964087889)(-1.19286524938917e-05,-0.0263416087504547) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (6.96340423041551e-05,-0.154387394838987)(-1.19286524938917e-05,-0.0263416087504547) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0873706906820867,0.0814614656547614)(6.65489271265366e-05,0.0746907498728486) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.19286524938917e-05,-0.0263416087504547)(6.65489271265366e-05,0.0746907498728486) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0747807143308046,0.161804944525026)(4.35666588738439e-05,0.155696766028112) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (6.65489271265366e-05,0.0746907498728486)(4.35666588738439e-05,0.155696766028112) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0641119799901358,0.236737362405633)(-0.000207533652783961,0.231146214965605) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (4.35666588738439e-05,0.155696766028112)(-0.000207533652783961,0.231146214965605) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0551391237698735,0.301697277122478)(-0.000344966267735054,0.297206935759542) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.000207533652783961,0.231146214965605)(-0.000344966267735054,0.297206935759542) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0481545192693127,0.357521808054785)(-0.00038469475544155,0.353601731941322) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.000344966267735054,0.297206935759542)(-0.00038469475544155,0.353601731941322) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0427229536269612,0.419108017667408)(-0.000349640100607679,0.414663205458766) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.00038469475544155,0.353601731941322)(-0.000349640100607679,0.414663205458766) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.0386424424507753,0.473927667699498)(-0.000590755645171768,0.471081914510284) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.000349640100607679,0.414663205458766)(-0.000590755645171768,0.471081914510284) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.00864750209569024,-4.61948414087574)(1.43536874506124,-4.40733464415518) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.000357646349827829,-2.23934934075171)(0.720821054056495,-2.14155141417157) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.43536874506124,-4.40733464415518)(0.720821054056495,-2.14155141417157) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.00107129478556572,-1.34388085738671)(0.447915694326032,-1.28867184379438) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.720821054056495,-2.14155141417157)(0.447915694326032,-1.28867184379438) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.000477435506785667,-0.850674235739861)(0.306759390326534,-0.816794152438714) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.447915694326032,-1.28867184379438)(0.306759390326534,-0.816794152438714) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.000202569917885269,-0.534045672374294)(0.220177171074072,-0.511900513600974) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.306759390326534,-0.816794152438714)(0.220177171074072,-0.511900513600974) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.000215760546838065,-0.316988572123696)(0.166648734351357,-0.300495753199086) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.220177171074072,-0.511900513600974)(0.166648734351357,-0.300495753199086) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (6.96340423041551e-05,-0.154387394838987)(0.131855709209781,-0.142375836946951) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.166648734351357,-0.300495753199086)(0.131855709209781,-0.142375836946951) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-1.19286524938917e-05,-0.0263416087504547)(0.105117921764894,-0.0175233665715408) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.131855709209781,-0.142375836946951)(0.105117921764894,-0.0175233665715408) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (6.65489271265366e-05,0.0746907498728486)(0.0886651838610403,0.0813188451256966) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.105117921764894,-0.0175233665715408)(0.0886651838610403,0.0813188451256966) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (4.35666588738439e-05,0.155696766028112)(0.0745056669795883,0.161925899216785) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0886651838610403,0.0813188451256966)(0.0745056669795883,0.161925899216785) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.000207533652783961,0.231146214965605)(0.0636834958656292,0.236840847601873) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0745056669795883,0.161925899216785)(0.0636834958656292,0.236840847601873) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.000344966267735054,0.297206935759542)(0.0546327556918167,0.301841859124099) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0636834958656292,0.236840847601873)(0.0546327556918167,0.301841859124099) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.00038469475544155,0.353601731941322)(0.0473775424597445,0.357534983272026) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0546327556918167,0.301841859124099)(0.0473775424597445,0.357534983272026) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.000349640100607679,0.414663205458766)(0.0418256550030792,0.419234135797052) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0473775424597445,0.357534983272026)(0.0418256550030792,0.419234135797052) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (-0.000590755645171768,0.471081914510284)(0.0376931594609013,0.473936520141528) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0418256550030792,0.419234135797052)(0.0376931594609013,0.473936520141528) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.43536874506124,-4.40733464415518)(2.74319586124507,-3.78232950806847) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.720821054056495,-2.14155141417157)(1.3834559897314,-1.85451974112239) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (2.74319586124507,-3.78232950806847)(1.3834559897314,-1.85451974112239) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.447915694326032,-1.28867184379438)(0.864490618363969,-1.12720475094159) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.3834559897314,-1.85451974112239)(0.864490618363969,-1.12720475094159) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.306759390326534,-0.816794152438714)(0.594224211965762,-0.716207950014131) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.864490618363969,-1.12720475094159)(0.594224211965762,-0.716207950014131) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.220177171074072,-0.511900513600974)(0.432978942055304,-0.444871479039786) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.594224211965762,-0.716207950014131)(0.432978942055304,-0.444871479039786) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.166648734351357,-0.300495753199086)(0.327168832581736,-0.254741768946418) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.432978942055304,-0.444871479039786)(0.327168832581736,-0.254741768946418) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.131855709209781,-0.142375836946951)(0.25749579625809,-0.107624138011185) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.327168832581736,-0.254741768946418)(0.25749579625809,-0.107624138011185) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.105117921764894,-0.0175233665715408)(0.208109011239052,0.00854160999429432) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.25749579625809,-0.107624138011185)(0.208109011239052,0.00854160999429432) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0886651838610403,0.0813188451256966)(0.171854225457177,0.103095568525981) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.208109011239052,0.00854160999429432)(0.171854225457177,0.103095568525981) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0745056669795883,0.161925899216785)(0.146418761431883,0.180313502791887) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.171854225457177,0.103095568525981)(0.146418761431883,0.180313502791887) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0636834958656292,0.236840847601873)(0.124586832773712,0.252101710005911) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.146418761431883,0.180313502791887)(0.124586832773712,0.252101710005911) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0546327556918167,0.301841859124099)(0.108998465234906,0.316568013512307) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.124586832773712,0.252101710005911)(0.108998465234906,0.316568013512307) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0473775424597445,0.357534983272026)(0.0949036296451356,0.370795037179257) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.108998465234906,0.316568013512307)(0.0949036296451356,0.370795037179257) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0418256550030792,0.419234135797052)(0.0827669708037909,0.430845377387147) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0949036296451356,0.370795037179257)(0.0827669708037909,0.430845377387147) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0376931594609013,0.473936520141528)(0.0721404977623237,0.483299955674344) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0827669708037909,0.430845377387147)(0.0721404977623237,0.483299955674344) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (2.74319586124507,-3.78232950806847)(3.85531727445326,-2.74896068209122) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.3834559897314,-1.85451974112239)(1.95883321346741,-1.37334499233227) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (3.85531727445326,-2.74896068209122)(1.95883321346741,-1.37334499233227) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.864490618363969,-1.12720475094159)(1.23763187115442,-0.860931034367349) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.95883321346741,-1.37334499233227)(1.23763187115442,-0.860931034367349) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.594224211965762,-0.716207950014131)(0.857536073476235,-0.550434659260551) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.23763187115442,-0.860931034367349)(0.857536073476235,-0.550434659260551) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.432978942055304,-0.444871479039786)(0.626839756123018,-0.336259495695955) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.857536073476235,-0.550434659260551)(0.626839756123018,-0.336259495695955) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.327168832581736,-0.254741768946418)(0.476524987278035,-0.178185965187957) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.626839756123018,-0.336259495695955)(0.476524987278035,-0.178185965187957) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.25749579625809,-0.107624138011185)(0.378539943654742,-0.0515368027816883) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.476524987278035,-0.178185965187957)(0.378539943654742,-0.0515368027816883) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.208109011239052,0.00854160999429432)(0.302799606863896,0.0525034201938802) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.378539943654742,-0.0515368027816883)(0.302799606863896,0.0525034201938802) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.171854225457177,0.103095568525981)(0.25154520629393,0.138149101962415) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.302799606863896,0.0525034201938802)(0.25154520629393,0.138149101962415) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.146418761431883,0.180313502791887)(0.214086746708777,0.210186951936164) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.25154520629393,0.138149101962415)(0.214086746708777,0.210186951936164) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.124586832773712,0.252101710005911)(0.183283850806359,0.278468106648505) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.214086746708777,0.210186951936164)(0.183283850806359,0.278468106648505) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.108998465234906,0.316568013512307)(0.159773277714963,0.340140898470237) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.183283850806359,0.278468106648505)(0.159773277714963,0.340140898470237) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0949036296451356,0.370795037179257)(0.139194892830454,0.392603018986699) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.159773277714963,0.340140898470237)(0.139194892830454,0.392603018986699) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0827669708037909,0.430845377387147)(0.121339116054978,0.450500877389809) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.139194892830454,0.392603018986699)(0.121339116054978,0.450500877389809) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.0721404977623237,0.483299955674344)(0.107121234246492,0.500348300994989) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.121339116054978,0.450500877389809)(0.107121234246492,0.500348300994989) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (3.85531727445326,-2.74896068209122)(4.63119552629589,-1.32486909022242) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.95883321346741,-1.37334499233227)(2.38304229931109,-0.733532506880494) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (4.63119552629589,-1.32486909022242)(2.38304229931109,-0.733532506880494) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.23763187115442,-0.860931034367349)(1.53436526832057,-0.50479201919651) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (2.38304229931109,-0.733532506880494)(1.53436526832057,-0.50479201919651) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.857536073476235,-0.550434659260551)(1.07569939338242,-0.3286561940317) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.53436526832057,-0.50479201919651)(1.07569939338242,-0.3286561940317) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.626839756123018,-0.336259495695955)(0.793558769336271,-0.189931569502651) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.07569939338242,-0.3286561940317)(0.793558769336271,-0.189931569502651) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.476524987278035,-0.178185965187957)(0.611409636789793,-0.0764337209306798) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.793558769336271,-0.189931569502651)(0.611409636789793,-0.0764337209306798) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.378539943654742,-0.0515368027816883)(0.484198904496373,0.0222636446835322) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.611409636789793,-0.0764337209306798)(0.484198904496373,0.0222636446835322) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.302799606863896,0.0525034201938802)(0.391582359275053,0.109402815333764) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.484198904496373,0.0222636446835322)(0.391582359275053,0.109402815333764) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.25154520629393,0.138149101962415)(0.325481880248524,0.186786903335767) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.391582359275053,0.109402815333764)(0.325481880248524,0.186786903335767) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.214086746708777,0.210186951936164)(0.276908910182509,0.252908445119686) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.325481880248524,0.186786903335767)(0.276908910182509,0.252908445119686) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.183283850806359,0.278468106648505)(0.238158499778865,0.314532613713282) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.276908910182509,0.252908445119686)(0.238158499778865,0.314532613713282) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.159773277714963,0.340140898470237)(0.206269700852205,0.373688325158885) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.238158499778865,0.314532613713282)(0.206269700852205,0.373688325158885) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.139194892830454,0.392603018986699)(0.180299435278359,0.421088263242268) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.206269700852205,0.373688325158885)(0.180299435278359,0.421088263242268) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.121339116054978,0.450500877389809)(0.156489586919583,0.477023366641367) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.180299435278359,0.421088263242268)(0.156489586919583,0.477023366641367) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.107121234246492,0.500348300994989)(0.138262113367708,0.52202583889576) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.156489586919583,0.477023366641367)(0.138262113367708,0.52202583889576) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (4.63119552629589,-1.32486909022242)(4.90194545235197,0.385034724403061) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (2.38304229931109,-0.733532506880494)(2.61177271340319,0.0305794061370216) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (4.90194545235197,0.385034724403061)(2.61177271340319,0.0305794061370216) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.53436526832057,-0.50479201919651)(1.73360079103949,-0.0794849867227847) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (2.61177271340319,0.0305794061370216)(1.73360079103949,-0.0794849867227847) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.07569939338242,-0.3286561940317)(1.23807397824089,-0.0611784311432713) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.73360079103949,-0.0794849867227847)(1.23807397824089,-0.0611784311432713) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.793558769336271,-0.189931569502651)(0.929672869900151,-0.00899569165327329) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.23807397824089,-0.0611784311432713)(0.929672869900151,-0.00899569165327329) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.611409636789793,-0.0764337209306798)(0.724360372225465,0.0517116250296286) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.929672869900151,-0.00899569165327329)(0.724360372225465,0.0517116250296286) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.484198904496373,0.0222636446835322)(0.578454851629675,0.116901188199768) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.724360372225465,0.0517116250296286)(0.578454851629675,0.116901188199768) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.391582359275053,0.109402815333764)(0.470731014914493,0.182951003338301) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.578454851629675,0.116901188199768)(0.470731014914493,0.182951003338301) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.325481880248524,0.186786903335767)(0.392594051722774,0.246467911229152) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.470731014914493,0.182951003338301)(0.392594051722774,0.246467911229152) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.276908910182509,0.252908445119686)(0.33634408445844,0.306101709217604) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.392594051722774,0.246467911229152)(0.33634408445844,0.306101709217604) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.238158499778865,0.314532613713282)(0.287319654317675,0.361454073538242) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.33634408445844,0.306101709217604)(0.287319654317675,0.361454073538242) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.206269700852205,0.373688325158885)(0.247765869336122,0.414691669500688) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.287319654317675,0.361454073538242)(0.247765869336122,0.414691669500688) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.180299435278359,0.421088263242268)(0.217514506740853,0.458645621670627) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.247765869336122,0.414691669500688)(0.217514506740853,0.458645621670627) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.156489586919583,0.477023366641367)(0.187105010468326,0.507600733896965) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.217514506740853,0.458645621670627)(0.187105010468326,0.507600733896965) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.138262113367708,0.52202583889576)(0.166373287541631,0.551121770039827) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.187105010468326,0.507600733896965)(0.166373287541631,0.551121770039827) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (4.90194545235197,0.385034724403061)(4.59343377978777,2.05053175190458) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (2.61177271340319,0.0305794061370216)(2.62313739245203,0.776535766276366) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (4.59343377978777,2.05053175190458)(2.62313739245203,0.776535766276366) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.73360079103949,-0.0794849867227847)(1.82459570186243,0.353653064074879) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (2.62313739245203,0.776535766276366)(1.82459570186243,0.353653064074879) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.23807397824089,-0.0611784311432713)(1.33776737445536,0.233704044323431) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.82459570186243,0.353653064074879)(1.33776737445536,0.233704044323431) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.929672869900151,-0.00899569165327329)(1.02748403440241,0.193974567120413) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.33776737445536,0.233704044323431)(1.02748403440241,0.193974567120413) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.724360372225465,0.0517116250296286)(0.811407908361367,0.201037639877749) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.02748403440241,0.193974567120413)(0.811407908361367,0.201037639877749) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.578454851629675,0.116901188199768)(0.656396822725886,0.233051969066122) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.811407908361367,0.201037639877749)(0.656396822725886,0.233051969066122) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.470731014914493,0.182951003338301)(0.538872913072212,0.272724253824261) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.656396822725886,0.233051969066122)(0.538872913072212,0.272724253824261) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.392594051722774,0.246467911229152)(0.450906802973484,0.318742352811259) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.538872913072212,0.272724253824261)(0.450906802973484,0.318742352811259) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.33634408445844,0.306101709217604)(0.386697218819315,0.368826655618404) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.450906802973484,0.318742352811259)(0.386697218819315,0.368826655618404) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.287319654317675,0.361454073538242)(0.331885948246966,0.416524635852589) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.386697218819315,0.368826655618404)(0.331885948246966,0.416524635852589) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.247765869336122,0.414691669500688)(0.286198167933087,0.460207938737974) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.331885948246966,0.416524635852589)(0.286198167933087,0.460207938737974) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.217514506740853,0.458645621670627)(0.249200184411622,0.500242529703983) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.286198167933087,0.460207938737974)(0.249200184411622,0.500242529703983) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.187105010468326,0.507600733896965)(0.214495849275894,0.543813586783031) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.249200184411622,0.500242529703983)(0.214495849275894,0.543813586783031) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.166373287541631,0.551121770039827)(0.190238825421122,0.581001119403749) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.214495849275894,0.543813586783031)(0.190238825421122,0.581001119403749) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (4.59343377978777,2.05053175190458)(3.95082398295042,3.31135518755815) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (2.62313739245203,0.776535766276366)(2.49430339317797,1.39585217625381) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (3.95082398295042,3.31135518755815)(2.49430339317797,1.39585217625381) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.82459570186243,0.353653064074879)(1.83105971950599,0.754080037319931) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (2.49430339317797,1.39585217625381)(1.83105971950599,0.754080037319931) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.33776737445536,0.233704044323431)(1.3828559951984,0.512335992613613) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.83105971950599,0.754080037319931)(1.3828559951984,0.512335992613613) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.02748403440241,0.193974567120413)(1.08303189377444,0.412547997919586) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.3828559951984,0.512335992613613)(1.08303189377444,0.412547997919586) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.811407908361367,0.201037639877749)(0.870069729209949,0.369382936752154) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (1.08303189377444,0.412547997919586)(0.870069729209949,0.369382936752154) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.656396822725886,0.233051969066122)(0.714348877023101,0.361946125388053) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.870069729209949,0.369382936752154)(0.714348877023101,0.361946125388053) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.538872913072212,0.272724253824261)(0.59287963218186,0.376775965882668) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.714348877023101,0.361946125388053)(0.59287963218186,0.376775965882668) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.450906802973484,0.318742352811259)(0.499848208804151,0.404903237871514) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.59287963218186,0.376775965882668)(0.499848208804151,0.404903237871514) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.386697218819315,0.368826655618404)(0.427620739082731,0.442543395194415) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.499848208804151,0.404903237871514)(0.427620739082731,0.442543395194415) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.331885948246966,0.416524635852589)(0.3673353955779,0.478515681972889) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.427620739082731,0.442543395194415)(0.3673353955779,0.478515681972889) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.286198167933087,0.460207938737974)(0.318186565021382,0.513607686347979) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.3673353955779,0.478515681972889)(0.318186565021382,0.513607686347979) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.249200184411622,0.500242529703983)(0.277886196944736,0.545689505684118) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.318186565021382,0.513607686347979)(0.277886196944736,0.545689505684118) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.214495849275894,0.543813586783031)(0.240755983731065,0.58149104593336) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.277886196944736,0.545689505684118)(0.240755983731065,0.58149104593336) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.190238825421122,0.581001119403749)(0.213149490369959,0.613845368047651) 
+};
+\addplot [
+color=black,
+dotted,
+forget plot
+]
+coordinates{
+ (0.240755983731065,0.58149104593336)(0.213149490369959,0.613845368047651) 
+};
+\addplot[scatter,only marks,scatter src=explicit,scatter/use mapped color={mark=*,draw=mapped color,fill=mapped color}] plot coordinates{ (-3.95083519048286,3.31136011863937) [1.000000e-01] (-2.49467221350795,1.39621364847782) [2.357143e-01] (-1.83163986957495,0.752937528521295) [3.714286e-01] (-1.38396931642502,0.509406815041232) [5.071429e-01] (-1.08428820188421,0.409011712623786) [6.428571e-01] (-0.870704799356933,0.367871588697994) [7.785714e-01] (-0.715159237271229,0.363678290565652) [9.142857e-01] (-0.593524597511607,0.37579937198332) [1.050000e+00] (-0.5006055910957,0.40359965939978) [1.185714e+00] (-0.428359819230203,0.441830073777339) [1.321429e+00] (-0.368024592562462,0.47789612157128) [1.457143e+00] (-0.319014150805705,0.513057384459856) [1.592857e+00] (-0.278686492137433,0.544845726668067) [1.728571e+00] (-0.241726908879884,0.580873753859454) [1.864286e+00] (-0.214090405301393,0.613419813022804) [2] (-4.5960224847749,2.04463712892086) [1.000000e-01] (-2.62415735497511,0.773459757196738) [2.357143e-01] (-1.82495087859797,0.353731646477777) [3.714286e-01] (-1.3384138991781,0.23163937939576) [5.071429e-01] (-1.02775120934224,0.191476326573031) [6.428571e-01] (-0.811797405099068,0.199688834066606) [7.785714e-01] (-0.657404629548919,0.231462872489683) [9.142857e-01] (-0.539393126004444,0.272164029596357) [1.050000e+00] (-0.451393671867092,0.318535624821582) [1.185714e+00] (-0.38731968588882,0.368178601168093) [1.321429e+00] (-0.332599205064545,0.415943254353583) [1.457143e+00] (-0.2868890661178,0.459834044868199) [1.592857e+00] (-0.249984704240218,0.499810078105791) [1.728571e+00] (-0.215390933831801,0.543423816300112) [1.864286e+00] (-0.191140275530731,0.580703360000451) [2] (-4.90244753451138,0.38067795020024) [1.000000e-01] (-2.61224096272359,0.0278534691563421) [2.357143e-01] (-1.73393792578895,-0.0818873612121869) [3.714286e-01] (-1.23800415664711,-0.0630088452604565) [5.071429e-01] (-0.930073531027754,-0.0118610521766265) [6.428571e-01] (-0.724465316089991,0.0505520194776895) [7.785714e-01] (-0.578874880800122,0.115916061587467) [9.142857e-01] (-0.471083887102138,0.182327123100304) [1.050000e+00] (-0.392948856127118,0.244896536933399) [1.185714e+00] (-0.336791507239839,0.305436023843987) [1.321429e+00] (-0.287859559050402,0.360981528756107) [1.457143e+00] (-0.24848387940555,0.414245735335172) [1.592857e+00] (-0.218149514294492,0.458213246421606) [1.728571e+00] (-0.187963396584915,0.507276677323536) [1.864286e+00] (-0.167294549344532,0.550140739125387) [2] (-4.63314155427237,-1.32103987365299) [1.000000e-01] (-2.384673029727,-0.733060975053359) [2.357143e-01] (-1.53420264481895,-0.506219001473256) [3.714286e-01] (-1.07622918021037,-0.328989727656816) [5.071429e-01] (-0.79364023078652,-0.190781864964185) [6.428571e-01] (-0.611206928473494,-0.0777149788799894) [7.785714e-01] (-0.483944871571785,0.0227755083334864) [9.142857e-01] (-0.391810514306981,0.108794677784619) [1.050000e+00] (-0.325638778295385,0.185424680755041) [1.185714e+00] (-0.277355164950458,0.252380396044417) [1.321429e+00] (-0.238721812047798,0.314115970591155) [1.457143e+00] (-0.206945544470335,0.373326974885842) [1.592857e+00] (-0.180953410652589,0.420948681777746) [1.728571e+00] (-0.157262237350692,0.476755361266574) [1.864286e+00] (-0.139172901147175,0.521869071750571) [2] (-3.84652700933849,-2.76013728788402) [1.000000e-01] (-1.95699915822046,-1.37619336734733) [2.357143e-01] (-1.23573306395206,-0.863261693480504) [3.714286e-01] (-0.856188075487727,-0.552145344104956) [5.071429e-01] (-0.626245252594373,-0.337398648219913) [6.428571e-01] (-0.47657383881101,-0.178699669826848) [7.785714e-01] (-0.376163842203264,-0.052790218372813) [9.142857e-01] (-0.302939529928837,0.0520402374970869) [1.050000e+00] (-0.251622816379302,0.13743335660078) [1.185714e+00] (-0.214473577030558,0.209777136571356) [1.321429e+00] (-0.183749621182142,0.278195791053165) [1.457143e+00] (-0.160433372857158,0.339839467626678) [1.592857e+00] (-0.139891298087237,0.392357563444266) [1.728571e+00] (-0.122165345932033,0.450316580860818) [1.864286e+00] (-0.107918433723864,0.50012909314646) [2] (-2.73863368365096,-3.7848905217299) [1.000000e-01] (-1.38201080488982,-1.8561489747996) [2.357143e-01] (-0.862290657753627,-1.12895576910006) [3.714286e-01] (-0.592443041504695,-0.71733552290019) [5.071429e-01] (-0.432539841996694,-0.445517813391856) [6.428571e-01] (-0.327240394400411,-0.254960550790778) [7.785714e-01] (-0.257431809751207,-0.107985532204908) [9.142857e-01] (-0.206992425143757,0.0084433384965104) [1.050000e+00] (-0.171889872651482,0.102797794327137) [1.185714e+00] (-0.146738900430769,0.180029640751974) [1.321429e+00] (-0.125039707218009,0.251891672753696) [1.457143e+00] (-0.109561002397008,0.316304550834902) [1.592857e+00] (-0.0955932769191991,0.370807553263891) [1.728571e+00] (-0.0835082803411003,0.430695489722059) [1.864286e+00] (-0.0732188622080469,0.483287866408972) [2] (-1.42788805801623,-4.4099414963467) [1.000000e-01] (-0.719968568974269,-2.14253393259474) [2.357143e-01] (-0.446757551775814,-1.28928738112166) [3.714286e-01] (-0.305024271687171,-0.817177004740914) [5.071429e-01] (-0.219754461070501,-0.512098736783075) [6.428571e-01] (-0.167052246256312,-0.300608805389039) [7.785714e-01] (-0.131760986961773,-0.142486327763894) [9.142857e-01] (-0.105146472956448,-0.0176675964087889) [1.050000e+00] (-0.0873706906820867,0.0814614656547614) [1.185714e+00] (-0.0747807143308046,0.161804944525026) [1.321429e+00] (-0.0641119799901358,0.236737362405633) [1.457143e+00] (-0.0551391237698735,0.301697277122478) [1.592857e+00] (-0.0481545192693127,0.357521808054785) [1.728571e+00] (-0.0427229536269612,0.419108017667408) [1.864286e+00] (-0.0386424424507753,0.473927667699498) [2] (0.00864750209569024,-4.61948414087574) [1.000000e-01] (0.000357646349827829,-2.23934934075171) [2.357143e-01] (0.00107129478556572,-1.34388085738671) [3.714286e-01] (0.000477435506785667,-0.850674235739861) [5.071429e-01] (0.000202569917885269,-0.534045672374294) [6.428571e-01] (-0.000215760546838065,-0.316988572123696) [7.785714e-01] (6.96340423041551e-05,-0.154387394838987) [9.142857e-01] (-1.19286524938917e-05,-0.0263416087504547) [1.050000e+00] (6.65489271265366e-05,0.0746907498728486) [1.185714e+00] (4.35666588738439e-05,0.155696766028112) [1.321429e+00] (-0.000207533652783961,0.231146214965605) [1.457143e+00] (-0.000344966267735054,0.297206935759542) [1.592857e+00] (-0.00038469475544155,0.353601731941322) [1.728571e+00] (-0.000349640100607679,0.414663205458766) [1.864286e+00] (-0.000590755645171768,0.471081914510284) [2] (1.43536874506124,-4.40733464415518) [1.000000e-01] (0.720821054056495,-2.14155141417157) [2.357143e-01] (0.447915694326032,-1.28867184379438) [3.714286e-01] (0.306759390326534,-0.816794152438714) [5.071429e-01] (0.220177171074072,-0.511900513600974) [6.428571e-01] (0.166648734351357,-0.300495753199086) [7.785714e-01] (0.131855709209781,-0.142375836946951) [9.142857e-01] (0.105117921764894,-0.0175233665715408) [1.050000e+00] (0.0886651838610403,0.0813188451256966) [1.185714e+00] (0.0745056669795883,0.161925899216785) [1.321429e+00] (0.0636834958656292,0.236840847601873) [1.457143e+00] (0.0546327556918167,0.301841859124099) [1.592857e+00] (0.0473775424597445,0.357534983272026) [1.728571e+00] (0.0418256550030792,0.419234135797052) [1.864286e+00] (0.0376931594609013,0.473936520141528) [2] (2.74319586124507,-3.78232950806847) [1.000000e-01] (1.3834559897314,-1.85451974112239) [2.357143e-01] (0.864490618363969,-1.12720475094159) [3.714286e-01] (0.594224211965762,-0.716207950014131) [5.071429e-01] (0.432978942055304,-0.444871479039786) [6.428571e-01] (0.327168832581736,-0.254741768946418) [7.785714e-01] (0.25749579625809,-0.107624138011185) [9.142857e-01] (0.208109011239052,0.00854160999429432) [1.050000e+00] (0.171854225457177,0.103095568525981) [1.185714e+00] (0.146418761431883,0.180313502791887) [1.321429e+00] (0.124586832773712,0.252101710005911) [1.457143e+00] (0.108998465234906,0.316568013512307) [1.592857e+00] (0.0949036296451356,0.370795037179257) [1.728571e+00] (0.0827669708037909,0.430845377387147) [1.864286e+00] (0.0721404977623237,0.483299955674344) [2] (3.85531727445326,-2.74896068209122) [1.000000e-01] (1.95883321346741,-1.37334499233227) [2.357143e-01] (1.23763187115442,-0.860931034367349) [3.714286e-01] (0.857536073476235,-0.550434659260551) [5.071429e-01] (0.626839756123018,-0.336259495695955) [6.428571e-01] (0.476524987278035,-0.178185965187957) [7.785714e-01] (0.378539943654742,-0.0515368027816883) [9.142857e-01] (0.302799606863896,0.0525034201938802) [1.050000e+00] (0.25154520629393,0.138149101962415) [1.185714e+00] (0.214086746708777,0.210186951936164) [1.321429e+00] (0.183283850806359,0.278468106648505) [1.457143e+00] (0.159773277714963,0.340140898470237) [1.592857e+00] (0.139194892830454,0.392603018986699) [1.728571e+00] (0.121339116054978,0.450500877389809) [1.864286e+00] (0.107121234246492,0.500348300994989) [2] (4.63119552629589,-1.32486909022242) [1.000000e-01] (2.38304229931109,-0.733532506880494) [2.357143e-01] (1.53436526832057,-0.50479201919651) [3.714286e-01] (1.07569939338242,-0.3286561940317) [5.071429e-01] (0.793558769336271,-0.189931569502651) [6.428571e-01] (0.611409636789793,-0.0764337209306798) [7.785714e-01] (0.484198904496373,0.0222636446835322) [9.142857e-01] (0.391582359275053,0.109402815333764) [1.050000e+00] (0.325481880248524,0.186786903335767) [1.185714e+00] (0.276908910182509,0.252908445119686) [1.321429e+00] (0.238158499778865,0.314532613713282) [1.457143e+00] (0.206269700852205,0.373688325158885) [1.592857e+00] (0.180299435278359,0.421088263242268) [1.728571e+00] (0.156489586919583,0.477023366641367) [1.864286e+00] (0.138262113367708,0.52202583889576) [2] (4.90194545235197,0.385034724403061) [1.000000e-01] (2.61177271340319,0.0305794061370216) [2.357143e-01] (1.73360079103949,-0.0794849867227847) [3.714286e-01] (1.23807397824089,-0.0611784311432713) [5.071429e-01] (0.929672869900151,-0.00899569165327329) [6.428571e-01] (0.724360372225465,0.0517116250296286) [7.785714e-01] (0.578454851629675,0.116901188199768) [9.142857e-01] (0.470731014914493,0.182951003338301) [1.050000e+00] (0.392594051722774,0.246467911229152) [1.185714e+00] (0.33634408445844,0.306101709217604) [1.321429e+00] (0.287319654317675,0.361454073538242) [1.457143e+00] (0.247765869336122,0.414691669500688) [1.592857e+00] (0.217514506740853,0.458645621670627) [1.728571e+00] (0.187105010468326,0.507600733896965) [1.864286e+00] (0.166373287541631,0.551121770039827) [2] (4.59343377978777,2.05053175190458) [1.000000e-01] (2.62313739245203,0.776535766276366) [2.357143e-01] (1.82459570186243,0.353653064074879) [3.714286e-01] (1.33776737445536,0.233704044323431) [5.071429e-01] (1.02748403440241,0.193974567120413) [6.428571e-01] (0.811407908361367,0.201037639877749) [7.785714e-01] (0.656396822725886,0.233051969066122) [9.142857e-01] (0.538872913072212,0.272724253824261) [1.050000e+00] (0.450906802973484,0.318742352811259) [1.185714e+00] (0.386697218819315,0.368826655618404) [1.321429e+00] (0.331885948246966,0.416524635852589) [1.457143e+00] (0.286198167933087,0.460207938737974) [1.592857e+00] (0.249200184411622,0.500242529703983) [1.728571e+00] (0.214495849275894,0.543813586783031) [1.864286e+00] (0.190238825421122,0.581001119403749) [2] (3.95082398295042,3.31135518755815) [1.000000e-01] (2.49430339317797,1.39585217625381) [2.357143e-01] (1.83105971950599,0.754080037319931) [3.714286e-01] (1.3828559951984,0.512335992613613) [5.071429e-01] (1.08303189377444,0.412547997919586) [6.428571e-01] (0.870069729209949,0.369382936752154) [7.785714e-01] (0.714348877023101,0.361946125388053) [9.142857e-01] (0.59287963218186,0.376775965882668) [1.050000e+00] (0.499848208804151,0.404903237871514) [1.185714e+00] (0.427620739082731,0.442543395194415) [1.321429e+00] (0.3673353955779,0.478515681972889) [1.457143e+00] (0.318186565021382,0.513607686347979) [1.592857e+00] (0.277886196944736,0.545689505684118) [1.728571e+00] (0.240755983731065,0.58149104593336) [1.864286e+00] (0.213149490369959,0.613845368047651) [2] };
+
+\end{axis}
+\end{tikzpicture}%

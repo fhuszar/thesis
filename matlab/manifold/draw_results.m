@@ -1,7 +1,4 @@
-function f = draw_results(X,thetas,parallel_edges)
-
-f = figure(1);
-clf
+function f =  draw_results(X,thetas,parallel_edges)
 
 hold on
 
@@ -12,6 +9,7 @@ for i=1:size(row,1)
     plot([X(i1,1),X(i2,1)],[X(i1,2),X(i2,2)],'k:');
 end
 
-scatter(X(:,1),X(:,2),50,thetas(:,2),'.')
+scatter(X(:,1),X(:,2),70,thetas(:,2),'.')
 
 axis equal
+axis off

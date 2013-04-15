@@ -1,0 +1,20 @@
+% this script generates figures for inclusion in LaTeX
+
+basedir = 'figs/';
+% Bernoulli random variables
+embed_Bernoulli
+%saving figures
+savefigure([basedir,'Bernoulli_comparison.tikz.tex'],1,0.5);
+savefigure([basedir,'Bernoulli_magnification.tikz.tex'],2,0.5)
+
+% Normals, embedding by varince only
+embed_Normals_varonly
+% saving figures
+savefigure([basedir,'Normal_varonly_comparison.tikz.tex'],1,1)
+% TODO: fixing y tick labels
+% system(['cat ',basedir,'Normal_varonly_comparison.tikz.tex | sed A,B,C,D')
+% {kernel, \(\ell=0.1\)},{kernel, \(\ell=0.2\)}, {kernel,\(\ell=0.5\)},{kernel, \(\ell=1.0\)}
+savefigure([basedir,'Normal_varonly_magnification.tikz.tex'],2,0.6)
+
+% Normals, Shannon information geometry
+embed_Normals_KL
