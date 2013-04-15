@@ -24,42 +24,43 @@ Where $\ddot{H(P)}$ is the Hamiltonian of the entropy function $H(P) = \mathbb{H
 
 The local distance between distributions is therefore controlled by the curvature of the entropy function: the higher the curvature, the more amplified the distances are locally. The following Taylor expansion shows how this local distance is related to the Bregman divergences defined by the entropy function:
 
-\begin{statement}[Taylor expansion of Bregman divergences] Let $H:\Theta\mapsto\Reals$ be a smooth, strictly concave function and $\divergence{H}{\cdot}{\cdot}$ the Bregman divergence it induces. For infinitesimally small $dP\in\Theta$ the following approximation holds:
-\begin{equation}
-	\divergence{H}{P}{P+ dP} \approx \frac{1}{2} \sum_{i,j} \frac{\partial^2 \mathbb{H}_{\score}}{\partial p_i\partial p_j} dp_{i} dp_{j} \approx   \divergence{H}{P + dP}{P}
-\end{equation}
-\begin{proof}
-	We prove the left-hand equation first:
-	\begin{align}
-		\frac{\partial}{\partial q_i} \divergence{H}{P}{Q} &=  -\frac{\partial}{\partial q_i} H(Q) +    \frac{\partial}{\partial q_i}\scalar{\nabla_{Q} H(Q)}{Q-P}\\
-			&=  - \frac{\partial}{\partial q_i} H(Q) +  \frac{\partial}{\partial q_i}\sum_{j} \frac{\partial}{\partial q_j} H(Q) (q_j - p_j)\\
-			&= - \frac{\partial}{\partial q_i} H(Q)  + \frac{\partial}{\partial q_i} H(Q) + \sum_{j} \frac{\partial^2}{\partial q_i \partial q_j} H(Q) (q_j - p_j)\\
-			&= \sum_{j} \frac{\partial^2}{\partial q_i \partial q_j} H(Q) (q_j - p_j)
-	\end{align}
-	hence by first order Taylor expansion around $P$:
-	\begin{align}
-		\divergence{H}{P}{P+dP} &\approx  \divergence{H}{P}{P+dP}+ \frac{1}{2}\scalar{dP}{\left.\nabla_{Q}\divergence{H}{P}{Q}\right\rvert_{Q=P}}\\
-			&= \frac{1}{2} \sum_{i} dp_i \sum_{j} \frac{\partial^2 H(P)}{\partial p_i\partial p_j} dp_j \\
-			&= \frac{1}{2} \sum_{i,j} \frac{\partial^2 H(P)}{\partial p_i\partial p_j} dp_{i} dp_j
-	\end{align}
-	
-	Similarly in the other direction
+\begin{statement}[Taylor expansion of Bregman divergences]
+	Let $H:\Theta\mapsto\Reals$ be a smooth, strictly concave function and $\divergence{H}{\cdot}{\cdot}$ the Bregman divergence it induces. For infinitesimally small $dP\in\Theta$ the following approximation holds:
+	\begin{equation}
+		\divergence{H}{P}{P+ dP} \approx \frac{1}{2} \sum_{i,j} \frac{\partial^2 \mathbb{H}_{\score}}{\partial p_i\partial p_j} dp_{i} dp_{j} \approx   \divergence{H}{P + dP}{P}
+	\end{equation}
+	\begin{proof}
+		We prove the left-hand equation first:
 		\begin{align}
-				\frac{\partial}{\partial q_i} \divergence{H}{Q}{P} &=  \frac{\partial}{\partial q_i} H(Q) +     \frac{\partial}{\partial q_i}\scalar{\nabla_{P} H(P)}{P - Q}\\
-					&=  \frac{\partial}{\partial q_i} H(Q) + \frac{\partial}{\partial q_i}\sum_{j} \frac{\partial}{\partial p_j} H(P) (p_j - q_j)\\
-					&=  \frac{\partial}{\partial q_i} H(Q)  - \frac{\partial}{\partial p_i} H(P)\\
-					&= \dot{H}(Q) - \dot{H}(P)
+			\frac{\partial}{\partial q_i} \divergence{H}{P}{Q} &=  -\frac{\partial}{\partial q_i} H(Q) +    \frac{\partial}{\partial q_i}\scalar{\nabla_{Q} H(Q)}{Q-P}\\
+				&=  - \frac{\partial}{\partial q_i} H(Q) +  \frac{\partial}{\partial q_i}\sum_{j} \frac{\partial}{\partial q_j} H(Q) (q_j - p_j)\\
+				&= - \frac{\partial}{\partial q_i} H(Q)  + \frac{\partial}{\partial q_i} H(Q) + \sum_{j} \frac{\partial^2}{\partial q_i \partial q_j} H(Q) (q_j - p_j)\\
+				&= \sum_{j} \frac{\partial^2}{\partial q_i \partial q_j} H(Q) (q_j - p_j)
 		\end{align}
-		Note that for small deviation $dP$, the derivative can be written as
+		hence by first order Taylor expansion around $P$:
 		\begin{align}
-			\frac{\partial}{\partial dP} \divergence{H}{P+dP}{P} = \dot{H}(P+dP) - \dot{H}(P) \approx  \ddot{H}(P) dP
-		\end{align}
-		therefore, via Taylor expansion we get that for small $dP$
-		\begin{align}
-			\divergence{H}{P}{P+dP} &\approx \frac{1}{2} \scalar{dP}{\ddot{H}(P)dP}\\
+			\divergence{H}{P}{P+dP} &\approx  \divergence{H}{P}{P+dP}+ \frac{1}{2}\scalar{dP}{\left.\nabla_{Q}\divergence{H}{P}{Q}\right\rvert_{Q=P}}\\
+				&= \frac{1}{2} \sum_{i} dp_i \sum_{j} \frac{\partial^2 H(P)}{\partial p_i\partial p_j} dp_j \\
 				&= \frac{1}{2} \sum_{i,j} \frac{\partial^2 H(P)}{\partial p_i\partial p_j} dp_{i} dp_j
 		\end{align}
-\end{proof}
+		
+		Similarly in the other direction
+			\begin{align}
+					\frac{\partial}{\partial q_i} \divergence{H}{Q}{P} &=  \frac{\partial}{\partial q_i} H(Q) +     \frac{\partial}{\partial q_i}\scalar{\nabla_{P} H(P)}{P - Q}\\
+						&=  \frac{\partial}{\partial q_i} H(Q) + \frac{\partial}{\partial q_i}\sum_{j} \frac{\partial}{\partial p_j} H(P) (p_j - q_j)\\
+						&=  \frac{\partial}{\partial q_i} H(Q)  - \frac{\partial}{\partial p_i} H(P)\\
+						&= \dot{H}(Q) - \dot{H}(P)
+			\end{align}
+			Note that for small deviation $dP$, the derivative can be written as
+			\begin{align}
+				\frac{\partial}{\partial dP} \divergence{H}{P+dP}{P} = \dot{H}(P+dP) - \dot{H}(P) \approx  \ddot{H}(P) dP
+			\end{align}
+			therefore, via Taylor expansion we get that for small $dP$
+			\begin{align}
+				\divergence{H}{P}{P+dP} &\approx \frac{1}{2} \scalar{dP}{\ddot{H}(P)dP}\\
+					&= \frac{1}{2} \sum_{i,j} \frac{\partial^2 H(P)}{\partial p_i\partial p_j} dp_{i} dp_j
+			\end{align}
+	\end{proof}
 \end{statement}
 
 Hence, the distance on the manifold can be approximated locally as half the squareroot of the divergence function. Even though a Bregman divergence function is generally asymmetric, for infinitesimally small differences it becomes symmetric, and therefore it does not matter which direction we use if we want to approximate local distances on the manifold. Below we will use the following local approximation:
@@ -123,6 +124,23 @@ As we can see, compared to the Brier score, the KL divergence is more sensitive 
 
 When using the KL divergence or the log-score in practical situations, such as to train binary classifiers, we should therefore expect that much of the statistical power is going to be spent on faithfully representing small probabilities, as this is where the resolution of the divergence is highest. This behaviour is not always desirable: Imagine we were to model the probability that users click on certain news articles on an on-line news website. In this application, most potential clicks have negligible probability, but some user-article combinations may have probabilities closer to $0.5$. If we are to build a recommender system based on this analysis, it is modelling these large probabilities that will be of importance. In this case we are better off using the Brier-score, rather than the log-score which would spend most effort on modelling how small the small probabilities are exactly.
 
+\begin{figure}
+	\begin{center}
+	 \includegraphics{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Bernoulli_comparison.pdf}
+	\end{center}
+	\caption{Illustration of the differences between the Brier, spherical, and KL divergences between single parameter Bernoulli distributions. Each horizontal line of dots shows the embedding Bernoulli distributions corresponding to an uniform grid of parameter values between $0+\epsilon$ and $1-\epsilon$ on the statistical manifold induced by (from top to bottom) the Brier, KL, spherical and again the Brier score.  Dots representing the same distributions on the different manifolds are connected. This, together with colouring, highlights the differences between the manifolds.
+	The Brier divergence is equivalent to the squared Euclidean distance between parameter values, therefore when mapped by Brier divergence, parameters are evenly spaced along the line segment\emph{(top, bottom)}. The KL divergence places emphasis on discriminating between  small probabilities, therefore the manifold is stretched out as the parameter approaches $0$ and $1$. In fact the KL divergence is not bounded, and the full manifold of Bernoulli distributions stretches to the entire real line. By contrast, the spherical score focuses more on probability values around $0.5$.}
+	\label{fig:Bernoulli_manifold}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+	 \includegraphics{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Bernoulli_magnification.pdf}
+	\end{center}
+	\caption{Illustration of the differences between local distances on statistical manifolds of Bernoulli distributions. Each line shows the magnitude of the local distance on the manifold relative to the Euclidean distance as a function of the parameter value. Distance on the Brier manifold is equivalent to the Euclidean distance, hence it's relative magnitude is constant \ref{}. The KL divergence gives rise to increasing local distances as the parameter approaches $0$ and $1$ \ref{}. The spherical score induces a local distance that is largest at $0.5$ \ref{}.}
+	\label{fig:Bernoulli_squareddistance}
+\end{figure}
+
 Figure \ref{fig:Bernoulli_manifold} also shows the statistical manifold induced by the spherical score. As we can see, relative to the Brier score, the spherical score has a larger resolution among intermediate probabilities close to $0.5$ than around small probabilities closer to $0$ and $1$. Therefore in applications where modelling probabilities closer to $0.5$ is important, the spherical score may be an even more appropriate choice than the Brier score.
 
 In Figure \ref{fig:Bernoulli_squareddistance} I plotted the local distance $\sqrt{\ddot{\mathbb{H}}_{\score}[p]}$ as a function of $p$ for the three different scores illustrated in Figure \ref{fig:Bernoulli_comparison}. Higher value of this curve means that the scoring rule has a ``higher resolution'' locally. It is another visualisation that allows us to observe that relative to the Brier score, the logarithmic score focuses more on probabilities close to $0$ and $1$, whilst the spherical divergence focuses more on probabilities close to $0.5$.
@@ -130,21 +148,6 @@ In Figure \ref{fig:Bernoulli_squareddistance} I plotted the local distance $\sqr
 % We note that in this simple example of binary random variables, a map of the manifold could have been drawn exactly, without the need for the numerical approximations used by the ISOMAP technique. It is easy to see that given a scoring rule $\score$ transforming the real line by the gradient of the entropy function $\dot{\mathbb{H}}_{\score}$ yields an embedding that faithfully represents the statistical manifold induced by $\score$. For example, the geodesic distance on the Brier manifold is simply the Euclidean distance, and indeed the gradient of the entropy function is essentially the identity $\dot{\mathbb{H}}_{Brier}[p] = -p$. The gradient of the Shannon's entropy diverges to infinity $p\rightarrow 0$ and to negative infinity as $p\rightarrow 1$, which shows that this statistical manifold spans the entire real line.
 
 % The fact that we can compute an exact embedding allows us to evaluate how well our ISOMAP-based numerical technique works. As the embedding is unique only up to translation and reflection, we \TODO{do this numerically, maybe}.
-
-\begin{figure}
-\begin{center}
- \includegraphics{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Bernoulli_comparison.pdf}
-\end{center}
-\caption{Illustration of the differences between the Brier, spherical, and KL divergences between single parameter Bernoulli distributions. Each horizontal line of dots shows the embedding Bernoulli distributions corresponding to an uniform grid of parameter values between $0+\epsilon$ and $1-\epsilon$ on the statistical manifold induced by (from top to bottom) the Brier, KL, spherical and again the Brier score.  Dots representing the same distributions on the different manifolds are connected. This, together with colouring, highlights the differences between the manifolds.
-The Brier divergence is equivalent to the squared Euclidean distance between parameter values, therefore when mapped by Brier divergence, parameters are evenly spaced along the line segment\emph{(top, bottom)}. The KL divergence places emphasis on discriminating between  small probabilities, therefore the manifold is stretched out as the parameter approaches $0$ and $1$. In fact the KL divergence is not bounded, and the full manifold of Bernoulli distributions stretches to the entire real line. By contrast, the spherical score focuses more on probability values around $0.5$.}
-\end{figure}
-
-\begin{figure}
-\begin{center}
- \includegraphics{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Bernoulli_magnification.pdf}
-\end{center}
-\caption{Illustration of the differences between local distances on statistical manifolds of Bernoulli distributions. Each line shows the magnitude of the local distance on the manifold relative to the Euclidean distance as a function of the parameter value. Distance on the Brier manifold is equivalent to the Euclidean distance, hence it's relative magnitude is constant \ref{}. The KL divergence gives rise to increasing local distances as the parameter approaches $0$ and $1$ \ref{}. The spherical score induces a local distance that is largest at $0.5$ \ref{}.}
-\end{figure}
 
 \subsection{Gaussian distributions}
 
@@ -164,6 +167,35 @@ In this case as Gaussian distributions have two parameters, the distributions ar
 	\end{center}
 	\caption{Map of Normal distributions on the statistical manifold induced by the logarithmic score and KL divergence. Distributions are chosen from a uniform grid in parameter space, with mean ranging between $-2$ and $2$ \emph{(left to right)}, and standard deviation between $0.1$ and $1$ \emph{(from outside inwards)}. The labels show distributions at the corners of this grid.  Dots of the same colour show distributions with the same standard deviation. It can be clearly seen that distributions with lower standard deviation are spread out more than those with a higher standard deviation, giving rise to a characteristic fan-like structure.}
 	\label{fig:Normal_meanvar}
+\end{figure}
+
+\begin{figure} % zero-mean Normals KL, kernel, Brier comparison plot
+	\begin{center}
+		\includegraphics{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_varonly_comparison.pdf}
+	\end{center}
+	\caption{ Illustration of the differences between the statistical manifolds of Normal distributions induced by the KL, Brier and kernel divergences. Each horizontal line of points shows the one-dimensional manifold of zero-mean Gaussians. The dots correspond to distributions with logarithmically spaced variance between $\sigma_{min}=0.05$ and $\sigma_{max}=1$. When mapped according to the KL divergence, these distributions become evenly spaced \emph{(top,bottom)}. Compared to the KL, the Brier score \emph{(second from bottom)} places more emphasis on disriminating between narrower distributions. In this range $0.05 \leq \sigma \leq 1$ the kernel divergence with bandwidth $\ell=0.1$ \emph{(third from bottom)} approximately mimics the behaviour of the KL divergence. As we use the kernel score with increasing brandwith \emph{(from bottom to top)}, we can see that the focus shifts from narrow distributions towards distributions with larger variance.}
+	\label{fig:Normal_varonly_comparison}
+\end{figure}
+
+\begin{figure} % zero-mean Normals relative local distance plots
+	\begin{center}
+	  \includegraphics{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_varonly_magnification.pdf}
+	\end{center}
+	\caption{Illustration of the differences between local distances induced by various scoring rules on the statistical manifold of zero-mean Normal distributions. Each line shows the magnitude of the local distance on each manifold relative to that induced by the KL divergence as a function of variance. Relative to the KL, the kernel divergence induces distances that are magnified around a region depending on the bandwidth of the kernel. As the bandwidth increases, this magnified region shifts towards distributions with larger variance.}
+	\label{fig:Normal_varonly_magnification}
+\end{figure}
+
+\begin{figure} % kernel vs spherical kernel between Normals
+	\begin{center}
+	\begin{tabular}{ccc}
+	quadratic & & spherical\\
+	\includegraphics[width = .4\columnwidth]{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_kernel_1.pdf} & $\ell\rightarrow 0$& \includegraphics[width = .4\columnwidth]{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_kernel_2.pdf} \\
+	\includegraphics[width = .4\columnwidth]{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_kernel_3.pdf} & $\ell=0.5$ & \includegraphics[width = .4\columnwidth]{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_kernel_4.pdf} \\
+	\includegraphics[width = .4\columnwidth]{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_kernel_5.pdf} & $\ell=2$ &  \includegraphics[width = .4\columnwidth]{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_kernel_6.pdf} \\
+	\includegraphics[width = .4\columnwidth]{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_kernel_7.pdf} & $\ell=5$ &  \includegraphics[width = .4\columnwidth]{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_kernel_8.pdf} \\
+	\end{tabular}
+	\end{center}
+	\caption{Maps of the statistical manifold induced by the (quadratic) kernel score and the spherical kernel score over Gaussian distributions for different setting of the kernel bandwidth parameter. The two panels in the top row $\ell\rightarrow 0$ correspond to the limiting cases of the Brier score and the spherical score. It can be seen that as the bandwidth increases, both scores shift their sensitivity to distributions with higher variance (red). For equal bandwidth, the spherical kernel score is more sensitive to distributions with larger standard deviation.}
 \end{figure}
 
 The main purpose of this section is to visualise differences between the geometries induced by various divergence measures over the same set of distributions. A particularly interesting divergence that we will use in subsequent chapters is that induced by the (quadratic) kernel scoring rule from (section \ref{sec:kernel_scoring}). The kernel scoring rule itself is very flexible, and its properties are dictated by the choice of kernel function.
@@ -200,36 +232,6 @@ For these distributions the KL divergence is scale-free: the divergence between 
 In Figure \ref{fig:Normals_varonly_magnification} I plotted the local distances on the various manifolds relative to distances induced by the logarithmic score. Higher values on the plot indicate a region where local distances are magnified in comparison to the KL divergence, which can be interpreted as a region in which the particular scoring rule is more sensitive to small differences. Observe how changing the kernel bandwidth shifts the most sensitive region of the kernel scoring rule.
 
 These figures highlight how the choice of the kernel allows us to fine-tune properties of the divergences and the corresponding manifold. We can use this flexibility to tailor the divergence to our application \citep{tailoring}. However, as discussed in chapter \ref{sec:scoring_rules} this flexibility also poses a challenge in applications where there is no principled way of choosing kernel hyperparameters.
-
-\begin{figure} % zero-mean Normals KL, kernel, Brier
-\begin{center}
- \includegraphics{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_varonly_comparison.pdf}
- \end{center}
-\caption{ Illustration of the differences between the statistical manifolds of Normal distributions induced by the KL, Brier and kernel divergences. Each horizontal line of points shows the one-dimensional manifold of zero-mean Gaussians. The dots correspond to distributions with logarithmically spaced variance between $\sigma_{min}=0.05$ and $\sigma_{max}=1$. When mapped according to the KL divergence, these distributions become evenly spaced \emph{(top,bottom)}. Compared to the KL, the Brier score \emph{(second from bottom)} places more emphasis on disriminating between narrower distributions. In this range $0.05 \leq \sigma \leq 1$ the kernel divergence with bandwidth $\ell=0.1$ \emph{(third from bottom)} approximately mimics the behaviour of the KL divergence. As we use the kernel score with increasing brandwith \emph{(from bottom to top)}, we can see that the focus shifts from narrow distributions towards distributions with larger variance.}
-\label{fig:Normal_varonly_comparison}
-\end{figure}
-
-\begin{figure} % zero-mean Normals local distance plots
-\begin{center}
-  \includegraphics{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_varonly_magnification.pdf}
-\end{center}
-\caption{Illustration of the differences between local distances induced by various scoring rules on the statistical manifold of zero-mean Normal distributions. Each line shows the magnitude of the local distance on each manifold relative to that induced by the KL divergence as a function of variance. Relative to the KL, the kernel divergence induces distances that are magnified around a region depending on the bandwidth of the kernel. As the bandwidth increases, this magnified region shifts towards distributions with larger variance.}
-\label{fig:Normal_varonly_magnification}
-\end{figure}
-
-
-\begin{figure} % kernel vs spherical kernel between Normals
-	\begin{center}
-	\begin{tabular}{ccc}
-	quadratic & & spherical\\
-	\includegraphics[width = .4\columnwidth]{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_kernel_1.pdf} & $\ell\rightarrow 0$& \includegraphics[width = .4\columnwidth]{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_kernel_2.pdf} \\
-	\includegraphics[width = .4\columnwidth]{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_kernel_3.pdf} & $\ell=0.5$ & \includegraphics[width = .4\columnwidth]{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_kernel_4.pdf} \\
-	\includegraphics[width = .4\columnwidth]{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_kernel_5.pdf} & $\ell=2$ &  \includegraphics[width = .4\columnwidth]{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_kernel_6.pdf} \\
-	\includegraphics[width = .4\columnwidth]{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_kernel_7.pdf} & $\ell=5$ &  \includegraphics[width = .4\columnwidth]{/Users/fhuszar/Dropbox/thesis/matlab/manifold/figs/Normal_kernel_8.pdf} \\
-	\end{tabular}
-	\end{center}
-	\caption{Maps of the statistical manifold induced by the (quadratic) kernel score and the spherical kernel score over Gaussian distributions for different setting of the kernel bandwidth parameter. The two panels in the top row $\ell\rightarrow 0$ correspond to the limiting cases of the Brier score and the spherical score. It can be seen that as the bandwidth increases, both scores shift their sensitivity to distributions with higher variance (red). For equal bandwidth, the spherical kernel score is more sensitive to distributions with larger standard deviation.}
-\end{figure}
 
 \subsection{Gamma distributions}
 

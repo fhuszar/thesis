@@ -1,7 +1,68 @@
 %!TEX root = ../main.tex
-\section{General framework for Bayesian experiment design}
-	\subsection{Shannon's entropy}
-	\subsection{Decision theoretic active classification}
-	\subsection{Bayesian optimisation}
-	\subsection{Bayesian quadrature}
+
+In most machine learning applications, a learner passively observes data with which it can make inferences about its environment. It is generally true that as more data becomes available the inferences become more accurate. However, not each and every datapoint is equally useful. Some datapoints will be critically informative, while many more will become redundant given the context and information already learnt from other examples.
+
+It is intuitive to think that, by actively seeking out measurements to be used in inference, the learner can significantly improve the quality of inference using smaller quantities of data. Amongst machine learning researchers this process of choosing which measurements to take is known as active learning; the same problem is called optimal experimental design in the statistics literature. Although active learning has been studied for several decades \citep{lindley1956,jaynes1986}, it is still an active area of research and no general solution exists.
+
+The active learning paradigm is as pertinent now as it has ever been. With the advent and rapid expansion of the Internet, very large amounts of unlabelled data have become available; however, it is relatively costly to obtain labels. Therefore, one must seek the most informative data points. Experimental scientists work with ever growing volumes of data, carrying out experiments or labeling datapoints is a time-consuming and costly process for them. Carefully pre-selecting only the most informative experiments can result in substantial improvements in terms of faster processing or reduced costs. Searching for the most useful data in vast spaces of measurements calls for powerful active learning algorithms.
+
+In this chapter I explain how scoring-rule based information quantities described in Chapter \ref{sec:scoring_rules} can be used to formalise the problem of active learning and experiment design. I devise a framework that is flexible enough to accomodate and connect a wide range of existing techniques. Examples include decision theoretic active learning, Bayesian optimisation and Bayesian quadrature.
+
+In the second half of this chapter I focus on a special case of Bayesian active learning that attempts to maximise Shannon's information. I derive a computationally convenient method, called Bayesian Active Learning by Disagreement (BALD) and present multiple applications to binary classification, multi-user preference learning and quantum physics.
+
+\section{A general framework for Bayesian experiment design}
+
+In active learning the goal is to learn about dependence of some variable $\y\in\mathcal{Y}$ on the input variable $\x\in\mathcal{X}$ by interactively querying the system with inputs $\x_i\in\mathcal{X}$ and observing the system's response $\y_i$. Ultimately, having observed data $\data = \{(\x_i,\y_i)\}$, our goal is to choose queries such that the observed outcomes provide us with the most information about relevant properties of the system. Different approaches quantify information in different ways. Here we take a Bayesian approach, that assumes the existence of some latent parameters $\param$, that control the dependence between inputs and outputs, $p(\y\vert\x,\param)$.
+
+Our goal is to infer the value of $\param$ from the observed data $\data = \{(\x_i,\y_i)\}$, which is possible via Bayes' rule
+\begin{equation}
+p(\param\vert\data) = \frac{p(\data\vert\param)p(\param)}{\int p(\data\vert\param)p(\param) d\param}
+\end{equation}
+Here I will assume that inference is possible without approximations, and the posterior $p(\param\vert\data)$ is available in closed form. In practice this is rarely the case, but it simplifies the analysis of active learning.
+
+A core problem in active learning is to describe how informative data is. In the Bayesian inference framework the posterior $p_\data(\param) := p(\param\vert\data)$ captures and summarises everything there is to know about the parameter $\param$ based on the data $\data$. It therefore makes sense to assess the quality of data $\data$ in terms of the quality of the posterior $p_\data$. Informative data should allow one to construct an accurate prediction $p_\data$ of the parameters $\theta$. If the data is redundant, our estimate $p_\data$ is going to be poor.
+
+The posterior $p_\data$ is a probabilistic estimate, hence it's accuracy can be quantified using a scoring rule $\score(\param,p_\data)$. The goal of the active learner should be to gather data $\data$ so that $p_\data$ minimises this quantity. However, during the process of active learning, the parameters $\param$ or indeed the score $\score(\param,p_\data)$ are never explicitly revealed to the learner, otherwise there was no point in learning. The best strategy the learner can follow is to collect data so that the zn estimate of this score is minimised. The Bayes estimator to the score $\score(\param,p_\data)$ is the expected score or generalised entropy of the posterior $p_\data$.
+
+Hence, in the scoring rule framework, the information in data is quantified by the (negative) generalised entropy of the posterior. When selecting the next measurement $\x$ this is the quantity we should therefore aim to decrease.
+
+\begin{equation}
+\argmax_x \left[ \genentropy{\score}{p(\param\vert\data)} - \expect{y\sim p(\y\vert \x, \data)}{\genentropy{\score}{p(\param\vert \x,\y,\data)} }\right ]
+\end{equation}
+In the scoring rule framework, the goal of active learning is to choose measurements $\x$ whose value of information $formula$ with regards to the latent parameters $\param$ is maximal.
+
+\section{Examples and special cases}
+\subsection{Shannon's entropy}
+
+The most commonly used special case of the decision theoretic Bayesian active learning framework uses the log score and Shannon's entropy. 
+
+\citep{MacKay,BALD}
+
+\subsection{Decision theoretic active classification}
+
+Often, applying active learning in a general supervised learning, the performance is assessed in terms of average prediction error on a held-out test dataset. If this is the case, the scoring rule used to define information in the framework should be chosen to reflect this.
+
+\begin{equation}
+\score_{\loss}(\param,p_\data) = \iint \loss(\hat{\y}(\x,p_\data),\y) p(\y\vert\x,\param) d\y\ p_{test}(\x) d\x,
+\end{equation}
+
+where $p_{test}$ is the distribution of test examples, $\loss(\y,\y')$ is the loss incurred for prediction $\y$ when the true output is $\y'$, and $\hat{\y}(\x,p)$ is the predicted label for input $\x$ given the posterior $p_\data$ over $\param$. $\hat{\y}(\x,p)$ can be the Bayes decision, but this is not a requirement, as long as it is consistent with how decisions are computed in the final evaluation.
+
+Exact decesion theoretic active learning is complicated to achieve in practice, however approximation strategies exist. \citet{} apply \citet{ZhuGhahramani} use a similar objective function to perform graph-based active learning.
+A related approach minimises the Shannon mutual information between the label of the chosen point and the unseen labels of a pool of unlabelled points in a transductive setting.
+
+\subsection{Bayesian optimisation}
+
+\subsection{Sequential Bayesian quadrature}
+
+Sequential Bayesian quadrature, described in detail in chapter \ref{sec:herding} is also an example of active learning. In that case, one seeks to approximate the expectation of a function $f$ under a probability distribution $p$
+
+Since the integral is intractable to calculate in closed form, the integral is approximated by weighted sum of function evaluations at particular sampling locations $\x_n$. The active learning problem involves finding the next sample $x_1$ point given the points already querried.
+
+\begin{equation}
+\score(\f,p_\data) = \left(Z_{p,f}v - \hat{Z}_\data \right)^2
+\end{equation}
+
+Using this scoring rule in the scoring-rule based Bayesian active learning framework is equivalent to minimising the expected reduction in posterior variance of the quadrature estimate as in eqn.\ \eqref{eqn:foo}.
+
 \section{Bayesian active learning by Disagreement (BALD)}
