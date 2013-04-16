@@ -43,7 +43,7 @@ The most commonly used special case of the decision theoretic Bayesian active le
 Often, applying active learning in a general supervised learning, the performance is assessed in terms of average prediction error on a held-out test dataset. If this is the case, the scoring rule used to define information in the framework should be chosen to reflect this.
 
 \begin{equation}
-\score_{\loss}(\param,p_\data) = \iint \loss(\hat{\y}(\x,p_\data),\y) p(\y\vert\x,\param) d\y\ p_{test}(\x) d\x,
+	\score_{\loss}(\param,p_\data) = \iint \loss(\hat{\y}(\x,p_\data),\y) p(\y\vert\x,\param) d\y\ p_{test}(\x) d\x,
 \end{equation}
 
 where $p_{test}$ is the distribution of test examples, $\loss(\y,\y')$ is the loss incurred for prediction $\y$ when the true output is $\y'$, and $\hat{\y}(\x,p)$ is the predicted label for input $\x$ given the posterior $p_\data$ over $\param$. $\hat{\y}(\x,p)$ can be the Bayes decision, but this is not a requirement, as long as it is consistent with how decisions are computed in the final evaluation.
@@ -60,7 +60,7 @@ Sequential Bayesian quadrature, described in detail in chapter \ref{sec:herding}
 Since the integral is intractable to calculate in closed form, the integral is approximated by weighted sum of function evaluations at particular sampling locations $\x_n$. The active learning problem involves finding the next sample $x_1$ point given the points already querried.
 
 \begin{equation}
-\score(\f,p_\data) = \left(Z_{p,f}v - \hat{Z}_\data \right)^2
+	\score(f,p_\data) = \left(Z_{p,f}v - \hat{Z}_\data \right)^2
 \end{equation}
 
 Using this scoring rule in the scoring-rule based Bayesian active learning framework is equivalent to minimising the expected reduction in posterior variance of the quadrature estimate as in eqn.\ \eqref{eqn:foo}.
