@@ -1,0 +1,14 @@
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdftex 2011.2.1)  2 JUN 2011 10:15
+entering extended mode
+**C:/Users/Neil/Work/SVN/nmth2/active*learning/NIPS/figs/cancerB.tikz
+("C:/Users/Neil/Work/SVN/nmth2/active learning/NIPS/figs/cancerB.tikz"
+! Undefined control sequence.
+l.9 \begin
+          {tikzpicture}
+? 
+! Emergency stop.
+l.9 \begin
+          {tikzpicture}
+End of file on the terminal!
+
+!  ==> Fatal error occurred, no output PDF file produced!

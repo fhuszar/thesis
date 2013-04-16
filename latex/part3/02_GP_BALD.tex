@@ -1,5 +1,11 @@
 %!TEX root = ../main.tex
 
+\definecolor{mycolor1}{rgb}{0.8,0.8,0}
+\definecolor{mycolor2}{rgb}{0,1,1}
+\definecolor{mycolor3}{rgb}{1,0,1}
+\definecolor{mycolor4}{rgb}{1,0.8,0.5}
+\definecolor{mycolor5}{rgb}{0.7,0.4,0.01}
+
 \paragraph{Summary of contributions and published work} The work presented in this chapter has been carried out in collaboration with Neil M.\ T.\ Houlsby(NMTH), Jose Miguel Hernandez-Lobato (JMHL), Zoubin Ghahramani(ZG) and M\'{a}t\'{e} Lengyel(ML). This work forms the basis of the technical report \citep{arxivBALD} and the peer-reviewed conference paper \citep{NIPS2012}. In addition, elements of this work have also been presented by Ferenc Husz\'{a}r and NMTH at the NIPS 2011 workshops ``Preferenc Learning'' and ``Bayesian Optimization and Active Learning''. All authors contributed equally to the design of the research and to the development of statistical models. The derivation of the preference kernel eqn.\ \eqref{} and the approximation to the BALD formula in eqn.\ \eqref{} are original contributions by Ferenc Husz\'{a}r. Computational experiments were run and the results were interpreted using MATLAB and R by Ferenc Husz\'{a}r, NMTH and JMHL.
 
 
@@ -17,6 +23,41 @@
 
 \subsection{Results}
 
+\begin{figure}
+	\begin{center}
+	\begin{tabular}{ccc}
+	\input{figs/BALD/GPC/blockinthemiddle_dataset.tikz}&
+	\input{figs/BALD/GPC/corner_dataset.tikz}&
+	\input{figs/BALD/GPC/checkerboard_dataset.tikz}\\
+	\input{figs/BALD/GPC/blockinmiddle2.tikz}&
+	\input{figs/BALD/GPC/blockincorner2.tikz}&
+	\input{figs/BALD/GPC/checkerboard2.tikz} \\
+	\end{tabular}
+	\end{center}
+	\caption{\emph{Top:} Artificial datasets used in our evaluation of active learning methods. Exemplars of the two classes are shown with black squares (\ref{plots:positives}) and red circles (\ref{plots:negatives}). \emph{Bottom:} Results of active learning with nine methods: random query (\ref{plots:rand}), \ourmethod (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with the vote criterion with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), Kapoor \emph{et al.} \cite{kapoor2007} (\ref{plots:dec}), Zhu \emph{et al.} \cite{zhu2003} (\ref{plots:semi}) and empirical error (\ref{plots:emp}).}
+	\label{fig:artificial}
+\end{figure}
+\begin{figure}
+	\begin{center}
+	\begin{tabular}{ccc}
+	\input{figs/BALD/GPC/crabs2.tikz}&
+	\input{figs/BALD/GPC/vehicle2.tikz}&
+	\input{figs/BALD/GPC/wine2.tikz}\\
+	\input{figs/BALD/GPC/wdbc2.tikz}&
+	\input{figs/BALD/GPC/isolet2.tikz}&
+	\input{figs/BALD/GPC/austra2.tikz}\\
+	\input{figs/BALD/GPC/letterDP2.tikz}&
+	\input{figs/BALD/GPC/letterEF2.tikz}&
+	\input{figs/BALD/GPC/prefkinem2.tikz}\\
+	\input{figs/BALD/GPC/prefcart2.tikz}&
+	\input{figs/BALD/GPC/prefcpu2.tikz}&
+	\input{figs/BALD/GPC/cancerB2.tikz}\\
+	\end{tabular}
+	\end{center}
+	\caption{Classification accuracy on classification and preference learning datasets. Methods used are random query (\ref{plots:rand}), \ourmethod (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), decision theoretic \cite{kapoor2007} (\ref{plots:dec}), semi-supervised \cite{zhu2003} (\ref{plots:semi}) and empicial error (\ref{plots:emp}). The decision theoretic methods took a long time to run, so were not completed for all datasets. Plots (a-h) are GPC datasets, (i-k) are preference learning, plot (l) includes \ourmethod with hyperparameter learning (\ref{plots:opthyper})}.
+	\label{fig:all}
+\end{figure}
+
 \subsection{Conclusions}
 
 \section{Preference elicitation}
@@ -30,7 +71,7 @@ In this section I address the practical problem of learing peoples' preferences.
 	\item [equipment calibration:] calibration of parameters to improve perceived subjective quality. Examples include calibrating sound quality of hearing aid or stereo equipment, high-dimensional parameter optimisation in digital image rendering
 \end{description}
 
-Many extisting approaches -- such as traditional market research surveys, restaurant review websites, DVD rental websites, etc -- require human respondents to give ratings of items on an absolute scale. Market research surveys often use a scale of 1 to 7, while review websites use star ratings, typically on a scale between 1 to 5 stars. There are multiple problems with this approach.
+Many extisting approaches -- such as traditional market research surveys, restaurant review websites, DVD rental websites, etc -- require human respondents\footnote{Throughout this chapter I will use the words person, respondent and user interchangeably to mean the person whose preferences we are interested in predicting.} to give ratings of items on an absolute scale. Market research surveys often use a scale of 1 to 7, while review websites use star ratings, typically on a scale between 1 to 5 stars. There are multiple problems with this approach.
 \begin{enumerate}
 	\item People's baseline level on the absolute scale may differ. One person's 4 star rating may describe the same level of satisfaction as someone else's 5 star rating. This makes aggregating opinions from many different people a non-trivial task
 	\item The variance of responses may also differ across people: some more conservative reviewers would never use the extreme 1 star or 5 star ratings, whilst other respondents' opinions may be more polarised
@@ -84,7 +125,7 @@ We can recast the inference problem in terms of $g$ and ignore $f$. When the eva
 Since $g$ is obtained from $f$ through a linear operation, the GP prior on $f$ induces a GP prior on $g$.
 The covariance function $k_\text{pref}$ of the GP prior on $g$ can be computed from the covariance function $k$ of the GP on $f$ as $k_\text{pref}((\x_i,\x_j),(\x_k,\x_l)) = k(\x_i,\x_k) + k(\x_j,\x_l) - k(\x_i,\x_l) - k(\x_j,\x_k)$. The derivations can be found in Section 1 of the supplementary material. We call $k_\text{pref}$ the \emph{preference kernel}. The same kernel function can be derived from a large margin classification viewpoint \cite{furnkranz2010}. However, to our knowledge, the preference kernel has not been used previously for GP-based models.	
 
-The combination of (\ref{eqn:preference_likelihood2}) with a GP prior based on the preference kernel allows us to transform the pairwise preference learning problem into  binary classification with GPs. This means that state-of-the-art methods for GP binary classification, such as expectation propagation \cite{Minka2001}, can be applied directly to preference learning. Furthermore, the simplified likelihood (\ref{eqn:preference_likelihood2}) allows us to implement complex methods  such as the multi-user approach which is described in the following section.
+The combination of (\ref{eqn:preference_likelihood2}) with a GP prior based on the preference kernel allows us to transform the pairwise preference learning problem into  binary classification with GPs. This means that state-of-the-art methods for GP binary classification, such as expectation propagation \cite{Minka2001}, can be applied directly to preference learning. Furthermore, the simplified likelihood (\ref{eqn:preference_likelihood2}) allows us to implement complex methods such as the multi-user approach which is described in the following section.
 
 % ##     ## ##     ## ##       ######## ####         ##     ##  ######  ######## ########  
 % ###   ### ##     ## ##          ##     ##          ##     ## ##    ## ##       ##     ## 
@@ -96,7 +137,9 @@ The combination of (\ref{eqn:preference_likelihood2}) with a GP prior based on t
 
 \subsection{Multi-user preference learning}
 
-Consider $I$ items with feature vectors $\mathbf{x}_i\in\mathcal{X}$ for $i=1,\ldots,I$.  The single-user learning approach assumes an independent latent function for the $u$-th user, $g_u:\mathcal{X}^2\mapsto\mathbb{R}$. Our approach to the multi-user problem is to assume common structure in the user latent functions. In particular, we assume a set of $D$ shared latent functions, $h_d:\mathcal{X}^2\mapsto \mathbb{R}$ for $d=1,\ldots,D$, such that the user latent functions are  generated by a linear combination of these functions, namely
+In the previous chapter we assumed that the data is consitsent with a single user's preferences. However, in many real time applications the data is actually produced by multiple users, whose preferences may deviate from each other. The goal of multi-user preference learning is to devise a model which can model preferences expressed by multiple users. As a na\:{i}ve extension of the single-user learning approach, one could independently model the latent preference function  for each user separately, and carry out inference and prediction that way. 
+
+A more sophisticated approach to the multi-user problem is to assume common structure in the user latent functions. In particular, we assume a set of $D$ shared latent functions, $h_d:\mathcal{X} \mapsto \mathbb{R}$ for $d=1,\ldots,D$, such that the user latent functions are  generated by a linear combination of these functions, namely
 
 \begin{equation}
 	g_{u}(\mathbf{x}_j,\mathbf{x}_k)=\sum_{d=1}^{D}w_{u,d}h_{d}(\mathbf{x}_j,\mathbf{x}_k)\,,\label{eqn:preference_expressionG}
