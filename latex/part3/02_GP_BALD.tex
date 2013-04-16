@@ -7,8 +7,6 @@
 \definecolor{mycolor5}{rgb}{0.7,0.4,0.01}
 
 \paragraph{Summary of contributions and published work} The work presented in this chapter has been carried out in collaboration with Neil M.\ T.\ Houlsby(NMTH), Jose Miguel Hernandez-Lobato (JMHL), Zoubin Ghahramani(ZG) and M\'{a}t\'{e} Lengyel(ML). This work forms the basis of the technical report \citep{arxivBALD} and the peer-reviewed conference paper \citep{NIPS2012}. In addition, elements of this work have also been presented by Ferenc Husz\'{a}r and NMTH at the NIPS 2011 workshops ``Preferenc Learning'' and ``Bayesian Optimization and Active Learning''. All authors contributed equally to the design of the research and to the development of statistical models. The derivation of the preference kernel eqn.\ \eqref{} and the approximation to the BALD formula in eqn.\ \eqref{} are original contributions by Ferenc Husz\'{a}r. Computational experiments were run and the results were interpreted using MATLAB and R by Ferenc Husz\'{a}r, NMTH and JMHL.
-
-
 \section{Gaussian process classification}
 
 \subsection{Approximate BALD for GPC}
@@ -23,40 +21,41 @@
 
 \subsection{Results}
 
-\begin{figure}
-	\begin{center}
-	\begin{tabular}{ccc}
-	\input{figs/BALD/GPC/blockinthemiddle_dataset.tikz}&
-	\input{figs/BALD/GPC/corner_dataset.tikz}&
-	\input{figs/BALD/GPC/checkerboard_dataset.tikz}\\
-	\input{figs/BALD/GPC/blockinmiddle2.tikz}&
-	\input{figs/BALD/GPC/blockincorner2.tikz}&
-	\input{figs/BALD/GPC/checkerboard2.tikz} \\
-	\end{tabular}
-	\end{center}
-	\caption{\emph{Top:} Artificial datasets used in our evaluation of active learning methods. Exemplars of the two classes are shown with black squares (\ref{plots:positives}) and red circles (\ref{plots:negatives}). \emph{Bottom:} Results of active learning with nine methods: random query (\ref{plots:rand}), \ourmethod (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with the vote criterion with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), Kapoor \emph{et al.} \cite{kapoor2007} (\ref{plots:dec}), Zhu \emph{et al.} \cite{zhu2003} (\ref{plots:semi}) and empirical error (\ref{plots:emp}).}
-	\label{fig:artificial}
-\end{figure}
-\begin{figure}
-	\begin{center}
-	\begin{tabular}{ccc}
-	\input{figs/BALD/GPC/crabs2.tikz}&
-	\input{figs/BALD/GPC/vehicle2.tikz}&
-	\input{figs/BALD/GPC/wine2.tikz}\\
-	\input{figs/BALD/GPC/wdbc2.tikz}&
-	\input{figs/BALD/GPC/isolet2.tikz}&
-	\input{figs/BALD/GPC/austra2.tikz}\\
-	\input{figs/BALD/GPC/letterDP2.tikz}&
-	\input{figs/BALD/GPC/letterEF2.tikz}&
-	\input{figs/BALD/GPC/prefkinem2.tikz}\\
-	\input{figs/BALD/GPC/prefcart2.tikz}&
-	\input{figs/BALD/GPC/prefcpu2.tikz}&
-	\input{figs/BALD/GPC/cancerB2.tikz}\\
-	\end{tabular}
-	\end{center}
-	\caption{Classification accuracy on classification and preference learning datasets. Methods used are random query (\ref{plots:rand}), \ourmethod (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), decision theoretic \cite{kapoor2007} (\ref{plots:dec}), semi-supervised \cite{zhu2003} (\ref{plots:semi}) and empicial error (\ref{plots:emp}). The decision theoretic methods took a long time to run, so were not completed for all datasets. Plots (a-h) are GPC datasets, (i-k) are preference learning, plot (l) includes \ourmethod with hyperparameter learning (\ref{plots:opthyper})}.
-	\label{fig:all}
-\end{figure}
+% \begin{figure}
+% 	\begin{center}
+% 	\begin{tabular}{ccc}
+% 	\input{figs/BALD/GPC/blockinthemiddle_dataset.tikz}&
+% 	\input{figs/BALD/GPC/corner_dataset.tikz}&
+% 	\input{figs/BALD/GPC/checkerboard_dataset.tikz}\\
+% 	\input{figs/BALD/GPC/blockinmiddle2.tikz}&
+% 	\input{figs/BALD/GPC/blockincorner2.tikz}&
+% 	\input{figs/BALD/GPC/checkerboard2.tikz} \\
+% 	\end{tabular}
+% 	\end{center}
+% 	\caption{\emph{Top:} Artificial datasets used in our evaluation of active learning methods. Exemplars of the two classes are shown with black squares (\ref{plots:positives}) and red circles (\ref{plots:negatives}). \emph{Bottom:} Results of active learning with nine methods: random query (\ref{plots:rand}), \ourmethod (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with the vote criterion with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), Kapoor \emph{et al.} \cite{kapoor2007} (\ref{plots:dec}), Zhu \emph{et al.} \cite{zhu2003} (\ref{plots:semi}) and empirical error (\ref{plots:emp}).}
+% 	\label{fig:artificial}
+% \end{figure}
+
+% \begin{figure}
+% 	\begin{center}
+% 	\begin{tabular}{ccc}
+% 	\input{figs/BALD/GPC/crabs2.tikz}&
+% 	\input{figs/BALD/GPC/vehicle2.tikz}&
+% 	\input{figs/BALD/GPC/wine2.tikz}\\
+% 	\input{figs/BALD/GPC/wdbc2.tikz}&
+% 	\input{figs/BALD/GPC/isolet2.tikz}&
+% 	\input{figs/BALD/GPC/austra2.tikz}\\
+% 	\input{figs/BALD/GPC/letterDP2.tikz}&
+% 	\input{figs/BALD/GPC/letterEF2.tikz}&
+% 	\input{figs/BALD/GPC/prefkinem2.tikz}\\
+% 	\input{figs/BALD/GPC/prefcart2.tikz}&
+% 	\input{figs/BALD/GPC/prefcpu2.tikz}&
+% 	\input{figs/BALD/GPC/cancerB2.tikz}\\
+% 	\end{tabular}
+% 	\end{center}
+% 	\caption{Classification accuracy on classification and preference learning datasets. Methods used are random query (\ref{plots:rand}), \ourmethod (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), decision theoretic \cite{kapoor2007} (\ref{plots:dec}), semi-supervised \cite{zhu2003} (\ref{plots:semi}) and empicial error (\ref{plots:emp}). The decision theoretic methods took a long time to run, so were not completed for all datasets. Plots (a-h) are GPC datasets, (i-k) are preference learning, plot (l) includes \ourmethod with hyperparameter learning (\ref{plots:opthyper})}.
+% 	\label{fig:all}
+% \end{figure}
 
 \subsection{Conclusions}
 

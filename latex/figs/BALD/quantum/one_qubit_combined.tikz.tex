@@ -1,0 +1,116 @@
+% This file was created by matlab2tikz v0.0.7.
+% Copyright (c) 2008--2010, Nico Schlömer <nico.schloemer@gmail.com>
+% All rights reserved.
+% 
+% The latest updates can be retrieved from
+%   http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz
+% where you can also make suggestions and rate matlab2tikz.
+% 
+\begin{tikzpicture}
+
+\begin{loglogaxis}[%
+scale only axis,
+width=1.2in,
+height=1in,
+xmin=100, xmax=10000,
+ymin=0.001, ymax=0.1,
+xlabel={no.\ measurements ($n$)},
+ylabel={mean infidelity},
+axis on top
+,anchor=north west]
+\addplot [
+color=black,
+dotted,
+line width=1.0pt
+]
+coordinates{ (100,0.0936504) (127,0.0831784) (162,0.0703672) (206,0.0552666) (263,0.0442545) (335,0.0367459) (428,0.0288689) (545,0.0240754) (695,0.0219549) (885,0.0182243) (1128,0.0154802) (1438,0.0127685) (1832,0.00966868) (2335,0.00797919) (2976,0.00641328) (3792,0.00604222) (4832,0.00543209) (6158,0.0051745) (7847,0.0052069) (10000,0.00427943)
+};
+\label{leg:rand}
+
+\addplot [
+color=red,
+dashed,
+line width=1.0pt
+]
+coordinates{ (100,0.0854107) (127,0.0685189) (162,0.0556463) (206,0.0536513) (263,0.0455832) (335,0.0361215) (428,0.0293875) (545,0.0261447) (695,0.0222585) (885,0.0205318) (1128,0.0170572) (1438,0.0149583) (1832,0.0132948) (2335,0.0108542) (2976,0.00907246) (3792,0.00787257) (4832,0.0070859) (6158,0.00582692) (7847,0.00538335) (10000,0.00451835)
+};
+
+\addplot [
+color=blue,
+dash pattern=on 4pt off 2pt on 1pt off 2pt,
+line width=1.0pt
+]
+coordinates{ (100,0.0770638) (127,0.066016) (162,0.0639258) (206,0.0575981) (263,0.0488788) (335,0.0416774) (428,0.0385588) (545,0.0306082) (695,0.0264267) (885,0.0209842) (1128,0.0168218) (1438,0.0157689) (1832,0.0132344) (2335,0.0124372) (2976,0.0110141) (3792,0.0101086) (4832,0.00830792) (6158,0.00739129) (7847,0.00680199) (10000,0.00627426)
+};
+
+\addplot [
+color=green,
+solid,
+line width=1.5pt
+]
+coordinates{ (100,0.0717411) (127,0.0634239) (162,0.0479571) (206,0.0386032) (263,0.0300618) (335,0.0213717) (428,0.0172278) (545,0.0121796) (695,0.0100679) (885,0.00768467) (1128,0.0064199) (1438,0.00571155) (1832,0.00436206) (2335,0.00366658) (2976,0.0030864) (3792,0.0025154) (4832,0.00203493) (6158,0.00194272) (7847,0.00142223) (10000,0.00119099)
+};
+\label{leg:aFlex}
+
+\end{loglogaxis}
+
+% This file was created by matlab2tikz v0.0.7.
+% Copyright (c) 2008--2010, Nico Schlömer <nico.schloemer@gmail.com>
+% All rights reserved.
+% 
+% The latest updates can be retrieved from
+%   http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz
+% where you can also make suggestions and rate matlab2tikz.
+% 
+
+\begin{semilogyaxis}[%
+at={(1.65in,0)},
+scale only axis,
+width=1.1in,
+height=1in,
+xmin=0.5, xmax=1,
+xtick={0.5,0.75,1},
+ymin=0.0005, ymax=0.01,
+xlabel={purity},
+axis on top
+,anchor=north west]
+\addplot [
+color=black,
+dotted,
+line width=1.0pt
+]
+coordinates{ (0.5,0.00075929) (0.6,0.000857054) (0.7,0.000956602) (0.8,0.000893443) (0.85,0.00111663) (0.9,0.00113761) (0.925,0.00221566) (0.95,0.0024295) (0.975,0.00216895) (1,0.00581406)
+};
+
+
+\addplot [
+color=red,
+dashed,
+line width=1.0pt
+]
+coordinates{ (0.5,0.000728511) (0.6,0.000663376) (0.7,0.000813218) (0.8,0.000983281) (0.85,0.00146818) (0.9,0.00145583) (0.925,0.00191827) (0.95,0.00189825) (0.975,0.00225826) (1,0.00709776)
+};
+
+\addplot [
+color=blue,
+dash pattern=on 4pt off 2pt on 1pt off 2pt,
+line width=1.0pt
+]
+coordinates{ (0.5,0.000933037) (0.6,0.000803118) (0.7,0.00094978) (0.8,0.000968539) (0.85,0.00136559) (0.9,0.00113676) (0.925,0.00114692) (0.95,0.0016187) (0.975,0.00198486) (1,0.00877819)
+};
+
+\addplot [
+color=green,
+solid,
+line width=1.5pt
+]
+coordinates{ (0.5,0.000583439) (0.6,0.000722364) (0.7,0.000871828) (0.8,0.000775065) (0.85,0.000892919) (0.9,0.000805987) (0.925,0.00087682) (0.95,0.00094804) (0.975,0.00114797) (1,0.00169893)
+};
+
+\end{semilogyaxis}
+
+
+\node at (1.05in,-0.13in) {(a)};
+\node at (1.80in,-0.13in) {(b)};
+
+\end{tikzpicture}
