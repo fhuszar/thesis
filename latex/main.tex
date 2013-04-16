@@ -11,7 +11,7 @@
 \usepackage{natbib}
 \usepackage{bm}
 \usepackage{booktabs}
-
+\usepackage{lipsum}
 
 
 \newtheorem{definition}{Definition}
@@ -20,20 +20,38 @@
 \newtheorem{proposition}{Proposition}
 \newtheorem{statement}{Statement}
 
+\makeatletter
+\newcommand{\ChapterOutsidePart}{%
+   \def\toclevel@chapter{-1}\def\toclevel@section{0}\def\toclevel@subsection{1}}
+\newcommand{\ChapterInsidePart}{%
+   \def\toclevel@chapter{0}\def\toclevel@section{1}\def\toclevel@subsection{2}}
+\makeatother
+
 \input{notation}
 
 \begin{document}
 \maketitle
 
+\ChapterOutsidePart 
+\pdfbookmark{\contentsname}{toc}
 \tableofcontents
-\chapter{Introduction}
-Foor bar Lorem ipsum.
 
+\chapter{Introduction}
+\input{introduction}
+
+\ChapterInsidePart
 \input{part1_main}
 \input{part2_main}
 \input{part3_main}
+
+\ChapterOutsidePart
+\chapter{Conclusions}
+\input{conclusions}
+\lipsum[1]
+
 \bibliographystyle{plainnat}
 \bibliography{thesis}
+
 \end{document}
 
 

@@ -1,7 +1,10 @@
 %!TEX root = ../main.tex
-foo
+
+
 
 \section{Gaussian process classification}
+
+\paragraph{Summary of contributions and published work} The work presented in this chapter has been carried out in collaboration with Neil M.\ T.\ Houlsby(NMTH), Jose Miguel Hernandez-Lobato (JMHL), Zoubin Ghahramani(ZG) and Máté Lengyel(ML). This work forms the basis of the technical report \citep{arxivBALD} and the peer-reviewed conference paper \citep{NIPS2012}. In addition, elements of this work have also been presented by Ferenc Huszár and NMTH at the NIPS 2011 workshops ``Preferenc Learning'' and ``Bayesian Optimization and Active Learning''. All authors contributed equally to the design of the research and to the development of statistical models. The derivation of the preference kernel eqn.\ \eqref{} and the approximation to the BALD formula in eqn.\ \eqref{} are original contributions by Ferenc Huszár. Computational experiments were run and the results were interpreted using MATLAB and R by Ferenc Huszár, NMTH and JMHL.
 
 \subsection{Approximate BALD for GPC}
 \subsection{Results}
@@ -9,24 +12,31 @@ foo
 
 \section{Preference elicitation}
 
-In this section I address the practical problem of learing users' preferences.
+In this section I address the practical problem of learing peoples' preferences. People have rich knowledge knowledge and information about which products, services, people, items they prefer, find attractive or like. Methods that uncover this private knowledge is invaluable in a number of commercial and science applications. Examples include
+\begin{description}
+	\item [market research and e-commerce:] learning about users' preferences of products, prices, or brands. Preferences can be exploited to maximise user satisfaction and to drive profit
+	\item [social media:] identifying people that their peers find influential, reliable, trustworthy or knowledgable on certain topics
+	\item [recommendation:] on review websites collecting and quantifying user feedback on restaurants, activities, movies, music albums, etc. to power recommendations
+	\item [research:] learning about difficult, subjective concepts such as attractiveness, for example investigating which features determine perceived attractiveness
+	\item [equipment calibration:] calibration of parameters to improve perceived subjective quality. Examples include calibrating sound quality of hearing aid or stereo equipment, high-dimensional parameter optimisation in digital image rendering
+\end{description}
 
-Many approaches -- such as traditional market research surveys, restaurant review websites, DVD rental websites, etc -- require human respondents to give ratings of items an absolute scale. In surveys .
-There are multiple problems with this approach.
+Many extisting approaches -- such as traditional market research surveys, restaurant review websites, DVD rental websites, etc -- require human respondents to give ratings of items on an absolute scale. Market research surveys often use a scale of 1 to 7, while review websites use star ratings, typically on a scale between 1 to 5 stars. There are multiple problems with this approach.
 \begin{enumerate}
-	\item People's baseline level on the absolute scale may differ. One person's 4 star rating may describe the same level of satisfaction as someone else's 5 star rating.
-	\item The variance of responses may also differ across people: some more conservative reviewers would never write an the extreme 1 star or 5 star reviews, while others' opinions may be more polarised.
-	\item To give informed ratings, the user has to know the distribution of the quality of items ahead of time. They may prefer not to give a maximal, 5-star rating to an item, because they don't know if better items exist. Others may give 5-star to a mediocre item, because they have never seen to a better one.
+	\item People's baseline level on the absolute scale may differ. One person's 4 star rating may describe the same level of satisfaction as someone else's 5 star rating. This makes aggregating opinions from many different people a non-trivial task
+	\item The variance of responses may also differ across people: some more conservative reviewers would never use the extreme 1 star or 5 star ratings, whilst other respondents' opinions may be more polarised
+	\item To give informed ratings, the user has to know the distribution of the quality of items ahead of time. They may prefer not to give a maximal 5-star rating to an item, because they don't know if better items exist. Others may give 5-star to a mediocre item, because they have never seen a better alternative.
 \end{enumerate} 
 
-The problem has widespred applications in a variety of domains.
-\begin{itemize}
-	\item on e-commerce website, learning about users preferences of item-price pairs, or learning about brand preferences. Would a user prefer a cheap item with no discount to a more expensive item with a slight discount? These preferences can then be exploited to maximise user satisfaction and to drive profit
-	\item in social media, peerindex.com used 
-	\item Learning about attractiveness, and the features that determine attractiveness. 
-	\item Calibration of sound quality of hearing aid. 
-	\item Computer graphics, finding parameter combination of lighting and 
-\end{itemize}
+To overcome the limitations of an absolute scale, in an increasing number of applications preference elicitation is done via pairwise item comparisons. In this case, the respondent is presented a pair of items, and they have to judge which of the two alternatives is more preferable. In cognitive science, this type of preference elicitation is known as two-alternative forced choice, or 2AFC for short \citep{2AFC}. The machine learning community often refers to this kind problem as \emph{binary preference elicitation}, preference learning or learning to rank.
+
+Crucially, binary preference elicitation sidesteps most of the problems that eliciting preference on an absolute scale exhibits. Because no absolute scale is used, it does not matter if the scale of ratings used by different respondents are not aligned, as long as there is a mostly monotonic relationship between them. Also, the respondent only needs to be knowledgeable about the two items being compared in order to give an informed responce. This way respondents with much more limited scope of knowledge can provide highly informative data.
+
+Despite these convenient properties, pairwise preference learning has a drawback. When learning preferences over $n$ items, there are $\mathcal{O}(n)$ potential pairs of items that we can ask the respondents to compare. Not only would querying all item-pairs take prohibitively long time, it is also unneccessary. Most binary choices would be predictable from previous choices the respondent or other respondents have already made.
+
+Therefore, in binary preference learning, active learning and optimal experiment design has increased importance, and increased potential to improve over passive learning.
+
+In this section I will extend the BALD framework developed for Gaussian process classification to work on preference learning. I will do this by showing how a popular nonparametric model for preference learning can be interpreted as binary Gaussian process classification with an special positive definite kernel between item-pairs, that I call \emph{the preference kernel}. I also present an extension of the model which can be applied to learn from preference choices expressed by multiple users, even if different users disagree in their preferences. The experimental results presented in this chapter show that the Gaussian-process-based models combined with the BALD framework are very competitive and on many datasets surpass state-of-the art levels of performance.
 
 \subsection{Relation to Gaussian process classification}
 
