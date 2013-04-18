@@ -1,6 +1,6 @@
 %!TEX root = ../main.tex
 
-\paragraph{Summary of contributions} The results presented in this chapter are joint work with Neil M.\ T.\ Houlsby, M\'{a}t\'{e} Lengyel and Zoubin Ghahramani, and are published as an online technical report \citep{Houlsby2011} and as part of \citep{Houlsby2012preference}. NMTH, ML and FH contributed equally to the development of the BALD framework. The connections to the general scoring rule framework are original contribution by FH.
+\paragraph{Summary of contributions} The results presented in this chapter are joint work with Neil M.\ T.\ Houlsby, M\'{a}t\'{e} Lengyel and Zoubin Ghahramani, and are published as an online technical report \citep{Houlsby2011} and as part of \citep{Houlsby2012preference}. NMTH, ML and FH contributed equally to the development of the BALD framework. The connections to the unifying scoring rule framework are original contribution by FH.
 
 \section{Introduction}
 
@@ -14,33 +14,65 @@ In this chapter I explain how scoring-rule based information quantities describe
 
 In the second half of this chapter I focus on a special case of Bayesian active learning that attempts to maximise Shannon's information. I derive a computationally convenient method, called Bayesian Active Learning by Disagreement (BALD) and present multiple applications to binary classification, multi-user preference learning and quantum physics.
 
+% ######## ########     ###    ##     ## ######## ##      ##  #######  ########  ##    ## 
+% ##       ##     ##   ## ##   ###   ### ##       ##  ##  ## ##     ## ##     ## ##   ##  
+% ##       ##     ##  ##   ##  #### #### ##       ##  ##  ## ##     ## ##     ## ##  ##   
+% ######   ########  ##     ## ## ### ## ######   ##  ##  ## ##     ## ########  #####    
+% ##       ##   ##   ######### ##     ## ##       ##  ##  ## ##     ## ##   ##   ##  ##   
+% ##       ##    ##  ##     ## ##     ## ##       ##  ##  ## ##     ## ##    ##  ##   ##  
+% ##       ##     ## ##     ## ##     ## ########  ###  ###   #######  ##     ## ##    ## 
+                                                      
 \section{A general framework for Bayesian experiment design}
 
-In active learning the goal is to learn about dependence of some variable $\y\in\mathcal{Y}$ on the input variable $\x\in\mathcal{X}$ by interactively querying the system with inputs $\x_i\in\mathcal{X}$ and observing the system's response $\y_i$. Ultimately, having observed data $\data = \{(\x_i,\y_i)\}$, our goal is to choose queries such that the observed outcomes provide us with the most information about relevant properties of the system. Different approaches quantify information in different ways. Here we take a Bayesian approach, that assumes the existence of some latent parameters $\param$, that control the dependence between inputs and outputs, $p(\y\vert\x,\param)$.
+In active learning the goal is to learn about dependence of a \emph{target variable} $\y\in\mathcal{Y}$ on the \emph{input variable} $\x\in\mathcal{X}$ by interactively querying the system with inputs $\x_i\in\mathcal{X}$ and observing the system's response $\y_i$. Ultimately, having observed data $\data = \{(\x_i,\y_i)\}$, our goal is to choose queries such that the observed outcomes provide us with the most information about relevant properties of the system. There are many approaches to active learning that carry out predictions and quantify the value of information in different ways. Here we take a Bayesian discriminative approach, that assumes the existence of some latent parameters $\param$, that directly control the dependence between inputs and outputs, $p(\y\vert\x,\param)$. Figure \ref{fig:triangle_generative_model} illustrates the dependence assumptions as a probabilistic graphical model \citep{Koller2009book}.
 
 Our goal is to infer the value of $\param$ from the observed data $\data = \{(\x_i,\y_i)\}$, which is possible via Bayes' rule
 \begin{equation}
 p(\param\vert\data) = \frac{p(\data\vert\param)p(\param)}{\int p(\data\vert\param)p(\param) d\param}
 \end{equation}
-Here I will assume that inference is possible without approximations, and the posterior $p(\param\vert\data)$ is available in closed form. In practice this is rarely the case, but it simplifies the analysis of active learning.
+In this chapter I will assume that inference is possible without approximations, and the posterior distribution $p(\param\vert\data)$ is available in closed form. In practice this is rarely the case, and in subsequent chapters I will apply the framework to cases where only approximations to the posterior are available.
 
 A core problem in active learning is to describe how informative data is. In the Bayesian inference framework the posterior $p_\data(\param) := p(\param\vert\data)$ captures and summarises everything there is to know about the parameter $\param$ based on the data $\data$. It therefore makes sense to assess the quality of data $\data$ in terms of the quality of the posterior $p_\data$. Informative data should allow one to construct an accurate prediction $p_\data$ of the parameters $\theta$. If the data is redundant, our estimate $p_\data$ is going to be poor.
 
-The posterior $p_\data$ is a probabilistic estimate, hence it's accuracy can be quantified using a scoring rule $\score(\param,p_\data)$. The goal of the active learner should be to gather data $\data$ so that $p_\data$ minimises this quantity. However, during the process of active learning, the parameters $\param$ or indeed the score $\score(\param,p_\data)$ are never explicitly revealed to the learner, otherwise there was no point in learning. The best strategy the learner can follow is to collect data so that the zn estimate of this score is minimised. The Bayes estimator to the score $\score(\param,p_\data)$ is the expected score or generalised entropy of the posterior $p_\data$.
-
-Hence, in the scoring rule framework, the information in data is quantified by the (negative) generalised entropy of the posterior. When selecting the next measurement $\x$ this is the quantity we should therefore aim to decrease.
+The posterior $p_\data$ is a probabilistic estimate, hence it's accuracy can be quantified using a scoring rule $\score(\param,p_\data)$. The goal of the active learner should be to gather data $\data$ so that $p_\data$ minimises this quantity. However, during the process of active learning, the actual parameters $\param$ or indeed the score $\score(\param,p_\data)$ are never explicitly revealed to the learner, otherwise there was no point in learning. The best strategy the learner can follow is to collect data so that their best estimate of this score is minimised. The Bayes estimator to the score $\score(\param,p_\data)$ is the expected posterior score or generalised entropy of the posterior $p_\data$.
 
 \begin{equation}
-\argmax_x \left[ \genentropy{\score}{p(\param\vert\data)} - \expect{y\sim p(\y\vert \x, \data)}{\genentropy{\score}{p(\param\vert \x,\y,\data)} }\right ]
+	\genentropy{\score}{p_\data} = \expect{\param\sim p_\data} \score(\param,p_\data)
 \end{equation}
-In the scoring rule framework, the goal of active learning is to choose measurements $\x$ whose value of information $formula$ with regards to the latent parameters $\param$ is maximal.
+
+Hence, in the scoring rule framework, the active learner's goal should be to minimise the generalised entropy of the posterior. Recall from section \ref{sec:decision_theory_scoring} that generalised entropy is intimately related to Bayes Risk, so in that context the goal of the learner is to collect data so as to reduce the risk of decisions they have to make in the future.
+
+Having defined a quantitative measure of the information contained in data, I now turn to discussing how this criterion can be exploited to proactively select measurement $x$ to speed up the process of learning. In this thesis I only consider myopic strategies to active learning, whereby the learner optimises the immediate value of information that the next observation provides, as if the next one was the last measurement to perform. This shortsighted strategy is known to lead to suboptimal performance if the learner is allowed to query multiple measurements in a sequence. However, the optimisation problem for non-myopic strategies get quickly intractable because of the combinatorial nature of the problem \citep{Krause2007}.
+
+In myopic active learning, the learner solves the same problem in each step. Having observed some data $\data$, which is the next best measurement $\x$ I should make to minimise the entropy of the posterior. This optimisation problem can be formalised as follows:
+
+\begin{equation}
+	\argmax_\x\ \left[ \genentropy{\score}{p(\param\vert\data)} - \expect{y\sim p(\y\vert \x, \data)}{\genentropy{\score}{p(\param\vert \x,\y,\data)} }\right ]
+	\label{eqn:active_learning_optimisation_criterion}
+\end{equation}
+
+The first term is the entropy of the posterior the learner currently has. This is a function of data $\data$ that is already observed, hence it is constant and could be neglected. The second term is the entropy of the posterior after making measurement $\x$ and observing outcome $\y$. Because at the point of choosing the next measurement the outcome is unknown, the learner has to rely on an approximation again and take an expectation with respect to its current predictive model of the outcome $p(\y \vert \x, \data)$. Note that here, the latent parameter $\param$ has been integrated out.
+
+Recall Definition \ref{def:conditional_value_of_information} of the generalised conditional value of information. Using that definition we can also say that the learner's goal is to maximise the conditional value of intormation of the measurement $\x$ with respect to $\param$ given $\data$.
+
+\begin{equation}
+	\argmax_\x\ \conditionalinformation{\score}{\param}{\x}{\data}
+\end{equation}
+
+Yet another equivalent formulation of the criterion expresses the learner's goal as maximising the expected divergence between the current and new posterior after observing the outcome of the next measurement:
+
+\begin{equation}
+	\argmax_\x\  \expect{y \sim p(\y\vert \x, \data)}\divergence{S}{P_{\data}}{P_{\data\cup\{\x,\y\}}}
+\end{equation}
+
+The equivalence between these three criteria has been noted in the context of the Shannon's information in \citep{MacKay1992}. The framework presented here is a generalisation of \citeauthor{MacKay1992}'s work, and allows one to specify the goal of Bayesian active learning as a scoring rule for the posterior distribution. In the following section I will review a wide range of Bayesian methods in the literature that all fall within the scope of this approach.
 
 \section{Examples and special cases}
 \subsection{Shannon's entropy}
 
-The most commonly used special case of the decision theoretic Bayesian active learning framework uses the log score and Shannon's entropy. 
+The most commonly used special case of the scoring-rule-based Bayesian active learning framework uses the logarithmic score and hence, Shannon's entropy. 
 
-\citep{MacKay,BALD}
+Sannon's entropy is used in multiple practical methods \citep{MacKay1992,Lawrence2004,Krause2006,Ji2008,Settles2010,Houlsby2011,Huszar2012quantum}
 
 \subsection{Decision theoretic active classification}
 
@@ -55,7 +87,41 @@ where $p_{test}$ is the distribution of test examples, $\loss(\y,\y')$ is the lo
 Exact decesion theoretic active learning is complicated to achieve in practice, however approximation strategies exist. \citet{} apply \citet{ZhuGhahramani} use a similar objective function to perform graph-based active learning.
 A related approach minimises the Shannon mutual information between the label of the chosen point and the unseen labels of a pool of unlabelled points in a transductive setting.
 
-\subsection{Bayesian optimisation}
+\subsection{Information-greedy Bayesian optimisation}
+
+\TODO{introductory paragraph about global optimisation}
+
+Many of these search and optimisation algorithms can be inerpreted as adaptive learning algorithms that probe the function at various locations to uncover the location of the minimum. This interpretation allowed for the development of novel class of probabilistic optimisation approaches which explicitly model the objective function, and perform probabilistic inference as part of the optimisation procedure. Many of these models use Gaussian processes to model complex surfaces.
+
+The first generation of Bayesian optimisation algorithms were typically based on the concept of improvement: the aim is to evaluate the objective function at points so that subsequent function values become lower and lower. Several heuristics have been developed around this idea, including the popular expected improvement \citep{Mockus1982,Jones1998, Frean2008}, probability of improvement \citep{Jones2001,Lizotte2008} and upper confidence bounds \citep{Srinivas2009}. These algorithms are prone to getting stuck in local minima because they attempt to collect low function values, rather than to learn about the location of the optimum \citep{Hennig2012entropy},.
+
+The newest class of algorithms \citep{Hennig2012entropy}, called information-greedy algorithms separate the problem of learning about the function and providing an estimate to the minimum. The sequence of function evaluations does not necessarily converge, and indeed do not generally decrease. These algorithms prefer exploration to exploitation.
+
+The information-greedy Bayeisan optimisation algorithm presented in \citep{Hennig2012entropy} is a special case of the scoring-rule-based active learning framework. They employ a scoring rule of the following form:
+
+\begin{equation}
+	\score_{\mbox{argmin}}(f,p) = \score(\argmin_{\x}f,p_{\argmin}) \label{eqn:Bayesian_argmin_scoring_rule}
+\end{equation}
+,where $f$ is the objective function, $p$ a (posterior) measure over objective functions. The measure $P_{\argmin} \in \probmeasures{\Xe}$ is the probability distribution that $P$ implies over the minimum $\argmin_{x}$ of the function $f$. We note that in \citep{Hennig2012entropy} $p_{\argmin}$ is denoted $p_{\min}$. The scoring rule $\score$ could be any strictly proper scoring rule, \citet{Hennig2012entropy} use the logarithmic loss for which a convenient approximations exits.
+
+Equation \eqref{eqn:Bayesian_argmin_scoring_rule} implies that the goal of optimisation is to find the exact location of the global minimum. In many applications however this is not required, it is sufficient to learn about the value at the minimum. In this case, one could use a scoring rule of the following form.
+
+
+\begin{equation}
+	\score_{\mbox{min}}(f,p) = \score(\min_{\x}f,p_{\min}), \label{eqn:Bayesian_argmin_scoring_rule}
+\end{equation}
+where $\min_{\x}f$ is the minimal value of the objective function, $p_{\min}$ the measure $p$ induces over the minimal value of $f$.
+
+Lastly, it is possible that neither the location nor the exact value of the minimum is important. The goal is simply to find a location $\x^{*}$ where the function $f(\x^{*})$ is as small as possible. In most modern applications of numerical optimisation this is a more reasonable requirement than finding the exact location of the global optimum. This goal can be expressed in the scoring rule framework using the following scoring rule.
+
+\begin{equation}
+	\score_{\mbox{best}}(f,P) = f(\argmin_{\x}\expect{f\sim p}{f(\x)}) \label{eqn:Bayesian_optimisation_scoring_rule}
+\end{equation}
+
+Note that $\score_{\mbox{best}}$ is also a special case of a Bayesian decision score $\score_{\loss}$ (section \ref{sec:loss_scoring_rule}, Equation \eqref{eqn:loss_scoring_rule}) with loss function $\loss(f,a)=f(a)$.
+
+
+Information-greedy Bayesian optimisation methods are still in their infancy. Interpreting them in the general scoring-rule-based framework allows one to understand the underlying goals, and to propose straightforward extensions. I am not aware of either \eqref{eqn:Bayesian_argmin_scoring_rule} or \eqref{eqn:Bayesian_optimisation_scoring_rule} used in previous work in the context of Bayesian optimisation.
 
 \subsection{Sequential Bayesian quadrature}
 

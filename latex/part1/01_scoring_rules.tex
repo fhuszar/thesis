@@ -93,6 +93,7 @@ For a more elaborate proof and discussion of Bregman divergences and scoring rul
 So far we have only introduced quantities describing a single random variable, and comparing probability distributions over the same variable. We can extend the scoring rule framework to define information quantities that describe the relationship between multiple variables. A particularly useful quantity is the value of information, that measures the dependence between two variables:
 
 \begin{definition}[Generalised value of information]
+	\label{def:value_of_information}
 	Let $X,Y$ be random variables with joint distribution $P\in\probmeasures{\Xe\times\Ye}$. Let $\score:\Xe\times\probmeasures{\Xe}\mapsto\Reals$ be a scoring rule over the variable $X$. We define the value of information in variable $Y$ about variable $X$ with respect to the scoring rule $\score$ as
 	\begin{equation}
 		\information{S}{X}{Y} =  \expect{x\sim P_{X}}\score(x,P_{X})- \expect{y\sim P_{Y}} \expect{x\sim P_{X\vert Y=y}}\score(x,P_{X\vert Y=y})
@@ -112,7 +113,7 @@ If the scoring rule is proper, the value of information is always non-negative. 
 	Let $\score:\Xe\times\probmeasures{\Xe}\mapsto\Reals$ be a strictly proper scoring rule with respect to probability distributions $\probmeasures{\Xe}$, and $P\in\probmeasures{\Xe\times\Ye}$ the joint probability of variables $X$ and $Y$. Then the two statements are equaivalent:
 	\begin{enumerate}
 		\item $\information{\score}{X}{Y} = 0$
-		\item the variables $X$ and $Y$ are independent
+		\item $\independent{X}{Y}$; the variables $X$ and $Y$ are independent
 	\end{enumerate}
 	\begin{proof}
 		If $X$ is independent of $Y$, then $\forall y: P_{X\vert Y=y} = P_{X}$, which implies $\forall y:  \divergence{S}{P_{X}}{P_{X\vert Y=y}}=0$, and hence $\information{\score}{X}{Y} = 0$.
@@ -132,6 +133,32 @@ It also follows that the value of information defined by strictly proper scoring
 \begin{corollary}[Weak symmetry of information]
 	Let $\score_X:\Xe\times\probmeasures{\Xe}\mapsto\Reals$ be a strictly proper scoring rule over $X$ and $\score_Y:\Ye\times\probmeasures{\Ye}\mapsto\Reals$ be a strictly proper scoring rule over $Y$.  Then $\information{\score_X}{X}{Y} > 0$ if and only if $\information{\score_Y}{Y}{X} > 0$.
 \end{corollary}
+
+We can also define a conditional version of the quantity which measures how much additional information $Y$ provides about $X$ given the value of a third variable $Z$ which is also observed.
+
+\begin{definition}[Conditional value of information]
+	\label{def:conditional_value_of_information}
+	Let $X,Y,Z$ be random variables with joint distribution $P\in\probmeasures{\Xe\times\Ye\times\Ze}$. Let $\score:\Xe\times\probmeasures{\Xe}\mapsto\Reals$ be a scoring rule over the variable $X$. We define the value of information in variable $Y$ about variable $X$ with respect to the scoring rule $\score$ as
+	\begin{equation}
+		\conditionalinformation{S}{X}{Y}{Z} =  \expect{x\sim P_{X\vert Z=z}}\score(x,P_{X\vert Z=z})- \expect{y\sim P_{Y\vert Z=z}} \expect{x\sim P_{X\vert Y=y, Z=z}}\score(x,P_{X\vert Y=y, Z=z})
+	\end{equation}
+	Alternatively, we can write information in terms of the generalised entropy or divergence functions
+		\begin{align}
+			\conditionalinformation{\score}{X}{Y}{Z=z} &=  \genentropy{\score}{P_{X\vert Z=z}} - \expect{y \sim P_{Y \vert Z=z}} \genentropy{\score}{P_{X\vert Y=y, Z=z}}\\
+				&= \expect{y\sim P_{Y}}\divergence{S}{P_{X\vert Z=z}}{P_{X\vert Y=y, Z=z}}
+		\end{align}
+\end{definition}
+
+Just like in the case of non-conditional value of information, the definition only calls for a scoring rule over $X$, not over the other variables $X$ or $Z$. Just like the value of information was related to statistical independence, conditional value of information is related to conditional independence in the following sense.
+
+\begin{statement}
+	Let $\score:\Xe\times\probmeasures{\Xe}\mapsto\Reals$ be a strictly proper scoring rule with respect to Borel probability distributions $\probmeasures{\Xe}$, and $P\in\probmeasures{\Xe\times\Ye\times\Ze}$ the joint probability of variables $X$ and $Y$ and $Z$. Then the following two statements are equaivalent:
+	\begin{enumerate}
+		\item $\conditionalinformation{\score}{X}{Y}{Z=z} = 0$
+		\item $\conditionallyindependent{X}{Y}{Z=z}$; the variables $X$ and $Y$ are conditionally independent given $Z=z$
+	\end{enumerate}
+\end{statement}
+
 
 \section{Examples of scoring rules}
 
@@ -544,7 +571,15 @@ Thus, the divergence function \eqref{eqn:spherical_kernel_divergence} is related
 
 I am not aware of any previous definition or mention of the spherical scoring rule or it's associated divergence in either the statistics or machine learning literature. It is unclear whether this intuitive divergence function provides any advantages over, say MMD, in practical applications, or whether efficient empirical estimators exist.
 
-\subsection{Scoring rules and Bayesian decision problems}
+% ##        #######   ######   ######  
+% ##       ##     ## ##    ## ##    ## 
+% ##       ##     ## ##       ##       
+% ##       ##     ##  ######   ######  
+% ##       ##     ##       ##       ## 
+% ##       ##     ## ##    ## ##    ## 
+% ########  #######   ######   ######  
+
+\subsection{Scoring rules and Bayesian decision problems \label{sec:loss_scoring_rule}}
 
 The scoring rule framework is very flexible, in fact for every Bayesian decision problem it is possible to derive a corresponding scoring rule as we will show in this section.
 
@@ -558,7 +593,7 @@ Let us assume we have a probabilistic forecast or belief $P$ about the state of 
 When we observe the value of $X$ we can score the probabilistic forecast, by evaluating the loss incurred by using this optimal action $\action^{*}_{P}$ in state $\X=\x$.
 
 \begin{align}
-	\score_{\loss}(\x,P) = \loss(\x,\action^{*}_{P})
+	\score_{\loss}(\x,P) = \loss(\x,\action^{*}_{P}) \label{eqn:loss_scoring_rule}
 \end{align}
 
 This function only depends on the true state $\x$ and the forecast $P$, hence it is a scoring rule. The generalised entropy that this scoring rule defines is otherwise known as the Bayes-risk of the decision problem:

@@ -1,5 +1,4 @@
 %!TEX root = main.tex
-
 \newcommand{\TODO}[1]{\textbf{TODO: #1}}
 
 \newcommand{\eg}{e.\,g.\ }
@@ -9,13 +8,15 @@
 \newcommand{\trace}[1]{\mbox{tr}\,#1}
 
 
+
+\newcommand{\independent}[2]{#1\perp\!\!\!\perp#2}
+\newcommand{\conditionallyindependent}[3]{#1\perp\!\!\!\perp#2\vert#3}
 \newcommand{\hamiltonian}{H}
 \newcommand{\E}[2]{\mathbb{E}_{#1}\left[ #2 \right]}
 \newcommand{\expect}[1]{\mathbb{E}_{#1}}
 \newcommand{\cov}[3]{\mathbb{C}\mbox{ov}_{#1}\left[{#2},{#3}\right]}
 \newcommand{\covar}{\operatorname{cov}}
 \newcommand{\var}[1]{\mathbb{V}_{#1}}
-\newcommand{\independent}{\perp\!\!\!\perp}
 
 \newcommand{\model}{\mathcal{M}}
 \newcommand{\List}{\mathcal{L}}
@@ -26,6 +27,8 @@
 \newcommand{\KL}[2]{d_{KL}\left[#1\middle\|#2\right]}
 \newcommand{\MMD}[2]{d_{MMD}\left[#1\middle\|#2\right]}
 \newcommand{\information}[3]{\mathbb{I}_{#1}\left[#2\leftarrow#3\right]}
+\newcommand{\conditionalinformation}[4]{\mathbb{I}_{#1}\left[#2\leftarrow#3\vert#4\right]}
+
 
 \newcommand{\iid}{i.\,i.\,d.\ }
 \newcommand{\x}{x}
@@ -33,6 +36,7 @@
 \newcommand{\X}{X}
 \newcommand{\Xe}{\mathcal{X}}
 \newcommand{\Ye}{\mathcal{Y}}
+\newcommand{\Ze}{\mathcal{Z}}
 \newcommand{\Qe}{\mathcal{Q}}
 \newcommand{\Fe}{\mathcal{F}}
 \newcommand{\He}{\mathcal{H}}
