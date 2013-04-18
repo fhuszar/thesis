@@ -1,6 +1,6 @@
 %!TEX root = ../main.tex
 
-\paragraph{Summary of contributions} The results presented in this chapter are joint work with Neil M.\ T.\ Houlsby, M\'{a}t\'{e} Lengyel and Zoubin Ghahramani, and are published as an online technical report \citep{Houlsby2011} and as part of \citep{Houlsby2012preference}. NMTH, ML and FH contributed equally to the development of the BALD framework. The connections to the unifying scoring rule framework are original contribution by FH.
+\paragraph{Summary of contributions} The results presented in this chapter are joint work with Neil M.\ T.\ Houlsby, M\'{a}t\'{e} Lengyel and Zoubin Ghahramani, and are published as an online technical report \citep{Houlsby2011} and as part of \citep{Houlsby2012preference}. NMTH, ML and FH contributed equally to the development of the BALD framework. Unifying active learning, Bayesian optimisation and Bayesian quadrature in the scoring rules framework is original contribution by FH.
 
 \section{Introduction}
 
@@ -67,6 +67,14 @@ Yet another equivalent formulation of the criterion expresses the learner's goal
 
 The equivalence between these three criteria has been noted in the context of the Shannon's information in \citep{MacKay1992}. The framework presented here is a generalisation of \citeauthor{MacKay1992}'s work, and allows one to specify the goal of Bayesian active learning as a scoring rule for the posterior distribution. In the following section I will review a wide range of Bayesian methods in the literature that all fall within the scope of this approach.
 
+% ######## ##     ##    ###    ##     ## ########  ##       ########  ######  
+% ##        ##   ##    ## ##   ###   ### ##     ## ##       ##       ##    ## 
+% ##         ## ##    ##   ##  #### #### ##     ## ##       ##       ##       
+% ######      ###    ##     ## ## ### ## ########  ##       ######    ######  
+% ##         ## ##   ######### ##     ## ##        ##       ##             ## 
+% ##        ##   ##  ##     ## ##     ## ##        ##       ##       ##    ## 
+% ######## ##     ## ##     ## ##     ## ##        ######## ########  ######  
+
 \section{Examples and special cases}
 \subsection{Shannon's entropy}
 
@@ -76,36 +84,34 @@ Sannon's entropy is used in multiple practical methods \citep{MacKay1992,Lawrenc
 
 \subsection{Decision theoretic active classification}
 
-Often, applying active learning in a general supervised learning, the performance is assessed in terms of average prediction error on a held-out test dataset. If this is the case, the scoring rule used to define information in the framework should be chosen to reflect this.
+In supervised learning the goal of learning is to accurately predict the outcome $y$ and the performance is often assessed in terms of average prediction error on a held-out test dataset. If this is the case, the scoring rule used to define information in the active learning framework should be chosen to reflect this held-out dataset:
 
 \begin{equation}
 	\score_{\loss}(\param,p_\data) = \iint \loss(\hat{\y}(\x,p_\data),\y) p(\y\vert\x,\param) d\y\ p_{test}(\x) d\x,
 \end{equation}
 
-where $p_{test}$ is the distribution of test examples, $\loss(\y,\y')$ is the loss incurred for prediction $\y$ when the true output is $\y'$, and $\hat{\y}(\x,p)$ is the predicted label for input $\x$ given the posterior $p_\data$ over $\param$. $\hat{\y}(\x,p)$ can be the Bayes decision, but this is not a requirement, as long as it is consistent with how decisions are computed in the final evaluation.
+where $p_{test}$ is the distribution of test examples, $\loss(\y,\y')$ is the loss incurred for prediction $\y$ when the true output is $\y'$, and $\hat{\y}(\x,p)$ is the predicted label for input $\x$ given the posterior $p_\data$ over $\param$. $\hat{\y}(\x,p)$ can be the Bayes decision, but this is not a requirement, as long as it is consistent with how decisions are computed in the final evaluation. 
 
 Exact decesion theoretic active learning is complicated to achieve in practice, however approximation strategies exist. \citet{} apply \citet{ZhuGhahramani} use a similar objective function to perform graph-based active learning.
 A related approach minimises the Shannon mutual information between the label of the chosen point and the unseen labels of a pool of unlabelled points in a transductive setting.
 
 \subsection{Information-greedy Bayesian optimisation}
 
-\TODO{introductory paragraph about global optimisation}
+Numerical optimisation techniques are an important tool for many applications in engineering and computational science.
+The goal is to find the minimum of an objective function $f$ by probing the function at a sequence of locations $x_n$. At each step, the function value $f(\x_n)$, and often local gradients are revealed. Many of these search and optimisation algorithms can be interpreted as active learning algorithms that try to learn about the objective function. This interpretation allowed for the development of novel class of probabilistic optimisation approaches which explicitly model the objective function, and perform probabilistic inference as part of the optimisation procedure. Many of these modern methods use Gaussian processes to model complex surfaces.
 
-Many of these search and optimisation algorithms can be inerpreted as adaptive learning algorithms that probe the function at various locations to uncover the location of the minimum. This interpretation allowed for the development of novel class of probabilistic optimisation approaches which explicitly model the objective function, and perform probabilistic inference as part of the optimisation procedure. Many of these models use Gaussian processes to model complex surfaces.
+The first generation of Bayesian optimisation algorithms were typically based on the concept of improvement: the aim is to evaluate the objective function at a sequence of points, such that that subsequent function values become lower and lower. Several heuristics have been developed around this idea, including the popular expected improvement \citep{Mockus1982,Jones1998, Frean2008}, probability of improvement \citep{Jones2001,Lizotte2008} and upper confidence bounds \citep{Srinivas2009}. These algorithms are prone to getting stuck in local minima because they attempt to collect low function values, rather than to learn about the location of the optimum \citep{Hennig2012entropy}.
 
-The first generation of Bayesian optimisation algorithms were typically based on the concept of improvement: the aim is to evaluate the objective function at points so that subsequent function values become lower and lower. Several heuristics have been developed around this idea, including the popular expected improvement \citep{Mockus1982,Jones1998, Frean2008}, probability of improvement \citep{Jones2001,Lizotte2008} and upper confidence bounds \citep{Srinivas2009}. These algorithms are prone to getting stuck in local minima because they attempt to collect low function values, rather than to learn about the location of the optimum \citep{Hennig2012entropy},.
+The newest class of algorithms \citep{Hennig2012entropy}, called information-greedy algorithms separate the problem of learning about the function and providing an estimate to the minimum. The sequence of function evaluations does not necessarily converge, or indeed it does not generally decrease. These algorithms prefer exploration to exploitation.
 
-The newest class of algorithms \citep{Hennig2012entropy}, called information-greedy algorithms separate the problem of learning about the function and providing an estimate to the minimum. The sequence of function evaluations does not necessarily converge, and indeed do not generally decrease. These algorithms prefer exploration to exploitation.
-
-The information-greedy Bayeisan optimisation algorithm presented in \citep{Hennig2012entropy} is a special case of the scoring-rule-based active learning framework. They employ a scoring rule of the following form:
+Entropy search, and information-greedy Bayeisan optimisation algorithm presented in \citep{Hennig2012entropy} is a special case of the scoring-rule-based active learning framework. It employs a scoring rule of the following form:
 
 \begin{equation}
 	\score_{\mbox{argmin}}(f,p) = \score(\argmin_{\x}f,p_{\argmin}) \label{eqn:Bayesian_argmin_scoring_rule}
 \end{equation}
-,where $f$ is the objective function, $p$ a (posterior) measure over objective functions. The measure $P_{\argmin} \in \probmeasures{\Xe}$ is the probability distribution that $P$ implies over the minimum $\argmin_{x}$ of the function $f$. We note that in \citep{Hennig2012entropy} $p_{\argmin}$ is denoted $p_{\min}$. The scoring rule $\score$ could be any strictly proper scoring rule, \citet{Hennig2012entropy} use the logarithmic loss for which a convenient approximations exits.
+,where $f$ is the objective function which takes the role of $\param$ as the parameter of interest. $p$ is a (posterior) measure over objective functions -- in most recent work this is a Gaussian process measure. $p_{\argmin} \in \probmeasures{\Xe}$ is the probability distribution that $p$ implies over the location of the minimum $\argmin_{x}f$. Note that in \citep{Hennig2012entropy} $p_{\argmin}$ is called $p_{\min}$, I use a different notation for consistency. The scoring rule $\score$ could be any strictly proper scoring rule, \citeauthor{Hennig2012entropy} use the logarithmic loss which they derive approximations for.
 
-Equation \eqref{eqn:Bayesian_argmin_scoring_rule} implies that the goal of optimisation is to find the exact location of the global minimum. In many applications however this is not required, it is sufficient to learn about the value at the minimum. In this case, one could use a scoring rule of the following form.
-
+Equation \eqref{eqn:Bayesian_argmin_scoring_rule} implies that the goal of optimisation is to find the exact location of the global minimum. In many applications however this is not required, instead, it is sufficient to learn about the value at the minimum. In this case, one could use a scoring rule of the following form.
 
 \begin{equation}
 	\score_{\mbox{min}}(f,p) = \score(\min_{\x}f,p_{\min}), \label{eqn:Bayesian_argmin_scoring_rule}
