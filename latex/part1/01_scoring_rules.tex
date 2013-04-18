@@ -333,7 +333,7 @@ MMD measures the divergence or distance between two distributions, $P$ and $Q$. 
 	
 Intuitively, if two distributions are close in the integral probability metric sense, then no matter which function $f$ we choose from function class $\mathcal{F}$, the difference in its expectation under $P$ and $Q$ should be small. This class of divergences include Wasserstein distance \citep{Barrio1999}, Dudley metric \citep{Dudley1974} and MMD, which differ only in their choice of the function class $\Fe$.
 
-A particularly interesting case is when the function class $\Fe$ is functions of unit norm from a reproducing kernel Hilbert space (RKHS) $\He$. In this case, the MMD between two distributions can be conveniently expressed using expectations of the associated kernel $k(x, x')$ only \citep{Sriperumbudur2010}:
+A particularly interesting case is when the function class $\Fe$ is functions of unit norm from a reproducing kernel Hilbert space (RKHS) $\He$. In this case, the MMD between two distributions can be conveniently expressed using expectations of the associated kernel $k(x, x')$ only \citep{Sriperumbudur2008}:
 
 \begin{align}
 \divergence{k}{P}{Q} &\defeq \mbox{MMD}^2\left(P,Q\right)\\
