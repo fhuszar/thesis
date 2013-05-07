@@ -1,0 +1,21 @@
+\renewcommand{\ic}{\hspace{0.3cm}}
+\begin{table}
+\centering
+\caption{Test error for each method and active learning strategy with at most 1000 users.}
+\resizebox{0.79\textwidth}{!}{
+\begin{tabular}{@{\ic}l@{\ic}@{\ic}c@{\ic}c@{\ic}c@{\ic}@{\ic}c@{\ic}c@{\ic}c@{\ic}@{\ic}c@{\ic}c@{\ic}c@{\ic}}
+\hline
+\textbf{Dataset}&\textbf{CPU-B}&\textbf{CPU-E}&\textbf{CPU-R}&
+\textbf{CP-B}&\textbf{CP-E}&\textbf{CP-R}&\textbf{SU-B}&\textbf{SU-E}&\textbf{SU-R}\\\hline
+
+Synthetic&\underline{\bf{0.135}}&\underline{\bf{0.135}}&0.139&\bf{0.153}&0.160&0.173&\bf{0.249}&0.259&0.268\\
+Sushi&\bf{0.148}&0.153&0.178&\underline{\bf{0.144}}&0.151&0.176&\bf{0.179}&0.197&0.212\\
+MovieLens&\bf{0.170}&0.176&0.199&\underline{\bf{0.163}}&0.170&0.195&\bf{0.225}&0.235&0.248\\
+Election&0.202&\bf{0.158}&0.224& \underline{\bf{0.097}} & \underline{\bf{0.093}} &0.151&\bf{0.332}&0.346&0.338\\
+Jura&\bf{0.143}&\underline{\bf{0.141}}&0.168&\underline{\bf{0.138}}&\underline{\bf{0.138}}&0.169&0.176&\bf{0.166}&0.197\\
+
+\hline
+\end{tabular}
+}
+\label{tab:large}
+\end{table}

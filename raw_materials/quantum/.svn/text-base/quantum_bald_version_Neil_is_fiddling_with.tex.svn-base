@@ -1,0 +1,167 @@
+\documentclass[aps,twocolumn,showpacs,prl]{revtex4-1}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{color}
+\usepackage{amsmath}
+
+\newcommand{\m}{{\mathcal{M}}}
+\newcommand{\x}{{\mathbf{x}}}
+\newcommand{\param}{{\rho}}
+\newcommand{\data}{\mathcal{D}}
+\newcommand{\argmax}{ \operatorname*{arg \max}} 
+
+
+\begin{document}
+
+\title{Beyond Mutually Unbiased Measurements}
+
+\author{F.~Husz\'{a}r}
+\affiliation{Computational and Biological Learning Lab\\ Department of Engineering, University of Cambridge \\Cambridge, CB2 1PZ, UK}
+%
+\author{N.\,M.\,T.~Houlsby}
+\affiliation{Computational and Biological Learning Lab\\ Department of Engineering, University of Cambridge \\Cambridge, CB2 1PZ, UK}
+%
+
+\begin{abstract}
+In this letter we revisit the problem of optimal experiment design for quantum state determination. Our letter represents an extension of the work by Wootters \emph{et al.}\cite{OEDFirst}, who introduced mutually unbiased bases for optimal state determination. Our framework reproduces the finding that the first D+1 copies of the state should be measured in mutually unbiased states. However, it also reveals that after having made at least single observation in all D+1 mutually unbiased bases, the next measurement basis is in fact equally biased with all previously used measurements, and its exact otientation in fact depends on the outcome of previous measurements. Thus, repeated use of fixed set of MUBs is suboptimal. This suggests an adaptive procedure for state determination whereby after each single observation the measurement apparatus is reconfigured adaptively, depending on the previous observations. We show a physically feasible experimental setup for what we call active tomography, and show by Monte Carlo simulations how it outperforms passive tomography using a fixed set of mutually unbiased bases.
+\end{abstract}
+
+\pacs{03.65.Wj	}
+\maketitle
+
+
+Quantum tomography has become a valuable tool in quantum information processing, being essential for characterisation of quantum states, gates, and measurement equipment. In this paper we focus on classical problem of quantum state tomography (QST) and the design of maximally effective quantum experiments. 
+
+QST aims to determine the state from outcomes of measurements performed on an ensemble of identically prepared systems. However, in large systems the number of copies, and thus experimentation time required for precise tomographic reconstruction is often prohibitive. For example, in a recent experimental study \textcolor{red}{(ref?)}, full tomographic reconstruction of a four-photon state reportedly took over a week of net experiment time. Optimal experiment design (OED) aims to make such experiments substantially shorter by selecting cleverly which measurement configurations to use during the experiment.
+
+Using information theory tt has been shown that mutually unbiased bases (MUBs) are maximally informative \cite{patra07}. Research since has mainly focused on how to prove existence of, and theoretically construct MUBs for systems of various dimensions; they have not all been found \textcolor{red}{refsomething}. Other works, \cite{OEDfirst}, \cite{PRApaper} consider OED when only a non-ideal set of measurements is available. Using maximum likelihood estimates (MLE) and the Cramer-Rao bound the optimal time to spend performing each measurement is calculated. What is common to these approaches, including MUBs, is that the set of measurements used throughout the experiment is fixed a priori. It is intuitive to think that if the measurements are allowed to be reconfigured in the light of the data already collected, the efficiency of state determination can be further improved. We call this approach \emph{active tomography} (after active learning in machine learning literature).
+
+In this letter we revisit the Bayesian/information theoretic approach to OED presented in \cite{OEDFirst}, which aims at reducing the Shannon entropy of the Bayesian posterior distribution over density matrices conditioned on experimental outcome. Crucially, in our framework we allow the next measurement to be optimised after each single measurement. We show that by allowing the measurements to be picked depending on the data, the efficiency of tomographic reconstruction can be increased substantially compared to using a fixed set of MUBs. We provide analytical and experimental results for single and multi-qubit systems, and consider practical implementations of the active tomography. 
+
+\paragraph{Quantum state tomography} involves determining a quantum state $\rho$ from experimental data. If our systems is $D$-dimensional ($D=2^N$ for $N$-qubit systems), $\rho$ is an $D \times D$ complex-valued density matrix. $\rho$ must be Hermitian and have unit trace, therefore, one must estimate $D^2-1$ real numbers to characterise $\rho$. 
+
+When performing a tomographic experiment we may configure our apparatus in $K$ different ways; each configuration corresponds to a basis set of $D$ positive operator-valued measures (POVM) elements. Given infinite measurement each basis spans up to $D-1$ degrees of freedom, so to achieve complete reconstruction $K\geq D+1$. Each POVM element is an $D \times D$ complex matrix, which is Hermitian and positive. Within a basis set each POVM must be orthogonal i.e. $\text{Tr}\{M_i^{(1)}M_j^{(1)} \}=\delta_{ij}$. For two basis set to be mutually unbiased, $\text{Tr}\{M_i^{(1)}M_j^{(2)} \}=\frac{1}{D}\,\, \forall i,j$ must hold. Associated with each POVM is a single outcome of the experiment; when a state enters the apparatus in configuration $\gamma$, then from Born's rule \textcolor{red}{cite Born 1926?} outcome $\alpha$ is observed with probability
+
+\begin{equation}
+label{eqn:born}
+p_{\alpha\gamma} = \text{Tr}\left\{M_{\alpha\gamma}\rho  \right\}
+\end{equation}
+
+where $M_{\alpha\gamma}$ is the POVM associated with outcome $\alpha$. For each configuration, the outcome probabilities must sum to unity, which imposes the following constraint on the POVMs, $\sum_{\alpha=1}^D M_{\alpha\gamma}=I_{D\times D}$. 
+
+\paragraph{State reconstruction} is approached with three possible methods. The first is to simply invert Born's, Eqn \eqref{eqn:born} rule using matrix pseudo inverses \textcolor{red}{(ref?)}, however, this does not necessarily yield a feasible state. The second method, Maximum likelihood estimation (MLE) chooses the state that is most likely to have produced the data, $\mathcal{D}$ i.e. 
+\begin{equation}
+\label{eqn:lik}
+\underset{\rho}{\text{argmax}}\,\,p(\data|\rho)=\sum_{\alpha\gamma}\text{Tr}\{M_{\alpha\gamma}\rho\}^{n_{\alpha\gamma}}
+\end{equation}
+ where $n_{\alpha\gamma}$ is the number of times outcome $\alpha$ was observed in configuration $\gamma$. This always yields feasible states, however, this method can often yield rank-deficient states; in 1 qubit systems this corresponds to pure states. Given finite observations this seems unreasonable as it claims that there is zero probability assigned to making certain observations, a very confident conclusion. Furthermore this method returns no error bars on the solution, these issues are discussed extensively in \cite{BayesianTomography}. 
+
+Recent work developing Bayesian approaches to QST suffer from neither of these problems \textcolor{red}{ref}. First a prior distribution over feasible states is specified $\pi_0(\rho)\text{d}\rho$ \textcolor{red}{(used same notation as in Kohout)}; usually this is set to be as `uniform' as possible over feasible states. This is augmented by the likelihood (as in Eqn. \eqref{eqn:lik}) using Bayes rule to yield a posterior distribution over states:
+
+\begin{equation}
+\label{eqn:bayes}
+\pi_{\data}(\rho)\text{d}\rho\propto p(\data|\rho)\pi_0(\rho)\text{d}\rho
+\end{equation}
+
+The posterior naturally expresses our uncertainty in the true state. Should we want a point estimate we may report, say, the posterior mean which is known to maximise the expected fidelity \textcolor{red}{ref}. 
+
+Two issues exist: firstly, the choice of prior. One method, proposed in \cite{kohout or one of the papers he references} is to express the $D \times D$ dimensional mixed state as a \textcolor{red}{what is the right term, inner product?} of a $D \times K$ dimensional pure state, $|\psi_{D\times K}><\psi_{D\times K}|=\rho_{D\times D}$. Putting a Haar measure on the higher dimensional pure state yields a Hilbert-Schmidt measure on $\rho$. \textcolor{red}{put a line in about size of k? i dont really understand the haar measure}. For 1-qubit systems one could implement a Lebesgue measure directly on the Bloch sphere \cite{thepaperthatdoesthat}, however, this is hard to generalise to many dimension. The second issue is that only when MUBs are used does the likelihood admit a conjugate prior and the posterior is tractable; otherwise the posterior becomes analytically complicated and we resort to sampling methods, specifically the Metropolis-Hastings algorithm, \cite{kohout,a general paper on MCMC}.
+
+\paragraph{Information theoretic experimental design} concerns finding the paramters of a model with the greatest precision with minimal data. Suppose we characterise our model by some parameters $\param$. Given an experimental set up, $\m$, each $\param$ induces a probability measure on our experimental data, $\x$, denoted $p(\x|\param,\m)\mathrm{d}x$. Our prior beliefs about $\param$ are expressed as $p(\param)$; after taking a measurement our posterior belief is $p(\param|\x,\m)$. The aim of an experiment is to falsify as many hypotheses as possible, each $\param$ corresponds to a different hyposthesis, so we desire our posterior to shrink to a Dirac delta. The Shannon entropy (denoted $H[p(\cdot)]$) is a well motivated measure of uncertainty in a probability distribution \cite{coverandthomas} , so reducing our hypothesis space corresponds to minimizing our expected posterior entropy, \cite{lindley56	,mackay92}. Suppose we have already seen $\data$, the value assigned to making a measurement $\x$ is:
+
+\begin{equation}
+\mathfrak{I}(\m)= H\left[p(\param|\data)\right] - \left[ p(\param|\x,\m,\data) \right]
+\end{equation} 
+
+Prior to taking the measurement we do not know the outcome, so we must use the expected information gain, Eqn. \eqref{eqn:expectedinfo}; if we note that this is equivalent to the mutual entropy between the parameters and the outcome, we can exploit symmetry properties to re-write the objective in terms of predictive distributions, Eqn. \eqref{eqn:rearrangement}.We seek the following experimental set up:
+
+\begin{align}
+\underset{\m}{\text{argmax}}\,\,&\mathbb{E}_{\x\sim p(\x|\m,\data)}\left[\mathfrak{I}(\x) \right] \label{eqn:expectedinfo} \\
+=\, &I(\param,\x;\m,\data) \nonumber \\
+=\, &H\left[p(\x|\m,\data) \right] - \mathbb{E}_{\param\sim p(\param|\data)}H\left[\x|\m,\param \right] \label{eqn:rearrangement}
+\end{align}
+
+Eqn. \eqref{eqn:rearrangement} offers two substantial computational advantages over Eqn. \eqref{eqn:expectedinfo}: firstly, entropies need only be computed in output space (usually much lower dimensional than parameter space), and secondly the posterior does not need to be re-computed for every possible experimental set up and outcome - a huge saving if Monte-carlo based approximate inference is used.
+
+For QST, the parameters, $\param$ are the density matrix, $\mathfrak{M}$ is a set of POVMs and $\x$ are multinomial probabilities, derived from observation frequencies. After every measurements we perform the optimisation in Eqn. \eqref{eqn:rearrangement} on a pre-defined class of allowable experimental set ups to maximise the informativeness of our next tomographic measurement.
+
+\paragraph{Study 1: single qubit tomography.} In single qubit systems, $\rho$ has three degrees of freedom, we can therefore represent a state as a point in the Bloch sphere \textcolor{red}{ref?}. The Cartesian coordinates correspond to projections onto the three Pauli matrices \textcolor{red}{ref?}. Orthogonal bases points in opposite direction in the Bloch sphere and a measurements provide a frequency count for a Bernoulli likelihood. An optimal measurement will be projective (i.e. have rank one, corresponding to a point on the surface of the Bloch sphere). This is because any higher rank measurement will merely yield a statistical mixture of two orthogonal projective measurements, \textcolor{red}{and somehow formally show in 1 line how this is suboptimal}. 
+
+For active tomography we would like to access all projective measurements with our experimental set up. Because optimal measurements are projective we only require two degrees of freedom; using polar coordinates, the radial distance is set to unity and we may adjust the inclination and azimuth angles of our POVM. \cite{OpticalQuantumScience} shows that these two degrees of freedom can by achieved  by rotating a quarter-wave and half-wave plates (QWP and HWP) in front of a polarising beam splitter. 
+
+We first provide a toy demonstration of the effect of active tomography, by considering tomography when the inclination angle is fixed at zero. This corresponds to tomography on a circle in the Bloch sphere, we cannot disambiguate along the Cartesian coordinate orthogonal to the plane. Fig. \ref{fig:2dtomography} shows the progression of bases chosen by Eqn.  \eqref{eqn:rearrangement}. Initially our objective is uniform, WLOG we assume that our first measurement is in the `$x$'-direction and our first measurement is positive. Active tomography now selects a measurement in the `$y$'-direction, this yields a complete set of MUBs. Passive MUB experimental literature would then cycle through the MUBs chosing them in turn. However, our criterion states that it is optimal to chose a measurement at $45^{\circ}$ to the MUBs. \textcolor{red}{maths in appendix,was almost there with the proof, just need to show the range in the first term is necessarily greater than that in the second}. The objective function takes the form of a simple sine wave in azimuth angle. After many measurements, the objective function becomes much more complicated and analytic computation of the objective become more difficult, so we resort to sampling and optimisation routines. 
+
+%\begin{tikzpicture}
+%\label{2dtomography}
+%\def\anglediff{0.01123595516}
+%\def\rin{1in}
+%\def\rout{1.2in}
+%\foreach \angle/\red/\green/\blue in %{0/0.5/0/0,0.01123595506/0.5625/0/0,0.02247191011/0.6875/0/0,0.03370786517/0.9375/0/0,0.04494382022/1/0.1875/0,0.05617977528/1/0.5625/0,0.06741573034/1/0.9375/0,0.07865168539/0.625/1/0.375,0.08988764045/0.25/1/0.75,0.1011235955/0/0.8125/1,0.1123595506/0/0.4375/1,0.1235955056/0/0.125/1,0.1348314607/0/0/0.8125,0.1460674157/0/0/0.625,0.1573033708/0/0/0.5625,0.1685393258/0/0/0.5625,0.1797752809/0/0/0.5625,0.191011236/0/0/0.6875,0.202247191/0/0/0.9375,0.2134831461/0/0.1875/1,0.2247191011/0/0.5625/1,0.2359550562/0/0.9375/1,0.2471910112/0.375/1/0.625,0.2584269663/0.8125/1/0.1875,0.2696629213/1/0.8125/0,0.2808988764/1/0.4375/0,0.2921348315/1/0.125/0,0.3033707865/0.8125/0/0,0.3146067416/0.625/0/0,0.3258426966/0.5625/0/0,0.3370786517/0.5/0/0,0.3483146067/0.625/0/0,0.3595505618/0.75/0/0,0.3707865169/1/0/0,0.3820224719/1/0.3125/0,0.393258427/1/0.6875/0,0.404494382/0.9375/1/0.0625,0.4157303371/0.5/1/0.5,0.4269662921/0.0625/1/0.9375,0.4382022472/0/0.6875/1,0.4494382022/0/0.3125/1,0.4606741573/0/0/1,0.4719101124/0/0/0.75,0.4831460674/0/0/0.5625,0.4943820225/0/0/0.5625,0.5056179775/0/0/0.5625,0.5168539326/0/0/0.5625,0.5280898876/0/0/0.75,0.5393258427/0/0/1,0.5505617978/0/0.3125/1,0.5617977528/0/0.6875/1,0.5730337079/0.0625/1/0.9375,0.5842696629/0.5/1/0.5,0.595505618/0.9375/1/0.0625,0.606741573/1/0.6875/0,0.6179775281/1/0.3125/0,0.6292134831/1/0/0,0.6404494382/0.75/0/0,0.6516853933/0.625/0/0,0.6629213483/0.5/0/0,0.6741573034/0.5625/0/0,0.6853932584/0.625/0/0,0.6966292135/0.8125/0/0,0.7078651685/1/0.125/0,0.7191011236/1/0.4375/0,0.7303370787/1/0.8125/0,0.7415730337/0.8125/1/0.1875,0.7528089888/0.375/1/0.625,0.7640449438/0/0.9375/1,0.7752808989/0/0.5625/1,0.7865168539/0/0.1875/1,0.797752809/0/0/0.9375,0.808988764/0/0/0.6875,0.8202247191/0/0/0.5625,0.8314606742/0/0/0.5625,0.8426966292/0/0/0.5625,0.8539325843/0/0/0.625,0.8651685393/0/0/0.8125,0.8764044944/0/0.125/1,0.8876404494/0/0.4375/1,0.8988764045/0/0.8125/1,0.9101123596/0.25/1/0.75,0.9213483146/0.625/1/0.375,0.9325842697/1/0.9375/0,0.9438202247/1/0.5625/0,0.9550561798/1/0.1875/0,0.9662921348/0.9375/0/0,0.9775280899/0.6875/0/0,0.9887640449/0.5625/0/0,1/0.5/0/0} %{
+%\definecolor{currentcolor}{rgb}{\red,\green,\blue}
+%\draw[draw=none,fill=currentcolor](-360*\angle+180*\anglediff:\rin) -- %(-360*\angle+180*\anglediff:\rout) -- (-360*\angle+540*\anglediff:\rout) -- %(-360*\angle+540*\anglediff:\rin) -- cycle;
+%\draw[draw=none,fill=currentcolor](-360*\angle:\rin) -- (-360*\angle:\rout) %-- (-360*\angle+360*\anglediff:\rout) -- (-360*\angle+360*\anglediff:\rin) %-- cycle;
+%}
+%\end{tikzpicture}
+
+Fig. \ref{fig:3dtomography} shows an extended simulation of full reconstruction of a single qubit state. It is clear that active tomography substantially improves the rate of reconstruction, after XXX trials, XXX times less experimental measurements need to be made to achieve the same fidelity.
+
+\begin{figure}
+\label{3dtomography}
+%stuff
+\caption{describe what fidelity is, perhaps inclus a pic of 4th and Nth base selection, make the fig small!}
+\end{figure}
+
+\paragraph{Study 2: 2-qubit separable and entangled tomography} \cite{OEDfirst}. We now investigate active tomography in 2-qubit systems, using separable state quantum tomography (SSQT) and entrangling interference \cite{OEDFirst,MUBexperiment}. With SSQT we perform single-qubit tomography on each bit using the experimental set up above. The complete measurement matrix decomposes into the Kroeneker product of the individual POVMs. To characterise each qubit one needs three bases, therefore we need $3^N$ bases to characterise an $N$ qubit system. Entangled tomography grants us access to the full set of feasible measurement matrices and we require only $2^N+1$ bases; however, detector noise is greater using this set up \cite{something}. In \cite{MUBtomography (check this)} an experimental investigation of the relative performance of SSQT and entangled tomography are investigated; we extend these experiments to include active tomography, Fig. \ref{fig:2qubit}.
+
+% insert 2 qubit figure etc etc.  
+
+
+
+\section{Additional Stuff}
+
+ Our adaptive framework, too, suggests that the first $D+1$ measurements should be in mutually unbiased bases, however, it also reveals that after at least a single measurement is made in all such measurements, continued use of the same set of MUB's is suboptimal. Indeed, we show analytically that for a one qubit case that having made one observation in each of the Pauli bases, the next best measurement is perpendicular to the maximum likelihood estimate which is perpendicular to the direction $(\pm1,\pm1\pm1)/\sqrt{3}$ (which is the maximum likelihood solution) in Bloch coordinates.
+
+
+
+
+Bayesian experimental design based on average reduction in posterior Shannon entropy is the generalisation of the above vanilla experiment design problem. In Bayesian design, one starts out with an a priori distribution over competing theories or parameter values. An experiment is described by a likelihood function: how probable the observed outcome is according to theory A.
+
+\paragraph{Experiment 1:} 2-qubit separable and entabgled tomography \cite{OEDFirst}, with adjustable quarter- and half-wave plates (with or without entangling two-photon interference \cite{MUBExperiment}). A way to compare it to non-adaptive MUB, SSQT.
+
+\paragraph{Experiment 2:} k-qubit state tomography with separable measurements. See how things scale with number of qubits/dimensionality.
+
+\paragraph{Experiment 3:} quantum process tomography: characterisation of a CNOT gate. Input state preparation ($\beta$-BBO, Type II spontaneous parametric down-conversion) and measurement continuously paramtrised via rotating QWPs and HWPs.
+
+\cite{OpticalQuantumScience} says, an arbitrary rotation in qubit-space is made possible by a QWP-HWP-QWP sequence. Three real degrees of freedom are in theory sufficient to realize an arbitrary one qubit quantum gate. Two degrees of freedom is sufficient to implement an arbitrary single-qubit projective measurement. This can be done by rotating a QWP and a HWP in front of a PBS.
+
+\cite{OEDFirst} required many repeated measurements with the same basis in order to get a convenient Gaussian approximation to the posterior, which allowed convenient expression of posterior entropies. We expressed the expected information gain in terms of entropies of the sampling distirbution, and therefore our approach does not require intractable computation of entropies of the posterior.
+
+Changing the basis by reconfiguring the measurement apparatus after each single measurement may be impracticable in some experiments. 
+
+If all measurements are mutually unbiased, the likelihood admits a conjugate prior, and the posterior is tractable. However as soon as
+ the measurements are biased with respect to one another, the posterior gets analytically complicated to work with, and we have to resort to Markov chain Monte Carlo methods as in \cite{BayesianTomography}.
+
+\begin{itemize}
+\item{\textbf{introduction}: why QT+QST?, summarise progression-invert Born's eq, MLE, Bayes (emphasise advantage of each+crack in loads of references (Nunn-PRA gets 31 refs into 1st paragraph!)), overview of OED and MUB research, motivate ACTIVE QT (mention D+1th base)- put in the hypothesis elimination stuff, mention mathematical and physical practicality, summarise with a `contributions of this paper' paragraph}
+\item{single qbit, bloch sphere, introduce info theoretic active learning, analytic MUB+AL stuff (maybe need to do resort to numerical integration) talk a little about priors, longer experiments, batch update etc.}
+\item{2 qbit SSQT+MUB BALD number of bases needed + practicality (noise), results + that interesting pic of 2 of the bases being uninformative, THINK ABOUT: how to pick MUBs with BALD}
+\item{many qbits, how do methods scale with dimensionality}
+\item{\textcolor{red}{point to note: CONSISTENCY: some of the physics papers use `probability measure' where `probability distribution' would do; I use there interchangeably, but `measure' sounds smarter; I don't mind, as long as we are consistent. Another thing: do we refer to this document as `letter' or `paper'}}
+\end{itemize}
+
+\textcolor{red}{could first introduce the complete problem of selecting all the measurements at once, then introduce the myopic approach and mention  submodularity/bounds, a bit pointless but might be impressive.}
+
+This paper is arranged as follows, in Section II we review Bayesian QST and information theoretic experimental design. Section III gives some analytical and simulated results for a single qubit system. Section IV considers 2 qubit systems where one can make arbitrary measurements on the entangled state or perform separable measurements. In Section V we investigate the utility of active tomography in higher dimensional systems, for which it is not necessarily known that MUBs exist...
+
+\textcolor{red}{note to self: revisit this para}Imagine that the conclusions of an experiment with respect to a particular theory are twofold: it either falsifies the theory, or not (in which case the theory may still be false, but this experiment did not ). The goal of experiment design in this scenario is straightforward: one should design an experiment, or sequence of experiments that is expected to falsify the most number of theories, so that we are left with as few competing theories as possible. The importance of adaptive experimental design is also obvious in this scenario: after having done some experiments, having falsified a certain fraction of the a priori plausible theories, one does not. 
+
+%\bibliography{quantum_bald}
+
+\end{document}
+
+
+
+
+
+
+

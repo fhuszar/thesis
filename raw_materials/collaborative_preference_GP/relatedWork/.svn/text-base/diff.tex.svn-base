@@ -1,0 +1,54 @@
+\section{Related Methods \label{sec:relatedWork}}
+
+\DIFaddbegin \DIFadd{In this section we briefly review some methods related to either the multi-task model for preference learning
+of Section \ref{sec:model} or the active learning approach BALD described in Section \ref{sec:active}.
+}
+
+\DIFaddend \paragraph{Multi-task Preference Learning} Other \DIFdelbegin \DIFdel{approaches to generalizing the GP framework }\DIFdelend \DIFaddbegin \DIFadd{methods for generalising the GP approach }\DIFaddend of \citep{chu2005} to
+the multi-user case are presented in \DIFdelbegin %DIFDELCMD < \citep{bonilla2010, birlutiu2009}%%%
+\DIFdelend \DIFaddbegin \citep{Bonilla2010,birlutiu2009}\DIFaddend . 
+Bonilla et al. \DIFdelbegin %DIFDELCMD < \citep{bonilla2010} %%%
+\DIFdel{use a GP to model both users and items simultaneously using a product kernel}\DIFdelend \DIFaddbegin \DIFadd{use GPs with a product kernel to model preference functions evaluated on both user and item features}\DIFaddend .
+This is a flexible approach, but is not applicable in our domain, where we do not assume access to user features.
+Birlutiu et al. \DIFdelbegin \DIFdel{model }\DIFdelend \DIFaddbegin \DIFadd{capture }\DIFaddend similarities between users \DIFdelbegin \DIFdel{using }\DIFdelend \DIFaddbegin \DIFadd{with }\DIFaddend a hierarchical GP model. 
+\DIFdelbegin \DIFdel{They capture shared behavior by assuming a common prior mean and covariance matrix over users. The model is less flexible than ours because user's preference functionsare modeled as perturbations about a unimodal prior; by combining distinct auxiliary latent functions we may capture a wider variety of user behavior. We compare experimentally to this model, details of the implementation may be found in the supplementary material. }%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdel{Our model resembles matrix factorization methods for recommendation systems where the users' preferences are expressed as the product of two matrices (here $\w$ and $\h$). Our method extends this approach by putting GP prior on the rows of $\h$, incorporating covariates on the items. Recently, matrix factorisation approaches have been extended successfully to large scale recommender systems }%DIFDELCMD < \citep{stern2009}%%%
+\DIFdelend \DIFaddbegin \DIFadd{In particular, they assume a common GP prior for the different preference functions.
+However, their model lacks flexibility since differences accross users are described
+as perturbations from a single unimodal prior. In real data we would expect
+to see different clusters of user preferences. The multi-task model from Section \ref{sec:model} is more flexible and can
+capture a wider variety of behaviors by computing linear combinations of a few latent functions shared across users}\DIFaddend .
+
+\paragraph{Active Learning} \DIFdelbegin \DIFdel{Maximum Entropy Sampling }\DIFdelend \DIFaddbegin \DIFadd{A related method is maximum entropy sampling }\DIFaddend (MES) \citep{sebastiani2000}\DIFdelbegin \DIFdel{also works explicitly in data space (i.e.}%DIFDELCMD < \, %%%
+\DIFdel{with Eqn. 
+}%DIFDELCMD < \,\eqref{eqn:rearrangement}%%%
+\DIFdel{). MES }\DIFdelend \DIFaddbegin \DIFadd{. 
+This method }\DIFaddend was proposed for regression models with input-independent \DIFdelbegin \DIFdel{observation noise. 
+Although Eqn.}%DIFDELCMD < \,\eqref{eqn:rearrangement} %%%
+\DIFdel{is used, the second term is constant because of input independent noise and isignored}\DIFdelend \DIFaddbegin \DIFadd{noise. 
+MES also works explicitly in data space, that is, with equation (\ref{eqn:rearrangement})}\DIFaddend . 
+However, \DIFdelbegin \DIFdel{when confronted with }\DIFdelend \DIFaddbegin \DIFadd{MESS ignores }\DIFaddend input-dependent \DIFdelbegin \DIFdel{observation noise
+(as is the case for GPC or our preference model) it fails }\DIFdelend \DIFaddbegin \DIFadd{noise
+and assumes that the second term in (\ref{eqn:rearrangement}) is constant. For the case of preference learning,
+where users are likely to give noisy feedback on their preferences,
+this means that MESS will fail }\DIFaddend to differentiate between \DIFdelbegin \DIFdel{model uncertainty and observation uncertainty (about which our model may be confident).
+There is a large host of other information-theoretic based approach that }\DIFdelend \DIFaddbegin \DIFadd{uncertainty in the value of the latent function
+and uncertainty in class labels.
+Several methods }\DIFaddend make further approximations to BALD when applied to \DIFdelbegin \DIFdel{GPC, }\DIFdelend \DIFaddbegin \DIFadd{GP
+binary classification }\DIFaddend and often have \DIFdelbegin \DIFdel{higher computational complexity. We describe these algorithms and compare them experimentally to BALD
+(see supplementary material). We find that }\DIFdelend \DIFaddbegin \DIFadd{significantly higher cost. Comparisons between BALD
+and these methods can be found in the supplementary material. Overall, }\DIFaddend BALD consistently performs \DIFdelbegin \DIFdel{very well because it makes the fewest approximations to the full information theoretic criteria}\DIFdelend \DIFaddbegin \DIFadd{better}\DIFaddend .
+The closest \DIFdelbegin \DIFdel{performing algorithm is MES, which has the same computational complexity as BALD ; it is therefore used as our comparison for active multi-task preference learning.
+ }%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+%DIF < The Query by Committee algorithm (QBC) \citep{freund1997} approach performs a sampling approximation to \eqref{eqn:rearrangement} . If BALD is used with a sampled posterior, it is equivalent to QBC but with a probabilistic measure of disagreement. QBC's deterministic vote criterion discards confidence in the predictions and so can exhibit the same pathologies as MES. 
+%DIF < The Informative Vector Machine (IVM) \citep{lawrence2002} is also motivated by information theory. It was designed for sub-sampling a dataset and cannot be used for online active learning because the alggorithm is privy to the $\y$ values before including a measurement. It cannot therefore work explicitly in output space i.e. with Eqn.\,\eqref{eqn:rearrangement}. The IVM uses Eqn.\,\eqref{eqn:ent_change}, but parameter entropies are calculated approximately in the marginal subspace corresponding to the observed data points. This approach is expensive, requiring $\mathcal{O}(Q_{\x}Q_{\y})$ posterior updates to sample a single new datapoint. To make this computationally feasible, Assumed Density Filtering (ADF) is proposed in \citep{lawrence2002} which is a further approximation to EP. Such an approach would be infeasible with our more complex inference algorithm.
+%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+%DIF < Another flavour of approaches is proposed for multi-user preference learning is to use Expected Value of Information (EVOI) \citep{bonilla2010}. This is a decision theoretic approach, and the objective is not to learn optimally about the parameters but to seek the data that is expected to improve the maximum of users latent function the most (i.e. find their most preferred item). This of course requires the set or distribution over test items to be known. This approach is well tailored for online active learning with a single user as it seeks to find the best recommendation as fast as possible, whereas the information theoretic approach is more suited when trying to learn the model offline from existing data from many users. By focussing just on areas of high preference one is less likely to discover the true latent functions underlying user behavior, our approach directly tries to reduce uncertainty about these alongside the user-specific parameters (i.e. the weights). Perhaps more importantly to calculate the EVOI new predictive distributions need to be calculated for all possible data points under consideration, again requiring $\mathcal{O}(Q_{\pair}Q_{\y})$ posterior updates; we only require one from that may calculate the score for all candidates, this offers a very large computational saving when the number of possible item pairs is large.
+ \DIFdelend \DIFaddbegin \DIFadd{competitor to BALD in these experiments is MES.
+ }\DIFaddend

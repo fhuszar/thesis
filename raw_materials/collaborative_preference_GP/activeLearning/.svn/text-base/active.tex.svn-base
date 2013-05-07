@@ -1,0 +1,101 @@
+\section{Active Learning \label{sec:active}}
+
+Information theoretic approaches to active learning are popular because
+they do not require prior knowledge of loss functions or test domains.
+The central goal is to identify the new data point that maximizes the expected reduction in
+posterior entropy. For preference learning
+(see Section \ref{sec:prefKernel}), this implies
+identifying the new item features $\mathbf{x}_i$ and $\mathbf{x}_j$ that maximize
+\begin{align}   
+\ent[\mathcal{P}(g|\mathcal{D})] - \E_{\mathcal{P}(y|\mathbf{x}_i,\mathbf{x}_j,\data)} \left[ \ent[\mathcal{P}(g|y,\mathbf{x}_i,\mathbf{x}_j,\data)]\right]\,,
+\label{eqn:ent_change}
+\end{align}
+where $\mathcal{D}$ are the user preferences observed so far and
+$\ent[p(x)]=-\int p(x)\log p(x)\,dx$ is the Shannon entropy. 
+This framework, originally proposed by \citep{lindley1956},
+is difficult to apply directly to GP based models.
+In these models, entropies can be poorly
+defined or their comptuation can be intractable.
+In practice, current approaches make
+approximations for the computation of the posterior entropy \citep{mackay1992,lawrence2002}. 
+However, a second difficulty arises; if $n$ new data points are
+available for selection, with $|\{-1,1\}|=2$ possible values for $y$.
+Then $\mathcal{O}(2n)$ potentially expensive posterior updates are required to find the maximizer
+of (\ref{eqn:ent_change}); one for every available feature vector and possible class value.
+This is often too expensive in practice.
+
+A solution consists in noting that (\ref{eqn:ent_change}) is equivalent to the conditional mutual information between $y$ and $g$.
+Using this we can rearrange this equation to compute entropies in $\y$ space:
+\begin{align}
+\ent[\mathcal{P}(y|\mathbf{x}_i,\mathbf{x}_j,\data)] - \E_{\mathcal{P}(g|\data)}
+\left[\ent\left[ \mathcal{P}(y|\mathbf{x}_i,\mathbf{x}_j,g)\right]\right]\,. \label{eqn:rearrangement} 
+\end{align}
+This overcomes the previous challenges. Entropies are now evaluated in
+output space, which has low dimension. Futhermore, $g$ is now conditioned to $\data$,
+so only $\mathcal{O}(1)$ updates of the posterior distribution are required. 
+We only need to recompute the posterior once per data point selected, not for every possible data point under consideration.
+Expression (\ref{eqn:rearrangement}) also provides us with an intuition about the objective;
+we seek the $\mathbf{x}_i$ and $\mathbf{x}_j$ for which a) the model is marginally
+uncertain about $y$ (high $\ent[\mathcal{P}(\y | \mathbf{x}_i,\mathbf{x}_j, \data)]$) and
+b) the model is confident about the value of $g$ at that location
+(low $\E_{\mathcal{P}(g|\data)} \left[\ent [ \mathcal{P}(y |\mathbf{x}_i,\mathbf{x}_j,g] \right)]$).
+This can be interpreted as seeking the $\mathbf{x}_i$ and $\mathbf{x}_j$ for which
+$g$, under the posterior, disagrees the most about the outcome.
+Therefore, we refer to this objective as Bayesian Active Learning by Disagreement (BALD).
+In the following section we show how (\ref{eqn:rearrangement}) can be applied to binary classification problems with GPs.
+The proposed method is independent of the approach used for inference, something which does not hold for
+the techniques described in \citep{mackay1992, krishnapuram2004, lawrence2002}. 
+
+\subsection{BALD in Binary Classification with GPs}
+
+\begin{figure}
+\includegraphics[scale = 0.5]{figs/BALD_eg.pdf} \\
+\vskip-0.4cm
+\caption{Toy example with 1D input. Cirles and crosses
+are the data. We plot the mean and variance of the GP predictive
+distribution. Maximum Entropy Sampling (MES, see Section \ref{sec:relatedWork})
+samples from the region of highest marginal uncertainty, ignoring the
+second term in \eqref{eqn:rearrangement}. BALD samples 
+from the region of greatest model uncertainty.\label{fig:BALD}}
+\end{figure}
+
+Most approximate inference methods for the problem of binary classification with
+GPs produce a Gaussian approximation to the posterior distribution of $f$, the
+latent function of interest. In the binary GP classifier, the entropy of $y$ given the corresponding value of $f$ 
+can be expressed in terms of the binary entropy function, $\mathrm{h}[f]=- f\log f - (1-f)\log(1-f)$.
+In particular,
+\begin{align}
+\ent[p(y\vert\x,\latfun)] &= \mathrm{h}\left[\Phi(\latfun(\x)\right]\,. \notag
+\end{align}
+When a Gaussian is used to approximate the posterior of $f$,  we have that
+for each $\x$, $\latfun_{\x} = \latfun(\x)$ will follow a Gaussian distribution with mean $\mu_{\x}$ and
+variance $\sigma_{\x}^2$.
+The first term in (\ref{eqn:rearrangement}), that is, $\ent[p(y\vert\x,\data)]$, can be handled analytically in this case:
+\begin{align}
+\ent[p(y\vert\x,\data)] &\stackrel{1}{\approx} \mathrm{h}\left[ \int \Phi( \latfun_{\x} )
+\mathcal{N}(\latfun_{\x}| \mu_{\x},\sigma_{\x}^2) d\latfun_{\x} \right] \notag \\ 
+&= \mathrm{h} \left[ \Phi\left( \mu_{\x} (\sigma^2_{\x} + 1)^{-1/2}\right)\right]\,, \label{ent_mean}
+\end{align}
+where $\stackrel{1}{\approx}$ denotes the Gaussian approximation to the posterior of $\latfun_{\x}$.
+The second term in (\ref{eqn:rearrangement}), that is,
+$\E_{p(\latfun\vert\data)} \left[ \ent[p(\y\vert\x, \latfun)] \right]$, can be approximated as
+\begin{align}
+\E_{p(f\vert\data)} & \left[ \ent[p(\y\vert\x, \latfun)] \right] \stackrel{1}{\approx} \notag \\
+& \int \mathrm{h}[\Phi(\latfun_{\x})] \mathcal{N}(\latfun_{\x}| \mu_{\x},\sigma_{\x}^2) d\latfun_{\x} \stackrel{2}{\approx} \notag\\
+& \int \exp\left(-\frac{\latfun_{\x}^2}{\pi\log 2}\right) \mathcal{N}(\latfun_{\x}| \mu_{\x},\sigma_{\x}^2)d\latfun_{\x} = \notag\\ 
+& \frac{C}{\sqrt{\sigma_{\x}^2 + C^2}}\exp\left(-\frac{\mu_{\x}^2}{2\left(\sigma_{\x}^2 + C^2\right)}\right)\,,\notag
+\end{align}
+where $C=\sqrt{\pi\log 2 / 2}$ and $\stackrel{2}{\approx}$ denotes
+an approximation to $\log \mathrm{h}[\Phi(\latfun_{\x})]$ given
+by the squared exponential curve $\exp(-\latfun_{\x}^2/\pi\log 2)$. 
+This approximation is very accurate (Taylor expansion and vizualisation are presented in the supplementary material).
+
+To summarize, the BALD algorithm for active binary GP classification / preference learning first applies
+any approximate inference method to obtain the posterior mean
+$\mu_{\x}$ and variance $\sigma_{\x}^2$ of $f$ at each point of interest $\x$. Then, it selects the
+data $\x$ that maximizes 
+\begin{align}
+& \mathrm{h} \left[ \Phi\left(  \mu_{\x}(\sigma^2_{\x} + 1)^{-1/2} \right)\right] -\notag \\
+& \hspace{2cm} \frac{C}{\sqrt{\sigma_{\x}^2 + C^2}} \exp\left(-\frac{\mu_{\x}^2}{2\left(\sigma_{\x}^2 + C^2\right)}\right)\,.\label{eqn:BALD}
+\end{align}
+Finally, Figure \ref{fig:BALD} shows why BALD usually outperforms maximum entropy samplying (MES).

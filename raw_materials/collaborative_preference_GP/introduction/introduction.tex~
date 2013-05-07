@@ -1,0 +1,29 @@
+\section{Introduction}
+
+Preference learning is concerned about making inference from data consisting of
+pairs of items and corresponding binary labels indicating user preferences.
+Contexts in which this type of data arises include medical assistive
+technologies \cite{birlutiu2009}, graphical design \cite{brochu2007active} and recommendation
+systems \cite{de2009}. A popular modelling approach assumes the existence of a utility function
+$f$ such that $f(\mathbf{x})$ gives the value of an item with feature vector $\mathbf{x}$. In particular,
+$f(\x_i)>f(\x_j)$ indicates that item $i$ is preferred to item $j$.
+Bayesian methods are used to learn $f$ from preference data. For example, $f$
+can be modeled independently for each user as a sample from a Gaussian process (GP) prior \cite{chu2005}.
+However, when data from many users is avaiable, such approaches do not leverage similarities in preferences across users.
+Current approaches to the multi-user case are limited in that they either assume a single cluster of utility functions \cite{birlutiu2009} or require
+that features are available for each user and assume
+users with similar features have similar preferences \cite{Bonilla2010}.
+In this paper we tackle the more general scenario when i) there are multiple clusters of users
+with different utility functions, ii) user features are not available or iii) users with similar features
+do not necessarily have similar preferences.
+
+We present a new multi-user model which addresses the problems mentioned above. The proposed approach is based on
+dimensionality reduction ideas from the field of collaborative filtering \cite{stern2009,raiko2007}.
+Unsupervised learning of the similarities across users' behavior is exploited without requiring access to user features.
+However, should these features be available, our model can incorporate this information also.
+The proposed method is based on a connection between preference learning and GP binary classification.
+We show that both problems are equivalent when a covariance function called the \emph{preference kernel} is used. 
+This specific kernel simplifies the inference process, allowing us to implement more complex models such as the proposed multi-user approach. 
+Finally, in real scenarios, it is desirable to learn preferences using the least data possible. 
+With this objective, we present BALD (Bayesian active learning by disagreement),
+an efficient active learning strategy for binary classification problems with GP priors.

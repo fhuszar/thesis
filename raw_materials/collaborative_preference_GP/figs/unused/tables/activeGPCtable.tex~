@@ -1,0 +1,28 @@
+\begin{figure}[t]
+\centering
+%\resizebox{\textwidth}{!}{
+\begin{tabular}{lccccccc}
+\hline
+{\bf Dataset} & {\bf BALD} & {\bf Random} & {\bf Entropy} & {\bf $\mbox{QBC}_{2}$} & {\bf $\mbox{QBC}_{100}$} & {\bf IVM} & {\bf SVM} \\ 
+\hline
+D1 & $ 9.80 \pm 0.58 $ & $ 11.40 \pm 1.29 $ & $ \bm{9.20 \pm 0.49} $ & $ 17.00 \pm 1.26 $ & $ 10.20 \pm 0.97 $ & $ 13.60 \pm 1.86 $ & $ 23.20 \pm 7.29 $ \\
+
+D2 & $ \bm{16.80 \pm 0.59} $ & $ 22.20 \pm 1.25 $ & $ 21.10 \pm 0.48 $ & $ 39.65 \pm 0.41 $ & $ 18.95 \pm 1.34 $ & $ 21.35 \pm 0.50 $ & $ 24.40 \pm 8.30 $ \\ 
+
+D3 & $ \bm{33.20 \pm 2.11} $ & $ 75.30 \pm 7.38 $ & $ 36.60 \pm 1.74 $ & $ 85.20 \pm 7.16 $ & $ 35.00 \pm 1.80 $ & $ 38.20 \pm 2.00 $ & $ 41.60 \pm 1.64 $ \\ 
+
+D4 & $ \bm{8.80 \pm 0.37} $ & $ 26.60 \pm 8.57 $ & $ 10.80 \pm 1.66 $ & $ 36.40 \pm 8.36 $ & $ 12.60 \pm 1.78 $ & $ 20.40 \pm 9.92 $ & $ 23.80 \pm 3.48 $ \\ 
+
+D5 & $ \bm{18.15 \pm 0.37} $ & $ 47.00 \pm 1.46 $ & $ 22.55 \pm 1.05 $ & $ 43.85 \pm 1.39 $ & $ 23.40 \pm 1.05 $ & $ 21.40 \pm 0.85 $ & $ 45.70 \pm 1.75 $ \\ 
+
+D5 & $ \bm{18.54 \pm 2.94} $ & $ 44.15 \pm 12.63 $ & $ 22.46 \pm 6.20 $ & $ 68.38 \pm 1.38 $ & $ 29.31 \pm 5.06 $ & $ 28.46 \pm 6.58 $ & $ 55.00 \pm 1.00 $ \\ 
+
+D6 & $ \bm{45.30 \pm 1.14} $ & $ 92.10 \pm 2.41 $ & $ 51.50 \pm 0.83 $ & $ 48.80 \pm 1.34 $ & $ 49.10 \pm 1.38 $ & $ 51.00 \pm 0.84 $ & N/A \\ 
+
+D7 & $ \bm{30.17 \pm 1.11} $ & $ 71.50 \pm 17.72 $ & $ 34.33 \pm 0.42 $ & $ 44.67 \pm 2.12 $ & $ 30.67 \pm 1.65 $ & $ 33.00 \pm 2.27 $ & N/A \\ 
+
+\hline
+\end{tabular}
+\caption{Performance of the BALD and other active learning algorithms for GPC on a number of UCI binary classification datasets. Numbers indicate number of datapoints (plus or minus one s.e.m.) required to achive $95\%$ predictive performance of the pool, bold typeface indicates the best performing algorithm for each dataset. N/A indicates that the algorithms had not met the $95\%$ performance level by the end of the simulation. \label{tab:activeTable}}
+%}
+\end{figure}

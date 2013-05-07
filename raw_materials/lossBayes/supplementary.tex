@@ -1,0 +1,113 @@
+% ----------------------------------------------------------------
+% AMS-LaTeX Paper ************************************************
+% **** -----------------------------------------------------------
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+% ----------------------------------------------------------------
+\newcommand{\dataset}{\mathcal{D}}
+\newcommand{\prob}[1]{\boldsymbol{\mathbb{#1}}}
+\newcommand{\fix}[1]{$^\text{\textcolor{red}{?}}$\marginpar[\raggedleft\parbox{2.5cm}{\raggedleft \tiny{#1}}]{\parbox{2.5cm}{\tiny{#1}}}}
+\newcommand{\new}{\marginpar{NEW}}
+\newcommand{\argmin}[1]{\underset{#1}{\arg\min\:}}
+\newcommand{\argmax}[1]{\underset{#1}{\arg\max\:}}
+
+\begin{document}
+
+\title{Supplementary material}%
+\author{}%
+%\address{}%
+%\email{}%
+
+% \thanks{}%
+% \subjclass{}%
+% \keywords{}%
+
+%\date{}%
+%\dedicatory{}%
+%\commby{}%
+
+\numberwithin{equation}{section}
+
+\maketitle
+% ----------------------------------------------------------------
+We provide small corrections to the main submission in this supplementary material to save the time of the reviewers (and apologize for the typos). We also provide optional additional details for some derivations to make the manuscript more easily verifiable.
+
+\section{Typos}
+\begin{itemize}
+  \item The paragraph on p.6 just above the section 4.3 should have ``loss-insensitive fixed point $\mu_{q_{\mathrm{sp}}^{\mathrm{KL}}}$" instead of ``non loss-sensitive fixed point $\mu_{q_{\mathrm{sp}}^{\mathrm{opt}}}$" -- i.e. the updates converge to the min-KL solution rather than something which would be loss-calibrated such as $\mu_{q_{\mathrm{sp}}^{\mathrm{opt}}}$.
+  \item Equation (23) should be corrected to:
+    $$
+        p(y|x,\theta) = \Phi\left( \frac{y \,K_{x\dataset}\theta}{\tilde{\sigma}_x} \right)
+    $$
+  \item Equation (24) should be corrected to:
+    $$
+        p_q(y|x) = \Phi\left( \frac{y \,K_{x\dataset} \mu_q}{\tilde{\sigma}_q(x)} \right)
+    $$
+  \item Equation (28) should have $\forall y \in \mathcal{Y}$ as well in the constraint.
+\end{itemize}
+
+\section{Derivations notes}
+
+\subsection{$\mu_{q_{\mathrm{sp}}^{\mathrm{KL}}}$ (in text left of p.6)}
+
+We want to find the $\mu_q$ which minimizes the KL expression given in (21) subject to the sparsity constraint $(\mu_q)_i=0$ for $i \in T$. Writing $\tilde{\Lambda} \doteq \Sigma_{p_\dataset}^{-1}$ and setting the derivative to zero, we get that the non-zero components of $\mu_q$ (on the set $S$) are given by:
+    \begin{equation} \label{e:mu_sparse}
+        \mu_{q_{\mathrm{sp}}^{\mathrm{KL}}} = \tilde{\Lambda}_{SS}^{-1}\tilde{\Lambda}_{S\dataset}\mu_{p_{\dataset}}.
+    \end{equation}
+Substituting $\Sigma_{p_\dataset}^{-1} = K_{\dataset\dataset} + \sigma^{-2} K_{\dataset\dataset}^2$ and $\mu_{p_\dataset} = (K_{\dataset\dataset}+\sigma^2 I)^{-1} \mathbf{y}$, we have that:
+    \begin{equation} \label{e:mu_sparse_cancellation}
+        \tilde{\Lambda}_{S\dataset}\mu_{p_{\dataset}} = K_{S\dataset} (\mathcal{I} + \sigma^{-2} K_{\dataset\dataset}) (K_{\dataset\dataset}+\sigma^2 I)^{-1} \mathbf{y} = \sigma^{-2} K_{S\dataset} \mathbf{y},
+    \end{equation}
+which is the convenient cancellation which enables us to avoid the inversion of the $N\times N$ matrix $K_{\dataset\dataset}$ which was previously needed to compute $\mu_{p_\dataset}$. Substituting~\eqref{e:mu_sparse_cancellation} into~\eqref{e:mu_sparse} and expanding $\tilde{\Lambda}_{SS}$, we get
+$$
+  \mu_{q_{\mathrm{sp}}^{\mathrm{KL}}} =  \left( \sigma^2 K_{SS} +  K_{S\dataset} K_{\dataset S}\right)^{-1} K_{S\dataset}\, \mathbf{y},
+$$
+which was the expression in the text. Note that similarly $\mu_{q_{\mathrm{sp}}^{\mathrm{opt}}} = \Lambda_{SS}^{-1}\Lambda_{S\dataset}\mu_{p_{\dataset}}$, but in this case $\Lambda_{S\dataset}\mu_{p_{\dataset}}$ doesn't simplify, hence we still need the $O(N^3)$ computation unfortunately in this case.
+
+\subsection{Linearized loss-EM update for GP regression (last paragraph of section 4.2)}
+
+We derive here the linearized loss-EM update (see table 2) with sparse constraints for GP regression which was claimed to be efficiently computable in $O(k^3+N k^2)$ in the last paragraph of section 4.2. As we mentioned in the text, $h_q(x) = \mu_q(x) = K_{x\dataset}\mu_q$ and so the linearized M-step is trivially $h^{t+1}(x) = K_{x\dataset}\mu_{q^{t+1}}$. We now look at the linearized E-step:
+\begin{equation} \label{e:E-step}
+    q^{t+1}  =  \argmin{q \in \mathcal{Q}} \:\: KL\left( q \| p_\dataset \right) + \frac{\mathcal{R}_{q}(h^t)}{M}.
+\end{equation}
+Because $h^{t}$ only depends on $\mu_{q^{t}}$ (and not $\Sigma_{q^{t}}$), we only need to optimize the RHS of~\eqref{e:E-step} with respect to $\mu_q$. So only keeping the terms depending on $\mu_q$ in~\eqref{e:E-step} and using equation (19) to get an expression for $\mathcal{R}_{q}(h^t)$ (replace $h_q$ with $h^t$ and $p_\dataset$ with $q$) and equation (21) for the KL, we need to optimize:
+$$
+    \mu_q^\top \frac{\tilde{\Lambda}}{2} \mu_q - \mu_q^\top \tilde{\Lambda} \mu_{p_\dataset} + \mu_q^\top \frac{\Lambda}{M} \mu_q - 2 \mu_q^\top \Lambda \mu_{q^{t}} .
+$$
+Now letting $\mu_S$ be the non-zero coefficients of $\mu_q$ and setting the rest to zero, we get:
+$$
+    \mu_S^\top \left(\frac{\tilde{\Lambda}_{SS}}{2} + \frac{\Lambda_{SS}}{M} \right) \mu_S - \mu_S^\top \left(\tilde{\Lambda}_{S\dataset} \mu_{p_\dataset}  + 2\frac{\Lambda_{S\dataset}}{M} \mu_{q^{t}} \right) .
+$$
+Setting the derivative to zero and solving for $\mu_S$ gives:
+\begin{equation} \label{e:E_update}
+    \mu_S^{t+1} = \breve{\Lambda}_{SS}^{-1} \left(\tilde{\Lambda}_{S\dataset} \mu_{p_\dataset}  + 2\frac{\Lambda_{S\dataset}}{M} \mu_{q^{t}} \right),
+\end{equation}
+where $\breve{\Lambda}_{SS} \doteq \tilde{\Lambda}_{SS} + 2\Lambda_{SS}/M$ is a $k\times k$ matrix which is computable in $O(N k^2)$ time since $\tilde{\Lambda}_{SS} = K_{SS} + \sigma^{-2} K_{S\dataset} K_{\dataset S}$. Moreover, $\tilde{\Lambda}_{S\dataset} \mu_{p_\dataset}$ simplifies to $\sigma^{-2} K_{S\dataset} \mathbf{y}$ as we saw in equation~\eqref{e:mu_sparse_cancellation} for the KL derivation. So the whole update can be done in $O(k^3+N k^2)$ as we claimed. It is also loss-sensitive as it contains a $\Lambda_{S\dataset}$ term which has information about the test distribution $p(x)$. Unfortunately, this dependence is lost in the limit. First of all, we can see that this sequence of update does converge to a fixed point by noting that $\mu_S^t$ is multiplied by the matrix $A \doteq \breve{\Lambda}_{SS}^{-1} (2 \Lambda_{SS}/M)$ which has norm smaller than one. We basically have $\mu_S^{t+1} = \mathbf{a} + A \mu_S^{t}$ and so $\mu_S^{t+1}$ is expressible with a geometric sum in $A$ which converges as $t \rightarrow \infty$ because $||A||<1$. We can find the fixed point of~\eqref{e:E_update} by putting $\mu_S^{t+1} = \mu_{\infty}$ on the LHS and $\mu_{q^t} = \mu_{\infty}$ on the RHS and solving for $\mu_{\infty}$ to get:
+$$
+    \mu_{\infty} = \tilde{\Lambda}_{SS}^{-1}\tilde{\Lambda}_{S\dataset}\mu_{p_{\dataset}}
+$$
+and so $\mu_{\infty} = \mu_{q_{\mathrm{sp}}^{\mathrm{KL}}}$ by comparing with~\eqref{e:mu_sparse}, as we said in the text.
+
+\subsection{Deriving the $q$-optimal action for GP classification (equation (25))}
+
+We note that the $q$-risk for the predictive setup becomes (by pushing the integral with respect to $\theta$ inside the sum terms of the generalization error $L(\theta,h)$):
+$$
+    \mathcal{R}_q(h) =  \int_\mathcal{X} p(x) \left( \sum_{y \in \mathcal{Y}} p_q(y|x) \ell(y,h(x)) \right)  dx.
+$$
+So in our setup of section 4.3, we get $h_q(x)$ by minimizing the integrand pointwise:
+$$
+    h_q(x) = \argmin{y' \in \{-1,+1\}} \mathbb{I}_{\{y'=+1\}} c_+ \Phi\left( \frac{-\,K_{x\dataset} \mu_q}{\tilde{\sigma}_q(x)} \right) + \mathbb{I}_{\{y'=-1\}} c_-  \Phi\left( \frac{\,K_{x\dataset} \mu_q}{\tilde{\sigma}_q(x)} \right).
+$$
+So we want to choose $y' = +1$ when:
+$$
+     c_+ \Phi\left( \frac{-\,K_{x\dataset} \mu_q}{\tilde{\sigma}_q(x)} \right) < c_-  \Phi\left( \frac{\,K_{x\dataset} \mu_q}{\tilde{\sigma}_q(x)} \right).
+$$
+Using the fact that $\Phi(-a) = 1-\Phi(a)$ and rearranging the terms give the choice function (25).
+
+% ----------------------------------------------------------------
+%\bibliographystyle{amsplain}
+%\bibliography{mybibliography}
+\end{document}
+% ----------------------------------------------------------------

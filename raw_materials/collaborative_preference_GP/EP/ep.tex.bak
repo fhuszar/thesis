@@ -1,0 +1,83 @@
+\section{EP and VB \label{sec:EPinference}}
+
+Approximate inference in the proposed multi-task model is implemented using a
+combination of expectation propagation (EP)
+\cite{Minka2002} with variational Bayes (VB) \cite{attias2000variational}.
+In this section we briefly describe the method,
+full details can be found in the supplementary material.
+We approximate the posterior (\ref{eq:post}) by the parametric distribution
+\vskip-0.4cm
+{\small
+\begin{align}
+&\mathcal{Q}(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) =
+\left[\prod_{u=1}^{U}\prod_{d=1}^{D}\mathcal{N}(w_{ud}|m_{u,d}^{w},v_{u,d}^{w})\right]\times \nonumber\\
+&\left[\prod_{d=1}^{D}\prod_{i=1}^{P} \mathcal{N}(h_{d,i}|m_{d,i}^h,v_{d,i}^{h})\right]
+\left[\prod_{u=1}^N \prod_{j=1}^{M_u} \mathcal{N}(g_{u,z_{u,j}}|m_{u,j}^g,v_{u,j}^g)\right]\,,\notag
+\end{align}
+}
+where $m_{u,d}^w$, $v_{u,d}^w$, $m_{d,i}^h$, $v_{d,i}^h$,
+$m_{u,j}^g$, and $v_{u,j}^g$ are free distributional parameters to be determined by EP
+and the superscripts $w$, $h$ and $g$ indicate the random variables
+described by these parameters.
+The joint distribution 
+$\mathcal{P}(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H},\mathbf{T}^{(\mathcal{D})},\mathbf{X},\ell)$ can be factorized
+into four factors $f_1,\ldots,f_4$, namely,
+\begin{equation}
+\mathcal{P}(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H},\mathbf{T}^{(\mathcal{D})},\mathbf{X},\ell) =
+\prod_{a=1}^4 f_a(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H})\nonumber\,,
+\end{equation}
+where $f_1(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) = \mathcal{P}(\mathbf{T}^{(\mathcal{D})}|\mathbf{G}^{(\mathcal{D})})$,\\
+$f_2(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) = \mathcal{P}(\mathbf{G}^{(\mathcal{D})}|\mathbf{W},\mathbf{H})$,
+$f_3(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) = \mathcal{P}(\mathbf{w})$ and
+$f_4(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) = \mathcal{P}(\mathbf{H}|\mathbf{X},\ell)$.
+EP approximates each of these exact factors by 
+approximate factors $\hat{f}_{1}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})}),\ldots,\hat{f}_{4}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})$
+that have the same functional form as $\mathcal{Q}$
+\vskip-0.4cm
+{\small
+\begin{align}
+&\hat{f}_a(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) =
+\hat{s}_a 
+\left[\prod_{u=1}^{U}\prod_{d=1}^{D}\mathcal{N}(w_{ud}|\hat{m}_{u,d}^{a,w},\hat{v}_{u,d}^{a,w})\right]\times\nonumber\\
+&\left[\prod_{d=1}^{D}\prod_{i=1}^{P} \mathcal{N}(h_{d,i}|\hat{m}_{d,i}^{a,h},\hat{v}_{d,i}^{a,h})\right]
+\left[\prod_{u=1}^N \prod_{j=1}^{M_u} \mathcal{N}(g_{u,z_{u,j}}|\hat{m}_{u,j}^{a,g},\hat{v}_{u,j}^{a,g})\right] \nonumber\,,
+\end{align}
+}
+where $a=1,\ldots,4$ and $\hat{m}_{u,d}^{a,w}$, $\hat{v}_{u,d}^{a,w}$, $\hat{m}_{d,i}^{a,h}$, $\hat{v}_{d,i}^{a,h}$,
+$\hat{m}_{u,j}^{a,g}$, $\hat{v}_{u,j}^{a,g}$ and $\hat{s}_a$ are free parameters.
+$\mathcal{Q}(\mathbf{w},\mathbf{H},\mathbf{G}^{(\mathcal{D})})$
+is the normalized product of $\hat{f}_{1},\ldots,\hat{f}_{4}$, that is,
+\begin{equation}
+\mathcal{Q}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})}) \propto
+\hat{f}_{1}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})\cdots\hat{f}_{4}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})\,.\notag
+\end{equation}
+The first step of EP is to initialize $\hat{f}_1,\ldots,\hat{f}_4$ and $\mathcal{Q}$ to be uniform.
+In particular,
+$m_{u,d}^w=m_{d,i}^h=m_{u,j}^g=\hat{m}_{u,d}^{w,a}=\hat{m}_{d,i}^{a,h}=\hat{m}_{u,j}^{g,a}=0$ and 
+$v_{u,d}^w = v_{d,i}^h = v_{u,j}^g = \hat{v}_{u,d}^{a,w} = \hat{v}_{d,i}^{a,h} = \hat{v}_{u,j}^{a,h} = \infty$ for
+$a=1,\ldots,4$, $u=1,\ldots,U$, $d=1,\ldots,D$, $i=1,\ldots,P$ and $j = 1,\ldots,M_u$.
+After that, EP iteratively refines of $\hat{f}_1,\ldots,\hat{f}_4$ by minimizing the Kullback-Leibler (KL) divergence
+between the product of $\mathcal{Q}^{\setminus a}$ and $f_a$
+and the product of $\mathcal{Q}^{\setminus a}$ and $\hat{f}_a$, 
+where $\mathcal{Q}^{\setminus a}$ is the ratio between $\mathcal{Q}$ and $\hat{f}_a$. 
+EP iteratively minimizes
+\begin{align} 
+&\text{D}_{\text{KL}}(Q^{\setminus a}f_a\|Q^{\setminus a}\hat{f}_a) = \nonumber\\
+\int &\left[Q^{\setminus a}f_a \log \frac{Q^{\setminus a}f_a}{Q^{\setminus a}\hat{f}_a}+
+Q^{\setminus a}\hat{f}_a-Q^{\setminus a}f_a\right]\,d\mathbf{W}\,d\mathbf{H}\,d\mathbf{G}^{(\mathcal{D})}\notag
+\end{align}
+with respect to $\hat{f}_a$, where
+the arguments to $Q^{\setminus a}f_a $ and 
+$Q^{\setminus a}\hat{f}_a$ have been omitted.
+However, this approach does not perform well when we have to refine $\hat{f}_2$, see \cite{stern2009} for further details.
+For this specific factor, we follow a variational Bayes approach.
+Instead of minimizing $\text{KL}(\mathcal{Q}^{\setminus 2} f_2 \| \mathcal{Q}^{\setminus 2} \hat{f}_2)$ with respecct to the parameters of $\hat{f}_2$,
+we refine this approximate factor so that the reversed version of the KL divergence is minimzed, that is,
+we minimize $\text{KL}(\mathcal{Q}^{\setminus 2} \hat{f}_2 \| \mathcal{Q}^{\setminus 2} f_2)$.
+
+The EP algorithm iteratively refines the approximate factors until convergence.
+EP can also approximate the predictive distribution (\ref{eq:predictions}). 
+For this, we replace the exact posterior in (\ref{eq:predictions})
+with the EP approximation $\mathcal{Q}$.
+EP also approximates the normalization constant in (\ref{eq:post})
+as the integral of the product of all the approximate factors $\hat{f}_1,\ldots,\hat{f}_4$.

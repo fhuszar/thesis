@@ -1,0 +1,125 @@
+\section{Experiments and Discussion}\label{sec:experiments}
+
+The performance of the proposed collaborative preference model with the new active learning strategy BALD
+is evaluated in a series of experiments with simulated and real-world data.
+The analyzed datasets include a) synthetic data generated from the probabilistic model assumed by
+the proposed multi-user method (Synthetic), b) a collection of user preferences on different movies (MovieLens),
+c) the number of votes obtained by different political parties in the 2010 general election in the UK (Election), 
+d) preferences of users about different types of sushi (Sushi) and finally, e)
+information regarding the concentration of heavy metals in the Swiss Jura region (Jura).
+Section 6 in the supplementary material contains a detailed description of these datasets.
+
+\subsection{Comparison with other multi-user methods}
+
+Two versions of the proposed collaborative preference (CP) approach are compared with other methods for multi-user preference learning.
+The first version (CPU) is the approach that takes into account the available user features, as described in Section \ref{sec:model}. The second version (CP) ignores these features by
+replacing $\mathbf{K}_\text{users}$ in (\ref{eq:priorW}) with the identity matrix.
+The first multi-user method we compare with is the approach of Birlitiu et al. (BI) \cite{birlutiu2009}.
+This method does not use user features, and captures similarities between users with a hierarchical GP model. In particular,
+a common GP prior is assumed for the preference function of each user; this model assumes
+that users may be modelled as perturbation of a single mean preference function.
+The second multi-user method is the technique of Bonilla et al. (BO) \cite{Bonilla2010}.
+In this model there exists one high-dimensional function which depends on both
+the features of the two items to be compared and on the features of the user who makes the comparison. Relationships between user behavior's are captured only via their features.
+We implement BO and BI using the preference kernel and EP for approximate inference.
+More details about BI and BO are given in sections 7 and 8 of the supplementary material.
+Finally, we consider a single user approach (SU) which fits independently a different GP classifier to the data of each user.
+
+In CP and CPU, we selected the number $D$ of latent functions to be $20$.
+In general, the proposed multi-user method is robust to over-fitting and over-estimation of
+$D$ does not seem to harm predictive performance. Note that the Synthetic dataset is generated
+using $D=5$ and CP and CPU still obtain very good results using $D = 20$.
+This automatic pruning of unnecessary degrees of freedom seems to be common
+in methods based on variational Bayes \cite{MacKay2001}.
+In general, we selected the kernel lengthscales to be equal to
+the median distance between feature vectors. This leads to good empirical performance
+for most methods. An exception is BO, where the kernel hyper-parameters
+are tuned to some left out data using automatic relevance determination.
+In the proposed multi-user model, we can estimate the kernel
+lengthscales by maximizing the EP approximation of the model evidence,
+as illustrated in Section 9 of the supplementary material. This alternative approach can be used
+when it is necessary to fine tune the lengthscale parameters to the data at the cost
+of larger training times. In CPU we use $U_0 = 25$ pesudo inputs for approximating $\mathbf{K}_\text{users}$.
+These pesudo inputs are selected randomly from the set of available data points.
+Similarly, in CP and CPU, we use $P_0 = 25$ pesudo inputs for approximating $\mathbf{K}_\text{items}$,
+except in the Jura and Election datasets (which contain fewer items) where we use $P_0 = 15$.
+These pesudo inputs are also selected randomly from the available data points.
+The results obtained are not sensitive to the number of pseudo inputs used, as long as
+the number is not excessively low.
+
+\input{figs/SmallDatasetsTable.tex}
+
+The computational cost of BO and BI is rather high; BO has cubic complexity in the \emph{total} number of observations i.e. $\mathcal{O}((\sum_{u=1}^UM_u)^3)$, 
+our model (CPU) has a significantly lower cost of $\mathcal{O}(D(U^3+P^3))$ (before further speed-up from FITC). BI does not include 
+user features and has complexity $\mathcal{O}(UP^3)$, the equivalent version of our model
+(CP) has much lower cost $\mathcal{O}(NP+DP^3)$, becuase $D<<U$.
+For this reason, to compare these methods we must subsample the different datasets by keeping only 100 users.
+The available data were randomly split into training and test sets of item pairs,
+where the training sets contain 20 pairs per user in Sushi, MovieLens and Election, 15 pairs per user in Jura and
+30 pairs per user in Synthetic. This was repeated 25 times to obtain statistically meaningful results.
+Average test errors are shown in Table \ref{tab:errorSmallDatasets}. 
+The results of the best method are highlighted in bold.
+Highlighted results are statistically significant with respect to non-highlighted
+results according to a paired $t$ test. Overall, CP and CPU obtain the best results with
+CP outperforming CPU in all cases except in the Synthetic dataset. This indicates that
+user features are not very useful in practice for prediction. In the real datasets users with 
+similar features do not exhibit similar preference behavior, exploiting similarities in their behavior provides much more useful information. 
+This also explains the poor overall results obtained by BO.
+Finally, running times in seconds are presented in Table \ref{tab:timeSmallDatasets}. 
+The entries for BO do not include the time spent by this method to tune the kernel hyper-parameters.
+In general, CP and CPU are faster than BO and BI. Note that the FITC approximation imposes
+a large multiplicative constant in the cost of CP and CPU. For larger datasets, the gains of CP and CPU are considerably larger.
+
+
+\subsection{Active learning on large datasets}
+
+\input{figs/resultsTableLargeDatasets.tex}
+
+\begin{figure}[h!]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{ccc}
+Synthetic&
+Sushi&
+MovieLens\\
+\includegraphics[scale=0.3]{figs/error_syntheticDataLargeScale.pdf}&
+\includegraphics[scale=0.3]{figs/error_sushiDataLargeScale.pdf}&
+\includegraphics[scale=0.3]{figs/error_movieLensDataLargeScale.pdf}\\
+Election&
+Jura&
+\\
+\includegraphics[scale=0.3]{figs/error_electionDataLargeScale.pdf}&
+\includegraphics[scale=0.3]{figs/error_juraDataLargeScale.pdf}&
+\hskip0.6cm \raisebox{0.08\height}{\includegraphics[scale=0.45]{figs/legend.pdf}}
+\end{tabular}
+}
+\label{fig:learningcurves}
+\caption{Average test error for CPU, CP and SU, using the strategies BALD (-B), entropy (-E) and random (-R) for active learning.
+For clarity, the curves for CPU are included only in the Synthetic and Election datasets.
+The complete plots can be found in Section 10 of the supplementary material.}
+\end{figure}
+
+In this section, we evaluate the performance of BALD.
+In particular, we compare SU, CPU and CP using BALD (-B), maximum entropy sampling (-E) and random sampling (-R).
+We now use all the available users from each dataset, with a maximum of 1000 users.
+For each of these users, the available preference data are
+randomly split into training, pool and test sets with 5, 35 and 5 data points
+in Synthetic, Sushi and MovieLens, 3, 22 and 3 data points in Election
+and 3, 15 and 3 data points in Jura.
+Each method is fitted using the training sets and its performance
+is then evaluated on the corresponding test sets. After this,
+the most informative data point is identified for each
+of the pool sets. These data points are then moved into the corresponding training sets
+and the whole process repeats until 10 of these active
+additions to the training sets have been completed.
+The entire process, including the dataset splitting is repeated 25 times. 
+Figure \ref{fig:learningcurves} shows the learning curve for each method.
+For clarity, the curve for CPU is included only for the Synthetic and Election datasets.
+Average errors after 10 queries from the pool set of each user are summarized in Table \ref{tab:large}.
+For each model (SU, CPU and CP), the results of the best active learning strategy are highlighted in bold.
+The results of the best model are also underlined.
+Highlighted (underlined) results are statistically significant with respect to non-highlighted (non-underlined)
+results according to a paired $t$ test.
+In general, BALD always outperforms random sampling and usually outperforms or obtains equivalent performance than maximum entropy sampling (MES). 
+In particular, BALD significantly outperforms MES in 9 cases,
+while MES is significantly better than BALD in only 2 cases.

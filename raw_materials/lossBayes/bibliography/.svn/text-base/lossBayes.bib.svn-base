@@ -1,0 +1,276 @@
+% new ones:
+@InProceedings{stoyanov11erm,
+    author = "Veselin Stoyanov and Jason Eisner and Alexander Ropson",
+    title = "Empirical Risk Minimization of Graphical Model Parameters Given Approximate Inference, Decoding, and Model Structure ",
+    booktitle = "Proceedings of the Fourteenth International Conference on Artificial Intelligence and Statistics",
+    editor =	 {Geoff Gordon and David Dunson},
+    volume =	 15,
+    address =	 {Fort Lauderdale, FL, USA},
+    month =	 {April},
+    publisher =	 "Journal of Machine Learning Research",
+    year = 2011
+}
+
+@phdthesis{csato2002KLGP,
+     author = {Lehel Csat\'{o}},
+     title = {{G}aussian Processes - Iterative Sparse Approximations},
+     year = {2002},
+     school = {Aston University},
+ }
+
+@article{ghahramani1997fHMM,
+    author={Zoubin Ghahramani and Michael I. Jordan},
+    title={Factorial Hidden {M}arkov Models},
+    journal={Machine Learning},
+    volume = {29},
+    pages = {245--275},
+    year ={1997}
+}
+
+@incollection{jordan1999var,
+    author={M. I. Jordan and Z. Ghahramani and T. S. Jaakkola and L. K. Saul},
+    year = {1999},
+    title = {An introduction to variational methods for graphical models},
+    booktitle = {Learning in Graphical Models},
+    editor = {M. I. Jordan},
+    publisher = {MIT Press},
+    address = {Cambridge}
+}
+
+@article{wainwright08var,
+    author={Martin J. Wainwright and Michael I. Jordan},
+    title={Graphical Models, Exponential Families, and Variational Inference},
+    journal={Foundations and Trends in Machine Learning},
+    pages={1--305},
+    year={2008},
+    volume={1},
+    number={1--2}
+}
+
+@book{koller09pgm,
+  title = {Probabilistic Graphical Models: Principles and Techniques},
+  author = {D. Koller and N. Friedman},
+  year = 2009,
+  publisher = {MIT Press},
+}
+
+@book{bishop06pattern,
+   author={Christopher M. Bishop},
+   title={Pattern Recognition and Machine Learning},
+   publisher={Springer},
+   address = {New York},
+   year={2006}
+}
+
+@book{schervish95theory,
+   author={Mark J. Schervish},
+   title={Theory of Statistics},
+   publisher={Springer},
+   address = {New York},
+   year={1995}
+}
+
+@phdthesis{minka2001ep,
+     author = {Minka, Thomas P.},
+     title = {A family of algorithms for approximate {Bayesian} inference},
+     year = {2001},
+     school = {Massachusetts Institute of Technology},
+ }
+
+@article{dempster1977maximum,
+  title={Maximum Likelihood from Incomplete Data via the {EM} Algorithm},
+  author={Dempster, A.P. and Laird, N.M. and Rubin, D.B.},
+  journal={Journal of the Royal Statistical Society. Series B (Methodological)},
+  volume={39},
+  number={1},
+  pages={1--38},
+  year={1977},
+  publisher={Royal Statistical Society}
+}
+
+@article{nickisch2008gpc,
+    author={Nickisch, H. and C. E. Rasmussen},
+    title={Approximations for Binary {Gaussian} Process Classification},
+    journal={Journal of Machine Learning Research},
+    volume=9,
+    pages={2035--2078},
+    year={2008}
+}
+
+@techreport{dawid94scoring,
+  AUTHOR =       "A. P. Dawid",
+  TITLE =        "Proper Measures of Discrepancy, Uncertainty and Dependence with Applications to Predictive Experimental Designs",
+  INSTITUTION =  "Department of Statistical Science at University College London",
+  YEAR =         "1994",
+  note =         "(revised in 1998)",
+  number =       "139"
+}
+
+
+@article{candela05sparseGP,
+    author = "J. Quiñonero-Candela and C. E. Rasmussen",
+    title = "A unifying view of sparse approximate {G}aussian process regression",
+    journal = "Journal of Machine Learning Research",
+    volume = "6",
+    pages = "1935--1959",
+    year = "2005",
+}
+
+@phdthesis{snelson07sparseGP,
+  author =       "E. Snelson",
+  title =        "Flexible and efficient {G}aussian process models for machine learning",
+  school =       "Gatsby Computational Neuroscience Unit, University College London",
+  year =         "2007"
+}
+
+@InProceedings{jaakkola99MED,
+    author = "Jaakkola, T. and Meila, M. and Jebara, T.",
+    title = "Maximum entropy discrimination",
+    booktitle = "Advances in Neural Information Processing Systems 12",
+    publisher = "MIT Press, Cambridge, MA",
+    year = "1999",
+}
+
+@Article{Jebara09MED,
+    author = {Jebara, T.},
+    title = {Multitask Sparsity via {Maximum Entropy Discrimination}},
+    journal = {Journal of Machine Learning Research},
+    volume = {12},
+    pages = {75--110},
+    year = {2011}
+}
+
+@Article{joachims09SVMstruct,
+  author = 	 {T. Joachims and T. Finley and Chun-Nam Yu},
+  title = 	 {Cutting-Plane Training of Structural {SVM}s},
+  journal =  {Machine Learning},
+  volume =	 77,
+  number =	 1,
+  pages =    {27-59},
+  year = 	 {2009}
+}
+
+@article{sugiyama07covariate,
+    author = {Masashi Sugiyama and Matthias Krauledat and Klaus-Robert M\"{u}ller},
+    title = "Covariate Shift Adaptation by Importance Weighted Cross Validation",
+    journal = "Journal of Machine Learning Research",
+    volume = "8",
+    pages = "985--1005",
+    year = "2007",
+}
+
+@incollection{Neal2010,
+author={Neal, R. M.},
+year = {2010},
+title = {{MCMC} using {Hamiltonian} dynamics},
+booktitle = {Handbook of Markov Chain Monte Carlo},
+editor = {S. Brooks, A. Gelman, G. Jones and X.-L. Meng},
+publisher = {Chapman \& Hall / CRC Press}
+}
+
+% from Pascal grant:
+
+@book{robert01choice,
+   author={Christian P. Robert},
+   title={The {B}ayesian Choice},
+   publisher={Springer},
+   address = {New York},
+   year={2001}
+}
+
+@book{berger85decision,
+   author={James O. Berger},
+   title={Statistical Decision Theory and {B}ayesian Analysis},
+   publisher={Springer},
+   address = {New York},
+   year={1985}
+}
+
+@article{bartlett06risk,
+    author = "Peter L. Bartlett and Michael I. Jordan and Jon D. McAuliffe",
+    title = "Convexity, Classification, and Risk Bounds",
+    journal = "Journal of the American Statistical Association",
+    volume = "101",
+    number = "473",
+    pages = "138-156",
+    year = "2006",
+}
+
+@book{steinwart08svm,
+    author = {Ingo Steinwart and Andreas Christmann},
+    title = {Support Vector Machines},
+    publisher="Springer",
+    address="New York",
+    year = {2008},
+}
+
+@book{bakir07struct,
+ author = {Bakir, G\"{u}khan H. and Hofmann, Thomas and Sch\"{o}lkopf,
+    Bernhard and Smola, Alexander J. and Taskar, Ben and Vishwanathan, S. V. N.},
+ title = {Predicting Structured Data},
+ year = {2007},
+ publisher = {The MIT Press},
+}
+
+@inproceedings{papineni02bleu,
+ author = {Papineni, Kishore and Roukos, Salim and Ward, Todd and Zhu, Wei-Jing},
+ title = {{BLEU}: a method for automatic evaluation of machine translation},
+ booktitle = {ACL '02: Proceedings of the 40th Annual Meeting on Association for Computational Linguistics},
+ year = {2002},
+ pages = {311--318},
+ publisher = {Association for Computational Linguistics},
+}
+
+@article{mcallester99PACbayes,
+    author = "David A. McAllester",
+    title = "Some {PAC}-{B}ayesian Theorems",
+    journal = "Machine Learning",
+    volume = "37",
+    number = "3",
+    pages = "355-363",
+    year = "1999",
+}
+
+@article{vandervaart08posterior,
+    author = "A.W. van der Vaart and J.H. van Zanten",
+    title = "Rates of contraction of posterior distribution based on {G}aussian
+    process priors",
+    journal = "Annals of Statistics",
+    volume = "36",
+    number = "3",
+    pages = "1435-1463",
+    year = "2008",
+}
+
+@inproceedings{liang09asymptotics,
+ author = {Percy Liang and Francis Bach and Guillaume Bouchard and Michael I. Jordan},
+ title = {Asymptotically optimal regularization in smooth parametric models},
+ booktitle = {Advances in Neural Information Processing Systems 22},
+ pages = {1132--1140},
+ year = {2009}
+}
+
+@article{seeger02GPCpac,
+    author = "Matthias W. Seeger",
+    title = "{PAC-B}ayesian Generalization Error Bounds for Gaussian Process Classification",
+    journal = "Journal of Machine Learning Research",
+    volume = "3",
+    number = "Oct",
+    pages = "233--269",
+    year = "2002",
+}
+
+@book{rasmussen06GP,
+    author = {Carl Edward Rasmussen and Christopher K. I. Williams},
+    title = {Gaussian Processes for Machine Learning},
+    publisher="The MIT Press",
+    address="Cambridge, MA, USA",
+    year = {2006},
+}
+
+@unpublished{reid10risk,
+    author = "Mark D. Reid and Robet C. Williamson",
+    title = "Information, Divergence and Risk for Binary Experiments",
+    journal = "Journal of Machine Learning Research",
+    note = "\emph{-- under review for JMLR}",
+}

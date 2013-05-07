@@ -1,0 +1,49 @@
+\section{Introduction}
+
+Preference learning concerns making inferences from data which consists of pairs of items with a binary label indicating preference between them. Learning from preference data is becoming a larger subfield of Machine Learning and AI \citep{furnkranz2010}. Preference data appears in a number of contexts, including medical assistive technologies \citep{birlutiu2009} and graphical design \citep{brochu2007}; but perhaps the most ubiquitous application is in online recommendation and decision making systems \citep{de2009}. Users sometimes provide an absolute rating for a particular product, but more often the data takes the form of preference judgements between pairs of items. Preferences may either be extracted directly from items that have been ranked explicitly or from implicit feedback, e.g. clickthrough data \citep{joachims2002}. Not only is implicit preference data more abundant than explicit ratings, but preference judgements often elicit more consistent behaviour from users  \citep{kingsley2006}. Unlike absolute rankings preference judgements are less susceptible to drift of the rating scale over time. Therefore it has become important to be able to model and make decisions based upon preference data.
+
+To model preference judgements, a popular approach is to assume the existence of a latent function $f:\mathcal{X}\to\mathbb{R}$. This function models the `value' assigned to a particular item $\x$; $f(\x)>f(\x')$ indicates that item $\x$ is preferred to item $\x'$, denoted $\x\succ\x'$. As in many areas of probabilistic Machine Learning Bayesian models have become popular for preference learning so that one can capture formally both the uncertainty in the user's decisions, but also the model's uncertainty in the latent function that stems from making inferences based on finite data. The objective of Bayesian methods is to infer a posterior distribution over $f$ given some preference data. A prior distribution on $f$ must be defined; a Gaussian Process (GP) prior is often used because it allows $f$ to belong to very flexible class of continuous functions \citep{chu2005}.
+
+In many applications e.g. online retail, preference data will be available for many users. The approach in \citep{chu2005} models an individual and does not carry any information between multiple users. We propose a multi-user model that learns the shared structure in multiple users' preference functions to assist with making predictions. Our multi-user preference learning model that combines the matrix factorisation techniques are popular in collaborative filtering systems \citep{koren2008,stern2009} with the flexible nonlinear GP prior of \citep{chu2005}.
+
+Throughout this work we assume that we are equipped with features for the items; without these one could not construct a GP prior over latent functions. However, unlike other approaches to learning multi-user preferences \citep{birlutiu2009}, our model is unsupervised inasmuch as we do not assume access to user-specific features. It is realistic that one would not have \emph{a priori} access to user specific information, for example real-world retail or even online retail if the user chooses not to impart personal information. Although it is not the focus of this work, it is also possible to incorporate user features in our model should they be available.
+
+We perform inference in our model using a hybrid Expectation Propagation (EP) and Variational Inference algorithm. We also demonstrate a useful reformulation that allows GP preference learning to be posed as GP classification. This not only permits a much simpler implementation, but also allows researchers building similar models to port tools designed for GPC directly to the preference domain.  However, the training cost when using Gaussian processes is $\mathcal{O}(N^3)$ in the number of data points. Therefore we propose an active learning algorithm to select only the most informative data to use, we take the classic information-theoretic approach to active learning, and maximise knowledge of the model parameters \citep{mackay1992}. Although the information theoretic criterion has been applied exactly for simple models, for complicated models, such as GPs with infinite parameter spaces approximations are made to achieve tractability e.g. \citep{lawrence2002}. Our algorithm makes minimal approximations and has low computational complexity. To reduce training time further, once the data has been subsampled using Active Learning, we apply the FITC approximation to represent the selected data in a sparse form \citep{snelson2006}. As well as using active learning to perform a sparse subsampling of the data, as in \citep{lawrence2002}, we can also use it in an online setting to elicit maximal information from a new user when their preference judgements are not yet known.
+
+In Section \ref{sec:model} we present our multi-user preference learning model and make comparisons to other approaches in probabilistic preference learning and matrix factorisation. Inference in this model is intractable, and in Section \ref{sec:implementation} we demonstrate how to perform efficient approximate inference which consists of a combination of parallel Expectation Propagation \citep{gerven2010a} and Variational methods \citep{stern2009}. We show how we apply the FITC algorithm is used to represent the data in a sparse form. We also demonstrate a kernel reformulation that allows simpler implementation. Our active learning algorithm is presented in Section \ref{sec:active} and compared to other popular approaches. In Section \ref{sec:experiments} we demonstrate the power of our approach experimentally on simulated and real data, and conclude the paper in Section \ref{sec:conclusions}.
+
+\subsection{Notation}
+
+Table \ref{fig:notation} summarises the notation that we use throughout this report. It is important to note that $\ent[y|\x]$ denotes the entropy of a conditional distribution $\left(\int_{\mathcal{Y}} p(y|\x) \log p(y|\x)\mathrm{d}y \right)$, \emph{not} the conditional entropy, $\left( \int_{\mathcal{X}}\int_{\mathcal{Y}} p(y,\x)\log p(y|\x)\mathrm{d}\x\mathrm{d}y \right)$.
+
+\begin{figure}[t]
+\begin{center}
+\begin{tabular}{l|l}
+ \bf{Symbol} & \bf{Meaning} \\ \hline
+ \hline
+ $I$ & Number of items. \\
+ $P$ & Total number of distinct pairs of items evaluated by all users. \\
+ $U$ & Number of users. \\ 
+ $M_u$ & Number of pairs evaluated by user $u$. \\
+ $N_u$ & Number of judgement made by user $u$ \\
+ $D$ & Number of auxiliary latent functions. \\
+ $\mathbf{x}$ & Item $\in\mathcal{X}$. \\
+ $\$
+
+
+ $\x \succ \x'$ & Item $\x$ is preferred to $\x'$.  \\
+ $\xt$ & Concatenation of both inputs to a preference datapoint $[\x; \x']^\T$.  \\
+ $\{\tilde{\x}, y\}$ & Complete datapoint including preference judgement.  \\
+ $\X$ &  Tuple $\{\X_1,..,\X_{N_u}\}$, where $\X_u$ is $(N_u\times 2D)$ matrix of preferences inputs for user $u$. \\
+ $\y$ &  Tuple $\{\y_1,..,\y_{N_u}\}$, where $\y_u$ is $(N_u\times 1)$ vector of preferences from user $u$. \\
+ $\data$ & All observed data $\{\X, \y\}$. \\
+ $\w$ & Tuple $\{\w_1,..,\w_M\}$, where $\w_u$ is $(K\times 1)$ vector of weights for user $u$.  \\
+ $\h$ & Tuple $\{\h_1,..,\h_K\}$, where $\h_k$ is $(D\times N_u)$ matrix of auxiliary function values users and items.  \\
+ $\g$ & Tuple $\{\g_1,..,\g_M\}$, where $\g_u$ is $(N_u\times 1)$ of user latent function values for each item for user $u$.  \\
+ $\ent[\x]$ & Differential entropy: $-\int_{\mathcal{X}} p(\x)\log p(\x)\mathrm{d}\x$.  \\
+ $\ent[y|\x]$ & Entropy of conditional distribution the $p(y|\x)$: $-\int_{\mathcal{Y}} p(y|\x)\log p(y|\x)\mathrm{d}y$.  \\
+ $\mathrm{h}(\x)$ & Binary entropy function: $-p(\x)\log p(\x) - (1-p(\x))\log (1-p(\x))$.  \\
+\end{tabular}
+\caption{Summary of the key notation used throughout this work.}\label{fig:notation}
+\end{center}
+\end{figure}

@@ -1,0 +1,336 @@
+% TODO: 
+% fix refs in text - should make sense if deleted, also try to squeeze last paragraph in
+%DONT BOTHER: cancer, wdbc for box plot calc being done. Do austra(extend rand dec semi emp), isolet(all) - dec+MES hitting end DO O(f_x^4)
+% PUT IN ACKNOWLEDGEMENTS IF IT GETS IN
+\documentclass[twoside]{article}
+
+\usepackage{aistats2012}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{array}
+\usepackage{microtype}
+\usepackage{subfigure}
+%\usepackage{natbib}
+\usepackage{xfrac}
+\usepackage{fancyhdr} 
+
+\newcommand{\x}{\bm{x}}
+\newcommand{\y}{y}
+\newcommand{\upref}{\bm{u}}
+\newcommand{\vpref}{\bm{v}}
+\newcommand{\data}{\mathcal{D}}
+\newcommand{\param}{\bm{\theta}}
+\newcommand{\argmax}{ \operatorname*{arg \max}} 
+\newcommand{\argmin}{ \operatorname*{arg \min}} 
+\newcommand{\ourmethod}{BALD } % nb if change this wll need to change initial ref
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\rmI}{\mathrm{I}}
+\newcommand{\rmh}{\mathrm{h}}
+\newcommand{\rmH}{\mathrm{H}}
+\newcommand{\rmKL}{\mathrm{KL}}
+
+
+\definecolor{mycolor1}{rgb}{0,0.4,0}
+\definecolor{mycolor2}{rgb}{0,1,1}
+\definecolor{mycolor3}{rgb}{1,0,1}
+\definecolor{mycolor4}{rgb}{1,0.8,0.5}
+\definecolor{mycolor5}{rgb}{0.7,0.4,0.01}
+
+\renewcommand\floatpagefraction{.9}
+\renewcommand\topfraction{.9}
+\renewcommand\bottomfraction{.9}
+\renewcommand\textfraction{.1}   
+\setcounter{totalnumber}{50}
+\setcounter{topnumber}{50}
+\setcounter{bottomnumber}{50}
+
+\linespread{0.958}
+\addtolength{\parskip}{-1mm}
+%%\addtolength{\abovedisplayskip}{-20mm} 
+%%\addtolength{\belowdisplayskip}{-20mm}
+%%\addtolength{\floatsep}{-20mm}
+\addtolength{\abovecaptionskip}{-3mm}
+\addtolength{\belowcaptionskip}{-5mm}
+
+\begin{document}
+
+\twocolumn[
+
+\aistatstitle{Bayesian Active Learning for Classification and Preference Learning}
+
+\aistatsauthor{ Anonymous Author 1 \And Anonymous Author 2}
+
+\aistatsaddress{ Unknown Institution 1 \And Unknown Institution 2} 
+
+\aistatsauthor{ Anonymous Author 3 \And Anonymous Author 4}
+
+\aistatsaddress{ Unknown Institution 3 \And Unknown Institution 4}]
+
+%\aistatsauthor{ Neil Houlsby \And Ferenc Husz\'{a}r \And Zoubin Ghahramani \And M\'{a}t\'{e} Lengyel }
+
+%\aistatsaddress{ University of Cambridge \And University of Cambridge \And University of Cambridge \And University of Cambridge } ]
+
+%Information theoretic active learning has been widely studied for probabilistic models. For simple regression an optimal myopic policy is easily tractable. However, for other common tasks, such as classification with nonparametric models, the optimal solution is more complex; the objective is complicated further for nonparametric models with infinite dimensional parameter spaces. Many approaches have been proposed that include computing approximate posterior entropies, sampling, or using related quantities in non-probabilistic models. We propose an approach that expresses information gain in terms of predictive entropies. Using this we demonstrate an algorithm for active learning for the popular Gaussian Process classifier (GPC) that makes the fewest approximation to the full information theoretic objective to date with equal or lower computational complexity to current methods. Our method consistently equals or outperforms several other popular approaches to information theoretic active learning and even decision theoretic approaches (who are privy to more information and much slower). Notably our algorithm works with all known approximate inference methods for GPC and allows for active learning of hyperparameters too. Finally, using a novel trick to reformulate binary preference learning to a classification problem we extend our algorithm to yield a new approach to Gaussian process-based preference learning.
+
+\begin{abstract}
+
+Information theoretic active learning has been widely studied for probabilistic models. For simple regression an optimal myopic policy is easily tractable. However, for other tasks and with more complex models, such as classification with nonparametric models, the optimal solution is harder to compute. Current approaches make approximations to achieve tractability. We propose an approach that expresses information gain in terms of predictive entropies, and apply this method to the Gaussian Process Classifier (GPC). Our approach makes minimal approximations to the full information theoretic objective. Our experimental performance compares favourably to many popular active learning algorithms, and has equal or lower computational complexity. We compare well to decision theoretic approaches also, which are privy to more information and require much more computational time. Secondly, by developing further a reformulation of binary preference learning to a classification problem, we extend our algorithm to Gaussian Process preference learning.
+
+\end{abstract}
+
+\section{Introduction}
+In most machine learning systems, the learner passively collects data with which it makes inferences about its environment. In active learning, however, the learner seeks the most useful measurements to be trained upon. The goal of active learning is to produce the best model with the least possible data; this is closely related to the statistical field of optimal experimental design. With the advent of the internet and expansion of storage facilities, vast quantities of unlabelled data have become available, but it can be costly to obtain labels. Finding the most useful data in this vast space calls for efficient active learning algorithms.
+
+Two approaches to active learning are to use decision and information theory \cite{kapoor2007,lindley1956}. The former minimizes the expected losses encountered after making decisions based on the data collected i.e. minimize the Bayes posterior risk \cite{roy2001}. Maximising performance under test is the ultimate objective of most learners, however, evaluating this objective can be very hard. For example, the methods proposed in \cite{kapoor2007,zhu2003} for classification are in general expensive to compute. Furthermore, one may not know the loss function or test distribution in advance, or may want the model to perform well on a variety of loss functions. In extreme scenarios, such as exploratory data analysis, or visualisation, losses may be very hard to quantify. 
+
+This motivates information theoretic approaches to active learning, which are agnostic to the decision task at hand and particular test data, this is known an inductive approach. They seek to reduce the number of feasible models as quickly as possible, using either heuristics (e.g. margin sampling \cite{tong2001}) or by formalising uncertainty using well studied quantities, such as Shannon’s entropy and the KL-divergence \cite{coverandthomas}. Although the latter approach was proposed several decades ago \cite{lindley1956, bernardo1979}, it is not always straightforward to apply the criteria to complicated models such as nonparametric processes with infinite parameter spaces. As a result many algorithms exist which compute approximate posterior entropies, perform sampling, or work with related quantities in non-probabilistic models.
+
+We return to this problem, presenting the full information criterion and demonstrate how to apply it to Gaussian Processes Classification (GPC), yielding a novel active learning algorithm that makes minimal approximations. GPC is a powerful, non-parametric kernel-based model, and poses an interesting problem for information-theoretic active learning because the parameter space is infinite dimensional and the posterior distribution is analytically intractable. We present the information theoretic approach to active learning in Section 2. In Section 3 we apply it to GPC, and show how to extended our method to preference learning. In Section 4 we review other approaches and how they compare to our algorithm. We take particular care to contrast our approach to the Informative Vector Machine, that addresses data point selection for GPs directly. We present results on a wide variety of datasets in Section 5 and conclude in Section 6.
+
+\section{Bayesian Information Theoretic Active Learning}
+
+We consider a fully discriminative model where the goal of active learning is to discover the dependence of some variable $\y\in\mathcal{Y}$ on an input variable $\x\in\mathcal{X}$. The key idea in active learning is that the learner chooses the input queries $\x_i\in\mathcal{X}$ and observes the system's response $\y_i$, rather than passively receiving $(\x_i \y_i)$ pairs.
+
+Within a Bayesian framework we assume existence of some latent parameters, $\param$, that control the dependence between inputs and outputs, $p(\y\vert\x,\param)$. Having observed data $\data = \{(\x_i,\y_i)\}_{i=1}^n$, a posterior distribution over the parameters is inferred, $p(\param|\data)$. The central goal of information theoretic active learning is to reduce the number possible hypotheses maximally fast, i.e. to minimize the uncertainty about the parameters using Shannon's entropy \cite{coverandthomas}. Data points $\mathcal{D}'$ are selected that satisfy $\argmin_{\mathcal{D}'}\rmH[\param|\mathcal{D}']=-\int p(\param|\mathcal{D}')\log p(\param|\mathcal{D}') \mathrm{d}\param$. Solving this problem in general is NP-hard; however, as is common in sequential decision making tasks a myopic (greedy) approximation is made \cite{heckerman1995}. It has been shown that the myopic policy can perform near-optimally \cite{golovin2010,dasgupta2005}. Therefore, the objective is to seek the data point $\x$ that maximises the decrease in expected posterior entropy:
+
+\begin{align}	
+	\label{eqn:ent_change}
+	\argmax_{\x} \rmH[\param | \data] - \E_{\y\sim p(\y|\x\data)} \left[ \rmH[\param| \y, \x,\data] \right] 
+\end{align}
+
+Note that expectation over the unseen output $\y$ is required. Many works e.g. \cite{mackay1992, krishnapuram2004, lawrence2003} propose using this objective directly. However, parameter posteriors are often high dimensional and computing their entropies is usually intractable. Furthermore, for nonparametric processes the parameter space is infinite dimensional so Eqn.\,\eqref{eqn:ent_change} becomes poorly defined. To avoid gridding parameter space (exponentially hard with dimensionality), or sampling (from which it is notoriously hard to estimate entropies without introducing bias \cite{panzeri2007}), these papers make Gaussian or low dimensional approximations and calculate the entropy of the approximate posterior. A second computational difficulty arises; if $N_{\x}$ data points are under consideration, and $N_{\y}$ responses may be seen, then $\mathcal{O}(N_{\x}N_{\y})$, potentially expensive, posterior updates are required to calculate Eqn.\,\eqref{eqn:ent_change}.
+
+An important insight arises if we note that the objective in Eqn.\,\eqref{eqn:ent_change} is equivalent to the conditional mutual information between the unknown output and the parameters, $\rmI[\param,\y\vert\x,\data]$. Using this insight it is simple to show that the objective can be rearranged to compute entropies in $\y$ space:
+
+\begin{align}
+\argmax_{\x} \rmH[\y \vert \x, \data] - \E_{\param\sim p(\param|\data)} \left[ \rmH[\y \vert \x,\param] \right] \label{eqn:rearrangement} 
+\end{align}
+
+Eqn.\,\eqref{eqn:rearrangement} overcomes the challenges we described for Eqn.\,\eqref{eqn:ent_change}. Entropies are now calculated in, usually low dimensional, output space. For binary classification, these are just entropies of Bernoulli variables. Also $\param$ is now conditioned only on $\data$, so only $\mathcal{O}(1)$ posterior updates are required. Eqn.\,\eqref{eqn:rearrangement} also provides us with an interesting intuition about the objective; we seek the $\x$ for which the model is marginally most uncertain about $\y$ (high $\rmH[\y \vert \x, \data]$), but for which individual settings of the parameters are confident (low $\E_{\param\sim p(\param|\data)} \left[ \rmH[\y \vert \x,\param] \right]$). This can be interpreted as seeking the $\x$ for which the parameters under the posterior disagree about the outcome the most, so we refer to this objective as Bayesian Active Learning by Disagreement (BALD). We present a method to apply Eqn.\,\eqref{eqn:rearrangement} directly to GPC and preference learning. We no longer need to build our entropy calculation around the type of posterior approximation (as in \cite{mackay1992, krishnapuram2004, lawrence2003}) but are free to choose from many of the available algorithms. Minimal additional approximations are introduced, and so, to our knowledge our algorithm represents the most exact and fastest way to perform full information-theoretic active learning in non-parametric discriminative models.
+
+\section{Gaussian Processes for Classification and Preference Learning\label{sec:GPC}}
+
+In this section we derive the BALD algorithm for Gaussian Process classification (GPC). GPs are a powerful and popular non-parametric tool for regression and classification. GPC appears to be an especially challenging problem for information-theoretic active learning because the parameter space is infinite, however, by using \eqref{eqn:rearrangement} we are able to calculate fully the relevant information quantities without having to work out entropies of infinite dimensional objects. The probabilistic model underlying GPC is as follows:
+\begin{align}
+	&f \sim \mathrm{GP}(\mu(\cdot),k(\cdot,\cdot)) \notag \\
+	&\y\vert\x,f \sim\mathrm{Bernoulli}(\Phi(f(\x))) \notag
+\end{align}
+The latent parameter, now called $f$ is a function $\mathcal{X}\rightarrow\mathbb{R}$, and is assigned a Gaussian process prior with mean $\mu(\cdot)$ and covariance function or kernel $k(\cdot,\cdot)$. We consider the probit case where given the value of $f$, $y$ takes a Bernoulli distribution with probability $\Phi(f(\x))$, and $\Phi$ is the Gaussian CDF. For further details on GPs see \cite{rasmussen2005}.
+
+Inference in the GPC model is intractable; given some observations $\data$, the posterior over $f$ becomes non-Gaussian and complicated. The most commonly used approximate inference methods -- EP,  Laplace approximation, Assumed Density Filtering and sparse methods -- all approximate the posterior by a Gaussian \cite{rasmussen2005}. Throughout this section we will assume that we are provided with such a Gaussian approximation from one of these methods, though the active learning algorithm does not care which one. In our derivation we will use {\scriptsize$\stackrel{1}{\approx}$} to indicate where such an approximation is exploited.
+
+The informativeness of a query $\x$ is computed using Eqn.\,\eqref{eqn:rearrangement}.  The entropy of the binary output variable $\y$ given a fixed $f$ can be expressed in terms of the binary entropy function $\rmh$: 
+\begin{align}
+\rmH[y\vert\x,f] &= \rmh\left(\Phi(f(\x)\right) \notag\\
+\rmh(p)&=- p\log p - (1-p)\log(1-p) \notag
+\end{align}
+Expectations over the posterior need to be computed. Using a Gaussian approximation to the posterior, for each $\x$, $f_{\x} = f(\x)$ will follow a Gaussian distribution with mean $\mu_{\x,\data}$ and variance $\sigma_{\x,\data}^2$. To compute Eqn.\,\eqref{eqn:rearrangement} we have to compute two entropy quantities. The first term in Eqn.\,\eqref{eqn:rearrangement}, $\rmH[y\vert\x,\data]$ can be handled analytically for the probit case:
+\begin{align}
+	\rmH[y\vert\x,\data] &\stackrel{1}{\approx} \rmh\left( \int \Phi( f_{\x} )  \mathcal{N}(f_{\x}\vert \mu_{\x,\data},\sigma_{\x,\data}^2) df_{\x} \right) \notag \\ 
+	&= \rmh \left( \Phi\left( \frac{\mu_{\x,\data}}{\sqrt{\sigma^2_{\x,\data} + 1}} \right)\right) \label{ent_mean}
+\end{align}
+The second term, $\E_{f \sim p(f\vert\data)} \left[ \rmH[\y\vert\x, f] \right]$ can be computed approximately as follows:
+\begin{align}
+	&\E_{f \sim p(f\vert\data)} \left[ \rmH[\y\vert\x, f] \right] \notag\\	 
+	&\quad \stackrel{1}{\approx}\int \rmh(\Phi(f_{\x})) \mathcal{N}(f_{\x}\vert \mu_{\x,\data},\sigma_{\x,\data}^2)df_{\x}\label{eqn:mean_entropy}\\
+	&\quad\stackrel{2}{\approx} \int \exp\left(-\frac{f_{\x}^2}{\pi\ln2}\right) \mathcal{N}(f_{\x}\vert \mu_{\x,\data},\sigma_{\x,\data}^2)df_{\x}\notag\\	
+	&\quad= \frac{C}{\sqrt{\sigma_{\x,\data}^2 + C^2}}\exp\left(-\frac{\mu_{\x,\data}^2}{2\left(\sigma_{\x,\data}^2 + C^2\right)}\right)\notag
+\end{align}
+
+where $C=\sqrt{\frac{\pi\ln2}{2}}$. The first approximation, {\scriptsize $\stackrel{1}{\approx}$}, reflects the Gaussian approximation to the posterior. The integral in the left hand side of Eqn.\,\eqref{eqn:mean_entropy} is intractable. By performing a Taylor expansion on $\ln \rmh(\Phi(f_{\x}))$ (see supplementary material) we can see that it can be approximated up to $\mathcal{O}(f_{\x}^4)$ by a squared exponential curve, $\exp(-f_{\x}^2/\pi\ln2)$. We will refer to this approximation as {\scriptsize $\stackrel{2}{\approx}$}. Now we can apply the standard convolution formula for Gaussians to finally get a closed form expression for both terms of Eqn.\,\eqref{eqn:rearrangement}.
+
+Fig.\,\ref{fig:trick} depicts the striking accuracy of this simple approximation. The maximum possible error that will be incurred when using this approximation is if $\mathcal{N}(f_{\x}\vert \mu_{\x,\data},\sigma_{\x,\data}^2)$ is centred at $\mu_{\x,\data}=\pm 2.05$  with $\sigma_{\x,\data}^2$ tending to zero (see Fig.\,\ref{fig:trick}, absolute error \ref{plots:approx_error}), yielding only a 0.27\% error in the integral in Eqn.\,\eqref{eqn:mean_entropy}. The authors are unaware of previous use of this simple and useful approximation in this context.  In Section \ref{sec:experiments} we investigate experimentally the information lost from approximations {\scriptsize $\stackrel{1}{\approx}$} and {\scriptsize $\stackrel{2}{\approx}$} as compared to the golden standard of extensive Monte Carlo simulation.
+
+To summarise, the BALD algorithm for Gaussian process classification consists of two steps. First it applies any standard approximate inference algorithm for GPCs (such as EP) to obtain the posterior predictive mean $\mu_{\x,\data}$ and $\sigma_{\x,\data}$ for each point of interest $\x$. Then, it selects a query $\x$ that maximises the following objective function:
+
+\begin{equation}
+	\rmh \left( \Phi\left( \frac{\mu_{\x,\data}}{\sqrt{\sigma^2_{\x,\data} + 1}} \right)\right) - \frac{C \exp\left(-\frac{\mu_{\x,\data}^2}{2\left(\sigma_{\x,\data}^2 + C^2\right)}\right)}{\sqrt{\sigma_{\x,\data}^2 + C^2}} \label{eqn:BALD_GPC}
+\end{equation}
+
+For most practically relevant kernels, the objective \eqref{eqn:BALD_GPC} is a smooth and differentiable function of $\x$, so gradient-based optimisation procedures can be used to find the maximally informative query.
+
+\begin{figure}\centering
+\input{figs/gaussian_approx.tikz}
+\caption{Analytic approximation ({\scriptsize $\stackrel{1}{\approx}$}) to the binary entropy of the error function (\ref{plots:approx_true}) by a squared exponential (\ref{plots:approx_approx}). The absolute error (\ref{plots:approx_error}) remains under $3\cdot 10^{-3}$. }\label{fig:trick}
+\end{figure}
+
+\subsection{Extension: Learning Hyperparameters \label{sec:hyperparameters}}
+
+In many applications the parameter set $\param$ naturally divides into parameters of interest, $\param^+$, and nuisance parameters $\param^-$, i.e. $\param=\{\param^+,\param^-\}$. In such settings, the active learning may want to query points that are maximally informative about $\param^+$, while not caring about $\param^-$. By integrating Eqn.\,\eqref{eqn:ent_change} over the nuisance parameters, $\param^-$, BALD's objective is re-derived as:
+
+\begin{align} 
+&\rmH\left[\E_{p(\param^+,\param^-\vert \data)}\left[\y|\x,\param^+,\param^-\right]\right] \notag\\
+&\quad- \E_{p(\param^+|\data)} \left[ \rmH\left[\E_{p(\param^-|\param^+,\data)}[ \y \vert \x, \param^+,\param^- ]\right] \right]\label{eqn:BALD_bipartite}
+\end{align}
+
+In the context of GP models, hyperparameters typically control the smoothness or spatial length-scale of functions. If we maintain a posterior distribution over these hyperparameters, which we can do e.\,g.\ via Hamiltonian Monte Carlo, we can choose either to treat them as nuisance parameters $\param^-$ and use Eq.\ \ref{eqn:BALD_bipartite}, or to include them in $\param^+$ and perform active learning over them as well. In certain cases, such as automatic relevance determination \cite{rasmussen2005}, it may even make sense to treat hyperparameters as variables of primary interest, and the function $f$ itself as nuisance parameter $\param^-$.
+
+\subsection{Preference Learning}
+
+Our active learning framework for GPC can be extended to the important problem of preference learning \cite{furnkranz2003, chu2005}. In preference learning the dataset consists for pairs of items $(\upref_i,\vpref_i)\in\mathcal{X}^2$ with binary labels, $y_i\in\{0,1\}$. $y_i=1$ means instance $\upref_i$ is preferred to $\vpref_i$, denoted $\upref_i\succ \vpref_i$. The task is to predict the preference relation between any $(\upref,\vpref)$. We can view this as a special case of building a classifier on pairs of inputs $\rmh:\mathcal{X}^2\mapsto\{0,1\}$. \cite{chu2005} propose a Bayesian approach, using a latent preference function $f$, over which a GP prior is defined. The model predicts preference,  $\upref_i \succ \vpref_i$ whenever $f(\upref_i)+\epsilon_{u_i}>f(\vpref_i)+\epsilon_{v_i}$, where $\epsilon_{u_i}, \epsilon_{v_i}$ denote additive Gaussian noise. Under this model, the likelihood of $f$ becomes:
+
+\begin{align}
+	\mathbb{P}[y=1\vert (\upref_i,\vpref_i), f] &= \mathbb{P}[\upref_i\succ \vpref_i \vert f] \notag\\
+	&=  \Phi\left(\frac{f(\upref_i) - f(\vpref_i)}{\sqrt{2}\sigma_{noise}}\right)
+\end{align}
+
+By rescaling the latent function $f$, it can be assumed w.l.o.g.\,that $\sqrt{2}\sigma_{noise}=1$. The likelihood only depends on the difference between $f(\upref)$ and $f(\vpref)$. We therefore define $g(\upref,\vpref)=f(\upref)-f(\vpref)$, and do inference entirely in terms of $g$, for which the likelihood becomes the same as for probit classification: $y|\upref,\vpref,f\sim \mathrm{Bernoulli}(\Phi(g(\upref,\vpref)))$. We observe that a GP prior is induced on $g$ because it is formed by performing a linear operation on $f$, for which we have a GP prior already $f\sim \mathrm{GP}(0,k)$. We can derive the induced covariance function of $g$ as (derivation in the Supplementary material) as: $k_{\mathrm{pref}}((\upref_i,\vpref_i),(\upref_j,\vpref_j)) = k(\upref_i,\upref_j) + k(\vpref_i,\vpref_j) - k(\upref_i,\vpref_j) - k(\vpref_i,\upref_j)$.
+
+
+Note that this kernel $k_{\mathrm{pref}}$ respects the anti-symmetry properties desired for a preference learning scenario, i.e. the value $g(u,v)$ is perfectly anti-correlated with $g(v,u)$, ensuring $\mathbb{P}[\upref\succ \vpref] = 1 - \mathbb{P}[\vpref \succ \upref]$ holds. Thus, we can conclude that the GP preference learning framework of \cite{chu2005}, is equivalent to GPC with a particular class of kernels, that we may call the \emph{preference judgement kernels}. Therefore, our active learning algorithm presented in Section \ref{sec:GPC} for GPC can readily be applied to pairwise preference learning also.
+
+\section{Related Methodologies}
+
+There are a number of closely related algorithms for active classification which we now review.
+
+\paragraph{The Informative Vector Machine (IVM):} Perhaps the most closely related approach is the IVM \cite{lawrence2003}. This popular,and successful approach to active learning was designed specifically for GPs; it uses an information theoretic approach and so appears very similar to BALD. The IVM algorithm was designed for subsampling a dataset for training a GP, so it is privy to the $\y$ values before including a measurement; it cannot therefore work explicitly in output space i.e. with Eqn.\,\eqref{eqn:rearrangement}. The IVM uses Eqn.\,\eqref{eqn:ent_change}, but parameter entropies are calculated approximately in the marginal subspace corresponding to the observed data points. The entropy decrease after inclusion of a new data point can then be calculated efficiently using the GP covariance matrix.
+
+Although the IVM and BALD are motivated by the same objective, they work fundamentally differently when approximate inference is carried out. At any time both methods have an approximate posterior $q_t(\param|\data)$, this can be updated with the likelihood of a new data point $p(y_{t+1}|f,\x_{t+1})$, yielding $\hat{p}_{t+1}(\param|\data,\x_{t+1}, y_{t+1})=\frac{1}{Z}q_t(\param|\data)p(y_{t+1}|f,\x_{t+1})$. If the posterior at $t+1$ is approximated directly one gets $q_{t+1}(\param|\data,\x_{t+1},\y_{t+1})$. BALD calculates the entropy difference between $q_t$ and $\hat{p}_{t+1}$, without having to compute $q_{t+1}$ for each candidate $\x$. In contrast, the IVM calculates the entropy change between $q_{t}$ and $q_{t+1}$. The IVM's approach cannot calculate the entropy of the full infinite dimensional posterior, and requires $\mathcal{O}(N_{\x}N_{\y})$ posterior updates. To do these updates efficiently, approximate inference is performed using Assumed Density Filtering (ADF). Using ADF means that $q_{t+1}$ is a direct approximation to $\hat{p}_{t+1}$, indicating that the IVM makes a further approximation to BALD. Since BALD only requires $\mathcal{O}(1)$ posterior updates it can afford to use more accurate, iterative procedures, such as EP.
+
+\paragraph{Information Theoretic approaches:} Maximum Entropy Sampling (MES) \cite{sebastiani2000} explicitly works in dataspace (Eqn.\,\eqref{eqn:rearrangement}). MES was proposed for regression models with input-independent observation noise. Although Eqn.\,\eqref{eqn:rearrangement} is used, the second term is constant because of input independent noise and is ignored. One cannot, however, use MES for heteroscedastic regression or classification; it fails to differentiate between model uncertainty and observation uncertainty (about which our model may be confident). Some toy demonstrations show this `information based' active learning criterion performing pathologically in classification by repeatedly querying points close the decision boundary or in regions of high observation uncertainty  e.g. \cite{huang2010}. This is because MES is inappropriate in this domain; BALD distinguishes between observation and model uncertainty and eliminates these problems as we will show.
+
+Mutual-information based objective functions are presented in \cite{ertin2003,fuhrmann2003}. They maximise the mutual information between the variable being measured and the variable of interest. Fuhrmann \cite{fuhrmann2003} applies this to linear Gaussian models and acoustic arrays, Ertin \emph{et al.} \cite{ertin2003} to a communications channel. Although related, these objectives do not work with the model parameters and are not applied to classification. \cite{guestrin2005, krause2006} also use mutual information. They specify interest points in advance and maximise the expected mutual information between the predictive distributions at these points and at the observed locations. Although this is a objective is promising for regression, it is not tractable for models with input-dependent observation noise, such as classification or preference learning.
+
+%can lose this para
+%(MAYBE REMOVE THIS PARA)We have briefly reviewed several information-theoretic based algorithms, but as far as the authors are aware our paper is the first to develop an efficient algorithm that applies the full information theoretic criterion (Eqn.\,\eqref{eqn:rearrangement}) to probabilistic classification.
+
+\paragraph{Decision theoretic:} We briefly mention decision theoretic approaches to active learning. Two closely related algorithms, \cite{kapoor2007, zhu2003}, seek to minimize the expected cost i.e. loss weighted misclassification probability on all seen and future data. These methods observe the locations of the test points and their objective functions become monotonic in the predictive entropies at the test points. \cite{kapoor2007} also includes an empirical error term that can yield pathological behaviour (we investigate this experimentally). These approaches are computationally expensive, requiring $\mathcal{O}(N_{\x}N_{\y})$ posterior updates. Also, they must know the locations of the test data (and thus are transductive approaches); designing an inductive, decision-theoretic algorithm  is an open, hard problem as it would require expensive integration over possible test data distributions.
+
+% can call version space VS
+\paragraph{Non-probabilistic} Some non-probabilistic methods have close analogues to information theoretic active learning. Perhaps the most ubiquitous is active learning for SVMs \cite{tong2001,seung1992}, where the volume of Version Space (VS) is used as a proxy for the posterior entropy. If a uniform (improper) prior is used with a deterministic classification likelihood, the log volume of VS and Bayesian posterior entropy are in fact equivalent. Just as Bayesian posteriors become intractable after observing many data points, VS can become complicated. \cite{tong2001} proposes methods for approximating VS with a simple shapes, such as hyperspheres (their simplest approximation reduces to margin sampling). This closely resembles approximating a Bayesian posterior using a Gaussian distribution via the Laplace or EP approximations. \cite{seung1992} sidesteps the problem by working with predictions. The algorithm, Query by Committee (QBC), samples parameters from VS (committee members), they vote on the outcome of each possible $\x$. The $\x$ with the most balanced vote is selected; this is termed the `principle of maximal disagreement'. If BALD is used with a sampled posterior, query by committee is implemented but with a probabilistic measure of disagreement. QBC's deterministic vote criterion discards confidence in the predictions and so can exhibit the same pathologies as MES.
+
+%\paragraph{PAC-Bayes} Think about putting a line about it here. Explain why it doesn't work.
+
+\begin{figure}[t]\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+&MCMC&EP ($\stackrel{1}{\approx}$)&Laplace ($\stackrel{1}{\approx}$)\\ \hline
+\hline
+MC & 0 & $7.51\pm2.51$ & $41.57\pm4.02$ \\
+$\stackrel{2}{\approx}$ & $0.16\pm0.05$ & $7.43\pm2.40$ & $40.45\pm3.67$ \\ \hline
+\end{tabular}
+\caption{Percentage approximation error ($\pm$1 s.d.) for different methods of approximate inference (\emph{columns}) and approximation methods for evaluating Eqn.\,\eqref{eqn:mean_entropy} (\emph{rows}). The results indicate that {\scriptsize $\stackrel{2}{\approx}$} is a very accurate approximation; EP causes some loss and Laplace significantly more, which is in line with the comparison presented in \cite{Kuss05}. For our experiments we use EP.}\label{fig:trick_results}
+\end{figure}
+
+\section{Experiments} \label{sec:experiments}
+
+\begin{figure*}[t]
+\begin{center}
+\begin{tabular}{ccc}
+\input{figs/blockinthemiddle_dataset.tikz}&
+\input{figs/corner_dataset.tikz}&
+\input{figs/checkerboard_dataset.tikz}\\
+\input{figs/blockinmiddle2.tikz}&
+\input{figs/blockincorner2.tikz}&
+\input{figs/checkerboard2.tikz} \\
+\end{tabular}
+\end{center}
+\caption{\emph{Top:} Evaluation on artificial datasets. Exemplars of the two classes are shown with black squares (\ref{plots:positives}) and red circles (\ref{plots:negatives}). \emph{Bottom:} Results of active learning with nine methods: random query (\ref{plots:rand}), \ourmethod (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with the vote criterion with 2 (\ref{plots:QBC2}) and 100 (\ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), decision theoretic: \cite{kapoor2007} (\ref{plots:dec}), \cite{zhu2003} (\ref{plots:semi}) and empirical error (\ref{plots:emp}).}
+\label{fig:artificial}
+\end{figure*}
+
+\begin{figure*}
+\begin{center}
+\begin{tabular}{ccc}
+\input{figs/crabs3.tikz}&
+\input{figs/vehicle2.tikz}&
+\input{figs/wine3.tikz}\\
+\input{figs/wdbc3.tikz}&
+\input{figs/isolet2.tikz}&
+\input{figs/austra3.tikz}\\
+\input{figs/letterDP2.tikz}&
+\input{figs/letterEF2.tikz}&
+\input{figs/cancer3.tikz}\\
+\input{figs/prefkinem2.tikz}&
+\input{figs/prefcart3.tikz}&
+\input{figs/prefcpu2.tikz}
+\end{tabular}
+\end{center}
+\caption{Test set classification accuracy on classification and preference learning datasets. Methods used are \ourmethod (\ref{plots:BALD}), random query (\ref{plots:rand}), MES (\ref{plots:maxent}), QBC with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), decision theoretic \cite{kapoor2007} (\ref{plots:dec}), decision theoretic \cite{zhu2003} (\ref{plots:semi}) and empicial error (\ref{plots:emp}). The decision theoretic methods took a long time to run, so were not completed for all datasets. Plots (a-i) are GPC datasets, (j-l) are preference learning.}.
+\label{fig:all}
+\end{figure*}
+
+
+\begin{figure*}
+\begin{center}
+\input{figs/boxandwhisker2.tikz}
+\end{center}
+\caption{Summary of results for all classification experiments. $y$-axis denotes the number of additional data points, relative to BALD, required to achieve at least $97.5\%$ of the predictive performance of the entire pool. The `box' denotes 25th to 75th percentile, the red line denotes the median over datasets, and the `whiskers' depict the range. The crosses denote outliers ($>2.7\sigma$ from the mean). Positive values mean that the algorithm required more data points than BALD to achieve the same performance.}
+\label{fig:boxandwhisker}
+\end{figure*}
+
+\paragraph{Quantifying Approximation Losses:} To obtain \eqref{eqn:BALD_GPC} we made two approximations: we perform approximate inference ({\scriptsize $\stackrel{1}{\approx}$}), and we approximated the binary entropy of the Gaussian CDF by a squared exponential ({\scriptsize $\stackrel{2}{\approx}$}). Both of these can be substituted with Monte Carlo sampling, enabling us to compute an asymptotically unbiased estimate of the expected information gain. Using extensive Monte Carlo as the `gold standard', we can evaluate how much we loose by applying these approximations. We quantify approximation error as: 
+
+\begin{align}
+\frac{ \max_{\x\in\mathcal{P}} I(\x) - I(\argmax_{\x\in\mathcal{P}}\hat{I}(\x)) }{{\max_{\x\in\mathcal{P}}I(\x) }}\cdot 100\% 
+\end{align}
+
+where $I$ is the objective computed using Monte Carlo, $\hat{I}$ is the approximate objective. The \emph{cancer} UCI dataset was used, results and discussion are in Fig.\,\ref{fig:trick_results}.
+
+\paragraph{Pool based active learning:} We test \ourmethod for GPC and preference learning in the pool-based setting i.e. selecting $\x$ values from a fixed set of data-points. Although BALD can generalise to selecting continuous $\x$, this enables us to compare to algorithms that cannot. We compare to eight other algorithms: random sampling, MES, QBC (with 2 and 100 committee members), SVM with version space approximation \cite{tong2001}, decision theoretic approaches in \cite{kapoor2007, zhu2003} and directly minimizing expected empirical error (the last is not a widely used method, but is included for analysis of \cite{kapoor2007}).
+
+We consider three artificial, but challenging, datasets. The first of which, \emph{block in the middle}, has a block of noisy points on the decision boundary, the second \emph{block in the corner}, has a block of uninformative points far from the decision boundary: a strong active learning algorithm should avoid these uninformative regions. The third is similar to the \emph{checkerboard} dataset in \cite{zhu2003}, and is designed to test the algorithm's capabilities to find multiple disjoint islands of points from one class. The three datasets and results using each algorithm are depicted in Fig.\,\ref{fig:artificial}.
+
+Results are also presented on eight UCI classification datasets \emph{australia, crabs, vehicle, isolet, cancer, wine, wdbc} and \emph{letter}. \emph{Letter} is a multiclass dataset for which we select hard-to-distinguish letters E vs. F and D vs. P. For preference learning we use the \emph{cpu, cart} and \emph{kinematics} regression datasets \footnote{http://www.liacc.up.pt/~ltorgo/Regression/DataSets.html} processed to yield a preference task as described in \cite{chu2005}. Results are plotted in Fig.\,\ref{fig:all}, and Fig.\,\ref{fig:boxandwhisker} depicts an aggregation of the results.
+
+\paragraph{Discussion:} Figs.\,\ref{fig:artificial} and \ref{fig:all} show that by using \ourmethod we make significant gains over naive random sampling in both the classification and preference learning domains. Relative to other active learning algorithms \ourmethod is consistently the best, or amongst the best performing algorithms on all datasets. On any individual dataset BALD's performance is often matched because we compare to many methods, and the more approximate algorithms can have good performance under different conditions. Fig.\,\ref{fig:boxandwhisker} reveals that BALD has the best overall performance; on average, all other methods require more data points to achieve the same classification accuracy. Zhu \emph{et al.}'s decision theoretic approach is closest, the median increase in the number of data points required is $1.4$ and zero (i.e. equivalent to BALD) is within the inter-quartile range. This algorithm, however, requires much more computational time and has access to the full set of test inputs, which BALD does not have. MES and QBC appear close in performance to BALD, but the zero line falls outside both of their inter-quartile ranges.
+
+As expected, MES performs poorly on the noisy dataset (Fig.\,\ref{fig:artificial}(a)) because it discards knowledge of observation noise. When there is zero observation noise it is equivalent to BALD e.g. Fig.\,\ref{fig:artificial}(c). On many of the real-world datasets MES performs as well as BALD e.g. Fig.\,\ref{fig:all}(b, e), indicating that these datasets are mostly noise-free.
+
+The IVM performs well on Fig.\,\ref{fig:artificial}(c), but pathologically on \ref{fig:artificial}(a); this is due to the fact that it biases selection towards points from only one class in the noisy cluster, reducing the posterior entropy rapidly but artificially. However, it also performs significantly worse than BALD on noise-free (indicated by MES's strong performance) datasets e.g. Fig.\,\ref{fig:all}(b). This implies that the IVM's posterior approximation or the ADF update are detrimental to the algorithm's performance.
+
+QBC often yields only a small decrement in performance, the sampling approximation is often not too detrimental. However, it performs poorly on the noisy artificial dataset (Fig.\,\ref{fig:artificial}(a)) because the vote criterion is not maintaining a notion of inherent uncertainty, like MES. The SVM-based approach exhibits variable performance (it does well on Fig.\,\ref{fig:all}(d), but very poorly on \ref{fig:all}(f)). The performance is greatly effected by the approximation used, for consistency we present here one that yielded the most consistent good performance.
+
+Decision theoretic approaches sometimes perform well, on \ref{fig:artificial}(c) they choose the first 16 points from the centre of each cluster as they are influenced by the surrounding unlabelled points. \ourmethod does not observe the unlabelled points so may not pick points from the centres. Fig.\,\ref{fig:boxandwhisker} reveals that BALD is performing as well as the method in \cite{zhu2003}, and outperforms the approach in \cite{kapoor2007}, despite not having access to the locations of the test points and having a significantly lower computational cost. The objective in \cite{kapoor2007} can fail, this is because one term in their objective function is the empirical error. The weight given to this term is determined by the relative sizes of the training and test set (and the associated losses). Directly minimizing empirical error usually performs very pathologically, picking only `safe' points. When the method in \cite{kapoor2007} assigns too much weight to this term, it can fail also.
+
+Finally we note that BALD may occasionally perform poorly on the first few data points (e.g. Fig.\,\ref{fig:all}(l)). This is may be because the hyperparameters are fixed throughout the experiments to provide a fair comparison to algorithms incapable of incorporating hyperparameter learning. This may mean that given little data the GP model overfits, leading to BALD selecting abnormal query locations. Maintaining a distribution over hyperparameters can be done using MCMC, although this significantly increases computational time. Designing a general method to do this efficiently is a subject of further work. In practice, a simple heuristic such as picking the first few points randomly, and optimising hyperparameters will usually suffice.  
+
+ 
+\section{Conclusions}
+
+We have demonstrated a method that applies the full information theoretic active learning criterion to GP classification that makes, as far as the authors are aware, the smallest number of approximations to date, and has as good computational complexity. We extend the GPC model to develop a new preference learning kernel, which enables us to apply our active learning algorithm directly to this domain also. The method can handle naturally active learning of kernel hyperparameters, which is a hard, mostly unsolved problem, for example in SVM active learning. One notable feature of our approach is that it is agnostic to the approximate inference methods used. This allows us to choose from a whole range of approximate inference methods, including EP, the Laplace approximation, ADF or even sparse online learning, and thereby make the trade off between computational complexity and accuracy. Our experimental performance compares favourably to many other active learning methods for classification, and even decision theoretic methods that have access to the test data and require much greater computational time.
+
+
+{
+\bibliographystyle{apalike}
+\bibliography{bib/bibliog}
+}
+
+\newpage
+\section*{APPENDIX -- SUPPLEMENTARY MATERIAL}
+
+\subsection*{Taylor Expansion for Approximation  $\stackrel{2}{\approx}$}
+
+We perform a Taylor expansion on $ \ln \rmH[\Phi(x)]$ as follows:
+
+\begin{align}
+f(x) &= f(0) + \frac{f'(0)x}{1!} + \frac{f''(0)x^2}{2!} + \dots \nonumber \\
+f(x) &= \ln \rmH[\Phi(x)] \nonumber \\
+f'(x) &= -\frac{1}{\ln 2}\frac{\Phi'(x)}{\rmH[\Phi(x)]}\left[\ln\Phi(x) - \ln(1-\Phi(x))  \right] \nonumber \\ 
+f''(x) &= \frac{1}{\ln 2}\frac{\Phi'(x)^2}{\rmH[\Phi(x)]^2}\left[\ln\Phi(x) - \ln(1-\Phi(x))  \right]\nonumber\\
+& \qquad - \frac{1}{\ln 2}\frac{\Phi''(x)}{\rmH[\Phi(x)]}\left[\ln\Phi(x) - \ln(1-\Phi(x))  \right] \nonumber\\
+& \qquad - \frac{1}{\ln 2}\frac{\Phi'(x)^2}{\rmH[\Phi(x)]}\left[\frac{1}{\Phi(x)} + \frac{1}{(1-\Phi(x)})  \right] \nonumber\\
+\therefore \ln \rmH[\Phi(x)] \nonumber  &= 1 - \frac{1}{\pi\ln2}x^2 + \mathcal{O}(x^4)
+\end{align}
+
+Because the function is even, we can inspect that the $x^3$ term will be zero. Therefore, exponentiating, we make the approximation up to $\mathcal{O}(x^4)$: $$\rmH[\Phi(x)]\stackrel{2}{\approx}\exp\left({-\frac{x^2}{\pi\ln2}}\right) $$
+
+\subsection*{Preference Kernel}
+
+ The mean $\mu_{\mathrm{pref}}$, and covariance function $k_{\mathrm{pref}}$ of the GP over $g$ can be computed from the mean and covariance of $f\sim \mathrm{GP}(\mu,k)$ as follows:
+\begin{align}
+	k_{\mathrm{pref}}&([\bm{u}_i,\bm{v}_i],[\bm{u}_j,\bm{v}_j]) = Cov[g(\bm{u}_i,\bm{v}_i),g(\bm{u}_j,\bm{v}_j)]\notag\\
+		&= Cov\left[\left(f(\bm{u}_i) - f(\bm{v}_i)\right) , \left(f(\bm{u}_i)  - f(\bm{v}_i)\right)\right]\notag\\
+		&= \mathbb{E}\left[\left(f(\bm{u}_i) - f(\bm{v}_i)\right)\cdot \left(f(\bm{u}_i)  - f(\bm{v}_i)\right)\right]\notag\\
+		& \qquad - \left(\mu(\bm{u}_i) -  \mu(\bm{v}_i)\right) \left(\mu(\bm{v}_j) - \mu(\bm{u}_i)\right)\notag\\
+		&= k(\bm{u}_i,\bm{u}_j) + k(\bm{v}_i,\bm{v}_j) \notag \\
+		&\qquad - k(\bm{u}_i,\bm{v}_j) - k(\bm{v}_i,\bm{u}_j)\\
+	\mu_{\mathrm{pref}}&([\bm{u},\bm{v}]) = \mathbb{E}\left[g([\bm{u},\bm{v}])\right] = \mathbb{E}\left[f(\bm{u}) - f(\bm{v})\right]\notag\\
+		&=\mu(\bm{u}) - \mu(\bm{v})
+\end{align}
+
+
+\end{document}

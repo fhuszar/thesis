@@ -1,0 +1,195 @@
+\section{Active Learning \label{sec:active}}
+
+Information theoretic approaches to active learning are popular because
+they do not require \DIFdelbegin \DIFdel{\emph{a priori} knowledge of the loss function or test domain}\DIFdelend \DIFaddbegin \DIFadd{prior knowledge of loss functions or test domains}\DIFaddend .
+The central goal of information theoretic active learning is 
+to \DIFdelbegin \DIFdel{reduce uncertainty about the parameters using the Shannon entropy i.e. seek a }\DIFdelend \DIFaddbegin \DIFadd{identify the }\DIFaddend new data point \DIFdelbegin \DIFdel{$\x$ }\DIFdelend that maximizes the \DIFdelbegin \DIFdel{decrease in expected posterior entropy: 
+}\DIFdelend \DIFaddbegin \DIFadd{expected reduction in
+posterior entropy. For the problem of preference learning,
+as described in Section \ref{sec:prefKernel}, this implies
+identifying the new item features $\mathbf{x}_i$ and $\mathbf{x}_j$ that maximize
+}\DIFaddend \begin{align}   
+\DIFdelbegin %DIFDELCMD < \label{eqn:ent_change}
+%DIFDELCMD <         \argmax%%%
+\DIFdel{_{\x} }%DIFDELCMD < \ent[p(\param | \data)] %%%
+\DIFdelend \DIFaddbegin \ent[\mathcal{P}(g|\mathcal{D})] \DIFaddend - \E_{\DIFdelbegin \DIFdel{p}\DIFdelend \DIFaddbegin \DIFadd{\mathcal{P}}\DIFaddend (\DIFdelbegin %DIFDELCMD < \y%%%
+\DIFdelend \DIFaddbegin \DIFadd{y}\DIFaddend |\DIFdelbegin %DIFDELCMD < \x%%%
+\DIFdelend \DIFaddbegin \DIFadd{\mathbf{x}_i,\mathbf{x}_j,}\DIFaddend \data)} \left[ \DIFdelbegin %DIFDELCMD < \ent[p(\param| \y, \x,\data)] %%%
+\DIFdelend \DIFaddbegin \ent[\mathcal{P}(g|y,\mathbf{x}_i,\mathbf{x}_j,\data)]\DIFaddend \right]\,,
+\DIFaddbegin \label{eqn:ent_change}
+\DIFaddend \end{align}
+\DIFdelbegin \DIFdel{The preference kernel means that the following derivation apply equally to GPC and preference learning, for the latter $\x$ denotes an input pair. $\param$ denotes the parameters of the model and
+$\ent[p(\param | \data)]=-\int p(\param|\data')\log p(\param|\data') d\param$ }\DIFdelend \DIFaddbegin \DIFadd{where $\mathcal{D}$ are the user preferences observed so far and
+$\ent[p(x)]=-\int p(x)\log p(x)\,dx$ is }\DIFaddend the Shannon entropy. 
+\DIFdelbegin \DIFdel{Although this frameworkwas presented several decades ago }\DIFdelend \DIFaddbegin \DIFadd{This framework, which was originally proposed by }\DIFaddend \citep{lindley1956}\DIFdelbegin \DIFdel{it is not straightforward to apply }%DIFDELCMD < \eqref{eqn:ent_change} %%%
+\DIFdel{to complicated }\DIFdelend \DIFaddbegin \DIFadd{,
+is difficult to apply directly to non-parametric }\DIFaddend models such
+as \DIFdelbegin \DIFdel{nonparametric processes; parameter posteriors are often high or even infinite dimensional so computing their entropies is intractable, or even poorly
+defined . 
+To avoid gridding parameter space (exponentially hard with dimensionality), or sampling (from which it is notoriously hard to estimate entropies }%DIFDELCMD < \citep{panzeri2007}%%%
+\DIFdel{)}\DIFdelend \DIFaddbegin \DIFadd{those based on GPs. 
+In these models, entropies can be poorly
+defined or their comptuation can be intractable.
+In practice}\DIFaddend , current approaches make \DIFdelbegin \DIFdel{Gaussian or low dimensional approximations to }\DIFdelend \DIFaddbegin \DIFadd{some form of 
+approximation for the computation of }\DIFaddend the posterior entropy \citep{mackay1992,lawrence2002}. 
+\DIFdelbegin \DIFdel{A }\DIFdelend \DIFaddbegin \DIFadd{However, a }\DIFaddend second computational difficulty arises; if \DIFdelbegin \DIFdel{one can query one of $Q_{\x}$ possible input points , and observe one of $Q_{\y}$ responses (for binary preference learning, $Q_{\y}=2$), then $\mathcal{O}(Q_{\x}Q_{\y})$, potentially expensive, }\DIFdelend \DIFaddbegin \DIFadd{$n$ new data points are
+available for selection, with $|\{-1,1\}|=2$ possible values for $y$.
+Then $\mathcal{O}(2n)$ potentially expensive }\DIFaddend posterior updates are required to \DIFdelbegin \DIFdel{calculate Eqn.}%DIFDELCMD < \,\eqref{eqn:ent_change}%%%
+\DIFdelend \DIFaddbegin \DIFadd{find the maximizer
+of (\ref{eqn:ent_change})}\DIFaddend ; one for every \DIFdelbegin \DIFdel{possible input and corresponding label}\DIFdelend \DIFaddbegin \DIFadd{available feature vector and possible class value}\DIFaddend .
+For the \DIFdelbegin \DIFdel{model presented in this work}\DIFdelend \DIFaddbegin \DIFadd{multi-class preference model}\DIFaddend , each update \DIFdelbegin \DIFdel{requires running the full EP algorithm .
+}\DIFdelend \DIFaddbegin \DIFadd{would require to re-run the proposed
+approximate inference algorithm (see Section \ref{sec:EPinference}).  This would be too expensive in practice.
+}\DIFaddend 
+
+\DIFdelbegin \DIFdel{An important insight arises if we note that the objective in Eqn.
+}%DIFDELCMD < \,\eqref{eqn:ent_change} %%%
+\DIFdelend \DIFaddbegin \DIFadd{A solution consists in noting that (\ref{eqn:ent_change}) }\DIFaddend is equivalent to the conditional mutual information between \DIFdelbegin \DIFdel{the unknown output and the parameters, $\info[\param,\y\vert\x,\data]$}\DIFdelend \DIFaddbegin \DIFadd{$y$ and $g$}\DIFaddend .
+Using this \DIFdelbegin \DIFdel{insight it is simple to show that the objective can be rearranged }\DIFdelend \DIFaddbegin \DIFadd{we can rearrange this equation }\DIFaddend to compute entropies in $\y$ space:
+\begin{align}
+\DIFdelbegin %DIFDELCMD < \argmax%%%
+\DIFdel{_{\x} }%DIFDELCMD < \ent[p(\y \vert \x, \data)] %%%
+\DIFdelend \DIFaddbegin \ent[\mathcal{P}(y|\mathbf{x}_i,\mathbf{x}_j,\data)] \DIFaddend - \E_{\DIFdelbegin \DIFdel{p}\DIFdelend \DIFaddbegin \DIFadd{\mathcal{P}}\DIFaddend (\DIFdelbegin %DIFDELCMD < \param%%%
+\DIFdelend \DIFaddbegin \DIFadd{g}\DIFaddend |\data)}
+\left[\DIFdelbegin \DIFdel{p(}%DIFDELCMD < \ent[\y \vert \x,\param)] %%%
+\DIFdelend \DIFaddbegin \ent\left[ \DIFadd{\mathcal{P}(y|\mathbf{x}_i,\mathbf{x}_j,g)}\right]\DIFaddend \right]\,. \label{eqn:rearrangement} 
+\end{align}
+\DIFdelbegin \DIFdel{Eqn.}%DIFDELCMD < \,\eqref{eqn:rearrangement} %%%
+\DIFdel{overcomes the challenges we described for Eqn.}%DIFDELCMD < \,\eqref{eqn:ent_change}%%%
+\DIFdelend \DIFaddbegin \DIFadd{This overcomes the previous challenges}\DIFaddend . Entropies are now \DIFdelbegin \DIFdel{calculated }\DIFdelend \DIFaddbegin \DIFadd{evaluated }\DIFaddend in
+output space, which \DIFdelbegin \DIFdel{usually }\DIFdelend has low dimension. \DIFdelbegin \DIFdel{Also $\param$ }\DIFdelend \DIFaddbegin \DIFadd{Futhermore, $g$ }\DIFaddend is now conditioned \DIFdelbegin \DIFdel{only on }\DIFdelend \DIFaddbegin \DIFadd{to }\DIFaddend $\data$,
+so only $\mathcal{O}(1)$ \DIFdelbegin \DIFdel{posterior updates are required i.e. we need only }\DIFdelend \DIFaddbegin \DIFadd{updates of the posterior distribution are required. In particular,
+we only need }\DIFaddend to recompute the posterior once per data point selected, not for every possible data point under consideration.
+\DIFdelbegin \DIFdel{Eqn.}%DIFDELCMD < \,\eqref{eqn:rearrangement} %%%
+\DIFdelend \DIFaddbegin \DIFadd{Expression (\ref{eqn:rearrangement}) }\DIFaddend also provides us with an \DIFdelbegin \DIFdel{interesting }\DIFdelend intuition about the objective;
+we seek the \DIFdelbegin \DIFdel{$\x$ for which }\DIFdelend \DIFaddbegin \DIFadd{$\mathbf{x}_i$ and $\mathbf{x}_j$ for which a) }\DIFaddend the model is marginally
+\DIFdelbegin \DIFdel{most uncertain about $\y$ (high $\ent[p(\y \vert \x, \data)]$) , but for which individual settings of the parameters are confident (low $\E_{p(\param|\data)} \left[p( \ent[\y \vert \x,\param] \right)]$).
+Figure \ref{fig:BALD} demonstrates the importance of including this second term. }\DIFdelend \DIFaddbegin \DIFadd{uncertain about $y$ (high $\ent[\mathcal{P}(\y | \mathbf{x}_i,\mathbf{x}_j, \data)]$) and
+b) the model is confident about the value of $g$ at that location
+(low $\E_{\mathcal{P}(g|\data)} \left[\ent [ \mathcal{P}(y |\mathbf{x}_i,\mathbf{x}_j,g] \right)]$).
+}\DIFaddend This can be interpreted as seeking the \DIFdelbegin \DIFdel{$\x$ for which
+the parameters }\DIFdelend \DIFaddbegin \DIFadd{$\mathbf{x}_i$ and $\mathbf{x}_j$ for which
+$g$, }\DIFaddend under the posterior\DIFdelbegin \DIFdel{disagree }\DIFdelend \DIFaddbegin \DIFadd{, disagrees the most }\DIFaddend about the outcome\DIFdelbegin \DIFdel{the most, so }\DIFdelend \DIFaddbegin \DIFadd{.
+Therefore, }\DIFaddend we refer to this objective as Bayesian Active Learning by Disagreement (BALD).
+\DIFdelbegin \DIFdel{Next, }\DIFdelend \DIFaddbegin \DIFadd{In the following section }\DIFaddend we show how \DIFdelbegin \DIFdel{to apply Eqn.
+}%DIFDELCMD < \,\eqref{eqn:rearrangement} %%%
+\DIFdel{to GPC; the algorithm }\DIFdelend \DIFaddbegin \DIFadd{(\ref{eqn:rearrangement}) can be applied to the problem of binary classification with GPs.
+Section \ref{sec:prefKernel} shows that this
+problem is equivalent to the learning of pairwise user preferences.
+The proposed method }\DIFaddend is independent of the particular \DIFdelbegin \DIFdel{method of inference, so we no longer need to build our entropy calculation around the particular posterior approximation as }\DIFdelend \DIFaddbegin \DIFadd{approach used for inference, something which does not hold for
+the techniques described }\DIFaddend in \citep{mackay1992, krishnapuram2004, lawrence2002}. 
+
+\DIFaddbegin \subsection{\DIFadd{BALD in Binary Classification with GPs}}
+
+\DIFaddend \begin{figure}
+\DIFdelbeginFL %DIFDELCMD < \centering
+%DIFDELCMD < %%%
+%DIF < \resizebox{3in}{!}{
+%DIFDELCMD < \input{figs/class_demo.tikz}%%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[scale = 0.5]{figs/BALD_eg.pdf} \DIFaddendFL \\
+%DIF < }
+\vskip\DIFdelbeginFL \DIFdelFL{-0.5cm
+}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{-0.4cm
+}\DIFaddendFL \caption{\DIFdelbeginFL \DIFdelFL{1D toy }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Toy }\DIFaddendFL GPC example \DIFaddbeginFL \DIFaddFL{with 1D input}\DIFaddendFL . \DIFdelbeginFL \DIFdelFL{True data generating function (\ref{GPplot:true}) is random at $\x=10$. (\ref{GPplot:BALDsamp}), (\ref{GPplot:MESsamp}) }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Cirles and crosses }\DIFaddendFL denote \DIFaddbeginFL \DIFaddFL{previosuly seen }\DIFaddendFL samples\DIFdelbeginFL \DIFdelFL{taken using }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{. Plot shows the mean and variance of the GP predictive distribution trained upon these points. }\DIFaddendFL Maximum Entropy Sampling (MES, see Section \ref{sec:relatedWork}) \DIFdelbeginFL \DIFdelFL{and BALD respectively, (\ref{GPplot:BALD}) and (\ref{GPplot:MES}) are the GP posterior mean predictions after training on }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{seeks its next datapoint in }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{samples selected by BALD and MES. MES uses only }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{region of highest marginal uncertainty because it ignores }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{first }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{second }\DIFaddendFL term in \DIFaddbeginFL \DIFaddFL{Eq.}\,\DIFaddendFL \eqref{eqn:rearrangement}, \DIFdelbeginFL \DIFdelFL{and samples excessively about $\x=10$ because uncertainty in the model parameters }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{so nothing new }\DIFaddendFL is \DIFdelbeginFL \DIFdelFL{confounded with uncertainty in }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{learned about }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{output}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{data}\DIFaddendFL . BALD \DIFdelbeginFL \DIFdelFL{penalises $\x$'s for which the individual settings of }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{will select }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{parameters do not predict }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{next datapoint from }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{output with confidence}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{region of greatest model uncertainty}\DIFaddendFL , \DIFdelbeginFL \DIFdelFL{hence selects more varied samples and yields a better posterior mean}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{as indicated in the Figure}\DIFaddendFL . \label{fig:BALD}}
+\end{figure}
+
+\DIFdelbegin \subsection{\DIFdel{Application to GP Preference Learning}}
+%DIFAUXCMD
+\addtocounter{subsection}{-1}%DIFAUXCMD
+\DIFdel{Here we apply Eqn.}%DIFDELCMD < \,\eqref{eqn:rearrangement} %%%
+\DIFdel{to GPC where the latent function $\latfun$ is the model parameters ($\param$ in the previous section). As for our hybrid EP algorithm, all the standard approximate inference algorithms for GPC model the posterior with
+a Gaussian e.g. Laplace approximation , sparse methods; the
+following derivations apply equally to these scenarios. The symbol }%DIFDELCMD < {\scriptsize%%%
+\DIFdel{$\stackrel{1}{\approx}$}%DIFDELCMD < } %%%
+\DIFdel{denotes when such an approximation is exploited. The entropy of }\DIFdelend \DIFaddbegin \DIFadd{Most approximate inference methods for }\DIFaddend the \DIFdelbegin \DIFdel{binary output variable $\y$ given the latent function $\latfun$ }\DIFdelend \DIFaddbegin \DIFadd{problem of binary classification with
+GPs produce a Gaussian approximation to the posterior distribution of $f$, the
+latent function of interest. In the binary GPs classifier, the entropy of $y$ given the corresponding value of $f$ 
+}\DIFaddend can be expressed in terms of the binary entropy function, \DIFdelbegin \DIFdel{$\mathrm{h}(q)=- q\log q - (1-q)\log(1-q)$:
+}\DIFdelend \DIFaddbegin \DIFadd{$\mathrm{h}[f]=- f\log f - (1-f)\log(1-f)$.
+In particular,
+}\DIFaddend \begin{align}
+\ent[p(y\vert\x,\latfun)] &= \mathrm{h}\DIFdelbegin %DIFDELCMD < \left(%%%
+\DIFdelend \DIFaddbegin \left[\DIFaddend \Phi(\latfun(\x)\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \right]\DIFaddend \,. \notag
+\end{align}
+\DIFdelbegin \DIFdel{Expectations over the posterior need to be computed. Using the Gaussian approximationto the posterior, }\DIFdelend \DIFaddbegin \DIFadd{When the posterior distribution of $f$ is modeled using a Gaussian approximation, we have that
+}\DIFaddend for each $\x$, $\latfun_{\x} = \latfun(\x)$ will follow a Gaussian distribution with mean $\mu_{\x}$ and
+variance $\sigma_{\x}^2$.
+The first term in \DIFdelbegin \DIFdel{Eqn.}%DIFDELCMD < \,\eqref{eqn:rearrangement}%%%
+\DIFdelend \DIFaddbegin \DIFadd{(\ref{eqn:rearrangement}), that is}\DIFaddend , $\ent[p(y\vert\x,\data)]$\DIFaddbegin \DIFadd{, }\DIFaddend can be handled analytically \DIFaddbegin \DIFadd{in this case}\DIFaddend :
+\begin{align}
+\ent[p(y\vert\x,\data)] &\stackrel{1}{\approx} \mathrm{h}\DIFdelbegin %DIFDELCMD < \left( %%%
+\DIFdelend \DIFaddbegin \left[ \DIFaddend \int \Phi( \latfun_{\x} )
+\mathcal{N}(\latfun_{\x}| \mu_{\x},\sigma_{\x}^2) d\latfun_{\x} \DIFdelbegin %DIFDELCMD < \right) %%%
+\DIFdelend \DIFaddbegin \right] \DIFaddend \notag \\ 
+&= \mathrm{h} \DIFdelbegin %DIFDELCMD < \left( %%%
+\DIFdelend \DIFaddbegin \left[ \DIFaddend \Phi\left( \frac{\mu_{\x}}{\sqrt{\sigma^2_{\x} + 1}} \right)\DIFdelbegin %DIFDELCMD < \right)%%%
+\DIFdelend \DIFaddbegin \right]\DIFaddend \,\DIFdelbegin \DIFdel{. }\DIFdelend \DIFaddbegin \DIFadd{, }\DIFaddend \label{ent_mean}
+\end{align}
+\DIFaddbegin \DIFadd{where $\stackrel{1}{\approx}$ denotes the Gaussian approximation to the posterior of $\latfun_{\x}$.
+}\DIFaddend The second term \DIFaddbegin \DIFadd{in (\ref{eqn:rearrangement}), that is}\DIFaddend ,
+$\E_{p(\latfun\vert\data)} \left[ \ent[p(\y\vert\x, \latfun)] \right]$\DIFaddbegin \DIFadd{, }\DIFaddend can be computed approximately as follows:
+\DIFdelbegin %DIFDELCMD < \vskip%%%
+\DIFdel{-0.4cm
+}%DIFDELCMD < {\small
+%DIFDELCMD < %%%
+\DIFdelend \begin{align}
+\E_{p(f\vert\data)} \DIFaddbegin & \DIFaddend \left[ \ent[p(\y\vert\x, \latfun)] \right] \DIFdelbegin %DIFDELCMD < &%%%
+\DIFdelend \stackrel{1}{\approx} \DIFdelbegin \DIFdel{\int \mathrm{h}(\Phi(}%DIFDELCMD < \latfun%%%
+\DIFdel{_{\x})) }\DIFdelend \DIFaddbegin \notag \\
+& \DIFadd{\int \mathrm{h}[\Phi(\latfun_{\x})] }\DIFaddend \mathcal{N}(\latfun_{\x}| \mu_{\x},\sigma_{\x}^2) d\latfun_{\x} \DIFdelbegin %DIFDELCMD < \label{eqn:mean_entropy}%%%
+\DIFdelend \DIFaddbegin \stackrel{2}{\approx} \notag\DIFaddend \\
+& \DIFdelbegin %DIFDELCMD < \stackrel{2}{\approx} %%%
+\DIFdelend \int \exp\left(-\DIFdelbegin \DIFdel{\frac{\latfun_{\x}^2}{\pi\ln2}}\DIFdelend \DIFaddbegin \DIFadd{\frac{\latfun_{\x}^2}{\pi\log 2}}\DIFaddend \right) \mathcal{N}(\latfun_{\x}| \mu_{\x},\sigma_{\x}^2)d\latfun_{\x} \DIFaddbegin \DIFadd{= }\DIFaddend \notag\\ 
+& \DIFdelbegin \DIFdel{= }\DIFdelend \frac{C}{\sqrt{\sigma_{\x}^2 + C^2}}\exp\left(-\frac{\mu_{\x}^2}{2\left(\sigma_{\x}^2 + C^2\right)}\right)\,,\notag
+\end{align}
+\DIFdelbegin %DIFDELCMD < }
+%DIFDELCMD < %%%
+\DIFdel{where $C=\sqrt{\frac{\pi\ln2}{2}}$. The integral in the left hand side of Eqn.}%DIFDELCMD < \,\eqref{eqn:mean_entropy} %%%
+\DIFdel{is intractable. By performing a Taylor expansion on $\ln \mathrm{h}(\Phi(\latfun_{\x}))$ we can see that it can be approximated up to $\mathcal{O}(\latfun_{\x}^4)$ by a }\DIFdelend \DIFaddbegin \DIFadd{where $C=\sqrt{\pi\log 2 / 2}$ and $\stackrel{2}{\approx}$ denotes
+an approximation to $\log \mathrm{h}[\Phi(\latfun_{\x})]$ given
+by the }\DIFaddend squared exponential curve \DIFdelbegin \DIFdel{, $\exp(-\latfun_{\x}^2/\pi\ln2)$. 
+We denote this approximation as }%DIFDELCMD < {\scriptsize %%%
+\DIFdel{$\stackrel{2}{\approx}$}%DIFDELCMD < } %%%
+\DIFdel{and note that it strikingly }\DIFdelend \DIFaddbegin \DIFadd{$\exp(-\latfun_{\x}^2/\pi\log 2)$. 
+This approximation is very }\DIFaddend accurate (Taylor expansion and \DIFdelbegin \DIFdel{a }\DIFdelend vizualisation are presented in the supplementary material).
+The maximum possible error incurred in the \DIFdelbegin \DIFdel{integral in Eqn.}%DIFDELCMD < \,\eqref{eqn:mean_entropy} %%%
+\DIFdelend \DIFaddbegin \DIFadd{required integral }\DIFaddend is only $0.27\%$\DIFaddbegin \DIFadd{, }\DIFaddend which occurs when
+$\mathcal{N}(\latfun_{\x}| \mu_{\x},\sigma_{\x}^2)$ is centred at $\mu_{\x}=\pm 2.05$  with $\sigma_{\x}^2$ \DIFdelbegin \DIFdel{tends }\DIFdelend \DIFaddbegin \DIFadd{tending }\DIFaddend to zero.
+\DIFdelbegin \DIFdel{We can now apply the standard convolution formula for Gaussians to get a closed form expression for both terms of Eqn.}%DIFDELCMD < \,\eqref{eqn:rearrangement}%%%
+\DIFdel{.
+}\DIFdelend 
+
+To summarize, the BALD algorithm for \DIFdelbegin \DIFdel{GPC}\DIFdelend \DIFaddbegin \DIFadd{active binary GP classification }\DIFaddend / preference learning first applies
+any approximate inference \DIFdelbegin \DIFdel{algorithm (for us, EP) }\DIFdelend \DIFaddbegin \DIFadd{method }\DIFaddend to obtain the posterior \DIFdelbegin \DIFdel{predictive }\DIFdelend mean
+$\mu_{\x}$ and variance $\sigma_{\x}^2$ \DIFdelbegin \DIFdel{for }\DIFdelend \DIFaddbegin \DIFadd{of $f$ at }\DIFaddend each point of interest $\x$. Then, it selects the
+\DIFdelbegin \DIFdel{preference data point/pair }\DIFdelend \DIFaddbegin \DIFadd{data }\DIFaddend $\x$ that maximizes the \DIFdelbegin \DIFdel{following objective
+function:
+}%DIFDELCMD < \begin{equation}
+\begin{displaymath}%DIFAUXCMD
+%DIFDELCMD <         %%%
+\DIFdel{\mathrm{h} }%DIFDELCMD < \left( %%%
+\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \DIFadd{objective
+}\begin{align}
+& \DIFadd{\mathrm{h} }\left[ \DIFaddend \Phi\left(  \frac{\mu_{\x}}{\sqrt{\sigma^2_{\x} + 1}} \right)\DIFdelbegin %DIFDELCMD < \right) %%%
+\DIFdelend \DIFaddbegin \right] \DIFaddend -\DIFaddbegin \notag \\
+& \DIFadd{\hspace{2cm} }\DIFaddend \frac{C}{\sqrt{\sigma_{\x}^2 + C^2}} \exp\left(-\frac{\mu_{\x}^2}{2\left(\sigma_{\x}^2 + C^2\right)}\right)\,.\label{eqn:BALD}
+\DIFdelbegin %DIFDELCMD < \end{equation}
+\end{align}%DIFAUXCMD
+%DIFDELCMD < %%%
+%DIF < For most practically relevant kernels, the objective \eqref{eqn:BALD} is a smooth and differentiable function of $\x$, so should we be able to select items from a continuous feature space gradient-based optimisation methods can be employed.
+%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+%DIF < In this section we describe the general framework for our information-theoretic approach to active learning and describe the computational advantages. We then derive how to compute the information theoretic objective with very minimal approximations for our preference learning model. Note that due to the kernel reformulation in \ref{sec:prefKernel}, the equations in this section are exactly the same as for deriving the equivalent active learning algorithm for GP classification. For this reason, and to keep notation clean, we refer to an input datapoint as $\x$, although for our preference learning model this refers to a pair of input items. 
+%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+%DIF < Data points $\data'$ are selected that satisfy $\argmin_{\data'}\ent[p(\param|\data')]=-\int p(\param|\data')\log p(\param|\data') d\param$, where $\param$ to denotes the parameters of the model; for multi-task preference learning, these parameters correspond to the latent functions $g$ for each user. Solving this problem is NP-hard, however, as is common in sequential decision making tasks a myopic (greedy) approximation is made \citep{heckerman1995}. It has been shown that the myopic policy can perform near-optimally \citep{dasgupta2005,golovin2010}. Therefore, the objective is to seek a new preference data point $\x$ that maximises the decrease in expected posterior entropy:
+%DIFDELCMD < 
+
+%DIFDELCMD <  %%%
+\begin{align}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \end{align}
+ \DIFaddend

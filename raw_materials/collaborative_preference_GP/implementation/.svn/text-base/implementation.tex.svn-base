@@ -1,0 +1,295 @@
+\section{Expectation Propagation \label{sec:EPinference}}
+
+The method Expectation Propagation (EP) is used to approximate (\ref{eq:post}).
+For this purpose, we select the following distribution as an approximation to the real posterior:
+\begin{eqnarray}
+\mathcal{Q}(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) & = & \left[\prod_{u=1}^{U}\prod_{d=1}^{D}\mathcal{N}(w_{ud}|m_{u,d}^{w},v_{u,d}^{w})\right]
+\left[\prod_{d=1}^{D}\prod_{i=1}^{P} \mathcal{N}(h_{d,i}|m_{d,i}^h,v_{d,i}^{h})\right]\nonumber\\
+& & \left[\prod_{u=1}^N \prod_{j=1}^{M_u} \mathcal{N}(g_{u,z_{u,j}}|m_{u,j}^g,v_{u,j}^g)\right]\,,\label{eq:epPostApprox}
+\end{eqnarray}
+where $m_{u,d}^w$, $v_{u,d}^w$, $m_{d,i}^h$, $v_{d,i}^h$,
+$m_{u,j}^g$, and $v_{u,j}^g$ are free parameters to be determined by EP. 
+The joint distribution of the model parameters and the data 
+$\mathcal{P}(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H},\mathbf{T}^{(\mathcal{D})})$ can be factorized
+into four factors $f_1,\ldots,f_4$, namely,
+\begin{equation}
+\mathcal{P}(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H},\mathbf{T}^{(\mathcal{D})}) = \prod_{k=1}^4 f_a(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H})\,,
+\end{equation}
+where $f_1(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) = \mathcal{P}(\mathbf{T}^{(\mathcal{D})}|\mathbf{G}^{(\mathcal{D})})$,
+$f_2(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) = \mathcal{P}(\mathbf{G}^{(\mathcal{D})}|\mathbf{W},\mathbf{H})$,
+$f_3(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) = \mathcal{P}(\mathbf{w})$ and
+$f_4(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) = \mathcal{P}(\mathbf{H})$.
+The EP algorithm approximates each of these exact factors by 
+approximate factors $\hat{f}_{1}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})}),\ldots,\hat{f}_{4}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})$
+that have the same functional form as (\ref{eq:epPostApprox}), namely,
+\begin{eqnarray}
+\hat{f}_a(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) & = &
+\left[\prod_{u=1}^{U}\prod_{d=1}^{D}\mathcal{N}(w_{ud}|\hat{m}_{u,d}^{a,w},\hat{v}_{u,d}^{a,w})\right]
+\left[\prod_{d=1}^{D}\prod_{i=1}^{P} \mathcal{N}(h_{d,i}|\hat{m}_{d,i}^{a,h},\hat{v}_{d,i}^{a,h})\right]\nonumber\\
+& & \left[\prod_{u=1}^N \prod_{j=1}^{M_u} \mathcal{N}(g_{u,z_{u,j}}|\hat{m}_{u,j}^{a,g},\hat{v}_{u,j}^{a,g})\right] \hat{s}_a\,,
+\end{eqnarray}
+where $a=1,\ldots,4$ and $\hat{m}_{u,d}^{a,w}$, $\hat{v}_{u,d}^{a,w}$, $\hat{m}_{d,i}^{a,h}$, $\hat{v}_{d,i}^{a,h}$,
+$\hat{m}_{u,j}^{a,g}$, $\hat{v}_{u,j}^{a,g}$ and $\hat{s}_a$ are free parameters to be determined by EP. 
+The posterior approximation $\mathcal{Q}(\mathbf{w},\mathbf{H},\mathbf{G}^{(\mathcal{D})})$
+is obtained as the normalized product of the approximate factors $\hat{f}_{1},\ldots,\hat{f}_{4}$, that is,
+\begin{equation}
+\mathcal{Q}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})}) \propto
+\hat{f}_{1}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})\cdots\hat{f}_{4}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})\,.
+\end{equation}
+The first step of EP is to initialize all the approximate factors $\hat{f}_1,\ldots,\hat{f}_4$ and the posterior approximation $\mathcal{Q}$ to be uniform.
+In particular,
+$m_{u,d}^w=m_{d,i}^h=m_{u,j}^g=\hat{m}_{u,d}^{w,a}=\hat{m}_{d,i}^{a,h}=\hat{m}_{u,j}^{g,a}=0$ and 
+$v_{u,d}^w = v_{d,i}^h = v_{u,j}^g = \hat{v}_{u,d}^{a,w} = \hat{v}_{d,i}^{a,h} = \hat{v}_{u,j}^{a,h} = \infty$ for
+$a=1,\ldots,4$, $u=1,\ldots,U$, $d=1,\ldots,D$, $i=1,\ldots,P$ and $j = 1,\ldots,M_u$.
+After that, EP refines the parameters of the approximate factors by iteratively minimizing the Kullback-Leibler (KL) divergence
+between $\mathcal{Q}^{\setminus a}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})f_a(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})$
+and $\mathcal{Q}^{\setminus a}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})\hat{f}_a(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})$, for $a=1,\ldots,4$,
+where $\mathcal{Q}^{\setminus a}$ is the ratio between $\mathcal{Q}$ and $\hat{f}_a$. That is, EP iteratively minimizes
+\begin{equation} 
+\text{D}_{\text{KL}}(Q^{\setminus a}f_a\|Q^{\setminus a}\hat{f}_a) 
+= \int \left[f_a Q^{\setminus a}\log \frac{f_aQ^{\setminus a}}{\hat{f}_a Q^{\setminus a}}+
+\hat{f}_a Q^{\setminus a}-f_a Q^{\setminus a}\right]\,d\mathbf{W}\,d\mathbf{H}\,d\mathbf{G}^{(\mathcal{D})}\label{eq:KL}
+\end{equation}
+with respect to $\hat{f}_a$, for $a = 1,\ldots,4$.
+The arguments to $f_a Q^{\setminus a}$ and 
+$f_aQ^{\setminus a}$ have been omitted in the 
+right-hand side of (\ref{eq:KL}) to improve the readability of the expression.
+However, the minimization of (\ref{eq:KL}) does not perform well when we have to refine the parameters of $\hat{f}_2$. For this specific factor,
+we follow an approach similar to the one described by \cite{stern2009}. 
+Instead of minimizing $\text{KL}(\mathcal{Q}^{\setminus 2} f_2 \| \mathcal{Q}^{\setminus 2} \hat{f}_2)$ with respecct to the parameters of $\hat{f}_2$,
+we refine this approximate factor so that the reversed version of the KL divergence is minimzed, that is,
+$\text{KL}(\mathcal{Q}^{\setminus 2} \hat{f}_2 \| \mathcal{Q}^{\setminus 2} f_2)$.
+
+The EP algorithm iteratively refines the approximate factors until convergence.
+We assume the algorithm as converged when the absolute value of the change in the parameters
+$m_{u,i}^g$ and $\mathbf{v}_{u,i}^g$ of $\mathcal{Q}$, where $u = 1,\ldots,U$ and $i = 1,\ldots,M_u$,
+is less than a threshold $\delta = 1e-3$ between two consecutive cycles of EP,
+where a cycle consists in the sequential update of all the approximate factors.
+However, convergence is not guaranteed and
+EP may end up oscillating without ever stopping \citep{Minka2001}.
+This undesirable behavior can be prevented by \emph{damping} the EP updates \citep{Minka2002}.
+Let $\hat{f}_a^\text{new}$ denote the value of the approximate factor that minimizes the Kullback-Leibler
+divergence. Damping consists in using
+\begin{equation}
+\hat{f}_a^\text{damp} = \left[ \hat{f}_a^\text{new} \right]^\epsilon \left[ \hat{f}_a \right]^{(1 - \epsilon)}\,,\label{eq:damping}
+\end{equation}
+instead of $\hat{f}_a^\text{new}$ for the update of each approximate factor $a = 1,\ldots,4$.
+The quantity $\hat{f}_a$ represents in (\ref{eq:damping})
+the factor before the update. The parameter
+$\epsilon \in [0,1]$ controls the amount of damping.
+The original EP update (that is, without damping)
+is recovered in the limit $\epsilon = 1$. For $\epsilon = 0$,
+the approximate factor $\hat{f}_a$ is not modified.
+To improve the converge of EP, we use a damping scheme
+with a parameter $\epsilon$ that is initialized to 1
+and then progressively annealed as recommended by \cite{HernandezLobato2010}.
+After each iteration of EP, the value of
+this parameter is multiplied by a constant $k < 1$.
+The value selected for $k$ is $k = 0.95$.
+In the experiments performed, EP stops usually in less than 100 iterations.
+
+\subsection{The EP Update Operations}
+
+In this section we describe the EP updates for refining the approximate factors $\hat{f}_1,\ldots,\hat{f}_4$.
+For the sake of clarity, we only include the update rules with no damping ($\epsilon = 1$).
+Incorporating the effect of damping in these operations is straightforward. 
+With damping,  the natural parameters of the approximate factors become 
+a convex combination of the natural parameters before and after the 
+update with no damping
+\begin{align}
+[\hat{v}_{u,d}^{w,a}]^{-1}_\text{damp} & = \epsilon [\hat{v}_{u,d}^{w,a}]^{-1}_\text{new}
++ (1 - \epsilon) [\hat{v}_{u,d}^{w,a}]^{-1}\,,\\
+[\hat{m}_{u,d}^{w,a}]_\text{damp} [\hat{v}_{u,d}^{w,a}]_\text{damp}^{-1} & =
+\epsilon [\hat{m}_{u,d}^{w,a}]_\text{new} [\hat{v}_{u,d}^{w,a}]_\text{new}^{-1} + (1 - \epsilon)
+[\hat{m}_{u,d}^{w,a}][\hat{v}_{u,d}^{w,a}]^{-1}\,,\\
+[\hat{v}_{d,i}^{h,a}]^{-1}_\text{damp} & = \epsilon [\hat{v}_{d,i}^{h,a}]^{-1}_\text{new}
++ (1 - \epsilon) [\hat{v}_{d,i}^{h,a}]^{-1}\,,\\
+[\hat{m}_{d,i}^{h,a}]_\text{damp} [\hat{v}_{d,i}^{h,a}]_\text{damp}^{-1} & =
+\epsilon [\hat{m}_{d,i}^{h,a}]_\text{new} [\hat{v}_{d,i}^{h,a}]_\text{new}^{-1} + (1 - \epsilon)
+[\hat{m}_{d,i}^{h,a}][\hat{v}_{d,i}^{h,a}]^{-1}\,,\\
+[\hat{v}_{u,j}^{g,a}]^{-1}_\text{damp} & = \epsilon [\hat{v}_{u,j}^{g,a}]^{-1}_\text{new}
++ (1 - \epsilon) [\hat{v}_{u,j}^{g,a}]^{-1}\,,\\
+[\hat{m}_{d,j}^{g,a}]_\text{damp} [\hat{v}_{u,j}^{g,a}]_\text{damp}^{-1} & =
+\epsilon [\hat{m}_{u,j}^{g,a}]_\text{new} [\hat{v}_{u,j}^{g,a}]_\text{new}^{-1} + (1 - \epsilon)
+[\hat{m}_{u,j}^{g,a}][\hat{v}_{u,j}^{g,a}]^{-1}\,,
+\end{align}
+where $u = 1,\ldots,U$, $d = 1,\ldots,D$, $i = 1,\ldots,P$ and $j=1,\ldots,M_u$.
+The superscript $\emph{new}$ denotes the value of the parameter 
+given by the full EP update operation with no damping.
+The superscript $\emph{damp}$ denotes the parameter value given by the
+damped update rule. The absence of a superscript refers to
+the value of the parameter before the EP update.
+The updates for the parameters $\hat{s}_1,\ldots,\hat{s}_4$ are not damped. These parameters are initialized to 1 and are only
+updated once the EP algorithm has converged.
+
+The first factor to be refined is $\hat{f}_4$. The update operations that minimize
+$\text{KL}(\mathcal{Q}^{\setminus 2} f_4 \| \mathcal{Q}^{\setminus 2} \hat{f}_4)$ are given by
+\begin{align}
+[\hat{v}_{d,i}^{h,4}]_\text{new} & =
+\left\{ [v_{d,i}^{h}]_\text{new}^{-1} - [\hat{v}_{d,i}^{h,4} ]_\text{old}^{-1}\right\}^{-1}\,,\\
+[\hat{m}_{d,i}^{h,4}]_\text{new} & =
+[\hat{v}_{d,i}^{h,4}]_\text{new} \left\{[ m_{d,i}^{h}]_\text{new} 
+[v_{d,i}^{h}]_\text{new}^{-1} - [\hat{m}_{d,i}^{h,4}]_\text{old} [\hat{v}_{d,i}^{h,4}]_\text{old}^{-1}\right\}^{-1}\,,
+\end{align}
+for $d = 1,\ldots,D$ and $i = 1,\ldots,P$,
+where the subscripts \emph{new} and \emph{old} denote the parameter value after and before the update, respectively, and
+the parameters $[v_{d,i}^{h}]_\text{new}$ and $[ m_{d,i}^{h}]_\text{new}$ are the $i$-th entries in the vectors
+$[\mathbf{v}_{d}^{h}]_\text{new}$ and $[\mathbf{m}_{d}^{h}]_\text{new}$ given by
+\begin{align}
+[\mathbf{v}_{d}^{h}]_\text{new} & = \text{diag}\left[ \bm \Sigma_d \right]\,,\label{eq:Sigma} \\
+[\mathbf{m}_{d}^{h}]_\text{new} & = \bm \Sigma_d \text{diag}[\hat{\mathbf{v}}_d^{h,2}]^{-1} \hat{\mathbf{m}}_d^{h,2}\label{eq:Sigma2}\,,
+\end{align}
+where $\bm \Sigma_d^{-1} = \mathbf{K}^{-1} + \text{diag}[\hat{\mathbf{v}}_d^{h,2}]^{-1}$,
+the function \emph{diag} applied to a vector returns a diagonal matrix with that vector in
+its diagonal and applied to a matrix returns a vector with the entries in the diagonal of the matrix and the vectors
+$\hat{\mathbf{m}}_d^{h,2}$ and $\hat{\mathbf{v}}_d^{h,2}$ are given by
+$\hat{\mathbf{m}}_d^{h,2}=(\hat{m}_{1,d}^{h,2},\ldots,\hat{m}_{P,d}^{h,2})^\text{T}$ and
+$\hat{\mathbf{v}}_d^{h,2}=(\hat{v}_{1,d}^{h,2},\ldots,\hat{v}_{P,d}^{h,2})^\text{T}$.
+
+The second factor to be refined by EP is $\hat{f}_3$. This approximate factor has the same functional form as the exact factor $f_3$. Therefore,
+the EP update operation in this case is simply
+\begin{align}
+[\hat{v}_{d,i}^{h,3}]_\text{new} & = 1\,, & [\hat{m}_{d,i}^{h,3}]_\text{new} & = 0\,,
+\end{align}
+for $d = 1,\ldots,D$ and $i = 1,\ldots,P$. Because this update rule does not depend on the parameters of the other approximate factors $\hat{f}_1$,
+$\hat{f}_2$ and $\hat{f}_4$, we only have to refine $\hat{f}_3$ during the first cycle of the EP algorithm.
+
+The third factor to be refined by EP is $\hat{f}_2$. For this, we follow the approach used by \cite{stern2009}
+and first marginalize $f_2\mathcal{Q}^{\setminus 2}$ with respect to $\mathbf{G}^{(\mathcal{D})}$.
+The result of this operation is the auxiliary un-normalized distribution $\mathcal{S}(\mathbf{W},\mathbf{H})$ given by
+\begin{eqnarray}
+\mathcal{S}(\mathbf{W},\mathbf{H}) & = & \int 
+\prod_{u=1}^{U} \prod_{i=1}^{M_u}\delta[g_{u,z_{u,i}}-\mathbf{w}_u\mathbf{h}_{\cdot,z_{u,i}}]
+\mathcal{Q}^{\setminus 2 }(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H})\,d\mathbf{G}^{(\mathcal{D})}\nonumber\\
+& = & \left[\prod_{u=1}^{U}
+\prod_{i=1}^{M_u}\mathcal{N}(\mathbf{w}_u\mathbf{h}_{\cdot,z_{u,i}}|\hat{m}^{g,1}_{u,i},\hat{v}^{g,1}_{u,i})\right]
+\left[ \prod_{u=1}^U\prod_{d=1}^D \mathcal{N}(w_{u,d}|\hat{m}^{w,3}_{u,d},\hat{v}^{w,3}_{u,d}) \right]\nonumber \\
+& & \left[ \prod_{d=1}^D\prod_{i=1}^P \mathcal{N}(h_{d,i}|\hat{m}^{h,4}_{d,i},\hat{v}^{h,4}_{d,i}) \right]\,.
+\end{eqnarray}
+Let $\mathcal{Q}_{\mathbf{W},\mathbf{H}}$ be the posterior approximation (\ref{eq:epPostApprox}) after marginalizing $\mathbf{G}^{(\mathcal{D})}$ out.
+The parameters of $\mathcal{Q}_{\mathbf{W},\mathbf{H}}$, that is, $m_{d,i}^{h}$,
+$v_{d,i}^{h}$, $m_{u,d}^{w}$ and $v_{u,d}^{w}$, for $d = 1,\ldots,D$, $u=1,\ldots,U$ and $i = 1,\ldots,P$,
+are then optimized to minimize $\text{KL}(\mathcal{Q}_{\mathbf{W},\mathbf{H}}\|\mathcal{S})$.
+This can be done very efficiently using the gradient descent method described by \cite{raiko2007}. The resulting EP updates for $\hat{f}_2$ are
+given by
+\begin{align}
+[\hat{v}_{d,i}^{h,2}]_\text{new} & =
+\left\{ [v_{d,i}^{h}]_\text{new}^{-1} - [\hat{v}_{d,i}^{h,2} ]_\text{old}^{-1}\right\}^{-1}\,,\\
+[\hat{m}_{d,i}^{h,2}]_\text{new} & =
+[\hat{v}_{d,i}^{h,2}]_\text{new} \left\{[ m_{d,i}^{h}]_\text{new} 
+[v_{d,i}^{h}]_\text{new}^{-1} - [\hat{m}_{d,i}^{h,2}]_\text{old} [\hat{v}_{d,i}^{h,2}]_\text{old}^{-1}\right\}^{-1}\,,\\
+[\hat{v}_{u,d}^{w,2}]_\text{new} & =
+\left\{ [v_{u,d}^{w}]_\text{new}^{-1} - [\hat{v}_{u,l}^{w,2} ]_\text{old}^{-1}\right\}^{-1}\,,\\
+[\hat{m}_{u,d}^{w,2}]_\text{new} & =
+[\hat{v}_{u,d}^{w,2}]_\text{new} \left\{[ m_{u,d}^{w}]_\text{new} 
+[v_{u,d}^{w}]_\text{new}^{-1} - [\hat{m}_{u,d}^{w,2}]_\text{old} [\hat{v}_{u,d}^{w,2}]_\text{old}^{-1}\right\}^{-1}\,,\\
+[\hat{m}_{u,j}^{g,2}]_\text{new} & = \sum_{d=1}^D [\hat{m}_{u,d}^{w,2}]_\text{new} [\hat{m}_{d,z_{u,j}}^{h,2}]_\text{new}\,,\\
+[\hat{v}_{u,j}^{g,2}]_\text{new} & = \sum_{d=1}^D [\hat{m}_{u,d}^{w,2}]_\text{new}^2 [\hat{v}_{d,z_{u,j}}^{h,2}]_\text{new} +
+\sum_{d=1}^D [\hat{v}_{u,d}^{w,2}]_\text{new} [\hat{m}_{d,z_{u,j}}^{h,2}]_\text{new}^2 +
+\sum_{d=1}^D [\hat{v}_{u,d}^{w,2}]_\text{new} [\hat{v}_{d,z_{u,j}}^{h,2}]_\text{new}\,,
+\end{align}
+for $d = 1,\ldots,D$, $u = 1,\ldots,U$, $j = 1,\ldots,M_u$ and $i = 1,\ldots,P$ where $[m_{d,i}^{h}]_\text{new}$,
+$[v_{d,i}^{h}]_\text{new}$, $[ m_{u,d}^{w}]_\text{new}$ and $[v_{u,d}^{w}]_\text{new}$, are the parameters of $\mathcal{Q}$ that minimize
+$\text{KL}(\mathcal{Q}_{\mathbf{W},\mathbf{H}}\|\mathcal{S})$.
+
+The last factor to be refined on each cycle of EP is $\hat{f}_1$. The EP update operations for this factor are
+\begin{align}
+[\hat{m}_{u,i}^{g,1}]_\text{new} & = \hat{m}_{u,i}^{g,2} + \hat{v}_{u,i}^{g,2}
+[m_{u,i}]^{-1}_\text{new}\,,\\
+[\hat{v}_{u,i}^{g,1}]_\text{new} & = \hat{v}_{u,i}^{g,2} \left[ \alpha_{u,i}^{-1} [m_{u,i}]^{-1}_\text{new} - 1 \right]\,,
+\end{align}
+for $u = 1,\ldots,U$ and $i = 1,\ldots,M_u$, where
+\begin{align}
+[m_{u,i}]_\text{new} & = \hat{m}_{u,i}^{g,2} + \hat{v}_{u,i}^{g,2} \alpha_{u,i}\,,\\
+\alpha_{u,i} & = \Phi[\beta_{u,i}]^{-1} \phi[\beta_{u,i}] t_{u,i} [\hat{v}_{u,i}^{g,2} + 1]^{-1}\,,\\
+\beta_{u,i} & = t_{u,i} \hat{m}_{u,i}^{g,2} [\hat{v}_{u,i}^{g,2} + 1]^{-1}
+\end{align}
+and $\phi$ and $\Phi$ are the density and the cumulative probability functions of a standard Gaussian distribution,
+respectively.
+
+Once EP has converged, we can approximate the evidence of the model, that is, $\mathcal{P}(\mathbf{T}^{(\mathcal{D})})$, using
+\begin{align}
+\mathcal{P}(\mathbf{T}^{(\mathcal{D})}) \approx \int \prod_{a=1}^4
+\hat{f}_a(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H})\,d\mathbf{G}^{(\mathcal{D})}\,d\mathbf{H}\,d\mathbf{W}\,.
+\end{align}
+For this, we have to compute the value of the parameters $\hat{s}_1,\ldots,\hat{s}_4$. The value of $\hat{s}_1$ is
+\begin{equation}
+\log\hat{s}_1 = \sum_{u=1}^{U}\sum_{i=1}^{M_u}\left[\log \Phi[\beta_{u,i}] +
+\frac{1}{2}\log(2\pi)+\frac{1}{2}\log \frac{\hat{v}_{u,i}^{g,1} \hat{v}_{u,i}^{g,2}}{v_{u,i}^g}-
+\frac{[m_{u,i}^g]^2}{v_{u,i}^g}+\frac{[\hat{m}_{u,i}^{g,1}]^2}{\hat{v}_{u,i}^{g,1}}+
+\frac{[\hat{m}_{u,i}^{g,2}]^2}{\hat{v}_{u,i}^{g,2}}\right]\,.
+\end{equation}
+The value of $\hat{s}_2$ is given by
+\begin{align}
+\log\hat{s}_2 & = \log Z_2 + \sum_{u=1}^{U}\sum_{i=1}^{M_u}\left[\frac{1}{2}\log(2\pi)+
+\frac{1}{2}\log \frac{\hat{v}_{u,i}^{g,1}\hat{v}_{u,i}^{g,2}}{v_{u,i}^g}-
+\frac{[m_{u,i}^g]^2}{v_{u,i}^g}+\frac{[\hat{m}_{u,i}^{g,1}]^2}{\hat{v}_{u,i}^{g,1}}+
+\frac{[\hat{m}_{u,i}^{g,2}]^2}{\hat{v}_{u,i}^{g,2}}\right]+\nonumber\\
+& \quad \sum_{d=1}^{D}\sum_{i=1}^{P}\left[\frac{1}{2}\log(2\pi)+
+\frac{1}{2}\log \frac{\hat{v}_{d,i}^{h,2}\hat{v}_{d,i}^{h,4}}{v_{d,i}^h}-
+\frac{[m_{d,i}^h]^2}{v_{d,i}^h}+\frac{[\hat{m}_{d,i}^{h,2}]^2}{\hat{v}_{d,i}^{h,2}}+
+\frac{[\hat{m}_{d,i}^{h,4}]^2}{\hat{v}_{d,i}^{h,4}}\right]+\nonumber\\
+& \quad \sum_{u=1}^{U}\sum_{d=1}^{D}\left[\frac{1}{2}\log(2\pi)+
+\frac{1}{2}\log \frac{\hat{v}_{u,d}^{w,2}\hat{v}_{u,d}^{w,3}}{v_{u,d}^w}-
+\frac{[m_{u,d}^w]^2}{v_{u,d}^w}+\frac{[\hat{m}_{u,d}^{w,2}]^2}{\hat{v}_{u,d}^{w,2}}+
+\frac{[\hat{m}_{u,d}^{w,3}]^2}{\hat{v}_{u,d}^{w,3}}\right]\,,
+\end{align}
+where $Z_2$ is the variational lower bound obtained in the update of $\hat{f}_2$, that is,
+\begin{equation}
+Z_2 = \int \mathcal{Q}_{\mathbf{W},\mathbf{H}}\log\frac{\mathcal{S}(\mathbf{W},\mathbf{H})}
+{\mathcal{Q}_{\mathbf{W},\mathbf{H}}(\mathbf{W},\mathbf{H})} \,d\mathbf{W},d\mathbf{H}\,.
+\end{equation}
+The approximate factor $\hat{f}_{3}$ has the same functional form as the exact factor $f_3$.
+Therefore, the value of $\hat{s}_3$ is simply $\hat{s}_3 = 1$.
+Finally, the value of $\tilde{s}_{4}$ is given by
+\begin{align}
+\log\hat{s}_4 = \log Z_4 + \sum_{d=1}^{D}\sum_{i=1}^{P}\left[
+\frac{1}{2}\log(2\pi)+\frac{1}{2}\log \frac{\hat{v}_{d,i}^{h,4} \hat{v}_{d,i}^{h,2}}{v_{d,i}^h}-
+\frac{[m_{d,i}^h]^2}{v_{d,i}^h}+\frac{[\hat{m}_{d,i}^{h,4}]^2}{\hat{v}_{d,i}^{h,4}}+
+\frac{[\hat{m}_{d,i}^{h,2}]^2}{\hat{v}_{d,i}^{h,2}}\right]\,,
+\end{align}
+where $Z_4$ is computed using
+\begin{eqnarray}
+\log Z_{4}  & = & \log \int \mathcal{P}(\mathbf{H})\left[\prod_{d=1}^{D}\prod_{i=1}^{P}
+\mathcal{N}(h_{d,i}|\hat{m}_{d,i}^{h,2},\hat{m}_{d,i}^{h,2})\right]d\mathbf{H}\nonumber\\
+& = & -\frac{DP}{2}\log(2\pi) + \frac{1}{2}\sum_{d=1}^D\log|\bm \Sigma_d| -
+\frac{D}{2}\log|\mathbf{K}| - \frac{1}{2} \sum_{d=1}^D\sum_{i=1}^P \log \hat{v}_{d,i}^{h,2} - \nonumber \\
+& & \frac{1}{2} \sum_{d=1}^D\sum_{i=1}^p \frac{[\hat{m}_{d,i}^{h,2}]^2}{\hat{v}_{d,i}^{h,2}} +
+\sum_{d=1}^D \mathbf{m}_d^\text{T} \bm \Sigma_d^{-1} \mathbf{m}_d\,,\label{eq:Z4}
+\end{eqnarray}
+where $\bm \Sigma_d^{-1} = \mathbf{K}^{-1} + \text{diag}[\hat{\mathbf{v}}_d^{h,2}]^{-1}$,
+$\mathbf{m}_d = \bm \Sigma_d \text{diag}[\hat{\mathbf{v}}_d^{h,2}]^{-1} \hat{\mathbf{m}}_d^{h,2}$
+and the vectors $\hat{\mathbf{m}}_d^{h,2}$ and $\hat{\mathbf{v}}_d^{h,2}$ are given by
+$\hat{\mathbf{m}}_d^{h,2}=(\hat{m}_{1,d}^{h,2},\ldots,\hat{m}_{P,d}^{h,2})^\text{T}$ and
+$\hat{\mathbf{v}}_d^{h,2}=(\hat{v}_{1,d}^{h,2},\ldots,\hat{v}_{P,d}^{h,2})^\text{T}$.
+Given $\hat{s}_1,\ldots,\hat{s}_4$, we approximate $\mathcal{P}(\mathbf{T}^{(\mathcal{D})}$ using
+\begin{eqnarray}
+\mathcal{P}(\mathbf{T}^{(\mathcal{D})}) & \approx & \sum_{i=a}^{4}\log\hat{s}_{a}-
+\sum_{u=1}^{U}\sum_{i=1}^{M_u}\left[\frac{1}{2}\log(2\pi)+\frac{1}{2}\log \frac{\hat{v}_{u,i}^{g,1} \hat{v}_{u,i}^{g,2}}{v_{u,i}^g}-
+\frac{[m_{u,i}^g]^2}{v_{u,i}^g}+\frac{[\hat{m}_{u,i}^{g,1}]^2}{\hat{v}_{u,i}^{g,1}}+
+\frac{[\hat{m}_{u,i}^{g,2}]^2}{\hat{v}_{u,i}^{g,2}}\right]-\nonumber\\
+& & \sum_{d=1}^{D}\sum_{i=1}^{P}\left[
+\frac{1}{2}\log(2\pi)+\frac{1}{2}\log \frac{\hat{v}_{d,i}^{h,4} \hat{v}_{d,i}^{h,2}}{v_{d,i}^h}-
+\frac{[m_{d,i}^h]^2}{v_{d,i}^h}+\frac{[\hat{m}_{d,i}^{h,4}]^2}{\hat{v}_{d,i}^{h,4}}+
+\frac{[\hat{m}_{d,i}^{h,2}]^2}{\hat{v}_{d,i}^{h,2}}\right]-\nonumber\\
+& & \sum_{u=1}^{U}\sum_{d=1}^{D}\left[\frac{1}{2}\log(2\pi)+
+\frac{1}{2}\log \frac{\hat{v}_{u,d}^{w,2}\hat{v}_{u,d}^{w,3}}{v_{u,d}^w}-
+\frac{[m_{u,d}^w]^2}{v_{u,d}^w}+\frac{[\hat{m}_{u,d}^{w,2}]^2}{\hat{v}_{u,d}^{w,2}}+
+\frac{[\hat{m}_{u,d}^{w,3}]^2}{\hat{v}_{u,d}^{2,3}}\right]\,.
+\end{eqnarray}
+Finally, some of the EP updates may generate a negative value for $\hat{v}_{u,i}^{g,a}$, 
+$\hat{v}_{u,d}^{w,a}$ or $\hat{v}_{d,j}^{h,a}$, where $u = 1,\ldots,U$, $i = 1,\ldots,M_u$, $j = 1,\ldots,P$ and $i = 1,\ldots,4$.
+Negative variances in Gaussian approximate factors 
+are common in many EP implementations \citep{Minka2001,Minka2002}.
+When this happens, the marginals of the approximate factor with negative 
+variances are not density functions. Instead, they
+are correction factors that compensate the errors in the corresponding marginals of other approximate factors.
+However, these negative variances can lead to failure of the proposed EP algorithm.
+This may happen when we have to compute $\log|\bm \Sigma_d|$ in (\ref{eq:Z4}) and some
+of the $\hat{v}_{d,i}^{h,2}$ are negative. In this case, $\Sigma_d$ may not be
+positive definite and $|\bm \Sigma_d|$ may be negative. The result is that EP may no longer be able to approximate the model evidence
+since $\log |\bm \Sigma_d|$ could not be defined in (\ref{eq:Z4}).
+To address this problem, whenever an EP update yields a negative number for any of the
+$\hat{v}_{u,i}^{g,a}$, $\hat{v}_{u,d}^{w,a}$ or $\hat{v}_{d,j}^{h,a}$, we do not update this parameter, nor the corresponding
+$\hat{m}_{u,i}^{g,a}$, $\hat{m}_{u,d}^{w,a}$ or $\hat{m}_{d,j}^{h,a}$.
+

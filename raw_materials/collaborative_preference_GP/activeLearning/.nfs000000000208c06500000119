@@ -1,0 +1,88 @@
+\section{Active Learning \label{sec:active}}
+
+In this section we describe the general framework for our information-theoretic approach to active learning and describe the computational advantages. We then derive how to compute the information theoretic objective with very minimal approximations for our preference learning model. Note that due to the reformulation in \ref{sec:prefkernel} is equivalent to deriving the algorithm for GP classification.
+
+\subsection{Information Theoretic Approach}
+
+Information theoretic approaches have become very popular for deciding which data to acquire, or which data to retain when subsampling a large dataset. These methods seek to reduce the number of feasible models as quickly as possible, either using heuristics (e.g. margin sampling \citep{tong2001}) or by formalising uncertainty using well studied quantities, such as Shannon’s entropy and the KL-divergence \citep{coverandthomas}. Although the latter approach was proposed several decades ago \citep{lindley1956, bernardo1979}, it is not always straightforward to apply the criteria to complicated models such as nonparametric processes with infinite parameter spaces. Current approaches make approximations to achieve tractability. As a result many algorithms exist that compute approximate posterior entropies \citep{lawrence2002}, perform sampling \citep{freund1997}, or work with related quantities in non-probabilistic models \citep{tong2001}. We return to this objective, and demonstrate how to apply a simple reformulation to GP preference learning that provides a fast and accurate application of the full information theoretic criterion.
+
+The central goal of information theoretic active learning is to reduce the number of possible hypotheses maximally fast, i.e. to minimize the uncertainty about the parameters using Shannon's entropy \citep{coverandthomas}. Data points $\data}'$ are selected that satisfy $\argmin_{\data'}\ent[\param|\data']=-\int p(\param|\data')\log p(\param|\data') d\param$, where all the parameters of our model have been concatenated into $\param=\{\w,\g,\h\}$. Solving this problem in general is NP-hard. However, as is common in sequential decision making tasks a myopic (greedy) approximation is made \citep{heckerman1995}. It has been shown that the myopic policy can perform near-optimally \citep{dasgupta2005,golovin2010}. Therefore, the objective is to seek a new preference data point $\pair$ that maximises the decrease in expected posterior entropy:
+
+\begin{align}   
+        \label{eqn:ent_change}
+        \argmax_{\pair} \ent[\param | \data] - \E_{\y\sim p(\y|\pair\data)} \left[ \ent[\param| \y, \pair,\data] \right] 
+\end{align}
+
+Note that expectation over the unseen output $\y$ is required. Many works e.g. \citep{mackay1992, krishnapuram2004, lawrence2002} propose using this objective directly. However, parameter posteriors are often high dimensional and computing their entropies is usually intractable. Furthermore, for nonparametric processes the parameter space is infinite dimensional, so Equation \eqref{eqn:ent_change} becomes poorly defined. To avoid gridding parameter space (which is exponentially hard with dimensionality), or sampling (from which it is notoriously hard to estimate entropies without introducing bias \citep{panzeri2007}), these papers make Gaussian or low dimensional approximations and calculate the entropy of the approximate posterior. A second computational difficulty arises; if $N_{\pair}$ comparisons are under consideration, and $N_{\y}$ responses may be seen, then $\mathcal{O}(N_{\pair}N_{\y})$, potentially expensive, posterior updates are required to calculate Eqn.\,\eqref{eqn:ent_change}; one for every possible input and corresponding label.
+
+An important insight arises if we note that the objective in Eqn.\,\eqref{eqn:ent_change} is equivalent to the conditional mutual information between the unknown output and the parameters, $\info[\param,\y\vert\pair,\data]$. Using this insight it is simple to show that the objective can be rearranged to compute entropies in $\y$ space:
+
+\begin{align}
+\argmax_{\pair} \ent[\y \vert \pair, \data] - \E_{\param\sim p(\param|\data)} \left[ \ent[\y \vert \pair,\param] \right] \label{eqn:rearrangement} 
+\end{align}
+
+Eqn.\,\eqref{eqn:rearrangement} overcomes the challenges we described for Eqn.\,\eqref{eqn:ent_change}. Entropies are now calculated in output space, which usually has low dimension. For binary preferences, these are just entropies of Bernoulli variables. Also $\param$ is now conditioned only on $\data$, so only $\mathcal{O}(1)$ posterior updates are required i.e. we only need to recompute the posterior once per datapoint selected, not for every possible datapoint under consideration. Equation \eqref{eqn:rearrangement} also provides us with an interesting intuition about the objective; we seek the $\pair$ for which the model is marginally most uncertain about $\y$ (high $\ent[\y \vert \pair, \data]$), but for which individual settings of the parameters are confident (low $\E_{\param\sim p(\param|\data)} \left[ \ent[\y \vert \pair,\param] \right]$). This can be interpreted as seeking the $\pair$ for which the parameters under the posterior disagree about the outcome the most, so we refer to this objective as Bayesian Active Learning by Disagreement (BALD). We present a method to apply Eqn.\,\eqref{eqn:rearrangement} directly to preference learning. We no longer need to build our entropy calculation around the type of posterior approximation (as in \citep{mackay1992, krishnapuram2004, lawrence2002}) but are free to use our hybrid EP method presented in Section \ref{sec:EPinference}, or in fact any other method of approximate inference.
+
+\subsection{Application to GP Preference Learning}
+
+We demonstrate how Equation \eqref{eqn:rearrangement} is applied to our preference learning model, and hence GPC in general. Exact inference is intractable, but our approximate inference algorithm (Section \ref{sec:EPinference}) provides us with a Gaussian approximation to the posterior. All the standard methods for approximate inference for GPC also model the posterior with a Gaussian e.g. Laplace approximation, sparse methods, EP; the derivations in this Section extend to these scenarios also, the symbol {\scriptsize$\stackrel{1}{\approx}$} is used to denote when such an approximation is exploited.
+
+The entropy of the binary output variable $\y$ given the latent function $g$ can be expressed in terms of the binary entropy function $\mathrm{h}$:
+\begin{align}
+\ent[y\vert\pair,g] &= \mathrm{h}\left(\Phi(g(\pair)\right) \notag\\
+\mathrm{h}(p)&=- p\log p - (1-p)\log(1-p) \notag
+\end{align}
+Expectations over the posterior need to be computed. Using the Gaussian approximation to the posterior, for each $\pair$, $g_{\pair} = g(\pair)$ will follow a Gaussian distribution with mean $\mu_{\pair}$ and variance $\sigma_{\pair}^2$. To compute Eqn.\,\eqref{eqn:rearrangement} we have to compute two entropy quantities. The first term in Eqn.\,\eqref{eqn:rearrangement}, $\ent[y\vert\pair,\data]$ can be handled analytically:
+\begin{align}
+        \ent[y\vert\pair,\data] &\stackrel{1}{\approx} \ent\left( \int \Phi( g_{\pair} )  \mathcal{N}(g_{\pair}; \mu_{\pair},\sigma_{\pair}^2) \mathrm{d}g_{\pair} \right) \notag \\ 
+        &= \ent \left( \Phi\left( \frac{\mu_{\pair}}{\sqrt{\sigma^2_{\pair} + 1}} \right)\right) \label{ent_mean}
+\end{align}
+The second term, $\E_{f \sim p(f\vert\data)} \left[ \ent[\y\vert\x, f] \right]$ can be computed approximately as follows:
+\begin{align}
+        \E_{g \sim p(f\vert\data)} \left[ \ent[\y\vert\x, g] \right] &\stackrel{1}{\approx}\int \ent(\Phi(g_{\pair})) \mathcal{N}(g_{\pair}; \mu_{\pair},\sigma_{\pair}^2) \mathrm{d}g_{\x}\label{eqn:mean_entropy}\\
+        &\stackrel{2}{\approx} \int \exp\left(-\frac{g_{\pair}^2}{\pi\ln2}\right) \mathcal{N}(g_{\pair}; \mu_{\pair},\sigma_{\pair}^2)\mathrm{d}g_{\pair}\notag\\ 
+        &= \frac{C}{\sqrt{\sigma_{\pair}^2 + C^2}}\exp\left(-\frac{\mu_{\pair}^2}{2\left(\sigma_{\x}^2 + C^2\right)}\right)\notag
+\end{align}
+
+where $C=\sqrt{\frac{\pi\ln2}{2}}$. The first approximation, {\scriptsize $\stackrel{1}{\approx}$}, reflects the Gaussian approximation to the posterior. The integral in the left hand side of Eqn.\,\eqref{eqn:mean_entropy} is intractable. By performing a Taylor expansion on $\ln \ent(\Phi(g_{\pair}))$ (see the Appendix) we can see that it can be approximated up to $\mathcal{O}(g_{\pair}^4)$ by a squared exponential curve, $\exp(-g_{\pair}^2/\pi\ln2)$. We will refer to this approximation as {\scriptsize $\stackrel{2}{\approx}$}. Now we can apply the standard convolution formula for Gaussians to finally get a closed form expression for both terms of Eqn.\,\eqref{eqn:rearrangement}.
+
+Fig.\,\ref{fig:trick} depicts the striking accuracy of this simple approximation. The maximum possible error that will be incurred when using this approximation is if $\mathcal{N}(g_{\pair}; \mu_{\pair},\sigma_{\pair}^2)$ is centred at $\mu_{\pair}=\pm 2.05$  with $\sigma_{\pair}^2$ tending to zero (see Fig.\,\ref{fig:trick}, yielding only a 0.27\% error in the integral in Eqn.\,\eqref{eqn:mean_entropy}.
+
+To summarise, the BALD algorithm for Gaussian process classification consists of two steps. First it applies any standard approximate inference algorithm for GPCs (such as EP) to obtain the posterior predictive mean $\mu_{\pair}$ and $\sigma_{\pair}$ for each point of interest $\pair$. Then, it selects the preference datapoint $\pair$ that maximises the following objective function:
+
+\begin{equation}
+        \ent \left( \Phi\left( \frac{\mu_{\pair}}{\sqrt{\sigma^2_{\pair} + 1}} \right)\right) - \frac{C}{\sqrt{\sigma_{\pair}^2 + C^2}} \exp\left(-\frac{\mu_{\pair}^2}{2\left(\sigma_{\pair}^2 + C^2\right)}\right) \label{eqn:BALD_GPC}
+\end{equation}
+
+For most practically relevant kernels, the objective \eqref{eqn:BALD_GPC} is a smooth and differentiable function of $\pair$, so should we be able to select items from a continuous feature space gradient-based optimisation methods can be employed.
+
+\begin{figure}\centering
+\input{figs/gaussian_approx.tikz}
+\caption{Analytic approximation ({\scriptsize $\stackrel{1}{\approx}$}) to the binary entropy of the error function by a squared exponential. The absolute error remains under $3 \cdot 10^{-3}$. \label{fig:trick}}
+\end{figure}
+
+\subsection{Related Algorithms}
+
+A closely related approach is Maximum Entropy Sampling (MES) \citep{sebastiani2000}, which also explicitly works in dataspace (Eqn.\,\eqref{eqn:rearrangement}). MES was proposed for regression models with input-independent observation noise. Although Eqn.\,\eqref{eqn:rearrangement} is used, the second term is constant because of input independent noise and is ignored. However, for our preference model or any heteroscedastic model; it fails to differentiate between model uncertainty and observation uncertainty (about which our model may be confident).
+
+Another approximation to \eqref{eqn:rearrangement} is made by the Query by Committee (QBC) algorithm \citep{freund1997}. QBC samples parameters from the posterior (committee members), they vote on the outcome of each possible $\x$. The $\x$ with the most balanced vote is selected; this is termed the `principle of maximal disagreement'. If BALD is used with a sampled posterior, query by committee is implemented but with a probabilistic measure of disagreement. QBC's deterministic vote criterion discards confidence in the predictions and so can exhibit the same pathologies as MES.
+
+The IVM \citep{lawrence2002} is another algorithm motivated by information theory, it is designed for sub-sampling a dataset and cannot be used for online active learning, unlike the above algorithms. This is because the IVM is privy to the $\y$ values before including a measurement; it cannot therefore work explicitly in output space i.e. with Eqn.\,\eqref{eqn:rearrangement}. The IVM uses Eqn.\,\eqref{eqn:ent_change}, but parameter entropies are calculated approximately in the marginal subspace corresponding to the observed data points. The entropy decrease after inclusion of a new data point can then be calculated efficiently using the GP covariance matrix.  However, this approach requires $\mathcal{O}(N_{\pair}N_{\y})$ posterior updates to sample a single new datapoint. To do these updates efficiently, Assumed Density Filtering (ADF) is proposed in \citep{lawrence2002}. This algorithm is a further approximation to EP.
+
+Another flavour of approaches is proposed for multi-user preference learning is to use the Expected Value of Information (EVOI) \citep{bonilla2010}. This is a decision theoretic approach, and the objective is not to learn optimally about the parameters but to seek the data that is expected to improve the maximum of users latent function the most (i.e. find their most preferred item). This of course requires the set or distribution over test items to be known; although in general this will not be true it is a reasonable assumption for a recommendation application. This approach is well tailored for online active learning with a single user as it seeks to find the best recommendation as fast as possible, whereas the information theoretic approach is more suited when trying to learn the model offline from existing data from many users. By focussing just on areas of high preference one is less likely to discover the true latent functions underlying user behaviour, our approach directly tries to reduce uncertainty about these alongside the user-specific parameters (i.e. the weights). Perhaps more importantly to calculate the EVOI new predictive distributions need to be calculated for all possible data points under consideration, again requiring $\mathcal{O}(N_{\x}N_{\y})$ posterior updates; we only require one from that may calculate the score for all candidates, this offers a very large computational saving when the number of possible item pairs is large.
+
+%\begin{table*}
+%\begin{center}
+%\resizebox{6.75in}{!}{
+%\begin{tabular}{|l|ccccccc|}
+%\hline
+%Dataset&BALD&random&MES&IVM&$\mbox{QBC}_{2}$&$\mbox{QBC}_{100}$&Active SVM \ref{plots:SVM}\\ %\noalign{\hrule height 1.2pt}
+
+%\hline
+%\end{tabular}
+%}
+%\caption{If we want it can have a table of comparisons over BALD vs. rest for GPC, single user preference of both.}
+%\label{bigtable}
+%\end{center}
+%\end{table*}
+

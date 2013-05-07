@@ -1,0 +1,88 @@
+\section{Expectation propagation and variational Bayes \label{sec:EPinference}}
+
+Approximate inference in our model is implemented using a
+combination of expectation propagation (EP) \cite{Minka2002} and variational Bayes (VB) \cite{Ghahramani2001}.
+Here, we briefly describe the method, but
+full details are in Section 4 of the supplementary.
+We approximate the posterior (\ref{eq:post}) by the parametric distribution
+
+\vspace{-0.65cm}
+{\small
+\begin{align}
+\mathcal{Q}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})}) & =
+\left[\prod_{u=1}^{U}\prod_{d=1}^{D}\mathcal{N}(w_{ud}|m_{u,d}^{w},v_{u,d}^{w})\right]
+\left[\prod_{d=1}^{D}\prod_{i=1}^{P} \mathcal{N}(h_{d,i}|m_{d,i}^h,v_{d,i}^{h})\right]\notag\\
+& \quad
+\left[\prod_{u=1}^N \prod_{j=1}^{M_u} \mathcal{N}(g_{u,z_{u,j}}|m_{u,j}^g,v_{u,j}^g)\right]\,,
+\end{align}
+}
+
+\vspace{-0.5cm}
+\normalsize where $m_{u,d}^w$, $v_{u,d}^w$, $m_{d,i}^h$, $v_{d,i}^h$,
+$m_{u,j}^g$, and $v_{u,j}^g$ are free parameters to be determined by EP
+and the superscripts $w$, $h$ and $g$ indicate the random variables
+described by these parameters.
+The joint distribution 
+$\mathcal{P}(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H},\mathbf{T}^{(\mathcal{D})},\mathbf{X},\ell)$ can be factorized
+into four factors $f_1,\ldots,f_4$, namely,
+$\mathcal{P}(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H},\mathbf{T}^{(\mathcal{D})},\mathbf{X},\ell) =
+\prod_{a=1}^4 f_a(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H})$,
+where
+$f_1(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H})=\mathcal{P}(\mathbf{T}^{(\mathcal{D})}|\mathbf{G}^{(\mathcal{D})})$,
+$f_2(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H})=\mathcal{P}(\mathbf{G}^{(\mathcal{D})}|\mathbf{W},\mathbf{H})$,
+$f_3(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H})=\mathcal{P}(\mathbf{W}|\mathbf{U})$ and
+$f_4(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H})=\mathcal{P}(\mathbf{H}|\mathbf{X},\ell)$.
+EP approximates these exact factors by 
+approximate factors $\hat{f}_{1}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})}),\ldots,\hat{f}_{4}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})$
+that have the same functional form as $\mathcal{Q}$
+
+\vspace{-0.65cm}
+{\small
+\begin{align}
+\hat{f}_a(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) & =
+\left[\prod_{u=1}^{U}\prod_{d=1}^{D}\mathcal{N}(w_{ud}|\hat{m}_{u,d}^{a,w},\hat{v}_{u,d}^{a,w})\right]
+\left[\prod_{d=1}^{D}\prod_{i=1}^{P} \mathcal{N}(h_{d,i}|\hat{m}_{d,i}^{a,h},\hat{v}_{d,i}^{a,h})\right]\notag\\
+& \quad \left[\prod_{u=1}^N \prod_{j=1}^{M_u} \mathcal{N}(g_{u,z_{u,j}}|\hat{m}_{u,j}^{a,g},\hat{v}_{u,j}^{a,g})\right] \hat{s}_a\,,
+\end{align}
+}
+
+\vspace{-0.5cm}
+\normalsize where $a=1,\ldots,4$ and $\hat{m}_{u,d}^{a,w}$, $\hat{v}_{u,d}^{a,w}$, $\hat{m}_{d,i}^{a,h}$, $\hat{v}_{d,i}^{a,h}$,
+$\hat{m}_{u,j}^{a,g}$, $\hat{v}_{u,j}^{a,g}$ and $\hat{s}_a$ are free parameters.
+Note that $\mathcal{Q}$
+is the normalized product of $\hat{f}_{1},\ldots,\hat{f}_{4}$.
+The first step of EP is to initialize $\hat{f}_1,\ldots,\hat{f}_4$ and $\mathcal{Q}$ to be uniform.
+After that, EP iteratively refines of $\hat{f}_1,\ldots,\hat{f}_4$ by minimizing the Kullback-Leibler (KL) divergence
+between the product of $\mathcal{Q}^{\setminus a}$ and $f_a$
+and the product of $\mathcal{Q}^{\setminus a}$ and $\hat{f}_a$, 
+where $\mathcal{Q}^{\setminus a}$ is the ratio between $\mathcal{Q}$ and $\hat{f}_a$. 
+However, this does not perform well for refining $\hat{f}_2$; details on this problem can
+be found in Section 4 of the supplementary material and in \cite{stern2009}.
+For this factor we follow a VB approach.
+Instead of minimizing $\text{KL}(\mathcal{Q}^{\setminus 2} f_2 \| \mathcal{Q}^{\setminus 2} \hat{f}_2)$ with respect to the parameters of $\hat{f}_2$,
+we refine this approximate factor so that the reversed version of the KL divergence is minimized, that is,
+we minimize $\text{KL}(\mathcal{Q}^{\setminus 2} \hat{f}_2 \| \mathcal{Q}^{\setminus 2} f_2)$.
+EP iteratively refines all the approximate factors until convergence.
+This method also approximates the predictive distribution (\ref{eq:predictions}). 
+For this, we replace the exact posterior in (\ref{eq:predictions})
+with $\mathcal{Q}$. Finally, EP can also approximate the normalization constant in (\ref{eq:post}) (the model evidence)
+as the integral of the product of all the approximate factors $\hat{f}_1,\ldots,\hat{f}_4$.
+
+\subsection{A sparse approximation to speed up computation}
+
+The cost of GPs is cubic in the number of function evaluations. In our case, refining $\hat{f}_3$ has
+cost $\mathcal{O}(DU^3)$, where $U$ is the number of users, and $D$ the number of shared latent functions.
+The cost of refining $\hat{f}_4$ is $\mathcal{O}(DP^3)$,
+where $P$ is the number of observed item pairs. These costs can be reduced by
+approximating $\mathbf{K}_\text{users}$ and $\mathbf{K}_\text{items}$ in (\ref{eq:priorW}) and (\ref{eq:priorH}).
+We use the FITC approximation \cite{Snelson2006}. Under this approximation, an $n \times n$ covariance
+matrix $\mathbf{K}$ generated by the evaluation of a covariance function at $n$ locations
+is approximated by $\mathbf{K}' =  \mathbf{Q} + \text{diag}(\mathbf{K} - \mathbf{Q})$, where
+$\mathbf{Q} = \mathbf{K}_{nn_0} \mathbf{K}_{n_0n_0}^{-1} \mathbf{K}_{nn_0}^\text{T}$, $\mathbf{K}_{n_0n_0}$ is the
+$n_0 \times n_0$ matrix generated by the evaluation of the covariance function at all possible combinations of
+only $n_0 < n$ locations or pseudo-inputs and $\mathbf{K}_{nn_0}$ is the $n \times n_0$ matrix with the
+covariances between all possible combinations of
+original locations and pseudo-inputs. These approximations allow us to refine $\hat{f}_3$ and $\hat{f}_4$
+in $\mathcal{O}(DU_0^2U)$ and $\mathcal{O}(DP_0^2P)$ operations, where $U_0$ and $P_0$ are the
+number of pseudo-inputs for the users and for the item pairs, respectively.
+A detailed description of the EP updates based on the FITC approximation is given in Section 4.4 of the supplementary material.

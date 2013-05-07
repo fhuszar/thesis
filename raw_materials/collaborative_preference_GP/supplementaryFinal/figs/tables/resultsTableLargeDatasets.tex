@@ -1,0 +1,43 @@
+\begin{table*}[t]\centering
+
+\resizebox{\textwidth}{!}{
+
+\begin{tabular}{l|ccc|ccc}
+&\multicolumn{3}{c|}{\bf{training set only}}&\multicolumn{3}{c}{\bf{10 active samples}}\\\hline
+
+&\textbf{MTUF}&\textbf{MT}&\textbf{ST}&\textbf{MTUF-B}&\textbf{MTUF-E}&\textbf{MTUF-R}\\\hline
+
+\textbf{synthetic}&\bf{0.147$\pm$0.005} &0.245$\pm$0.008 &0.345$\pm$0.007 &\underline{\bf{0.136$\pm$0.004}} &\bf\underline{{0.136$\pm$0.004}} &0.140$\pm$0.005\\
+
+\textbf{sushi}&\bf{0.284$\pm$0.006} &0.297$\pm$0.007 &0.312$\pm$0.006 &\bf{0.150$\pm$0.004} &0.155$\pm$0.005 &0.185$\pm$0.004\\
+
+\textbf{movieLens}&0.348$\pm$0.008 &\bf{0.345$\pm$0.008} &0.350$\pm$0.007 &\bf{0.172$\pm$0.005} &0.177$\pm$0.006 &0.200$\pm$0.006\\
+
+\textbf{election}&\bf{0.354$\pm$0.016} &0.424$\pm$0.018 &0.425$\pm$0.017 &0.221$\pm$0.015 &\bf{0.188$\pm$0.016} &0.265$\pm$0.014\\
+
+\textbf{jura}&\bf{0.342$\pm$0.016} &0.357$\pm$0.019 &\bf{0.345$\pm$0.016} &\bf{0.143$\pm$0.009} &\bf{0.144$\pm$0.011} &0.17$\pm$0.011 \\
+
+\multicolumn{7}{c}{}\\
+
+&\multicolumn{6}{c}{\bf{10 active samples}}\\\hline
+
+&\textbf{MT-B}&\textbf{MT-E}&\textbf{MT-R}&\textbf{ST-B}&\textbf{ST-E}&\textbf{ST-R}\\\hline
+
+\textbf{synthetic}&\bf{0.154$\pm$0.004} &0.161$\pm$0.004 &0.179$\pm$0.004 &\bf{0.253$\pm$0.005} &0.263$\pm$0.007 &0.276$\pm$0.006 \\
+
+\textbf{sushi}&\underline{\bf{0.143$\pm$0.005}} &0.151$\pm$0.005 &0.179$\pm$0.006 &\bf{0.183$\pm$0.006} &0.199$\pm$0.005 &0.215$\pm$0.005 \\
+
+\textbf{movieLens}&\underline{\bf{0.165$\pm$0.005}} &0.171$\pm$0.006 &0.196$\pm$0.005 &\bf{0.233$\pm$0.006} &0.24$\pm$0.004 &0.253$\pm$0.007 \\
+
+\textbf{election}&\underline{\bf{0.107$\pm$0.016}} &\underline{\bf{0.103$\pm$0.010}} &0.184$\pm$0.015 &\bf{0.331$\pm$0.014} &0.349$\pm$0.017 &0.344$\pm$0.013 \\
+
+\textbf{jura}&\underline{\bf{0.138$\pm$0.009}} &\underline{\bf{0.138$\pm$0.010}} &0.17$\pm$0.011 &0.183$\pm$0.013 &\bf{0.169$\pm$0.012} &0.201$\pm$0.012 \\
+
+
+\end{tabular}
+
+}
+\caption{Test error for large datasets $\pm 1$ standard deviation for the proposed multi-task models with and without user features (MTUF and MT respectively) and a single task model (ST) \cite{chu2005} sampling strategies BALD (-B), entropy (-E) and random (-R).  Bold face denotes best performing active algorithm for each model, underlined denotes best overall algorithm.}
+\label{tab:large}
+\end{table*}
+

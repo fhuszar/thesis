@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"Dawi",
+				"Dawi Proper local scoring rules on discrete sample spaces"
+			],
+			[
+				"kernel",
+				"eqn:kernel_information"
+			],
+			[
+				"Scoring",
+				"Scoring Scoring rules, generalized entropy, and utility maximization"
+			],
+			[
+				"Gret",
+				"Gret A kernel two-sample test"
+			],
+			[
+				"scorin",
+				"sec:scoring_rules"
+			],
+			[
+				"hus",
+				"hus Optimally-Weighted Herding is {B}ayesian Quadrature"
+			],
+			[
+				"loss",
+				"sec:loss_scoring_rule"
+			],
+			[
+				"pho",
+				"eqn:photon_right"
+			],
+			[
 				"reg",
 				"regr_az"
 			],
@@ -75,20 +107,335 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "/Users/fhuszar/svn/papers/nips-11-BALD/AL_NIPS2011.tex",
+			"settings":
+			{
+				"buffer_size": 35219,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "raw_materials/collaborative_preference_GP/model/model.tex",
+			"settings":
+			{
+				"buffer_size": 9891,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part2/02_herding.tex",
+			"settings":
+			{
+				"buffer_size": 46307,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/notation.tex",
+			"settings":
+			{
+				"buffer_size": 4132,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/main.tex",
+			"settings":
+			{
+				"buffer_size": 1295,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part3/02_GP_BALD.tex",
+			"settings":
+			{
+				"buffer_size": 25509,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Searching 84 files for \"Nickisch2008\"\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex:\n  206  \\end{equation}\n  207  \n  208: $k_\\star$ is the prior variance of $h_d(\\mathbf{x}_{\\alpha(P+1)}, \\mathbf{x}_{\\beta(P+1)})$ and $\\mathbf{k}_\\star$ is a $P$-dimensional vector that contains the prior covariances between $h_d(\\mathbf{x}_{\\alpha(P+1)},  mathbf{x}_{\\beta(P+1)})$ and $h_d(\\mathbf{x}_{\\alpha(1)}, \\mathbf{x}_{\\beta(1)}),\\ldots,h_d(\\mathbf{x}_{\\alpha(P)}, \\mathbf{x}_{\\beta(P)})$. Computing (\\ref{eqn:preference_post}) or (\\ref{eqn:preference_predictive}) is infeasible and approximations must be used. For this, we use a combination of expectation propagation (EP) \\citep{Minka2001} and variation Bayes (VB) \\citep{Ghahramani2001}. Empirical studies show that EP obtains state-of-the-art performance  in the related problem of GP binary classification \\citep{Nickisch2008}.\n  209  \n  210  We want to learn user preferences with the proposed model from the least amount of data possible. Therefore we desire to query users actively about their preferences on the most informative pairs of items \\citep{Brochu2007active}. Next, we describe a novel method to implement this strategy. This method exploits the preference kernel and so may be trivially generalized to GP binary classification problems also.\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/tmp:\n  206  \\end{equation}\n  207  \n  208: $k_\\star$ is the prior variance of $h_d(\\mathbf{x}_{\\alpha(P+1)}, \\mathbf{x}_{\\beta(P+1)})$ and $\\mathbf{k}_\\star$ is a $P$-dimensional vector that contains the prior covariances between $h_d(\\mathbf{x}_{\\alpha(P+1)},  mathbf{x}_{\\beta(P+1)})$ and $h_d(\\mathbf{x}_{\\alpha(1)}, \\mathbf{x}_{\\beta(1)}),\\ldots,h_d(\\mathbf{x}_{\\alpha(P)}, \\mathbf{x}_{\\beta(P)})$. Computing (\\ref{eqn:preference_post}) or (\\ref{eqn:preference_predictive}) is infeasible and approximations must be used. For this, we use a combination of expectation propagation (EP) \\citep{Minka2001} and variation Bayes (VB) \\citep{Ghahramani2001}. Empirical studies show that EP obtains state-of-the-art performance  in the related problem of GP binary classification \\citep{Nickisch2008}.\n  209  \n  210  We want to learn user preferences with the proposed model from the least amount of data possible. Therefore we desire to query users actively about their preferences on the most informative pairs of items \\citep{Brochu2007active}. Next, we describe a novel method to implement this strategy. This method exploits the preference kernel and so may be trivially generalized to GP binary classification problems also.\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/collaborative_preference_GP/model/model.tex:\n  157  For this, we use a combination of expectation propagation (EP) \\cite{Minka2001} and variation Bayes (VB) \\cite{Ghahramani2001}.\n  158  Empirical studies show that EP obtains state-of-the-art performance \n  159: in the related problem of GP binary classification \\cite{nickisch2008}.\n  160  \n  161  We want to learn user preferences with the proposed model\n\n3 matches across 3 files\n\n\nSearching 84 files for \"schervish95theory\"\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex:\n   68  \\end{itemize}\n   69  \n   70: The loss $\\loss$ describes the decision task that we are interested in, whereas the observation model and the prior represent our beliefs about the world. Given these components, the ultimate objective for evaluating a possible action $\\action$ after observing $\\dataset$ is the \\emph{expected posterior loss} (also called the \\emph{posterior risk}~\\cite{schervish95theory})\n   71  \n   72  \\begin{equation}\n\n1 match in 1 file\n\n\nSearching 84 files for \"welling2009herding\"\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex:\n  214  \\subsubsection{HERDING} \n  215  \n  216: Herding was introduced by \\citep{welling2009herding} as a method for generating pseudo-samples from a distribution in such a way that certain nonlinear moments of the sample set closely match those of the target distribution.  The empirical mean $\\frac{1}{N}\\sum_{n=1}^{N}f_{x_n}$ over these pseudosamples is then used to estimate integral \\ref{eqn:integral}.\n  217  \n  218  \\subsubsection{Maximum Mean Discrepancy}\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex:\n   83  \\subsubsection{HERDING} \n   84  \n   85: Herding was introduced by \\citep{welling2009herding} as a method for generating pseudo-samples from a distribution in such a way that certain nonlinear moments of the sample set closely match those of the target distribution.  The empirical mean $\\frac{1}{N}\\sum_{n=1}^{N}f_{x_n}$ over these pseudosamples is then used to estimate integral \\ref{eqn:integral}.\n   86  \n   87  \\subsubsection{Maximum Mean Discrepancy}\n\n2 matches across 2 files\n",
+			"settings":
+			{
+				"buffer_size": 4774,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "latex/part1/01_scoring_rules.tex",
+			"settings":
+			{
+				"buffer_size": 57815,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "[ {   \"slug\": \"music\",   \"size\": 99,   \"name\": \"Music\" }, {   \"slug\": \"sports\",   \"size\": 73,   \"name\": \"Sports\" }, {   \"slug\": \"entertainment\",   \"size\": 79,   \"name\": \"Entertainment\" }, {   \"slug\": \"twitter\",   \"size\": 50,   \"name\": \"Twitter\" }, {   \"slug\": \"funny\",   \"size\": 60,   \"name\": \"Funny\" }, {   \"slug\": \"fashion\",   \"size\": 61,   \"name\": \"Fashion\" }, {   \"slug\": \"family\",   \"size\": 38,   \"name\": \"Family\" }, {   \"slug\": \"technology\",   \"size\": 55,   \"name\": \"Technology\" }, {   \"slug\": \"food-drink\",   \"size\": 64,   \"name\": \"Food & Drink\" }, {   \"slug\": \"news\",   \"size\": 49,   \"name\": \"News\" }, {   \"slug\": \"art-design\",   \"size\": 72,   \"name\": \"Art & Design\" }, {   \"slug\": \"books\",   \"size\": 62,   \"name\": \"Books\" }, {   \"slug\": \"business\",   \"size\": 45,   \"name\": \"Business\" }, {   \"slug\": \"science\",   \"size\": 49,   \"name\": \"Science\" }, {   \"slug\": \"health\",   \"size\": 46,   \"name\": \"Health\" }, {   \"slug\": \"travel\",   \"size\": 44,   \"name\": \"Travel\" }, {   \"slug\": \"government\",   \"size\": 53,   \"name\": \"Government\" }, {   \"slug\": \"staff-picks\",   \"size\": 88,   \"name\": \"Staff Picks\" }, {   \"slug\": \"television\",   \"size\": 210,   \"name\": \"Television\" }, {   \"slug\": \"nhl\",   \"size\": 62,   \"name\": \"NHL\" }, {   \"slug\": \"nba\",   \"size\": 127,   \"name\": \"NBA\" }, {   \"slug\": \"nascar\",   \"size\": 98,   \"name\": \"NASCAR\" }, {   \"slug\": \"pga\",   \"size\": 127,   \"name\": \"PGA\" }, {   \"slug\": \"mlb\",   \"size\": 81,   \"name\": \"MLB\" }, {   \"slug\": \"faith-and-religion\",   \"size\": 76,   \"name\": \"Faith and Religion\" }, {   \"slug\": \"social-good\",   \"size\": 48,   \"name\": \"Social Good\" } ]",
+			"file": "/Users/fhuszar/peerindex/datascience/wefollow/twittersugg",
+			"file_size": -1,
+			"file_write_time": -1,
+			"settings":
+			{
+				"buffer_size": 1591,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/fhuszar/peerindex/datascience/wefollow/suggestions.json",
+			"settings":
+			{
+				"buffer_size": 1591,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "[   {       \"slug\": \"music\",       \"size\": 41,       \"name\": \"Music\"   },   {       \"slug\": \"television\",       \"size\": 31,       \"name\": \"Television\"   },   {       \"slug\": \"news\",       \"size\": 26,       \"name\": \"News\"   },   {       \"slug\": \"entertainment\",       \"size\": 27,       \"name\": \"Entertainment\"   },   {       \"slug\": \"government\",       \"size\": 28,       \"name\": \"Government\"   },   {       \"slug\": \"technology\",       \"size\": 20,       \"name\": \"Technology\"   },   {       \"slug\": \"business\",       \"size\": 41,       \"name\": \"Business\"   },   {       \"slug\": \"london-services\",       \"size\": 51,       \"name\": \"London Services\"   },   {       \"slug\": \"science\",       \"size\": 34,       \"name\": \"Science\"   },   {       \"slug\": \"travel\",       \"size\": 54,       \"name\": \"Travel\"   },   {       \"slug\": \"literature\",       \"size\": 8,       \"name\": \"Literature\"   },   {       \"slug\": \"food-and-drink\",       \"size\": 31,       \"name\": \"Food and Drink\"   },   {       \"slug\": \"sport\",       \"size\": 47,       \"name\": \"Sport\"   },   {       \"slug\": \"fashion\",       \"size\": 42,       \"name\": \"Fashion\"   },   {       \"slug\": \"charity-and-ngos\",       \"size\": 46,       \"name\": \"Charity and NGOs\"   },   {       \"slug\": \"art-and-design\",       \"size\": 46,       \"name\": \"Art and Design\"   } ]",
+			"settings":
+			{
+				"buffer_size": 1301,
+				"line_ending": "Unix",
+				"name": "[   {       \"slug\": \"music\",       \"size\": 41,"
+			}
+		},
+		{
+			"file": "/Users/fhuszar/peerindex/datascience/wefollow/suggestions_Mischa.json",
+			"settings":
+			{
+				"buffer_size": 1301,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "import scipy as sp\nfrom scipy import optimize as opt\ndef nnlr(X, y, C):\n    \"\"\"\n    Non-negative Logistic Regression with L2 regularizer\n    \"\"\"\n    def lr_cost(X, y, theta, C):\n        m = len(y)\n        return (1./m) * (sp.dot(-y, sp.log(sigmoid(sp.dot(X, theta)))) \\\n              - sp.dot((1-y), sp.log(1 - sigmoid(sp.dot(X, theta)))) \\\n              + 2       * C * sp.dot(theta, theta))\n    \n    def lr_grad(X, y, theta, C):\n        m = len(y)\n        return (1./m) * (sp.dot(X.T, sigmoid(sp.dot(X, theta)) - y) \\\n                + C * theta)\n    \n    def sigmoid(z):\n        return 1 / (1 + sp.exp(-z))\n    \n    N = X.shape[1]\n    J = lambda theta: lr_cost(X, y, theta, C)\n    J_grad = lambda theta: lr_grad(X, y, theta, C)\n    theta0 = 0.02 * sp.ones(N)\n    x, nfeval, rc = opt.fmin_tnc(J,theta0, fprime=J_grad, bounds=[(0,None)]*N,\n                                 disp=0)\n    return x",
+			"file": "/Users/fhuszar/peerindex/datascience/wefollow/nonnegreg.py",
+			"file_size": 888,
+			"file_write_time": 1366993755000000,
+			"settings":
+			{
+				"buffer_size": 894,
+				"line_ending": "Unix",
+				"name": "import scipy as sp"
+			}
+		},
+		{
+			"file": "/Users/fhuszar/peerindex/datascience/wefollow/nonnegative_classification.py",
+			"settings":
+			{
+				"buffer_size": 1564,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/fhuszar/peerindex/datascience/wefollow/test.csv",
+			"settings":
+			{
+				"buffer_size": 23,
+				"line_ending": "Unix",
+				"name": "A,x,1"
+			}
+		},
+		{
+			"contents": "CREATE EXTERNAL TABLE wefollow (\n    screenname STRING,\n    twuser_id BIGINT,\n    tag STRING \n)\nROW FORMAT DELIMITED\nFIELDS TERMINATED BY '\\t'\nLOCATION 's3://fhuszar/wefollow/crawl'\n;\n\nCREATE EXTERNAL TABLE wefollow_user_hashtags (\n    twuser_id BIGINT,\n    hashtag_txt STRING,\n    count DOUBLE \n)\nROW FORMAT DELIMITED\nFIELDS TERMINATED BY '\\t'\nLOCATION 's3://fhuszar/wefollow/hashtags'\n;\n\nINSERT OVERWRITE TABLE wefollow_user_hashtags\nSELECT\n    /*+ MAPJOIN(wefollow) */\n    uh.twuser_id,\n    uh.hashtag_txt,\n    uh.count\nFROM (\n    SELECT\n        *\n    FROM\n        user_hashtags\n    WHERE\n        dt='20130325'\n    ) uh\nJOIN\n    wefollow\nON\n    uh.twuser_id = wefollow.twuser_id\n;",
+			"file": "/Users/fhuszar/peerindex/datascience/wefollow/wefollow_hashtags.hql",
+			"file_size": 669,
+			"file_write_time": 1367247872000000,
+			"settings":
+			{
+				"buffer_size": 683,
+				"line_ending": "Unix",
+				"name": "CREATE EXTERNAL TABLE wefollow ("
+			}
+		},
+		{
+			"file": "/Users/fhuszar/02-INSERT-user_info.hql",
+			"settings":
+			{
+				"buffer_size": 1191,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/fhuszar/peerindex/datapipeline/batch-pipeline/src/main/resources/hive/ddl/destinations/CREATE-TABLE-actor_json.hql",
+			"settings":
+			{
+				"buffer_size": 191,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/fhuszar/peerindex/datapipeline/batch-pipeline/src/main/resources/hive/ddl/destinations/CREATE-TABLE-actor_feature.hql",
+			"settings":
+			{
+				"buffer_size": 860,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/fhuszar/peerindex/datascience/getfollowers/CREATE TABLE comedycentral_channels_specific_topic",
+			"settings":
+			{
+				"buffer_size": 5523,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/fhuszar/peerindex/datapipeline/batch-pipeline/src/main/resources/hive/ddl/destinations/CREATE-TABLE-influence_graph.hql",
+			"settings":
+			{
+				"buffer_size": 412,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/fhuszar/svn/papers/quantum/PRA/quantum_bald.tex",
+			"settings":
+			{
+				"buffer_size": 197952,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/fhuszar/svn/papers/quantum/quantum_bald.tex",
+			"settings":
+			{
+				"buffer_size": 28922,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part3/03_quantum.tex",
+			"settings":
+			{
+				"buffer_size": 45921,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part3/quantum_foobar.tex",
+			"settings":
+			{
+				"buffer_size": 26577,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part3/quantum_PRA.tex",
+			"settings":
+			{
+				"buffer_size": 26577,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/quantum.tex",
+			"settings":
+			{
+				"buffer_size": 26577,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/quantum2.tex",
+			"settings":
+			{
+				"buffer_size": 8828,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/snippets.tex",
+			"settings":
+			{
+				"buffer_size": 2462,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part2/01_approximate_inference.tex",
+			"settings":
+			{
+				"buffer_size": 66226,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part3/01_introBALD.tex",
+			"settings":
+			{
+				"buffer_size": 19968,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part2_main.tex",
+			"settings":
+			{
+				"buffer_size": 179,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/conclusions.tex",
+			"settings":
+			{
+				"buffer_size": 4649,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part1_main.tex",
+			"settings":
+			{
+				"buffer_size": 353,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part3_main.tex",
+			"settings":
+			{
+				"buffer_size": 324,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 67.0,
+		"height": 47.0,
 		"selected_items":
 		[
+			[
+				"inde spa",
+				"Indentation: Convert to Spaces"
+			],
 			[
 				"sy py",
 				"Set Syntax: Python"
 			],
 			[
-				"inde spa",
-				"Indentation: Convert to Spaces"
+				"upper",
+				"Convert Case: Upper Case"
+			],
+			[
+				"figlet",
+				"Figlet: Select Font"
+			],
+			[
+				"figle",
+				"Figlet: Add Comment"
+			],
+			[
+				"figle fo",
+				"Figlet: Select Font"
+			],
+			[
+				"fig",
+				"Figlet: Add Comment"
 			],
 			[
 				"inspac",
@@ -137,10 +484,6 @@
 			[
 				"in spac",
 				"Indentation: Convert to Spaces"
-			],
-			[
-				"upper",
-				"Convert Case: Upper Case"
 			],
 			[
 				"sy json",
@@ -376,6 +719,12 @@
 	},
 	"file_history":
 	[
+		"/Users/fhuszar/peerindex/datapipeline/hivescripts/community.hive.hql",
+		"/Users/fhuszar/peerindex/datascience/hotornot_py/django_version/peerindex/peerindex/settings.py",
+		"/Users/fhuszar/svn/simon/papers/thesis/thesis.tex",
+		"/Users/fhuszar/svn/papers/quantum/quantum_bald",
+		"/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex",
+		"/Users/fhuszar/svn/papers/nips-11-BALD/AL_NIPS2011_supp.tex",
 		"/Users/fhuszar/peerindex/datascience/scoretraining/data/azeem_target.tsv",
 		"/Users/fhuszar/peerindex/datascience/jite/train_model.py",
 		"/Users/fhuszar/peerindex/datascience/getfollowers/hivescripts.sql",
@@ -437,18 +786,99 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
+			"01_approx*.*",
+			"*.*",
+			"<current file>",
+			"*.*",
 			"countries.tsv",
 			""
 		]
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"user_hashtag",
+			"num_words",
+			"n",
+			"KEY",
+			"\n ",
+			"equation",
+			"score matching",
+			"characteristics",
+			"\\theta",
+			"theta",
+			"param",
+			"\\theta",
+			"\\Theta",
+			"\\theta",
+			"\\Theta",
+			"\\theta",
+			"\\Theta",
+			"\\theta",
+			"\\Theta",
+			"\\theta",
+			"\\Theta",
+			"\\theta",
+			"theta",
+			"Theta",
+			"theta",
+			"Theta",
+			"theta",
+			"Theta",
+			"theta",
+			"Theta",
+			"theta",
+			"welling2009herding",
+			"arbitrary sco",
+			"transductive",
+			"equation",
+			"\\risk",
+			"risk",
+			"^{\\mbox{test}}",
+			"p_{test}",
+			"equation",
+			"poor",
+			"apply",
+			"nor",
+			"eqref",
+			"ref",
+			"align",
+			"equation",
+			"quadrature",
+			"\\cite{",
+			"tr",
+			"\\trace",
+			":\n",
+			"\\rho",
+			"Overview",
+			"equation",
+			"bar",
+			"}$",
+			"$",
+			"array",
+			"Born",
+			"schervish95theory",
+			"Nickisch2008",
+			"BayesianOptimality",
+			"Sriperumbudur2010",
+			"\\citep{L",
+			"\\cite",
+			"resizebox",
+			"{figures/",
+			"figures/",
+			"strategy",
+			"\\param",
+			"figure*",
+			"label{plots:",
+			"label:plots",
+			"figure",
+			"user",
+			"hyperparaeter",
 			"*.",
 			"Regr",
 			"regr",
@@ -499,14 +929,7 @@
 			"C",
 			"{}",
 			"json",
-			"influencer_in",
-			"19",
-			"score\":19",
-			"score",
-			"()\n",
-			"split",
-			"glob",
-			"'\n"
+			"influencer_in"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -514,6 +937,9 @@
 		"regex": false,
 		"replace_history":
 		[
+			"\\param",
+			"\\citep{",
+			"Sriperumbudur2008",
 			""
 		],
 		"reverse": false,
@@ -525,18 +951,978 @@
 	"groups":
 	[
 		{
+			"selected": 15,
 			"sheets":
 			[
-			]
-		},
-		{
-			"sheets":
-			[
-			]
-		},
-		{
-			"sheets":
-			[
+				{
+					"buffer": 0,
+					"file": "/Users/fhuszar/svn/papers/nips-11-BALD/AL_NIPS2011.tex",
+					"settings":
+					{
+						"buffer_size": 35219,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								638,
+								638
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 64.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "raw_materials/collaborative_preference_GP/model/model.tex",
+					"settings":
+					{
+						"buffer_size": 9891,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								603,
+								603
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "latex/part2/02_herding.tex",
+					"settings":
+					{
+						"buffer_size": 46307,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								601,
+								106
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "latex/notation.tex",
+					"settings":
+					{
+						"buffer_size": 4132,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1791,
+								1796
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "latex/main.tex",
+					"settings":
+					{
+						"buffer_size": 1295,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1225,
+								1225
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "latex/part3/02_GP_BALD.tex",
+					"settings":
+					{
+						"buffer_size": 25509,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								23818,
+								23818
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"settings":
+					{
+						"buffer_size": 4774,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										873,
+										885
+									],
+									[
+										2141,
+										2153
+									],
+									[
+										2950,
+										2962
+									],
+									[
+										3573,
+										3590
+									],
+									[
+										3843,
+										3861
+									],
+									[
+										4365,
+										4383
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								3646,
+								3646
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"output_tag": 3,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 468.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "latex/part1/01_scoring_rules.tex",
+					"settings":
+					{
+						"buffer_size": 57815,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								32521,
+								32521
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 7957.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/Users/fhuszar/peerindex/datascience/wefollow/twittersugg",
+					"settings":
+					{
+						"buffer_size": 1591,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1591,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "/Users/fhuszar/peerindex/datascience/wefollow/suggestions.json",
+					"settings":
+					{
+						"buffer_size": 1591,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1591,
+								1591
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 10281.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"settings":
+					{
+						"buffer_size": 1301,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								1301
+							]
+						],
+						"settings":
+						{
+							"auto_name": "[   {       \"slug\": \"music\",       \"size\": 41,",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "/Users/fhuszar/peerindex/datascience/wefollow/suggestions_Mischa.json",
+					"settings":
+					{
+						"buffer_size": 1301,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1301,
+								1301
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 7005.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "/Users/fhuszar/peerindex/datascience/wefollow/nonnegreg.py",
+					"settings":
+					{
+						"buffer_size": 894,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								365,
+								365
+							]
+						],
+						"settings":
+						{
+							"auto_name": "import scipy as sp",
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "/Users/fhuszar/peerindex/datascience/wefollow/nonnegative_classification.py",
+					"settings":
+					{
+						"buffer_size": 1564,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								283,
+								283
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "/Users/fhuszar/peerindex/datascience/wefollow/test.csv",
+					"settings":
+					{
+						"buffer_size": 23,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								23,
+								23
+							]
+						],
+						"settings":
+						{
+							"auto_name": "A,x,1",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "/Users/fhuszar/peerindex/datascience/wefollow/wefollow_hashtags.hql",
+					"settings":
+					{
+						"buffer_size": 683,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								591,
+								591
+							]
+						],
+						"settings":
+						{
+							"auto_name": "CREATE EXTERNAL TABLE wefollow (",
+							"syntax": "Packages/SQL/SQL.tmLanguage",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "/Users/fhuszar/02-INSERT-user_info.hql",
+					"settings":
+					{
+						"buffer_size": 1191,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SQL/SQL.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "/Users/fhuszar/peerindex/datapipeline/batch-pipeline/src/main/resources/hive/ddl/destinations/CREATE-TABLE-actor_json.hql",
+					"settings":
+					{
+						"buffer_size": 191,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								191,
+								191
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SQL/SQL.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"file": "/Users/fhuszar/peerindex/datapipeline/batch-pipeline/src/main/resources/hive/ddl/destinations/CREATE-TABLE-actor_feature.hql",
+					"settings":
+					{
+						"buffer_size": 860,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SQL/SQL.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 19,
+					"file": "/Users/fhuszar/peerindex/datascience/getfollowers/CREATE TABLE comedycentral_channels_specific_topic",
+					"settings":
+					{
+						"buffer_size": 5523,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 995.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 20,
+					"file": "/Users/fhuszar/peerindex/datapipeline/batch-pipeline/src/main/resources/hive/ddl/destinations/CREATE-TABLE-influence_graph.hql",
+					"settings":
+					{
+						"buffer_size": 412,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								352,
+								299
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SQL/SQL.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 21,
+					"file": "/Users/fhuszar/svn/papers/quantum/PRA/quantum_bald.tex",
+					"settings":
+					{
+						"buffer_size": 197952,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 22,
+					"file": "/Users/fhuszar/svn/papers/quantum/quantum_bald.tex",
+					"settings":
+					{
+						"buffer_size": 28922,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9779,
+								9779
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 492.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 23,
+					"file": "latex/part3/03_quantum.tex",
+					"settings":
+					{
+						"buffer_size": 45921,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								62,
+								26
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 24,
+					"file": "latex/part3/quantum_foobar.tex",
+					"settings":
+					{
+						"buffer_size": 26577,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 25,
+					"file": "latex/part3/quantum_PRA.tex",
+					"settings":
+					{
+						"buffer_size": 26577,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 26,
+					"file": "latex/quantum.tex",
+					"settings":
+					{
+						"buffer_size": 26577,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 27,
+					"file": "latex/quantum2.tex",
+					"settings":
+					{
+						"buffer_size": 8828,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 28,
+					"file": "latex/snippets.tex",
+					"settings":
+					{
+						"buffer_size": 2462,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 29,
+					"file": "latex/part2/01_approximate_inference.tex",
+					"settings":
+					{
+						"buffer_size": 66226,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								24881,
+								25406
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 4995.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 30,
+					"file": "latex/part3/01_introBALD.tex",
+					"settings":
+					{
+						"buffer_size": 19968,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								514,
+								514
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 31,
+					"file": "latex/part2_main.tex",
+					"settings":
+					{
+						"buffer_size": 179,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								138,
+								138
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 32,
+					"file": "latex/conclusions.tex",
+					"settings":
+					{
+						"buffer_size": 4649,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4649,
+								4649
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 33,
+					"file": "latex/part1_main.tex",
+					"settings":
+					{
+						"buffer_size": 353,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								316,
+								316
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 34,
+					"file": "latex/part3_main.tex",
+					"settings":
+					{
+						"buffer_size": 324,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								118,
+								143
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -557,25 +1943,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
-			],
-			[
-				2,
-				0,
-				3,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.0593772821324,
-			0.881743701315,
 			1.0
 		],
 		"rows":
@@ -587,7 +1959,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 280.0
+		"height": 201.0
 	},
 	"replace":
 	{

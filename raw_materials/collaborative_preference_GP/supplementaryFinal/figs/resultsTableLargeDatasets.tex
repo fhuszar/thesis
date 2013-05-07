@@ -1,0 +1,24 @@
+\renewcommand{\ic}{\hspace{0.3cm}}
+\begin{table}
+\centering
+\caption{Test error for each method and active learning strategy with at most 1000 users.}
+\resizebox{0.95\textwidth}{!}{
+\begin{tabular}{@{\ic}l@{\ic}@{\ic}c@{\ic}c@{\ic}c@{\ic}@{\ic}c@{\ic}c@{\ic}c@{\ic}@{\ic}c@{\ic}c@{\ic}c@{\ic}}
+\hline
+\textbf{Dataset}&\textbf{CPU-B}&\textbf{CPU-E}&\textbf{CPU-R}&
+\textbf{CP-B}&\textbf{CP-E}&\textbf{CP-R}&\textbf{SU-B}&\textbf{SU-E}&\textbf{SU-R}\\\hline
+
+Synthetic&\underline{\bf{0.136$\pm$0.004 }}&\bf\underline{{0.136$\pm$0.004 }}&0.14$\pm$0.005&\bf{0.154$\pm$0.004 }&0.161$\pm$0.004 &0.179$\pm$0.004 &\bf{0.253$\pm$0.005 }&0.263$\pm$0.007 &0.276$\pm$0.006 \\
+
+Sushi&\bf{0.150$\pm$0.004 }&0.155$\pm$0.005 &0.185$\pm$0.004 &\underline{\bf{0.143$\pm$0.05 }}&0.151$\pm$0.05 &0.179$\pm$0.06 &\bf{0.183$\pm$0.06 }&0.199$\pm$0.05 &0.215$\pm$0.05 \\
+
+MovieLens&\bf{0.172$\pm$0.005 }&0.177$\pm$0.006 &0.200$\pm$0.006 &\underline{\bf{0.165$\pm$0.005 }}&0.171$\pm$0.006 &0.196$\pm$0.005 &\bf{0.233$\pm$0.006 }&0.24$\pm$0.004 &0.253$\pm$0.007 \\
+
+Election&0.221$\pm$0.015 &\bf{0.188$\pm$0.016 }&0.265$\pm$0.014 &\underline{\bf{0.107$\pm$0.016 }}&\underline{\bf{0.103$\pm$0.0010 }}&0.184$\pm$0.015 &\bf{0.331$\pm$0.014 }&0.349$\pm$0.017 &0.344$\pm$0.013 \\
+
+Jura&\bf{0.143$\pm$0.009 }&\bf{0.144$\pm$0.011 }&0.17$\pm$0.011 &\underline{\bf{0.138$\pm$0.009 }}&\underline{\bf{0.138$\pm$0.0010 }}&0.17$\pm$0.011 &0.183$\pm$0.013 &\bf{0.169$\pm$0.012 }&0.201$\pm$0.012 \\
+\hline
+\end{tabular}
+}
+\label{tab:large}
+\end{table}

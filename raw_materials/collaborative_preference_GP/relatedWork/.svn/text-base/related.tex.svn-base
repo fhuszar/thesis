@@ -1,0 +1,28 @@
+\section{Related Methods \label{sec:relatedWork}}
+
+In this section we briefly review some methods related to either the multi-task model for preference learning
+of Section \ref{sec:model} or the active learning approach BALD described in Section \ref{sec:active}.
+
+\paragraph{Multi-task Preference Learning} Other methods for generalising the GP approach of \citep{chu2005} to
+the multi-user case are presented in \citep{Bonilla2010,birlutiu2009}. 
+Bonilla et al. use GPs with a product kernel to model preference functions evaluated on both user and item features.
+This is a flexible approach, but is not applicable in our domain, where we do not assume access to user features.
+Birlutiu et al. capture similarities between users with a hierarchical GP model. 
+In particular, they assume a common GP prior for the different preference functions.
+However, their model lacks flexibility since differences between users are described
+as perturbations from a single unimodal prior. In real data we would expect
+to see different clusters of user preferences. The multi-task model from Section \ref{sec:model} is more flexible and can
+capture a wider variety of behaviors by computing linear combinations of a few latent functions shared across users.
+
+\paragraph{Active Learning} A related method is maximum entropy sampling (MES) \citep{sebastiani2000}. 
+This method was proposed for regression models with input-independent noise. 
+MES also works explicitly in data space, that is, with equation (\ref{eqn:rearrangement}). 
+However, MES ignores input-dependent noise
+and assumes that the second term in (\ref{eqn:rearrangement}) is constant. For the case of preference learning,
+where users are likely to give noisy feedback on their preferences,
+this means that MES will fail to differentiate between uncertainty in the value of the latent function
+and uncertainty in class labels.
+Several methods make further approximations to BALD when applied to GP
+binary classification and often have significantly higher cost. Comparisons between BALD
+and these methods can be found in the supplementary material. Overall, BALD consistently performs better;
+the closest competitor to BALD in these experiments is MES.

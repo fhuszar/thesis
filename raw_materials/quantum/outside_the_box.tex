@@ -1,0 +1,108 @@
+\documentclass[aps,twocolumn,showpacs,prl]{revtex4-1}
+\usepackage[
+pdfstartview={FitH},
+bookmarks=true,
+bookmarksnumbered=true,
+bookmarksopen=true,
+bookmarksopenlevel=\maxdimen,
+pdfborder={0 0 0},
+colorlinks=true,
+linkcolor = blue,
+citecolor=blue,
+urlcolor=blue,
+filecolor=black,
+pdfauthor={Ferenc Huszar and Neil Houlsby},
+pdftitle={Adaptive Bayesian Quantum Tomography},
+pdfdisplaydoctitle=true
+]{hyperref}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+
+\newcommand{\m}{{\mathcal{M}}}
+\newcommand{\x}{{\mathbf{x}}}
+\newcommand{\param}{{\rho}}
+\newcommand{\data}{\mathcal{D}}
+\newcommand{\argmax}{ \operatorname*{argmax}}
+\newcommand{\config}{\alpha}
+\newcommand{\configset}{\mathcal{A}}
+\newcommand{\outcome}{\gamma}
+\newcommand{\ie}{i.\,e.\ }
+\newcommand{\eg}{e.\,g.\ }
+
+\begin{document}
+%
+\title{Thinking Outside the Box}
+
+\author{F.~Husz\'{a}r}
+\affiliation{Computational and Biological Learning Lab\\ Department of Engineering, University of Cambridge \\Cambridge, CB2 1PZ, UK}
+%
+
+\begin{abstract}
+OK, here is a summary of how far I got with my thinking outside the box: Main idea: measure two copies of $\rho$ jointly, potentially entangling them, instead of measuring them separately. It turns out, that myopic active tomography is a special case of this, as I'm going to show. Main question: is there anything we can do this beyond BALD? Is BALD the right way of maximising information in the myopic setting?
+\end{abstract}
+
+\pacs{03.65.Wj	}
+\maketitle
+
+OK, so setup, we have access to two separable, independent copies of $\rho$, and we want to measure them using projective measurements (let's consider PVM's only). I consider three cases here:
+\begin{description}
+	\item[standard]: measure the two copies separately using predifined measurements
+	\item[myopic]: measure the first one than depending on the outcome, determine wht measurement to use for the second one
+	\item[joint]: perform a general, possibly entangling measurement on the bipartite system $\rho\otimes\rho$
+\end{description}
+
+In all these cases there are $D^2$ possible outcomes, index these by pairs $(\gamma,\delta)$, $\gamma,\delta=1\ldots D$. For separable measurements (standard and myopic) think of $\gamma$ as the outcome of the measurement on the first copy, $\delta$ the outcome on the second. Otherwise, think of $\gamma$ and $\delta$ as a two digit representation of a number between 1 and $D^2$.
+
+For standard separable measurements $M_{\gamma,\delta} = M^{(1)}_\gamma\otimes M^{(2)}_\delta$, and therefore, not surprisingly
+\begin{align}
+p_{\gamma\delta} &= \mbox{tr} M_{\gamma,\delta}\left(\rho\otimes\rho\right) \\
+&= \mbox{tr} \left(M^{(1)}_\gamma\otimes M^{(2)}_\delta\right)\left(\rho\otimes\rho\right)\\
+&= \mbox{tr} M^{(1)}_\gamma \rho \otimes M^{(2)}_\delta \rho\\
+&= \mbox{tr} M^{(1)}_\gamma \rho \cdot \mbox{tr} M^{(2)}_\delta \rho\\
+&= p^{(1)}_\gamma p^{(2)}_\delta
+\end{align}
+
+So this means that the possible probabilities $p_{\gamma\delta}$ are constrained so if we put them in a vector $\bm{p}=[p_{\gamma\delta}]$, then
+\begin{equation}
+	\bm{p} = \bm{p}^{(1)}\otimes\bm{p}^{(2)}
+\end{equation}
+For separable $M$s. This crucially limits the kind of observation models that we can realize this way.
+
+If we make a joint measurement, we can allow $M_{\gamma,\delta}$ to be an arbirtary projection valued measure $M_{\gamma,\delta} = \left\vert\psi_{\gamma,\delta}\right\rangle\left\langle\psi_{\gamma,\delta}\right\vert$, then
+\begin{align}
+p_{\gamma\delta} &= \mbox{tr} M_{\gamma,\delta}\left(\rho\otimes\rho\right) \\
+&= \mbox{ tr} \left\vert\psi_{\gamma,\delta}\right\rangle\left\langle\psi_{\gamma,\delta}\right\vert\left(\rho\otimes\rho\right)\\
+&= \mbox{ tr} \left\langle\psi_{\gamma,\delta}\right\vert\left(\rho\otimes\rho\right)\left\vert\psi_{\gamma,\delta}\right\rangle\\
+&= \mbox{ tr} \left\langle\psi_{\gamma,\delta}\right\vert\left(\rho\otimes\rho\right)\mbox{ vec} P_{\gamma,\delta}\label{eqn:Krontrick}\\
+&= \mbox{ tr} \left\langle\psi_{\gamma,\delta}\right\vert\mbox{ vec} \rho P_{\gamma,\delta}\rho\\
+&= \mbox{ tr} \mbox{ vec}P_{\gamma,\delta}^{*} \mbox{ vec} \rho P_{\gamma,\delta}\rho\\
+&= \mbox{ tr} P_{\gamma,\delta} ^{*}\rho P_{\gamma,\delta}\rho\\
+\end{align}
+
+Here, $P_{\gamma,\delta}$ is a matrix composed by rearranging elements of $\left\vert\psi_{\gamma,\delta}\right\rangle$ into $D\times D$. In \eqref{eqn:Krontrick} we used a property of Kronecker products, that you will find on Wikipedia to obtain the next line. Now this formula is quite interesting, as $\rho$ appears in it twice. You can reinterpret the equation as making a POVM (positive operator valued measure) on $\rho$ with a measurement, which itself depends on $\rho$, ie $M_{\gamma\delta}(\rho) = P_{\gamma,\delta} ^{*}\rho P_{\gamma,\delta}$. This suggests that you can potentially do beautiful things with this. Also, now of course you can in fact construct an arbitrary $\bm{p}$.
+
+Now, on to myopic strategies. So now, you first make a measurement $M^{(1)}_{\cdot}$ on the first copy, and then based on the outcome $\gamma$ you make another measurement $M^{(1)}_{\gamma,\cdot}$. So now, your joint measurement is of the form $M_{\gamma\delta} = M^{(1)}_\gamma\otimes M^{(2)}_{\gamma\delta}$ you have that
+
+\begin{align}
+p_{\gamma\delta} &= \mbox{tr} M_{\gamma,\delta}\left(\rho\otimes\rho\right) \\
+&= \mbox{tr} \left(M^{(1)}_\gamma\otimes M^{(2)}_{\gamma\delta}\right)\left(\rho\otimes\rho\right)\\
+&= \mbox{tr} M^{(1)}_\gamma \rho \otimes M^{(2)}_{\gamma\delta} \rho\\
+&= \mbox{tr} M^{(1)}_\gamma \rho \cdot \mbox{tr} M^{(2)}_{\gamma\delta} \rho\\
+&= p^{(1)}_\gamma p^{(2)}_{\gamma\delta}
+\end{align}
+
+Crucially, you can see that you can again, teak your measurements in such a way, that arbitrary probability vector, $\bm{p}$, can be realised. 
+
+So what are we interested in, information. So the question is, if you want to maximise information between $\rho$ and your observations $\gamma\delta$, having a fixed $p(\rho)$, how much information can these tomography schemes carry at maximum. It's like an inverse channel capacity. Just as recap, channel capacity is: your channel is described by $p(y\vert x)$, you cannot modify it, the question is what's the best $p(x)$, such that $I(x,y)$ is maximised. Our question is the other way round: knowing $p(x)$, we can choose amongst several $p(y\vert x)$'s (these being the measurements of course), and the question is what is the maximal value of $I(x,y)$.
+
+Now, the three different tomography methods, standard, myopic and joint, restrict the space of available $p(y\vert x)$'s in various ways. In our notation, they restrict what kind of likelihood $p(\gamma,\delta\vert\rho)$ you can achieve. It's trivial that with a static separable observation pair, you cannot implement all possible $p(\gamma,\delta\vert\rho)$'s that you have access to using a myopic strategy or joint measurement. So, it is probably possible to prove that myopic is better in that sense. To me now the big question is, whether joint measurement can be better than myopic. 
+
+If we can prove either way, it's good for us: if myopic is as good as joint measurement, it's a strong case for the paper we are now working on. If not, that's a strong case for another paper :)
+
+This is how far I've gotten so far (in fact I'm just deriving these as I write this note): Every $p(\gamma,\delta\vert\rho)$ can be written as  $p(\gamma,\delta\vert\rho) = p(\gamma\vert\rho)p(\delta\vert\gamma\rho)$. Now, what we'd have to show is that if $p(\gamma,\delta\vert\rho)$ is a projective measurement on $\rho\otimes\rho$, then both $p(\gamma\vert\rho)$ and $p(\delta\vert\gamma\rho)$ can be realised as a projective measurement on a single copy of $\rho$. Now, I would be surprised if this would be true, actually.
+
+Second question: in the myopic scenario is optimising $M^{(1)}$ and then optimising $M^{2}$ the right way to do, or should you jointly optimise the two? This is by the way a general question of myopic active learning, that would be interesting to investigate generally.
+\end{document}

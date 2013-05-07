@@ -1,0 +1,111 @@
+\documentclass{article}
+
+\usepackage{nips11submit_e,times}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{array}
+
+\newcommand{\x}{\bm{x}}
+\newcommand{\y}{\bm{y}}
+\newcommand{\upref}{\bm{u}}
+\newcommand{\vpref}{\bm{v}}
+\newcommand{\data}{\mathcal{D}}
+\newcommand{\param}{\bm{\theta}}
+\newcommand{\argmax}{ \operatorname*{arg \max}} 
+\newcommand{\argmin}{ \operatorname*{arg \min}} 
+\newcommand{\ourmethod}{BALD } % nb if change this wll need to change initial ref
+
+\definecolor{mycolor1}{rgb}{0.8,0.8,0}
+\definecolor{mycolor2}{rgb}{0,1,1}
+\definecolor{mycolor3}{rgb}{1,0.8,0.5}
+\definecolor{mycolor4}{rgb}{0.7,0.4,0.01}
+
+
+
+\title{Supplementary Material for `Information Theoretic Active Learning for Classification and Preference Modelling'}
+
+\author{
+Neil M. T. Houlsby OR Ferenc Husz\'{a}r tbd\\
+Department of Engineering\\
+University of Cambridge\\
+\texttt{} \\
+\And
+Neil M. T. Houlsby OR Ferenc Husz\'{a}r tbd\\
+Department of Engineering\\
+University of Cambridge\\
+\texttt{} \\
+\AND
+Zoubin Ghahramani\\
+Department of Engineering\\
+University of Cambridge\\
+\texttt{zoubin@eng.cam.ac.uk} \\
+\And
+M\'{a}t\'{e} Lengyel\\
+Department of Engineering\\
+University of Cambridge\\
+\texttt{m.lengyel@eng.cam.ac.uk} \\
+}
+
+%\nipsfinalcopy % Uncomment for camera-ready version
+
+\begin{document}
+
+
+\maketitle
+
+\section*{Summary Table for Information and Decision Theoretic Active Learning}
+
+Table 1 presents a summary of some of the algorithms presented in this paper. Although the entries are by no means hard and fast rules, it is meant to allow for easy comparison of common methods and summarise some of their properties.
+
+\section*{Taylor Expansion for Approximation  $\stackrel{2}{\approx}$}
+
+We perform a Taylor expansion on $ \ln H[\Phi(x)]$ as follows:
+
+\begin{align}
+\text{Taylor Expansion:} f(x) &= f(0) + \frac{f'(0)x}{1!} + \frac{f''(0)x^2}{2!} + \dots \nonumber \\
+f(x) &= \ln H[\Phi(x)] \nonumber \\
+f'(x) &= -\frac{1}{\ln 2}\frac{\Phi'(x)}{H[\Phi(x)]}\left[\ln\Phi(x) - \ln(1-\Phi(x))  \right] \nonumber \\ 
+f''(x) &= \frac{1}{\ln 2}\frac{\Phi'(x)^2}{H[\Phi(x)]^2}\left[\ln\Phi(x) - \ln(1-\Phi(x))  \right]\nonumber\\
+& \qquad - \frac{1}{\ln 2}\frac{\Phi''(x)}{H[\Phi(x)]}\left[\ln\Phi(x) - \ln(1-\Phi(x))  \right] \nonumber\\
+& \qquad - \frac{1}{\ln 2}\frac{\Phi'(x)^2}{H[\Phi(x)]}\left[\frac{1}{\Phi(x)} + \frac{1}{(1-\Phi(x)})  \right] \nonumber\\
+\therefore \ln H[\Phi(x)] \nonumber  &= 1 - \frac{1}{\pi\ln2}x^2 + \mathcal{O}(x^3)
+\end{align}
+
+Therefore, exponentiating, we make the approximation up to the $\mathcal{O}(x^3)$ term: $$H[\Phi(x)]\stackrel{2}{\approx}\exp\left({-\frac{x^2}{\pi\ln2}}\right) $$
+
+\section*{Preference Kernel}
+
+ The mean $\mu_{pref}$, and covariance function $k_{pref}$ of the GP over $g$ can be computed from the mean and covariance of $f\sim \mathrm{GP}(\mu,k)$ as follows:
+\begin{align}
+	k_{pref}&([\bm{u}_i,\bm{v}_i],[\bm{u}_j,\bm{v}_j]) = Cov[g(\bm{u}_i,\bm{v}_i),g(\bm{u}_j,\bm{v}_j)]\notag\\
+		&= Cov\left[\left(f(\bm{u}_i) - f(\bm{v}_i)\right) , \left(f(\bm{u}_i)  - f(\bm{v}_i)\right)\right]\notag\\
+		&= \mathbb{E}\left[\left(f(\bm{u}_i) - f(\bm{v}_i)\right)\cdot \left(f(\bm{u}_i)  - f(\bm{v}_i)\right)\right]-\notag\\
+		& - \left(\mu(\bm{u}_i) -  \mu(\bm{v}_i)\right) \left(\mu(\bm{v}_j) - \mu(\bm{u}_i)\right)\notag\\
+		&= k(\bm{u}_i,\bm{u}_j) + k(\bm{v}_i,\bm{v}_j) - k(\bm{u}_i,\bm{v}_j) - k(\bm{v}_i,\bm{u}_j)\\
+	\mu_{pref}&([\bm{u},\bm{v}]) = \mathbb{E}\left[g([\bm{u},\bm{v}])\right] = \mathbb{E}\left[f(\bm{u}) - f(\bm{v})\right]\notag\\
+		&=\mu(\bm{u}) - \mu(\bm{v})
+\end{align}
+
+\newcolumntype{x}[1]{%
+>{\centering\hspace{0pt}}p{#1}}%
+\begin{table}\centering
+\begin{tabular}{ |x{1.6cm}|x{1.2cm}|x{1.3cm}|x{1.5cm}|x{1.2cm}|x{1.4cm}|p{3.3cm}| }
+\hline
+ & Inductive? & Info theoretic? & Rearrangement to data spce & Single post. updt. & Use with Prob, Non-Prob & Comment  \\ \hline \hline
+\ourmethod & y & y & y & y & y, n &  \\ \hline
+MES & y & y & y & y & y, n & does not differentiate model and observation uncertainty  \\ \hline
+QBC & y & inherent & inherent & y & y, y & if vote criterion used can suffer like MES \\ \hline
+SVM & y & non-prob equivalent & n  & y & n, y & choice of  version space approx. effects performance greatly \\ \hline
+IVM & not fully & y & n & n & y, n & knows $\y$ a priori \\ \hline
+Kapoor \emph{et al.} (decision) & n & n & n & n & y, n & if few unlabelled points can be dominated by empirical error term  \\ \hline
+Zhu \emph{et al.} (decision) & n & n & n & n & y, n & monotonic function of prediction entropy at datapoints  \\ \hline
+Emp. Error & n & n & n & n & y, y & avoids exploration  \\ \hline
+\end{tabular}
+\label{table:allmethods}
+\caption{Summary of some properties of popular information and decision theoretic active learning algorithms (empirical error is not a widely proposed algorithm, but is presented for comparison)}
+\end{table}
+
+\end{document}

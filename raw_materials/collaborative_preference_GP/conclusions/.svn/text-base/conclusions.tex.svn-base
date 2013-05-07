@@ -1,0 +1,12 @@
+\section{Conclusions and Discussion\label{sec:conclusions}}
+
+We have shown that learning user preferences can be recasted as a particular case of binary classification with GPs.
+The connection between these two problems is based on a novel covariance function called the preference kernel.
+Using this new view, we have proposed a novel multi-task model that
+discovers structure in users' preference functions and exploits this to improve predictive performance.
+We do not assume access to user features, however, should they be available, an interesting extension would be to
+incorporate these features in a GP prior for the user weight vectors in the muti-task model.
+This would induce dependences between users with similar features.
+We have also presented BALD, a novel active learning strategy for binary classification
+models with GPs. The proposed muti-task model with BALD performs favourably in simulated and real-world data
+against single-task methods and exhisting approaches for multi-task preference learning.

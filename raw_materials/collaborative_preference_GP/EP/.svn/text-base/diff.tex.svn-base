@@ -1,0 +1,148 @@
+\section{\DIFdelbegin \DIFdel{Expectation Propagation }\DIFdelend \DIFaddbegin \DIFadd{EP and VB }\DIFaddend \label{sec:EPinference}}
+\DIFdelbegin \DIFdel{To perform inference we use hybrid Expectation Propagation }\DIFdelend \DIFaddbegin 
+
+\DIFadd{Approximate inference in the proposed multi-task preference model is implemented using a
+combination of expectation propagation (EP)
+}\DIFaddend \cite{Minka2002} \DIFdelbegin \DIFdel{and variational inference algorithm }%DIFDELCMD < \cite{stern2009} %%%
+\DIFdel{to approximate (\ref{eq:post}) .
+We present here a brief outline of EP for our multitask preference learning model}\DIFdelend \DIFaddbegin \DIFadd{with variational Bayes (VB) methods }\cite{attias2000variational}\DIFadd{.
+In this section we give a brief description of this hybrid EP-VB approach}\DIFaddend ,
+full details \DIFdelbegin \DIFdel{of the algorithm are presented in the Supplementary }\DIFdelend \DIFaddbegin \DIFadd{are available in the supplementary }\DIFaddend material.
+We \DIFdelbegin \DIFdel{select the following distribution as an approximation to the real posterior:
+}%DIFDELCMD < \vskip%%%
+\DIFdel{-0.4cm
+}%DIFDELCMD < {\small
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{approximate the posterior (\ref{eq:post}) by the following parametric distribution:
+}\DIFaddend \begin{align}
+&\mathcal{Q}(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) =
+\left[\prod_{u=1}^{U}\prod_{d=1}^{D}\mathcal{N}(w_{ud}|m_{u,d}^{w},v_{u,d}^{w})\right]\times \nonumber\\
+&\DIFaddbegin \qquad\qquad\DIFaddend \left[\prod_{d=1}^{D}\prod_{i=1}^{P} \mathcal{N}(h_{d,i}|m_{d,i}^h,v_{d,i}^{h})\right]\DIFaddbegin \DIFadd{\times }\nonumber\\
+&\qquad\qquad\DIFaddend \left[\prod_{u=1}^N \prod_{j=1}^{M_u} \mathcal{N}(g_{u,z_{u,j}}|m_{u,j}^g,v_{u,j}^g)\right]\,,\label{eq:epPostApprox}
+\end{align}
+\DIFdelbegin %DIFDELCMD < }
+%DIFDELCMD < %%%
+\DIFdelend where $m_{u,d}^w$, $v_{u,d}^w$, $m_{d,i}^h$, $v_{d,i}^h$,
+$m_{u,j}^g$, and $v_{u,j}^g$ are free \DIFaddbegin \DIFadd{distributional }\DIFaddend parameters to be determined by EP
+\DIFaddbegin \DIFadd{and the superscripts $w$, $h$ and $g$ indicate the random variables
+described by these parameters}\DIFaddend .
+The joint distribution of the model parameters and the data 
+$\mathcal{P}(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H},\mathbf{T}^{(\mathcal{D})},\mathbf{X},\ell)$ can be factorized
+into four factors $f_1,\ldots,f_4$, namely,
+\begin{equation}
+\mathcal{P}(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H},\mathbf{T}^{(\mathcal{D})},\mathbf{X},\ell) =
+\prod_{\DIFdelbegin \DIFdel{k}\DIFdelend \DIFaddbegin \DIFadd{a}\DIFaddend =1}^4 f_a(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H})\nonumber\,,
+\end{equation}
+\DIFdelbegin \DIFdel{where }\DIFdelend \DIFaddbegin \DIFadd{and }\DIFaddend $f_1(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) = \mathcal{P}(\mathbf{T}^{(\mathcal{D})}|\mathbf{G}^{(\mathcal{D})})$,\DIFaddbegin \\
+\DIFaddend $f_2(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) = \mathcal{P}(\mathbf{G}^{(\mathcal{D})}|\mathbf{W},\mathbf{H})$,
+$f_3(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) = \mathcal{P}(\mathbf{w})$ and
+$f_4(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) = \mathcal{P}(\mathbf{H}|\mathbf{X},\ell)$.
+\DIFdelbegin \DIFdel{The EP algorithm }\DIFdelend \DIFaddbegin \DIFadd{EP }\DIFaddend approximates each of these exact factors by 
+approximate factors $\hat{f}_{1}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})}),\ldots,\hat{f}_{4}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})$
+that have the same functional form as (\ref{eq:epPostApprox}), namely,
+\DIFdelbegin %DIFDELCMD < \vskip%%%
+\DIFdel{-0.4cm
+}%DIFDELCMD < {\small
+%DIFDELCMD < %%%
+\DIFdelend \begin{align}
+&\hat{f}_a(\mathbf{G}^{(\mathcal{D})},\mathbf{W},\mathbf{H}) =
+\left[\prod_{u=1}^{U}\prod_{d=1}^{D}\mathcal{N}(w_{ud}|\hat{m}_{u,d}^{a,w},\hat{v}_{u,d}^{a,w})\right]\times\nonumber\\
+&\DIFaddbegin \qquad\qquad\DIFaddend \left[\prod_{d=1}^{D}\prod_{i=1}^{P} \mathcal{N}(h_{d,i}|\hat{m}_{d,i}^{a,h},\hat{v}_{d,i}^{a,h})\right]\DIFaddbegin \DIFadd{\times}\nonumber\\
+&\qquad\qquad\DIFaddend \left[\prod_{u=1}^N \prod_{j=1}^{M_u} \mathcal{N}(g_{u,z_{u,j}}|\hat{m}_{u,j}^{a,g},\hat{v}_{u,j}^{a,g})\right] \hat{s}_a \nonumber\,,
+\end{align}
+\DIFdelbegin %DIFDELCMD < }
+%DIFDELCMD < %%%
+\DIFdelend where $a=1,\ldots,4$ and $\hat{m}_{u,d}^{a,w}$, $\hat{v}_{u,d}^{a,w}$, $\hat{m}_{d,i}^{a,h}$, $\hat{v}_{d,i}^{a,h}$,
+$\hat{m}_{u,j}^{a,g}$, $\hat{v}_{u,j}^{a,g}$ and $\hat{s}_a$ are free parameters to be determined by EP. 
+The \DIFdelbegin \DIFdel{posterior }\DIFdelend approximation $\mathcal{Q}(\mathbf{w},\mathbf{H},\mathbf{G}^{(\mathcal{D})})$
+is obtained as the normalized product of the approximate factors $\hat{f}_{1},\ldots,\hat{f}_{4}$, that is,
+\begin{equation}
+\mathcal{Q}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})}) \propto
+\hat{f}_{1}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})\cdots\hat{f}_{4}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})\,.\DIFaddbegin \notag
+\DIFaddend \end{equation}
+The first step of EP is to initialize \DIFdelbegin \DIFdel{all the approximate factors }\DIFdelend $\hat{f}_1,\ldots,\hat{f}_4$ and \DIFdelbegin \DIFdel{the posterior approximation }\DIFdelend $\mathcal{Q}$ to be uniform.
+In particular,
+$m_{u,d}^w=m_{d,i}^h=m_{u,j}^g=\hat{m}_{u,d}^{w,a}=\hat{m}_{d,i}^{a,h}=\hat{m}_{u,j}^{g,a}=0$ and 
+$v_{u,d}^w = v_{d,i}^h = v_{u,j}^g = \hat{v}_{u,d}^{a,w} = \hat{v}_{d,i}^{a,h} = \hat{v}_{u,j}^{a,h} = \infty$ for
+$a=1,\ldots,4$, $u=1,\ldots,U$, $d=1,\ldots,D$, $i=1,\ldots,P$ and $j = 1,\ldots,M_u$.
+After that, EP \DIFaddbegin \DIFadd{iteratively }\DIFaddend refines the parameters of \DIFdelbegin \DIFdel{the approximate factors by iteratively }\DIFdelend \DIFaddbegin \DIFadd{$\hat{f}_1,\ldots,\hat{f}_4$ by }\DIFaddend minimizing the Kullback-Leibler (KL) divergence
+between \DIFdelbegin \DIFdel{$\mathcal{Q}^{\setminus a}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})f_a(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})$
+and $\mathcal{Q}^{\setminus a}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})\hat{f}_a(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})})$}\DIFdelend \DIFaddbegin \DIFadd{the product of $\mathcal{Q}^{\setminus a}$ and $f_a$
+and the product of $\mathcal{Q}^{\setminus a}$ and $\hat{f}_a$}\DIFaddend , for $a=1,\ldots,4$,
+where $\mathcal{Q}^{\setminus a}$ is the ratio between $\mathcal{Q}$ and $\hat{f}_a$. 
+That is, EP iteratively minimizes
+with respect to $\hat{f}_a$, for $a = 1,\ldots,4$.
+The arguments to $Q^{\setminus a}f_a $ and 
+$Q^{\setminus a}\hat{f}_a$ have been omitted in
+\DIFdelbegin \DIFdel{the 
+right-hand side of }\DIFdelend (\ref{eq:KL}) to improve the readability of the expression.
+However, the minimization of (\ref{eq:KL}) does not perform well when we have to refine the parameters of $\hat{f}_2$. For this specific factor,
+we follow a variational \DIFaddbegin \DIFadd{Bayes }\DIFaddend approach similar to the one described by \cite{stern2009}. 
+Instead of minimizing $\text{KL}(\mathcal{Q}^{\setminus 2} f_2 \| \mathcal{Q}^{\setminus 2} \hat{f}_2)$ with respecct to the parameters of $\hat{f}_2$,
+we refine this approximate factor so that the reversed version of the KL divergence is minimzed, that is,
+we minimize $\text{KL}(\mathcal{Q}^{\setminus 2} \hat{f}_2 \| \mathcal{Q}^{\setminus 2} f_2)$.
+
+%DIF < The EP algorithm iteratively refines the approximate factors until convergence.
+%DIF < We assume the algorithm as converged when the absolute value of the change in the parameters
+%DIF < $m_{u,i}^g$ and $\mathbf{v}_{u,i}^g$ of $\mathcal{Q}$, where $u = 1,\ldots,U$ and $i = 1,\ldots,M_u$,
+%DIF < is less than a threshold $\delta = 10^{-3}$ between two consecutive cycles of EP,
+%DIF < where a cycle consists in the sequential update of all the approximate factors.
+%DIF < However, convergence is not guaranteed and
+%DIF < EP may end up oscillating without ever stopping \citep{Minka2001}.
+%DIF < This undesirable behavior can be prevented by \emph{damping} the EP updates \citep{Minka2002}.
+%DIF < Let $\hat{f}_a^\text{new}$ denote the value of the approximate factor that minimizes the Kullback-Leibler
+%DIF < divergence. Damping consists in using
+%DIF < \begin{equation}
+%DIF < \hat{f}_a^\text{damp} = \left[ \hat{f}_a^\text{new} \right]^\epsilon \left[ \hat{f}_a \right]^{(1 - \epsilon)}\label{eq:damping}
+%DIF < \end{equation}
+%DIF < instead of $\hat{f}_a^\text{new}$ for the update of each approximate factor $a = 1,\ldots,4$.
+%DIF < The quantity $\hat{f}_a$ represents in (\ref{eq:damping})
+%DIF < the factor before the update. The parameter
+%DIF < $\epsilon \in [0,1]$ controls the amount of damping.
+%DIF < The original EP update (that is, without damping)
+%DIF < is recovered in the limit $\epsilon = 1$. For $\epsilon = 0$,
+%DIF < the approximate factor $\hat{f}_a$ is not modified.
+%DIF < To improve the converge of EP, we use a damping scheme
+%DIF < with a parameter $\epsilon$ that is initialized to 1
+%DIF < and then progressively annealed as recommended by \cite{HernandezLobato2010}.
+%DIF < After each iteration of EP, the value of
+%DIF < this parameter is multiplied by a constant $k < 1$.
+%DIF < The value selected for $k$ is $k = 0.95$.
+%DIF < In the experiments performed, EP performs on average about 100 iterations.
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend The EP algorithm iteratively refines the approximate factors until convergence\DIFdelbegin \DIFdel{, defined by the absolute value of the parameters.
+Finally, }\DIFdelend \DIFaddbegin \DIFadd{.
+}\DIFaddend EP can also approximate the predictive distribution (\ref{eq:predictions}). 
+For this, we replace the exact posterior in (\ref{eq:predictions})
+with the EP approximation $\mathcal{Q}$.
+%DIF < In this way, we obtain
+%DIF < \begin{align}
+%DIF < &\mathcal{P}(t_{u,P+1}|\mathbf{T}^{(\mathcal{D})},\mathbf{X},\ell,p_{P+1}) \approx \nonumber\\
+%DIF < &\qquad\Phi\left[t_{u,P+1} m_{u,P+1}^g(v_{u,P+1}^g + 1)^{-\frac{1}{2}}\right]\,, \nonumber
+%DIF < \end{align}
+%DIF < where
+%DIF < \begin{align}
+%DIF < m_{u,P+1}^g = & \sum_{d=1}^D  m_{u,d}^w m_{d,P+1}^h\,,\nonumber\\
+%DIF < v_{u,P+1}^g = & \sum_{d=1}^D  [m_{u,d}^w]^2 v_{d,P+1}^h + \nonumber\\
+%DIF < & \sum_{d=1}^D v_{u,d}^w [m_{d,P+1}^h]^2 + \sum_{d=1}^D v_{u,d}^w v_{d,P+1}^h
+%DIF < \end{align}
+%DIF < and $m_{d,P+1}^h$ and $v_{d,P+1}^h$ for $d = 1,\ldots,D$ are given by
+%DIF < \begin{align}
+%DIF < m_{d,P+1}^h & = \mathbf{k}_\star^\text{T} \left[ \mathbf{K} + \text{diag}[\hat{\mathbf{v}}_d^{h,2}] \right]^{-1} \hat{\mathbf{m}}_d^{h,2}\,, \nonumber \\
+%DIF < v_{d,P+1}^h & = k_\star - \mathbf{k}_\star^\text{T} \left[ \mathbf{K} + \text{diag}[\hat{\mathbf{v}}_d^{h,2}] \right]^{-1} \mathbf{k}_\star\,, \nonumber
+%DIF < \end{align}
+%DIF < where $k_\star$ is the prior variance of $h_d(\mathbf{x}_{\alpha(P+1)}, \mathbf{x}_{\beta(P+1)})$.
+%DIF < $\mathbf{k}_\star$ is a $P$-dimensional vector that contains the prior covariances between $h_d(\mathbf{x}_{\alpha(P+1)}, \mathbf{x}_{\beta(P+1)})$
+%DIF < and $h_d(\mathbf{x}_{\alpha(1)}, \mathbf{x}_{\beta(1)}),\ldots,h_d(\mathbf{x}_{\alpha(P)}, \mathbf{x}_{\beta(P)})$ for $d=1,\ldots,D$,
+%DIF < the function \emph{diag} applied to a vector returns a diagonal matrix with that vector in
+%DIF < its diagonal and the vectors $\hat{\mathbf{m}}_d^{h,2}$ and $\hat{\mathbf{v}}_d^{h,2}$ are given by
+%DIF < $\hat{\mathbf{m}}_d^{h,2}=(\hat{m}_{1,d}^{h,2},\ldots,\hat{m}_{P,d}^{h,2})^\text{T}$ and
+%DIF < $\hat{\mathbf{v}}_d^{h,2}=(\hat{v}_{1,d}^{h,2},\ldots,\hat{v}_{P,d}^{h,2})^\text{T}$.
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD <  %%%
+\DIFdelend \DIFaddbegin \DIFadd{EP also approximates the normalization constant in (\ref{eq:post})
+as the integral of the product of all the approximate factors $\hat{f}_1,\ldots,\hat{f}_4$.
+ }\DIFaddend

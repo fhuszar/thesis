@@ -1,0 +1,20 @@
+%\renewcommand{\arraystretch}{0.9}
+\newcommand{\ic}{\hspace{0.25cm}}
+\begin{table}
+\centering
+\caption{Average test error with 100 users.}
+%\resizebox{\textwidth}{!}{
+\begin{tabular}{@{\ic}l@{\ic}c@{\ic}c@{\ic}c@{\ic}c@{\ic}c@{\ic}c@{\ic}}
+\hline
+\textbf{Dataset} &\textbf{CPU}&\textbf{CP}&\textbf{BI}&\textbf{BO}&\textbf{SU}\\
+\hline
+Synthetic&\bf{0.163$\pm$0.007}&0.182$\pm$0.007&0.255$\pm$0.016&0.169$\pm$0.008&0.228$\pm$0.008\\
+Sushi&0.125$\pm$0.009&\bf{0.115$\pm$0.010}&0.196$\pm$0.011&0.253$\pm$0.008&0.153$\pm$0.010\\
+MovieLens&0.187$\pm$0.008&\bf{0.166$\pm$0.006}&0.205$\pm$0.009&0.314$\pm$0.007&0.223$\pm$0.008\\
+Election&0.232$\pm$0.015&\bf{0.154$\pm$0.015}&\bf{0.153$\pm$0.011}&0.385$\pm$0.017&0.309$\pm$0.014\\
+Jura&0.162$\pm$0.015&\bf{0.154$\pm$0.011}&0.188$\pm$0.022&0.181$\pm$0.014&0.185$\pm$0.013\\
+\hline
+\end{tabular} \label{tab:errorSmallDatasets}
+%}
+\label{tab:small}
+\end{table}

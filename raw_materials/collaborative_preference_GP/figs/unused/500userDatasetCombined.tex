@@ -1,0 +1,39 @@
+%\renewcommand{\arraystretch}{0.9}
+%\renewcommand{\ic}{\hspace{0.25cm}}
+\begin{table}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\caption{Average test error with 500 users.}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{@{\ic}l@{\ic}c@{\ic}c@{\ic}c@{\ic}c@{\ic}c@{\ic}c@{\ic}}
+\hline
+\textbf{Dataset} &\textbf{CPU}&\textbf{CP}&\textbf{BI}&\textbf{BO}&\textbf{SU}\\
+\hline
+\textbf{syntheticData2}&0.098&0.112&0.112\\\hline
+\textbf{sushiData}&0.150&0.147&0.148\\\hline
+\textbf{movieLensData}&0.161&0.159&0.159\\\hline
+\textbf{electionData}&0.146&0.106&0.073\\\hline
+\textbf{juraData}&0.157&0.152&0.154\\\hline
+\hline
+\end{tabular} \label{tab:errorSmallDatasets}
+}
+\end{minipage}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\caption{Training times (s) with 500 users.}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{@{\ic}l@{\ic}r@{\ic}r@{\ic}r@{\ic}r@{\ic}r@{\ic}r@{\ic}}
+\hline
+\textbf{Dataset} &\textbf{CPU}&\textbf{CP}&\textbf{BI}&\textbf{BO}&\textbf{SU}\\
+\hline
+\textbf{syntheticData2}&17.385&15.473&73.812\\\hline
+\textbf{sushiData}&13.490&11.390&80.470\\\hline
+\textbf{movieLensData}&15.540&14.340&96.150\\\hline
+\textbf{electionData}&17.297&7.672&34.494\\\hline
+\textbf{juraData}&9.880&6.650&39.900\\\hline
+\hline
+\end{tabular} \label{tab:timeSmallDatasets}
+}
+\end{minipage}
+\label{tab:small}
+\end{table}

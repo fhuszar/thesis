@@ -1,0 +1,98 @@
+\section{Experiments}\label{sec:experiments}
+
+The performance of the new muti-task preference model with BALD (MT-B)
+is evaluated in a series of experiments with simulated and real-world data.
+We compare MT-B with two versions of the proposed muti-task model
+based on MES (MT-E) and random sampling (MT-R) for
+active learning. We also evaluate the performance of a single task method
+with BALD (ST-B), MES (ST-E) and random sampling (ST-R).
+ST fits a different GP classifier to the item preferences of each user.
+Finally, the last benchmark method is the muti-task method of \cite{birlutiu2009} using
+BALD (MB-B), MES (MB-E) and random sampling (MB-R).
+A description of the implementation of MB can be found in the supplementary material.
+
+\paragraph{Simulated Data}
+For the experiments with simulated data
+we generate a total of $I=15$ synthetic items with features given by 2-dimensional vectors,
+where the $i$-th item satisfies
+$\mathbf{x}_i=(x_{i1},x_{i2})$ and $x_{i1}$ and $x_{i2}$ follow a uniform distribution with zero mean and unit standard deviation.
+The preferences of each user are generated
+by a linear combination of $D=5$ latent functions $h_1,\ldots,h_5$. These functions are sampled from a Gaussian process
+with zero mean and preference kernel given by a squared exponential kernel with unit length-scale.
+The preferences for the $u$-th user are obtained according to 
+$g_u(\mathbf{x}_i, \mathbf{x}_j) = \text{sign}\{ \sum_{d=1}^5 w_{ud} h_d(\mathbf{x}_i, \mathbf{x}_j) + \epsilon_{ij} \}$,
+where $w_{u1},\ldots,w_{u5}$ and $\epsilon_{ij}$ are sampled from a standard Gaussian distribution.
+All the possible pairwise preferences are evaluated for a total of $U = 500$ users. 
+For each of these users, the available preference data are randomly split into training, pool and test sets with 10, 40 and 50 elements, respectively.
+In total, we have 500 training, pool and test sets, one per each different user.
+The multi-task model is fitted using the data available in the 500 training sets and its performance is
+evaluated on the corresponding test sets. After this, the most informative data point is identified in each of the 500 pool sets.
+The resulting 500 data points are then moved into the corresponding training sets and the whole process repeats
+until 10 of these active additions to the training sets have been completed.
+The entire process, including the dataset splitting is repeated 25 times to obtain representative results.
+We run the different methods using a squared exponential kernel with unit length-scale parameter.
+The number of latent functions in MT is fixed to $D = 10$. Note that the data are generated using only 5 latent functions.
+Nevertheless, the proposed multitask model seems to be robust to over-fitting; over-estimation of the number of latent functions
+does not seem to harm predictive performance. 
+
+The top left plot in Fig.\,\ref{fig:results} shows the average test error of MT and ST as a
+function of the number of active measurements.
+In both MT and ST, BALD and MES outperform the random approach, with BALD obtaining the best overall results.
+MT also performs significantly better than ST, irrespective of the approach used for querying the pool set. 
+The top right plot in Fig.\,\ref{fig:results} shows a comparison of
+MT and MB. In this case MT-B also obtains the best peformance.
+Table \ref{tab:resultsSimulated} provides details of the average test
+error and corresponding standard deviation for each method when a different number $n$
+of queries to the pool set have been carried out. The results of the best method are high-lighted in bold.
+
+\begin{figure*}
+\centering
+\includegraphics[scale = 0.3]{figs/plotsSyntheticData/plotSyntheticDatasetSTvsMT.pdf}
+\hspace{-0.1cm}
+\includegraphics[scale = 0.3]{figs/plotsSyntheticData/plotSyntheticDatasetMBvsMT.pdf}
+\hspace{-0.1cm}
+\includegraphics[scale = 0.3]{figs/plotsSushiData/plotSushiDatasetSTvsMT.pdf}
+\hspace{-0.1cm}
+\includegraphics[scale = 0.3]{figs/plotsSushiData/plotSushiDatasetMBvsMT.pdf}
+\caption{Top left, average test error as a function of the number of active measurements for MT and ST in the simulated data.
+Top right, comparison on the simulated data between MT and MB.
+Bottom left, average test error as a function of the number of active measurements for MT and ST in the Sushi dataset.
+Bottom right, comparison on the Sushi dataset between MT and MB.
+}\label{fig:results}
+\end{figure*}
+
+\input{figs/tables/tableSimulated.tex}
+
+\input{figs/tables/tableSushi.tex}
+
+\paragraph{Real-world Data}
+In the previous experiments with simulated data, MT obtains the best results. This is expected because the data are actually sampled
+from the probabilistic model assumed by this method. To obtain more representative results, we perform another series of experiments
+with the real-world Sushi dataset \citep{kamishima2003}.
+This dataset contains complete rankings given by 5000 users over a total of $I = 10$ different types of sushi,
+where each sushi is represented by a set of features including style, major group, minor group, heaviness, consumption
+frequency, normalized price and sale frequency. The first three featuers in the dataset are categorical. We encoded them
+using dummy binary variables.
+Each sushi is represented by a 15-dimensional feature vector. We reduced the size of the dataset by
+randomly sub-sampling $U=1000$ users. For each of these users, the available preference data are 
+randomly split into training, pool and test sets with 10, 20 and 25 elements, respectively.
+In this case we use a total of $D=50$ latent functions in MT. 
+The results obtained by this method are not sensitive to the exact value of this parameter as long as it is not excessively low.
+Finally, we always standardize the item features so that they have zero mean and unit standard deviation in the training set and 
+set the length-scale parameter of the squared exponential kernel to one. 
+In practice, the kernel parameter should be learned to obtain the best possible performance.
+This can be done in MT by searching for the parameter value that
+maximizes the EP approximation of the model evidence, as illustrated in the suplementary material.
+The cost of this search is too expensive for the proposed experimental protocol.
+Nevertheless, we expect that using the same value for the kernel parameter in all
+methods leads to an unbiased comparison of performances.
+
+The bottom plots in Figure \ref{fig:results} show the results of MT, ST and MB on the Sushi dataset.
+MT is markedly superior to ST and MB. The differences between the BALD and MES alternatives are also significant, with BALD outperforming MES in general.
+However, for more than 5 active measurements MT-B and ST-B seem to converge to MT-E and ST-E, respectively.
+This result is likely to have its origin in the reduced size of the pool set, which only contains 20 points in this case.
+Furthermore, if subjects exhibit low noise in their preferences then MES approaches BALD because the second term in Equation \eqref{eqn:BALD} becomes small.
+We also note a pathological behaviour of MB-B as more data points are added to the training set.
+Similar patterns can be observed for the simulated data.
+This result is probably due to fact that MB assumes a common unimodal prior for preference functions; an assumption which is
+unlikely to be true in practice. Finally, Table \ref{tab:resultsSushi} provides detailed results for each method on the Sushi dataset.

@@ -1,0 +1,118 @@
+\documentclass{article}
+
+\usepackage{graphicx,
+            amsmath,
+            subfigure,
+            amsfonts,
+		sidecap,
+            tikz,
+            bm,
+		verbatim}
+
+\usepackage{nips12submit_e,times}
+
+\usepackage[pdftex]{hyperref}
+
+\hypersetup{
+colorlinks,%
+citecolor=black,%
+filecolor=black,%
+linkcolor=black,%
+urlcolor=black
+}
+
+\usetikzlibrary{arrows,positioning} 
+
+\tikzset{
+    select/.style={
+           draw=black,
+           line width=1.2mm
+    },
+    punkt/.style={
+           circle,
+           draw=black,
+           minimum height=4em,
+           text centered}
+}
+
+\renewcommand\arraystretch{1.2}
+\newcommand{\f}[1]{\textbf{#1}}
+
+\author{
+Neil Houlsby \thanks{Both authors contributed equally.} \\
+Department of Engineering\\
+University of Cambridge \\
+\And
+Jose Miguel Hern\'{a}ndez-Lobato $^*$  \\
+Department of Engineering\\
+University of Cambridge \\
+\AND
+Ferenc Husz\'{a}r \\
+Department of Engineering\\
+University of Cambridge \\
+\And
+Zoubin Ghahramani \\
+Department of Engineering\\
+University of Cambridge \\
+}
+
+\begin{document}
+
+\title{Collaborative Gaussian Processes for\\ Preference Learning}
+
+\newcommand{\argmax}{ \operatorname*{arg \max}}
+\newcommand{\argmin}{ \operatorname*{arg \min}} 
+\newcommand{\x}{\mathbf{x}} 
+\newcommand{\pair}{(\x,\x')} 
+\newcommand{\param}{\bm{\theta}}
+\newcommand{\X}{\mathbf{X}} 
+\newcommand{\y}{y}
+\newcommand{\data}{\mathcal{D}} 
+\newcommand{\h}{\mathbf{H}} 
+\newcommand{\g}{\mathbf{G}} 
+\newcommand{\w}{\mathbf{W}} 
+\newcommand{\pr}{\mathrm{P}} 
+\newcommand{\ent}{\mathrm{H}} 
+\newcommand{\info}{\mathrm{I}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\ie}{i.\,e.\ }
+\newcommand{\eg}{e.\,g.\ }
+\newcommand{\latfun}{f}
+\newcommand{\List}{\mathcal{L}}
+
+\nipsfinalcopy
+
+\maketitle
+
+\begin{abstract}
+We present a new model based on Gaussian processes (GPs) for learning pairwise preferences expressed by multiple users.
+Inference is simplified by using a \emph{preference kernel} for GPs
+which allows us to combine supervised GP learning of user preferences with unsupervised dimensionality
+reduction for multi-user systems. The model not only exploits collaborative information from
+the shared structure in user behavior, but may also incorporate user
+features if they are available. 
+Approximate inference is implemented using a combination of
+expectation propagation and variational Bayes. 
+Finally, we present an efficient active learning strategy for querying preferences.
+The proposed technique performs favorably on real-world data against state-of-the-art multi-user preference
+learning algorithms.
+\end{abstract}
+
+\input{introduction/introduction}
+\input{prefKernel/prefKernel.tex}
+\input{model/model.tex}
+\input{activeLearning/active.tex}
+\input{EP/ep.tex}
+%\input{relatedWork/related.tex}
+\input{experiments/experiments.tex}
+\input{conclusions/conclusions.tex}
+\subsubsection*{Acknowledgements}
+NH is a recipient of the Google Europe Fellowship in Statistical Machine Learning, and this research is supported in part by this Google Fellowship.
+JMH is supported by Infosys Labs, Infosys Limited.
+
+\newpage
+\bibliography{bib/bibliog}
+\bibliographystyle{plain}
+
+\end{document}

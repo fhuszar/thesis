@@ -1,0 +1,159 @@
+%merlin.mbs apsrev4-1.bst 2010-07-25 4.21a (PWD, AO, DPC) hacked
+%Control: key (0)
+%Control: author (8) initials jnrlst
+%Control: editor formatted (1) identically to author
+%Control: production of article title (-1) disabled
+%Control: page (0) single
+%Control: year (1) truncated
+%Control: production of eprint (0) enabled
+\begin{thebibliography}{13}%
+\makeatletter
+\providecommand \@ifxundefined [1]{%
+ \@ifx{#1\undefined}
+}%
+\providecommand \@ifnum [1]{%
+ \ifnum #1\expandafter \@firstoftwo
+ \else \expandafter \@secondoftwo
+ \fi
+}%
+\providecommand \@ifx [1]{%
+ \ifx #1\expandafter \@firstoftwo
+ \else \expandafter \@secondoftwo
+ \fi
+}%
+\providecommand \natexlab [1]{#1}%
+\providecommand \enquote  [1]{``#1''}%
+\providecommand \bibnamefont  [1]{#1}%
+\providecommand \bibfnamefont [1]{#1}%
+\providecommand \citenamefont [1]{#1}%
+\providecommand \href@noop [0]{\@secondoftwo}%
+\providecommand \href [0]{\begingroup \@sanitize@url \@href}%
+\providecommand \@href[1]{\@@startlink{#1}\@@href}%
+\providecommand \@@href[1]{\endgroup#1\@@endlink}%
+\providecommand \@sanitize@url [0]{\catcode `\\12\catcode `\$12\catcode
+  `\&12\catcode `\#12\catcode `\^12\catcode `\_12\catcode `\%12\relax}%
+\providecommand \@@startlink[1]{}%
+\providecommand \@@endlink[0]{}%
+\providecommand \url  [0]{\begingroup\@sanitize@url \@url }%
+\providecommand \@url [1]{\endgroup\@href {#1}{\urlprefix }}%
+\providecommand \urlprefix  [0]{URL }%
+\providecommand \Eprint [0]{\href }%
+\providecommand \doibase [0]{http://dx.doi.org/}%
+\providecommand \selectlanguage [0]{\@gobble}%
+\providecommand \bibinfo  [0]{\@secondoftwo}%
+\providecommand \bibfield  [0]{\@secondoftwo}%
+\providecommand \translation [1]{[#1]}%
+\providecommand \BibitemOpen [0]{}%
+\providecommand \bibitemStop [0]{}%
+\providecommand \bibitemNoStop [0]{.\EOS\space}%
+\providecommand \EOS [0]{\spacefactor3000\relax}%
+\providecommand \BibitemShut  [1]{\csname bibitem#1\endcsname}%
+\let\auto@bib@innerbib\@empty
+%</preamble>
+\bibitem [{\citenamefont {Wootters}\ and\ \citenamefont
+  {Fields}(1989)}]{MUBFirst}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {W.}~\bibnamefont
+  {Wootters}}\ and\ \bibinfo {author} {\bibfnamefont {B.}~\bibnamefont
+  {Fields}},\ }\href {\doibase DOI: 10.1016/0003-4916(89)90322-9} {\bibfield
+  {journal} {\bibinfo  {journal} {Ann.\ Phys.}\ }\textbf {\bibinfo {volume}
+  {191}},\ \bibinfo {pages} {363 } (\bibinfo {year} {1989})}\BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {Adamson}\ and\ \citenamefont
+  {Steinberg}(2010)}]{MUBExperiment}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.~B.~A.}\
+  \bibnamefont {Adamson}}\ and\ \bibinfo {author} {\bibfnamefont {A.~M.}\
+  \bibnamefont {Steinberg}},\ }\href {\doibase 10.1103/PhysRevLett.105.030406}
+  {\bibfield  {journal} {\bibinfo  {journal} {Phys.\ Rev.\ Lett.}\ }\textbf
+  {\bibinfo {volume} {105}},\ \bibinfo {pages} {030406} (\bibinfo {year}
+  {2010})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Raynal}\ \emph {et~al.}(2011)\citenamefont {Raynal},
+  \citenamefont {L\"u},\ and\ \citenamefont {Englert}}]{DimensionSix}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {P.}~\bibnamefont
+  {Raynal}}, \bibinfo {author} {\bibfnamefont {X.}~\bibnamefont {L\"u}}, \ and\
+  \bibinfo {author} {\bibfnamefont {B.-G.}\ \bibnamefont {Englert}},\ }\href
+  {\doibase 10.1103/PhysRevA.83.062303} {\bibfield  {journal} {\bibinfo
+  {journal} {Phys.\ Rev.\ A}\ }\textbf {\bibinfo {volume} {83}},\ \bibinfo
+  {pages} {062303} (\bibinfo {year} {2011})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Yan}\ \emph {et~al.}(2010)\citenamefont {Yan},
+  \citenamefont {Yang},\ and\ \citenamefont {Cao}}]{MUBQutrit}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {F.}~\bibnamefont
+  {Yan}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Yang}}, \ and\
+  \bibinfo {author} {\bibfnamefont {Z.-L.}\ \bibnamefont {Cao}},\ }\href
+  {\doibase 10.1103/PhysRevA.82.044102} {\bibfield  {journal} {\bibinfo
+  {journal} {Phys. Rev. A}\ }\textbf {\bibinfo {volume} {82}},\ \bibinfo
+  {pages} {044102} (\bibinfo {year} {2010})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Kosut}\ \emph {et~al.}(2004)\citenamefont {Kosut},
+  \citenamefont {Walmsley},\ and\ \citenamefont {Rabitz}}]{OEDFirst}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
+  {Kosut}}, \bibinfo {author} {\bibfnamefont {I.~A.}\ \bibnamefont {Walmsley}},
+  \ and\ \bibinfo {author} {\bibfnamefont {H.}~\bibnamefont {Rabitz}},\
+  }\href@noop {} {\  (\bibinfo {year} {2004})},\ \Eprint
+  {http://arxiv.org/abs/quant-ph/0411093} {arXiv:quant-ph/0411093} \BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {{Nunn \emph{et al}}}(2010)}]{OEDAverage}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.}~\bibnamefont
+  {{Nunn \emph{et al}}}},\ }\href {\doibase 10.1103/PhysRevA.81.042109}
+  {\bibfield  {journal} {\bibinfo  {journal} {Phys.\ Rev.\ A}\ }\textbf
+  {\bibinfo {volume} {81}},\ \bibinfo {pages} {042109} (\bibinfo {year}
+  {2010})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Fischer}\ \emph {et~al.}(2000)\citenamefont
+  {Fischer}, \citenamefont {Kienle},\ and\ \citenamefont
+  {Freyberger}}]{SelfLearning}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {D.~G.}\ \bibnamefont
+  {Fischer}}, \bibinfo {author} {\bibfnamefont {S.~H.}\ \bibnamefont {Kienle}},
+  \ and\ \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Freyberger}},\
+  }\href {\doibase 10.1103/PhysRevA.61.032306} {\bibfield  {journal} {\bibinfo
+  {journal} {Phys. Rev. A}\ }\textbf {\bibinfo {volume} {61}},\ \bibinfo
+  {pages} {032306} (\bibinfo {year} {2000})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {{Hannemann \emph{et
+  al}}}(2002)}]{SelfLearningExperimental}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {T.}~\bibnamefont
+  {{Hannemann \emph{et al}}}},\ }\href {\doibase 10.1103/PhysRevA.65.050303}
+  {\bibfield  {journal} {\bibinfo  {journal} {Phys. Rev. A}\ }\textbf {\bibinfo
+  {volume} {65}},\ \bibinfo {pages} {050303} (\bibinfo {year}
+  {2002})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Blume-Kohout}()}]{BayesianTomography}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
+  {Blume-Kohout}},\ }\href {\doibase 10.1088/1367-2630/12/4/043034} {\bibfield
+  {journal} {\bibinfo  {journal} {New J.\ Phys.}\ }\textbf {\bibinfo {volume}
+  {12}},\ \bibinfo {pages} {043034}}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Doucet}\ \emph {et~al.}(2001)\citenamefont {Doucet},
+  \citenamefont {{de Freitas}},\ and\ \citenamefont {Gordon}}]{SMCBook}%
+  \BibitemOpen
+  \bibinfo {editor} {\bibfnamefont {A.}~\bibnamefont {Doucet}}, \bibinfo
+  {editor} {\bibfnamefont {N.}~\bibnamefont {{de Freitas}}}, \ and\ \bibinfo
+  {editor} {\bibfnamefont {N.}~\bibnamefont {Gordon}},\ eds.,\ \href@noop {}
+  {\emph {\bibinfo {title} {Sequential Monte Carlo in Paractice}}}\ (\bibinfo
+  {publisher} {Springer-Verlag},\ \bibinfo {year} {2001})\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Blume-Kohout}\ and\ \citenamefont
+  {Hayden}(2006)}]{BayesianOptimality}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
+  {Blume-Kohout}}\ and\ \bibinfo {author} {\bibfnamefont {P.}~\bibnamefont
+  {Hayden}},\ }\href@noop {} {\  (\bibinfo {year} {2006})},\ \Eprint
+  {http://arxiv.org/abs/quant-ph/0603116} {arXiv:quant-ph/0603116} \BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {{Gross \emph{et al}}}(2010)}]{CompressedSensing}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {D.}~\bibnamefont
+  {{Gross \emph{et al}}}},\ }\href {\doibase 10.1103/PhysRevLett.105.150401}
+  {\bibfield  {journal} {\bibinfo  {journal} {Phys.\ Rev.\ Lett.}\ }\textbf
+  {\bibinfo {volume} {105}},\ \bibinfo {pages} {150401} (\bibinfo {year}
+  {2010})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Patra}(2007)}]{ExactInformation}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {M.~K.}\ \bibnamefont
+  {Patra}},\ }\href {http://stacks.iop.org/1751-8121/40/i=35/a=011} {\bibfield
+  {journal} {\bibinfo  {journal} {J.\ Phys.\ A}\ }\textbf {\bibinfo {volume}
+  {40}},\ \bibinfo {pages} {10887} (\bibinfo {year} {2007})}\BibitemShut
+  {NoStop}%
+\end{thebibliography}%

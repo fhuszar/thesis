@@ -1,0 +1,39 @@
+%\renewcommand{\arraystretch}{0.9}
+\newcommand{\ic}{\hspace{0.25cm}}
+\begin{table}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\caption{Average test error with 100 users.}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{@{\ic}l@{\ic}c@{\ic}c@{\ic}c@{\ic}c@{\ic}c@{\ic}c@{\ic}}
+\hline
+\textbf{Dataset} &\textbf{CPU}&\textbf{CP}&\textbf{BI}&\textbf{BO}&\textbf{SU}\\
+\hline
+Synthetic&\bf{0.163}&0.182&0.255&0.169&0.228\\
+Sushi&0.125&\bf{0.115}&0.196&0.253&0.153\\
+MovieLens&0.187&\bf{0.166}&0.205&0.314&0.223\\
+Election&0.232&\bf{0.154}&\bf{0.153}&0.385&0.309\\
+Jura&0.162&\bf{0.154}&0.188&0.181&0.185\\
+\hline
+\end{tabular} \label{tab:errorSmallDatasets}
+}
+\end{minipage}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\caption{Training times (s) with 100 users.}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{@{\ic}l@{\ic}r@{\ic}r@{\ic}r@{\ic}r@{\ic}r@{\ic}r@{\ic}}
+\hline
+\textbf{Dataset} &\textbf{CPU}&\textbf{CP}&\textbf{BI}&\textbf{BO}&\textbf{SU}\\
+\hline
+Synthetic&10.50&10.07&59.90&1235.97&1.77\\
+Sushi&10.52&8.88&36.85&259.22&1.21\\
+MovieLens&10.11&9.37&33.98&202.80&1.34\\
+Election&32.19&31.02&60.59&124.76&1.13\\
+Jura&5.20&3.58&23.08&94.81&1.10\\
+\hline
+\end{tabular} \label{tab:timeSmallDatasets}
+}
+\end{minipage}
+\label{tab:small}
+\end{table}

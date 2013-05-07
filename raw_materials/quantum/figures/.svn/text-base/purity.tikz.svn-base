@@ -1,0 +1,50 @@
+% This file was created by matlab2tikz v0.0.7.
+% Copyright (c) 2008--2010, Nico Schlömer <nico.schloemer@gmail.com>
+% All rights reserved.
+% 
+% The latest updates can be retrieved from
+%   http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz
+% where you can also make suggestions and rate matlab2tikz.
+% 
+\begin{tikzpicture}
+
+\begin{semilogyaxis}[%
+scale only axis,
+width=1in,
+height=1in,
+xmin=0.5, xmax=1,
+ymin=0.0005, ymax=0.01,
+xlabel={purity},
+axis on top
+,anchor=north]
+\addplot [
+color=black,
+dotted
+]
+coordinates{ (0.5,0.00075929) (0.6,0.000857054) (0.7,0.000956602) (0.8,0.000893443) (0.85,0.00111663) (0.9,0.00113761) (0.925,0.00221566) (0.95,0.0024295) (0.975,0.00216895) (1,0.00581406)
+};
+
+\addplot [
+color=green,
+solid,
+
+]
+coordinates{ (0.5,0.000583439) (0.6,0.000722364) (0.7,0.000871828) (0.8,0.000775065) (0.85,0.000892919) (0.9,0.000805987) (0.925,0.00087682) (0.95,0.00094804) (0.975,0.00114797) (1,0.00169893)
+};
+
+\addplot [
+color=red,
+solid
+]
+coordinates{ (0.5,0.000728511) (0.6,0.000663376) (0.7,0.000813218) (0.8,0.000983281) (0.85,0.00146818) (0.9,0.00145583) (0.925,0.00191827) (0.95,0.00189825) (0.975,0.00225826) (1,0.00709776)
+};
+
+\addplot [
+color=blue,
+dashed
+]
+coordinates{ (0.5,0.000933037) (0.6,0.000803118) (0.7,0.00094978) (0.8,0.000968539) (0.85,0.00136559) (0.9,0.00113676) (0.925,0.00114692) (0.95,0.0016187) (0.975,0.00198486) (1,0.00877819)
+};
+
+\end{semilogyaxis}
+\end{tikzpicture}

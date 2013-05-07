@@ -27,6 +27,8 @@ In section \ref{sec:losscalibrated} I argue that when Bayesian inference is perf
 
 Monte Carlo methods produce random samples (approximately) drawn from the posterior, which in turn allow for approximating relevant integrals and making predictinos. Monte Carlo techniques have been successfully applied to a wide range of Bayesian inference problems. However, just as most variational approaches, Monte Carlo techniques are ignorant of the decisions and losses involved in a decision problem. In section \ref{sec:} I introduce a new class of approximate inference algorithms that I call loss-calibrated quasi-Monte Carlo methods. These algorithms produce a deterministic sequence of pseudo-samples in such a way, that the divergence between the empirical distribution of pseudosamples is minimised from the target distribution. I show that kernel herding, a recent heuristic algorithm proposed by \citet{Chen2012} can be considered a special case of loss-calibrated quasi-Monte Carlo, and point out connections between this method and Bayesian Quadrature.
 
+
+
 \section{Loss-calibrated approximate inference}
 
 In many practically relevant cases computing the Bayesian posterior is not analytically tractable. This is predominantly due to the fact that the integral defining the marginal likelihood $\int p(\dataset\vert\param)p(\param)d\param$ cannot be computed analytically, and therefore the posterior is only known up to a multiplicative constant. It is usual practice to approximate the intractable posterior by something simpler, a computationally convenient approximate distribution $q$. The problem of finding an approximate posterior $q$ is referred to as approximate Bayesian inference.
@@ -159,14 +161,14 @@ However, it is easy to construct an ideal series of $N$ `pseudo-samples' where t
 
 TODO{review existing quasi-Monte-Carlo methods: Sobol sequences, Halton sequence}
 
-The quasi-Monte-Carlo methods reviewed here often achieve faster convergence rates than traditional random Monte Carlo, but they are general-purpose sampling tools: they cannot be fine-tuned to particular decision problems we may want to use them for. Here I will introduce a class of quasi-Monte-Carlo methods that I will call loss-calibrated QMC. 
+	The quasi-Monte-Carlo methods reviewed here often achieve faster convergence rates than traditional random Monte Carlo, but they are general-purpose sampling tools: they cannot be fine-tuned to particular decision problems we may want to use them for. Here I will introduce a class of quasi-Monte-Carlo methods that I will call loss-calibrated QMC. 
 
-Quasi-Monte-Carlo can be interpreted as a special case of approximate inference, where the approximating family is the family of empirical distributions
-\begin{equation}
-	q(x ; x_1,\ldots,x_N) = \frac{1}{N} \sum_{n=1}^{N} \delta(x - x_n)\mbox{,}
-\end{equation}
-or weighted empirical distributions
-\begin{equation}
+	Quasi-Monte-Carlo can be interpreted as a special case of approximate inference, where the approximating family is the family of empirical distributions
+	\begin{equation}
+		q(x ; x_1,\ldots,x_N) = \frac{1}{N} \sum_{n=1}^{N} \delta(x - x_n)\mbox{,}
+	\end{equation}
+	or weighted empirical distributions
+	\begin{equation}
 	q(x ; x_1,\ldots,x_N,w_1,\ldots,w_N) = \sum_{n=1}^{N} w_n \delta(x - x_n)\mbox{.}
 \end{equation}
 

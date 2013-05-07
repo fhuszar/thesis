@@ -1,0 +1,35 @@
+\section{Introduction}
+
+Preference learning is concerned about making inference from data that consist of
+pairs of items and corresponding binary labels indicating item preferences.
+These type of data arises in a number of contexts, including medical assistive
+technologies \citep{birlutiu2009}, graphical design \citep{brochu2007active} and recommendation
+systems \citep{de2009}. A popular approach to modelling preference data assumes the existence of a latent function
+$f$ such that $f(\mathbf{x})$ gives the value of a particular item with feature vector $\x$. In particular,
+$f(\x_i)>f(\x_j)$ indicates that item $i$ is preferred to item $j$.
+Bayesian machine learning methods can be used to learn $f$ from preference data.
+For example, \citep{chu2005} assume a Gaussian Process (GP) prior on $f$ 
+and then approximate the posterior distribution for this fuction
+using the Laplace approximation. However, their approach models preferences from different users 
+independently. When data from several users are available
+we would like to leverage the similarity between user preferences.
+For example, one may discover that user behaviors can be summarized by their preferences
+towards latent themes such as sports, politics or technology. We may identify these common themes
+from the data across all users, and at the individual level, only infer the relative user's interest in each of them.
+
+Following the strategy mentioned above, we propose a multi-task preference model that exploits shared structure in user behavior. 
+This multi-task model is based on a connection between preference learning and binary classification with GP priors.
+We show that both problems are equivalent when the GP priors include a novel
+covariance function called the \emph{preference kernel}. This connection simplifies the inference process
+and allows us to design sophisticated methods such as the proposed multi-task approach.
+For efficient approximate inference, we use a hybrid algorithm that combines
+expectation propagation and variational Bayes \citep{Minka2001,attias2000variational}.
+Finally, in real scenarios, it is desirable to learn user preferences
+using as less data as possible. For this purpose we present BALD (Bayesian active learning by disagreement),
+a new active learning strategy for binary classification problems with GP priors.
+BALD is based on the information theoretic approach to active learning
+and makes less approximations than other alternative strategies also based on this approach.
+The proposed muti-task model with BALD is evaluated in experiments with simulated and real-world data.
+In these experiments, we are able to outperform 
+single-task methods \citep{chu2005} and current
+methods for multi-task preference learning \citep{birlutiu2009}.

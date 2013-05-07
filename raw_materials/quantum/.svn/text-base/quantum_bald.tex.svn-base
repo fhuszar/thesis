@@ -1,0 +1,195 @@
+\documentclass[aps,twocolumn,prl]{revtex4-1}
+\usepackage[
+pdfstartview={FitH},
+bookmarks=true,
+bookmarksnumbered=true,
+bookmarksopen=true,
+bookmarksopenlevel=\maxdimen,
+pdfborder={0 0 0},
+colorlinks=true,
+linkcolor = blue,
+citecolor=blue,
+urlcolor=blue,
+filecolor=black,
+pdfauthor={Ferenc Huszar and Neil Houlsby},
+pdftitle={Adaptive Bayesian Quantum Tomography},
+pdfdisplaydoctitle=true
+]{hyperref}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{microtype}
+
+\definecolor{mycolor1}{rgb}{1,0,1}
+
+\newcommand{\m}{{\mathcal{M}}} \newcommand{\x}{{\mathbf{x}}}
+\newcommand{\param}{{\rho}} \newcommand{\data}{\mathcal{D}}
+\newcommand{\argmax}{ \operatorname*{argmax}}
+\newcommand{\config}{\alpha} \newcommand{\configset}{\mathcal{A}}
+\newcommand{\outcome}{\gamma} \newcommand{\ie}{i.\,e.\ }
+\newcommand{\eg}{e.\,g.\ }
+
+\linespread{0.945}
+%\addtolength{\floatsep}{-0mm}
+%\addtolength{\textfloatsep}{-0mm}
+\addtolength{\belowcaptionskip}{-4mm}
+\addtolength{\abovecaptionskip}{-0mm}
+%\addtolength{\abovedisplayskip}{-0mm}
+%\addtolength{\belowdisplayskip}{-0mm}
+%\addtolength{\arraycolsep}{-0mm}
+
+
+\begin{document}
+%
+\title{Adaptive Bayesian Quantum Tomography}
+
+\author{F.~Husz\'{a}r}
+\affiliation{Computational and Biological Learning Lab, Department of Engineering, University of Cambridge, Cambridge, UK}
+%
+\author{N.\,M.\,T.~Houlsby}
+\affiliation{Computational and Biological Learning Lab, Department of Engineering, University of Cambridge, Cambridge, UK}
+%
+
+\begin{abstract}
+In this paper we revisit the problem of optimal design of quantum tomographic experiments. In contrast to previous approaches where an optimal set of measurements is decided in advance of the experiment, we allow for measurements to be adaptively and efficiently re-optimised depending on data collected so far. We develop an adaptive statistical framework based on Bayesian inference and Shannon's information, and demonstrate a ten-fold reduction in the total number of measurements required as compared to non-adaptive methods, including mutually unbiased bases.
+\end{abstract}
+
+\pacs{03.65.Wj, 03.67.-a, 02.50.Ng, 07.05.Fb}
+\maketitle
+
+Quantum tomography is a valuable tool in quantum information processing, being essential for characterisation of quantum states, gates, and measurement equipment.  Quantum state tomography (QST) aims to determine an unknown quantum state from the outcome of measurements performed on an ensemble of identically prepared systems. Measurements in quantum systems are non-deterministic, hence QST is a classical statistical estimation problem. Full tomography is inherently resource-intensive: even in moderately sized systems, the number of measurements required is often prohibitive.
+%e.\,g.\ over a week of net experiment time for a four-qubit state in\,\cite{FourQubit}.
+There is a need for methods that allow for shorter experiments. Optimal experiment design (OED) aims to achieve this by selecting cleverly which measurements to use during the experiment.
+
+Most existing approaches to OED determine, prior to collecting data, an optimal set of measurements to be used throughout the experiment. In this sense, whenever they exist, mutually unbiased bases (MUBs) are known to be optimal\,\cite{MUBFirst,MUBExperiment}. Research since has focused mainly on proving or disproving existence of, and implement MUBs in various dimensions\,\cite{DimensionSix,MUBQutrit,MUBExperiment}. Other work,\,\cite{OEDFirst,OEDAverage} considered OED based on the Cram\'{e}r-Rao bound. Here we argue that these approaches, including MUBs, provide only a partial solution to the problem of optimal experiment design inasmuch as they do not take partial data into account. If we are allowed to revise our choice of measurements during the experiment based on data collected so far, we may be in a better position to reduce redundancy. This strategy is generally known as active learning or adaptive sampling; such adaptive experimental design have been applied in a number of other fields, such as clinical trails \cite{Berry2006}, cognitive science \cite{Cavagnaro2010} and computer vision \cite{Vondrick2011}. In physics, this approach has been referred to as self-learning measurements \cite{SelfLearning, SelfLearningExperimental}. However, due to the expensive computations that are involved, these methods have been restricted to two dimensional pure quantum states, or very few measurements. Recently advances in Bayesian methods allow us to build a fast, online algorithm that allows self-learning in arbitrary dimensions with many measurements. 
+
+Here we propose a new algorithmic framework that we call \emph{Adaptive Bayesian Quantum Tomography} (ABQT), that builds on full Bayesian inference and Shannon information. 
+To achieve adaptivity in practice, we need a fast algorithm for performing Bayesian state reconstruction from partial data after each measurement. Current sampling methods such as in \cite{BayesianTomography} are inappropriate as their costs increase with the number of measurement configurations tried so far. As a solution, we present a sequential importance sampling scheme\,\cite{SMCBook}, that does not suffer from this. We then use the developed algorithm in conjunction with an information theoretic objective to adaptively optimise measurements. We assess the relative performance of our adaptive method in Monte Carlo simulations of qubit systems, and demonstrate a ten-fold reduction in the number of measurements needed for full tomography of two-qubit pure states. We also investigate the trade off between entangling and separable measurements in multipartite systems. Our central finding is that via adaptive tomography one can achieve, and even surpass, the statistical efficiency of MUB tomography using only separable measurements, that require experimental apparatus that is substantially easier to build using current technology.
+
+\paragraph{Quantum state tomography} involves determining from experimental data the quantum state, $\rho$, of a system by performing measurements on several identical copies. For a $D$-dimensional system ($D=2^m$ for $m$-qubit systems), $\rho$ is an $D \times D$ complex-valued density matrix. $\rho$ has to be Hermitian and have unit trace, so $D^2-1$ real degrees of freedom must be estimated. The apparatus for a tomographic experiment may be configured in several different ways; we use $\config\in\configset$ to index all accessible configurations. Each measurement configuration $\config$ is characterised by a positive operator-valued measure (POVM). For each configuration, a measurement results in observing one of a finite number, $\Gamma$, of distinguishable outcomes. A POVM is defined by a set, $\mathbb{M}_{\config}$, of Hermitian operators $M_{\config\outcome}$, indexed by possible outcomes $\outcome\in\{1,\ldots,\Gamma\}$, satisfying $\sum_{\outcome=1}^{\Gamma} M_{\config\outcome} = I$. These POVMs jointly constitute our tomographic model $\mathcal{M}=\{\mathbb{M}_{\config}:\config\in\configset\}$ and determine the probability of observing outcome $\outcome$ in configuration $\config$ when the measured system is in state $\param$ via Born's rule:
+
+\begin{equation}
+\mathbb{P}\left(\gamma\vert\param,\config;\mathcal{M}\right) = \text{tr}\left\{M_{\config\outcome}\param \right\}\label{eqn:born}\notag
+\end{equation}
+
+State reconstruction has been approached with several methods, the most popular being maximum likelihood estimation (MLE). MLE finds a physically feasible state $\param$ that is most likely to have produced the observed data, $\mathcal{D}$, by maximising the likelihood:
+
+\begin{equation}
+\label{eqn:lik}
+\mathcal{L}(\rho;\data)=\prod_{n=1}^{N} \mathbb{P}\left(\outcome_n\vert\param,\config_n\right) = \prod_{\config \in \configset}n_{\config}!\prod_{\gamma=1}^{\Gamma}\frac{\mbox{tr}\{M_{\alpha\gamma}\rho\}^{n_{\config\outcome}}}{n_{\config\outcome}!}
+\end{equation}
+
+where $n_{\config}$ is the number of times configuration $\config$ was used, $n_{\config\outcome}$ is the number of times outcome $\outcome$ was observed in configuration $\config$. All probabilities are conditional on $\mathcal{M}$, for brevity this is omitted. A well-known drawback of MLE is that it often yields rank-deficient estimates, and thus assigns zero predictive probability to certain observations\,\cite{BayesianTomography}. This seems an unreasonable conclusion on the basis of a finite sample.
+%This phenomenon is not unusual in maximum likelihood methods, and is termed \emph{over-fitting} in statistics.
+Additionally, MLE provides no measure of uncertainty in its point estimate.
+
+More sophisticated methods for quantum tomography use Bayesian inference and suffer from neither of these problems\,\cite[][and refs.]{BayesianTomography}. In Bayesian inference a prior probability density, $p(\param)$, over feasible states is specified. This prior is then augmented with the likelihood from Eqn.\,\eqref{eqn:lik} using Bayes' rule to yield a posterior distribution:
+
+\begin{equation}
+\label{eqn:bayes}
+p(\param\vert\data)\propto \mathcal{L}(\param;\data)p(\param)
+\end{equation}
+
+Should we want a point estimate, we may report, say, the Bayesian mean estimate (BME) which is known to maximise expected operational divergences\,\cite{BayesianTomography,BayesianOptimality}. But importantly, Bayesian inference also provides \emph{error bars}, and more: the posterior captures richly our remaining uncertainty in the true state having seen the data $\data$. 
+
+For Bayesian inference one has to provide the prior $p(\param)$, which is typically chosen to be non-informative or uniform. Here we adopt the representation and prior introduced in\,\cite{BayesianTomography}, that treats our original system of interest as part of a larger, $D\times K$ dimensional bipartite system. Our prior over the mixed state $\param$ is then defined as the measure induced by the uniform (Haar) measure over pure states in $D\times K$ dimensions. It is easy to see that, tracing out the $K$ dimensional ancillary part leaves us with a rank-$K$ mixed state $\rho$. Thus, by tuning this parameter we can trade off between computational efficiency and estimation accuracy, in a similar manner to compressed sensing\,\cite{CompressedSensing}.
+
+Unfortunately, normalisation of the posterior distribution (Eqn.\,\eqref{eqn:bayes}) becomes analytically intractable, and therefore we have to approximate it, usually via Markov chain Monte Carlo (MCMC) methods. Several MCMC approaches have been suggested in this context\,\cite[][and refs.\ therein]{BayesianTomography}. These methods require evaulation of the full likelihood \eqref{eqn:lik}, which has $\mathcal{O}(n)$ cost with the number of different configurations used so far. This is undesirable for adaptive tomography, where inference has to be performed after each measurement. To address this problem we developed a fast sequential importance sampling (SIS) algorithm, with $\mathcal{O}(1)$ likelihood evaluation cost. As we are not aware of this approach being used in the context of QST, we briefly explain the basic version below. The interested reader is referred to\,\cite{SMCBook} for a thorough overview.
+
+In SIS, one keeps track of a number of samples, often called particles, $\param_s,\, (s=1\ldots S)$ and corresponding weights $w_s, \, \left( \sum_s w_s = 1 \right)$  which are updated sequentially, every time a new measurement is made. Assume that after $n$ measurements, having observed data $\data_n$, the particles and weights  $w^{(n)}_s$ constitute an approximation to the posterior:
+
+\begin{equation}
+	p(\param\vert\data_n)\approx \sum_{s=1}^{S}w^{(n)}_s\delta(\param-\param_s)\label{eqn:SISapprox}
+\end{equation}
+
+Using this approximation, and Bayes' rule, one can derive an approximation to the next posterior, after observing a new outcome $\outcome_{n+1}$ in configuration $\config_{n+1}$, as:
+
+\begin{align}
+	p(\param\vert\config_{n+1}&,\outcome_{n+1},\data_n) = \frac{\mathbb{P}(\outcome_{n+1}\vert\param,\config_{n+1})p(\param\vert\data_n)}{\int \mathbb{P}(\outcome_{n+1}\vert\param,\config_{n+1})p(\param\vert\data_n) d\param}\label{eqn:SISupdate}\\
+	&\approx \sum_{s=1}^{S}\underbrace{\frac{\mathbb{P}(\outcome_{n+1}\vert\param_s,\config_{n+1})w^{(n)}_s}{\sum_{r=1}^{S}\mathbb{P}(\outcome_{n+1}\vert\param_r,\config_{n+1})w^{(n)}_r}}_{w^{(n+1)}_s}\delta(\param-\param_s)\notag
+\end{align}
+
+The new weights $w^{(n+1)}_s$ are the renormalised product of our current weights $w^{(n)}_s$ and observation probabilities $\mathbb{P}(\outcome_{n+1}\vert\param_s,\config_{n+1})$. This update is fast, and only requires computing one term of the full likelihood, thus its complexity is independent of how many configurations have been tried before. This computational efficiency comes at a price; as time progresses, several weights decay to almost zero, and thus the quality of our approximation drops. This issue can be detected and handled by monitoring the effective sample size and resampling appropriately\,\cite{SMCBook}.
+%$\mbox{ESS}^{(t)}=\left(\sum_{s=1}^{S}{w^{(t)}_s}^2\right)^{-1}$.
+
+Having discussed our method for estimating the state based on partial data, we now turn to the problem of optimal experiment design. Different state determination schemes have different OED strategies associated with them. Maximum likelihood methods usually use some form of the Cram\'{e}r-Rao bound\,\cite{OEDFirst,OEDAverage}. Bayesian experiment design on the other hand is based on Shannon information\,\cite{MUBFirst,ExactInformation}. The posterior characterises our remaining uncertainty in the parameter, and this uncertainty can be quantified using Shannon's entropy. A sensible aim is to pick an experimental configuration $\config$, such that after observing the outcome $\outcome$, the entropy $\mathbb{H}$ of the new posterior is reduced the most:
+
+\begin{equation}
+\argmax_{\config\in\configset} \left\{ \mathbb{H}\left[p(\param|\data)\right] - \mathbb{E}_{p(\outcome\vert\config,\data)}\left[\mathbb{H}\left[ p(\param|\outcome,\config,\data) \right] \right]\right\}\label{eqn:expectedentropyreduction}
+\end{equation} 
+
+
+The expectation with respect to $\outcome$ is needed as the measurement outcome is unknown \emph{a priori}. This objective naturally allows us to address the question `Having seen the outcome of the first few measurements, which measurement should we carry out next?'
+%However, in the context of quantum state estimation, the criterion has only been used with $\data = \emptyset$, i.e. the information gain was always computed with respect to the prior $p(\param)$\,\cite{MUBFirst,ExactInformation}. In practical terms this means that an optimal set measurements was determined prior to the experiment and then kept fixed throughout the experiment.
+Rather, it was used to determine a single best set of measurements which are then uniformly sampled throughout the experiment\,\cite{MUBFirst,ExactInformation}. Under these circumstances mutually unbiased bases (MUBs) are optimal, whenever they exist. We exploit the dependence of Eqn.\,\eqref{eqn:expectedentropyreduction} on past observations, and allow for measurements to be re-optimised adaptively as the experiment progresses.
+
+However, Eqn.\,\eqref{eqn:expectedentropyreduction}  is impractical to work with directly, as it involves computing entropies of high-dimensional intractable posterior densities. Recall that we approximate our posterior by samples, with which it is notoriously hard to estimate differential entropies. Furthermore, in Eqn. \eqref{eqn:expectedentropyreduction} the posterior has to be re-computed for every possible outcome $\outcome$. Therefore, instead of working with Eqn.\,\eqref{eqn:expectedentropyreduction} directly, we propose to use an equivalent reformulation thereof in terms of predictive distributions\,\cite{ExactInformation}:
+
+\begin{equation}
+\argmax_{\config\in\configset} \left\{ \mathbb{H}\left[\mathbb{P}(\outcome|\config,\data)\right] - \mathbb{E}_{p(\param\vert\data)}\left[\mathbb{H}\left[ \mathbb{P}(\outcome|\config,\param) \right] \right]\right\}\label{eqn:rearrangement}
+\end{equation}
+
+In previous studies \cite{SelfLearning} the system is limited to pure single qubit states, calculating the intractable Bayesian normalising constant can be realised with simple numerical integration; this could not be extended easily to higher dimensions. They consider two active learning algorithms: firstly, uncertainty sampling, which uses an approximate version of Eqn. \eqref{eqn:rearrangement}, where the second term was ignored. This arguably leads to suboptimal selection behaviour; the experimenter's uncertainty may be confounded with inherent uncertainty of quantum measurements. 
+
+Within the Bayesian framework, one could use other measures of uncertainty about the Quantum state; we note that minimizing the Shannon Entropy (Eqn. \eqref{eqn:expectedentropyreduction}) is equivalent to minimization of the Bayes risk when one uses the log loss to evaluate probabilistic estimate of the state \cite{Dawid2007}. One could construct a number of other loss functions - the second algorithm in \cite{SelfLearning} seeks to minimize the Bayes risk, but using fidelity as the loss function. Although this loss is theoretically attractive, only the log loss allows the particular analytic reformulation to Eqn. \eqref{eqn:rearrangement} that permits efficient online computations. Other loss functions require one full posterior update for every possible outcome for each measurement under consideration, ABQT requires only one update per complete cycle. Therefore, if one does not use log loss online computation is infeasible; in \cite{SelfLearningExperimental} experimental designs for all $2^N$ possible experimental outcome successions are pre-computed, they are therefore limited to very short experiments ($< 20$ measurements). Combining Eqn. \eqref{eqn:rearrangement} with our SIS Bayesian update scheme allows for fast online experimental design.
+
+
+\begin{figure}
+\resizebox{.9\columnwidth}{!}{
+\includegraphics{figures/Bloch_disk.pdf}
+}
+
+\caption{Adaptive selection of measurements based of partial data. Scatter plots show 400 samples from current posterior. Shaded circles around the `Bloch disk' show relative value of the objective in Eqn.\,\eqref{eqn:rearrangement} for different measurement directions (lighter is higher). Pairs of arrows show the most informative next measurement. Circular histograms show the number of times measurement directions have been used. \textbf{(a)}  Initially, no observations are made, samples shown are from the uniform prior. All measurements are equally informative, we chose to start with $\{\left\vert H\right\rangle,\left\vert V\right\rangle\}$. \textbf{(b)}  After one measurement, the posterior is updated, the next best measurement is mutually unbiased w.r.t.\ the first one. It is now $\{\left\vert D\right\rangle,\left\vert A\right\rangle\}$. \textbf{(c)} After two observations, the next best measurement is equally biased to the first two bases. \textbf{(d)} Posterior after 1000 observations concentrates around true state. The method tries a range of measurements, with a tendency to point towards the solution.
+\label{fig:Bloch disk}}
+\end{figure}
+
+\begin{figure}
+\input{figures/one_qubit_combined.tikz}
+\caption{One qubit tomography using projective measurements. \textbf{(a)}  Improvement of mean posterior fidelity as the experiment progresses. Results are shown for uniformly sampled measurements (\ref{leg:rand}), uniformly sampled Pauli measurements ( \ref{leg:MUB}), ABQT selecting adaptively amongst the 3 Pauli measurements (\ref{leg:aMUB}) and ABQT picking general measurements (\ref{leg:aFlex}). Adaptive optimisation of measurements allows for an almost $n^{-1}$ rate of convergence, while other methods are more consistent with a $n^{-\frac{1}{2}}$ rate. \textbf{(b)}  Final value of the mean posterior infidelity after 6000 measurements using the four methods as before, as a function of purity of the state to be estimated. The advantage of ABQT is greatest for purer states. \label{fig:qubit_results}}
+\end{figure}
+
+\begin{figure*}[th]
+\input{figures/case1.tikz}
+\input{figures/case2.tikz}
+\input{figures/case3.tikz}
+\input{figures/case5b.tikz}\\
+\caption{Two qubit QST with uniformly chosen amongst MUB (\ref{leg:MUB}) or SSQT bases (\ref{leg:SSQT}) and ABQT picking from the same set of MUBs (\ref{leg:aMUB}),  SSQT bases (\ref{leg:aSSQT}) or a more flexible set of 81 separable bases (\ref{leg:fSSQT}). Cases (a)-(c) are the same as those in\,\cite{MUBExperiment}, (d) shows average results over 20 randomly generated entangled pure states. \textbf{(a)} As expected, for the maximally mixed state the choice of measurement strategy has little effect. \textbf{(b)} On the entangled state $(\vert HH\rangle+\vert VV\rangle)/\sqrt{2}$ MUB outperforms SSQT when uniformly sampled, but by allowing for adaptivity we can close the performance gap. \textbf{(c)} SSQT outperforms MUBs on the separable state $\vert HV \rangle$, but again, picking measurements adaptively the two sets perform similarly. \textbf{(d)} For random pure states a large improvement in performance is made when performing ABQT with the flexible set of separable measurements. Using this set, ABQT only needs $10^4$ measurements to achieve $\approx98.7\%$ mean fidelity for which MUB needs $10^5$ measurements. \label{fig:two_qubit_results}}
+\end{figure*}
+
+The equivalence between Eqns.\, \eqref{eqn:expectedentropyreduction} and \eqref{eqn:rearrangement} becomes clear realising that they both express the conditional mutual information between $\param$ and $\outcome$. Eqn.\,\eqref{eqn:rearrangement} offers computational advantages over Eqn.\,\eqref{eqn:expectedentropyreduction}: it only involves computing discrete entropies $\mathbb{H}\left[ \mathbb{P}(\outcome|\config,\param) \right]$ and expectations of these under the posterior. This objective function is generally non-convex in $\config$, but its value - and derivatives with respect to $\config$ - can now be efficiently computed using our weighted posterior samples from Eqn.\,\eqref{eqn:SISapprox}, allowing us to find the most informative $\config$ by direct optimisation. It is interesting to note that Eqn. \eqref{eqn:rearrangement} is equivalent to the Jensen-Shannon divergence of the class of predictive distributions, with the posterior being the mixing distribution.
+
+In summary, we propose the following algorithm, called Adaptive Bayesian Quantum Tomography. After each single measurement, ABQT updates its approximate posterior using Eqn.\,\eqref{eqn:SISupdate}, then chooses the next measurement by direct numerical maximisation of the information theoretic objective in Eqn.\,\eqref{eqn:rearrangement}.
+
+\paragraph{EX 1: single qubit tomography.} In our first simulated experiments we study tomography of single qubits ($D=2$). Mixed state qubits have three real degrees of freedom, $\rho$ is represented as a point in a unit ball, called the Bloch sphere. For illustration purposes we first omit the third component, and only infer two remaining parameters, which will lie in a unit (Bloch) disk. This corresponds to \eg determining linear polarisation of a photon, assuming that the circular polarisation is zero. We allow for arbitrary projective measurements with binary ($\Gamma = 2$) outcomes. These are represented by pairs of antipodal points on the perimeter of the Bloch disk. Now $\config\in[0,\pi)$ codes for the orientation. Fig.\ \ref{fig:Bloch disk} shows the progression of measurement bases chosen by ABQT. The first two measurements are mutually unbiased, however, the third measurement is equally biased with respect to both previous bases, demonstrating that using a fixed MUB set is suboptimal in the adaptive framework. Throughout the rest of the experiment the algorithm explores a wide range of measurements.
+
+Fig.\ \ref{fig:qubit_results} shows that the posterior mean fidelity - this time inferring all three coordinates in the full Bloch sphere - improves at a faster rate when measurements are adaptively optimised. We quantify performance as mean posterior fidelity, rather than the fidelity of the Bayesian mean estimate, as the latter gives no indication of the confidence in our estimate. The rate is more consistent with a $n^{-1}$ law rather than $n^{-\frac{1}{2}}$ as predicted for non-adaptive methods\,\cite[][and refs.]{MUBExperiment}. Fig.\ \ref{fig:qubit_results}.b shows a larger advantage for states of high purity (defined as sum of squared eigenvalues).
+
+\paragraph{EX 2: Separable vs.\ MUB tomography of two qubits.} In multipartite systems, such as $m$-qubit registers, there are two fundamentally different classes of measurements one can apply: separable or entangling. Separable tomographic experiments are straightforward and cheap to implement, while entangling measurements are statistically more powerful. Notably, entanglement is required for implementing MUBs. These differences are discussed extensively in\,\cite{MUBExperiment}. To investigate this trade-off in the light of adaptive tomography, we reproduce and extend the experiments in\,\cite{MUBExperiment}. Results are shown in Fig.\ \ref{fig:two_qubit_results}. Notably, all substantial differences between MUB and standard separable tomography (SSQT) vanish as we allow for adaptivity (Fig.\ \ref{fig:two_qubit_results}.a--c). Furthermore, for random pure states, we are able to realise a ten-fold improvement over MUBs when using flexible separable measurements (Fig.\ \ref{fig:two_qubit_results}.d). The results indicate that allowing for adaptivity with an imperfect, but flexible set of measurements offers greater advantages than using a fixed set of MUBs.
+
+% conclusions
+
+In summary, we have presented a new adaptive optimal experimental design framework and method based on Bayesian inference and Shannon's information. We showed that mutually unbiased bases, widely accepted as \emph{the} optimal measurements, represent only a partial solution and are suboptimal in the adaptive framework. Moreover, the adaptive framework applies regardless of dimensionality, and can be applied to spaces where MUBs do not even exist\,\cite{DimensionSix,ExactInformation}. This motivates a shift in experimental focus from implementing complex entangling measurements to implementing quickly reconfigurable simpler measurements. In quantum optics, this could be feasibly achieved via mechanically or electronically controlled liquid crystal wave plates.
+
+Although our algorithm demonstrated a substantial leap forward in terms of empirical performance, it is important to keep in mind that it still does not resolve the curse of dimensionality: the size of the parameter space still scales exponentially with the number of qubits in question. Other successful approaches address the question of dimensionality by restricting the search space. Compressed sensing \cite{CompressedSensing} constrains estimation onto a lower-dimensional manifold of rank-deficient states. It is even possible to carry out quantum homodyne tomography in infinite dimensional spaces, assuming the Wigner function is infinitely differentiable and falls into a particular smoothness class \cite{Butucea2007}. These simplifying assumptions and smoothness constraints can be incorporated into a Bayesian framework via priors.
+
+\begin{acknowledgments}
+We thank our advisors M Lengyel, Z Ghahramani and CE Rasmussen as well as G Cs\'{a}nyi, S Lacoste-Julien, E Snelson, J Rau and S Strelchuk for useful comments. We are supported by EPSRC and Trinity College Cambridge\,(FH) and Google Europe\,(NMTH).
+\end{acknowledgments}
+
+\bibliography{quantum_bald}
+
+\end{document}
+
+%\appendix*
+
+%\section{Appendix Illustration of the failure of maximum uncertainty sampling}
+
+%In this appendix we illustrate why maximum uncertainty sampling used in previous studies is an inappropriate strategy for adaptive quantum tomography. 
+
+%Consider the case when we know that the true state is of the form $ \param = \frac{1-\xi}{2}I + \xi\left\vert\psi\right\rangle\left\langle\psi\right\vert$ but we are uncertain about the value of $\xi\in[-1,1]$. Let's assume that our uncertainty about $\xi$ at this point is characterised by the distribtion $q(\xi)$. Now consider selecting the next measurement to make based on the maximum uncertainty criterion. It is easy to see that for any $\left\vert\phi\right\rangle\perp\left\vert\psi\right\rangle$ and any $\chi\in[-1,1]$. $ M_{\pm} = \frac{1-\xi}{2}I \pm \chi\left\vert\phi\right\rangle\left\langle\phi\right\vert$ maximises criterion \eqref{eqn:maxent}, as under all states $\rho$ that have non-zero probability under $q$, the probability of observing each input is
+%\begin{equation}
+%	tr\{M_{\pm}\rho\} = \frac{(1-\xi)(1-\chi)}{4}  + \frac{\xi(1-\chi)}{2} \pm \frac{(1-\xi)\chi}{2} = \frac{1}{2}
+%\end{equation}
+
+

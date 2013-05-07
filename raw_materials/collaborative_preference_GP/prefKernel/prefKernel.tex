@@ -1,0 +1,61 @@
+\section{Pairwise preference learning as special case of binary classification}\label{sec:prefKernel}
+
+The problem of pairwise preference learning can be recast as a special case of binary classification.
+Let us consider two items $i$ and $j$ with corresponding feature vectors $\mathbf{x}_i,\mathbf{x}_j\in\mathcal{X}$.
+In the pairwise preference learning problem, we are given pairs of feature vectors $\mathbf{x}_i$ and $\mathbf{x}_j$
+and corresponding class labels $y\in\{-1,1\}$ such that $y=1$ if the user prefers item $i$ to item $j$
+and $y=-1$ otherwise. The task of interest is then to predict the class label for a new pair of feature vectors
+not seen before.
+This problem can be addressed by introducing a latent preference function $f:\mathcal{X}\mapsto \mathbb{R}$ such that
+$f(\mathbf{x}_i) > f(\mathbf{x}_j)$ whenever the user prefers item $i$ to item $j$
+and $f(\mathbf{x}_i) < f(\mathbf{x}_j)$ otherwise \cite{chu2005}.
+When the evaluations of $f$ are contaminated with Gaussian
+noise with zero mean and (without loss of generality) variance $1/2$, we obtain the following likelihood for $f$
+given $\mathbf{x}_i$, $\mathbf{x}_j$ and $y$
+
+\vspace{-0.65cm}
+{\small
+\begin{align}
+\mathcal{P}(y|\mathbf{x}_i,\mathbf{x}_j,f) &= \Phi[(f[\mathbf{x}_i] - f[\mathbf{x}_j])y]\,,\label{eq:likelihood}
+\end{align}
+}
+
+\vspace{-0.7cm}
+\normalsize where $\Phi$ is the standard Gaussian cumulative distribution function.
+The preference learning problem can be solved by combining a GP prior on $f$
+with the likelihood function in (\ref{eq:likelihood}) \cite{chu2005}. The posterior for $f$ can
+then be used to make predictions on the user preferences for new pairs of items.
+
+Note that the likelihood (\ref{eq:likelihood}) depends only on the difference between $f(\mathbf{x}_i)$ and $f(\mathbf{x}_j)$.
+Let $g:\mathcal{X}^2\mapsto\mathbb{R}$ be the latent function $g(\mathbf{x}_i,\mathbf{x}_j) = f(\mathbf{x}_i) - f(\mathbf{x}_j)$.
+We can recast the inference problem in terms of $g$ and ignore $f$. When the evaluation of $g$ is contaminated with standard Gaussian noise,
+the likelihood for $g$ given $\mathbf{x}_i$, $\mathbf{x}_j$ and $y$ is
+
+\vspace{-0.65cm}
+{\small
+{\small
+\begin{align}
+\mathcal{P}(y|\mathbf{x}_i,\mathbf{x}_j,g) &= \Phi[g(\mathbf{x}_i, \mathbf{x}_j)y]\,.\label{eq:likelihood2}
+\end{align}
+}
+
+\vspace{-0.7cm}
+\normalsize Since $g$ is obtained from $f$ through a linear operation, the GP prior on $f$ induces a GP prior on $g$.
+The covariance function $k_\text{pref}$ of the GP prior on $g$ can be computed from the
+covariance function $k$ of the GP on $f$ as
+$k_\text{pref}((\x_i,\x_j),(\x_k,\x_l)) = k(\x_i,\x_k) + k(\x_j,\x_l) - k(\x_i,\x_l) - k(\x_j,\x_k)$.
+The derivations can be found in Section 1 of the supplementary material.
+We call $k_\text{pref}$ the \emph{preference kernel}. The same kernel function can be derived from a large margin classification
+viewpoint \cite{furnkranz2010}. However, to our knowledge, the preference kernel has not been used
+previously for GP-based models.
+
+The combination of (\ref{eq:likelihood2})
+with a GP prior based on the preference kernel allows us
+to transform the pairwise preference learning problem into 
+binary classification with GPs.
+This means that state-of-the-art methods
+for GP binary classification, such as expectation propagation \cite{Minka2001},
+can be applied directly to preference learning.
+Furthermore, the simplified likelihood (\ref{eq:likelihood2})
+allows us to implement complex methods 
+such as the multi-user approach which is described in the following section.
