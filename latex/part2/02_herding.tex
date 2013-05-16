@@ -55,11 +55,13 @@ In most cases - just as loss-calibrated approximate inference in general, algori
 \begin{figure}[h]
 \centering
 \includegraphics[width=\columnwidth]{figs/herding/fig1_v2}
-\caption{The first 8 samples from sequential Bayesian quadrature, versus the first 20 samples from herding.  Only 8 weighted \sbq{} samples are needed to give an estimator with the same maximum mean discrepancy as using 20 herding samples with uniform weights.  Relative sizes of samples indicate their relative weights.}
+\caption[Sequential Bayesian quadrature versus kernel herding]{}
+% The first 8 samples from sequential Bayesian quadrature, versus the first 20 samples from herding.  Only 8 weighted \sbq{} samples are needed to give an estimator with the same maximum mean discrepancy as using 20 herding samples with uniform weights.  Relative sizes of samples indicate their relative weights.}
 \label{fig:fig1}
 \end{figure} 
 
-\subsubsection{INTRODUCTION}
+\subsubsection{Introduction}
+
 \paragraph{The problem: Integrals} A common problem in statistical machine learning is to compute expectations of functions over probability distributions of the form:
 \begin{equation}
 	Z_{f,p} = \int f(x) p(x) dx \label{eqn:integral}
@@ -140,7 +142,7 @@ In finite dimensional Hilbert spaces, the herding algorithm has been shown to re
 \begin{figure}
 \centering
 \includegraphics[width=\columnwidth]{figs/herding/bq_intro4}
-\caption{An illustration of Bayesian Quadrature.  The function $f(x)$ is sampled at a set of input locations.  This induces a Gaussian process posterior distribution on $f$, which is integrated in closed form against the target density, $p(\vx)$.  Since the amount of volume under $f$ is uncertain, this gives rise to a (Gaussian) posterior distribution over $Z_{f,p}$.}
+\caption[An illustration of Bayesain Quadrature]{An illustration of Bayesian Quadrature.  The function $f(x)$ is sampled at a set of input locations.  This induces a Gaussian process posterior distribution on $f$, which is integrated in closed form against the target density, $p(\vx)$.  Since the amount of volume under $f$ is uncertain, this gives rise to a (Gaussian) posterior distribution over $Z_{f,p}$.}
 \label{fig:bq_intro}
 \end{figure}
 
@@ -208,7 +210,7 @@ Thus, we can view the BQ estimate as a weighted version of the herding estimate.
 \begin{figure}
 \centering
 \includegraphics[width=\columnwidth]{figs/herding/weights_v1_n100}
-\caption{A set of optimal weights given by \bq{}, after 100 \sbq{} samples were selected on the distribution shown in Figure \ref{fig:fig1}.  Note that the optimal weights are spread away from the uniform weight ($\frac{1}{N}$), and that some weights are even negative.  The sum of these weights is 0.93.}
+\caption[Empirical distribution of optimal weights in sequential Bayesian quadrature]{A set of optimal weights given by \bq{}, after 100 \sbq{} samples were selected on the distribution shown in Figure \ref{fig:fig1}.  Note that the optimal weights are spread away from the uniform weight ($\frac{1}{N}$), and that some weights are even negative.  The sum of these weights is 0.93.}
 \label{fig:weights100}
 \end{figure}
 
@@ -464,8 +466,6 @@ Finally, we empirically demonstrated a superior rate of convergence of \sbq{} ov
 \subsubsection{Future Work}
 
 In section \ref{sec:submodularity}, we showed that \sbq{} is approximately submodular, which provides only weak sub-optimality guarantees of its performance. It would be of interest to further explore the connection between Bayesian Quadrature and the dictionary selection problem to see if algorithms developed for dictionary selection can provide further practical or theoretical developments. The results in section \ref{sec:experiments}, specifically Figure \ref{fig:mmd_curve}, suggest that the convergence rate of \sbq{} is faster than $\mathcal{O}(1/N)$. However, we are not aware of any work showing what the theoretically optimal rate is. It would be of great interest to determine this optimal rate of convergence for particular classes of kernels.
-
-\subsubsection*{Acknowledgements}
 
 %The authors would like to thank Carl Rasmussen for helpful discussions, and Yutian Chen for his help in reproducing experiments.
 

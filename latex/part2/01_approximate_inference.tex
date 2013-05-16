@@ -188,7 +188,7 @@ In most cases - just as loss-calibrated approximate inference in general, algori
 \begin{figure}[h]
 \centering
 \includegraphics[width=\columnwidth]{figs/herding/fig1_v2}
-\caption{The first 8 samples from sequential Bayesian quadrature, versus the first 20 samples from herding.  Only 8 weighted \sbq{} samples are needed to give an estimator with the same maximum mean discrepancy as using 20 herding samples with uniform weights.  Relative sizes of samples indicate their relative weights.}
+\caption[Sequential Bayesian quadrature versus kernel herding]{The first 8 samples from sequential Bayesian quadrature, versus the first 20 samples from herding.  Only 8 weighted \sbq{} samples are needed to give an estimator with the same maximum mean discrepancy as using 20 herding samples with uniform weights.  Relative sizes of samples indicate their relative weights.}
 \label{fig:fig1}
 \end{figure} 
 
@@ -273,7 +273,7 @@ In finite dimensional Hilbert spaces, the herding algorithm has been shown to re
 \begin{figure}
 \centering
 \includegraphics[width=\columnwidth]{figs/herding/bq_intro4}
-\caption{An illustration of Bayesian Quadrature.  The function $f(x)$ is sampled at a set of input locations.  This induces a Gaussian process posterior distribution on $f$, which is integrated in closed form against the target density, $p(\vx)$.  Since the amount of volume under $f$ is uncertain, this gives rise to a (Gaussian) posterior distribution over $Z_{f,p}$.}
+\caption[An illustration of Bayesian quadrature]{An illustration of Bayesian Quadrature.  The function $f(x)$ is sampled at a set of input locations.  This induces a Gaussian process posterior distribution on $f$, which is integrated in closed form against the target density, $p(\vx)$.  Since the amount of volume under $f$ is uncertain, this gives rise to a (Gaussian) posterior distribution over $Z_{f,p}$.}
 \label{fig:bq_intro}
 \end{figure}
 
@@ -341,7 +341,7 @@ Thus, we can view the BQ estimate as a weighted version of the herding estimate.
 \begin{figure}
 \centering
 \includegraphics[width=\columnwidth]{figs/herding/weights_v1_n100}
-\caption{A set of optimal weights given by \bq{}, after 100 \sbq{} samples were selected on the distribution shown in Figure \ref{fig:fig1}.  Note that the optimal weights are spread away from the uniform weight ($\frac{1}{N}$), and that some weights are even negative.  The sum of these weights is 0.93.}
+\caption[Empirical distribution of weights in sequential Bayesian quadrature]{A set of optimal weights given by \bq{}, after 100 \sbq{} samples were selected on the distribution shown in Figure \ref{fig:fig1}.  Note that the optimal weights are spread away from the uniform weight ($\frac{1}{N}$), and that some weights are even negative.  The sum of these weights is 0.93.}
 \label{fig:weights100}
 \end{figure}
 
@@ -352,7 +352,7 @@ Figure \ref{fig:weights_shrinkage} demonstrates that, in general, the sum of the
 \begin{figure}
 \centering
 \includegraphics[width=\columnwidth]{figs/herding/weights_shrinkage}
-\caption{An example of Bayesian shrinkage in the sample weights.  In this example, the kernel width is approximately $\nicefrac{1}{20}$ the width of the distribution being considered.  Because the prior over functions is zero mean, in the small sample case the weights are shrunk towards zero.  The weights given by simple Monte Carlo and herding do not exhibit shrinkage. }
+\caption[The concept of shrinkage in Bayesian quadrature]{An example of Bayesian shrinkage in the sample weights.  In this example, the kernel width is approximately $\nicefrac{1}{20}$ the width of the distribution being considered.  Because the prior over functions is zero mean, in the small sample case the weights are shrunk towards zero.  The weights given by simple Monte Carlo and herding do not exhibit shrinkage. }
 \label{fig:weights_shrinkage}
 \end{figure}
 
@@ -484,7 +484,7 @@ We demonstrate that although herding improves upon i.\,i.\,d.\ sampling, the uni
 %
 \begin{figure}
 \includegraphics[width=\columnwidth]{figs/herding/expected_variance_v7_400}
-\caption{The maximum mean discrepancy, or expected error of several different quadrature methods.  Herding appears to approach a rate close to $\mathcal{O}(1/N)$.  \sbq{} appears to attain a faster, but unknown rate.}
+\caption[Discrepancy of Bayesian quadrature, herding and random sampling]{The maximum mean discrepancy, or expected error of several different quadrature methods.  Herding appears to approach a rate close to $\mathcal{O}(1/N)$.  \sbq{} appears to attain a faster, but unknown rate.}
 \label{fig:mmd_curve}
 \end{figure}
 %
@@ -511,7 +511,7 @@ That is, these functions belonged exactly to the unit ball of the RKHS defined b
 %
 \begin{figure}
 \includegraphics[width=\columnwidth]{figs/herding/error_curve_rkhs_400_v4}
-\caption{Within-model error: The empirical error rate in estimating $Z_{f,p}$, for several different sampling methods, averaged over 250 functions randomly drawn from the RKHS corresponding to the kernel used.}
+\caption[Empirical error of Bayesian quadrature, herding and random sampling]{Within-model error: The empirical error rate in estimating $Z_{f,p}$, for several different sampling methods, averaged over 250 functions randomly drawn from the RKHS corresponding to the kernel used.}
 \label{fig:error_curve}
 \end{figure}
 %
@@ -521,7 +521,7 @@ By definition, MMD provides a upper bound on the estimation error in the integra
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{figs/herding/bound_curve_rkhs}
-\caption{The empirical error rate in estimating $Z_{f,p}$,  for the \sbq{} estimator, on 10 random functions drawn from the RKHS corresponding to the kernel used.  Also shown is the upper bound on the error rate implied by the $\mmd$.}
+\caption[Illustrating MMD as an upper bound on empirical error rate]{The empirical error rate in estimating $Z_{f,p}$,  for the \sbq{} estimator, on 10 random functions drawn from the RKHS corresponding to the kernel used.  Also shown is the upper bound on the error rate implied by the $\mmd$.}
 \label{fig:bound_curve}
 \end{figure}
 
@@ -537,7 +537,7 @@ where each $\alpha_i$ $\vc_i$ $\Sigma_i$ were drawn from broad distributions.  T
 %
 \begin{figure}
 \includegraphics[width=\columnwidth]{figs/herding/error_curve_outmodel_400_v3}
-\caption{Out-of-model error: The empirical error rates in estimating $Z_{f,p}$, for several different sampling methods, averaged over 250 functions drawn from outside the RKHS corresponding to the kernels used.}
+\caption[Out-of-model error of Bayeisan quadrature, herding and random sampling]{Out-of-model error: The empirical error rates in estimating $Z_{f,p}$, for several different sampling methods, averaged over 250 functions drawn from outside the RKHS corresponding to the kernels used.}
 \label{fig:error_curve_outmodel}
 \end{figure}
 %

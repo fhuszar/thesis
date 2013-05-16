@@ -1,0 +1,15 @@
+%!TEX root = main.tex
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newtheorem{statement}{Statement}
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+\newtheorem{definition}{Definition}
+
+\makeatletter
+\newcommand{\ChapterOutsidePart}{%
+   \def\toclevel@chapter{-1}\def\toclevel@section{0}\def\toclevel@subsection{1}}
+\newcommand{\ChapterInsidePart}{%
+   \def\toclevel@chapter{0}\def\toclevel@section{1}\def\toclevel@subsection{2}}
+\makeatother

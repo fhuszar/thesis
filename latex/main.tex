@@ -1,7 +1,5 @@
-\documentclass[11pt]{book}
-\title{Scoring rules and Information Quantities\\in Bayesian Analysis \\ | or | \\ Why I am never going to submit this}
-\author{Ferenc Husz\'{a}r}
-\usepackage{a4wide}
+\documentclass[11pt]{CUEDthesisPSnPDF}
+
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools}
 \usepackage{tikz,pgfplots}
@@ -14,43 +12,88 @@
 \usepackage{lipsum}
 
 
-\newtheorem{theorem}{Theorem}
-\newtheorem{corollary}{Corollary}
-\newtheorem{proposition}{Proposition}
-\newtheorem{statement}{Statement}
-\theoremstyle{definition}
-\newtheorem{example}{Example}[section]
-\newtheorem{definition}{Definition}
-
-\makeatletter
-\newcommand{\ChapterOutsidePart}{%
-   \def\toclevel@chapter{-1}\def\toclevel@section{0}\def\toclevel@subsection{1}}
-\newcommand{\ChapterInsidePart}{%
-   \def\toclevel@chapter{0}\def\toclevel@section{1}\def\toclevel@subsection{2}}
-\makeatother
+\input{preamble}
 
 \input{notation}
 
+\ifpdf
+    \pdfinfo { /Title  (CUED PhD and MPhil Thesis Classes)
+               /Creator (TeX)
+               /Producer (pdfTeX)
+               /Author (Harish Bhanderi harish.bhanderi@cantab.net)
+               /CreationDate (D:20030101000000)  %format D:YYYYMMDDhhmmss
+               /ModDate (D:20030815213532)
+               /Subject (Writing a PhD thesis in LaTeX)
+               /Keywords (PhD, Thesis)}
+    \pdfcatalog { /PageMode (/UseOutlines)
+                  /OpenAction (fitbh)  }
+\fi
+
+\title{Scoring rules and stuff}
+
+\ifpdf
+  \author{\href{mailto:ferenc.huszar@gmail.com}{Ferenc Husz\'{a}r}}
+  \collegeordept{\href{http://mlg.eng.cam.ac.uk}{Computational and Biological Learning Lab \\ Department of Engineering \\[1ex] Trinity College}}
+  \university{\href{http://www.cam.ac.uk}{University of Cambridge}}
+% insert below the file name that contains the crest in-place of 'UnivShield'
+  \crest{\includegraphics[width=60mm]{figs/uc-pantone}}
+\else
+  \author{Harish Bhanderi}
+  \collegeordept{Department of Engineering}
+  \university{University of Cambridge}
+% insert below the file name that contains the crest in-place of 'UnivShield'
+  \crest{\includegraphics[bb = 0 0 292 336, width=60mm]{figs/uc-pantone}}
+\fi
+
+\degree{Doctor of Philosophy}
+\degreedate{Yet to be decided}
+
+\hbadness=10000
+\hfuzz=50pt
+
+\onehalfspacing
+
 \begin{document}
+
 \maketitle
 
-\ChapterOutsidePart 
-\pdfbookmark{\contentsname}{toc}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\frontmatter
+\pagenumbering{roman}
+\include{frontmatter/dedication}
+\include{frontmatter/acknowledgement}
+\include{frontmatter/abstract}
+
 \tableofcontents
+\listoffigures
+% \printnomenclature  %% Print the nomenclature
+% \addcontentsline{toc}{chapter}{Nomenclature}
+\mainmatter
+
+\ChapterOutsidePart
 
 \chapter{Introduction}
+
 \input{introduction}
 
 \ChapterInsidePart
+
 \input{part1_main}
+
 \input{part2_main}
+
 \input{part3_main}
 
 \ChapterOutsidePart
+
 \chapter{Conclusions}
+
 \input{conclusions}
 
 \bibliographystyle{plainnat}
+\renewcommand{\bibname}{References}
 \bibliography{thesis}
 
 \end{document}

@@ -70,8 +70,7 @@ BALD exploits the fact that in many active learning applications the output spac
 I will use a non-parametric Bayesian classification model, Gaussian process classification \citep[GPC,][]{rasmussen06GP} to demonstrate the usefulness of BALD: GPC appears to be an especially challenging problem for information-theoretic active learning because its parameter space is infinite. Therefore, computing entropy of the posterior involves nontrivial quantities. However, by using the BALD approach and Eqn.\ \eqref{eqn:rearrangement} we are able to fully calculate the relevant information quantities without having to work out entropies of infinite dimensional objects. 
 
 
-
- The probabilistic model underlying GPC is as follows:
+The probabilistic model underlying GPC is as follows:
 
 \begin{align}
 	f \sim \mathrm{GP}(\mu(\cdot),k(\cdot,\cdot)) \qquad \y\vert\x,f \sim\mathrm{Bernoulli}(\Phi(f(\x))) 
@@ -82,6 +81,8 @@ The latent parameter, now called $f$ (previously denoted as $\param$), is a real
 We consider the probit case where given the value of $f$, the binary label $y$ takes a Bernoulli distribution with probability $\Phi(f(\x))$, and $\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \citep{rasmussen2005}.
 
 Posterior inference in the GPC model is intractable; given some observations $\data$, the posterior over $f$ becomes non-Gaussian and complicated. The most commonly used approximate inference methods for Gaussian process classification are expectation propagation \citep[EP,][]{Minka2002}, Laplace's approximation \citep{williams1998}, assumed density filtering \citep[ADF,][]{csato2000} and sparse methods \citep{candela05sparseGP}. These all approximate the non-Gaussian posterior by a Gaussian \citep{Nickisch2008}, but differ in the optimisation criterion and other restrictions. Throughout this chapter I will assume that we are provided with some Gaussian approximation to the GPC posterior resulting from one of these methods, though the active learning method is agnostic as to which method produced this estimate. Given the sequential nature of active learning, fast on-line methods are particualrly well suited for the task \citep{Csato2002}. In our derivation we will use {\scriptsize$\stackrel{1}{\approx}$} to indicate where approximate inference is exploited.
+
+\subsection{Computing the value of information}
 
 Now, we will compute the informativeness of a query $\x$ using Eqn.  \eqref{eqn:rearrangement}.  The entropy of the binary output variable $y$ given a fixed $f$ can be expressed in terms of the binary entropy function $h$: 
 \begin{align}
@@ -110,7 +111,7 @@ To summarise, the \ourmethod algorithm for Gaussian process classification consi
 
 For most practically relevant kernels, the objective \eqref{eqn:BALD_GPC} is smooth, and differentiable function of $\x$, so gradient-based optimisation procedures can be used to find the maximally informative query.
 
-% \begin{figure}\centering
+\begin{figure}\centering
 % \begin{tikzpicture}
 % \node at (0,0) {
 % \resizebox{.55\columnwidth}{!}{\input{figs/gaussian_approx.tikz}}};
@@ -125,8 +126,8 @@ For most practically relevant kernels, the objective \eqref{eqn:BALD_GPC} is smo
 % \end{tabular}
 % }};
 % \end{tikzpicture}
-% \caption{\emph{Left:} Analytic approximation ({\scriptsize $\stackrel{1}{\approx}$}) to the binary entropy of the error function (\ref{plots:approx_true}) by a squared exponential (\ref{plots:approx_approx}). The absolute error (\ref{plots:approx_error}) remains under $3\cdot 10^{-3}$. \emph{Right:} Percentage approximation error ($\pm$1 s.d.) for different methods of approximate inference (\emph{columns}) and approximation methods for evaluating Eqn.\eqref{eqn:mean_entropy} (\emph{rows}). The results indicate that {\scriptsize $\stackrel{2}{\approx}$} is a very accurate approximation; EP causes some loss and Laplace significantly more, which is in line with the comparison presented in \citep{Kuss05}. }\label{fig:trick}
-% \end{figure}
+	\caption[Taylor series approximation to the value of information in GP classification]{\emph{Left:} Analytic approximation ({\scriptsize $\stackrel{1}{\approx}$}) to the binary entropy of the error function (\ref{plots:approx_true}) by a squared exponential (\ref{plots:approx_approx}). The absolute error (\ref{plots:approx_error}) remains under $3\cdot 10^{-3}$. \emph{Right:} Percentage approximation error ($\pm$1 s.d.) for different methods of approximate inference (\emph{columns}) and approximation methods for evaluating Eqn.\eqref{eqn:mean_entropy} (\emph{rows}). The results indicate that {\scriptsize $\stackrel{2}{\approx}$} is a very accurate approximation; EP causes some loss and Laplace significantly more, which is in line with the comparison presented in \citep{Kuss05}. }\label{fig:trick}
+\end{figure}
 	
 % ########  ########  ######  ##     ## ##       ########  ######      ######   ########   ######  
 % ##     ## ##       ##    ## ##     ## ##          ##    ##    ##    ##    ##  ##     ## ##    ## 
@@ -138,22 +139,22 @@ For most practically relevant kernels, the objective \eqref{eqn:BALD_GPC} is smo
 
 \subsection{Results}
 
-% \begin{figure}
-% 	\begin{center}
-% 	\begin{tabular}{ccc}
-% 	\input{figs/BALD/GPC/blockinthemiddle_dataset.tikz}&
-% 	\input{figs/BALD/GPC/corner_dataset.tikz}&
-% 	\input{figs/BALD/GPC/checkerboard_dataset.tikz}\\
-% 	\input{figs/BALD/GPC/blockinmiddle2.tikz}&
-% 	\input{figs/BALD/GPC/blockincorner2.tikz}&
-% 	\input{figs/BALD/GPC/checkerboard2.tikz} \\
-% 	\end{tabular}
-% 	\end{center}
-% 	\caption{\emph{Top:} Artificial datasets used in our evaluation of active learning methods. Exemplars of the two classes are shown with black squares (\ref{plots:positives}) and red circles (\ref{plots:negatives}). \emph{Bottom:} Results of active learning with nine methods: random query (\ref{plots:rand}), \ourmethod (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with the vote criterion with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), Kapoor \emph{et al.} \citep{Kapoor2007} (\ref{plots:dec}), Zhu \emph{et al.} \citep{Zhu2003} (\ref{plots:semi}) and empirical error (\ref{plots:emp}).}
-% 	\label{fig:artificial}
-% \end{figure}
+\begin{figure}
+	% \begin{center}
+	% \begin{tabular}{ccc}
+	% \input{figs/BALD/GPC/blockinthemiddle_dataset.tikz}&
+	% \input{figs/BALD/GPC/corner_dataset.tikz}&
+	% \input{figs/BALD/GPC/checkerboard_dataset.tikz}\\
+	% \input{figs/BALD/GPC/blockinmiddle2.tikz}&
+	% \input{figs/BALD/GPC/blockincorner2.tikz}&
+	% \input{figs/BALD/GPC/checkerboard2.tikz} \\
+	% \end{tabular}
+	% \end{center}
+	\caption[Evaluation of Bayesian active learning on artificial datasets]{\emph{Top:} Artificial datasets used in our evaluation of active learning methods. Exemplars of the two classes are shown with black squares (\ref{plots:positives}) and red circles (\ref{plots:negatives}). \emph{Bottom:} Results of active learning with nine methods: random query (\ref{plots:rand}), \ourmethod (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with the vote criterion with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), Kapoor \emph{et al.} \citep{Kapoor2007} (\ref{plots:dec}), Zhu \emph{et al.} \citep{Zhu2003} (\ref{plots:semi}) and empirical error (\ref{plots:emp}).}
+	\label{fig:artificial}
+\end{figure}
 
-% \begin{figure}
+\begin{figure}
 % 	\begin{center}
 % 	\begin{tabular}{ccc}
 % 	\input{figs/BALD/GPC/crabs2.tikz}&
@@ -170,9 +171,9 @@ For most practically relevant kernels, the objective \eqref{eqn:BALD_GPC} is smo
 % 	\input{figs/BALD/GPC/cancerB2.tikz}\\
 % 	\end{tabular}
 % 	\end{center}
-% 	\caption{Classification accuracy on classification and preference learning datasets. Methods used are random query (\ref{plots:rand}), \ourmethod (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), decision theoretic \citep{Kapoor2007} (\ref{plots:dec}), semi-supervised \citep{Zhu2003} (\ref{plots:semi}) and empicial error (\ref{plots:emp}). The decision theoretic methods took a long time to run, so were not completed for all datasets. Plots (a-h) are GPC datasets, (i-k) are preference learning, plot (l) includes \ourmethod with hyperparameter learning (\ref{plots:opthyper})}.
-% 	\label{fig:all}
-% \end{figure}
+	\caption[Evaluation of Bayesian active learning on real-world datasets]{Classification accuracy on classification and preference learning datasets. Methods used are random query (\ref{plots:rand}), \ourmethod (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), decision theoretic \citep{Kapoor2007} (\ref{plots:dec}), semi-supervised \citep{Zhu2003} (\ref{plots:semi}) and empicial error (\ref{plots:emp}). The decision theoretic methods took a long time to run, so were not completed for all datasets. Plots (a-h) are GPC datasets, (i-k) are preference learning, plot (l) includes \ourmethod with hyperparameter learning (\ref{plots:opthyper})}.
+	\label{fig:all}
+\end{figure}
 
 \subsection{Conclusions}
 
