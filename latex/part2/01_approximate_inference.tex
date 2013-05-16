@@ -27,9 +27,15 @@ In section \ref{sec:losscalibrated} I argue that when Bayesian inference is perf
 
 Monte Carlo methods produce random samples (approximately) drawn from the posterior, which in turn allow for approximating relevant integrals and making predictinos. Monte Carlo techniques have been successfully applied to a wide range of Bayesian inference problems. However, just as most variational approaches, Monte Carlo techniques are ignorant of the decisions and losses involved in a decision problem. In section \ref{sec:} I introduce a new class of approximate inference algorithms that I call loss-calibrated quasi-Monte Carlo methods. These algorithms produce a deterministic sequence of pseudo-samples in such a way, that the divergence between the empirical distribution of pseudosamples is minimised from the target distribution. I show that kernel herding, a recent heuristic algorithm proposed by \citet{Chen2012} can be considered a special case of loss-calibrated quasi-Monte Carlo, and point out connections between this method and Bayesian Quadrature.
 
+% ######## ########     ###    ##     ## ######## ##      ##  #######  ########  ##    ## 
+% ##       ##     ##   ## ##   ###   ### ##       ##  ##  ## ##     ## ##     ## ##   ##  
+% ##       ##     ##  ##   ##  #### #### ##       ##  ##  ## ##     ## ##     ## ##  ##   
+% ######   ########  ##     ## ## ### ## ######   ##  ##  ## ##     ## ########  #####    
+% ##       ##   ##   ######### ##     ## ##       ##  ##  ## ##     ## ##   ##   ##  ##   
+% ##       ##    ##  ##     ## ##     ## ##       ##  ##  ## ##     ## ##    ##  ##   ##  
+% ##       ##     ## ##     ## ##     ## ########  ###  ###   #######  ##     ## ##    ## 
 
-
-\section{Loss-calibrated approximate inference}
+\section{The goals of approximate inference}
 
 In many practically relevant cases computing the Bayesian posterior is not analytically tractable. This is predominantly due to the fact that the integral defining the marginal likelihood $\int p(\dataset\vert\param)p(\param)d\param$ cannot be computed analytically, and therefore the posterior is only known up to a multiplicative constant. It is usual practice to approximate the intractable posterior by something simpler, a computationally convenient approximate distribution $q$. The problem of finding an approximate posterior $q$ is referred to as approximate Bayesian inference.
 
@@ -43,7 +49,7 @@ Variational methods to approximate inference find the optimal approximation $q^{
 	\log p(\dataset) &= \log \int p(\dataset\vert\param)p(\param) d\param\\
 		&=\log \int \frac{p(\dataset\vert\param)p(\param)}{q(\param)}q(\param) d\param\\
 		&\geq \int \log \frac{p(\dataset\vert\param)p(\param)}{q(\param)} q(\param) d\param\\
-		&= \log p(\dataset) - \KL{q}{p_{\dataset}}		\label{eqn:variational_lower_bound}
+		&= \log p(\dataset) - \KL{q}{p_{\dataset}}      \label{eqn:variational_lower_bound}
 \end{align}
 
 Maximising the lower bound amounts to minimising the Kullback-Leibler divergence $\KL{q}{p_{\dataset}}$ (Eqn.\ \eqref{eqn:KL_divergence}) between the approximate distribution $q$ and the true posterior $p_{\dataset}$. A common practice in approximate inference is to choose the approximate posterior distribution $q$ from an exponential family of distributions $\Qe$. In addition, $q$ is often such that it factorises over multivariate quantities. When these assumptions are made, the optimal solution maximising the lower bound in eqn.\ \eqref{eqn:variational_lower_bound} can usually be expressed in closed form. If analytical solution is not available, efficient iterative algorithms based on message passing exist for finding a locally optimal solution numerically \citep{Winn2006}.
@@ -115,26 +121,34 @@ This simple example already highlighted some features of the loss-calibrated fra
 
 In practice, one usually treats the approximate $q$ as if it was the true posterior and chooses the action that minimizes what we will call the \emph{$q$-risk}:
 \begin{equation} \label{e:q-risk}
-    \mathcal{R}_q(h) \doteq \int_\Theta q(\param) L(\param,h) d\param ,
+	\mathcal{R}_q(h) \doteq \int_\Theta q(\param) L(\param,h) d\param ,
 \end{equation}
 obtaining a \emph{$q$-optimal} action $h_q$:
 \begin{equation}
-    h_q \doteq \argmin{h \in \mathcal{H}} \mathcal{R}_q(h).
+	h_q \doteq \argmin{h \in \mathcal{H}} \mathcal{R}_q(h).
 \end{equation}
 In this paper, we will assume that computing exactly the $q$-optimal action $h_q$ for $q \in \mathcal{Q}$ is tractable, and focus on the problem of choosing a suitable $q$ to approximate the posterior $p_\dataset$ \emph{in order to yield a decision $h_q$ with low posterior risk $\mathcal{R}_{p_\dataset}(h_q)$}, mimicking the standard methodology but crystallizing the decision theoretic goal. Given this approach, a (usually non-unique) optimal $q \in \mathcal{Q}$ is clearly:
 \begin{equation}
-    q_\mathrm{opt} = \argmin{q \in \mathcal{Q}} \mathcal{R}_{p_\dataset}(h_q),
+	q_\mathrm{opt} = \argmin{q \in \mathcal{Q}} \mathcal{R}_{p_\dataset}(h_q),
 \end{equation}
 though a practical algorithm might only be able to find an approximate minimizer to this quantity. In the case where $p_\dataset\in\mathcal{Q}$, $p_\dataset$ is obviously optimal according to this criterion.
 
 We could interpret the above criterion as minimizing the following asymmetric non-negative discrepancy measure between distributions:
 \begin{equation} \label{e:d_L}
-    d_L(p\|q) \doteq \mathcal{R}_{p}(h_q) - \mathcal{R}_{p}(h_p).
+	d_L(p\|q) \doteq \mathcal{R}_{p}(h_q) - \mathcal{R}_{p}(h_p).
 \end{equation}
 Interestingly, the Kullback-Leibler divergence $KL(p\|q)$ can be interpreted as a special case of $d_L$ for the task of posterior density estimation over $\Theta$. In this task, an action $h$ is a density over $\Theta$ and the standard density estimation statistical loss is $L(\param,h) = -\log h(\param)$. The $q$-risk $R_q(h)$ then becomes the cross-entropy $H(q,h)=-\int_\Theta q(\param) \log(h(\param)) d\param$, and so $h_q = q$ assuming that $q \in \mathcal{H}$. Under these assumptions, we obtain that $KL(p\|q) = d_L(p\|q)$ and so as was already known in statistics, $KL(p_\dataset\|\cdot)$ appears ``loss-calibrated'' for the task of posterior density estimation in our approximation framework. But this begs the natural question of whether minimizing $d_L$ for a particular loss $L$ provides optimal performance under other losses. We will show in \ref{ss:GPR} that even in the simple Gaussian linear regression setting, minimizing the KL divergence can be suboptimal in the squared loss sense, thus motivating us to seek loss-calibrated alternatives.
 
 %!TEX root = ../main.tex
 \definecolor{mydarkblue}{rgb}{0,0.08,0.45}
+
+% ##        #######   ######   ######      #######  ##     ##  ######  
+% ##       ##     ## ##    ## ##    ##    ##     ## ###   ### ##    ## 
+% ##       ##     ## ##       ##          ##     ## #### #### ##       
+% ##       ##     ##  ######   ######     ##     ## ## ### ## ##       
+% ##       ##     ##       ##       ##    ##  ## ## ##     ## ##       
+% ##       ##     ## ##    ## ##    ##    ##    ##  ##     ## ##    ## 
+% ########  #######   ######   ######      ##### ## ##     ##  ######  
 
 \section{Loss-calibrated quasi-Monte Carlo}
 
@@ -192,7 +206,8 @@ In most cases - just as loss-calibrated approximate inference in general, algori
 \label{fig:fig1}
 \end{figure} 
 
-\subsubsection{INTRODUCTION}
+\section{Bayesian herding}
+
 \paragraph{The problem: Integrals} A common problem in statistical machine learning is to compute expectations of functions over probability distributions of the form:
 \begin{equation}
 	Z_{f,p} = \int f(x) p(x) dx \label{eqn:integral}
@@ -213,11 +228,9 @@ We then demonstrate empirically the relative performance of herding, i.i.d rando
 
 
 
-\subsubsection{HERDING} 
+\subsection{Herding} 
 
 Herding was introduced by \citep{welling2009herding} as a method for generating pseudo-samples from a distribution in such a way that certain nonlinear moments of the sample set closely match those of the target distribution.  The empirical mean $\frac{1}{N}\sum_{n=1}^{N}f_{x_n}$ over these pseudosamples is then used to estimate integral \ref{eqn:integral}.
-
-\subsubsection{Maximum Mean Discrepancy}
 
 For selecting pseudosamples, herding relies on an objective based on the maximum mean discrepancy \citep[MMD;\ ][]{Sriperumbudur2008}. MMD measures the divergence between two distributions, $p$ and $q$ with respect to a class of integrand functions $\mathcal{F}$ as follows:
 %
@@ -230,8 +243,8 @@ Intuitively, if two distributions are close in the MMD sense, then no matter whi
 \begin{align}
 MMD^2_{\He}(p,q) =& \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left\vert\int f_x p(x) dx - \int f_x q(x) dx\right\vert^2\label{eqn:rkhs-mmd}\\
 	=& \Hnorm{\mu_{p} - \mu_{q}}^2\\
-\nonumber	=&\iint k(x,y) p(x) p(y) dx dy\\
-\nonumber	-2 &\iint k(x,y) p(x) q(y) dx dy\\
+\nonumber   =&\iint k(x,y) p(x) p(y) dx dy\\
+\nonumber   -2 &\iint k(x,y) p(x) q(y) dx dy\\
 	+ &\iint k(x,y) q(x) q(y) dx dy,
 \end{align}
 %
@@ -241,7 +254,7 @@ Herding uses maximum mean discrepancy to evaluate of how well the sample set $\{
 
 \begin{align}
 	\epsilon_{herding}&\left(\{\vx_1,\ldots,\vx_{N}\}\right) = \mmd_{\He}\left(p,\frac{1}{N}\sum_{n=1}^{N}\delta_{x_n}\right)\\
-\nonumber	=&\iint k(x,y) p(x) p(y) dx dy\\
+\nonumber   =&\iint k(x,y) p(x) p(y) dx dy\\
 		-2 &\frac{1}{N}\sum_{n=1}^{N}\int k(x,x_n) p(x) dx
 		+ \frac{1}{N^2}\sum_{n,m=1}^{N} k(x_n,x_m)
 \label{eq:mmd_assumption}
@@ -266,9 +279,7 @@ Criterion \eqref{eqn:herding_criterion} can be evaluated in only $\mathcal{O}(n)
 In finite dimensional Hilbert spaces, the herding algorithm has been shown to reduce $\mmd$ at a rate $\mathcal{O}(\frac{1}{N})$, which compares favourably with the $\mathcal{O}(\frac{1}{\sqrt{N}})$ rate obtained by non-deterministic Monte Carlo samplers. However, as pointed out by \citep{bach2012equivalence}, this fast convergence is not guaranteed in infinite dimensional Hilbert spaces, such as the RKHS corresponding to the Gaussian kernel.
 
 
-
-
-\subsubsection{BAYESIAN QUADRATURE} 
+\subsection{Bayesian quadrature} 
 
 \begin{figure}
 \centering
@@ -281,11 +292,6 @@ So far, we have only considered integration methods in which the integral \eqref
 
 In \citep{BZMonteCarlo}, an alternate method is propositionosed: Bayesian Monte Carlo, or Bayesian quadrature (\bq).  \bq{} puts a prior distribution on $\vf$, then estimates integral \eqref{eqn:integral} by inferring a posterior distribution over the function $\vf$, conditioned on the observations $\vf(\vx_n)$ at some query points $\vx_n$.  The posterior distribution over $f$ then implies a distribution over $Z_{f,p}$.  This method allows us to choose sample locations $\vx_n$ in any desired manner. See Figure \ref{fig:bq_intro} for an illustration of Bayesian Quadrature.
 
-%In \citep{BZMonteCarlo}, an alternate method was propositionosed: Bayesian Monte Carlo, or Bayesian quadrature (\bq).  \bq{} puts a prior distribution on $\vf$, then conditions on the observations $\vf(\vx_n)$ to obtain a posterior distribution over the function $\vf$.  The posterior over $\vf$ then implies a Then estimates integral \eqref{eqn:integral} by 
-
-
-\subsubsection{ BQ Estimator}
-
 Here we derive the \bq{} estimate of \eqref{eqn:integral}, after conditioning on function evaluations $\vf(\vx_1) \dots \vf(\vx_N)$, denoted as $f(\vX)$.  The Bayesian solution implies a distribution over $Z_{f,p}$.  The mean of this distribution, $\expect{}{Z}$ is the optimal Bayesian estimator for a squared loss.
 
 For simplicity, $\vf$ is assigned a Gaussian process prior with kernel function $k$ and mean $0$.  This assumption is very similar to the one made by kernel herding in Eqn.\ \eqref{eq:mmd_assumption}.
@@ -293,12 +299,12 @@ For simplicity, $\vf$ is assigned a Gaussian process prior with kernel function 
 After conditioning on $\vf_{\vx}$, we obtain a closed-form posterior over $\vf$:
 %
 \begin{align}
-p(\vf(\vx\st)|\vf(\vX)) = \Normal{\vf_{\vx\st}}{\mf(\vx\st)}{\cov(\vx\st,\vx\st')}
+	p(\vf(\vx\st)|\vf(\vX)) = \Normal{\vf_{\vx\st}}{\mf(\vx\st)}{\cov(\vx\st,\vx\st')}
 \end{align} 
 where
 \begin{align}
-\mf(\vx\st) = & k(\vx\st, \vX) K^{-1} \vf(\vX) \\
-\cov(\vx\st, \vx\st') = & k(\vx\st,\vx\st) - k(\vx\st, \vX) K^{-1} k(\vX, \vx\st)
+	\mf(\vx\st) = & k(\vx\st, \vX) K^{-1} \vf(\vX) \\
+	\cov(\vx\st, \vx\st') = & k(\vx\st,\vx\st) - k(\vx\st, \vX) K^{-1} k(\vX, \vx\st)
 \end{align} 
 %
 and $K = k(\vX, \vX)$. 
@@ -310,12 +316,12 @@ Conveniently, the \gp{} posterior allows us to compute the expectation of \eqref
 %\end{align} 
 %so we integrate over functions to get:
 \begin{align}
-\expect{\gp}{Z} & = \expect{\gp}{\int f(\vx)p(\vx)d\vx}\\
- & = \int\!\!\! \int\!\! f(\vx) p(f(\vx)|\vf(\vX)) p(\vx) d\vx df\\
- & = \int\!\!\! \mf(\vx) p(\vx) d\vx \\
- & = \left[ \int\!\! k(\vx, \vX) p(\vx) d\vx \right] K^{-1} \vf(\vX) \\
- & = \vz^T K^{-1} \vf(\vX)
-\label{eq:marg_mean_symbolic}
+	\expect{\gp}{Z} & = \expect{\gp}{\int f(\vx)p(\vx)d\vx}\\
+	 & = \int\!\!\! \int\!\! f(\vx) p(f(\vx)|\vf(\vX)) p(\vx) d\vx df\\
+	 & = \int\!\!\! \mf(\vx) p(\vx) d\vx \\
+	 & = \left[ \int\!\! k(\vx, \vX) p(\vx) d\vx \right] K^{-1} \vf(\vX) \\
+	 & = \vz^T K^{-1} \vf(\vX)
+	\label{eq:marg_mean_symbolic}
 \end{align} 
 where
 \begin{align}
@@ -325,24 +331,24 @@ z_n & = \int\!\! k(\vx, \vx_n) p(\vx) d\vx = \expect{\vx' \sim p}{k(\vx_n, \vx')
 Conveniently, as in kernel herding, the desired expectation of $Z_{f,p}$ is simply a linear combination of observed function values $\vf(\vx)$:
 %
 \begin{align}
-\expect{\gp}{Z} & = \vz^T K^{-1} \vf(\vX) \\
-    & = \sum_n w_{\bq}^{(n)} \vf_{\vx_n})
+	\expect{\gp}{Z} & = \vz^T K^{-1} \vf(\vX) \\
+		& = \sum_n w_{\bq}^{(n)} \vf_{\vx_n})
 \end{align}  
 where
 \begin{align}  
-w_{\bq}^{(n)} & = \sum_m \vz_j^T K^{-1}_{nm}
-\label{eq:bq_weights}
+	w_{\bq}^{(n)} & = \sum_m \vz_j^T K^{-1}_{nm}
+	\label{eq:bq_weights}
 \end{align}
 %
 Thus, we can view the BQ estimate as a weighted version of the herding estimate.  Interestingly, the weights $\vw_{\bq}$ do not need to sum to 1, and are not even necessarily positive.
 
-\subsubsection{Non-normalized and Negative Weights}
+	\subsubsection{Weights in Bayesian quadrature}
 
 \begin{figure}
-\centering
-\includegraphics[width=\columnwidth]{figs/herding/weights_v1_n100}
-\caption[Empirical distribution of weights in sequential Bayesian quadrature]{A set of optimal weights given by \bq{}, after 100 \sbq{} samples were selected on the distribution shown in Figure \ref{fig:fig1}.  Note that the optimal weights are spread away from the uniform weight ($\frac{1}{N}$), and that some weights are even negative.  The sum of these weights is 0.93.}
-\label{fig:weights100}
+	\centering
+	\includegraphics[width=\columnwidth]{figs/herding/weights_v1_n100}
+	\caption[Empirical distribution of weights in sequential Bayesian quadrature]{A set of optimal weights given by \bq{}, after 100 \sbq{} samples were selected on the distribution shown in Figure \ref{fig:fig1}.  Note that the optimal weights are spread away from the uniform weight ($\frac{1}{N}$), and that some weights are even negative.  The sum of these weights is 0.93.}
+	\label{fig:weights100}
 \end{figure}
 
 When weighting samples, it is often assumed, or enforced \citep[as in][]{bach2012equivalence,Song2008}, that the weights $\vw$ form a probability distribution.  However, there is no technical reason for this requirement, and in fact, the optimal weights do not have this propositionerty.  Figure \ref{fig:weights100} shows a representative set of 100 \bq{} weights chosen on samples representing the distribution in figure \ref{fig:fig1}.  There are several negative weights, and the sum of all weights is 0.93.
@@ -350,22 +356,23 @@ When weighting samples, it is often assumed, or enforced \citep[as in][]{bach201
 Figure \ref{fig:weights_shrinkage} demonstrates that, in general, the sum of the Bayesian weights exhibits shrinkage when the number of samples is small.
 
 \begin{figure}
-\centering
-\includegraphics[width=\columnwidth]{figs/herding/weights_shrinkage}
-\caption[The concept of shrinkage in Bayesian quadrature]{An example of Bayesian shrinkage in the sample weights.  In this example, the kernel width is approximately $\nicefrac{1}{20}$ the width of the distribution being considered.  Because the prior over functions is zero mean, in the small sample case the weights are shrunk towards zero.  The weights given by simple Monte Carlo and herding do not exhibit shrinkage. }
-\label{fig:weights_shrinkage}
+	\centering
+	\includegraphics[width=\columnwidth]{figs/herding/weights_shrinkage}
+	
+		\caption[The concept of shrinkage in Bayesian quadrature]{An example of Bayesian shrinkage in the sample weights.  In this example, the kernel width is approximately $\nicefrac{1}{20}$ the width of the distribution being considered.  Because the prior over functions is zero mean, in the small sample case the weights are shrunk towards zero.  The weights given by simple Monte Carlo and herding do not exhibit shrinkage. }
+	\label{fig:weights_shrinkage}
 \end{figure}
 
 %For a fixed kernel, the variance of the BQ estimate does not depend on the function values.
 
 %A natural criterion for selecting sample locations would be to choose locations which most reduce the variance of $Z_{f,p}$.
 
-\subsubsection{Optimal sampling for BQ}
+\subsection{Sequential sampling for BQ}
 
 Bayesian quadrature provides not only a mean estimate of $Z_{f,p}$, but a full Gaussian posterior distribution. The variance of this distribution $\var{}{Z_{f,p}|f_{x_1}, \dots, f_{x_N}}$ quantifies our uncertainty in the estimate. When selecting locations to evaluate the function $f$, minimising the posterior variance is a sensible strategy. Below, we give a closed form formula for the posterior variance of $Z_{f,p}$, conditioned on the observations $f_{x_1} \dots f_{x_N}$, which we will denote by $\epsilon^2_{\bq{}}$.  For a longer derivation, see \citep{BZMonteCarlo}.
 \begin{align}
-\epsilon^{2}_{\bq{}}(\vx_1,\ldots,\vx_N) & = 
-\var{}{Z_{f,p}|f_{x_1}, \dots, f_{x_N}} \\
+	\epsilon^{2}_{\bq{}}(\vx_1,\ldots,\vx_N) & = 
+	\var{}{Z_{f,p}|f_{x_1}, \dots, f_{x_N}} \\
 % \nonumber & = \expect{f \sim \gp, p\sim p(x)}{ \left( f(\vx) - \mf(\vx) \right)\left( f(\vx') - \mf(\vx') \right)} \\ 
 %\nonumber & = \int \Bigg( \!\! \left( \int f(\vx) p(\vx) d\vx - \int \mf(\vx') p(\vx') d\vx' \right) \\ 
 %\nonumber & \quad \times \left( \int f(\vx) p(\vx) d\vx - \int \mf(\vx') p(\vx') d\vx' \right) \!\! \Bigg) p(f) df \\ 
@@ -376,8 +383,8 @@ Bayesian quadrature provides not only a mean estimate of $Z_{f,p}$, but a full G
 %\nonumber          & \qquad \times p(\vx) p(\vx') d\vx d\vx' \\ 
 %\nonumber & = \int\!\!\! \int\!\! k(\vx, \vx') p(\vx) p(\vx') d\vx d\vx' \\
 %\nonumber & \quad - \left[ \int\!\! k(\vx, \vX) p(\vx) d\vx \right] K^{-1} \left[ \int\!\! k(\vX, \vx') p(\vx') d\vx' \right] \\
-& = \expect{\vx, \vx' \sim p}{k(\vx, \vx')} - \vz^T K^{-1} \vz\mbox{,}
-\label{eq:marg_var_symbolic}
+	& = \expect{\vx, \vx' \sim p}{k(\vx, \vx')} - \vz^T K^{-1} \vz\mbox{,}
+		\label{eq:marg_var_symbolic}
 \end{align}
 where $\vz_n = \expect{\vx' \sim p}{k(\vx_n, \vx')}$ as before. Perhaps surprisingly, the posterior variance of $Z_{f,p}$ does not depend on the observed function values, only on the location $x_n$ of samples. A similar independence is observed in other optimal experimental design problems involving Gaussian processes \citep{guestrin1}. This allows the optimal samples to be computed ahead of time, before observing any values of $f$ at all \citep{minka2000dqr}.
 %\begin{align}
@@ -392,10 +399,10 @@ In a similar fashion to herding, we may use a greedy method to minimise $\epsilo
 \end{align}
 Using incremental updates to the Cholesky factor, the criterion can be evaluated in $\mathcal{O}(n^2)$ time. Iteratively selecting $N$ samples thus takes $\mathcal{O}(N^3)$ time, assuming optimisation can be done on $\mathcal{O}(1)$ time.
 
-\subsubsection{RELATING $\var{}{Z_{f,p}}$ TO $\mmd$}
+\subsubsection{Relating $\var{}{Z_{f,p}}$ TO $\mmd$}
 
 The similarity in the behaviour of $\epsilon^{2}_{herding}$ and $\epsilon^{2}_{\bq{}}$ is not a coincidence, the two quantities are closely related to each other, and to \mmd.
-	
+
 \begin{proposition} The expected variance in the Bayesian quadrature $\epsilon^{2}_{\bq{}}$  is the maximum mean discrepancy between the target distribution $p$ and $q_{\bq{}}(x) = \sum_{n=1}^{N}w^{(n)}_{\bq{}}\delta_{x_n}(x)$
 \end{proposition}
 %
@@ -416,18 +423,18 @@ We know that the the posterior mean $\expect{\gp}{Z_{f,p}\vert f_1,\ldots,f_N}$ 
 \begin{align}
 \epsilon^{2}_{\bq{}} &= \sup_{\substack{f\in\He\\\Hnorm{f}{\He}=1}} \left| \int f_x p(x) dx - \sum_{n=1}^{N}w^{(n)}_{\bq{}} f_{x_n}\right|^2\\
 	&= \inf_{\hat{Z}:\mathcal{X}^N\mapsto\mathbb{R}} \sup_{\substack{f\in\He\\\Hnorm{f}=1}} \left| Z - \hat{Z}\left(f_{x_1},\ldots,f_{x_N}\right)\right|^2\\
-	&= \inf_{\bm{w}\in\mathbb{R}^N} \sup_{\substack{f\in\He\\\Hnorm{f}=1}} \left| \int f_x p(x) dx - \sum_{n=1}^{N}w_n 	f_{x_n}\right|^2
+	&= \inf_{\bm{w}\in\mathbb{R}^N} \sup_{\substack{f\in\He\\\Hnorm{f}=1}} \left| \int f_x p(x) dx - \sum_{n=1}^{N}w_n  f_{x_n}\right|^2
 \end{align}
 %
 Looking at $\epsilon^{2}_{\bq{}}$  this way, we may discover the deep similarity to the criterion $\epsilon^2_{herding}$ that kernel herding minimises. Optimal sampling for Bayesian quadrature minimises the same objective as kernel herding, but with the uniform $\frac{1}{N}$ weights replaced by the optimal weights. As a corollary
 %
 \begin{align}
-\epsilon^{2}_{\bq{}}(x_1,\ldots,x_N)  \leq \epsilon^{2}_{KH} (x_1,\ldots,x_N)
+	\epsilon^{2}_{\bq{}}(x_1,\ldots,x_N)  \leq \epsilon^{2}_{KH} (x_1,\ldots,x_N)
 \end{align}
 
 It is interesting that $\epsilon^{2}_{\bq{}}$ has both a Bayesian interpretation as posterior variance under a Gaussian process prior, and a frequentist interpretation as a minimax bound on estimation error with respect to an RKHS.
 
-\subsubsection{SUBMODULARITY}
+\subsection{SUBMODULARITY}
 
 \label{sec:submodularity}
 
@@ -466,7 +473,7 @@ Unfortunately, weak submodularity does not provide the strong near-optimality gu
 
 As pointed out by \citet{KrauseCevher10}, this guarantee is very weak as in our case the objective function $\epsilon^{2}_{\bq{}}(\emptyset)-\epsilon^{2}_{\bq{}}(\cdot)$ is upper bounded by a constant. However, establishing a connection between \sbq{} and sparse dictionary selection problem opens up interesting directions for future research, and it may be possible to apply algorithms and theory developed for sparse dictionary selection to kernel-based quasi-Monte Carlo methods.
 
-\subsubsection{EXPERIMENTS}
+\subsection{Experimental evaluation}
 \label{sec:experiments}
 
 In this section, we examine empirically the rates of convergence of sequential Bayesian quadrature and herding.  We examine both the expected error rates, and the empirical error rates.
@@ -494,7 +501,7 @@ There are two differences between herding and \sbq{}:  \sbq{} chooses samples ac
 
 \subsubsection{Estimating Integrals}
 
-%\subsubsection{Functions in the RKHS}
+%\subsection{Functions in the RKHS}
 
 We then examined the empirical performance of the different estimators at estimating integrals of real functions.  To begin with, we looked at performance on 100 randomly drawn functions, of the form:
 %
@@ -545,7 +552,13 @@ Figure \ref{fig:error_curve_outmodel} shows that, on functions drawn from outsid
 
 Code to reproduce all results is available at \texttt{http://mlg.eng.cam.ac.uk/duvenaud/}
 
-\subsubsection{DISCUSSION}
+\subsection{Summary and Discussions}
+
+In this paper, we have shown two main results:  First, we proved that the loss minimized by kernel herding is closely related to the loss minimized by Bayesian quadrature, when selecting sample locations. This implies that sequential Bayesian quadrature can viewed as an optimally-weighted version of kernel herding.
+
+Second, we showed that the loss minimized by the Bayesian method is approximately submodular with respect to the samples chosen, and established connections to the submodular dictionary selection problem studied in \citep{KrauseCevher10}.
+
+Finally, we empirically demonstrated a superior rate of convergence of \sbq{} over herding, and demonstrated a bound on the empirical error of the Bayesian quadrature estimate.
 
 \subsubsection{Choice of Kernel}
 
@@ -586,24 +599,14 @@ SBQ & $\mathcal{O}(N^3)$ & unknown & approximate submodularity\\
 %
 Table \ref{tbl:rates} summarizes the rates of convergence of all the methods considered here.
 
-\section{CONCLUSIONS}
-
-In this paper, we have shown two main results:  First, we proved that the loss minimized by kernel herding is closely related to the loss minimized by Bayesian quadrature, when selecting sample locations. This implies that sequential Bayesian quadrature can viewed as an optimally-weighted version of kernel herding.
-
-Second, we showed that the loss minimized by the Bayesian method is approximately submodular with respect to the samples chosen, and established connections to the submodular dictionary selection problem studied in \citep{KrauseCevher10}.
-
-Finally, we empirically demonstrated a superior rate of convergence of \sbq{} over herding, and demonstrated a bound on the empirical error of the Bayesian quadrature estimate.
-
 \subsubsection{Future Work}
 
 In section \ref{sec:submodularity}, we showed that \sbq{} is approximately submodular, which provides only weak sub-optimality guarantees of its performance. It would be of interest to further explore the connection between Bayesian Quadrature and the dictionary selection problem to see if algorithms developed for dictionary selection can provide further practical or theoretical developments. The results in section \ref{sec:experiments}, specifically Figure \ref{fig:mmd_curve}, suggest that the convergence rate of \sbq{} is faster than $\mathcal{O}(1/N)$. However, we are not aware of any work showing what the theoretically optimal rate is. It would be of great interest to determine this optimal rate of convergence for particular classes of kernels.
 
-\subsubsection*{Acknowledgements}
-
 %The authors would like to thank Carl Rasmussen for helpful discussions, and Yutian Chen for his help in reproducing experiments.
 
 %\appendix
-%\section{Lemma on submodularity	}
+%\section{Lemma on submodularity    }
 %\label{app:submo}
 %
 %\begin{lem}\label{lemma:submodular}
@@ -615,27 +618,27 @@ In section \ref{sec:submodularity}, we showed that \sbq{} is approximately submo
 %\begin{proof}
 %Submodularity of $f_p$ means that $\forall A\subseteq B\subseteq\He$ and $x\notin B$:
 %\begin{align}
-%	f_{p}(A\cup\{x\}) - f_{p}(A) \stackrel{?}{\geq} f_{p}(B\cup\{x\}) - f_{p}(B)
+%   f_{p}(A\cup\{x\}) - f_{p}(A) \stackrel{?}{\geq} f_{p}(B\cup\{x\}) - f_{p}(B)
 %\end{align}
 %Spelling out the two quantities we get
 %\begin{align}
-%	-\Hnorm{p-\Pi_{A\cup\{x\}}p}^2 +\Hnorm{p-\Pi_{A}p}^2 \stackrel{?}{\geq}\\
-%	 -\Hnorm{p-\Pi_{B\cup\{x\}}p}^2 +\Hnorm{p-\Pi_{B}p}^2
+%   -\Hnorm{p-\Pi_{A\cup\{x\}}p}^2 +\Hnorm{p-\Pi_{A}p}^2 \stackrel{?}{\geq}\\
+%    -\Hnorm{p-\Pi_{B\cup\{x\}}p}^2 +\Hnorm{p-\Pi_{B}p}^2
 %\end{align}
 %Using the Pythagorean theorem on both sides we get
 %\begin{align}
-%	-\Hnorm{\Pi_{A\cup\{x\}}p - \Pi_{A}p}^2 \stackrel{?}{\geq} -\Hnorm{\Pi_{B\cup\{x\}}p - \Pi_{B}p}^2
+%   -\Hnorm{\Pi_{A\cup\{x\}}p - \Pi_{A}p}^2 \stackrel{?}{\geq} -\Hnorm{\Pi_{B\cup\{x\}}p - \Pi_{B}p}^2
 %\end{align}
 %We can use the following Pythagorean identities
 %\begin{align}
-%	&\Hnorm{\Pi_{B\cup\{x\}}p - \Pi_{A}p}^2  =\\
-%	 	&= \Hnorm{\Pi_{B\cup\{x\}}p - \Pi_{A\cup\{x\}}p}^2  + \Hnorm{\Pi_{A\cup\{x\}}p - \Pi_{A}p}^2 \\	
-%	&\Hnorm{\Pi_{B\cup\{x\}}p - \Pi_{A}p}^2 = \\
-%	&= \Hnorm{\Pi_{B\cup\{x\}}p - \Pi_{B}p}^2  + \Hnorm{\Pi_{B}p - \Pi_{A}p}^2 
+%   &\Hnorm{\Pi_{B\cup\{x\}}p - \Pi_{A}p}^2  =\\
+%       &= \Hnorm{\Pi_{B\cup\{x\}}p - \Pi_{A\cup\{x\}}p}^2  + \Hnorm{\Pi_{A\cup\{x\}}p - \Pi_{A}p}^2 \\ 
+%   &\Hnorm{\Pi_{B\cup\{x\}}p - \Pi_{A}p}^2 = \\
+%   &= \Hnorm{\Pi_{B\cup\{x\}}p - \Pi_{B}p}^2  + \Hnorm{\Pi_{B}p - \Pi_{A}p}^2 
 %\end{align}
 %Then our inequality becomes
 %\begin{align}
-%	\Hnorm{\Pi_{B\cup\{x\}}p - \Pi_{A\cup\{x\}}p}^2 \stackrel{?}{\geq} \Hnorm{\Pi_{B}p - \Pi_{A}p}^2
+%   \Hnorm{\Pi_{B\cup\{x\}}p - \Pi_{A\cup\{x\}}p}^2 \stackrel{?}{\geq} \Hnorm{\Pi_{B}p - \Pi_{A}p}^2
 %\end{align}
 %W.\,l.\,o.\,g.\ we can assume that $x\perp S(B)$, in which case using that
 %\begin{align}
@@ -644,7 +647,7 @@ In section \ref{sec:submodularity}, we showed that \sbq{} is approximately submo
 %\end{align}
 %we can write
 %\begin{align}
-%	\Hnorm{\Pi_{B\cup\{x\}}p - \Pi_{A\cup\{x\}}p}^2 \geq \Hnorm{\Pi_{B}\left(\Pi_{B\cup\{x\}}p - \Pi_{A\cup\{x\}}\right)}^2
+%   \Hnorm{\Pi_{B\cup\{x\}}p - \Pi_{A\cup\{x\}}p}^2 \geq \Hnorm{\Pi_{B}\left(\Pi_{B\cup\{x\}}p - \Pi_{A\cup\{x\}}\right)}^2
 %\end{align}
 %Which is always true, as a projection of vectors is never longer than the vector itself.
 %\end{proof}
