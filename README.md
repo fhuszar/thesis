@@ -1,7 +1,7 @@
 thesis
 ======
 
-Ferenc Huszar's PhD thesis on Bayesian inference.
+Ferenc Huszar's PhD thesis on scoring rules and Bayesian inference
 
 ## Contents :
  - General intro to scoring rules
