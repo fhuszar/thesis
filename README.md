@@ -3,7 +3,7 @@ thesis
 
 Ferenc Huszar's PhD thesis on scoring rules and Bayesian inference.
 
-Now you can flattr my thesis: <a href="http://flattr.com/thing/1265514/fhuszarthesis-on-GitHub" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a>
+Now you can flattr my thesis: [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=fhuszar&url=https://github.com/fhuszar/thesis&title=thesis&language=&tags=github&category=software) 
 
 ## Contents:
  - General intro to scoring rules
