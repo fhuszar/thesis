@@ -1,9 +1,11 @@
 thesis
 ======
 
-Ferenc Huszar's PhD thesis on scoring rules and Bayesian inference
+Ferenc Huszar's PhD thesis on scoring rules and Bayesian inference.
 
-## Contents :
+Now you can flattr my thesis: <a href="http://flattr.com/thing/1265514/fhuszarthesis-on-GitHub" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a>
+
+## Contents:
  - General intro to scoring rules
  - Visualisation of information geometries induced by scoring rules
  - loss-calibrated approximate Bayesian inference
