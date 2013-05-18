@@ -109,7 +109,7 @@ where $p_{\mbox{test}}$ is the distribution of test examples, $p(\y\vert\x,\data
 	\score_{\mbox{trans}}(\param,p_\data) &= \frac{1}{N_{\mbox{test}}}\sum_{n=1}^{N_{\mbox{test}}} \expect{p(\y\vert\x_n,\param)}{S(\y,p(\y\vert\x_n,\data))}
 \end{align}
 
-When $\score$ is chosen to be the logarithmic score, the active learning criterion \eqref{Eqn:active_learning_optimisation_criterion} becomes the average mutual information between the newly unveiled label and the unknown labels of test examples. This objective function was considered in prior work by \citet{MacKay1992} and is used in various other applications \citep[see \eg][]{Ertin2003,Fuhrmann2003}.
+When $\score$ is chosen to be the logarithmic score, the active learning criterion \eqref{Eqn:active_learning_optimisation_criterion} becomes the average mutual information between the newly unveiled label and the unknown labels of test examples. This objective function was considered in prior work by \citet{MacKay1992}.
 
 One may also consider a loss-based scoring rule from section \ref{sec:loss_scoring_rule}
 

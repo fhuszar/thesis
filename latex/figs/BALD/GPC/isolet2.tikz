@@ -8,12 +8,7 @@
 % 
 \begin{tikzpicture}
 
-% defining custom colors
-\definecolor{mycolor1}{rgb}{0.8,0.8,0}
-\definecolor{mycolor2}{rgb}{0,1,1}
-\definecolor{mycolor3}{rgb}{1,0,1}
-\definecolor{mycolor4}{rgb}{1,0.8,0.5}
-\definecolor{mycolor5}{rgb}{0.7,0.4,0.01}
+
 
 \begin{axis}[
 footnotesize,

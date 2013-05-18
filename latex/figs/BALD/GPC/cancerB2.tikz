@@ -24,7 +24,7 @@ ytick={0.5,1},
 xtick = {0,50},
 xlabel = {No. queried points},
 ylabel = {Accuracy},
-title = {(l) cancer},
+title = {(i) cancer},
 axis on top,
 axis y line = left,
 axis x line = bottom
