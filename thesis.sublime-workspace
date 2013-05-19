@@ -4,6 +4,58 @@
 		"selected_items":
 		[
 			[
+				"scor",
+				"sec:scoring_rules"
+			],
+			[
+				"support",
+				" Support vector machine active learning with applications to text classifi"
+			],
+			[
+				"Houlsb",
+				"Houlsb Bayesian Active Learning for Classification and Preference Learning"
+			],
+			[
+				"Houls",
+				"Houlsby2012preference"
+			],
+			[
+				"Houl",
+				"Houlsby2011"
+			],
+			[
+				"zhu",
+				"Zhu2003"
+			],
+			[
+				"houls",
+				"Houlsby2012preference"
+			],
+			[
+				"seung",
+				" Selective sampling using the query by committee algorithm"
+			],
+			[
+				"sco",
+				"sec:scoring_rules"
+			],
+			[
+				"fig",
+				"eqn:def_divergence"
+			],
+			[
+				"B",
+				"eqn:BALD_GPC"
+			],
+			[
+				"prefere",
+				"sec:prefKernel"
+			],
+			[
+				"log",
+				"sec:log_score"
+			],
+			[
 				"sparse",
 				"sparse A unifying view of sparse approximate {G}aussian process regression"
 			],
@@ -148,18 +200,108 @@
 	"buffers":
 	[
 		{
-			"file": "/Users/fhuszar/svn/papers/nips-11-BALD/AL_NIPS2011.tex",
-			"settings":
-			{
-				"buffer_size": 35219,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "latex/part1/01_scoring_rules.tex",
 			"settings":
 			{
-				"buffer_size": 60570,
+				"buffer_size": 60572,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part1/01_scoring_rules.tex.bak",
+			"settings":
+			{
+				"buffer_size": 60573,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Searching 87 files for \"\n%!TEX root = main.tex\n%!TEX root = main.tex\n%!TEX root = ../main.tex\"\n\n0 matches across 0 files\n\n\nSearching 87 files for \"\n%!TEX root = main.tex\n%!TEX root = main.tex\nTEX root = ../main.tex\"\n\n0 matches across 0 files\n\n\nSearching 87 files for \"\n%!TEX root = main.tex\n%!TEX root = main.tex\n%!TEX root = main.tex\"\n\n0 matches across 0 files\n\n\nSearching 87 files for \"%!TEX root = main.tex\"\n\n/Users/fhuszar/Dropbox/thesis/latex/conclusions.tex:\n    1: %!TEX root = main.tex\n    2  \n    3  Machine learning is a mess. This thesis finally brings order and clarity to what otherwise appears as a mix of muddled thoughts. Just kidding.\n\n/Users/fhuszar/Dropbox/thesis/latex/introduction.tex:\n    1: %!TEX root = main.tex\n    2  \\lipsum[1-5]\n\n/Users/fhuszar/Dropbox/thesis/latex/notation.tex:\n    1: %!TEX root = main.tex\n    2  \\newcommand{\\TODO}[1]{\\textbf{TODO: #1}}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/part1_main.tex:\n    1: %!TEX root = main.tex\n    2  \\part{Scoring rules, Divergences and Information}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/part2_main.tex:\n    1: %!TEX root = main.tex\n    2  \\part{Approximate Bayesian inference}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/part3_main.tex:\n    1: %!TEX root = main.tex\n    2  \\part{Optimal Experiment Design}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/preamble.tex:\n    1: %!TEX root = main.tex\n    2  \\newtheorem{theorem}{Theorem}\n    3  \\newtheorem{corollary}{Corollary}\n\n7 matches across 7 files\n",
+			"settings":
+			{
+				"buffer_size": 1488,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "latex/conclusions.tex",
+			"settings":
+			{
+				"buffer_size": 4650,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/introduction.tex",
+			"settings":
+			{
+				"buffer_size": 36,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/notation.tex",
+			"settings":
+			{
+				"buffer_size": 4134,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part1_main.tex",
+			"settings":
+			{
+				"buffer_size": 366,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part2_main.tex",
+			"settings":
+			{
+				"buffer_size": 183,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part3_main.tex",
+			"settings":
+			{
+				"buffer_size": 357,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/preamble.tex",
+			"settings":
+			{
+				"buffer_size": 650,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/frontmatter/abstract.tex",
+			"settings":
+			{
+				"buffer_size": 159,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/frontmatter/acknowledgement.tex",
+			"settings":
+			{
+				"buffer_size": 90,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/frontmatter/dedication.tex",
+			"settings":
+			{
+				"buffer_size": 165,
 				"line_ending": "Unix"
 			}
 		},
@@ -167,7 +309,39 @@
 			"file": "latex/part1/02_embeddings.tex",
 			"settings":
 			{
-				"buffer_size": 38114,
+				"buffer_size": 38116,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part2/01_approximate_inference.tex",
+			"settings":
+			{
+				"buffer_size": 67540,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part3/01_introBALD.tex",
+			"settings":
+			{
+				"buffer_size": 21628,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part1/02_embeddings.tex.bak",
+			"settings":
+			{
+				"buffer_size": 38116,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part1/03_scoring_processes.tex",
+			"settings":
+			{
+				"buffer_size": 21176,
 				"line_ending": "Unix"
 			}
 		},
@@ -182,120 +356,7 @@
 			"file": "latex/part3/02_GP_BALD.tex",
 			"settings":
 			{
-				"buffer_size": 43784,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/Users/fhuszar/peerindex/datascience/dbpedia/descendants.py",
-			"settings":
-			{
-				"buffer_size": 2311,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "#/bin/bash\n\nrm index.html\n\nwget http://dumps.wikimedia.org/enwiki/latest\n\nrm *pages-articles*bz2\n\ncat index.html | sed 's/.*href=\\\"\\([^\\\"]*\\).*/\\1/' | grep pages-articles[0-9][0-9]*\\.xml.*bz2$ | parallel -j 8 wget --quiet http://dumps.wikimedia.org/enwiki/latest/{}",
-			"settings":
-			{
-				"buffer_size": 265,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "ls enwiki-latest-pages-articles*.bz2 -1 | parallel 'bzcat {} | python extract_pages.py | bzip2 > {.}.json.bz2'",
-			"settings":
-			{
-				"buffer_size": 110,
-				"line_ending": "Unix",
-				"name": "ls enwiki-latest-pages-articles*.bz2 -1 | parallel"
-			}
-		},
-		{
-			"file": "latex/part3/01_introBALD.tex",
-			"settings":
-			{
-				"buffer_size": 20015,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "latex/part3_main.tex",
-			"settings":
-			{
-				"buffer_size": 320,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "latex/main.tex",
-			"settings":
-			{
-				"buffer_size": 2324,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "latex/frontmatter/acknowledgement.tex",
-			"settings":
-			{
-				"buffer_size": 88,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "latex/frontmatter/abstract.tex",
-			"settings":
-			{
-				"buffer_size": 157,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "latex/frontmatter/dedication.tex",
-			"settings":
-			{
-				"buffer_size": 174,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "latex/preamble.tex",
-			"settings":
-			{
-				"buffer_size": 516,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "latex/CUEDthesisPSnPDF/thesis.tex",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "latex/part2/02_herding.tex",
-			"settings":
-			{
-				"buffer_size": 46448,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "latex/part2/01_approximate_inference.tex",
-			"settings":
-			{
-				"buffer_size": 66704,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "latex/part1_main.tex",
-			"settings":
-			{
-				"buffer_size": 357,
+				"buffer_size": 47000,
 				"line_ending": "Unix"
 			}
 		},
@@ -303,7 +364,30 @@
 			"file": "latex/part3/03_quantum.tex",
 			"settings":
 			{
-				"buffer_size": 46088,
+				"buffer_size": 46390,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "raw_materials/BALD-GPC/AL_NIPS2011.tex",
+			"settings":
+			{
+				"buffer_size": 35262,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/thesis.tex",
+			"settings":
+			{
+				"buffer_size": 2097,
 				"line_ending": "Unix"
 			}
 		}
@@ -311,11 +395,47 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 107.0,
+		"height": 392.0,
 		"selected_items":
 		[
 			[
+				"figlet",
+				"Figlet: Add Comment"
+			],
+			[
+				"sy bash",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"indespa",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"markdow",
+				"Set Syntax: Markdown"
+			],
+			[
+				"markdo",
+				"Set Syntax: Markdown"
+			],
+			[
+				"inde",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"inde spa",
+				"Indentation: Convert to Spaces"
+			],
+			[
 				"figle",
+				"Figlet: Add Comment"
+			],
+			[
+				"figlet se",
+				"Figlet: Select Font"
+			],
+			[
+				"fglcmm",
 				"Figlet: Add Comment"
 			],
 			[
@@ -329,14 +449,6 @@
 			[
 				"figlet sele",
 				"Figlet: Select Font"
-			],
-			[
-				"figlet",
-				"Figlet: Add Comment"
-			],
-			[
-				"inde spa",
-				"Indentation: Convert to Spaces"
 			],
 			[
 				"sy py",
@@ -360,10 +472,6 @@
 			],
 			[
 				"indesa",
-				"Indentation: Convert to Spaces"
-			],
-			[
-				"indespa",
 				"Indentation: Convert to Spaces"
 			],
 			[
@@ -409,10 +517,6 @@
 			[
 				"IND ",
 				"Indentation: Convert to Tabs"
-			],
-			[
-				"inde",
-				"Indentation: Convert to Spaces"
 			],
 			[
 				"ind tab",
@@ -632,10 +736,56 @@
 	},
 	"file_history":
 	[
-		"/Users/fhuszar/Dropbox/thesis/raw_materials/collaborative_preference_GP/model/model.tex",
-		"/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex",
-		"/Users/fhuszar/Dropbox/thesis/latex/notation.tex",
+		"/Users/fhuszar/svn/papers/nips-11-BALD/AL_NIPS2011.tex",
+		"/Users/fhuszar/Dropbox/thesis/raw_materials/BALD-GPC/AL_NIPS2011_supp.tex",
+		"/Users/fhuszar/Dropbox/thesis/latex/figs/BALD/GPC/austra2.tikz",
+		"/Users/fhuszar/Dropbox/thesis/latex/figs/BALD/GPC/isolet2.tikz",
+		"/Users/fhuszar/Dropbox/thesis/latex/figs/BALD/GPC/vehicle2.tikz",
+		"/Users/fhuszar/Dropbox/thesis/latex/figs/BALD/GPC/wdbc2.tikz",
+		"/Users/fhuszar/Dropbox/thesis/latex/figs/BALD/GPC/wine2.tikz",
+		"/Users/fhuszar/Dropbox/thesis/latex/figs/BALD/GPC/unused/grid2.tikz",
+		"/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex.bak",
+		"/Users/fhuszar/Dropbox/thesis/latex/conclusions.tex",
+		"/Users/fhuszar/Dropbox/thesis/latex/conclusions.tex.bak",
+		"/Users/fhuszar/Dropbox/thesis/latex/quantum.tex",
+		"/Users/fhuszar/peerindex/datascience/dbpedia/descendants.py",
+		"/Users/fhuszar/Dropbox/thesis/latex/part3/01_introBALD.tex",
+		"/Users/fhuszar/Dropbox/thesis/latex/part3/01_introBALD.tex.bak",
+		"/Users/fhuszar/Dropbox/thesis/latex/part3_main.tex",
 		"/Users/fhuszar/Dropbox/thesis/latex/main.tex",
+		"/Users/fhuszar/Dropbox/thesis/check_spelling.tex",
+		"/Users/fhuszar/Dropbox/thesis/check_spelling.sh",
+		"/Users/fhuszar/Dropbox/thesis/latex/frontmatter/acknowledgement.tex",
+		"/Users/fhuszar/Dropbox/thesis/latex/frontmatter/abstract.tex",
+		"/Users/fhuszar/Dropbox/thesis/latex/frontmatter/dedication.tex",
+		"/Users/fhuszar/Dropbox/thesis/README.md",
+		"/Users/fhuszar/Downloads/INSERT-oneshot-user_info_update-to-user_info.hql",
+		"/Users/fhuszar/peerindex/datapipeline/batch-pipeline/src/main/resources/hive/ddl/destinations/CREATE-TABLE-actor_feature.hql",
+		"/Users/fhuszar/Dropbox/thesis/latex/preamble.tex",
+		"/Users/fhuszar/Dropbox/thesis/latex/CUEDthesisPSnPDF/thesis.tex",
+		"/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex",
+		"/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex",
+		"/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex.bak",
+		"/Users/fhuszar/Dropbox/thesis/latex/part1_main.tex",
+		"/Users/fhuszar/Dropbox/thesis/latex/part3/03_quantum.tex",
+		"/Users/fhuszar/Dropbox/thesis/latex/part3/03_quantum.tex.bak",
+		"/Users/fhuszar/Dropbox/thesis/title_variations.txt",
+		"/Users/fhuszar/Dropbox/thesis/latex/part3/quantum_foobar.tex",
+		"/Users/fhuszar/Dropbox/thesis/latex/part3/quantum_PRA.tex",
+		"/Users/fhuszar/Dropbox/thesis/latex/part3/tmp",
+		"/Users/fhuszar/Dropbox/thesis/latex/part2_main.tex",
+		"/Users/fhuszar/Dropbox/thesis/latex/figs/BALD/GPC/checkerboard2.tikz",
+		"/Users/fhuszar/Dropbox/thesis/latex/figs/BALD/GPC/blockinmiddle2.tikz",
+		"/Users/fhuszar/Dropbox/thesis/latex/figs/BALD/GPC/blockincorner2.tikz",
+		"/Users/fhuszar/Dropbox/thesis/latex/figs/BALD/GPC/cancerB2.tikz",
+		"/Users/fhuszar/Dropbox/thesis/latex/figs/BALD/GPC/prefcart2.tikz",
+		"/Users/fhuszar/Dropbox/thesis/latex/figs/BALD/GPC/prefcpu2.tikz",
+		"/Users/fhuszar/Dropbox/thesis/latex/figs/BALD/GPC/prefkinem2.tikz",
+		"/Users/fhuszar/Dropbox/thesis/latex/thesis.bib",
+		"/Users/fhuszar/Dropbox/thesis/latex/CUEDthesisPSnPDF.cls",
+		"/Users/fhuszar/peerindex/datapipeline/batch-pipeline/src/main/resources/hive/ddl/sources/CREATE-TABLE-url_topics.hql",
+		"/Users/fhuszar/Dropbox/thesis/raw_materials/collaborative_preference_GP/model/model.tex",
+		"/Users/fhuszar/Dropbox/thesis/latex/notation.tex",
 		"/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex",
 		"/Users/fhuszar/Dropbox/thesis/latex/part1/01_scoring_rules.tex",
 		"/Users/fhuszar/peerindex/datascience/wefollow/twittersugg",
@@ -647,23 +797,12 @@
 		"/Users/fhuszar/peerindex/datascience/wefollow/wefollow_hashtags.hql",
 		"/Users/fhuszar/02-INSERT-user_info.hql",
 		"/Users/fhuszar/peerindex/datapipeline/batch-pipeline/src/main/resources/hive/ddl/destinations/CREATE-TABLE-actor_json.hql",
-		"/Users/fhuszar/peerindex/datapipeline/batch-pipeline/src/main/resources/hive/ddl/destinations/CREATE-TABLE-actor_feature.hql",
 		"/Users/fhuszar/peerindex/datascience/getfollowers/CREATE TABLE comedycentral_channels_specific_topic",
 		"/Users/fhuszar/peerindex/datapipeline/batch-pipeline/src/main/resources/hive/ddl/destinations/CREATE-TABLE-influence_graph.hql",
 		"/Users/fhuszar/svn/papers/quantum/PRA/quantum_bald.tex",
 		"/Users/fhuszar/svn/papers/quantum/quantum_bald.tex",
-		"/Users/fhuszar/Dropbox/thesis/latex/part3/03_quantum.tex",
-		"/Users/fhuszar/Dropbox/thesis/latex/part3/quantum_foobar.tex",
-		"/Users/fhuszar/Dropbox/thesis/latex/part3/quantum_PRA.tex",
-		"/Users/fhuszar/Dropbox/thesis/latex/quantum.tex",
 		"/Users/fhuszar/Dropbox/thesis/latex/quantum2.tex",
 		"/Users/fhuszar/Dropbox/thesis/latex/snippets.tex",
-		"/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex",
-		"/Users/fhuszar/Dropbox/thesis/latex/part3/01_introBALD.tex",
-		"/Users/fhuszar/Dropbox/thesis/latex/part2_main.tex",
-		"/Users/fhuszar/Dropbox/thesis/latex/conclusions.tex",
-		"/Users/fhuszar/Dropbox/thesis/latex/part1_main.tex",
-		"/Users/fhuszar/Dropbox/thesis/latex/part3_main.tex",
 		"/Users/fhuszar/peerindex/datapipeline/hivescripts/community.hive.hql",
 		"/Users/fhuszar/peerindex/datascience/hotornot_py/django_version/peerindex/peerindex/settings.py",
 		"/Users/fhuszar/svn/simon/papers/thesis/thesis.tex",
@@ -730,9 +869,15 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
+			"*",
+			"*tikz",
+			"*",
+			"01_intro*,02_GP*",
+			"03_quantum.tex",
+			"*",
 			"01_approx*.*",
 			"*.*",
 			"<current file>",
@@ -743,9 +888,49 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
+			"%!TEX root = ../main.tex",
+			"%!TEX root = main.tex",
+			"\n%!TEX root = main.tex\n%!TEX root = main.tex\n%!TEX root = main.tex",
+			"\n%!TEX root = main.tex\n%!TEX root = main.tex\nTEX root = ../main.tex",
+			"\n%!TEX root = main.tex\n%!TEX root = main.tex\n%!TEX root = ../main.tex",
+			"}\n",
+			"title",
+			"Figure",
+			"}f(\\x_",
+			"f(\\x_i)",
+			"fig:all",
+			"Fig. ",
+			"e.g.",
+			"% defining custom colors\n\\definecolor{mycolor1}{rgb}{0.8,0.8,0}\n\\definecolor{mycolor2}{rgb}{0,1,1}\n\\definecolor{mycolor3}{rgb}{1,0,1}\n\\definecolor{mycolor4}{rgb}{1,0.8,0.5}\n\\definecolor{mycolor5}{rgb}{0.7,0.4,0.01}",
+			"in addition to",
+			"mycolor",
+			"\\mathcal{P}",
+			"\\ourmethod",
+			"Results",
+			"RESULTS",
+			"x",
+			"f_{\\x}",
+			"]",
+			"[",
+			"f",
+			"ln",
+			"Eqn. ",
+			"{Eqn:",
+			"\\label{Eqn:rearrangement} ",
+			"Eqn:rearrangement",
+			"eqns",
+			"eqn",
+			"s the experiment",
+			"adaptively",
+			"adaptivelys",
+			"adaptivly",
+			"theta",
+			"matching",
+			"herding",
+			"subsubsection",
 			"figure",
 			"out-of",
 			"figure",
@@ -833,54 +1018,22 @@
 			"\\cite",
 			"resizebox",
 			"{figures/",
-			"figures/",
-			"strategy",
-			"\\param",
-			"figure*",
-			"label{plots:",
-			"label:plots",
-			"figure",
-			"user",
-			"hyperparaeter",
-			"*.",
-			"Regr",
-			"regr",
-			"preference",
-			"fileitem",
-			"activity",
-			"}",
-			"{",
-			":",
-			"\"",
-			"\"country\"",
-			"\"channel\"",
-			"\"count\"",
-			":",
-			"actor_info",
-			"twitter",
-			", ",
-			"GENDER",
-			"encode",
-			"network",
-			"benchmark_topic.score",
-			"score",
-			"RUN_DATE",
-			"RUN_FOR",
-			"today",
-			"updated",
-			"previous",
-			"USER_ACTION_DECAY",
-			"RUN_DATE",
-			"RUN_FOR",
-			"today",
-			"yesterday"
+			"figures/"
 		],
 		"highlight": true,
-		"in_selection": false,
+		"in_selection": true,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
 		[
+			"%!TEX root = ../thesis.tex",
+			"%!TEX root = thesis.tex",
+			"fig:BALD_GPC_results",
+			"",
+			"Eqn.\\ ",
+			"{Eqn:quantum_",
+			"Eqns",
+			"Eqn",
 			"\\param",
 			"\\citep{",
 			"Sriperumbudur2008",
@@ -895,23 +1048,144 @@
 	"groups":
 	[
 		{
-			"selected": 17,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/Users/fhuszar/svn/papers/nips-11-BALD/AL_NIPS2011.tex",
+					"file": "latex/part1/01_scoring_rules.tex",
 					"settings":
 					{
-						"buffer_size": 35219,
+						"buffer_size": 60572,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								14888,
-								21984
+								9914,
+								9914
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2182.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "latex/part1/01_scoring_rules.tex.bak",
+					"settings":
+					{
+						"buffer_size": 60573,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								26,
+								26
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"settings":
+					{
+						"buffer_size": 1488,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										472,
+										493
+									],
+									[
+										714,
+										735
+									],
+									[
+										814,
+										835
+									],
+									[
+										952,
+										973
+									],
+									[
+										1099,
+										1120
+									],
+									[
+										1234,
+										1255
+									],
+									[
+										1362,
+										1383
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								364,
+								364
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"output_tag": 4,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 345.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "latex/conclusions.tex",
+					"settings":
+					{
+						"buffer_size": 4650,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								23,
+								23
 							]
 						],
 						"settings":
@@ -925,98 +1199,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "latex/part1/01_scoring_rules.tex",
-					"settings":
-					{
-						"buffer_size": 60570,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9906,
-								9912
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1928.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "latex/part1/02_embeddings.tex",
-					"settings":
-					{
-						"buffer_size": 38114,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								33761,
-								33761
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 7698.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
 					"buffer": 4,
-					"file": "latex/part3/02_GP_BALD.tex",
+					"file": "latex/introduction.tex",
 					"settings":
 					{
-						"buffer_size": 43784,
+						"buffer_size": 36,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								22747,
-								22753
+								23,
+								23
 							]
 						],
 						"settings":
@@ -1031,52 +1226,51 @@
 				},
 				{
 					"buffer": 5,
-					"file": "/Users/fhuszar/peerindex/datascience/dbpedia/descendants.py",
+					"file": "latex/notation.tex",
 					"settings":
 					{
-						"buffer_size": 2311,
+						"buffer_size": 4134,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2233,
-								2233
+								23,
+								23
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 579.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 6,
+					"file": "latex/part1_main.tex",
 					"settings":
 					{
-						"buffer_size": 265,
+						"buffer_size": 366,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								265,
-								265
+								23,
+								23
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
-						"translation.x": 320.0,
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -1084,23 +1278,23 @@
 				},
 				{
 					"buffer": 7,
+					"file": "latex/part2_main.tex",
 					"settings":
 					{
-						"buffer_size": 110,
+						"buffer_size": 183,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								110
+								23,
+								23
 							]
 						],
 						"settings":
 						{
-							"auto_name": "ls enwiki-latest-pages-articles*.bz2 -1 | parallel",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1110,18 +1304,18 @@
 				},
 				{
 					"buffer": 8,
-					"file": "latex/part3/01_introBALD.tex",
+					"file": "latex/part3_main.tex",
 					"settings":
 					{
-						"buffer_size": 20015,
+						"buffer_size": 357,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10751,
-								10712
+								23,
+								23
 							]
 						],
 						"settings":
@@ -1136,18 +1330,18 @@
 				},
 				{
 					"buffer": 9,
-					"file": "latex/part3_main.tex",
+					"file": "latex/preamble.tex",
 					"settings":
 					{
-						"buffer_size": 320,
+						"buffer_size": 650,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								21,
-								21
+								23,
+								23
 							]
 						],
 						"settings":
@@ -1162,28 +1356,26 @@
 				},
 				{
 					"buffer": 10,
-					"file": "latex/main.tex",
+					"file": "latex/frontmatter/abstract.tex",
 					"settings":
 					{
-						"buffer_size": 2324,
+						"buffer_size": 159,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2132,
-								2132
+								26,
+								26
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1113.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1193,15 +1385,15 @@
 					"file": "latex/frontmatter/acknowledgement.tex",
 					"settings":
 					{
-						"buffer_size": 88,
+						"buffer_size": 90,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								88,
-								88
+								26,
+								26
 							]
 						],
 						"settings":
@@ -1216,18 +1408,18 @@
 				},
 				{
 					"buffer": 12,
-					"file": "latex/frontmatter/abstract.tex",
+					"file": "latex/frontmatter/dedication.tex",
 					"settings":
 					{
-						"buffer_size": 157,
+						"buffer_size": 165,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								157,
-								157
+								26,
+								26
 							]
 						],
 						"settings":
@@ -1242,23 +1434,24 @@
 				},
 				{
 					"buffer": 13,
-					"file": "latex/frontmatter/dedication.tex",
+					"file": "latex/part1/02_embeddings.tex",
 					"settings":
 					{
-						"buffer_size": 174,
+						"buffer_size": 38116,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								174,
-								174
+								33763,
+								33763
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1268,18 +1461,18 @@
 				},
 				{
 					"buffer": 14,
-					"file": "latex/preamble.tex",
+					"file": "latex/part2/01_approximate_inference.tex",
 					"settings":
 					{
-						"buffer_size": 516,
+						"buffer_size": 67540,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								22,
-								22
+								26,
+								26
 							]
 						],
 						"settings":
@@ -1294,7 +1487,87 @@
 				},
 				{
 					"buffer": 15,
-					"file": "latex/CUEDthesisPSnPDF/thesis.tex",
+					"file": "latex/part3/01_introBALD.tex",
+					"settings":
+					{
+						"buffer_size": 21628,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								26,
+								26
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "latex/part1/02_embeddings.tex.bak",
+					"settings":
+					{
+						"buffer_size": 38116,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								26,
+								26
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "latex/part1/03_scoring_processes.tex",
+					"settings":
+					{
+						"buffer_size": 21176,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								970,
+								970
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 18,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -1310,88 +1583,7 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 491.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 16,
-					"file": "latex/part2/02_herding.tex",
-					"settings":
-					{
-						"buffer_size": 46448,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								44323,
-								44323
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 10523.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 17,
-					"file": "latex/part2/01_approximate_inference.tex",
-					"settings":
-					{
-						"buffer_size": 66704,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4790,
-								4790
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 805.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 18,
-					"file": "latex/part1_main.tex",
-					"settings":
-					{
-						"buffer_size": 357,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								258,
-								357
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1401,18 +1593,18 @@
 				},
 				{
 					"buffer": 19,
-					"file": "latex/part3/03_quantum.tex",
+					"file": "latex/part3/02_GP_BALD.tex",
 					"settings":
 					{
-						"buffer_size": 46088,
+						"buffer_size": 47000,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								40237,
-								40237
+								47000,
+								47000
 							]
 						],
 						"settings":
@@ -1421,7 +1613,114 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 8211.0,
+						"translation.y": 8947.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 20,
+					"file": "latex/part3/03_quantum.tex",
+					"settings":
+					{
+						"buffer_size": 46390,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								26,
+								26
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 21,
+					"file": "raw_materials/BALD-GPC/AL_NIPS2011.tex",
+					"settings":
+					{
+						"buffer_size": 35262,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								25788,
+								34096
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 6900.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 22,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "/Users/fhuszar/Dropbox/thesis/latex",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 23,
+					"file": "latex/thesis.tex",
+					"settings":
+					{
+						"buffer_size": 2097,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								81,
+								81
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1462,7 +1761,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 201.0
+		"height": 100.0
 	},
 	"replace":
 	{
@@ -1474,6 +1773,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"thesis",
+				"thesis.bib"
+			],
 			[
 				"facebookscorer",
 				"src/main/java/net/peerindex/businesslogic/facebook/FacebookScorer.java"

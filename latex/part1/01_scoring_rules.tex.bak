@@ -1,4 +1,4 @@
-%!TEX root = ../main.tex
+%!TEX root = ../thesis.tex
 
 
 In this section I describe scoring rules, a framework for quantifying the accuracy of probabilistic forecasts. Scoring rules allow one to define useful generalisations of well-known information quantities, such as entropy, divergence and mutual information. Each scoring rule defines a unique geometry over probabilistic models, which can be exploited in a variety of statistical applications. They provide a unifying framework for problems such as parameter estimation, approximate Bayesian inference and Bayesian optimal experiment design.

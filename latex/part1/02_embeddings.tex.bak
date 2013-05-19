@@ -1,4 +1,4 @@
-%!TEX root = ../main.tex
+%!TEX root = ../thesis.tex
 \section{Introduction}
 
 Strictly proper scoring rules and associated Bregman divergences determine a unique \emph{information geometry} of probability distributions. Different scoring rules are sensitive to different properties of distributions. Consider measuring divergence between Normal distributions, some divergences are more sensitive to small changes in the variance, while others are agnostic to the variance but sensitive to changes in the mean. In this section I aim to develop an understanding of these differences by visualising the geometric structures common scoring rules give rise to.

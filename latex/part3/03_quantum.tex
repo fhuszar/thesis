@@ -1,9 +1,8 @@
-%!TEX root = ../main.tex
+%!TEX root = ../thesis.tex
 
 \begin{summarycontributions}
- The work presented in this section is joint work with Neil M.\ T.\ Houlsby. Both authors contributed equally to all aspects of research. The work forms the basis of the journal article `Adaptive Bayesian Quantum Tomography' \citep{Huszar2012}.
+ The material presented in this chapter is joint work with Neil M.\ T.\ Houlsby. Both authors contributed equally to all aspects of research. The work forms the basis of the journal article `Adaptive Bayesian Quantum Tomography' \citep{Huszar2012quantum}. Figures \ref{fig:Bloch_disk}, \ref{fig:qubit_results} and \ref{fig:two_qubit_results} illustrating experimental results are taken from this paper as published, or with only slight modification, with consent from the co-author.
 \end{summarycontributions}
-
 
 \section{Introduction}
 
@@ -280,7 +279,7 @@ In summary, we propose the following algorithm, called Adaptive Bayesian Quantum
 	}
 
 	\caption[Illustration of adaptive tomography on a single-photon system]{Adaptive selection of measurements based of partial data. Scatter plots show 400 samples from current posterior. Shaded circles around the `Bloch disk' show relative value of the objective in Eqn.\,\eqref{Eqn:quantum_rearrangement} for different measurement directions (lighter is higher). Pairs of arrows show the most informative next measurement. Circular histograms show the number of times measurement directions have been used. \textbf{(a)}  Initially, no observations are made, samples shown are from the uniform prior. All measurements are equally informative, we chose to start with $\{\left\vert H\right\rangle,\left\vert V\right\rangle\}$. \textbf{(b)}  After one measurement, the posterior is updated, the next best measurement is mutually unbiased w.r.t.\ the first one. It is now $\{\left\vert D\right\rangle,\left\vert A\right\rangle\}$. \textbf{(c)} After two observations, the next best measurement is equally biased to the first two bases. \textbf{(d)} Posterior after 1000 observations concentrates around true state. The method tries a range of measurements, with a tendency to point towards the solution.
-	\label{fig:Bloch disk}}
+	\label{fig:Bloch_disk}}
 \end{figure}
 
 \begin{figure}
@@ -298,9 +297,9 @@ In summary, we propose the following algorithm, called Adaptive Bayesian Quantum
 	\caption[Performance of the adaptive Bayesian method in two-qubit tomography]{Two qubit QST with uniformly chosen amongst MUB (\ref{leg:MUB}) or SSQT bases (\ref{leg:SSQT}) and AB QT picking from the same set of MUBs (\ref{leg:aMUB}),  SSQT bases (\ref{leg:aSSQT}) or a more flexible set of 81 separable bases (\ref{leg:fSSQT}). Cases (a)-(c) are the same as those in\,\citep{MUBExperiment}, (d) shows average results over 20 randomly generated entangled pure states. \textbf{(a)} As expected, for the maximally mixed state the choice of measurement strategy has little effect. \textbf{(b)} On the entangled state $(\vert HH\rangle+\vert VV\rangle)/\sqrt{2}$ MUB outperforms SSQT when uniformly sampled, but by allowing for adaptivity we can close the performance gap. \textbf{(c)} SSQT outperforms MUBs on the separable state $\vert HV \rangle$, but again, picking measurements adaptively the two sets perform similarly. \textbf{(d)} For random pure states a large improvement in performance is made when performing ABQT with the flexible set of separable measurements. Using this set, ABQT only needs $10^4$ measurements to achieve $\approx98.7\%$ mean fidelity for which MUB needs $10^5$ measurements. \label{fig:two_qubit_results}}
 \end{figure}
 
-\subsection{single qubit tomography}
+\subsection{Single qubit tomography}
 
-In our first simulated experiments we study tomography of single qubits ($D=2$). Mixed state qubits have three real degrees of freedom, $\quantumparam$ is represented as a point in a unit ball, called the Bloch sphere. For illustration purposes we first omit the third component, and only infer two remaining parameters, which will lie in a unit (Bloch) disk. This corresponds to \eg determining linear polarisation of a photon, assuming that the circular polarisation is zero. We allow for arbitrary projective measurements with binary ($\Gamma = 2$) outcomes. These are represented by pairs of antipodal points on the perimeter of the Bloch disk. Now $\config\in[0,\pi)$ codes for the orientation. Fig.\ \ref{fig:Bloch disk} shows the progression of measurement bases chosen by ABQT. The first two measurements are mutually unbiased, however, the third measurement is equally biased with respect to both previous bases, demonstrating that using a fixed MUB set is suboptimal in the adaptive framework. Throughout the rest of the experiment the algorithm explores a wide range of measurements.
+In our first simulated experiments we study tomography of single qubits ($D=2$). Mixed state qubits have three real degrees of freedom, $\quantumparam$ is represented as a point in a unit ball, called the Bloch sphere. For illustration purposes we first omit the third component, and only infer two remaining parameters, which will lie in a unit (Bloch) disk. This corresponds to \eg determining linear polarisation of a photon, assuming that the circular polarisation is zero. We allow for arbitrary projective measurements with binary ($\Gamma = 2$) outcomes. These are represented by pairs of antipodal points on the perimeter of the Bloch disk. Now $\config\in[0,\pi)$ codes for the orientation. Fig.\ \ref{fig:Bloch_disk} shows the progression of measurement bases chosen by ABQT. The first two measurements are mutually unbiased, however, the third measurement is equally biased with respect to both previous bases, demonstrating that using a fixed MUB set is suboptimal in the adaptive framework. Throughout the rest of the experiment the algorithm explores a wide range of measurements.
 
 Fig.\ \ref{fig:qubit_results} shows that the posterior mean fidelity - this time inferring all three coordinates in the full Bloch sphere - improves at a faster rate when measurements are adaptively optimised. We quantify performance as mean posterior fidelity, rather than the fidelity of the Bayesian mean estimate, as the latter gives no indication of the confidence in our estimate. The rate is more consistent with a $n^{-1}$ law rather than $n^{-\frac{1}{2}}$ as predicted for non-adaptive methods\,\cite[][and refs.]{MUBExperiment}. Fig.\ \ref{fig:qubit_results}.b shows a larger advantage for states of high purity (defined as sum of squared eigenvalues).
 

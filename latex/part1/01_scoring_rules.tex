@@ -1,5 +1,14 @@
-%!TEX root = ../main.tex
+%!TEX root = ../thesis.tex
 
+\begin{summarycontributions}
+The material presented in this chapter is largely introductory, based on textbook material and references provided. The following otherwise unpublished material represent original contributions in this chapter:
+\begin{itemize}[noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt]
+	\item connection between maximum mean discrepancy and scoring rules (Section \ref{sec:kernel_score})
+	\item the kernel value of information and diversity operator (Section \ref{sec:kernel_score})
+	\item the spherical scoring rule (Section \ref{sec:spherical_kernel_score})
+\end{itemize}
+\end{summarycontributions}
+\section{Introduction}
 
 In this section I describe scoring rules, a framework for quantifying the accuracy of probabilistic forecasts. Scoring rules allow one to define useful generalisations of well-known information quantities, such as entropy, divergence and mutual information. Each scoring rule defines a unique geometry over probabilistic models, which can be exploited in a variety of statistical applications. They provide a unifying framework for problems such as parameter estimation, approximate Bayesian inference and Bayesian optimal experiment design.
 
@@ -376,7 +385,7 @@ The value of information under the spherical score is
 	\genentropy{\gamma,pseudospherical}{P} &= -\customnorm{P}{\gamma}
 \end{align}
 
-\subsection{The kernel scoring rule}
+\subsection{The kernel scoring rule\label{sec:kernel_score}}
 
 The kernel scoring rule first appeared in the statistics literature in \citep{Eaton1996}, although the name \emph{kernel scoring rule} was only used in more recent references \citep{Dawid1999,Dawid2007,Gneiting2007}.
 
@@ -541,7 +550,7 @@ Using this alternative definition it is easy to see that the kernel value of inf
 
 It would be interestnig future direction to investigate whether this information criterion has any connections to COCO and HSIC, or indeed if it inherits any of their useful properties.
 
-\subsection{The spherical kernel score}
+\subsection{The spherical kernel score\label{sec:spherical_kernel_score}}
 
 Seeing how the Brier score is a special case of the kernel scoring rule, one might wonder whether the spherical scoring rule has a similar generalisation. It turns out it does, and it gives rise to a very Intuitivelyitive divergence. Consider the following scoring rule
 

@@ -1,4 +1,4 @@
-%!TEX root = ../main.tex
+%!TEX root = ../thesis.tex
 
 % defining plot colors
 \definecolor{mycolor1}{rgb}{0.8,0.8,0}
@@ -8,7 +8,7 @@
 \definecolor{mycolor5}{rgb}{0.7,0.4,0.80}
 
 \begin{summarycontributions}
-The work presented in this chapter has been carried out in collaboration with Neil M.\ T.\ Houlsby, Jose Miguel Hernandez-Lobato, Zoubin Ghahramani and M\'{a}t\'{e} Lengyel. This work forms the basis of the technical report \citep{Houlsby2011} and the peer-reviewed conference paper \citep{Houlsby2012preference}. In addition, elements of this work have also been presented by Ferenc Husz\'{a}r and Neil Houlsby at the NIPS 2011 workshops ``Preference Learning'' and ``Bayesian Optimization and Active Learning''. All authors contributed equally to the design of the research and to the development of statistical models. The derivation of the preference kernel in Section \eqref{sec:prefKernel} and the approximation to the BALD formula in Experimentalqn.\ \eqref{Eqn:BALD_GPC} are original contributions by Ferenc Husz\'{a}r. Some experiments reported in Figures \ref{fig:artificial} and \ref{fig:BALD_GPC_results} were carried out by Neil Houlsby.
+The work presented in this chapter has been carried out in collaboration with Neil M.\ T.\ Houlsby, Jose Miguel Hernandez-Lobato, Zoubin Ghahramani and M\'{a}t\'{e} Lengyel. This work forms the basis of the technical report \citep{Houlsby2011} and the peer-reviewed conference paper \citep{Houlsby2012preference}. In addition, elements of this work have also been presented by FH and NMTH at the NIPS 2011 workshops ``Preference Learning'' and ``Bayesian Optimization and Active Learning''. All authors contributed equally to the design of the research and to the development of statistical models. The derivation of the preference kernel in Section \eqref{sec:prefKernel} and the approximation to the BALD formula in Eqn.\ \eqref{Eqn:BALD_GPC} are original contributions by FH. Experiments were mainly implemented and carried out by NMTH. Figures \ref{fig:artificial} and \ref{fig:BALD_GPC_results} are taken from \citep{Houlsby2011}, as published or with slight modification, with the co-authors' consent.
 \end{summarycontributions}
 
 \section{Introduction}
@@ -225,14 +225,14 @@ The three datasets and results using each algorithm are depicted in Fig.\ \ref{f
 
 \begin{figure}
 	\begin{center}
-	% \begin{tabular}{ccc}
+	\begin{tabular}{ccc}
 	% \input{figs/BALD/GPC/blockinthemiddle_dataset.tikz}&
 	% \input{figs/BALD/GPC/corner_dataset.tikz}&
 	% \input{figs/BALD/GPC/checkerboard_dataset.tikz}\\
 	% \input{figs/BALD/GPC/blockinmiddle2.tikz}&
 	% \input{figs/BALD/GPC/blockincorner2.tikz}&
 	% \input{figs/BALD/GPC/checkerboard2.tikz} \\
-	% \end{tabular}
+	\end{tabular}
 	\end{center}
 	\caption[Evaluation of Bayesian active learning on artificial data sets]{\emph{Top:} Artificial data sets used in our evaluation of active learning methods. Exemplars of the two classes are shown with black squares (\ref{plots:positives}) and red circles (\ref{plots:negatives}). \emph{Bottom:} Results of active learning with nine methods: random query (\ref{plots:rand}), BALD (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with the vote criterion with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), \citet{Kapoor2007} (\ref{plots:dec}), \citet{Zhu2003} (\ref{plots:semi}) and empirical error (\ref{plots:emp}).}
 	\label{fig:artificial}
@@ -242,7 +242,7 @@ In addition to this, we present results on 8 real-world classification datasets 
 
 \begin{figure}
 	\begin{center}
-	% \begin{tabular}{ccc}
+	\begin{tabular}{ccc}
 	% \input{figs/BALD/GPC/crabs2.tikz}&
 	% \input{figs/BALD/GPC/vehicle2.tikz}&
 	% \input{figs/BALD/GPC/wine2.tikz}\\
@@ -252,7 +252,7 @@ In addition to this, we present results on 8 real-world classification datasets 
 	% \input{figs/BALD/GPC/letterDP2.tikz}&
 	% \input{figs/BALD/GPC/letterEF2.tikz}&
 	% \input{figs/BALD/GPC/cancerB2.tikz}
-	% \end{tabular}
+	\end{tabular}
 	\end{center}
 	\caption[Evaluation of Bayesian active learning on real-world data sets]{Evaluation of the accuracy of active learning algorithms on various real-world classification datasets. Methods used are random query (\ref{plots:rand}), BALD (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), decision theoretic \citep{Kapoor2007} (\ref{plots:dec}), semi-supervised \citep{Zhu2003} (\ref{plots:semi}) and empicial error (\ref{plots:emp}). The decision theoretic methods took a long time to run, so were not completed for all data sets. Plots (a-i) correspond to different classification datasets from the UCI Machine Learning Repository. Plot (i) includes BALD with hyper-parameter learning (\ref{plots:opthyper}). See text for analysis. \label{fig:BALD_GPC_results}}
 \end{figure}
@@ -346,14 +346,14 @@ To test the performance of BALD on preference learning we use the \emph{cpu, car
 Results on the three datasets are shown in Fig.\ \ref{fig:BALD_pref_results}.  Surprisingly, despite our expectations, we found that random sampling from the pool provides reasonable performance, and active selection of measurements does not radically improve the speed of learning. Across the three data sets all studied methods perform well. BALD seems to struggle in the initial phase of learning on the \emph{cpu} dataset, for which we did not find a convincing explanation. On the \emph{kinematics} dataset the differnece between methods is more apparent, and here BALD provides the best performance among all methods studied.
 
 In follow-up work we extended BALD to collaborative preference learning, where preference judgements are elicited from multiple experts \citep{Houlsby2012preference}. The interested reader is referred to this paper for further experimental validation involving real-world preference datasets.
-
+% 
 \begin{figure}
 	\begin{center}
-	% \begin{tabular}{ccc}
+	\begin{tabular}{ccc}
 	% \input{figs/BALD/GPC/prefcpu2.tikz}&
 	% \input{figs/BALD/GPC/prefcart2.tikz}&
 	% \input{figs/BALD/GPC/prefkinem2.tikz}
-	% \end{tabular}
+	\end{tabular}
 	\end{center}
 	\caption[Evaluation of Bayesian active learning of binary preference relations]{Evaluation of the accuracy of active learning algorithms on various binary preference learning datasets. Methods used are random query (\ref{plots:rand}), BALD (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), decision theoretic \citep{Kapoor2007} (\ref{plots:dec}). For prediction, each method uses Gaussian process classification or SVM with the preference kernel from Eqn.\ \eqref{eqn:preference_kernel}.  See text for analysis. \label{fig:BALD_pref_results}}
 \end{figure}

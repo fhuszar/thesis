@@ -1,0 +1,28 @@
+Ingredients
+===========
+ - scoring rules
+ - infromation
+ - divergence
+ - information geometry
+ - Bayesian analyisis
+ - Bayesian machine learning
+ - Bayesian inference
+ - active learning
+ - approximate inference
+
+Variants
+========
+
+Scoring rules, Divergences and Information\\ in Bayesian Analysis
+
+Information, Divergence and Risk\\ in Bayesian Analysis
+
+Divergence and Information\\ in Bayesian Analysis
+
+Coherent Measures of Divergence and Information\\ in Bayesian Analysis
+
+Proper Measures of Divergence and Information\\ for Bayesian Analysis
+
+Proper Measures of Divergence and Information\\ in Probabilistic Machine Learning
+
+Scoring rules, Divergences and Information\\ in Probabilistic Machine Learning

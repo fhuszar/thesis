@@ -1,4 +1,19 @@
-%!TEX root = main.tex
+%!TEX root = thesis.tex
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{stackrel}
+\usepackage{nicefrac}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{lipsum}
+\usepackage[paper=a4paper]{geometry}
+\usepackage{enumitem}
+\usepackage{tikz,pgfplots}
+% \usetikzlibrary{external}
+% \tikzexternalize[prefix=tikz/]
+
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}
 \newtheorem{proposition}{Proposition}
@@ -6,6 +21,25 @@
 \theoremstyle{definition}
 \newtheorem{example}{Example}[section]
 \newtheorem{definition}{Definition}
+
+\definecolor{linkcolor}{rgb}{0.0,0.3,0.6}
+
+\hypersetup{
+    pdfstartview={FitH},
+    bookmarks=true,
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    bookmarksopenlevel=0,
+    pdfborder={0 0 0},
+    colorlinks=true,
+    linkcolor = linkcolor,
+    citecolor=linkcolor,
+    urlcolor=linkcolor,
+    filecolor=linkcolor,
+    pdfauthor={Ferenc Huszár},
+    pdfusetitle=true,
+    pdfdisplaydoctitle=true
+}
 
 \makeatletter
 \newcommand{\ChapterOutsidePart}{%
@@ -17,3 +51,19 @@
 \newenvironment{summarycontributions}{\sf \color{gray} \textbf{Summary of contributions:}\ }{}
 
 \renewcommand\baselinestretch{1.2}
+
+% pdfinfo tags
+\pdfinfo {
+  /Title  (Proper Measures of Divergence and Information in Probabilistic Machine Learning)
+  /Creator (TeX)
+  /Producer (pdfTeX)
+  /Author (Ferenc Huszar)
+  /CreationDate (D:20120524000000)  %format D:YYYYMMDDhhmmss
+  /ModDate (D:20120524000000)
+  /Subject (Statistical machine learning)
+  /Keywords (PhD, Thesis)
+}
+\pdfcatalog {
+  /PageMode (/UseOutlines)
+  /OpenAction (fitbh) 
+}

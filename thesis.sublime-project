@@ -5,6 +5,8 @@
       "name": "LaTeX files",
       "file_exclude_patterns": [
         "*.pdf",
+	"*.bak",
+	"*.brf",
         "*.aux",
         "*.auxlock",
         "*.fls",
