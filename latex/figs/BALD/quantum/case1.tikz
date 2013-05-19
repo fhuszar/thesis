@@ -1,4 +1,4 @@
-% This file was created by matlab2tikz v0.0.7.
+§% This file was created by matlab2tikz v0.0.7.
 % Copyright (c) 2008--2010, Nico Schlömer <nico.schloemer@gmail.com>
 % All rights reserved.
 % 
@@ -8,14 +8,13 @@
 % 
 \begin{tikzpicture}
 
-% defining custom colors
-\definecolor{mycolor1}{rgb}{1,0,1}
+
 
 
 \begin{loglogaxis}[%
 scale only axis,
-width= 1.39in,
-height= 1.2in,
+width= 1.8in,
+height= 1.5in,
 xmin=50, xmax=60000,
 ymin=0.0004, ymax=1,
 ylabel={mean infidelity},

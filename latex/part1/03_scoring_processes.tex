@@ -21,7 +21,7 @@ Indeed, the strictly proper property of a scoring rule under suitable regularity
 \begin{definition}[Score matching estimate]
 Let $\{P_{X\vert\theta, \theta\in\Theta}\}$ be a parametric family of distributions and $\score$ a strictly proper scoring rule with respect to this class. The following estimator is called the score matching estimate:
 \begin{equation}
-	\hat{\theta}_N(x_1,\ldots,x_N) = \argmin_{\theta\in\Theta} \sum_{n=1}^{N}\score(x_n,P_{X\vert\theta}) \label{Eqn:score_matching}
+	\hat{\theta}_N(x_1,\ldots,x_N) = \argmin_{\theta\in\Theta} \sum_{n=1}^{N}\score(x_n,P_{X\vert\theta}) \label{eqn:score_matching}
 \end{equation}
 The above equation is an unbiased estimating equation, and under suitable regularity conditions $\hat{\theta}_N(x_1,\ldots,x_N)$ is a consistent estimator, that is if $x_1,\ldots\sim P_{X\vert\theta_0}$\iid
 \begin{equation}
@@ -52,11 +52,11 @@ Marginal scoring rules allow one to calculate the score of a forecast on the bas
 Observe, that the traditional \iid scoring rule framework can be expressed in terms of marginal scoring rules over \iid processes. Instead of thinking about repeatedly sampling from a finite dimensional distribution, we can imagine sampling one infinitely long sequence first, but then revealing longer and longer sub-sequences from it. Let $\Xe$ be the set of natural numbers, and $\Pi$ an \iid process such that $\Pi_{I}(y_{I}) = \prod_{i\in I} P(y_i)$, then we can construct marginal scoring rules as follows:
 
 \begin{equation}
-R_{I}(y_{I},\Pi) = \frac{1}{\vert I \vert} \sum_{i\in I_n} S(y_i,P)\label{Eqn:decompose},
+R_{I}(y_{I},\Pi) = \frac{1}{\vert I \vert} \sum_{i\in I_n} S(y_i,P)\label{eqn:decompose},
 \end{equation}
 where $S$ is a strictly proper scoring rule over $\Ye$.
 
-The marginal scoring rules in Eqn. \eqref{Eqn:decompose} are useful in the following sense.
+The marginal scoring rules in Eqn. \eqref{eqn:decompose} are useful in the following sense.
 
 \begin{statement}[Consistency of marginal scoring for \iid processes]
 Let us take a monotonically increasing sequence of index sets $I_1\subseteq\ldots\subseteq I_N \subseteq \ldots \subseteq \Xe$, such that $\cup_{N=1}^{\infty} I_N = \Xe$ and $\score(y,P)$ be a strictly proper scoring rule over $\Ye$ with respect to the class of marginals $P_{\theta}$. Let $\Pi_{\theta}$ denote the \iid process over $\Ye^{\Xe}$ with marginal $P_{\theta}$. Then ``typically'' the following limit holds
@@ -97,7 +97,7 @@ Furthermore, the estimator is often statistically more efficient than maximum li
 
 \subsection{Decision theoretic scoring and $F_{\beta}$ scores}
 
-Further examples of scores that do not decompose as in \eqref{Eqn:decompose} can be constructed on decision theoretic grounds when the action and the loss that we minimise itself depends on multiple outcomes. For example in a binary case we may want to penalise imbalanced forecasters, so we prefer forecasters that produce about as many false positives as false negatives while at the same time minimise the total number of false predictions.
+Further examples of scores that do not decompose as in \eqref{eqn:decompose} can be constructed on decision theoretic grounds when the action and the loss that we minimise itself depends on multiple outcomes. For example in a binary case we may want to penalise imbalanced forecasters, so we prefer forecasters that produce about as many false positives as false negatives while at the same time minimise the total number of false predictions.
 
 Most of these complicated objectives can be achieved by optimising something like the $F_{\beta}$ score, which is applied in a variety of statistical applications \citep{}:
 
@@ -109,7 +109,7 @@ The $F$ score depends on a whole sample and cannot be decomposed as a sum of ter
 
 \section{Non-\iid processes}
 
-In the examples I gave above, the scoring rule did not decompose into a sum of univariate scores as in \eqref{Eqn:decompose}, but we would still use these scores to score and estimate \iid processes. The present framework also accommodates more general cases when we want to score non-\iid processes, such as hierarchical Bayesian models, Markov random fields, processes over tree structures or Gaussian processes.
+In the examples I gave above, the scoring rule did not decompose into a sum of univariate scores as in \eqref{eqn:decompose}, but we would still use these scores to score and estimate \iid processes. The present framework also accommodates more general cases when we want to score non-\iid processes, such as hierarchical Bayesian models, Markov random fields, processes over tree structures or Gaussian processes.
 
 The simplest and most widely adopted scoring rule of this form is log-score (assuming marginals of $\Pi$ have densities $P_{I_n}$), which is also called (negative) evidence:
 
@@ -133,7 +133,7 @@ We can observe that even though conditioned on $\theta$ subsequent $y_n$ variabl
 
 The evidence is accepted as a very robust criterion for Bayesian model selection and is thought to be particularly robust against over-fitting. On the other hand it is often intractable to compute exactly for complicated models, and one has to rely on various approximations such as the Bayesian information criterion (BIC)\citep{}, Akaike information criterion (AIC)\citep{}, variational lower bounds, or expectation-propagation (EP)\citep{}.
 
-We can generalise Bayesian model selection by replacing the log-score with another family of marginal scoring rulea, such as the quadratic kernel rule from Eqn.\ \eqref{Eqn:kernel_scoring}. When we use the kernel scoring rule for Bayesian model selection, it decomposes clearly into two terms, which intuitively represent the trade-off between accuracy and model flexibility.
+We can generalise Bayesian model selection by replacing the log-score with another family of marginal scoring rulea, such as the quadratic kernel rule from Eqn.\ \eqref{eqn:kernel_scoring}. When we use the kernel scoring rule for Bayesian model selection, it decomposes clearly into two terms, which intuitively represent the trade-off between accuracy and model flexibility.
 
 \begin{align}
 	\divergence{k}{\delta_{y}}{\Pi_{Y\vert\model}} &= \Hnorm{k(\cdot,y) - \mu_{Y\vert\model}}^2\\
@@ -164,7 +164,7 @@ Typically when studying consistency properties of pseudo-likelhiood, authors sho
 
 Pseudo-likelihood estimation can be used in other cases where computing the logarithmic score is intractable, such as estimating phylogenetic trees in models such as the infinite sites model \citep{something, something} . In this application the observed data are a set of related genomes, that are thought to have evolved from a common ancestor genome through a process of random mutations and recombinations and can therefore be related via a phylogenetic tree. The task is to infer the latent phylogenetic tree underlying the data, and to estimate model parameters such as the relative rate of mutation and recombination events.
 
-This estimation problem is hard because of the exponential number of phylogenetic trees consistent with any one dataset. Computing the marginal likelihood (or logarithmic score, as in Eqn.\ \eqref{Eqn:marginal_log_score}) is intractable as it involves computing a non-trivial sum over phylogenetic trees. However, computing the conditional distribution of just one gene (or segregating site on the DNA), conditioned on the observed values of other genes can be performed relatively efficiently in certain models, and thus pseudo-likelihood estimation may be efficiently applied to these models. It is an open question whether pseudo-likelihood estimation, or indeed maximum likelihood estimation is consistent in the limit of increasing number of alleles and species.
+This estimation problem is hard because of the exponential number of phylogenetic trees consistent with any one dataset. Computing the marginal likelihood (or logarithmic score, as in Eqn.\ \eqref{eqn:marginal_log_score}) is intractable as it involves computing a non-trivial sum over phylogenetic trees. However, computing the conditional distribution of just one gene (or segregating site on the DNA), conditioned on the observed values of other genes can be performed relatively efficiently in certain models, and thus pseudo-likelihood estimation may be efficiently applied to these models. It is an open question whether pseudo-likelihood estimation, or indeed maximum likelihood estimation is consistent in the limit of increasing number of alleles and species.
 
 \subsection{Information quantities for stochastic processes}
 

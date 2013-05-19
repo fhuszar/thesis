@@ -8,14 +8,13 @@
 % 
 \begin{tikzpicture}
 
-% defining custom colors
-\definecolor{mycolor1}{rgb}{1,0,1}
+
 
 
 \begin{loglogaxis}[%
 scale only axis,
-width= 1.39in,
-height= 1.2in,
+width= 1.8in,
+height= 1.5in,
 xmin=50, xmax=100000,
 ymin=0.003, ymax=0.8,
 axis on top]

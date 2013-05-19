@@ -8,8 +8,7 @@
 % 
 \begin{tikzpicture}
 
-% defining custom colors
-\definecolor{mycolor1}{rgb}{1,0,1}
+
 
 
 \begin{loglogaxis}[%

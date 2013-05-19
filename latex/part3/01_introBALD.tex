@@ -51,7 +51,7 @@ In myopic active learning, the learner solves the same problem in each step. Hav
 
 \begin{equation}
 	\argmax_\x\ \left[ \genentropy{\score}{p(\param\vert\data)} - \expect{y\sim p(\y\vert \x, \data)}{\genentropy{\score}{p(\param\vert \x,\y,\data)} }\right ]
-	\label{Eqn:active_learning_optimisation_criterion}
+	\label{eqn:active_learning_optimisation_criterion}
 \end{equation}
 
 The first term is the entropy of the posterior the learner currently has. This is a function of data $\data$ that is already observed, hence it is constant with respect to $\x$ and could be ignored. The second term is the entropy of the posterior after making measurement $\x$ and observing outcome $\y$. Because at the point of choosing the next measurement the outcome $\y$ is unknown, the learner has to rely on an approximation again and take an expectation with respect to its current predictive model of the outcome $p(\y \vert \x, \data)$. Note that here, the latent parameter $\param$ has been integrated out:
@@ -109,16 +109,16 @@ where $p_{\mbox{test}}$ is the distribution of test examples, $p(\y\vert\x,\data
 	\score_{\mbox{trans}}(\param,p_\data) &= \frac{1}{N_{\mbox{test}}}\sum_{n=1}^{N_{\mbox{test}}} \expect{p(\y\vert\x_n,\param)}{S(\y,p(\y\vert\x_n,\data))}
 \end{align}
 
-When $\score$ is chosen to be the logarithmic score, the active learning criterion \eqref{Eqn:active_learning_optimisation_criterion} becomes the average mutual information between the newly unveiled label and the unknown labels of test examples. This objective function was considered in prior work by \citet{MacKay1992} and is used in various other applications \citep[see \eg][]{Ertin2003,Fuhrmann2003}.
+When $\score$ is chosen to be the logarithmic score, the active learning criterion \eqref{eqn:active_learning_optimisation_criterion} becomes the average mutual information between the newly unveiled label and the unknown labels of test examples. This objective function was considered in prior work by \citet{MacKay1992} and is used in various other applications \citep[see \eg][]{Ertin2003,Fuhrmann2003}.
 
 One may also consider a loss-based scoring rule from section \ref{sec:loss_scoring_rule}
 
 \begin{align}
-	\score_{\mbox{trans},\loss}(\param,p_\data) &= \expect{\x\sim p_{\mbox{test}}}\left[ \min_{\hat{y}} \left\{\expect{\y\sim p(\y\vert\x,\param)} \loss(\hat{\y},\y) \right\} \right]\label{Eqn:transductive_loss_scoring}
+	\score_{\mbox{trans},\loss}(\param,p_\data) &= \expect{\x\sim p_{\mbox{test}}}\left[ \min_{\hat{y}} \left\{\expect{\y\sim p(\y\vert\x,\param)} \loss(\hat{\y},\y) \right\} \right]\label{eqn:transductive_loss_scoring}
 \end{align}
 where $\loss(\hat{y},\y)$ is the loss incurred for predicting $\hat{y}$ when the true outcome is $\y$.
 
-Transductive active learning with the loss-based criterion \eqref{Eqn:transductive_loss_scoring} is often referred to as decision theoretic active learning. Exact decesion theoretic active learning is computationally demanding to achieve in practice. \citet{Kapoor2007} provide details of such an algorithm in the context of Gaussian process models. \citet{Zhu2003active} use a similar objective function to perform graph-based transductive active learning based using harmonic functions.
+Transductive active learning with the loss-based criterion \eqref{eqn:transductive_loss_scoring} is often referred to as decision theoretic active learning. Exact decesion theoretic active learning is computationally demanding to achieve in practice. \citet{Kapoor2007} provide details of such an algorithm in the context of Gaussian process models. \citet{Zhu2003active} use a similar objective function to perform graph-based transductive active learning based using harmonic functions.
 
 \subsection{Bayesian optimisation}
 
@@ -132,26 +132,26 @@ The newest class of algorithms \citep{Hennig2012entropy}, called information-gre
 Entropy search, and information-greedy Bayeisan optimisation algorithm presented in \citep{Hennig2012entropy} is a special case of the scoring-rule-based active learning framework. It employs a scoring rule of the following form:
 
 \begin{equation}
-	\score_{\mbox{argmin}}(f,p_\data) = \score(\argmin_{\x}f,p_{\argmin}), \label{Eqn:Bayesian_argmin_scoring_rule}
+	\score_{\mbox{argmin}}(f,p_\data) = \score(\argmin_{\x}f,p_{\argmin}), \label{eqn:Bayesian_argmin_scoring_rule}
 \end{equation}
 where $f$ is the objective function which takes the role of $\param$ as the parameter of interest. $p_\data$ is a posterior measure over objective functions -- in most recent work this is a Gaussian process measure. $p_{\argmin} \in \probmeasures{\Xe}$ is the probability distribution that $p_\data$ implies over the location of the minimum $\argmin_{x}f$. Note that in \citep{Hennig2012entropy} $p_{\argmin}$ is called $p_{\min}$, I use a different notation for consistency. The scoring rule $\score$ could be any strictly proper scoring rule, \citeauthor{Hennig2012entropy} use the logarithmic loss which they derive approximations for.
 
-Equation \eqref{Eqn:Bayesian_argmin_scoring_rule} implies that the goal of optimisation is to find the exact location of the global minimum. In many applications however this is not required, instead, it is sufficient to learn about the value at the minimum. In this case, one could use a scoring rule of the following form.
+Equation \eqref{eqn:Bayesian_argmin_scoring_rule} implies that the goal of optimisation is to find the exact location of the global minimum. In many applications however this is not required, instead, it is sufficient to learn about the value at the minimum. In this case, one could use a scoring rule of the following form.
 
 \begin{equation}
-	\score_{\mbox{min}}(f,p_\data) = \score(\min_{\x}f,p_{\min}), \label{Eqn:Bayesian_argmin_scoring_rule}
+	\score_{\mbox{min}}(f,p_\data) = \score(\min_{\x}f,p_{\min}), \label{eqn:Bayesian_argmin_scoring_rule}
 \end{equation}
 where $\min_{\x}f$ is the minimal value of the objective function, $p_{\min}$ the measure $p_\data$ induces over the minimal value of $f$.
 
 Lastly, it is possible that neither the location nor the exact value of the minimum is important. The goal is simply to find a location $\x^{*}$ where the function $f(\x^{*})$ is as small as possible. In most modern applications of numerical optimisation this is a more reasonable requirement than finding the exact location of the global optimum. This goal can be expressed in the scoring rule framework using the following scoring rule.
 
 \begin{equation}
-	\score_{\mbox{best}}(f,p_\data) = f(\argmin_{\x}\expect{g\sim p_\data}{g(\x)}) \label{Eqn:Bayesian_optimisation_scoring_rule}
+	\score_{\mbox{best}}(f,p_\data) = f(\argmin_{\x}\expect{g\sim p_\data}{g(\x)}) \label{eqn:Bayesian_optimisation_scoring_rule}
 \end{equation}
 
-Note that $\score_{\mbox{best}}$ is also a special case of a Bayesian decision score $\score_{\loss}$ (section \ref{sec:loss_scoring_rule}, Equation \eqref{Eqn:loss_scoring_rule}) with actions $\actionset=\Xe$ and loss function $\loss(f,a)=f(a)$.
+Note that $\score_{\mbox{best}}$ is also a special case of a Bayesian decision score $\score_{\loss}$ (section \ref{sec:loss_scoring_rule}, Equation \eqref{eqn:loss_scoring_rule}) with actions $\actionset=\Xe$ and loss function $\loss(f,a)=f(a)$.
 
-Information-greedy Bayesian optimisation methods are still in their infancy. Interpreting them in the general scoring-rule-based framework allows one to understand the underlying goals, and propose straightforward extensions. I am not aware of either \eqref{Eqn:Bayesian_argmin_scoring_rule} or \eqref{Eqn:Bayesian_optimisation_scoring_rule} used in previous work in the context of Bayesian optimisation.
+Information-greedy Bayesian optimisation methods are still in their infancy. Interpreting them in the general scoring-rule-based framework allows one to understand the underlying goals, and propose straightforward extensions. I am not aware of either \eqref{eqn:Bayesian_argmin_scoring_rule} or \eqref{eqn:Bayesian_optimisation_scoring_rule} used in previous work in the context of Bayesian optimisation.
 
 \subsection{Sequential Bayesian quadrature}
 
@@ -172,7 +172,7 @@ Since the integral is intractable to calculate in closed form, the integral is a
 	\score_{SBQ}(f,p_\data) = \left(Z_{p,f} - \hat{Z}_\data \right)^2
 \end{equation}
 
-Using this scoring rule in the Bayesian active learning framework is equivalent to minimising the expected reduction in posterior variance of the quadrature estimate as in Eqn.\ \eqref{Eqn:marg_var_symbolic}. As we have shown in section \ref{sec:herding}, this optimisation problem corersponds to minimising MMD between the empirical distribution of test locations and the target distribution $p$.
+Using this scoring rule in the Bayesian active learning framework is equivalent to minimising the expected reduction in posterior variance of the quadrature estimate as in Eqn.\ \eqref{eqn:marg_var_symbolic}. As we have shown in section \ref{sec:herding}, this optimisation problem corersponds to minimising MMD between the empirical distribution of test locations and the target distribution $p$.
 
 Instead of the quadratic, one could use a different scoring rule to assess the accuracy of the forecast of the integral  $Z_{p,f}$:
 

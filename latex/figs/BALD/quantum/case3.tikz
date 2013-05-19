@@ -8,17 +8,16 @@
 % 
 \begin{tikzpicture}
 
-% defining custom colors
-\definecolor{mycolor1}{rgb}{1,0,1}
+
 
 
 \begin{loglogaxis}[%
 scale only axis,
-width= 1.39in,
-height= 1.2in,
-yticklabels={},
+width= 1.8in,
+height= 1.5in,
 xmin=50, xmax=60000,
 ymin=0.0004, ymax=1,
+ylabel={mean infidelity},
 axis on top]
 \addplot [
 color=red,

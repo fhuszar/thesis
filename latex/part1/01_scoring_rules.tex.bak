@@ -26,7 +26,7 @@ A further quantity of interest is the divergence between two distributions $P$ a
 \begin{definition}[Generalised divergence]\label{def:generalised_divergence}
 Given a scoring rule $\score:\Xe\times\probmeasures{\Xe}\mapsto\Reals$, let us define the divergence between two distributions $P,Q\in\probmeasures{\Xe}$ as follows:
 	\begin{equation}
-		\divergence{\score}{P}{Q} = \expect{x\sim P} \score(x,Q) - \expect{x\sim P} \score(x,P)\mbox{.}\label{Eqn:def_divergence}
+		\divergence{\score}{P}{Q} = \expect{x\sim P} \score(x,Q) - \expect{x\sim P} \score(x,P)\mbox{.}\label{eqn:def_divergence}
 	\end{equation}
 \end{definition}
 
@@ -52,7 +52,7 @@ Strictly proper scoring rules can therefore detect - on average - whether a fore
 \begin{definition}[Score matching estimate]\label{def:score_matching}
 Let $\{P_{X\vert\theta}, \theta\in\Theta\}$ be a parametric family of distributions and $\score$ a strictly proper scoring rule with respect to this class. The following estimator is called the score matching estimate:
 \begin{equation}
-	\hat{\theta}_N(x_1,\ldots,x_N) = \argmin_{\theta\in\Theta} \sum_{n=1}^{N}\score(x_n,P_{X\vert\theta}) \label{Eqn:score_matching}
+	\hat{\theta}_N(x_1,\ldots,x_N) = \argmin_{\theta\in\Theta} \sum_{n=1}^{N}\score(x_n,P_{X\vert\theta}) \label{eqn:score_matching}
 \end{equation}
 For most scoring rules the above estimating equation can be formulated in terms of the divergence as follows.
 \begin{equation}
@@ -64,9 +64,9 @@ The above equation is an unbiased estimating equation, and under suitable regula
 \end{equation}
 \end{definition}
 
-% As we will see, divergences are often used to match or approximate some \emph{true} or \emph{ideal} distribution with something \emph{approximate}, so that the divergence between the truth and the approximation is minimal. As we can measure divergence in both ways, there is a question of which direction of divergence is to be calculated. Definition \eqref{Eqn:def_divergence} suggests that the the first argument, $P$, should take the role of the true distribution, and $Q$ the approximate. \TODO{elaborate on this.}
+% As we will see, divergences are often used to match or approximate some \emph{true} or \emph{ideal} distribution with something \emph{approximate}, so that the divergence between the truth and the approximation is minimal. As we can measure divergence in both ways, there is a question of which direction of divergence is to be calculated. Definition \eqref{eqn:def_divergence} suggests that the the first argument, $P$, should take the role of the true distribution, and $Q$ the approximate. \TODO{elaborate on this.}
 
-The divergence defined in \eqref{Eqn:def_divergence} is a special case of Bregman divergences. Bregman divergences are an important class of divergence functions on complex domains, and include well known measures of distance or dissimilarity such as the Euclidean distance or KL divergence.
+The divergence defined in \eqref{eqn:def_divergence} is a special case of Bregman divergences. Bregman divergences are an important class of divergence functions on complex domains, and include well known measures of distance or dissimilarity such as the Euclidean distance or KL divergence.
 
 \begin{definition}[Bregman divergence]
 	Let $H$ be a differentiable, strictly concave function on a convex domain $\Theta$. For $P,Q\in\Theta$ 
@@ -225,14 +225,14 @@ The value of information becomes Shannon's mutual information, a crucial quantit
 		&= \expect{y \sim P_{Y}}\KL{P_{X\vert Y=y}}{P_X}\\
 		&= \expect{y \sim P_{Y}}\left[\expect{x \sim P_{X\vert Y=y}} \log\frac{P_{X\vert Y=y}(x)}{P_X(x)} \right]\\
 		&= \expect{(x,y) \sim P} \log \frac{P(x,y)}{P_{X}(x)P_{Y}(y)}\\
-		&= \KL{P(x,y)}{P_{X}(x)P_{Y}(y)}\label{Eqn:mutualinfo_as_KLdivergence}
+		&= \KL{P(x,y)}{P_{X}(x)P_{Y}(y)}\label{eqn:mutualinfo_as_KLdivergence}
 \end{align}
 
 As a consequence, Shannon's information is symmetric. Recall, that the value of information is generally non-symmetric, 
 
 The Shannon information in $Y$ about $X$ is the same as the Shannon information in $X$ about $Y$. This is a remarkable property of the log-score and, as we concluded in the previous section, is not generally true for value of information defined based on general scoring rules.
 
-For completeness, I note here that some authors have generalised Shannon's mutual information along the lines of \eqref{Eqn:mutualinfo_as_KLdivergence}, by replacing the KL divergence with a more general divergence $d$:
+For completeness, I note here that some authors have generalised Shannon's mutual information along the lines of \eqref{eqn:mutualinfo_as_KLdivergence}, by replacing the KL divergence with a more general divergence $d$:
 
 \begin{equation}
 	\mathbb{J}_{d}(X,Y) = \mbox{d}\left[ P(x,y) \middle\| P_{X}(x)P_{Y}(y) \right]\label{mutualinfo_generalisations}
@@ -393,15 +393,15 @@ Intuitively, if two distributions are close in the integral probability metric s
 A particularly interesting case is when the function class $\Fe$ is functions of unit norm from a reproducing kernel Hilbert space (RKHS) $\He$. In this case, the MMD between two distributions can be conveniently expressed using expectations of the associated kernel $k(x, x')$ only \citep{Sriperumbudur2008}:
 
 \begin{align}
-\mbox{MMD}^2\left(P,Q\right) &= \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left( \expect{x\sim P} f(x) - \expect{x\sim Q} f(x) \right)^2\label{Eqn:rkhs-mmd}\\
-	&=  \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left\vert \expect{x\sim P}\scalar{f}{k(\cdot,x)} - \expect{x\sim Q} \scalar{f}{k(\cdot,x)} \right\vert^2\label{Eqn:MMD_reproducing_property}\\
-	&=  \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left\vert \scalar{f}{\expect{x\sim P} k(\cdot,x) - \expect{x\sim Q} k(\cdot,x)}\right\vert^2\label{Eqn:MMD_linearity_of_expectation}\\
+\mbox{MMD}^2\left(P,Q\right) &= \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left( \expect{x\sim P} f(x) - \expect{x\sim Q} f(x) \right)^2\label{eqn:rkhs-mmd}\\
+	&=  \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left\vert \expect{x\sim P}\scalar{f}{k(\cdot,x)} - \expect{x\sim Q} \scalar{f}{k(\cdot,x)} \right\vert^2\label{eqn:MMD_reproducing_property}\\
+	&=  \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left\vert \scalar{f}{\expect{x\sim P} k(\cdot,x) - \expect{x\sim Q} k(\cdot,x)}\right\vert^2\label{eqn:MMD_linearity_of_expectation}\\
 	&=  \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\scalar{f}{\mu_{P} - \mu_{Q}}^2\\
-	&=  \Hnorm{\mu_{P} - \mu_{Q}}^2\label{Eqn:MMD_Cauchy_Schwartz}\\
-	&=  \expect{x,x'\sim P} k(x,x')	- 2 \expect{x\sim P}\expect{x'\sim Q} k(x,x') + \expect{x,x'\sim Q} k(x,x'),\label{Eqn:rkhs-mmd-lastline}
+	&=  \Hnorm{\mu_{P} - \mu_{Q}}^2\label{eqn:MMD_Cauchy_Schwartz}\\
+	&=  \expect{x,x'\sim P} k(x,x')	- 2 \expect{x\sim P}\expect{x'\sim Q} k(x,x') + \expect{x,x'\sim Q} k(x,x'),\label{eqn:rkhs-mmd-lastline}
 \end{align}
 
-In the derivation above we exploited the reproducing property of the kernel to arrive at \eqref{Eqn:MMD_reproducing_property} and the linearity of expectation to obtain \eqref{Eqn:MMD_linearity_of_expectation}. Step \eqref{Eqn:MMD_Cauchy_Schwartz} holds because of the Cauchy-Schwartz inequality. $\mu_P(\cdot) = \expect{x\sim P} k(\cdot,x)$ is called the mean element or RKHS-embedding of the probability distribution $P$ \citep{Smola2007}. The MMD metric is analogous to the Euclidean distance between the mean elements of the two distributions.
+In the derivation above we exploited the reproducing property of the kernel to arrive at \eqref{eqn:MMD_reproducing_property} and the linearity of expectation to obtain \eqref{eqn:MMD_linearity_of_expectation}. Step \eqref{eqn:MMD_Cauchy_Schwartz} holds because of the Cauchy-Schwartz inequality. $\mu_P(\cdot) = \expect{x\sim P} k(\cdot,x)$ is called the mean element or RKHS-embedding of the probability distribution $P$ \citep{Smola2007}. The MMD metric is analogous to the Euclidean distance between the mean elements of the two distributions.
 
 The most interesting kernels for the purposes of Hilbert-space embedding of distributions are those called \emph{characteristic} \citep{Sriperumbudur2008}. If the kernel $k$ is characteristic, the mapping from Borel probability measures to mean elements is injective, that is $\mu_P = \mu_Q \iff P = Q$. This also means that for characteristic Hilbert spaces $\divergence{k}{P}{Q} = 0 \iff Q=P$ holds. This is analogous to the strictly proper property of scoring rules and divergences as in Definition \ref{def:strictly_proper}.
 
@@ -411,16 +411,16 @@ The mean embedding $\mu_P$ can be thought of as a generalisation of characterist
 \phi_p(t) = \E{x\sim p}{e^{ i t x}} = \int e^{i t x} p(x) dx,
 \end{equation}
 
-where $i$ is the imaginary number $i=\sqrt{-1}$. The characteristic function is known to uniquely characterise any Borel probability measure on the real line. Indeed, it corresponds to an RKHS-embedding with the fourier kernel $k_{Fourier}(x,y) = \exp(ixy)$, which is an example of characteristic kernels. Note, that the final formula \eqref{Eqn:rkhs-mmd-lastline} assumed a real valued kernel function, therefore it is not valid for the special case of the Fourier kernel. Other, practically more relevant examples of characteristic kernels include the squared exponential, and the Laplacian kernels (see chapter \ref{sec:kernels}). \TODO{If I do this, I need a technical introduction to kernels - as well as probability distributions} As a counterexample, polynomial kernels, and in general kernels corresponding to finite dimensional Hilbert spaces are not characteristic.
+where $i$ is the imaginary number $i=\sqrt{-1}$. The characteristic function is known to uniquely characterise any Borel probability measure on the real line. Indeed, it corresponds to an RKHS-embedding with the fourier kernel $k_{Fourier}(x,y) = \exp(ixy)$, which is an example of characteristic kernels. Note, that the final formula \eqref{eqn:rkhs-mmd-lastline} assumed a real valued kernel function, therefore it is not valid for the special case of the Fourier kernel. Other, practically more relevant examples of characteristic kernels include the squared exponential, and the Laplacian kernels (see chapter \ref{sec:kernels}). \TODO{If I do this, I need a technical introduction to kernels - as well as probability distributions} As a counterexample, polynomial kernels, and in general kernels corresponding to finite dimensional Hilbert spaces are not characteristic.
 
 The maximum mean discrepancy with characteristic kernels has been applied in various contexts in machine learning. One of the first of these recent applications were two-sample tests. In two-sample testing one is provided i.\,i.\,d.\ samples from two distributions, and one has to determine whether the two distributions are the same or not. \citet{Gretton2012} developed and analysed efficient empirical methods based on the MMD for this problem.
 
 Herding \citep{welling2009herding} and its generalisation kernel herding \citep{Chen2012} have been shown to minimise MMD between a target distribution and the empirical distribution of pseudo-samples. This method is an example of quasi-Monte Carlo methods that are examined in Chapter \ref{sec:approximate_inference}. Lastly, in kernel moment matching \citep{Song2008} MMD is used for density estimation: parameters of a parametric density model are set by minimising MMD from the empirical distribution of data. As we will see shortly, this is a special case of score matching as defined in Definition \ref{def:score_matching}.
 
-The squared MMD in fact conforms to our definition of a generalised divergence in equation \eqref{Eqn:def_divergence}, and corresponds to the following scoring rule:
+The squared MMD in fact conforms to our definition of a generalised divergence in equation \eqref{eqn:def_divergence}, and corresponds to the following scoring rule:
 
 \begin{align}
-	\score_{k}(x,P) &\defeq k(x,x) - 2 \expect{x'\sim P} k(x,x') + \expect{x',x''\sim P}k(x',x'') \label{Eqn:kernel_scoring_rule}\\
+	\score_{k}(x,P) &\defeq k(x,x) - 2 \expect{x'\sim P} k(x,x') + \expect{x',x''\sim P}k(x',x'') \label{eqn:kernel_scoring_rule}\\
 		&=  \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left( f(x)- \expect{x\sim P} f(y) \right)^2
 \end{align}
 
@@ -434,7 +434,7 @@ The equivalence can be seen by applying Definition \ref{def:generalised_divergen
 		&= \mbox{MMD}^2\left(P,Q\right)
 \end{align}
 
-This scoring rule in Equation \eqref{Eqn:kernel_scoring_rule} is equivalent to the \emph{kernel scoring rule} introduced originally by \citet{Eaton1982}. The term kernel score was later coined by \citet{Dawid2007}. Further references to this scoring rule can be found in \citep{Eaton1996,Gneiting2007}. The original definitions differed from the formula by a factor of two, and they did not have the leading $k(x,x)$ term. These differences do not make any difference: scoring rules that are equal up to scaling and an additive term that depends only on $x$ but not on the distribution $P$ give rise to exactly the same generalised entropy and divergence functionals, and are hence equivalent \citep{Dawid2007}. Also, the statistics community defined the scores in terms of negative definite kernels, rather than positive definite ones which is the common convention in machine learning. It has also been pointed out that the Brier (quadratic) score is a special case of the kernel score when the kernel is chosen to be the trivial $k(x,x') = \delta(x - x')$, where $\delta$ is the Dirac delta function \citep{Dawid2007}.
+This scoring rule in Equation \eqref{eqn:kernel_scoring_rule} is equivalent to the \emph{kernel scoring rule} introduced originally by \citet{Eaton1982}. The term kernel score was later coined by \citet{Dawid2007}. Further references to this scoring rule can be found in \citep{Eaton1996,Gneiting2007}. The original definitions differed from the formula by a factor of two, and they did not have the leading $k(x,x)$ term. These differences do not make any difference: scoring rules that are equal up to scaling and an additive term that depends only on $x$ but not on the distribution $P$ give rise to exactly the same generalised entropy and divergence functionals, and are hence equivalent \citep{Dawid2007}. Also, the statistics community defined the scores in terms of negative definite kernels, rather than positive definite ones which is the common convention in machine learning. It has also been pointed out that the Brier (quadratic) score is a special case of the kernel score when the kernel is chosen to be the trivial $k(x,x') = \delta(x - x')$, where $\delta$ is the Dirac delta function \citep{Dawid2007}.
 
 To my knowledge the connection between kernel scores in statistics and maximum mean discrepancy has not been established before. This interpretation allows one to uncover previously unknown connections between existing machine learning methods and to provide a solid theoretical framework for understanding and generalising them.
 
@@ -460,7 +460,7 @@ We can use the generalised entropy and divergence defined by the kernel scoring 
 
 \begin{align}
 	\information{k}{X}{Y} &= \expect{y\sim P_{Y}} \divergence{k}{P_{X}}{P_{X\vert Y=y}}\\
-		&=  \expect{y\sim P_{Y}} \Hnorm{ \mu_{X \vert Y=y} - \mu_X }^2 \label{Eqn:kernel_information}\\
+		&=  \expect{y\sim P_{Y}} \Hnorm{ \mu_{X \vert Y=y} - \mu_X }^2 \label{eqn:kernel_information}\\
 		&= k(P_{X},P_{X}) - 2*\expect{y\sim P_{Y}}k(P_{X},P_{X\vert Y=y}) + \expect{y\sim P_{Y}} k(P_{X\vert Y=y},P_{X\vert Y=y})\\
 		&= \expect{y\sim P_{Y}} \expect{P_{x_1,x_2 \sim P_{X\vert Y=y}}}k(x_1,x_2) - \expect{x_1,x_2\sim P_{X}}k(x_1,x_2)
 \end{align}
@@ -490,7 +490,7 @@ Based on the cross-covariance operator, one can define various measures of depen
 
 A more robust measure of dependence, the Hilbert Schmidt Information Criterion (HSIC) uses the Hilbert-Schmidt norm of the cross-covatiance operator\citep{Gretton2005HSIC}. Kernel measures of dependence like COCO and HSIC have several useful properties. They are symmetric, and can be effectively estimated from empirical data \citep{Gretton2005HSIC}.
 
-However, as with generalisations of Shannon's information in Eqn.\ \eqref{Eqn:mutualinfo_generalisations}, COCO and its variants do not have an interpretation as ``the extent to which knowing $Y$ is useful for predicting $X$''. Also, they require a kernel to be defined over both $\Xe$ and $\Ye$, and properties of the functional depend on both choices of kernels. In contrast \eqref{Eqn:kernel_information} only requires a single kernel over $\Xe$.
+However, as with generalisations of Shannon's information in Eqn.\ \eqref{eqn:mutualinfo_generalisations}, COCO and its variants do not have an interpretation as ``the extent to which knowing $Y$ is useful for predicting $X$''. Also, they require a kernel to be defined over both $\Xe$ and $\Ye$, and properties of the functional depend on both choices of kernels. In contrast \eqref{eqn:kernel_information} only requires a single kernel over $\Xe$.
 
 Interestingly, the kernel value of information $\information{k}{X}{Y}$ that I introduced based on the kernel score can also be interpreted in terms of a linear operator in the Hilbert space. I am not aware of any previous use of this operator before, and in referencing it I will use the name diversity operator.
 
@@ -520,15 +520,15 @@ Let $f,g\in\He$, then
 	=&\expect{y\sim P_Y}\scalar{f}{ \left(\left(\mu_{X\vert Y=y} - \mu_{X}\right) \otimes \left(\mu_{X\vert Y=y}  - \mu_{X} \right)\right) g}\\
 	=& \scalar{f}{\left(\mu_{X\vert Y=y} - \mu_{X}\right)}\scalar{g}{\left(\mu_{X\vert Y=y} - \mu_{X}\right)}\\
 	=& \scalar{f}{\left(\expect{x\sim P_{X\vert Y=y}}k(\cdot,x) - \expect{x\sim P_X}k(\cdot,x)\right)}\scalar{g}{\left(\expect{x\sim P_{X\vert Y=y}}k(\cdot,x) - \expect{x\sim P_X}k(\cdot,x)\right)}\\
-	=& \expect{y\sim P_Y} \left(\expect{X\vert Y=y} f(x) - \expect{x\sim P_X}f(x)\right)\left(\expect{X\vert Y=y} g(x) - \expect{x\sim P_X}g(x)\right)\label{Eqn:diversity_operator_linearity_of_expectation}\\
+	=& \expect{y\sim P_Y} \left(\expect{X\vert Y=y} f(x) - \expect{x\sim P_X}f(x)\right)\left(\expect{X\vert Y=y} g(x) - \expect{x\sim P_X}g(x)\right)\label{eqn:diversity_operator_linearity_of_expectation}\\
 	=& \cov{y\sim P_Y}{\expect{X\vert Y=y} f}{\expect{X\vert Y=y} g}\\
 	=& \scalar{f}{D_{X\vert Y}g}_{\He},
 \end{align}
-where we used the linearity of expectation and the reproducing property of the kernel to obtain step \eqref{Eqn:diversity_operator_linearity_of_expectation}
+where we used the linearity of expectation and the reproducing property of the kernel to obtain step \eqref{eqn:diversity_operator_linearity_of_expectation}
 \end{proof}
 \end{statement}
 
-Using this alternative definition it is easy to see that the kernel value of information as defined in Eqn.\ \eqref{Eqn:kernel_information} can be expressed as the trace of the diversity operator (which in turn is the same as the Hilbert-Schmidt norm of the squareroot of the operator):
+Using this alternative definition it is easy to see that the kernel value of information as defined in Eqn.\ \eqref{eqn:kernel_information} can be expressed as the trace of the diversity operator (which in turn is the same as the Hilbert-Schmidt norm of the squareroot of the operator):
 
 \begin{align}
 	\information{k}{X}{Y} &= \expect{y \sim P_{Y}} \customnorm{\mu_X - \mu_{X\vert Y=y}}{2}^2\\
@@ -563,7 +563,7 @@ Whenever $k(x,x)=c$ this entropy is non-negative, and bounded from above. For ch
 \begin{align}
 	\divergence{k,spherical}{P}{Q} &= - \expect{x\sim Q}\frac{\mu_P}{\Hnorm{\mu_P}} + \Hnorm{\mu_P}\\
 		&= \Hnorm{\mu_P} \left( 1 - \cos(\mu_P, \mu_Q)\right)\\
-		&= \sqrt{\expect{x,x'\sim P}k(x,x')} - \frac{\expect{x\sim P}\expect{x'\sim Q}k(x,x')}{\sqrt{\expect{x,x'\sim Q}k(x,x')}} \label{Eqn:spherical_kernel_divergence}
+		&= \sqrt{\expect{x,x'\sim P}k(x,x')} - \frac{\expect{x\sim P}\expect{x'\sim Q}k(x,x')}{\sqrt{\expect{x,x'\sim Q}k(x,x')}} \label{eqn:spherical_kernel_divergence}
 \end{align}
 
 Unlike MMD and $\divergence{k}{\cdot}{\cdot}$, this divergence is asymmetric because of the leading $\Hnorm{\mu_P}$ factor. Also, just like the spherical score, it is agnostic to scaling of $Q$, that is $\divergence{k,spherical}{P}{c\cdot Q} = \divergence{k,spherical}{P}{Q}$. Furthermore, $\divergence{k,spherical}{c\cdot P}{Q} = c \cdot \divergence{k,spherical}{P}{Q}$. Whenever the kernel is characteristic, this scoring rule is strictly proper with respect to Borel probability distributions, whose mean embedding $\mu_P(x)$ is bounded.
@@ -591,14 +591,14 @@ The spherical kernel score also has an interesting intuitive meaning in terms of
 \begin{proposition}\label{prop:sign_random_function}
 Let $P,Q$ be probability distribuitons over the domain $\Xe$ and $\He$ a RKHS with associated kernel function $k$. Let $GP$ denote a standard Gaussian process in the Hilbert space. Then the following equality holds:
 \begin{equation}
-	 \divergence{k,spherical}{P}{Q} = \Hnorm{\mu_P} \mathbb{P}_{f\sim GP} \left[ \mbox{sign}(\expect{x\sim P} f(x)) \neq \mbox{sign}(\expect{x\sim Q} f(x)) \right] \label{Eqn:sign_random_function}
+	 \divergence{k,spherical}{P}{Q} = \Hnorm{\mu_P} \mathbb{P}_{f\sim GP} \left[ \mbox{sign}(\expect{x\sim P} f(x)) \neq \mbox{sign}(\expect{x\sim Q} f(x)) \right] \label{eqn:sign_random_function}
 \end{equation}
 \begin{proof}
 See Lemma 8 in \citep{Goemans1995}.
 \end{proof}
 \end{proposition}
 
-Thus, the divergence function \eqref{Eqn:spherical_kernel_divergence} is related to the probability that the expectation of a randomly drawn test function $f$ has the same sign when the expectation is taken under $P$ or under $Q$. Intuitively, the more smooth functions one can find whose expectation under $P$ is positive but under $Q$ is negative, the more different $P$ and $Q$ are. The finite dimensional analogue of Proposition \ref{prop:sign_random_function} is exploited in sign-random-projection locality sensitive hashing (SRP-LSH) algorithms \citep{Charikar2002,Ji2012}. Similarly, Eqn.\ \eqref{Eqn:sign_random_function} can be exploited in locality sensitive hashing algorithms for probability distributions, even though practical applications of such algorithms are probably limited.
+Thus, the divergence function \eqref{eqn:spherical_kernel_divergence} is related to the probability that the expectation of a randomly drawn test function $f$ has the same sign when the expectation is taken under $P$ or under $Q$. Intuitively, the more smooth functions one can find whose expectation under $P$ is positive but under $Q$ is negative, the more different $P$ and $Q$ are. The finite dimensional analogue of Proposition \ref{prop:sign_random_function} is exploited in sign-random-projection locality sensitive hashing (SRP-LSH) algorithms \citep{Charikar2002,Ji2012}. Similarly, Eqn.\ \eqref{eqn:sign_random_function} can be exploited in locality sensitive hashing algorithms for probability distributions, even though practical applications of such algorithms are probably limited.
 
 I am not aware of any previous definition or mention of the spherical kernel scoring rule or the associated divergence functional in either the statistics or machine learning literature. It is unclear whether this intuitive divergence function provides any advantages over, say MMD, in practical applications, or whether efficient empirical estimators exist.
 
@@ -624,7 +624,7 @@ Let us assume we have a probabilistic forecast or belief $P$ about the state of 
 When we observe the value of $X$ we can score the probabilistic forecast, by evaluating the loss incurred by using this optimal action $\action^{*}_{P}$ in state $\X=\x$.
 
 \begin{align}
-	\score_{\loss}(\x,P) = \loss(\x,\action^{*}_{P}) \label{Eqn:loss_scoring_rule}
+	\score_{\loss}(\x,P) = \loss(\x,\action^{*}_{P}) \label{eqn:loss_scoring_rule}
 \end{align}
 
 This function only depends on the true state $\x$ and the forecast $P$, hence it is a scoring rule. The generalised entropy that this scoring rule defines is otherwise known as the Bayes-risk of the decision problem:
@@ -641,7 +641,7 @@ The associated divergence can be interpreted as the excess loss we incur by usin
 	\divergence{\loss}{P}{Q} = \expect{x\sim P} \loss(\x,\action^{*}_{Q}) - \min_{\action \in \actionset}\expect{x\sim P} \loss(\x,\action)
 \end{align}
 
-Because of the definition of $\genentropy{\loss}{P}$, the divergence is always non-negative, hence the scoring rule defined this way is always proper. In fact, proper scoring rules and Bayesian decision problems are equivalent, inasmuch as every proper scoring rule can be expressed as Bayesian decision problem as in Eqn.\ \eqref{Eqn:loss_scoring_rule}. Throughout this thesis I will use the decision theoretic notation ($\loss$, $\actionset$, $\mathcal{R}_{\loss}[\cdot]$) or the scoring rule notation ($\score$, $\genentropy{\score}{\cdot}$, $\divergence{S}{\cdot}{\cdot}$) interchangeably, depending on which one is more natural given the context.
+Because of the definition of $\genentropy{\loss}{P}$, the divergence is always non-negative, hence the scoring rule defined this way is always proper. In fact, proper scoring rules and Bayesian decision problems are equivalent, inasmuch as every proper scoring rule can be expressed as Bayesian decision problem as in Eqn.\ \eqref{eqn:loss_scoring_rule}. Throughout this thesis I will use the decision theoretic notation ($\loss$, $\actionset$, $\mathcal{R}_{\loss}[\cdot]$) or the scoring rule notation ($\score$, $\genentropy{\score}{\cdot}$, $\divergence{S}{\cdot}{\cdot}$) interchangeably, depending on which one is more natural given the context.
 
 Several scoring rules can be interpreted as special cases of this loss-calibrated framework.
 
@@ -679,7 +679,7 @@ Thus, we can define the following scoring rule $\score$:
 		= 	\sup_{f\in\Fe}\left( f(\x) - \expect{x\sim P} f(x) \right)^2
 \end{equation}
 
-When $\Fe$ is chosen to be the unit ball in a reproducing kernel Hilbert space $\He$ defined by a positive definite kernel $k$, this scoring rule will be equivalent to the kernel scoring rule for probability distributions (Eqn.\ \eqref{Eqn:kernel_scoring_rule}).
+When $\Fe$ is chosen to be the unit ball in a reproducing kernel Hilbert space $\He$ defined by a positive definite kernel $k$, this scoring rule will be equivalent to the kernel scoring rule for probability distributions (Eqn.\ \eqref{eqn:kernel_scoring_rule}).
 
 As the Brier score is a special case of the kernel scoring rule, it can also be derived from the same decision problem.
 
