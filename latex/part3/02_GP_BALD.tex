@@ -86,7 +86,7 @@ I will use a non-parametric Bayesian classification model, Gaussian process clas
 The probabilistic model underlying GPC is as follows:
 
 \begin{align}
-	f \sim \mathrm{GP}(\mu(\cdot),k(\cdot,\cdot)) \qquad \y\vert\x,f \sim\mathrm{Bernoulli}(\Phi(f(\x))) 
+	f \sim \mathrm{GP}(\mu(\cdot),k(\cdot,\cdot)) \qquad \y\vert\x,f \sim\mathrm{Bernoulli}(\Phi(f(\x))) \label{eqn:GPC_model}
 \end{align}
 
 The latent parameter, now called $f$ (previously denoted as $\param$), is a real-valued function $\mathcal{X}\rightarrow\mathbb{R}$, and is assigned a Gaussian process prior with mean $\mu(\cdot)$ and covariance function $k(\cdot,\cdot)$.
@@ -242,17 +242,17 @@ In addition to this, we present results on 8 real-world classification datasets 
 
 \begin{figure}
 	\begin{center}
-	\begin{tabular}{ccc}
-	\input{figs/BALD/GPC/crabs2.tikz}&
-	\input{figs/BALD/GPC/vehicle2.tikz}&
-	\input{figs/BALD/GPC/wine2.tikz}\\
-	\input{figs/BALD/GPC/wdbc2.tikz}&
-	\input{figs/BALD/GPC/isolet2.tikz}&
-	\input{figs/BALD/GPC/austra2.tikz}\\
-	\input{figs/BALD/GPC/letterDP2.tikz}&
-	\input{figs/BALD/GPC/letterEF2.tikz}&
-	\input{figs/BALD/GPC/cancerB2.tikz}
-	\end{tabular}
+	% \begin{tabular}{ccc}
+	% \input{figs/BALD/GPC/crabs2.tikz}&
+	% \input{figs/BALD/GPC/vehicle2.tikz}&
+	% \input{figs/BALD/GPC/wine2.tikz}\\
+	% \input{figs/BALD/GPC/wdbc2.tikz}&
+	% \input{figs/BALD/GPC/isolet2.tikz}&
+	% \input{figs/BALD/GPC/austra2.tikz}\\
+	% \input{figs/BALD/GPC/letterDP2.tikz}&
+	% \input{figs/BALD/GPC/letterEF2.tikz}&
+	% \input{figs/BALD/GPC/cancerB2.tikz}
+	% \end{tabular}
 	\end{center}
 	\caption[Evaluation of Bayesian active learning on real-world data sets]{Evaluation of the accuracy of active learning algorithms on various real-world classification datasets. Methods used are random query (\ref{plots:rand}), BALD (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), decision theoretic \citep{Kapoor2007} (\ref{plots:dec}), semi-supervised \citep{Zhu2003} (\ref{plots:semi}) and empicial error (\ref{plots:emp}). The decision theoretic methods took a long time to run, so were not completed for all data sets. Plots (a-i) correspond to different classification datasets from the UCI Machine Learning Repository. Plot (i) includes BALD with hyper-parameter learning (\ref{plots:opthyper}). See text for analysis. \label{fig:BALD_GPC_results}}
 \end{figure}
@@ -275,10 +275,10 @@ On the real datasets though BALD usually performs as well, if not better, than t
 
 \section{Extension to preference elicitation}
 
-It is possible to extend the above framework to handle a practically highly relevant problem problem of learning peoples' preferences. People have rich knowledge knowledge and information about which products, services, people, items they prefer, find attractive or like. Methods that uncover this private knowledge is invaluable in a number of commercial and science applications. Examples include
+It is possible to extend the above framework to handle a practically highly relevant problem problem of learning peoples' preferences. People have rich knowledge knowledge and information about which products, services, people, items they prefer, find attractive or like. Methods that uncover this knowledge is invaluable in a number of commercial and science applications. Examples include
 \begin{description}
 	\item [market research and e-commerce:] learning about users' preferences of products, prices, or brands. Preferences can be exploited to maximise user satisfaction and to drive profit
-	\item [social media:] identifying people that their peers find influential, reliable, trustworthy or knowledgeable on certain topics
+	\item [social media:] identifying people whom their peers find influential, reliable, trustworthy or knowledgeable on certain topics, and using this information to find domain experts, or drive influence marketing
 	\item [recommendation:] on review websites collecting and quantifying user feedback on restaurants, activities, movies, music albums, etc. to power recommendations
 	\item [research:] learning about difficult, subjective concepts such as attractiveness, for example investigating which features determine perceived attractiveness
 	\item [equipment calibration:] calibration of parameters to improve perceived subjective quality. Examples include calibrating sound quality of hearing aid or stereo equipment, high-dimensional parameter optimisation in digital image rendering
@@ -286,54 +286,80 @@ It is possible to extend the above framework to handle a practically highly rele
 
 Many existing approaches -- such as traditional market research surveys, restaurant review websites, DVD rental websites, etc -- require human respondents\footnote{Throughout this chapter I will use the words person, respondent and user interchangeably to mean the person whose preferences we are interested in predicting.} to give ratings of items on an absolute scale. Market research surveys often use a scale of 1 to 7, while review websites use star ratings, typically on a scale between 1 to 5 stars. There are multiple problems with this approach.
 \begin{enumerate}
-	\item People's baseline level on the absolute scale may differ. One person's 4 star rating may describe the same level of satisfaction as someone else's 5 star rating. This makes aggregating opinions from many different people a non-trivial task
+	\item People's baseline level on the absolute scale may differ. One person's 4 star rating may describe the same level of satisfaction as someone else's 5 stars. This makes aggregating opinions from many different people a non-trivial task
 	\item The variance of responses may also differ across people: some more conservative reviewers would never use the extreme 1 star or 5 star ratings, whilst other respondents' opinions may be more polarised
 	\item To give informed ratings, the user has to know the distribution of the quality of items ahead of time. They may prefer not to give a maximal 5-star rating to an item, because they don't know if better items exist. Others may give 5-star to a mediocre item, because they have never seen a better alternative.
 \end{enumerate} 
 
-To overcome the limitations of an absolute scale, in an increasing number of applications preference elicitation is done via pairwise item comparisons. In this case, the respondent is presented a pair of items, and they have to judge which of the two alternatives is more preferable. In cognitive science, this type of preference elicitation is known as two-alternative forced choice, or 2AFC for short \citep{2AFC}. The machine learning community often refers to this kind problem as \emph{binary preference elicitation}, preference learning or learning to rank.
+To overcome the limitations of an absolute scale, in an increasing number of applications preference elicitation is done via pairwise item comparisons. In this case, the respondent is presented a pair of items, and they have to judge which of the two alternatives is more preferable. In cognitive science, this type of preference elicitation is known as two-alternative forced choice, or 2AFC for short \citep{Fechner1860,Platt1999}. The machine learning community often refers to this kind problem as \emph{binary preference elicitation}, preference learning or learning to rank \citep{Chu2005,furnkranz2010}.
 
 Crucially, binary preference elicitation sidesteps most of the problems that eliciting preference on an absolute scale exhibits. Because no absolute scale is used, it does not matter if the scale of ratings used by different respondents are not aligned, as long as there is a mostly monotonic relationship between them. Also, the respondent only needs to be knowledgeable about the two items being compared in order to give an informed response. This way respondents with much more limited scope of knowledge can provide highly informative data.
 
 Despite these convenient properties, pairwise preference learning has a drawback. When learning preferences over $n$ items, there are $\mathcal{O}(n^2)$ potential pairs of items that we can ask the respondents to compare. Not only would querying all item-pairs take prohibitively long time, it is also unnecessary. Most binary choices would be predictable from previous choices the respondent or other respondents have already made.
 
-Therefore, in binary preference learning, active learning and optimal experiment design has increased importance, and increased potential to improve over passive learning.
+Therefore, in binary preference learning, active learning and optimal experiment design have increased importance, and increased potential to improve over passive learning.
 
-In this section I will extend the BALD framework developed for Gaussian process classification to work on preference learning. I will do this by showing how a popular non-parametric model for preference learning can be interpreted as binary Gaussian process classification with an special positive definite kernel between item-pairs, that I call \emph{the preference kernel}. I also present an extension of the model which can be applied to learn from preference choices expressed by multiple users, even if different users disagree in their preferences. The experimental results presented in this chapter show that the Gaussian-process-based models combined with the BALD framework are very competitive and on many data sets surpass state-of-the art levels of performance.
+In this section I will extend the BALD framework developed for Gaussian process classification to work on preference learning. I will do this by showing how a popular non-parametric model for preference learning can be interpreted as binary Gaussian process classification with an special positive definite kernel between item-pairs, that I call \emph{the preference kernel}. This idea can be used in other kernel-based classifiers such as SVMs. I present experimental results where I compare BALD to other active learning approaches to this problem.
 
 \subsection{Reduction to classification\label{sec:prefKernel}}
 
-In preference learning each data point describes two items, $i$ and $j$, which have been presented to a human judge. It is assumed throughout this thesis that the items are described by their numeric feature vectors $\x_i\in\mathcal{X}$ and $\x_j\in\mathcal{X}$ respectively. Each item is assumed to have a fixed number, $\dim(\mathcal{X})=d$, of features associated with them. Each training data point also has a binary label $y\in\{-1,1\}$ such that $y=1$ if the user prefers item $i$ to item $j$, and $y=-1$ otherwise. The primary goal of preference learning is to accurately predict the direction of human preference for a new pair of feature vectors not seen before.
+In preference learning each data point describes two items, $i$ and $j$, which have been presented to a human judge. It is assumed that the items are described by their numeric feature vectors $\x_i\in\mathcal{X}$ and $\x_j\in\mathcal{X}$ respectively. Each item is assumed to have a fixed number, $\dim(\mathcal{X})=d$, of features associated with them. Each training data point also has a binary label $y\in\{-1,1\}$ such that $y=1$ if the user prefers item $i$ to item $j$, and $y=-1$ otherwise. The primary goal of preference learning is to accurately predict the direction of human preference for a new pair of feature vectors not seen before.
 
-The problem of pairwise preference learning is an instance of binary classification, inasmuch as the main goal is to predict a class label $y\in\{-1,1\}$ given an input feature vector $(\x_i,\x_j)\in\mathcal{X}^2$. However, using a generic classifier, such as an SVM or Gaussian process classifier would be highly inefficient, as these classifiers do not know about the symmetries inherent in the ranking problem. Firstly, if one observes $(\x_i,\x_j)$ pair with a positive label, that implies the pair $(\x_j,\x_i)$ would have a negative label. Furthermore, if one observes $\x_i$ is preferred to $\x_j$ and $\x_j$ is preferred to $\x_k$, one would predict $\x_i$ is preferred to $\x_k$. A generic classifier trained on pairs cannot make such deductions.
+Pairwise preference learning is a special case of binary classification, inasmuch as the main goal is to predict a class label $y\in\{-1,1\}$ given an input feature vector $(\x_i,\x_j)\in\mathcal{X}^2$, composed by concatenating features of $i$ and $j$. However, using a generic classifier, such as an SVM or Gaussian process classifier would be highly inefficient, as these classifiers do not know about the symmetries inherent in the ranking problem. Firstly, if one observes $(\x_i,\x_j)$ pair with a positive label, that implies the pair $(\x_j,\x_i)$ would have a negative label. Furthermore, if one observes $\x_i$ is preferred to $\x_j$ and $\x_j$ is preferred to $\x_k$, one would predict $\x_i$ is preferred to $\x_k$. A generic classifier trained on pairs cannot make such deductions.
 
 This problem is often addressed by introducing a latent preference function $f:\mathcal{X}\mapsto \mathbb{R}$ such that
-$f(\x_i) > f(\x_j)$ whenever the user prefers item $i$ to item $j$ and $f(\x_i) < f(\x_j)$ otherwise \citep{Chu2005}. This latent representation implies a pre-defined ordering of items. However, the observed data are not always consistent with a single fixed ordering, and sometimes are contradictory. Furthermore peoples' choices may be contaminated by noise, or be inaccurate because of lack of attention. To account for this randomness, the model presented by \citep{Chu2005} assumes that when respondents decide between options, their preference function is contaminated by evaluation noise.
+$f(\x_i) > f(\x_j)$ whenever the user prefers item $i$ to item $j$ and $f(\x_i) < f(\x_j)$ otherwise \citep{Chu2005}. This latent representation implies a pre-defined ordering of items. However, the observed data are not always consistent with a single fixed ordering, and sometimes are contradictory. Furthermore people's choices may be contaminated by noise, or be inaccurate because of lack of attention. To account for this randomness, the model presented by \citep{Chu2005} assumes that when respondents decide between options, their preference function is contaminated by evaluation noise.
 
 When the evaluations of $f$ are contaminated with Gaussian noise with zero mean and (without loss of generality) variance $1/2$, we obtain the following likelihood function for the underlying preference function $f$ given the data point $\x_i$, $\x_j$ and corresponding label $y$:
 
 \begin{align}
-\mathcal{P}(y|\x_i,\x_j,f) &= \Phi[(f[\x_i] - f[\x_j])y]\,,\label{Eqn:preference_likelihood}
+\mathbb{P}(y|\x_i,\x_j,f) &= \Phi[(f[\x_i] - f[\x_j])y]\,,\label{Eqn:preference_likelihood}
 \end{align}
-
-where $\Phi$ is the standard Normal cumulative distribution function. The preference learning problem can be solved by combining a GP prior on $f$ with the likelihood function in (\ref{Eqn:preference_likelihood}) \citep{Chu2005}. The posterior for $f$ can
-then be used to make predictions on the user preferences for new pairs of items.
+where $\Phi$ is the standard Normal cumulative distribution function. The preference learning problem can be solved via Bayesian inference, combining a GP prior on $f$ with the likelihood function in (\ref{Eqn:preference_likelihood}) \citep{Chu2005}. The posterior for $f$ can then be used to make predictions on the user preferences for new pairs of items.
 
 Note that the likelihood (\ref{Eqn:preference_likelihood}) depends only on the difference between $f(\x_i)$ and $f(\x_j)$.
 Let $g:\mathcal{X}^2\mapsto\mathbb{R}$ be the latent function $g(\x_i,\x_j) = f(\x_i) - f(\x_j)$.
-We can recast the inference problem in terms of $g$ and ignore $f$. When the evaluation of $g$ is contaminated with standard Gaussian noise, the likelihood for $g$ given $\x_i$, $\x_j$ and $y$ is
+We can recast the inference problem in terms of $g$ and ignore $f$. When the evaluation of $f$ is contaminated with standard Gaussian noise as before, the likelihood for $g$ given $\x_i$, $\x_j$ and $y$ is
 
 \begin{align}
-\mathcal{P}(y|\x_i,\x_j,g) &= \Phi[g(\x_i, \x_j)y]\,.\label{Eqn:preference_likelihood2}
+\mathbb{P}(y|\x_i,\x_j,g) &= \Phi[g(\x_i, \x_j)y]\,.\label{Eqn:preference_likelihood2}
 \end{align}
 
-Since $g$ is obtained from $f$ through a linear operation, the GP prior on $f$ induces a GP prior on $g$.
-The covariance function $k_\text{pref}$ of the GP prior on $g$ can be computed from the covariance function $k$ of the GP on $f$ as $k_\text{pref}((\x_i,\x_j),(\x_k,\x_l)) = k(\x_i,\x_k) + k(\x_j,\x_l) - k(\x_i,\x_l) - k(\x_j,\x_k)$. The derivations can be found in Section 1 of the supplementary material. We call $k_\text{pref}$ the \emph{preference kernel}. The same kernel function can be derived from a large margin classification viewpoint \citep{Furnkranz2010}. However, to our knowledge, the preference kernel has not been used previously for GP-based models.	
+Note this likelihood functon for $g$ is the same as the probit classification likelihood defined in Eqn.\ \eqref{eqn:GPC_model}. Since $g$ is obtained from $f$ through a linear operation, the GP prior on $f$ induces a GP prior on $g$. The prior covariance function $k_\text{pref}$ of the GP prior on $g$ can be computed from the covariance function $k$ of the GP on $f$ as follows (assuming zero mean prior for $f$)
 
-The combination of (\ref{Eqn:preference_likelihood2}) with a GP prior based on the preference kernel allows us to transform the pairwise preference learning problem into  binary classification with GPs. This means that state-of-the-art methods for GP binary classification, such as expectation propagation \citep{Minka2001}, can be applied directly to preference learning. Furthermore, the simplified likelihood (\ref{Eqn:preference_likelihood2}) allows us to implement complex methods such as the multi-user approach which is described in the following section.
+\begin{align}
+	k_\text{pref}&((\x_i,\x_j),(\x_k,\x_l)) = \cov{f\sim GP_k}{g(\x_i,\x_j)}{g(\x_i,\x_j)}\\
+	&= \cov{f\sim GP_k}{f(\x_i)-f(\x_j)}{f(\x_k)(\x_l)}\\
+	&= \expect{f\sim GP_k}\left[\left(f(\x_i)-f(\x_j)\right)\left(f(\x_k)-f(\x_l)\right)\right]\\
+	&= \expect{f\sim GP_k}f_{\x_i}f_{\x_k} + \expect{f\sim GP_k}f_{\x_j}f_{\x_l} - \expect{f\sim GP_k}f_{\x_i}f_{\x_l} - \expect{f\sim GP_k}f_{\x_j}f_{\x_k}\\
+	&= k(\x_i,\x_k) + k(\x_j,\x_l) - k(\x_i,\x_l) - k(\x_j,\x_k) \label{eqn:preference_kernel}
+\end{align}
+
+We call $k_\text{pref}$ the \emph{preference kernel}. This kernel function for preference learning is not new: the same kernel has been derived from a large margin classification viewpoint by \citet{furnkranz2010}. However, to our knowledge, the preference kernel has not been used previously in Bayesian, Gaussian process-based models, only in our previous work \citep{Houlsby2011,Houlsby2012preference}
+
+The combination of (\ref{Eqn:preference_likelihood2}) with a GP prior based on the preference kernel allows us to transform the pairwise preference learning problem into  binary classification with GPs. This means that state-of-the-art methods for GP binary classification, such as expectation propagation \citep{Minka2001}, can be applied readily to preference learning. Furthermore, the simplified likelihood (\ref{Eqn:preference_likelihood2}) allows us to implement complex inference problems such as the multi-user hierarchical model described in \citep{Houlsby2012preference}.
 
 \subsubsection{Experiments}
 
-For preference learning we use the \emph{cpu, cart} and \emph{kinematics} regression datasets \footnote{Data sets at http://www.liacc.up.pt/~ltorgo/Regression/DataSets.html} processed to yield a preference task as described in \cite{chu2005}
+To test the performance of BALD on preference learning we use the \emph{cpu, cart} and \emph{kinematics} regression datasets from the LIACC Machine Learning Data Set Repository \citep{LIABCRepository}. We processed each of these data sets to yield a binary preference task following the procedure described in in \cite{Chu2005}: Pairs of items were randomly selected and regression target values were used to decide the direction of preference to form a pool of training points for pool-based active learning. The performance was tested on a held-out test data set generated in a similar fashion.
+
+Results on the three datasets are shown in Fig.\ \ref{fig:BALD_pref_results}.  Surprisingly, despite our expectations, we found that random sampling from the pool provides reasonable performance, and active selection of measurements does not radically improve the speed of learning. Across the three data sets all studied methods perform well. BALD seems to struggle in the initial phase of learning on the \emph{cpu} dataset, for which we did not find a convincing explanation. On the \emph{kinematics} dataset the differnece between methods is more apparent, and here BALD provides the best performance among all methods studied.
+
+In follow-up work we extended BALD to collaborative preference learning, where preference judgements are elicited from multiple experts \citep{Houlsby2012preference}. The interested reader is referred to this paper for further experimental validation involving real-world preference datasets.
+
+\begin{figure}
+	\begin{center}
+	% \begin{tabular}{ccc}
+	% \input{figs/BALD/GPC/prefcpu2.tikz}&
+	% \input{figs/BALD/GPC/prefcart2.tikz}&
+	% \input{figs/BALD/GPC/prefkinem2.tikz}
+	% \end{tabular}
+	\end{center}
+	\caption[Evaluation of Bayesian active learning of binary preference relations]{Evaluation of the accuracy of active learning algorithms on various binary preference learning datasets. Methods used are random query (\ref{plots:rand}), BALD (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), decision theoretic \citep{Kapoor2007} (\ref{plots:dec}). For prediction, each method uses Gaussian process classification or SVM with the preference kernel from Eqn.\ \eqref{eqn:preference_kernel}.  See text for analysis. \label{fig:BALD_pref_results}}
+\end{figure}
 
 \section{Summary and Conclusions}
+
+In this chapter I presented BALD, or Bayesian active learning by Disagreement, a practical algorithm for Bayesian active learning based on Shannon's mutual information. BALD exploits the symmetry of Shannon's mutual information and expresses the well known criterion in terms of the Shannon entropy of predictive distributions in the observation space. We have shown how BALD can be implemented to perform Bayesian active classification and preference learning in state-of-the art Gaussian process-based models in a computationally efficient way. Our experiments show that BALD compares favourably to other active learning methods, including the popular active SVMs \citep{Tong2001}.
+
+Unfortunately, as BALD is built on the unique symmetry property of Shannon's mutual information, it does not generally apply to other instances of the scoring rule-based active learning framework described in Chapter \ref{sec:active_learning_framework}. Indeed, among the examples of scoring rules given in Chapter \ref{sec:scoring_rules}, no other value of information functional is symmetric.

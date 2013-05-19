@@ -24,7 +24,7 @@ ytick={0.5,0.7},
 xtick = {0,150,300},
 xlabel = {No. queried points},
 ylabel = {Accuracy},
-title = {(k) pref: cpu},
+title = {(k) cpu},
 axis on top,
 axis y line = left,
 axis x line = bottom

@@ -10,41 +10,35 @@
 \usepackage{bm}
 \usepackage{booktabs}
 \usepackage{lipsum}
-
+\usepackage[paper=a4paper]{geometry}
 
 \input{preamble}
 
 \input{notation}
 
-\ifpdf
-    \pdfinfo { /Title  (Scoring rules and machine learning)
-               /Creator (TeX)
-               /Producer (pdfTeX)
-               /Author (Ferenc Huszar)
-               /CreationDate (D:20120524000000)  %format D:YYYYMMDDhhmmss
-               /ModDate (D:20120524000000)
-               /Subject (Statistical machine learning)
-               /Keywords (PhD, Thesis)}
-    \pdfcatalog { /PageMode (/UseOutlines)
-                  /OpenAction (fitbh)  }
-\fi
 
-\title{Scoring rules and stuff}
+% pdfinfo tags
+\pdfinfo {
+  /Title  (Proper Measures of Divergence and Information in Probabilistic Machine Learning)
+  /Creator (TeX)
+  /Producer (pdfTeX)
+  /Author (Ferenc Huszar)
+  /CreationDate (D:20120524000000)  %format D:YYYYMMDDhhmmss
+  /ModDate (D:20120524000000)
+  /Subject (Statistical machine learning)
+  /Keywords (PhD, Thesis)
+}
+\pdfcatalog {
+  /PageMode (/UseOutlines)
+  /OpenAction (fitbh) 
+}
 
-\ifpdf
-  \author{\href{mailto:ferenc.huszar@gmail.com}{Ferenc Husz\'{a}r}}
-  \collegeordept{\href{http://mlg.eng.cam.ac.uk}{Computational and Biological Learning Lab \\ Department of Engineering \\[1ex] Trinity College}}
-  \university{\href{http://www.cam.ac.uk}{University of Cambridge}}
+\title{Proper Measures of Divergence and Information\\ in Probabilistic Machine Learning}
+\author{\href{mailto:ferenc.huszar@gmail.com}{Ferenc Husz\'{a}r}}
+\collegeordept{\href{http://mlg.eng.cam.ac.uk}{Computational and Biological Learning Lab \\ Department of Engineering \\[1ex] Trinity College}}
+\university{\href{http://www.cam.ac.uk}{University of Cambridge}}
 % insert below the file name that contains the crest in-place of 'UnivShield'
-  \crest{\includegraphics[width=60mm]{figs/uc-pantone}}
-\else
-  \author{Harish Bhanderi}
-  \collegeordept{Department of Engineering}
-  \university{University of Cambridge}
-% insert below the file name that contains the crest in-place of 'UnivShield'
-  \crest{\includegraphics[bb = 0 0 292 336, width=60mm]{figs/uc-pantone}}
-\fi
-
+\crest{\includegraphics[width=60mm]{figs/uc-pantone}}
 \degree{Doctor of Philosophy}
 \degreedate{Yet to be decided}
 
@@ -55,7 +49,9 @@
 
 \begin{document}
 
+ \newgeometry{margin=0pt,top=2in}
 \maketitle
+\restoregeometry
 
 \setcounter{secnumdepth}{2}
 \setcounter{tocdepth}{2}

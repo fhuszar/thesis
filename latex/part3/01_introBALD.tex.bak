@@ -1,4 +1,4 @@
-%!TEX root = ../main.tex
+	%!TEX root = ../main.tex
 \begin{summarycontributions}
 The unifying framework presented in this chapter unpublished contribution by Ferenc Husz\'{a}r. A similar framework was previously discussed by \citet{Dawid1994} in an unpublished technical report.
 \end{summarycontributions}
