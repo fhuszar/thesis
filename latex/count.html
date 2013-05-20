@@ -1,0 +1,166 @@
+<html>
+<head>
+<meta http-equiv='content-type' content='text/html; charset=utf8'>
+<style>
+<!--
+body {width:auto;padding:5;margin:5;}
+.error {font-weight:bold;color:#f00;font-style:italic;}
+.word1,.word2,.word3 {color: #009; border-left: 1px solid #CDF; border-bottom: 1px solid #CDF;}
+.word2 {font-weight: 700;}
+.word3 {font-style: italic;}
+.command {color: #c00;}
+.exclcommand {color: #f99;}
+.option {color: #cc0;}
+.grouping, .document {color: #900; font-weight:bold;}
+.mathgroup {color: #090;}
+.exclmath {color: #6c6;}
+.ignore {color: #999;}
+.exclgroup {color:#c66;}
+.tc {color: #999; font-weight:bold;}
+.comment {color: #999; font-style: italic;}
+.state {color: #990; font-size: 70%;}
+.cumsum {color: #999; font-size: 80%;}
+.fileinclude {color: #696; font-weight:bold;}
+.warning {color: #c00; font-weight: 700;}
+
+div.filegroup, div.parse, div.stylehelp, div.count, div.sumcount, div.error {
+   border: solid 1px #999; margin: 4pt 0pt; padding: 4pt;
+}
+div.stylehelp {font-size: 80%; background: #fffff0; margin-bottom: 16pt;}
+div.filegroup {background: #dfd; margin-bottom: 16pt;}
+div.count {background: #ffe;}
+div.sumcount {background: #cec;}
+div.error {background: #fcc;}
+.parse {font-size: 80%; background: #f8fff8; border-bottom:none;}
+
+ul.count {list-style-type: none; margin: 4pt 0pt; padding: 0pt;}
+.count li.header {font-weight: bold; font-style: italic;}
+.subcount li.header {font-weight: normal; font-style: italic;}
+.subcount li {margin-left: 16pt; font-size: 80%;}
+.fielddesc {font-style: italic;}
+.nb {color: #900;}
+
+table.stat {border:2px solid #339; background:#666; border-collapse:collapse;}
+table.stat tr {border:1px solid #CCC;}
+table.stat th, table.stat td {padding:1pt 4pt;}
+table.stat col {padding:4pt;}
+table.stat thead {background: #CCF;}
+table.stat tbody {border:1px solid #333;}
+table.stat tbody.sumstat {background:#FFC;}
+table.stat tbody.langstat {background:#FEE;}
+table.stat tbody.wordstat {background:#EEF;}
+table.stat .sum {font-weight:bold; font-style:italic;}
+-->
+</style>
+</head>
+
+<body>
+
+<h1>LaTeX word count</h1>
+
+<div class='filegroup'>
+<div class='count'>
+<ul class='count'>
+<li class='header'>File: thesis.tex</li>
+<li>Encoding: ascii</li>
+<li>Sum count: 34822</li>
+<li>Words in text: 31171</li>
+<li>Words in headers: 313</li>
+<li>Words in float captions: 1993</li>
+<li>Number of headers: 93</li>
+<li>Number of floats: 24</li>
+<li>Number of math inlines: 1171</li>
+<li>Number of math displayed: 174</li>
+<li>Subcounts:</li>
+<span class='subcount'>
+<li class='fielddesc'>&nbsp; text+headers+captions (#headers/#floats/#inlines/#displayed)</li>
+  <li>23+10+0 (1/0/0/0) _top_</li>
+  <li>0+1+0 (1/0/0/0) Chapter: Introduction</li>
+  <li>0+5+0 (1/0/0/0) Part: Scoring rules, Divergences and Information</li>
+  <li>57+5+0 (1/0/0/0) Chapter: An introduction to scoring rules\label{sec:scoring_rules}</li>
+  <li>289+1+0 (1/0/9/0) Section: Introduction</li>
+  <li>1063+2+109 (1/1/126/15) Section: Information quantities</li>
+  <li>145+4+0 (1/0/0/0) Section: Examples of scoring rules</li>
+  <li>511+3+0 (1/0/15/6) Subsection: The logarithmic score\label{sec:log_score}</li>
+  <li>351+2+0 (1/0/20/6) Subsection: The pseudolikelihood</li>
+  <li>280+4+0 (1/0/15/6) Subsection: The Brier (quadratic) score</li>
+  <li>106+3+0 (1/0/14/4) Subsection: Spherical scoring rules</li>
+  <li>1736+4+0 (1/0/73/15) Subsection: The kernel scoring rule\label{sec:kernel_score}</li>
+  <li>374+4+0 (1/0/21/6) Subsection: The spherical kernel score\label{sec:spherical_kernel_score}</li>
+  <li>602+14+0 (3/0/54/8) Subsection: Scoring rules and Bayesian decision problems \label{sec:loss_scoring_rule}</li>
+  <li>181+1+0 (1/0/0/0) Section: Summary</li>
+  <li>21+2+0 (1/0/0/0) Chapter: Information geometry\label{sec:embeddings}</li>
+  <li>515+1+0 (1/0/0/0) Section: Introduction</li>
+  <li>328+2+0 (1/0/25/10) Section: Information geometry</li>
+  <li>612+5+0 (1/0/8/0) Section: Approximate embedding of Riemannian manifolds</li>
+  <li>658+2+237 (1/2/38/0) Subsection: Bernoulli distributions</li>
+  <li>775+2+377 (1/4/34/4) Subsection: Gaussian distributions</li>
+  <li>270+2+112 (1/1/17/4) Subsection: Gamma distributions</li>
+  <li>0+3+0 (1/0/0/0) Part: Approximate Bayesian inference</li>
+  <li>59+3+0 (1/0/0/0) Chapter: Loss-calibrated approximate inference\label{sec:approximate_inference}</li>
+  <li>440+1+0 (1/0/13/1) Section: Introduction</li>
+  <li>153+5+0 (1/0/5/0) Section: The goals of approximate inference\label{sec:losscalibrated}</li>
+  <li>537+7+0 (1/0/23/4) Subsection: Overview of variational methods and expectation propagation</li>
+  <li>390+3+0 (1/0/16/2) Subsection: Loss-calibrated approximate inference</li>
+  <li>275+5+0 (1/0/25/4) Subsection: The loss-calibrated approximate inference framework</li>
+  <li>404+4+33 (1/1/30/0) Section: Illustration of the framework \label{sec:toy}</li>
+  <li>97+5+0 (1/0/0/0) Chapter: Quasi-Monte Carlo, quadrature and herding\label{sec:herding}</li>
+  <li>1+1+0 (1/0/0/0) Section: Introduction</li>
+  <li>1267+16+47 (4/1/31/4) Section: Loss-calibrated quasi-Monte Carlo</li>
+  <li>318+1+0 (1/0/23/4) Section: Herding</li>
+  <li>85+4+0 (1/0/7/0) Subsection: Complexity and Convergence Rates</li>
+  <li>249+2+50 (1/1/26/6) Section: Bayesian quadrature</li>
+  <li>85+4+100 (1/2/3/0) Subsection: Weights in Bayesian quadrature</li>
+  <li>245+4+0 (1/0/22/2) Section: Sequential sampling for BQ</li>
+  <li>170+2+0 (1/0/15/3) Subsection: Relating $\var{}{Z_{f,p}}$ TO $\mmd$</li>
+  <li>307+2+0 (1/0/24/4) Section: Approximate submodularity\label{sec:herding_submodularity}</li>
+  <li>132+1+0 (1/0/1/0) Section: Experiments}\label{sec:herding_experiments</li>
+  <li>314+3+28 (1/1/2/0) Subsection: Matching a distribution</li>
+  <li>125+2+62 (1/2/4/2) Subsection: Estimating Integrals</li>
+  <li>111+2+27 (1/1/5/1) Subsection: Out-of-model performance</li>
+  <li>104+3+0 (1/0/0/0) Section: Summary and Discussions</li>
+  <li>191+3+0 (1/0/4/0) Subsection: Choice of Kernel</li>
+  <li>255+2+14 (1/0/14/0) Subsection: Computational Complexity</li>
+  <li>98+2+0 (1/0/1/0) Subsection: Future Work</li>
+  <li>0+3+0 (1/0/0/0) Part: Optimal Experiment Design</li>
+  <li>30+6+0 (1/0/0/0) Chapter: A Bayesian Framework for Active Learning\label{sec:active_learning_framework}</li>
+  <li>354+1+0 (1/0/0/0) Section: Introduction</li>
+  <li>829+7+0 (1/0/39/6) Section: A general framework for Bayesian experiment design</li>
+  <li>0+4+0 (1/0/0/0) Section: Examples and special cases</li>
+  <li>67+2+0 (1/0/0/0) Subsection: Shannon's entropy\label{sec:active_learning_shannon_information}</li>
+  <li>365+3+0 (1/0/13/3) Subsection: Transductive active learning</li>
+  <li>546+2+0 (1/0/24/3) Subsection: Bayesian optimisation</li>
+  <li>175+3+0 (1/0/12/4) Subsection: Sequential Bayesian quadrature</li>
+  <li>0+1+0 (1/0/0/0) Section: Summary</li>
+  <li>149+5+0 (1/0/0/0) Chapter: Bayesian Active Learning by Disagreement\label{sec:BALD}</li>
+  <li>232+1+0 (1/0/0/0) Section: Introduction</li>
+  <li>455+5+0 (1/0/28/3) Section: Bayesian Active Learning by Disagreement</li>
+  <li>552+2+0 (1/0/9/0) Section: Related Techniques</li>
+  <li>337+5+0 (1/0/15/1) Section: BALD for Gaussian Process Classification</li>
+  <li>466+5+66 (1/1/39/10) Subsection: Computing the value of information</li>
+  <li>0+3+0 (1/0/0/0) Section: Experiments and Results</li>
+  <li>133+3+0 (1/0/6/1) Subsection: Quantifying approximation losses</li>
+  <li>686+4+132 (1/2/8/0) Subsection: Pool based active learning</li>
+  <li>684+4+24 (1/0/2/0) Section: Extension to preference elicitation</li>
+  <li>805+4+53 (2/1/60/3) Subsection: Reduction to classification\label{sec:prefKernel}</li>
+  <li>145+3+0 (1/0/0/0) Section: Summary and Conclusions</li>
+  <li>58+4+0 (1/0/0/0) Chapter: Adaptive Bayesian Quantum Tomography\label{sec:quantum}</li>
+  <li>598+1+34 (1/0/0/0) Section: Introduction</li>
+  <li>360+5+0 (1/0/19/5) Section: A primer to quantum statistics</li>
+  <li>485+1+0 (1/0/15/3) Subsection: Measurements</li>
+  <li>739+2+15 (1/0/41/4) Subsection: Density matrices</li>
+  <li>753+5+58 (1/0/44/5) Section: Quantum Tomography as Bayesian Inference</li>
+  <li>426+5+0 (1/0/8/2) Section: Active learning in Quantum Tomography</li>
+  <li>0+1+415 (1/3/9/0) Section: Results</li>
+  <li>341+3+0 (1/0/10/0) Subsection: Single qubit tomography</li>
+  <li>244+7+0 (1/0/2/0) Subsection: Separable vs.\ MUB tomography of two qubits</li>
+  <li>276+3+0 (1/0/2/0) Section: Conclusions and outlook</li>
+  <li>4572+31+0 (6/0/3/0) Chapter: Conclusions</li>
+</span>
+</ul>
+</div>
+</div>
+
+</body>
+
+</html>

@@ -80,7 +80,7 @@ However, just as Bayesian posteriors become intractable after observing many dat
 
 BALD exploits the fact that in many active learning applications the output space $\Ye$ is often simpler than the parameter space $\Theta$. Here I consider the problem of active learning for binary classification, when the output takes one of two possible values $y \in \{-1,1\}$. Given the simplicity of the outputs, binary classification is a highly relevant use-case for BALD.
 
-I will use a non-parametric Bayesian classification model, Gaussian process classification \citep[GPC,][]{rasmussen06GP} to demonstrate the usefulness of BALD: GPC appears to be an especially challenging problem for information-theoretic active learning because its parameter space is infinite. Therefore, computing entropy of the posterior involves nontrivial quantities. However, by using the BALD approach and Eqn.\ \eqref{eqn:rearrangement} we are able to fully calculate the relevant information quantities without having to work out entropies of infinite dimensional objects. 
+I will use a non-parametric Bayesian classification model, Gaussian process classification \citep[GPC,][]{Rasmussen2006} to demonstrate the usefulness of BALD: GPC appears to be an especially challenging problem for information-theoretic active learning because its parameter space is infinite. Therefore, computing entropy of the posterior involves nontrivial quantities. However, by using the BALD approach and Eqn.\ \eqref{eqn:rearrangement} we are able to fully calculate the relevant information quantities without having to work out entropies of infinite dimensional objects. 
 
 
 The probabilistic model underlying GPC is as follows:
@@ -93,7 +93,7 @@ The latent parameter, now called $f$ (previously denoted as $\param$), is a real
 
 \TODO{I need an appendix on kernels and Gaussian processes}
 
-We consider the probit case where, given the value of $f$, the binary label $y$ takes a Bernoulli distribution with probability $\Phi(f(\x))$, and $\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \citep{rasmussen2005}.
+We consider the probit case where, given the value of $f$, the binary label $y$ takes a Bernoulli distribution with probability $\Phi(f(\x))$, and $\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \citep{Rasmussen2006}.
 
 Posterior inference in the GPC model is intractable; given some observations $\data$, the posterior over $f$ becomes non-Gaussian and complicated. This is addressed by using approximate inference methods. The most commonly used approximate inference methods for Gaussian process classification are expectation propagation \citep[EP,][]{Minka2002}, Laplace's approximation \citep{williams1998}, assumed density filtering \citep[ADF,][]{csato2000} and sparse methods \citep{candela05sparseGP}. These all approximate the non-Gaussian posterior by a Gaussian \citep{Nickisch2008}, but differ in the optimisation criterion and other restrictions. Throughout this chapter I will assume that we are provided with some Gaussian approximation to the GPC posterior resulting from one of these methods, though the active learning method is agnostic as to which method produced this estimate. Given the sequential nature of active learning, fast on-line methods \citep{Csato2002} are particularly well suited for the task. In our derivation we will use {\scriptsize$\stackrel{1}{\approx}$} to indicate where approximate inference is exploited.
 

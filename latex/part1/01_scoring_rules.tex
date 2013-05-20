@@ -218,7 +218,7 @@ The associated entropy function is Shannon's entropy, also known as differential
 The divergence function is the Kullback-Leibler (KL) divergence, which is very widely used in approximate Bayesian inference, model selection and active learning.
 
 \begin{equation}
-	\KL{P}{Q} = \expect{x\sim P} \frac{\log P(x)}{\log Q(x)}
+	\KL{P}{Q} = \expect{x\sim P} \frac{\log P(x)}{\log Q(x)}\label{eqn:KL_divergence}
 \end{equation}
 
 The KL divergence is only well-defined when the distribution $Q$ is absolutely continuous with respect to $P$. This is a serious limitation of the KL divergence for our purposes in later chapters: If $P$ is a continuous density, then $Q$ has to be continuous as well for the KL divergence to be defined. Therefore we cannot express the KL divergence between, say, an empirical distribution of samples and a continuous distribution, as we did in Definition \ref{def:score_matching}.
