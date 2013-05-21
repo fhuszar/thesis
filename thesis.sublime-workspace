@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"scoring",
+				"sec:scoring_rules"
+			],
+			[
+				"gaussian",
+				" Gaussian Processes for Machine Learning"
+			],
+			[
+				"Kr",
+				"Kr Experimental Adaptive Bayesian Tomography"
+			],
+			[
+				"quan",
+				"quantumparam"
+			],
+			[
 				"scor",
 				"sec:scoring_rules"
 			],
@@ -136,10 +152,6 @@
 				"actor_id"
 			],
 			[
-				"scoring",
-				"scoring_target"
-			],
-			[
 				"actor",
 				"actor_json"
 			],
@@ -203,7 +215,7 @@
 			"file": "latex/part1/01_scoring_rules.tex",
 			"settings":
 			{
-				"buffer_size": 60572,
+				"buffer_size": 61296,
 				"line_ending": "Unix"
 			}
 		},
@@ -216,13 +228,21 @@
 			}
 		},
 		{
-			"contents": "Searching 87 files for \"\n%!TEX root = main.tex\n%!TEX root = main.tex\n%!TEX root = ../main.tex\"\n\n0 matches across 0 files\n\n\nSearching 87 files for \"\n%!TEX root = main.tex\n%!TEX root = main.tex\nTEX root = ../main.tex\"\n\n0 matches across 0 files\n\n\nSearching 87 files for \"\n%!TEX root = main.tex\n%!TEX root = main.tex\n%!TEX root = main.tex\"\n\n0 matches across 0 files\n\n\nSearching 87 files for \"%!TEX root = main.tex\"\n\n/Users/fhuszar/Dropbox/thesis/latex/conclusions.tex:\n    1: %!TEX root = main.tex\n    2  \n    3  Machine learning is a mess. This thesis finally brings order and clarity to what otherwise appears as a mix of muddled thoughts. Just kidding.\n\n/Users/fhuszar/Dropbox/thesis/latex/introduction.tex:\n    1: %!TEX root = main.tex\n    2  \\lipsum[1-5]\n\n/Users/fhuszar/Dropbox/thesis/latex/notation.tex:\n    1: %!TEX root = main.tex\n    2  \\newcommand{\\TODO}[1]{\\textbf{TODO: #1}}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/part1_main.tex:\n    1: %!TEX root = main.tex\n    2  \\part{Scoring rules, Divergences and Information}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/part2_main.tex:\n    1: %!TEX root = main.tex\n    2  \\part{Approximate Bayesian inference}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/part3_main.tex:\n    1: %!TEX root = main.tex\n    2  \\part{Optimal Experiment Design}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/preamble.tex:\n    1: %!TEX root = main.tex\n    2  \\newtheorem{theorem}{Theorem}\n    3  \\newtheorem{corollary}{Corollary}\n\n7 matches across 7 files\n",
+			"contents": "Searching 87 files for \"\n%!TEX root = main.tex\n%!TEX root = main.tex\n%!TEX root = ../main.tex\"\n\n0 matches across 0 files\n\n\nSearching 87 files for \"\n%!TEX root = main.tex\n%!TEX root = main.tex\nTEX root = ../main.tex\"\n\n0 matches across 0 files\n\n\nSearching 87 files for \"\n%!TEX root = main.tex\n%!TEX root = main.tex\n%!TEX root = main.tex\"\n\n0 matches across 0 files\n\n\nSearching 87 files for \"%!TEX root = main.tex\"\n\n/Users/fhuszar/Dropbox/thesis/latex/conclusions.tex:\n    1: %!TEX root = main.tex\n    2  \n    3  Machine learning is a mess. This thesis finally brings order and clarity to what otherwise appears as a mix of muddled thoughts. Just kidding.\n\n/Users/fhuszar/Dropbox/thesis/latex/introduction.tex:\n    1: %!TEX root = main.tex\n    2  \\lipsum[1-5]\n\n/Users/fhuszar/Dropbox/thesis/latex/notation.tex:\n    1: %!TEX root = main.tex\n    2  \\newcommand{\\TODO}[1]{\\textbf{TODO: #1}}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/part1_main.tex:\n    1: %!TEX root = main.tex\n    2  \\part{Scoring rules, Divergences and Information}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/part2_main.tex:\n    1: %!TEX root = main.tex\n    2  \\part{Approximate Bayesian inference}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/part3_main.tex:\n    1: %!TEX root = main.tex\n    2  \\part{Optimal Experiment Design}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/preamble.tex:\n    1: %!TEX root = main.tex\n    2  \\newtheorem{theorem}{Theorem}\n    3  \\newtheorem{corollary}{Corollary}\n\n7 matches across 7 files\n\n\nSearching 86 files for \"usetikzlibrary\"\n\n/Users/fhuszar/Dropbox/thesis/latex/preamble.tex:\n   11  \\usepackage[paper=a4paper]{geometry}\n   12  \\usepackage{tikz,pgfplots}\n   13: \\usetikzlibrary{external}\\tikzexternalize\n   14  \n   15  \\newtheorem{theorem}{Theorem}\n\n1 match in 1 file\n\n\nSearching 1 file for \"\\label:{fig:\"\n\n0 matches across 0 files\n\n\nSearching 1 file for \"\\label{fig:\"\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex:\n  208  \\includegraphics[width=\\columnwidth]{figs/herding/fig1_v2}\n  209  \\caption[Sequential Bayesian quadrature versus kernel herding]{The first 8 samples from sequential Bayesian quadrature, versus the first 20 samples from herding.  Only 8 weighted \\sbq{} samples are needed to give an estimator with the same maximum mean discrepancy as using 20 herding samples with uniform weights.  Relative sizes of samples indicate their relative weights.}\n  210: \\label{fig:fig1}\n  211  \\end{figure} \n  212  \n  ...\n  290  \\includegraphics[width=\\columnwidth]{figs/herding/bq_intro4}\n  291  \\caption[An illustration of Bayesian quadrature]{An illustration of Bayesian Quadrature.  The function $f(x)$ is sampled at a set of input locations.  This induces a Gaussian process posterior distribution on $f$, which is integrated in closed form against the target density, $p(\\vx)$.  Since the amount of volume under $f$ is uncertain, this gives rise to a (Gaussian) posterior distribution over $Z_{f,p}$.}\n  292: \\label{fig:bq_intro} \\label{fig:fig1}\n  293  \\end{figure}\n  294  \n  ...\n  353  	\\includegraphics[width=\\columnwidth]{figs/herding/weights_v1_n100}\n  354  	\\caption[Empirical distribution of weights in sequential Bayesian quadrature]{A set of optimal weights given by \\bq{}, after 100 \\sbq{} samples were selected on the distribution shown in Figure \\ref{fig:fig1}.  Note that the optimal weights are spread away from the uniform weight ($\\frac{1}{N}$), and that some weights are even negative.  The sum of these weights is 0.93.}\n  355: 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  356  \\end{figure}\n  357  \n  ...\n  365  	\n  366  		\\caption[The concept of shrinkage in Bayesian quadrature]{An example of Bayesian shrinkage in the sample weights.  In this example, the kernel width is approximately $\\nicefrac{1}{20}$ the width of the distribution being considered.  Because the prior over functions is zero mean, in the small sample case the weights are shrunk towards zero.  The weights given by simple Monte Carlo and herding do not exhibit shrinkage. }\n  367: 	\\label{fig:weights_shrinkage} 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  368  \\end{figure}\n  369  \n  ...\n  495  \\includegraphics[width=\\columnwidth]{figs/herding/expected_variance_v7_400}\n  496  \\caption[Discrepancy of Bayesian quadrature, herding and random sampling]{The maximum mean discrepancy, or expected error of several different quadrature methods.  Herding appears to approach a rate close to $\\mathcal{O}(1/N)$.  \\sbq{} appears to attain a faster, but unknown rate.}\n  497: \\label{fig:mmd_curve}\\label{fig:weights_shrinkage} 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  498  \\end{figure}\n  499  %\n  ...\n  522  \\includegraphics[width=\\columnwidth]{figs/herding/error_curve_rkhs_400_v4}\n  523  \\caption[Empirical error of Bayesian quadrature, herding and random sampling]{Within-model error: The empirical error rate in estimating $Z_{f,p}$, for several different sampling methods, averaged over 250 functions randomly drawn from the RKHS corresponding to the kernel used.}\n  524: \\label{fig:error_curve}\\label{fig:mmd_curve}\\label{fig:weights_shrinkage} 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  498  \n  525  \\end{figure}\n  526  %\n  ...\n  532  \\includegraphics[width=\\columnwidth]{figs/herding/bound_curve_rkhs}\n  533  \\caption[Illustrating MMD as an upper bound on empirical error rate]{The empirical error rate in estimating $Z_{f,p}$,  for the \\sbq{} estimator, on 10 random functions drawn from the RKHS corresponding to the kernel used.  Also shown is the upper bound on the error rate implied by the $\\mmd$.}\n  534: \\label{fig:bound_curve}\\label{fig:error_curve}\\label{fig:mmd_curve}\\label{fig:weights_shrinkage} 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  535  \\end{figure}\n  536  \n  ...\n  548  \\includegraphics[width=\\columnwidth]{figs/herding/error_curve_outmodel_400_v3}\n  549  \\caption[Out-of-model error of Bayeisan quadrature, herding and random sampling]{Out-of-model error: The empirical error rates in estimating $Z_{f,p}$, for several different sampling methods, averaged over 250 functions drawn from outside the RKHS corresponding to the kernels used.}\n  550: \\label{fig:error_curve_outmodel}\\label{fig:bound_curve}\\label{fig:error_curve}\\label{fig:mmd_curve}\\label{fig:weights_shrinkage} 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  551  \\end{figure}\n  552  %\n\n8 matches in 1 file\n\n\nSearching 86 files for \"asmussen\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/bibliography/thesis.bib:\n  146  \n  147  @article{quinonero2005,\n  148: 	Author = {Qui{\\~n}onero-Candela, Joaquin and Rasmussen, Carl Edward},\n  149  	Date-Added = {2013-05-12 16:04:56 +0000},\n  150  	Date-Modified = {2013-05-12 16:05:03 +0000},\n  ...\n  773  \n  774  @article{nickisch2008gpc,\n  775: 	Author = {Nickisch, H. and C. E. Rasmussen},\n  776  	Date-Added = {2013-04-16 17:25:49 +0000},\n  777  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  793  \n  794  @article{candela05sparseGP,\n  795: 	Author = {J. Qui{\\`O}onero-Candela and C. E. Rasmussen},\n  796  	Date-Added = {2013-04-16 17:25:49 +0000},\n  797  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  958  	Year = {2002}}\n  959  \n  960: @book{rasmussen06GP,\n  961  	Address = {Cambridge, MA, USA},\n  962: 	Author = {Carl Edward Rasmussen and Christopher K. I. Williams},\n  963  	Date-Added = {2013-04-16 17:25:49 +0000},\n  964  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n 1158  	Year = {2006}}\n 1159  \n 1160: @book{rasmussen2006,\n 1161: 	Author = {Rasmussen, Carl Edward and Williams, Christopher K. I.},\n 1162  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1163  	Date-Modified = {2013-04-16 17:12:02 +0000},\n ....\n 1192  \n 1193  @article{Nickisch2008,\n 1194: 	Author = {Nickisch, Hannes and Rasmussen, Carl Edward},\n 1195  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1196  	Date-Modified = {2013-04-16 17:14:05 +0000},\n ....\n 1623  @incollection{BZMonteCarlo,\n 1624  	Address = {Cambridge, MA},\n 1625: 	Author = {C. E. Rasmussen and Z. Ghahramani},\n 1626  	Booktitle = {Advances in Neural Information Processing Systems},\n 1627  	Date-Added = {2013-04-16 17:05:02 +0000},\n ....\n 1697  	Year = {2012}}\n 1698  \n 1699: @article{rasmussen38gaussian,\n 1700: 	Author = {Rasmussen, C.E. and Williams, CKI},\n 1701  	Date-Added = {2013-04-16 17:05:02 +0000},\n 1702  	Date-Modified = {2013-04-16 17:05:02 +0000},\n ....\n 1741  	Year = {2005}}\n 1742  \n 1743: @article{Rasmussen2005,\n 1744: 	Author = {Rasmussen, C.E. and Williams, C.K.I.},\n 1745  	Date-Added = {2013-04-16 16:35:16 +0000},\n 1746  	Date-Modified = {2013-04-16 16:35:31 +0000},\n ....\n 1881  \n 1882  @inproceedings{Kuss2005,\n 1883: 	Author = {M. Kuss and C. E. Rasmussen},\n 1884  	Booktitle = {NIPS},\n 1885  	Date-Added = {2013-04-16 16:35:16 +0000},\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex:\n   22  The likelihood $p(\\data\\vert\\param)$ describes how data is related to the parameters $\\param$, and $p(\\param)$ is a prior distribution which capture's one a priori expectations about what the value of $\\param$ may be. The posterior distribution $p_\\data = p(\\param\\vert\\data)$ captures all statistically relevant information that the data $\\data$ provides about $\\param$, and it is therefore of central importance.\n   23  \n   24: The marginal likelihood, also called the model evidence $Z = \\int p(\\data\\vert\\param) p(\\param) d\\param$ is also of interest. It is often used to quantify how well a Bayesian model -- the combination of likelihood and prior -- fit the data. When the model involves additinal parameters or hyper-parameters that are not modelled probabilistically via prior distributions, it is common practice to learn their values by maximising model evidence \\citep[see \\eg][Chapter 5]{Rasmussen2006}.\n   25  \n   26  In practically interesting Bayesian models, the posterior distribution and model evidence are often computationally intractable to obtain and therefore one has to resort to approximations. The most popular methods for Bayesian approximate inference are variational inference and Markov chain Monte Carlo.\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex:\n  362  This means that the estimate converges for any bounded measurable function $f$. The speed of convergence, however, may not be as fast.\n  363  \n  364: Therefore it is crucial that the kernel we choose is representative of the function or functions $f$ we will integrate.  For example, in our experiments, the convergence of herding was sensitive to the width of the Gaussian kernel.  One of the major weaknesses of kernel methods in general is the difficulty of setting kernel parameters.  A key benefit of the Bayesian interpretation of herding and MMD presented in this paper is that it provides a recipe for adapting the Hilbert space to the observations $f(x_n)$.  To be precise, we can fit the kernel parameters by maximizing the marginal likelihood of Gaussian process conditioned on the observations.  Details can be found in \\citep{rasmussen38gaussian}.\n  365  \n  366  \\subsection{Computational Complexity}\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex:\n   81  BALD exploits the fact that in many active learning applications the output space $\\Ye$ is often simpler than the parameter space $\\Theta$. Here I consider the problem of active learning for binary classification, when the output takes one of two possible values $y \\in \\{-1,1\\}$. Given the simplicity of the outputs, binary classification is a highly relevant use-case for BALD.\n   82  \n   83: I will use a non-parametric Bayesian classification model, Gaussian process classification \\citep[GPC,][]{rasmussen06GP} to demonstrate the usefulness of BALD: GPC appears to be an especially challenging problem for information-theoretic active learning because its parameter space is infinite. Therefore, computing entropy of the posterior involves nontrivial quantities. However, by using the BALD approach and Eqn.\\ \\eqref{eqn:rearrangement} we are able to fully calculate the relevant information quantities without having to work out entropies of infinite dimensional objects. \n   84  \n   85  \n   ..\n   94  \\TODO{I need an appendix on kernels and Gaussian processes}\n   95  \n   96: We consider the probit case where, given the value of $f$, the binary label $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\citep{rasmussen2005}.\n   97  \n   98  Posterior inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. This is addressed by using approximate inference methods. The most commonly used approximate inference methods for Gaussian process classification are expectation propagation \\citep[EP,][]{Minka2002}, Laplace's approximation \\citep{williams1998}, assumed density filtering \\citep[ADF,][]{csato2000} and sparse methods \\citep{candela05sparseGP}. These all approximate the non-Gaussian posterior by a Gaussian \\citep{Nickisch2008}, but differ in the optimisation criterion and other restrictions. Throughout this chapter I will assume that we are provided with some Gaussian approximation to the GPC posterior resulting from one of these methods, though the active learning method is agnostic as to which method produced this estimate. Given the sequential nature of active learning, fast on-line methods \\citep{Csato2002} are particularly well suited for the task. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where approximate inference is exploited.\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/BALD-GPC/AL_NIPS2011.tex:\n  124  	f \\sim \\mathrm{GP}(\\mu(\\cdot),k(\\cdot,\\cdot)) \\qquad \\y\\vert\\x,f \\sim\\mathrm{Bernoulli}(\\Phi(f(\\x))) \n  125  \\end{align}\n  126: The latent parameter, now called $f$ (previously denoted as $\\param$), is a function $\\mathcal{X}\\rightarrow\\mathbb{R}$, and is assigned a Gaussian process prior with mean $\\mu(\\cdot)$ and covariance function $k(\\cdot,\\cdot)$. We consider the probit case where given the value of $f$, $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\cite{rasmussen2005}.\n  127  \n  128: Inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. The most commonly used approximate inference methods -- EP,  Laplace approximation, Assumed Density Filtering and sparse methods -- all approximate the posterior by a Gaussian \\cite{rasmussen2005}. Throughout this section we will assume that we are provided with such a Gaussian approximation from one of these methods, though the active learning algorithm does not care which. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where such an approximation is exploited.\n  129  \n  130  Now, we will compute the informativeness of a query $\\x$ using Eqn.  \\eqref{eqn:rearrangement}.  The entropy of the binary output variable $y$ given a fixed $f$ can be expressed in terms of the binary entropy function $h$: \n  ...\n  181  \\end{align}\n  182  \n  183: In the context of GP models, hyperparameters typically control the smoothness or spatial length-scale of functions. If we maintain a posterior distribution over these hyperparameters, which we can do e.\\,g.\\ via Hamiltonian Monte Carlo, we can choose either to treat them as nuisance parameters $\\theta^-$ and use Eq.\\ \\ref{eqn:BALD_bipartite}, or to include them in $\\theta^+$ and perform active learning over them as well. In certain cases, such as automatic relevance determination\\cite{rasmussen2005}, it may even make sense to treat hyperparameters as variables of primary interest, and the function $f$ itself as nuisance parameter $\\theta^-$.\n  184  \n  185  \\subsection{Preference Learning}\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/lossBayes/lossBayes.tex:\n  246  \\section{SUPERVISED LEARNING} \\label{s:examples}\n  247  \n  248: In this section, we make our framework more concrete by investigating it in the predictive setting presented in \\secref{ss:predictive}. We recall that in order to apply our framework, we need to specify the loss, the action space, the Bayesian observation model and a tractable family $\\mathcal{Q}$ of approximate distributions over the latent variable $\\theta$. In the predictive setting, an action is a prediction function $h:\\mathcal{X}\\rightarrow\\mathcal{Y}$. We let the action space $\\mathcal{H}$ be the set of all possible such functions here -- we are thus in the non-parametric prediction regime where we are free to make arbitrary pointwise decision on $\\mathcal{X}$. This gives us rich predictive possibilities as well as actually enables us to analytically compute $h_q$, as we will see in the next paragraph. For the observation model, we consider Bayesian non-parametric probabilistic models based on Gaussian processes (GPs), which have been successfully applied to model a wide variety of phenomena in the past~\\citep{rasmussen06GP}. %%OPTIONAL\\footnote{Considering the non-parametric setup reduces the issue of model misspecification. Moreover, GPs are often applied using approximate inference and thus provide a useful illustration for our framework.}.\n  249  In \\secref{ss:GPR}, we first look at Gaussian process regression. In this case, we can obtain an analytic form for $p_\\dataset$ and $\\mathcal{R}_{p_\\dataset}(h_q)$ which gives us some insights about the approximation framework as well as when minimizing the KL divergence can be suboptimal. Because the quadratic cost function is not bounded (and so $M = \\infty$), we cannot directly apply our loss-EM algorithm for regression, but we can nevertheless get useful insights which suggest future research directions for regression with sparse GPs. In section~\\ref{ss:GPC}, we consider Gaussian process classification (GPC) which will provide a test bed for the loss-EM algorithm. In both cases, we use a GP as our prior over parameters and let $\\mathcal{Q}$ also be a family of GPs.\n  250  \n  ...\n  384  To investigate the effect of the test distribution $p(x)$ on our method, we generated three different transductive test sets of size 1000, with inputs sampled from $\\mathcal{U}(0,1)$, $\\mathcal{U}(0.2,1.2)$ and $\\mathcal{U}(0.5,1.5)$ respectively (columns of \\tableref{tab:results}), and repeated these experiments 10 times to get significance results. We used five different loss matrices: the loss for false negatives was constant at $c_{-}=1$, the loss for false positives $c_{+}$ was varied so that the decision threshold $p_{thresh}=\\frac{c_{+}}{c_{-} + c_{+}}$ changed linearly between 0.5 and 0.05 (rows of \\tableref{tab:results}).\n  385  \n  386: For each dataset, we compared three methods for approximate inference: Laplace approximation, expectation propagation (EP) and loss-EM (run separately for each loss and test set combination). Both Laplace and EP are standard approaches to GP classification~\\citep{rasmussen06GP}. To evaluate the performance of the methods, we used the following criterion based on the posterior risk:\n  387  \\addtolength{\\abovedisplayskip}{-1mm}\n  388  \\addtolength{\\belowdisplayskip}{-1mm}\n\n23 matches across 6 files\n\n\nSearching 86 files for \"asmussen\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/bibliography/thesis.bib:\n  146  \n  147  @article{quinonero2005,\n  148: 	Author = {Qui{\\~n}onero-Candela, Joaquin and Rasmussen, Carl Edward},\n  149  	Date-Added = {2013-05-12 16:04:56 +0000},\n  150  	Date-Modified = {2013-05-12 16:05:03 +0000},\n  ...\n  773  \n  774  @article{nickisch2008gpc,\n  775: 	Author = {Nickisch, H. and C. E. Rasmussen},\n  776  	Date-Added = {2013-04-16 17:25:49 +0000},\n  777  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  793  \n  794  @article{candela05sparseGP,\n  795: 	Author = {J. Qui{\\`O}onero-Candela and C. E. Rasmussen},\n  796  	Date-Added = {2013-04-16 17:25:49 +0000},\n  797  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  958  	Year = {2002}}\n  959  \n  960: @book{Rasmussen2006,\n  961  	Address = {Cambridge, MA, USA},\n  962: 	Author = {Carl Edward Rasmussen and Christopher K. I. Williams},\n  963  	Date-Added = {2013-04-16 17:25:49 +0000},\n  964  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n 1158  	Year = {2006}}\n 1159  \n 1160: @book{rasmussen2006,\n 1161: 	Author = {Rasmussen, Carl Edward and Williams, Christopher K. I.},\n 1162  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1163  	Date-Modified = {2013-04-16 17:12:02 +0000},\n ....\n 1192  \n 1193  @article{Nickisch2008,\n 1194: 	Author = {Nickisch, Hannes and Rasmussen, Carl Edward},\n 1195  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1196  	Date-Modified = {2013-04-16 17:14:05 +0000},\n ....\n 1623  @incollection{BZMonteCarlo,\n 1624  	Address = {Cambridge, MA},\n 1625: 	Author = {C. E. Rasmussen and Z. Ghahramani},\n 1626  	Booktitle = {Advances in Neural Information Processing Systems},\n 1627  	Date-Added = {2013-04-16 17:05:02 +0000},\n ....\n 1697  	Year = {2012}}\n 1698  \n 1699: @article{rasmussen38gaussian,\n 1700: 	Author = {Rasmussen, C.E. and Williams, CKI},\n 1701  	Date-Added = {2013-04-16 17:05:02 +0000},\n 1702  	Date-Modified = {2013-04-16 17:05:02 +0000},\n ....\n 1741  	Year = {2005}}\n 1742  \n 1743: @article{Rasmussen2005,\n 1744: 	Author = {Rasmussen, C.E. and Williams, C.K.I.},\n 1745  	Date-Added = {2013-04-16 16:35:16 +0000},\n 1746  	Date-Modified = {2013-04-16 16:35:31 +0000},\n ....\n 1881  \n 1882  @inproceedings{Kuss2005,\n 1883: 	Author = {M. Kuss and C. E. Rasmussen},\n 1884  	Booktitle = {NIPS},\n 1885  	Date-Added = {2013-04-16 16:35:16 +0000},\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex:\n   22  The likelihood $p(\\data\\vert\\param)$ describes how data is related to the parameters $\\param$, and $p(\\param)$ is a prior distribution which capture's one a priori expectations about what the value of $\\param$ may be. The posterior distribution $p_\\data = p(\\param\\vert\\data)$ captures all statistically relevant information that the data $\\data$ provides about $\\param$, and it is therefore of central importance.\n   23  \n   24: The marginal likelihood, also called the model evidence $Z = \\int p(\\data\\vert\\param) p(\\param) d\\param$ is also of interest. It is often used to quantify how well a Bayesian model -- the combination of likelihood and prior -- fit the data. When the model involves additinal parameters or hyper-parameters that are not modelled probabilistically via prior distributions, it is common practice to learn their values by maximising model evidence \\citep[see \\eg][Chapter 5]{Rasmussen2006}.\n   25  \n   26  In practically interesting Bayesian models, the posterior distribution and model evidence are often computationally intractable to obtain and therefore one has to resort to approximations. The most popular methods for Bayesian approximate inference are variational inference and Markov chain Monte Carlo.\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex:\n  362  This means that the estimate converges for any bounded measurable function $f$. The speed of convergence, however, may not be as fast.\n  363  \n  364: Therefore it is crucial that the kernel we choose is representative of the function or functions $f$ we will integrate.  For example, in our experiments, the convergence of herding was sensitive to the width of the Gaussian kernel.  One of the major weaknesses of kernel methods in general is the difficulty of setting kernel parameters.  A key benefit of the Bayesian interpretation of herding and MMD presented in this paper is that it provides a recipe for adapting the Hilbert space to the observations $f(x_n)$.  To be precise, we can fit the kernel parameters by maximizing the marginal likelihood of Gaussian process conditioned on the observations.  Details can be found in \\citep{rasmussen38gaussian}.\n  365  \n  366  \\subsection{Computational Complexity}\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex:\n   81  BALD exploits the fact that in many active learning applications the output space $\\Ye$ is often simpler than the parameter space $\\Theta$. Here I consider the problem of active learning for binary classification, when the output takes one of two possible values $y \\in \\{-1,1\\}$. Given the simplicity of the outputs, binary classification is a highly relevant use-case for BALD.\n   82  \n   83: I will use a non-parametric Bayesian classification model, Gaussian process classification \\citep[GPC,][]{Rasmussen2006} to demonstrate the usefulness of BALD: GPC appears to be an especially challenging problem for information-theoretic active learning because its parameter space is infinite. Therefore, computing entropy of the posterior involves nontrivial quantities. However, by using the BALD approach and Eqn.\\ \\eqref{eqn:rearrangement} we are able to fully calculate the relevant information quantities without having to work out entropies of infinite dimensional objects. \n   84  \n   85  \n   ..\n   94  \\TODO{I need an appendix on kernels and Gaussian processes}\n   95  \n   96: We consider the probit case where, given the value of $f$, the binary label $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\citep{rasmussen2005}.\n   97  \n   98  Posterior inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. This is addressed by using approximate inference methods. The most commonly used approximate inference methods for Gaussian process classification are expectation propagation \\citep[EP,][]{Minka2002}, Laplace's approximation \\citep{williams1998}, assumed density filtering \\citep[ADF,][]{csato2000} and sparse methods \\citep{candela05sparseGP}. These all approximate the non-Gaussian posterior by a Gaussian \\citep{Nickisch2008}, but differ in the optimisation criterion and other restrictions. Throughout this chapter I will assume that we are provided with some Gaussian approximation to the GPC posterior resulting from one of these methods, though the active learning method is agnostic as to which method produced this estimate. Given the sequential nature of active learning, fast on-line methods \\citep{Csato2002} are particularly well suited for the task. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where approximate inference is exploited.\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/BALD-GPC/AL_NIPS2011.tex:\n  124  	f \\sim \\mathrm{GP}(\\mu(\\cdot),k(\\cdot,\\cdot)) \\qquad \\y\\vert\\x,f \\sim\\mathrm{Bernoulli}(\\Phi(f(\\x))) \n  125  \\end{align}\n  126: The latent parameter, now called $f$ (previously denoted as $\\param$), is a function $\\mathcal{X}\\rightarrow\\mathbb{R}$, and is assigned a Gaussian process prior with mean $\\mu(\\cdot)$ and covariance function $k(\\cdot,\\cdot)$. We consider the probit case where given the value of $f$, $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\cite{rasmussen2005}.\n  127  \n  128: Inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. The most commonly used approximate inference methods -- EP,  Laplace approximation, Assumed Density Filtering and sparse methods -- all approximate the posterior by a Gaussian \\cite{rasmussen2005}. Throughout this section we will assume that we are provided with such a Gaussian approximation from one of these methods, though the active learning algorithm does not care which. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where such an approximation is exploited.\n  129  \n  130  Now, we will compute the informativeness of a query $\\x$ using Eqn.  \\eqref{eqn:rearrangement}.  The entropy of the binary output variable $y$ given a fixed $f$ can be expressed in terms of the binary entropy function $h$: \n  ...\n  181  \\end{align}\n  182  \n  183: In the context of GP models, hyperparameters typically control the smoothness or spatial length-scale of functions. If we maintain a posterior distribution over these hyperparameters, which we can do e.\\,g.\\ via Hamiltonian Monte Carlo, we can choose either to treat them as nuisance parameters $\\theta^-$ and use Eq.\\ \\ref{eqn:BALD_bipartite}, or to include them in $\\theta^+$ and perform active learning over them as well. In certain cases, such as automatic relevance determination\\cite{rasmussen2005}, it may even make sense to treat hyperparameters as variables of primary interest, and the function $f$ itself as nuisance parameter $\\theta^-$.\n  184  \n  185  \\subsection{Preference Learning}\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/lossBayes/lossBayes.tex:\n  246  \\section{SUPERVISED LEARNING} \\label{s:examples}\n  247  \n  248: In this section, we make our framework more concrete by investigating it in the predictive setting presented in \\secref{ss:predictive}. We recall that in order to apply our framework, we need to specify the loss, the action space, the Bayesian observation model and a tractable family $\\mathcal{Q}$ of approximate distributions over the latent variable $\\theta$. In the predictive setting, an action is a prediction function $h:\\mathcal{X}\\rightarrow\\mathcal{Y}$. We let the action space $\\mathcal{H}$ be the set of all possible such functions here -- we are thus in the non-parametric prediction regime where we are free to make arbitrary pointwise decision on $\\mathcal{X}$. This gives us rich predictive possibilities as well as actually enables us to analytically compute $h_q$, as we will see in the next paragraph. For the observation model, we consider Bayesian non-parametric probabilistic models based on Gaussian processes (GPs), which have been successfully applied to model a wide variety of phenomena in the past~\\citep{Rasmussen2006}. %%OPTIONAL\\footnote{Considering the non-parametric setup reduces the issue of model misspecification. Moreover, GPs are often applied using approximate inference and thus provide a useful illustration for our framework.}.\n  249  In \\secref{ss:GPR}, we first look at Gaussian process regression. In this case, we can obtain an analytic form for $p_\\dataset$ and $\\mathcal{R}_{p_\\dataset}(h_q)$ which gives us some insights about the approximation framework as well as when minimizing the KL divergence can be suboptimal. Because the quadratic cost function is not bounded (and so $M = \\infty$), we cannot directly apply our loss-EM algorithm for regression, but we can nevertheless get useful insights which suggest future research directions for regression with sparse GPs. In section~\\ref{ss:GPC}, we consider Gaussian process classification (GPC) which will provide a test bed for the loss-EM algorithm. In both cases, we use a GP as our prior over parameters and let $\\mathcal{Q}$ also be a family of GPs.\n  250  \n  ...\n  384  To investigate the effect of the test distribution $p(x)$ on our method, we generated three different transductive test sets of size 1000, with inputs sampled from $\\mathcal{U}(0,1)$, $\\mathcal{U}(0.2,1.2)$ and $\\mathcal{U}(0.5,1.5)$ respectively (columns of \\tableref{tab:results}), and repeated these experiments 10 times to get significance results. We used five different loss matrices: the loss for false negatives was constant at $c_{-}=1$, the loss for false positives $c_{+}$ was varied so that the decision threshold $p_{thresh}=\\frac{c_{+}}{c_{-} + c_{+}}$ changed linearly between 0.5 and 0.05 (rows of \\tableref{tab:results}).\n  385  \n  386: For each dataset, we compared three methods for approximate inference: Laplace approximation, expectation propagation (EP) and loss-EM (run separately for each loss and test set combination). Both Laplace and EP are standard approaches to GP classification~\\citep{Rasmussen2006}. To evaluate the performance of the methods, we used the following criterion based on the posterior risk:\n  387  \\addtolength{\\abovedisplayskip}{-1mm}\n  388  \\addtolength{\\belowdisplayskip}{-1mm}\n\n23 matches across 6 files\n\n\nSearching 86 files for \"asmussen\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/bibliography/thesis.bib:\n  146  \n  147  @article{quinonero2005,\n  148: 	Author = {Qui{\\~n}onero-Candela, Joaquin and Rasmussen, Carl Edward},\n  149  	Date-Added = {2013-05-12 16:04:56 +0000},\n  150  	Date-Modified = {2013-05-12 16:05:03 +0000},\n  ...\n  773  \n  774  @article{nickisch2008gpc,\n  775: 	Author = {Nickisch, H. and C. E. Rasmussen},\n  776  	Date-Added = {2013-04-16 17:25:49 +0000},\n  777  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  793  \n  794  @article{candela05sparseGP,\n  795: 	Author = {J. Qui{\\`O}onero-Candela and C. E. Rasmussen},\n  796  	Date-Added = {2013-04-16 17:25:49 +0000},\n  797  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  958  	Year = {2002}}\n  959  \n  960: @book{Rasmussen2006,\n  961  	Address = {Cambridge, MA, USA},\n  962: 	Author = {Carl Edward Rasmussen and Christopher K. I. Williams},\n  963  	Date-Added = {2013-04-16 17:25:49 +0000},\n  964  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n 1158  	Year = {2006}}\n 1159  \n 1160: @book{rasmussen2006,\n 1161: 	Author = {Rasmussen, Carl Edward and Williams, Christopher K. I.},\n 1162  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1163  	Date-Modified = {2013-04-16 17:12:02 +0000},\n ....\n 1192  \n 1193  @article{Nickisch2008,\n 1194: 	Author = {Nickisch, Hannes and Rasmussen, Carl Edward},\n 1195  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1196  	Date-Modified = {2013-04-16 17:14:05 +0000},\n ....\n 1623  @incollection{BZMonteCarlo,\n 1624  	Address = {Cambridge, MA},\n 1625: 	Author = {C. E. Rasmussen and Z. Ghahramani},\n 1626  	Booktitle = {Advances in Neural Information Processing Systems},\n 1627  	Date-Added = {2013-04-16 17:05:02 +0000},\n ....\n 1697  	Year = {2012}}\n 1698  \n 1699: @article{Rasmussen2006,\n 1700: 	Author = {Rasmussen, C.E. and Williams, CKI},\n 1701  	Date-Added = {2013-04-16 17:05:02 +0000},\n 1702  	Date-Modified = {2013-04-16 17:05:02 +0000},\n ....\n 1741  	Year = {2005}}\n 1742  \n 1743: @article{Rasmussen2005,\n 1744: 	Author = {Rasmussen, C.E. and Williams, C.K.I.},\n 1745  	Date-Added = {2013-04-16 16:35:16 +0000},\n 1746  	Date-Modified = {2013-04-16 16:35:31 +0000},\n ....\n 1881  \n 1882  @inproceedings{Kuss2005,\n 1883: 	Author = {M. Kuss and C. E. Rasmussen},\n 1884  	Booktitle = {NIPS},\n 1885  	Date-Added = {2013-04-16 16:35:16 +0000},\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex:\n   22  The likelihood $p(\\data\\vert\\param)$ describes how data is related to the parameters $\\param$, and $p(\\param)$ is a prior distribution which capture's one a priori expectations about what the value of $\\param$ may be. The posterior distribution $p_\\data = p(\\param\\vert\\data)$ captures all statistically relevant information that the data $\\data$ provides about $\\param$, and it is therefore of central importance.\n   23  \n   24: The marginal likelihood, also called the model evidence $Z = \\int p(\\data\\vert\\param) p(\\param) d\\param$ is also of interest. It is often used to quantify how well a Bayesian model -- the combination of likelihood and prior -- fit the data. When the model involves additinal parameters or hyper-parameters that are not modelled probabilistically via prior distributions, it is common practice to learn their values by maximising model evidence \\citep[see \\eg][Chapter 5]{Rasmussen2006}.\n   25  \n   26  In practically interesting Bayesian models, the posterior distribution and model evidence are often computationally intractable to obtain and therefore one has to resort to approximations. The most popular methods for Bayesian approximate inference are variational inference and Markov chain Monte Carlo.\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex:\n  362  This means that the estimate converges for any bounded measurable function $f$. The speed of convergence, however, may not be as fast.\n  363  \n  364: Therefore it is crucial that the kernel we choose is representative of the function or functions $f$ we will integrate.  For example, in our experiments, the convergence of herding was sensitive to the width of the Gaussian kernel.  One of the major weaknesses of kernel methods in general is the difficulty of setting kernel parameters.  A key benefit of the Bayesian interpretation of herding and MMD presented in this paper is that it provides a recipe for adapting the Hilbert space to the observations $f(x_n)$.  To be precise, we can fit the kernel parameters by maximizing the marginal likelihood of Gaussian process conditioned on the observations.  Details can be found in \\citep{Rasmussen2006}.\n  365  \n  366  \\subsection{Computational Complexity}\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex:\n   81  BALD exploits the fact that in many active learning applications the output space $\\Ye$ is often simpler than the parameter space $\\Theta$. Here I consider the problem of active learning for binary classification, when the output takes one of two possible values $y \\in \\{-1,1\\}$. Given the simplicity of the outputs, binary classification is a highly relevant use-case for BALD.\n   82  \n   83: I will use a non-parametric Bayesian classification model, Gaussian process classification \\citep[GPC,][]{Rasmussen2006} to demonstrate the usefulness of BALD: GPC appears to be an especially challenging problem for information-theoretic active learning because its parameter space is infinite. Therefore, computing entropy of the posterior involves nontrivial quantities. However, by using the BALD approach and Eqn.\\ \\eqref{eqn:rearrangement} we are able to fully calculate the relevant information quantities without having to work out entropies of infinite dimensional objects. \n   84  \n   85  \n   ..\n   94  \\TODO{I need an appendix on kernels and Gaussian processes}\n   95  \n   96: We consider the probit case where, given the value of $f$, the binary label $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\citep{rasmussen2005}.\n   97  \n   98  Posterior inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. This is addressed by using approximate inference methods. The most commonly used approximate inference methods for Gaussian process classification are expectation propagation \\citep[EP,][]{Minka2002}, Laplace's approximation \\citep{williams1998}, assumed density filtering \\citep[ADF,][]{csato2000} and sparse methods \\citep{candela05sparseGP}. These all approximate the non-Gaussian posterior by a Gaussian \\citep{Nickisch2008}, but differ in the optimisation criterion and other restrictions. Throughout this chapter I will assume that we are provided with some Gaussian approximation to the GPC posterior resulting from one of these methods, though the active learning method is agnostic as to which method produced this estimate. Given the sequential nature of active learning, fast on-line methods \\citep{Csato2002} are particularly well suited for the task. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where approximate inference is exploited.\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/BALD-GPC/AL_NIPS2011.tex:\n  124  	f \\sim \\mathrm{GP}(\\mu(\\cdot),k(\\cdot,\\cdot)) \\qquad \\y\\vert\\x,f \\sim\\mathrm{Bernoulli}(\\Phi(f(\\x))) \n  125  \\end{align}\n  126: The latent parameter, now called $f$ (previously denoted as $\\param$), is a function $\\mathcal{X}\\rightarrow\\mathbb{R}$, and is assigned a Gaussian process prior with mean $\\mu(\\cdot)$ and covariance function $k(\\cdot,\\cdot)$. We consider the probit case where given the value of $f$, $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\cite{rasmussen2005}.\n  127  \n  128: Inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. The most commonly used approximate inference methods -- EP,  Laplace approximation, Assumed Density Filtering and sparse methods -- all approximate the posterior by a Gaussian \\cite{rasmussen2005}. Throughout this section we will assume that we are provided with such a Gaussian approximation from one of these methods, though the active learning algorithm does not care which. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where such an approximation is exploited.\n  129  \n  130  Now, we will compute the informativeness of a query $\\x$ using Eqn.  \\eqref{eqn:rearrangement}.  The entropy of the binary output variable $y$ given a fixed $f$ can be expressed in terms of the binary entropy function $h$: \n  ...\n  181  \\end{align}\n  182  \n  183: In the context of GP models, hyperparameters typically control the smoothness or spatial length-scale of functions. If we maintain a posterior distribution over these hyperparameters, which we can do e.\\,g.\\ via Hamiltonian Monte Carlo, we can choose either to treat them as nuisance parameters $\\theta^-$ and use Eq.\\ \\ref{eqn:BALD_bipartite}, or to include them in $\\theta^+$ and perform active learning over them as well. In certain cases, such as automatic relevance determination\\cite{rasmussen2005}, it may even make sense to treat hyperparameters as variables of primary interest, and the function $f$ itself as nuisance parameter $\\theta^-$.\n  184  \n  185  \\subsection{Preference Learning}\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/lossBayes/lossBayes.tex:\n  246  \\section{SUPERVISED LEARNING} \\label{s:examples}\n  247  \n  248: In this section, we make our framework more concrete by investigating it in the predictive setting presented in \\secref{ss:predictive}. We recall that in order to apply our framework, we need to specify the loss, the action space, the Bayesian observation model and a tractable family $\\mathcal{Q}$ of approximate distributions over the latent variable $\\theta$. In the predictive setting, an action is a prediction function $h:\\mathcal{X}\\rightarrow\\mathcal{Y}$. We let the action space $\\mathcal{H}$ be the set of all possible such functions here -- we are thus in the non-parametric prediction regime where we are free to make arbitrary pointwise decision on $\\mathcal{X}$. This gives us rich predictive possibilities as well as actually enables us to analytically compute $h_q$, as we will see in the next paragraph. For the observation model, we consider Bayesian non-parametric probabilistic models based on Gaussian processes (GPs), which have been successfully applied to model a wide variety of phenomena in the past~\\citep{Rasmussen2006}. %%OPTIONAL\\footnote{Considering the non-parametric setup reduces the issue of model misspecification. Moreover, GPs are often applied using approximate inference and thus provide a useful illustration for our framework.}.\n  249  In \\secref{ss:GPR}, we first look at Gaussian process regression. In this case, we can obtain an analytic form for $p_\\dataset$ and $\\mathcal{R}_{p_\\dataset}(h_q)$ which gives us some insights about the approximation framework as well as when minimizing the KL divergence can be suboptimal. Because the quadratic cost function is not bounded (and so $M = \\infty$), we cannot directly apply our loss-EM algorithm for regression, but we can nevertheless get useful insights which suggest future research directions for regression with sparse GPs. In section~\\ref{ss:GPC}, we consider Gaussian process classification (GPC) which will provide a test bed for the loss-EM algorithm. In both cases, we use a GP as our prior over parameters and let $\\mathcal{Q}$ also be a family of GPs.\n  250  \n  ...\n  384  To investigate the effect of the test distribution $p(x)$ on our method, we generated three different transductive test sets of size 1000, with inputs sampled from $\\mathcal{U}(0,1)$, $\\mathcal{U}(0.2,1.2)$ and $\\mathcal{U}(0.5,1.5)$ respectively (columns of \\tableref{tab:results}), and repeated these experiments 10 times to get significance results. We used five different loss matrices: the loss for false negatives was constant at $c_{-}=1$, the loss for false positives $c_{+}$ was varied so that the decision threshold $p_{thresh}=\\frac{c_{+}}{c_{-} + c_{+}}$ changed linearly between 0.5 and 0.05 (rows of \\tableref{tab:results}).\n  385  \n  386: For each dataset, we compared three methods for approximate inference: Laplace approximation, expectation propagation (EP) and loss-EM (run separately for each loss and test set combination). Both Laplace and EP are standard approaches to GP classification~\\citep{Rasmussen2006}. To evaluate the performance of the methods, we used the following criterion based on the posterior risk:\n  387  \\addtolength{\\abovedisplayskip}{-1mm}\n  388  \\addtolength{\\belowdisplayskip}{-1mm}\n\n23 matches across 6 files\n",
 			"settings":
 			{
-				"buffer_size": 1488,
+				"buffer_size": 45241,
 				"line_ending": "Unix",
 				"name": "Find Results",
 				"scratch": true
+			}
+		},
+		{
+			"file": "latex/bibliography/thesis.bib",
+			"settings":
+			{
+				"buffer_size": 90805,
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -245,7 +265,7 @@
 			"file": "latex/notation.tex",
 			"settings":
 			{
-				"buffer_size": 4134,
+				"buffer_size": 4122,
 				"line_ending": "Unix"
 			}
 		},
@@ -261,7 +281,7 @@
 			"file": "latex/part2_main.tex",
 			"settings":
 			{
-				"buffer_size": 183,
+				"buffer_size": 279,
 				"line_ending": "Unix"
 			}
 		},
@@ -277,7 +297,7 @@
 			"file": "latex/preamble.tex",
 			"settings":
 			{
-				"buffer_size": 650,
+				"buffer_size": 1869,
 				"line_ending": "Unix"
 			}
 		},
@@ -309,7 +329,7 @@
 			"file": "latex/part1/02_embeddings.tex",
 			"settings":
 			{
-				"buffer_size": 38116,
+				"buffer_size": 38366,
 				"line_ending": "Unix"
 			}
 		},
@@ -317,15 +337,31 @@
 			"file": "latex/part2/01_approximate_inference.tex",
 			"settings":
 			{
-				"buffer_size": 67540,
+				"buffer_size": 23611,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part2/02_herding.tex",
+			"settings":
+			{
+				"buffer_size": 41251,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "raw_materials/lossBayes/lossBayes.tex",
+			"settings":
+			{
+				"buffer_size": 64505,
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "latex/part3/01_introBALD.tex",
 			"settings":
 			{
-				"buffer_size": 21628,
+				"buffer_size": 21682,
 				"line_ending": "Unix"
 			}
 		},
@@ -356,7 +392,7 @@
 			"file": "latex/part3/02_GP_BALD.tex",
 			"settings":
 			{
-				"buffer_size": 47000,
+				"buffer_size": 47083,
 				"line_ending": "Unix"
 			}
 		},
@@ -364,7 +400,7 @@
 			"file": "latex/part3/03_quantum.tex",
 			"settings":
 			{
-				"buffer_size": 46390,
+				"buffer_size": 45302,
 				"line_ending": "Unix"
 			}
 		},
@@ -387,7 +423,71 @@
 			"file": "latex/thesis.tex",
 			"settings":
 			{
-				"buffer_size": 2097,
+				"buffer_size": 1433,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/figs/BALD/quantum/case1.tikz",
+			"settings":
+			{
+				"buffer_size": 54634,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/figs/BALD/quantum/case2.tikz",
+			"settings":
+			{
+				"buffer_size": 54765,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/figs/BALD/quantum/case3.tikz",
+			"settings":
+			{
+				"buffer_size": 54921,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/figs/BALD/quantum/case4.tikz",
+			"settings":
+			{
+				"buffer_size": 54431,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/figs/BALD/quantum/case5.tikz",
+			"settings":
+			{
+				"buffer_size": 53115,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/figs/BALD/quantum/case5b.tikz",
+			"settings":
+			{
+				"buffer_size": 2283,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/figs/BALD/quantum/case6.tikz",
+			"settings":
+			{
+				"buffer_size": 53228,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/figs/BALD/quantum/one_qubit_combined.tikz.tex",
+			"settings":
+			{
+				"buffer_size": 3882,
 				"line_ending": "Unix"
 			}
 		}
@@ -395,9 +495,17 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 107.0,
 		"selected_items":
 		[
+			[
+				"figle",
+				"Figlet: Add Comment"
+			],
+			[
+				"fig",
+				"Figlet: Add Comment"
+			],
 			[
 				"figlet",
 				"Figlet: Add Comment"
@@ -427,19 +535,11 @@
 				"Indentation: Convert to Spaces"
 			],
 			[
-				"figle",
-				"Figlet: Add Comment"
-			],
-			[
 				"figlet se",
 				"Figlet: Select Font"
 			],
 			[
 				"fglcmm",
-				"Figlet: Add Comment"
-			],
-			[
-				"fig",
 				"Figlet: Add Comment"
 			],
 			[
@@ -869,9 +969,12 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
+			"*",
+			"03_qu*",
+			"01_approximate*",
 			"*",
 			"*tikz",
 			"*",
@@ -888,9 +991,58 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"x",
+			"param",
+			"\\mathcal{D}",
+			"doteq",
+			"d_L",
+			"h_p",
+			"h_q",
+			"kullback",
+			"rasmussen2005",
+			"asmussen",
+			"rasmussen38gaussian",
+			"asmussen",
+			"rasmussen06GP",
+			"asmussen",
+			"herding_herding_",
+			"sec:",
+			"sec:experiments",
+			"subsubsection",
+			"\\subsection{",
+			"Bayesian herding",
+			"% defining custom colors\n\\definecolor{mycolor1}{rgb}{1,0,1}",
+			"width= 1.39in,\nheight= 1.2in,",
+			"Eqn:",
+			"\\Gamma",
+			"\\gamma",
+			"\\Gamma",
+			"\\gamma",
+			"\\Gamma",
+			"\\gamma",
+			"tomography",
+			"tomograp",
+			"figure",
+			"because it is",
+			"fig:toy",
+			"black",
+			"blue",
+			"The kernel scoring",
+			"kernel score",
+			"figure",
+			"},\\ref{",
+			"label",
+			"\\label{fig:",
+			"\\label:{fig:",
+			"fig:",
+			"fig:Bloch disk",
+			"fig:",
+			"fig",
+			"single qubit",
+			"usetikzlibrary",
 			"%!TEX root = ../main.tex",
 			"%!TEX root = main.tex",
 			"\n%!TEX root = main.tex\n%!TEX root = main.tex\n%!TEX root = main.tex",
@@ -969,63 +1121,20 @@
 			"\\Theta",
 			"\\theta",
 			"\\Theta",
-			"\\theta",
-			"\\Theta",
-			"\\theta",
-			"theta",
-			"Theta",
-			"theta",
-			"Theta",
-			"theta",
-			"Theta",
-			"theta",
-			"Theta",
-			"theta",
-			"welling2009herding",
-			"arbitrary sco",
-			"transductive",
-			"equation",
-			"\\risk",
-			"risk",
-			"^{\\mbox{test}}",
-			"p_{test}",
-			"equation",
-			"poor",
-			"apply",
-			"nor",
-			"eqref",
-			"ref",
-			"align",
-			"equation",
-			"quadrature",
-			"\\cite{",
-			"tr",
-			"\\trace",
-			":\n",
-			"\\rho",
-			"Overview",
-			"equation",
-			"bar",
-			"}$",
-			"$",
-			"array",
-			"Born",
-			"schervish95theory",
-			"Nickisch2008",
-			"BayesianOptimality",
-			"Sriperumbudur2010",
-			"\\citep{L",
-			"\\cite",
-			"resizebox",
-			"{figures/",
-			"figures/"
+			"\\theta"
 		],
 		"highlight": true,
-		"in_selection": true,
+		"in_selection": false,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
 		[
+			"Rasmussen2006",
+			"",
+			"width= 1.8in,\nheight= 1.5in,",
+			"eqn:",
+			"D",
+			"\\outcome",
 			"%!TEX root = ../thesis.tex",
 			"%!TEX root = thesis.tex",
 			"fig:BALD_GPC_results",
@@ -1048,7 +1157,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 16,
 			"sheets":
 			[
 				{
@@ -1056,15 +1165,15 @@
 					"file": "latex/part1/01_scoring_rules.tex",
 					"settings":
 					{
-						"buffer_size": 60572,
+						"buffer_size": 61296,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								9914,
-								9914
+								34123,
+								34146
 							]
 						],
 						"settings":
@@ -1073,7 +1182,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2182.0,
+						"translation.y": 8257.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1109,7 +1218,7 @@
 					"buffer": 2,
 					"settings":
 					{
-						"buffer_size": 1488,
+						"buffer_size": 45241,
 						"regions":
 						{
 							"match":
@@ -1144,6 +1253,318 @@
 									[
 										1362,
 										1383
+									],
+									[
+										1667,
+										1681
+									],
+									[
+										2402,
+										2413
+									],
+									[
+										2947,
+										2958
+									],
+									[
+										3485,
+										3496
+									],
+									[
+										4030,
+										4041
+									],
+									[
+										4536,
+										4547
+									],
+									[
+										5060,
+										5071
+									],
+									[
+										5624,
+										5635
+									],
+									[
+										6201,
+										6212
+									],
+									[
+										6650,
+										6658
+									],
+									[
+										6866,
+										6874
+									],
+									[
+										7083,
+										7091
+									],
+									[
+										7248,
+										7256
+									],
+									[
+										7333,
+										7341
+									],
+									[
+										7529,
+										7537
+									],
+									[
+										7562,
+										7570
+									],
+									[
+										7805,
+										7813
+									],
+									[
+										8033,
+										8041
+									],
+									[
+										8239,
+										8247
+									],
+									[
+										8278,
+										8286
+									],
+									[
+										8470,
+										8478
+									],
+									[
+										8503,
+										8511
+									],
+									[
+										8727,
+										8735
+									],
+									[
+										9798,
+										9806
+									],
+									[
+										11039,
+										11047
+									],
+									[
+										11681,
+										11689
+									],
+									[
+										12522,
+										12530
+									],
+									[
+										14360,
+										14368
+									],
+									[
+										14710,
+										14718
+									],
+									[
+										15796,
+										15804
+									],
+									[
+										17178,
+										17186
+									],
+									[
+										19142,
+										19150
+									],
+									[
+										19587,
+										19595
+									],
+									[
+										19803,
+										19811
+									],
+									[
+										20020,
+										20028
+									],
+									[
+										20185,
+										20193
+									],
+									[
+										20270,
+										20278
+									],
+									[
+										20466,
+										20474
+									],
+									[
+										20499,
+										20507
+									],
+									[
+										20742,
+										20750
+									],
+									[
+										20970,
+										20978
+									],
+									[
+										21176,
+										21184
+									],
+									[
+										21215,
+										21223
+									],
+									[
+										21407,
+										21415
+									],
+									[
+										21440,
+										21448
+									],
+									[
+										21664,
+										21672
+									],
+									[
+										22735,
+										22743
+									],
+									[
+										23976,
+										23984
+									],
+									[
+										24618,
+										24626
+									],
+									[
+										25459,
+										25467
+									],
+									[
+										27297,
+										27305
+									],
+									[
+										27647,
+										27655
+									],
+									[
+										28733,
+										28741
+									],
+									[
+										30115,
+										30123
+									],
+									[
+										32079,
+										32087
+									],
+									[
+										32524,
+										32532
+									],
+									[
+										32740,
+										32748
+									],
+									[
+										32957,
+										32965
+									],
+									[
+										33122,
+										33130
+									],
+									[
+										33207,
+										33215
+									],
+									[
+										33403,
+										33411
+									],
+									[
+										33436,
+										33444
+									],
+									[
+										33679,
+										33687
+									],
+									[
+										33907,
+										33915
+									],
+									[
+										34113,
+										34121
+									],
+									[
+										34146,
+										34154
+									],
+									[
+										34338,
+										34346
+									],
+									[
+										34371,
+										34379
+									],
+									[
+										34595,
+										34603
+									],
+									[
+										35666,
+										35674
+									],
+									[
+										36907,
+										36915
+									],
+									[
+										37543,
+										37551
+									],
+									[
+										38384,
+										38392
+									],
+									[
+										40222,
+										40230
+									],
+									[
+										40572,
+										40580
+									],
+									[
+										41658,
+										41666
+									],
+									[
+										43040,
+										43048
+									],
+									[
+										45004,
+										45012
 									]
 								],
 								"scope": ""
@@ -1152,14 +1573,14 @@
 						"selection":
 						[
 							[
-								364,
-								364
+								40234,
+								40221
 							]
 						],
 						"settings":
 						{
 							"detect_indentation": false,
-							"output_tag": 4,
+							"output_tag": 10,
 							"result_base_dir": "",
 							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
 							"result_line_regex": "^ +([0-9]+):",
@@ -1167,13 +1588,40 @@
 							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 345.0,
+						"translation.y": 10027.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
+					"file": "latex/bibliography/thesis.bib",
+					"settings":
+					{
+						"buffer_size": 90805,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/Bibtex.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
 					"file": "latex/conclusions.tex",
 					"settings":
 					{
@@ -1199,7 +1647,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "latex/introduction.tex",
 					"settings":
 					{
@@ -1225,19 +1673,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "latex/notation.tex",
 					"settings":
 					{
-						"buffer_size": 4134,
+						"buffer_size": 4122,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								23,
-								23
+								1552,
+								1564
 							]
 						],
 						"settings":
@@ -1245,13 +1693,13 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 400.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 7,
 					"file": "latex/part1_main.tex",
 					"settings":
 					{
@@ -1262,34 +1710,8 @@
 						"selection":
 						[
 							[
-								23,
-								23
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "latex/part2_main.tex",
-					"settings":
-					{
-						"buffer_size": 183,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								23,
-								23
+								366,
+								366
 							]
 						],
 						"settings":
@@ -1304,6 +1726,32 @@
 				},
 				{
 					"buffer": 8,
+					"file": "latex/part2_main.tex",
+					"settings":
+					{
+						"buffer_size": 279,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								77,
+								77
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
 					"file": "latex/part3_main.tex",
 					"settings":
 					{
@@ -1329,24 +1777,26 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 10,
 					"file": "latex/preamble.tex",
 					"settings":
 					{
-						"buffer_size": 650,
+						"buffer_size": 1869,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								23,
-								23
+								412,
+								412
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1355,7 +1805,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 11,
 					"file": "latex/frontmatter/abstract.tex",
 					"settings":
 					{
@@ -1381,7 +1831,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 12,
 					"file": "latex/frontmatter/acknowledgement.tex",
 					"settings":
 					{
@@ -1407,7 +1857,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 13,
 					"file": "latex/frontmatter/dedication.tex",
 					"settings":
 					{
@@ -1433,51 +1883,25 @@
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 14,
 					"file": "latex/part1/02_embeddings.tex",
 					"settings":
 					{
-						"buffer_size": 38116,
+						"buffer_size": 38366,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								33763,
-								33763
+								4120,
+								4120
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
 							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 14,
-					"file": "latex/part2/01_approximate_inference.tex",
-					"settings":
-					{
-						"buffer_size": 67540,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								26,
-								26
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1487,18 +1911,100 @@
 				},
 				{
 					"buffer": 15,
-					"file": "latex/part3/01_introBALD.tex",
+					"file": "latex/part2/01_approximate_inference.tex",
 					"settings":
 					{
-						"buffer_size": 21628,
+						"buffer_size": 23611,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								26,
-								26
+								19759,
+								19759
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 4270.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "latex/part2/02_herding.tex",
+					"settings":
+					{
+						"buffer_size": 41251,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7732,
+								7732
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1307.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "raw_materials/lossBayes/lossBayes.tex",
+					"settings":
+					{
+						"buffer_size": 64505,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								559,
+								559
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"file": "latex/part3/01_introBALD.tex",
+					"settings":
+					{
+						"buffer_size": 21682,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								250,
+								250
 							]
 						],
 						"settings":
@@ -1513,7 +2019,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 16,
+					"buffer": 19,
 					"file": "latex/part1/02_embeddings.tex.bak",
 					"settings":
 					{
@@ -1540,7 +2046,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 17,
+					"buffer": 20,
 					"file": "latex/part1/03_scoring_processes.tex",
 					"settings":
 					{
@@ -1567,7 +2073,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 18,
+					"buffer": 21,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -1592,19 +2098,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 19,
+					"buffer": 22,
 					"file": "latex/part3/02_GP_BALD.tex",
 					"settings":
 					{
-						"buffer_size": 47000,
+						"buffer_size": 47083,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								47000,
-								47000
+								5020,
+								5020
 							]
 						],
 						"settings":
@@ -1613,25 +2119,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 8947.0,
+						"translation.y": 6011.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 20,
+					"buffer": 23,
 					"file": "latex/part3/03_quantum.tex",
 					"settings":
 					{
-						"buffer_size": 46390,
+						"buffer_size": 45302,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								26,
-								26
+								39924,
+								39924
 							]
 						],
 						"settings":
@@ -1640,13 +2146,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 8065.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 21,
+					"buffer": 24,
 					"file": "raw_materials/BALD-GPC/AL_NIPS2011.tex",
 					"settings":
 					{
@@ -1657,8 +2163,8 @@
 						"selection":
 						[
 							[
-								25788,
-								34096
+								639,
+								639
 							]
 						],
 						"settings":
@@ -1666,13 +2172,13 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 6900.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 22,
+					"buffer": 25,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -1698,19 +2204,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 23,
+					"buffer": 26,
 					"file": "latex/thesis.tex",
 					"settings":
 					{
-						"buffer_size": 2097,
+						"buffer_size": 1433,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								81,
-								81
+								738,
+								738
 							]
 						],
 						"settings":
@@ -1720,7 +2226,215 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
+						"translation.y": 59.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 27,
+					"file": "latex/figs/BALD/quantum/case1.tikz",
+					"settings":
+					{
+						"buffer_size": 54634,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								344,
+								344
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/TeX.tmLanguage"
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 28,
+					"file": "latex/figs/BALD/quantum/case2.tikz",
+					"settings":
+					{
+						"buffer_size": 54765,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								514,
+								514
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/TeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 29,
+					"file": "latex/figs/BALD/quantum/case3.tikz",
+					"settings":
+					{
+						"buffer_size": 54921,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								412,
+								412
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/TeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 30,
+					"file": "latex/figs/BALD/quantum/case4.tikz",
+					"settings":
+					{
+						"buffer_size": 54431,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/TeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 31,
+					"file": "latex/figs/BALD/quantum/case5.tikz",
+					"settings":
+					{
+						"buffer_size": 53115,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								412,
+								412
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/TeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 32,
+					"file": "latex/figs/BALD/quantum/case5b.tikz",
+					"settings":
+					{
+						"buffer_size": 2283,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								412,
+								412
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/TeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 33,
+					"file": "latex/figs/BALD/quantum/case6.tikz",
+					"settings":
+					{
+						"buffer_size": 53228,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/TeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 34,
+					"file": "latex/figs/BALD/quantum/one_qubit_combined.tikz.tex",
+					"settings":
+					{
+						"buffer_size": 3882,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2600,
+								2600
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 803.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

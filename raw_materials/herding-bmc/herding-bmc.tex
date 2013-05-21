@@ -54,8 +54,6 @@ Herding and kernel herding are deterministic methods of choosing samples which s
 \label{fig:fig1}
 \end{figure} 
 
-
-
  
 \section{INTRODUCTION}
 \paragraph{The problem: Integrals} A common problem in statistical machine learning is to compute expectations of functions over probability distributions of the form:
@@ -176,15 +174,15 @@ Conveniently, the \gp{} posterior allows us to compute the expectation of \eqref
 %so we integrate over functions to get:
 \begin{align}
 \expectargs{\gp}{Z} & = \expectargs{\gp}{\int f(\vx)p(\vx)d\vx}\\
- & = \int\!\!\! \int\!\! f(\vx) p(f(\vx)|\vf(\vX)) p(\vx) d\vx df\\
- & = \int\!\!\! \mf(\vx) p(\vx) d\vx \\
- & = \left[ \int\!\! k(\vx, \vX) p(\vx) d\vx \right] K^{-1} \vf(\vX) \\
+ & = \intRasmussen2006Rasmussen2006Rasmussen2006 \intRasmussen2006Rasmussen2006 f(\vx) p(f(\vx)|\vf(\vX)) p(\vx) d\vx df\\
+ & = \intRasmussen2006Rasmussen2006Rasmussen2006 \mf(\vx) p(\vx) d\vx \\
+ & = \left[ \intRasmussen2006Rasmussen2006 k(\vx, \vX) p(\vx) d\vx \right] K^{-1} \vf(\vX) \\
  & = \vz^T K^{-1} \vf(\vX)
 \label{eq:marg_mean_symbolic}
 \end{align} 
 where
 \begin{align}
-z_n & = \int\!\! k(\vx, \vx_n) p(\vx) d\vx = \expectargs{\vx' \sim p}{k(\vx_n, \vx')}.
+z_n & = \intRasmussen2006Rasmussen2006 k(\vx, \vx_n) p(\vx) d\vx = \expectargs{\vx' \sim p}{k(\vx_n, \vx')}.
 \end{align}
 %
 Conveniently, as in kernel herding, the desired expectation of $Z_{f,p}$ is simply a linear combination of observed function values $\vf(\vx)$:
@@ -232,15 +230,15 @@ Bayesian quadrature provides not only a mean estimate of $Z_{f,p}$, but a full G
 \epsilon^{2}_{\bq{}}(\vx_1,\ldots,\vx_N) & = 
 \varianceargs{}{Z_{f,p}|f_{x_1}, \dots, f_{x_N}} \\
 % \nonumber & = \expectargs{f \sim \gp, p\sim p(x)}{ \left( f(\vx) - \mf(\vx) \right)\left( f(\vx') - \mf(\vx') \right)} \\ 
-%\nonumber & = \int \Bigg( \!\! \left( \int f(\vx) p(\vx) d\vx - \int \mf(\vx') p(\vx') d\vx' \right) \\ 
-%\nonumber & \quad \times \left( \int f(\vx) p(\vx) d\vx - \int \mf(\vx') p(\vx') d\vx' \right) \!\! \Bigg) p(f) df \\ 
-%\nonumber & = \int\!\!\! \int\!\! \int\!\! \left[ f(\vx) - \mf(\vx) \right] \left[ f((\vx') - \mf(\vx') \right] p(f) df \\
+%\nonumber & = \int \Bigg( Rasmussen2006Rasmussen2006 \left( \int f(\vx) p(\vx) d\vx - \int \mf(\vx') p(\vx') d\vx' \right) \\ 
+%\nonumber & \quad \times \left( \int f(\vx) p(\vx) d\vx - \int \mf(\vx') p(\vx') d\vx' \right) Rasmussen2006Rasmussen2006 \Bigg) p(f) df \\ 
+%\nonumber & = \intRasmussen2006Rasmussen2006Rasmussen2006 \intRasmussen2006Rasmussen2006 \intRasmussen2006Rasmussen2006 \left[ f(\vx) - \mf(\vx) \right] \left[ f((\vx') - \mf(\vx') \right] p(f) df \\
 %\nonumber & \qquad \times   p(\vx) p(\vx') d\vx d\vx' \\
-%\nonumber & = \int\!\! \!\int\!\! \Cov \left[ f((\vx), f((\vx') \right] p(\vx) p(\vx') d\vx d\vx' \\
-%\nonumber & = \int\!\!\! \int\!\! \left[ k(\vx, \vx') - k(\vx, \vX) K^{-1} k(\vX, \vx') \right] \\
+%\nonumber & = \intRasmussen2006Rasmussen2006 Rasmussen2006\intRasmussen2006Rasmussen2006 \Cov \left[ f((\vx), f((\vx') \right] p(\vx) p(\vx') d\vx d\vx' \\
+%\nonumber & = \intRasmussen2006Rasmussen2006Rasmussen2006 \intRasmussen2006Rasmussen2006 \left[ k(\vx, \vx') - k(\vx, \vX) K^{-1} k(\vX, \vx') \right] \\
 %\nonumber          & \qquad \times p(\vx) p(\vx') d\vx d\vx' \\ 
-%\nonumber & = \int\!\!\! \int\!\! k(\vx, \vx') p(\vx) p(\vx') d\vx d\vx' \\
-%\nonumber & \quad - \left[ \int\!\! k(\vx, \vX) p(\vx) d\vx \right] K^{-1} \left[ \int\!\! k(\vX, \vx') p(\vx') d\vx' \right] \\
+%\nonumber & = \intRasmussen2006Rasmussen2006Rasmussen2006 \intRasmussen2006Rasmussen2006 k(\vx, \vx') p(\vx) p(\vx') d\vx d\vx' \\
+%\nonumber & \quad - \left[ \intRasmussen2006Rasmussen2006 k(\vx, \vX) p(\vx) d\vx \right] K^{-1} \left[ \intRasmussen2006Rasmussen2006 k(\vX, \vx') p(\vx') d\vx' \right] \\
 & = \expectargs{\vx, \vx' \sim p}{k(\vx, \vx')} - \vz^T K^{-1} \vz\mbox{,}
 \label{eq:marg_var_symbolic}
 \end{align}
