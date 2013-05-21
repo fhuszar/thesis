@@ -18,8 +18,7 @@ A well known example of scoring rules is the logarithmic score, or simply the lo
 
 \section{Information quantities}
 
-A scoring rule allows us to define useful information quantities, which can be exploited in a variety of applications \cite[see also][]{Blaetal2332}: these are generalised notions entropy, divergence and value of information.
-
+A scoring rule allows us to define useful information quantities, which can be exploited in a variety of applications \citep[see also][]{Gneiting2007}: these are generalised notions entropy, divergence and value of information.
 \begin{definition}[Generalised entropy]
 Given a scoring rule $\score:\Xe\times\probmeasures{\Xe}\mapsto\Reals$, let us define the generalised entropy of a distribution $P\in\probmeasures{\Xe}$ as follows:
 \begin{equation}
@@ -107,12 +106,11 @@ The divergence defined in \eqref{eqn:def_divergence} is a special case of Bregma
 \end{proof}
 \end{statement}
 
-\begin{figure}
-\label{fig:Bregman}
+\begin{figure}[t]
 \begin{center}
 	\includegraphics[width=0.8\columnwidth]{figs/embeddings/Bregman}
 \end{center}
-\caption[Pictorial illustration of Bregman divergences]{Pictorial illustration of Bregman divergences. Peter and Quentin are points who live on a convex hill, whose surface is described by the concave function $H(\cdot)$. Peter lives at $(p,H(p))$, Quentin at $(q,H(q))$. Because the hill is convex and they are both points, they cannot normally see each other, unless $p=q$. Anyone above the tangential line $H[q] + \dot{H}(q)(\cdot-q)$ can see Quentin, but Peter is normally below this line. If Peter wants to see Quentin, he has to jump up. The Bregman divergence $\divergence{H}{p}{q}$ measures how high Peter has to jump to see Quentin. In this example $H$ was chosen to be the Brier (quadratic) entropy, so here the divergence is symmetric, but this is not generally the case.}
+\caption[Pictorial illustration of Bregman divergences]{Pictorial illustration of Bregman divergences. Peter and Quentin are points who live on a convex hill, whose surface is described by the concave function $H(\cdot)$. Peter lives at $(p,H(p))$, Quentin at $(q,H(q))$. Because the hill is convex and they are both points, they cannot normally see each other, unless $p=q$. Anyone above the tangential line $H[q] + \dot{H}(q)(\cdot-q)$ can see Quentin, but Peter is normally below this line. If Peter wants to see Quentin, he has to jump up. The Bregman divergence $\divergence{H}{p}{q}$ measures how high Peter has to jump to see Quentin. In this example $H$ was chosen to be the Brier (quadratic) entropy, so here the divergence is symmetric, but this is not generally the case.\label{fig:Bregman}}
 \end{figure}
 
 For a more elaborate proof and discussion of Bregman divergences and scoring rules please refer to \citep{Amari2010,Dawid2007}. An intuitive explanation of Bregman divergences is given in Figure \ref{fig:Bregman}.
@@ -244,7 +242,7 @@ The Shannon information in $Y$ about $X$ is the same as the Shannon information 
 For completeness, I note here that some authors have generalised Shannon's mutual information along the lines of \eqref{eqn:mutualinfo_as_KLdivergence}, by replacing the KL divergence with a more general divergence $d$:
 
 \begin{equation}
-	\mathbb{J}_{d}(X,Y) = \mbox{d}\left[ P(x,y) \middle\| P_{X}(x)P_{Y}(y) \right]\label{mutualinfo_generalisations}
+	\mathbb{J}_{d}(X,Y) = \mbox{d}\left[ P(x,y) \middle\| P_{X}(x)P_{Y}(y) \right]\label{eqn:mutualinfo_generalisations}
 \end{equation}
 
 Examples of information functionals defined this way are described in \citep{Poczos2011}.
@@ -299,7 +297,7 @@ Here the $d^{\mbox{th}}$ term is a probability conditioned on $d-1$ variables. C
 \end{equation}
 where $\score_d$ are strictly proper scoring rules for each dimension
 
-\subsection{The Brier (quadratic) score}
+\subsection{The quadratic Brier score\label{sec:Brier_score}}
 
 Another widely used scoring rule is the so-called \emph{Brier score} or quadratic score, originally introduced in \citep{Brier1950}. It was first applied to evaluating probabilistic weather forecasts and it is still widely used in meteorology \citep{Ferro2007} as well as in medicine \citep{Spiegelhalter2006} and epidemiology \citep{Redelmeier1991}. It is also related to the root mean squared error (RMSE) of probabilistic binary classifiers, which is a commonly used loss function for training neural networks \citep{Rumelhart1988}.
 
@@ -387,7 +385,7 @@ The value of information under the spherical score is
 
 \subsection{The kernel scoring rule\label{sec:kernel_score}}
 
-The kernel scoring rule first appeared in the statistics literature in \citep{Eaton1996}, although the name \emph{kernel scoring rule} was only used in more recent references \citep{Dawid1999,Dawid2007,Gneiting2007}.
+The kernel scoring rule first appeared in the statistics literature in \citep{Eaton1996}, although the name \emph{kernel scoring rule} was only used in more recent references \citep{Dawid1994,Dawid2007,Gneiting2007}.
 
 Independently, a related concept, derived from different first principles, has become known in the machine learning community as \emph{maximum mean discrepancy} (MMD, \citep{Sriperumbudur2008}). As we will see, MMD is closely related to the kernel scoring rule. MMD has been adopted in a variety of modern applications in machine learning and statistics, including two sample tests \citep{Gretton2012}, kernel moment matching \citep{Song2008}, embedding of probability distributions \citep{Smola2007} and the kernel-based message passing \citep{Fukumizu2010}.
 
@@ -417,14 +415,14 @@ The most interesting kernels for the purposes of Hilbert-space embedding of dist
 The mean embedding $\mu_P$ can be thought of as a generalisation of characteristic functions \citep[see \eg][]{Ord1999}. The characteristic function of a probability distribution $P$ with density $p$ over the real line is defined as follows:
 
 \begin{equation}
-\phi_p(t) = \E{x\sim p}{e^{ i t x}} = \int e^{i t x} p(x) dx,
+	\phi_p(t) = \E{x\sim p}{e^{ i t x}} = \int e^{i t x} p(x) dx,
 \end{equation}
 
-where $i$ is the imaginary number $i=\sqrt{-1}$. The characteristic function is known to uniquely characterise any Borel probability measure on the real line. Indeed, it corresponds to an RKHS-embedding with the fourier kernel $k_{Fourier}(x,y) = \exp(ixy)$, which is an example of characteristic kernels. Note, that the final formula \eqref{eqn:rkhs-mmd-lastline} assumed a real valued kernel function, therefore it is not valid for the special case of the Fourier kernel. Other, practically more relevant examples of characteristic kernels include the squared exponential, and the Laplacian kernels (see chapter \ref{sec:kernels}). \TODO{If I do this, I need a technical introduction to kernels - as well as probability distributions} As a counterexample, polynomial kernels, and in general kernels corresponding to finite dimensional Hilbert spaces are not characteristic.
+where $i$ is the imaginary number $i=\sqrt{-1}$. The characteristic function is known to uniquely characterise any Borel probability measure on the real line. Indeed, it corresponds to an RKHS-embedding with the fourier kernel $k_{Fourier}(x,y) = \exp(ixy)$, which is an example of characteristic kernels. Note, that the final formula \eqref{eqn:rkhs-mmd-lastline} assumed a real valued kernel function, therefore it is not valid for the special case of the Fourier kernel. Other, practically more relevant examples of characteristic kernels include the squared exponential, and the Laplacian kernels. \TODO{If I do this, I need a technical introduction to kernels - as well as probability distributions} As a counterexample, polynomial kernels, and in general kernels corresponding to finite dimensional Hilbert spaces are not characteristic.
 
 The maximum mean discrepancy with characteristic kernels has been applied in various contexts in machine learning. One of the first of these recent applications were two-sample tests. In two-sample testing one is provided i.\,i.\,d.\ samples from two distributions, and one has to determine whether the two distributions are the same or not. \citet{Gretton2012} developed and analysed efficient empirical methods based on the MMD for this problem.
 
-Herding \citep{welling2009herding} and its generalisation kernel herding \citep{Chen2012} have been shown to minimise MMD between a target distribution and the empirical distribution of pseudo-samples. This method is an example of quasi-Monte Carlo methods that are examined in Chapter \ref{sec:approximate_inference}. Lastly, in kernel moment matching \citep{Song2008} MMD is used for density estimation: parameters of a parametric density model are set by minimising MMD from the empirical distribution of data. As we will see shortly, this is a special case of score matching as defined in Definition \ref{def:score_matching}.
+Herding \citep{welling2009herding} and its generalisation kernel herding \citep{Chen2010} have been shown to minimise MMD between a target distribution and the empirical distribution of pseudo-samples. This method is an example of quasi-Monte Carlo methods that are examined in Chapter \ref{sec:approximate_inference}. Lastly, in kernel moment matching \citep{Song2008} MMD is used for density estimation: parameters of a parametric density model are set by minimising MMD from the empirical distribution of data. As we will see shortly, this is a special case of score matching as defined in Definition \ref{def:score_matching}.
 
 The squared MMD in fact conforms to our definition of a generalised divergence in equation \eqref{eqn:def_divergence}, and corresponds to the following scoring rule:
 
@@ -447,7 +445,7 @@ This scoring rule in Equation \eqref{eqn:kernel_scoring_rule} is equivalent to t
 
 To my knowledge the connection between kernel scores in statistics and maximum mean discrepancy has not been established before. This interpretation allows one to uncover previously unknown connections between existing machine learning methods and to provide a solid theoretical framework for understanding and generalising them.
 
-Depending on the choice of kernel, the kernel score can be strictly proper. \citep{Gneiting2007} provide a proof of the propriety of the kernel scoring rule for Borel probability measures whenever the expectation $\expect{x,x'\sim P} k(x,x')$ is finite. Using the theory developed to study properties of MMD and characteristic kernels we can also see that the scoring rule is strictly proper whenever the kernel is characteristic \citep{Sripedimbudur}. \citep{Gneiting2007} showed that many examples of scoring rules, among them the Brier score (see section \ref{sec:Brier_score}), can be interpreted as special cases of the kernel scoring rule.
+Depending on the choice of kernel, the kernel score can be strictly proper. \citep{Gneiting2007} provide a proof of the propriety of the kernel scoring rule for Borel probability measures whenever the expectation $\expect{x,x'\sim P} k(x,x')$ is finite. Using the theory developed to study properties of MMD and characteristic kernels we can also see that the scoring rule is strictly proper whenever the kernel is characteristic \citep{Sriperumbudur2008}. \citet{Gneiting2007} showed that many examples of scoring rules, among them the Brier score (see section \ref{sec:Brier_score}), can be interpreted as special cases of the kernel scoring rule.
 
 The generalised entropy defined by this scoring rule becomes:
 

@@ -178,7 +178,7 @@ Multipartite systems are quantum systems composed of multiple subsystems. Multi-
 %  ##  ##   ### ##       ##       ##    ##  ##       ##   ### ##    ## ##       
 % #### ##    ## ##       ######## ##     ## ######## ##    ##  ######  ######## 
 
-\section{Quantum Tomography as Bayesian Inference}
+\section{Quantum tomography as Bayesian inference}
 
 Quantum state tomography involves determining from experimental data the quantum state, $\quantumparam$, of a system by performing measurements on several identical copies. As $\quantumparam$ is Hermitian and have unit trace, $D^2-1$ real degrees of freedom must be estimated. Note that the number of degrees of freedom is exponential in the number of qubits in a multi-qubit system.
 
@@ -236,7 +236,7 @@ The new weights $w^{(n+1)}_s$ are the re-normalised product of our current weigh
 % ##     ## ##    ##    ##     ##    ## ##   ##       
 % ##     ##  ######     ##    ####    ###    ######## 
 
-\section{Active learning in Quantum Tomography}
+\section{Active learning in quantum tomography}
 
 Most existing approaches to optimal experiment design for quantum tomography determine, prior to collecting data, an optimal set of measurements to be used throughout the experiment. In this sense, whenever they exist, mutually unbiased bases (MUBs) are known to be optimal\,\citep{MUBFirst,MUBExperiment}. Research since has focused mainly on proving or disproving existence of, and implementing MUBs in various dimensions\,\citep{DimensionSix,MUBQutrit,MUBExperiment}.
 
@@ -269,7 +269,7 @@ Within the Bayesian framework, one could consider other measures of uncertainty 
 % ##    ##  ##       ##    ## ##     ## ##          ##    ##    ## 
 % ##     ## ########  ######   #######  ########    ##     ######  
 
-\section{Results}
+\section{Experiments and results}
 
 \begin{figure}
 	\resizebox{\columnwidth}{!}{
@@ -317,10 +317,11 @@ Results or simulated experiments in two-qubit systems are shown in Fig.\ \ref{fi
 
 When not using active learning, we managed to reproduce the results reported in \citep{MUBExperiment}. Notably, all substantial differences between MUB and SSQT indeed vanish as we allow for adaptivity (Fig.\ \ref{fig:two_qubit_results}.a--c). Furthermore, for random pure states, we are able to realise a ten-fold improvement over MUBs when using flexible separable measurements (Fig.\ \ref{fig:two_qubit_results}.d). The results indicate that allowing for adaptivity with an imperfect, but flexible set of measurements offers greater advantages than using a fixed set of optimised measurements.
 
-\section{Conclusions and outlook}
+\section{Summary and conclusions}
 
 In summary, we have presented a new adaptive optimal experimental design framework for quantum tomography based on the BALD methodology. We showed that mutually unbiased bases, widely accepted as \emph{the} optimal measurements, represent only a partial solution and are suboptimal in the adaptive framework. Moreover, the adaptive framework applies regardless of dimensionality, and can be applied to spaces where MUBs do not even exist\,\citep{DimensionSix,ExactInformation}. This motivates a shift in experimental focus from implementing complex entangling measurements to implementing quickly reconfigurable simpler measurements.
 	
-The results presented here are based on simulations. In real quantum experiments involving photons, adaptive Bayesian tomography can be feasibly achieved via mechanically or electronically controlled liquid crystal wave plates. These are optical elements that can alter the polarisation state of photons that pass through them. In follow-up work, \citet The elements are rotated via electronically controlled step-motors giving rise to a large set of possible configurations $\Xe$.{Kravtsov2013} successfully implemented and tested ABQT for single-qubit photon-polarisation states using two mechanically controlled wave plates. The elements are rotated via electronically controlled step-motors giving rise to a large set of possible configurations $\Xe$ covering the whole spectrum of projective measurements.
+The results presented here are based on simulations. In real quantum experiments involving photons, adaptive Bayesian tomography can be feasibly achieved via mechanically or electronically controlled liquid crystal wave plates. These are optical elements that can alter the polarisation state of photons that pass through them. In follow-up work, \citet{Kravtsov2013} successfully implemented and tested ABQT for single-qubit photon-polarisation states using two mechanically controlled wave plates. The elements are rotated via electronically controlled step-motors giving rise to a large set of possible configurations $\Xe$, covering the whole spectrum of projective measurements.
+
 
 Although our algorithm demonstrated a substantial leap forward in terms of empirical performance, it is important to keep in mind that it still does not resolve the curse of dimensionality: the size of the parameter space still scales exponentially with the number of qubits in question. Other successful approaches address the question of dimensionality by restricting the search space. Compressed sensing \citep{CompressedSensing} constrains estimation onto a lower-dimensional manifold of rank-deficient states. These simplifying assumptions and smoothness constraints can be incorporated into a Bayesian framework by ways of the prior distribution.

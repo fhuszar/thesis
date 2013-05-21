@@ -132,14 +132,14 @@ The newest class of algorithms \citep{Hennig2012entropy}, called information-gre
 Entropy search, and information-greedy Bayeisan optimisation algorithm presented in \citep{Hennig2012entropy} is a special case of the scoring-rule-based active learning framework. It employs a scoring rule of the following form:
 
 \begin{equation}
-	\score_{\mbox{argmin}}(f,p_\data) = \score(\argmin_{\x}f,p_{\argmin}), \label{eqn:Bayesian_argmin_scoring_rule}
+	\score_{\mbox{argmin}}(f,p_\data) = \score(\argmin_{\x}f,p_{\argmin}), \label{eqn:Bayesian_optimisation_argmin_scoring_rule}
 \end{equation}
 where $f$ is the objective function which takes the role of $\param$ as the parameter of interest. $p_\data$ is a posterior measure over objective functions -- in most recent work this is a Gaussian process measure. $p_{\argmin} \in \probmeasures{\Xe}$ is the probability distribution that $p_\data$ implies over the location of the minimum $\argmin_{x}f$. Note that in \citep{Hennig2012entropy} $p_{\argmin}$ is called $p_{\min}$, I use a different notation for consistency. The scoring rule $\score$ could be any strictly proper scoring rule, \citeauthor{Hennig2012entropy} use the logarithmic loss which they derive approximations for.
 
-Equation \eqref{eqn:Bayesian_argmin_scoring_rule} implies that the goal of optimisation is to find the exact location of the global minimum. In many applications however this is not required, instead, it is sufficient to learn about the value at the minimum. In this case, one could use a scoring rule of the following form.
+Equation \eqref{eqn:Bayesian_optimisation_argmin_scoring_rule} implies that the goal of optimisation is to find the exact location of the global minimum. In many applications however this is not required, instead, it is sufficient to learn about the value at the minimum. In this case, one could use a scoring rule of the following form.
 
 \begin{equation}
-	\score_{\mbox{min}}(f,p_\data) = \score(\min_{\x}f,p_{\min}), \label{eqn:Bayesian_argmin_scoring_rule}
+	\score_{\mbox{min}}(f,p_\data) = \score(\min_{\x}f,p_{\min}), \label{eqn:Bayesian_optimisation_min_scoring_rule}
 \end{equation}
 where $\min_{\x}f$ is the minimal value of the objective function, $p_{\min}$ the measure $p_\data$ induces over the minimal value of $f$.
 
@@ -151,7 +151,7 @@ Lastly, it is possible that neither the location nor the exact value of the mini
 
 Note that $\score_{\mbox{best}}$ is also a special case of a Bayesian decision score $\score_{\loss}$ (section \ref{sec:loss_scoring_rule}, Equation \eqref{eqn:loss_scoring_rule}) with actions $\actionset=\Xe$ and loss function $\loss(f,a)=f(a)$.
 
-Information-greedy Bayesian optimisation methods are still in their infancy. Interpreting them in the general scoring-rule-based framework allows one to understand the underlying goals, and propose straightforward extensions. I am not aware of either \eqref{eqn:Bayesian_argmin_scoring_rule} or \eqref{eqn:Bayesian_optimisation_scoring_rule} used in previous work in the context of Bayesian optimisation.
+Information-greedy Bayesian optimisation methods are still in their infancy. Interpreting them in the general scoring-rule-based framework allows one to understand the underlying goals, and propose straightforward extensions. I am not aware of either \eqref{eqn:Bayesian_optimisation_min_scoring_rule} or \eqref{eqn:Bayesian_optimisation_scoring_rule} used in previous work in the context of Bayesian optimisation.
 
 \subsection{Sequential Bayesian quadrature}
 

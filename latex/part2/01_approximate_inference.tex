@@ -194,7 +194,7 @@ Various variants of MCMC methods can be applied to almost any problem but the co
 
 Monte Carlo methods are very general, they guarantee convergence for any measurable integral. Hence, convergence is also guaranteed in the KL divergence sense, and as the posterior risk is expressed as an integral, they also ensure convergence in $\divergence{\loss}{\cdot}{\cdot}$ for any loss function $\ell$. However, the rate of convergence cannot be fine-tuned to a particular divergence measure. One might hope that if the loss function $\loss$ is known ahead of time, a faster convergence rate can be achieved, maybe at the cost of slowing down convergence on integrals that are irrelevant to the decision problem.
 
-\subsection{Quasi-monte Carlo approaches}
+\subsection{Quasi-Monte Carlo approaches}
 
 The focus of this chapter is an example of quasi-Monte Carlo methods that -- instead of sampling randomly -- produce a set of pseudo-samples in a deterministic fashion. These methods operate by directly minimising some sort of discrepancy between the empirical distribution of pseudo-samples and the target distribution. Whenever these methods are applicable, they achieve convergence rates superior to the $\mathcal{O}(\nicefrac{1}{\sqrt{N}})$ rate typical of random sampling.
 
@@ -228,3 +228,7 @@ The optimisation problem in Eqn.\ \ref{eqn:loss_calibrated_nonsequential} assume
 \end{equation}
 
 Just as loss-calibrated approximate inference in general, algorithmic implementation of loss-calibrated QMC requires the ability to evaluate certain expectations over the target distribution easily. Therefore practical applications of loss-calibrated QMC in the form presented here are limited. Nevertheles, the framework may provide useful blueprint for designing sampling algotithms that are more tailored to particular loss functions. In the following chapter I focus on kernel herding and Bayesian quadrature, examples of loss-calibrated QMC that use the kernel score.
+
+\section{Summary}
+
+\TODO{So what the F?}
