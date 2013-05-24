@@ -165,21 +165,21 @@ Consequently, exponentiating both sides, we can make the following Gaussian appr
 \end{equation}
 
 \begin{figure}
-	% \centering
-	% \begin{tikzpicture}
-	% \node at (0,0) {
-	% \resizebox{.55\columnwidth}{!}{\input{figs/BALD/GPC/gaussian_approx.tikz}}};
-	% \node at (.47\columnwidth,0){
-	% \resizebox{.45\columnwidth}{!}{
-	% \begin{tabular}{|c|c|c|c|}
-	% \hline
-	% &MCMC&EP ($\stackrel{1}{\approx}$)&Laplace ($\stackrel{1}{\approx}$)\\ \hline
-	% \hline
-	% MC & 0 & $7.51\pm2.51$ & $41.57\pm4.02$ \\
-	% $\stackrel{2}{\approx}$ & $0.16\pm0.05$ & $7.43\pm2.40$ & $40.45\pm3.67$ \\ \hline
-	% \end{tabular}
-	% }};
-	% \end{tikzpicture}
+	\centering
+	\begin{tikzpicture}
+	\node at (0,0) {
+	\resizebox{.55\columnwidth}{!}{\input{figs/BALD/GPC/gaussian_approx.tikz}}};
+	\node at (.47\columnwidth,0){
+	\resizebox{.45\columnwidth}{!}{
+	\begin{tabular}{|c|c|c|c|}
+	\hline
+	&MCMC&EP ($\stackrel{1}{\approx}$)&Laplace ($\stackrel{1}{\approx}$)\\ \hline
+	\hline
+	MC & 0 & $7.51\pm2.51$ & $41.57\pm4.02$ \\
+	$\stackrel{2}{\approx}$ & $0.16\pm0.05$ & $7.43\pm2.40$ & $40.45\pm3.67$ \\ \hline
+	\end{tabular}
+	}};
+	\end{tikzpicture}
 
 	\caption[Taylor series approximation to the value of information in GP classification]{\emph{Left:} Analytic approximation ({\scriptsize $\stackrel{1}{\approx}$}) to the binary entropy of the error function (\ref{plots:approx_true}) by a squared exponential (\ref{plots:approx_approx}). The absolute error (\ref{plots:approx_error}) remains under $3\cdot 10^{-3}$. \emph{Right:} Percentage approximation error ($\pm$1 s.d.) for different methods of approximate inference (\emph{columns}) and approximation methods for evaluating Eqn.\eqref{eqn:mean_entropy} (\emph{rows}). The results indicate that {\scriptsize $\stackrel{2}{\approx}$} is a very accurate approximation; EP causes some loss and Laplace significantly more, which is in line with the comparison presented in \citep{Kuss2005}. }\label{fig:trick}
 \end{figure}
@@ -226,12 +226,12 @@ The three datasets and results using each algorithm are depicted in Fig.\ \ref{f
 \begin{figure}
 	\begin{center}
 	\begin{tabular}{ccc}
-	% \input{figs/BALD/GPC/blockinthemiddle_dataset.tikz}&
-	% \input{figs/BALD/GPC/corner_dataset.tikz}&
-	% \input{figs/BALD/GPC/checkerboard_dataset.tikz}\\
-	% \input{figs/BALD/GPC/blockinmiddle2.tikz}&
-	% \input{figs/BALD/GPC/blockincorner2.tikz}&
-	% \input{figs/BALD/GPC/checkerboard2.tikz} \\
+	\input{figs/BALD/GPC/blockinthemiddle_dataset.tikz}&
+	\input{figs/BALD/GPC/corner_dataset.tikz}&
+	\input{figs/BALD/GPC/checkerboard_dataset.tikz}\\
+	\input{figs/BALD/GPC/blockinmiddle2.tikz}&
+	\input{figs/BALD/GPC/blockincorner2.tikz}&
+	\input{figs/BALD/GPC/checkerboard2.tikz} \\
 	\end{tabular}
 	\end{center}
 	\caption[Evaluation of Bayesian active learning on artificial data sets]{\emph{Top:} Artificial data sets used in our evaluation of active learning methods. Exemplars of the two classes are shown with black squares (\ref{plots:positives}) and red circles (\ref{plots:negatives}). \emph{Bottom:} Results of active learning with nine methods: random query (\ref{plots:rand}), BALD (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with the vote criterion with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), \citet{Kapoor2007} (\ref{plots:dec}), \citet{Zhu2003} (\ref{plots:semi}) and empirical error (\ref{plots:emp}).}
@@ -243,15 +243,15 @@ In addition to this, we present results on 8 real-world classification datasets 
 \begin{figure}
 	\begin{center}
 	\begin{tabular}{ccc}
-	% \input{figs/BALD/GPC/crabs2.tikz}&
-	% \input{figs/BALD/GPC/vehicle2.tikz}&
-	% \input{figs/BALD/GPC/wine2.tikz}\\
-	% \input{figs/BALD/GPC/wdbc2.tikz}&
-	% \input{figs/BALD/GPC/isolet2.tikz}&
-	% \input{figs/BALD/GPC/austra2.tikz}\\
-	% \input{figs/BALD/GPC/letterDP2.tikz}&
-	% \input{figs/BALD/GPC/letterEF2.tikz}&
-	% \input{figs/BALD/GPC/cancerB2.tikz}
+	\input{figs/BALD/GPC/crabs2.tikz}&
+	\input{figs/BALD/GPC/vehicle2.tikz}&
+	\input{figs/BALD/GPC/wine2.tikz}\\
+	\input{figs/BALD/GPC/wdbc2.tikz}&
+	\input{figs/BALD/GPC/isolet2.tikz}&
+	\input{figs/BALD/GPC/austra2.tikz}\\
+	\input{figs/BALD/GPC/letterDP2.tikz}&
+	\input{figs/BALD/GPC/letterEF2.tikz}&
+	\input{figs/BALD/GPC/cancerB2.tikz}
 	\end{tabular}
 	\end{center}
 	\caption[Evaluation of Bayesian active learning on real-world data sets]{Evaluation of the accuracy of active learning algorithms on various real-world classification datasets. Methods used are random query (\ref{plots:rand}), BALD (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), decision theoretic \citep{Kapoor2007} (\ref{plots:dec}), semi-supervised \citep{Zhu2003} (\ref{plots:semi}) and empicial error (\ref{plots:emp}). The decision theoretic methods took a long time to run, so were not completed for all data sets. Plots (a-i) correspond to different classification datasets from the UCI Machine Learning Repository. Plot (i) includes BALD with hyper-parameter learning (\ref{plots:opthyper}). See text for analysis. \label{fig:BALD_GPC_results}}
@@ -350,9 +350,9 @@ In follow-up work we extended BALD to collaborative preference learning, where p
 \begin{figure}
 	\begin{center}
 	\begin{tabular}{ccc}
-	% \input{figs/BALD/GPC/prefcpu2.tikz}&
-	% \input{figs/BALD/GPC/prefcart2.tikz}&
-	% \input{figs/BALD/GPC/prefkinem2.tikz}
+	\input{figs/BALD/GPC/prefcpu2.tikz}&
+	\input{figs/BALD/GPC/prefcart2.tikz}&
+	\input{figs/BALD/GPC/prefkinem2.tikz}
 	\end{tabular}
 	\end{center}
 	\caption[Evaluation of Bayesian active learning of binary preference relations]{Evaluation of the accuracy of active learning algorithms on various binary preference learning datasets. Methods used are random query (\ref{plots:rand}), BALD (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), decision theoretic \citep{Kapoor2007} (\ref{plots:dec}). For prediction, each method uses Gaussian process classification or SVM with the preference kernel from Eqn.\ \eqref{eqn:preference_kernel}.  See text for analysis. \label{fig:BALD_pref_results}}
