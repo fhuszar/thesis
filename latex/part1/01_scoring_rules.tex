@@ -72,8 +72,6 @@ The above equation is an unbiased estimating equation, and under suitable regula
 \end{equation}
 \end{definition}
 
-% As we will see, divergences are often used to match or approximate some \emph{true} or \emph{ideal} distribution with something \emph{approximate}, so that the divergence between the truth and the approximation is minimal. As we can measure divergence in both ways, there is a question of which direction of divergence is to be calculated. Definition \eqref{eqn:def_divergence} suggests that the the first argument, $P$, should take the role of the true distribution, and $Q$ the approximate. \TODO{elaborate on this.}
-
 The divergence defined in \eqref{eqn:def_divergence} is a special case of Bregman divergences. Bregman divergences are an important class of divergence functions on complex domains, and include well known measures of distance or dissimilarity such as the Eulidean distance or KL divergence.
 
 \begin{definition}[Bregman divergence]
@@ -418,7 +416,7 @@ The mean embedding $\mu_P$ can be thought of as a generalisation of characterist
 	\phi_p(t) = \E{x\sim p}{e^{ i t x}} = \int e^{i t x} p(x) dx,
 \end{equation}
 
-where $i$ is the imaginary number $i=\sqrt{-1}$. The characteristic function is known to uniquely characterise any Borel probability measure on the real line. Indeed, it corresponds to an RKHS-embedding with the fourier kernel $k_{Fourier}(x,y) = \exp(ixy)$, which is an example of characteristic kernels. Note, that the final formula \eqref{eqn:rkhs-mmd-lastline} assumed a real valued kernel function, therefore it is not valid for the special case of the Fourier kernel. Other, practically more relevant examples of characteristic kernels include the squared exponential, and the Laplacian kernels. \TODO{If I do this, I need a technical introduction to kernels - as well as probability distributions} As a counterexample, polynomial kernels, and in general kernels corresponding to finite dimensional Hilbert spaces are not characteristic.
+where $i$ is the imaginary number $i=\sqrt{-1}$. The characteristic function is known to uniquely characterise any Borel probability measure on the real line. Indeed, it corresponds to an RKHS-embedding with the fourier kernel $k_{Fourier}(x,y) = \exp(ixy)$, which is an example of characteristic kernels. Note, that the final formula \eqref{eqn:rkhs-mmd-lastline} assumed a real valued kernel function, therefore it is not valid for the special case of the Fourier kernel. Other, practically more relevant examples of characteristic kernels include the squared exponential, and the Laplacian kernels \citep[see \eg][]{Rasmussen2006}. As a counterexample, polynomial kernels, and in general kernels corresponding to finite dimensional Hilbert spaces are not characteristic \citep{Sriperumbudur2008}.
 
 The maximum mean discrepancy with characteristic kernels has been applied in various contexts in machine learning. One of the first of these recent applications were two-sample tests. In two-sample testing one is provided i.\,i.\,d.\ samples from two distributions, and one has to determine whether the two distributions are the same or not. \citet{Gretton2012} developed and analysed efficient empirical methods based on the MMD for this problem.
 

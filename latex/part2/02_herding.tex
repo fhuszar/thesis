@@ -106,7 +106,7 @@ In \citep{BZMonteCarlo}, an alternate method is proposed: Bayesian Monte Carlo, 
 
 Here I derive the \bq{} estimate of the intergral in Eqn.\ \eqref{eqn:integral}. Let us assume we have evaluated the function at certain test locations $\x_1 \ldots \x_N$, collectovely denoted as $X$. The function values $f(\vx_1) \ldots f(\vx_N)$ are collectively denoted as the vector $\vf(\vX)$. The Bayesian solution implies a predictive distribution over $Z$. I am now goig to calculate the mean of this distribution, $\expect{}Z_{f,p}$. This is the optimal Bayesian estimator for a squared loss.
 
-For simplicity, $f$ is assigned a Gaussian process prior with kernel function $k$ and mean $0$. \TODO{reference appendix on Gaussian processes} Note that the GP assumption is the Bayesian analogoue to the assumption that integrand functions belong to an RKHS made by kernel herding in Eqn.\ \eqref{eq:mmd_assumption}. Conveniently, the \gp{} posterior allows us to compute the expectation of $Z_{f,p}$ in closed form: 
+For simplicity, $f$ is assigned a Gaussian process prior with kernel function $k$ and mean $0$ \citep{Rasmussen2006}. Note that the GP assumption is the Bayesian analogoue to the assumption that integrand functions belong to an RKHS made by kernel herding in Eqn.\ \eqref{eq:mmd_assumption}. Conveniently, the \gp{} posterior allows us to compute the expectation of $Z_{f,p}$ in closed form: 
 
 \begin{align}
 	\expect{} \left[Z_{f,p} \vert \vX, \vf(\vX) \right] &= \expect{} \left[ {\int f(\vx)p(\vx)d\vx} \middle\vert \vX, \vf(\vX) \right]\\

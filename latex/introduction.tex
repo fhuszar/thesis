@@ -1,15 +1,12 @@
 %!TEX root = thesis.tex
 
-Probability distributions and random variables play a central role in Bayesian analysis and reasoning. In Bayesian machine learning, we model observed data by introducing latent parameters. The relationship between latent parameter and data is probabilistically modelled via a probability distribution, called the likelihood. The parameter itself is treated as a random variable and is assigned a prior probability distribution.
-The most important distribution of all, the posterior is obtained by combining the likelihood and prior via Bayes' rule. In the Bayesian framework the posterior distribution captures all that there is to learn about the unobserved parameter from the data.
+Probability distributions and random variables play a central role in Bayesian computation. In Bayesian analysis, one models observed data by introducing latent parameters, which are treated as random variables and assigned a \emph{prior probability distribution}. The relationship between latent parameter and data is modelled via a \emph{probability distribution}, called the likelihood. The most important object of Bayesian analysis, the  \emph{posterior distribution} is obtained by combining the likelihood and prior via Bayes' rule. In the Bayesian framework the posterior captures all that there is to learn about the unobserved parameter from the data.
 
-\paragraph{divergences are important} \lipsum[1]Several applications need measures of similarity between
+In order to design effective Bayesian machine learning algorithms one needs rich frameworks for describing, characterising, comparing and manipulating probability distributions and random variables. This thesis is centred around one such framework: information geometry defined by strictly proper scoring rules.
 
-\paragraph{foo}Measures of information \lipsum[1]
+The scoring rule framework allows us to define general notions of divergence. Divergence functionals quantify the difference or discrepancy between two probability distributions. The best known example, the Kullback-Leibler (KL)divergence, has been used for decades in a wide range of Bayesian applications. Divergences play a central role in approximate inference. 
 
-\paragraph{proper scoring} In this thesis I focus on proper measures of divergence and information, and show how they can be used to solve problems in Bayesian machine learning. \lipsum[1]
-
-This thesis is divided into three main parts.
+Scoring rules also provide ways to quantify the value of information one random quantity provides about another one. The value of information functionals that one can define based on the framework generalise Shannon's mutual information which is used in a variety of applications in statistics and communications. Quantifying the value of information is of central importance in active machine learning and optimal experiment design, where one seeks to select the most informative measurements to perform. The generalisations considered in this thesis allows one to contextualise the value of information
 
 Part \ref{part:1} is a general discussion of proper scoring rules, measures of divergence and information. Chapter \ref{sec:scoring_rules} introduces key concepts: proper and strictly proper scoring rules, Bregman divergences and the value of information. I give a thorough review of the most common scoring rules used in statistics and machine learning. In addition, I show that maximum mean discrepancy, a kernel-based divergence measure is also related to scoring rules and introduce a novel scoring rule called the spherical kernel score.
 

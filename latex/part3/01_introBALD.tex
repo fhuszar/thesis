@@ -70,6 +70,7 @@ Another equivalent formulation of the criterion expresses the learner's goal as 
 
 \begin{equation}
 	\argmax_\x\  \expect{y \sim p(\y\vert \x, \data)}\divergence{S}{P_{\data\cup\{\x,\y\}}}{P_{\data}}
+	\label{eqn:active_learning_maximise_divergence}
 \end{equation}
 
 The equivalence between these three criteria has been noted in the context of the Shannon's information in \citep{MacKay1992}. The framework presented here is a generalisation of \citeauthor{MacKay1992}'s work, and allows one to specify the goal of Bayesian active learning as a scoring rule for the posterior distribution. In the following section I will review a wide range of Bayesian methods in the literature that all fall within the scope of this approach.
@@ -182,3 +183,7 @@ Instead of the quadratic, one could use a different scoring rule to assess the a
 where $p_{Z\vert\data}$ is the distribution that $p_{\data}$ induces over the integral $Z$. If $p_{\data}$ is a Gaussian process, $p_{Z\vert\data}$ is always a Normal distribution.
 
 \section{Summary}
+
+In this chapter I explored the importance of Bregman divergences in Bayesian active learning and developed a general theoretical framework for Bayesian active learning methods. I argued that a sensible strategy for Bayesian active learning is to maximise the conditional value of information in the next ovservation about the latent parameter $\param$. Equivalently the strategy can be interpreted as reducing posterior entropy (Eqn.\ \eqref{eqn:active_learning_optimisation_criterion}) or as maximising the expected divergence from the current posterior (Eqn.\ \eqref{eqn:active_learning_maximise_divergence}).
+
+I showed how a wide range of active learning methods can be interpreted in this general framework: information theoretic, transductive active learning, Bayesian optimisation and Bayesian quadrature.
