@@ -72,7 +72,7 @@ The above equation is an unbiased estimating equation, and under suitable regula
 \end{equation}
 \end{definition}
 
-The divergence defined in \eqref{eqn:def_divergence} is a special case of Bregman divergences. Bregman divergences are an important class of divergence functions on complex domains, and include well known measures of distance or dissimilarity such as the Eulidean distance or KL divergence.
+The divergence defined in \eqref{eqn:def_divergence} is a special case of Bregman divergences. Bregman divergences are an important class of divergence functions on complex domains, and include well known measures of distance or dissimilarity such as the Euclidean distance or KL divergence.
 
 \begin{definition}[Bregman divergence]
 	Let $H$ be a differentiable, strictly concave function on a convex domain $\Theta$. For $P,Q\in\Theta$ 
@@ -133,7 +133,7 @@ This quantity measures the extent to which observing the value of $Y$ is useful 
 If the scoring rule is proper, the value of information is always non-negative. Furthermore, if the scoring rule is strictly proper, the information is zero, if and only if the two variables are independent.
 
 \begin{theorem}
-	Let $\score:\Xe\times\probmeasures{\Xe}\mapsto\Reals$ be a strictly proper scoring rule with respect to probability distributions $\probmeasures{\Xe}$, and $P\in\probmeasures{\Xe\times\Ye}$ the joint probability of variables $X$ and $Y$. Then the two statements are equaivalent:
+	Let $\score:\Xe\times\probmeasures{\Xe}\mapsto\Reals$ be a strictly proper scoring rule with respect to probability distributions $\probmeasures{\Xe}$, and $P\in\probmeasures{\Xe\times\Ye}$ the joint probability of variables $X$ and $Y$. Then the two statements are equivalent:
 	\begin{enumerate}
 		\item $\information{\score}{X}{Y} = 0$
 		\item $\independent{X}{Y}$; the variables $X$ and $Y$ are independent
@@ -175,7 +175,7 @@ We can also define a conditional version of this quantity which measures how muc
 Just like in the case of non-conditional value of information, the definition only calls for a scoring rule over $X$, not over the other variables $X$ or $Z$. Just like the value of information was related to statistical independence, conditional value of information is related to conditional independence in the following sense.
 
 \begin{statement}
-	Let $\score:\Xe\times\probmeasures{\Xe}\mapsto\Reals$ be a strictly proper scoring rule with respect to Borel probability distributions $\probmeasures{\Xe}$, and $P\in\probmeasures{\Xe\times\Ye\times\Ze}$ the joint probability of variables $X$ and $Y$ and $Z$. Then the following two statements are equaivalent:
+	Let $\score:\Xe\times\probmeasures{\Xe}\mapsto\Reals$ be a strictly proper scoring rule with respect to Borel probability distributions $\probmeasures{\Xe}$, and $P\in\probmeasures{\Xe\times\Ye\times\Ze}$ the joint probability of variables $X$ and $Y$ and $Z$. Then the following two statements are equivalent:
 	\begin{enumerate}
 		\item $\conditionalinformation{\score}{X}{Y}{Z=z} = 0$
 		\item $\conditionallyindependent{X}{Y}{Z=z}$; the variables $X$ and $Y$ are conditionally independent given $Z=z$
@@ -219,7 +219,7 @@ The divergence function is the Kullback-Leibler (KL) divergence, which is very w
 
 The KL divergence is only well-defined when the distribution $Q$ is absolutely continuous with respect to $P$. This is a serious limitation of the KL divergence for our purposes in later chapters: If $P$ is a continuous density, then $Q$ has to be continuous as well for the KL divergence to be defined. Therefore we cannot express the KL divergence between, say, an empirical distribution of samples and a continuous distribution, as we did in Definition \ref{def:score_matching}.
 
-A related problem is that Shannon's entropy of atomic distributions or mixed atomic and continuous distributions is either not well defined or depends only on the relative weight of the atoms but ot on their locations. As we will see, information quantities based on other scoring rules remain well defined for wider classes of distributions including atomic ones.
+A related problem is that Shannon's entropy of atomic distributions or mixed atomic and continuous distributions is either not well defined or depends only on the relative weight of the atoms but not on their locations. As we will see, information quantities based on other scoring rules remain well defined for wider classes of distributions including atomic ones.
 
 These problems are related to a property of the logarithmic score, known as locality: The value of the scoring rule $\score(x,P)$ only depends on the value of the density function evaluated at the point $x$. This is a unique property of the logarithmic score: any strictly proper scoring rule that is local is analogous to the logarithmic score. Note, that there are weaker definitions of locality of scoring rules, which hold for scoring rules other than the logarithmic \citep{Parry2012, Dawid2012}.
 
@@ -246,9 +246,9 @@ For completeness, I note here that some authors have generalised Shannon's mutua
 Examples of information functionals defined this way are described in \citep{Poczos2011}.
 On one hand, an information functional like $\mathbb{J}$ has several nice properties, most notably that it is always symmetric. On the other hand, in the general case we loose the intuitive meaning of information as ``the extent to which observing the value of one variable is useful for predicting the value of the other one''. Furthermore, if we wanted to use a divergence function corresponding to a scoring rule, the scoring rule should be defined over the joint space $\Xe\times\Ye$, which is often not desired.
 
-\subsection{The pseudolikelihood}
+\subsection{The pseudo-likelihood}
 
-The idea of maximum pseudolikelihood estimation was introduced originally by \citet{Besag1977} to estimate parameters of Gaussian random fields. Later it was popularised in the context of parameter estimation in general Markov random fields \citep{Comets1992} and in Boltzmann machines \citep{Hyvarinen2006}. The pseudolikelihood is particularly useful for estimating parameters of statistical models with intractable normalisation constants.
+The idea of maximum pseudo-likelihood estimation was introduced originally by \citet{Besag1977} to estimate parameters of Gaussian random fields. Later it was popularised in the context of parameter estimation in general Markov random fields \citep{Comets1992} and in Boltzmann machines \citep{Hyvarinen2006}. The pseudo-likelihood is particularly useful for estimating parameters of statistical models with intractable normalisation constants.
 
 \begin{equation}
 	\score_{\mbox{pseudo}}(x,P) = - \sum_{d=1}^{D} \log P(x_d\vert x_{\neg d}),
@@ -278,9 +278,9 @@ where $Z = \sum_{x\in\{0,1\}^D}\exp(x^{T}Wx + b^{T}x)$ is the partition function
 		&= \frac{\exp\left( x_d \left( W_{d,d} + 2 W_{d,\neg d}^{T}x_{\neg d} + b_d \right)\right)}{\exp( W_{d,d} + 2 W_{d,\neg d}^{T}x_{\neg d} + b_{d}) + 1}\\
 \end{align}
 
-The pseudo-likelihood thus becomes a sum of easy-to-compute sigmoidal terms. These sigmoidal terms, and their derivatives with respect to parameters $W$ and $b$ can be computed in polynomial time, allowing for fast estimation algorithms. \citet{Hyvarinen2006} showed that pseudolikelihood estimation -- score matching with the pseudolikelihood score -- is consistent for fully visible Boltzmann machines. \citet{Besag1977,Comets1992} showed similar results for Markov random fields.
+The pseudo-likelihood thus becomes a sum of easy-to-compute sigmoidal terms. These sigmoidal terms, and their derivatives with respect to parameters $W$ and $b$ can be computed in polynomial time, allowing for fast estimation algorithms. \citet{Hyvarinen2006} showed that pseudo-likelihood estimation -- score matching with the pseudo-likelihood score -- is consistent for fully visible Boltzmann machines. \citet{Besag1977,Comets1992} showed similar results for Markov random fields.
 
-The difference between the pseudolikelihood score and the log score becomes more apparent when rewriting the log score by the chain rule of joint probabilities:
+The difference between the pseudo-likelihood score and the log score becomes more apparent when rewriting the log score by the chain rule of joint probabilities:
 
 \begin{equation}
 	\score_{\mbox{log}}(x,p) = - \log P(x) =  - \sum_{d=1}^{D} \log P(x_d\vert x_{1:d-1})
@@ -288,7 +288,7 @@ The difference between the pseudolikelihood score and the log score becomes more
 
 Here the $d^{\mbox{th}}$ term is a probability conditioned on $d-1$ variables. Computing the $d^{\mbox{th}}$ term therefore would require $D-d$ dimensional integral in the general case. The pseudo-likelihood makes computations more efficient by conditioning on more variables than needed by the chain rule, therefore requiring lower dimensional integrals.
 
-\citet{Csiszar2004} showed that pseudolikelihood score is strictly proper for strictly postitive distributions. Moreover, for always positive distributions the following generalisation of the pseudolikelihood is also a strictly proper scoring rule \citep*{Dawid2012}:
+\citet{Csiszar2004} showed that pseudo-likelihood score is strictly proper for strictly positive distributions. Moreover, for always positive distributions the following generalisation of the pseudo-likelihood is also a strictly proper scoring rule \citep*{Dawid2012}:
 
 \begin{equation}
 	\score_{\mbox{DLP12}}(x,P) = - \sum_{d=1}^{D} \score_d\left(x_d, P_{X_d \vert X_{\neg d}=x_{\neg d}}\right),
@@ -387,7 +387,7 @@ The kernel scoring rule first appeared in the statistics literature in \citep{Ea
 
 Independently, a related concept, derived from different first principles, has become known in the machine learning community as \emph{maximum mean discrepancy} (MMD, \citep{Sriperumbudur2008}). As we will see, MMD is closely related to the kernel scoring rule. MMD has been adopted in a variety of modern applications in machine learning and statistics, including two sample tests \citep{Gretton2012}, kernel moment matching \citep{Song2008}, embedding of probability distributions \citep{Smola2007} and the kernel-based message passing \citep{Fukumizu2010}.
 
-MMD measures the divergence or distance between two distributions, $P$ and $Q$. It belongs to a rich class of divergences called integral probablity metrics \citep{Sriperumbudur2009}, which define the distance between  $P$ and $Q$, with respect to a class of integrand functions $\mathcal{F}$ as follows:
+MMD measures the divergence or distance between two distributions, $P$ and $Q$. It belongs to a rich class of divergences called integral probability metrics \citep{Sriperumbudur2009}, which define the distance between  $P$ and $Q$, with respect to a class of integrand functions $\mathcal{F}$ as follows:
 %
 \begin{align}
 	\divergence{\Fe}{P}{Q} = \sup_{f\in\Fe}\left\vert \expect{x\sim P} f(x) - \expect{x\sim Q} f(x) \right\vert
@@ -416,7 +416,7 @@ The mean embedding $\mu_P$ can be thought of as a generalisation of characterist
 	\phi_p(t) = \E{x\sim p}{e^{ i t x}} = \int e^{i t x} p(x) dx,
 \end{equation}
 
-where $i$ is the imaginary number $i=\sqrt{-1}$. The characteristic function is known to uniquely characterise any Borel probability measure on the real line. Indeed, it corresponds to an RKHS-embedding with the fourier kernel $k_{Fourier}(x,y) = \exp(ixy)$, which is an example of characteristic kernels. Note, that the final formula \eqref{eqn:rkhs-mmd-lastline} assumed a real valued kernel function, therefore it is not valid for the special case of the Fourier kernel. Other, practically more relevant examples of characteristic kernels include the squared exponential, and the Laplacian kernels \citep[see \eg][]{Rasmussen2006}. As a counterexample, polynomial kernels, and in general kernels corresponding to finite dimensional Hilbert spaces are not characteristic \citep{Sriperumbudur2008}.
+where $i$ is the imaginary number $i=\sqrt{-1}$. The characteristic function is known to uniquely characterise any Borel probability measure on the real line. Indeed, it corresponds to an RKHS-embedding with the Fourier kernel $k_{Fourier}(x,y) = \exp(ixy)$, which is an example of characteristic kernels. Note, that the final formula \eqref{eqn:rkhs-mmd-lastline} assumed a real valued kernel function, therefore it is not valid for the special case of the Fourier kernel. Other, practically more relevant examples of characteristic kernels include the squared exponential, and the Laplacian kernels \citep[see \eg][]{Rasmussen2006}. As a counterexample, polynomial kernels, and in general kernels corresponding to finite dimensional Hilbert spaces are not characteristic \citep{Sriperumbudur2008}.
 
 The maximum mean discrepancy with characteristic kernels has been applied in various contexts in machine learning. One of the first of these recent applications were two-sample tests. In two-sample testing one is provided i.\,i.\,d.\ samples from two distributions, and one has to determine whether the two distributions are the same or not. \citet{Gretton2012} developed and analysed efficient empirical methods based on the MMD for this problem.
 
@@ -493,7 +493,7 @@ Based on the cross-covariance operator, one can define various measures of depen
 	where $\customnorm{\cdot}{2}$ denotes the spectral norm, that is the modulus of largest singular value \citep{Gretton2005COCO}
 \end{definition}
 
-A more robust measure of dependence, the Hilbert Schmidt Information Criterion (HSIC) uses the Hilbert-Schmidt norm of the cross-covatiance operator\citep{Gretton2005HSIC}. Kernel measures of dependence like COCO and HSIC have several useful properties. They are symmetric, and can be effectively estimated from empirical data \citep{Gretton2005HSIC}.
+A more robust measure of dependence, the Hilbert Schmidt Information Criterion (HSIC) uses the Hilbert-Schmidt norm of the cross-covariance operator\citep{Gretton2005HSIC}. Kernel measures of dependence like COCO and HSIC have several useful properties. They are symmetric, and can be effectively estimated from empirical data \citep{Gretton2005HSIC}.
 
 However, as with generalisations of Shannon's information in Eqn.\ \eqref{eqn:mutualinfo_generalisations}, COCO and its variants do not have an interpretation as ``the extent to which knowing $Y$ is useful for predicting $X$''. Also, they require a kernel to be defined over both $\Xe$ and $\Ye$, and properties of the functional depend on both choices of kernels. In contrast \eqref{eqn:kernel_information} only requires a single kernel over $\Xe$.
 
@@ -533,7 +533,7 @@ where we used the linearity of expectation and the reproducing property of the k
 \end{proof}
 \end{statement}
 
-Using this alternative definition it is easy to see that the kernel value of information as defined in Eqn.\ \eqref{eqn:kernel_information} can be expressed as the trace of the diversity operator (which in turn is the same as the Hilbert-Schmidt norm of the squareroot of the operator):
+Using this alternative definition it is easy to see that the kernel value of information as defined in Eqn.\ \eqref{eqn:kernel_information} can be expressed as the trace of the diversity operator (which in turn is the same as the Hilbert-Schmidt norm of the square-root of the operator):
 
 \begin{align}
 	\information{k}{X}{Y} &= \expect{y \sim P_{Y}} \customnorm{\mu_X - \mu_{X\vert Y=y}}{2}^2\\
@@ -544,11 +544,11 @@ Using this alternative definition it is easy to see that the kernel value of inf
 		&= \customnorm{I_{X\vert Y}^{\nicefrac{1}{2}}}{HS}
 \end{align}
 
-It would be interestnig future direction to investigate whether this information criterion has any connections to COCO and HSIC, or indeed if it inherits any of their useful properties.
+It would be interesting future direction to investigate whether this information criterion has any connections to COCO and HSIC, or indeed if it inherits any of their useful properties.
 
 \subsection{The spherical kernel score\label{sec:spherical_kernel_score}}
 
-Seeing how the Brier score is a special case of the kernel scoring rule, one might wonder whether the spherical scoring rule has a similar generalisation. It turns out it does, and it gives rise to a very Intuitivelyitive divergence. Consider the following scoring rule
+Seeing how the Brier score is a special case of the kernel scoring rule, one might wonder whether the spherical scoring rule has a similar generalisation. It turns out it does, and it gives rise to a very Intuitively divergence. Consider the following scoring rule
 
 \begin{align}
 	\score_{k,spherical}(x,P) &\defeq \Hnorm{\mu_{\delta_x}} - \frac{\mu_P(x)}{\Hnorm{\mu_P}}\\
@@ -594,7 +594,7 @@ Just as it is the case with the Brier score and the kernel scoring rule, the sph
 The spherical kernel score also has an interesting intuitive meaning in terms of test functions Gaussian processes
 
 \begin{proposition}\label{prop:sign_random_function}
-Let $P,Q$ be probability distribuitons over the domain $\Xe$ and $\He$ a RKHS with associated kernel function $k$. Let $GP$ denote a standard Gaussian process in the Hilbert space. Then the following equality holds:
+Let $P,Q$ be probability distributions over the domain $\Xe$ and $\He$ a RKHS with associated kernel function $k$. Let $GP$ denote a standard Gaussian process in the Hilbert space. Then the following equality holds:
 \begin{equation}
 	 \divergence{k,spherical}{P}{Q} = \Hnorm{\mu_P} \mathbb{P}_{f\sim GP} \left[ \mbox{sign}(\expect{x\sim P} f(x)) \neq \mbox{sign}(\expect{x\sim Q} f(x)) \right] \label{eqn:sign_random_function}
 \end{equation}
@@ -652,14 +652,14 @@ Several scoring rules can be interpreted as special cases of this loss-calibrate
 
 \subsubsection{Logarithmic score and Shannon entropy}
 
-Shannon's entropy has an intuitive operational meaning as minimum description length. We are given a random variable $X$ with distribution $P$ over a finite, discrete dictionary $\Xe$. We would like to encode symbols in $\Xe$ by binary sequences, in such a way, that any sequence composed by concatenating codewords is uniquely decodable. It can be shown that the expected code-length of any uniquely decodable code $f:\Xe\mapsto\{0,1\}^{*}$ under the distribution $P$ is lower bounded by the Shannon entropy of $P$:
+Shannon's entropy has an intuitive operational meaning as minimum description length. We are given a random variable $X$ with distribution $P$ over a finite, discrete dictionary $\Xe$. We would like to encode symbols in $\Xe$ by binary sequences, in such a way, that any sequence composed by concatenating code-words is uniquely decodable. It can be shown that the expected code-length of any uniquely decodable code $f:\Xe\mapsto\{0,1\}^{*}$ under the distribution $P$ is lower bounded by the Shannon entropy of $P$:
 
 \begin{equation}
 	\expect{x \sim P} \vert f(x) \vert \geq \frac{1}{\log(2)}\genentropy{Shannon}{P},
 \end{equation}
 where the $\nicefrac{1}{\log(2)}$ is not needed if use base-2 logarithm in the definition of $\genentropy{Shannon}{P}$.
  
-Let us consider the following decision problem: Let $\actionset$ be the set of all uniquely decodable binary codes, so that $a:\Xe\mapsto\{0,1\}^{*}$ maps $X$ to a binary codeword of variable length. Let the loss $\loss$ be the length of the codeword assigned to $X$: $\loss(x,a) = \vert a(x)\vert$.
+Let us consider the following decision problem: Let $\actionset$ be the set of all uniquely decodable binary codes, so that $a:\Xe\mapsto\{0,1\}^{*}$ maps $X$ to a binary code-word of variable length. Let the loss $\loss$ be the length of the code-word assigned to $X$: $\loss(x,a) = \vert a(x)\vert$.
 
 The scoring rule defined by this decision problem is approximately the same as the logarithmic score, and it becomes more exact as the dictionary size increases.
 
@@ -692,6 +692,6 @@ As the Brier score is a special case of the kernel scoring rule, it can also be 
 
 In this chapter I introduced the framework of scoring rules and strictly proper scoring rules. The framework allows us to define meaningful generalisations of entropy, divergence and the value of information, which are useful in a variety of tasks such as approximate inference and experiment design. I have also shown how the framework of proper scoring rules and Bayesian decision theory are intimately connected.
 
-In addition to the classic examples -- logarithmic, Brier, spherical scores -- I reviewed information quantities that one can define based on reproducing kernel Hilbert spaces: the kernel scoring rule and maximum mean disrepancy. These rich classes of scoring rules have been used by the machine learning community, where they were derived from different first principles without noting the connection to Bregman divergences.
+In addition to the classic examples -- logarithmic, Brier, spherical scores -- I reviewed information quantities that one can define based on reproducing kernel Hilbert spaces: the kernel scoring rule and maximum mean discrepancy. These rich classes of scoring rules have been used by the machine learning community, where they were derived from different first principles without noting the connection to Bregman divergences.
 
 Establishing connections between these quantities and strictly proper scoring rules allows us to understand their general properties, and to introduce generalisations such as the kernel value of information or the spherical kernel score. In the following chapter I further examine the properties of these scoring rules by visualising the Riemannian geometry they induce over probability distributions.

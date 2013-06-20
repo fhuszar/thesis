@@ -1,61 +1,72 @@
-%!TEX root = ../main.tex
+%!TEX root = ../thesis.tex
 
+% defining plot colors
 \definecolor{mycolor1}{rgb}{0.8,0.8,0}
 \definecolor{mycolor2}{rgb}{0,1,1}
 \definecolor{mycolor3}{rgb}{1,0,1}
 \definecolor{mycolor4}{rgb}{1,0.8,0.5}
-\definecolor{mycolor5}{rgb}{0.7,0.4,0.01}
+\definecolor{mycolor5}{rgb}{0.7,0.4,0.80}
 
 \begin{summarycontributions}
-The work presented in this chapter has been carried out in collaboration with Neil M.\ T.\ Houlsby(NMTH), Jose Miguel Hernandez-Lobato (JMHL), Zoubin Ghahramani(ZG) and M\'{a}t\'{e} Lengyel(ML). This work forms the basis of the technical report \citep{ArxivBALD} and the peer-reviewed conference paper \citep{NIPS2012}. In addition, elements of this work have also been presented by Ferenc Husz\'{a}r and NMTH at the NIPS 2011 workshops ``Preferenc Learning'' and ``Bayesian Optimization and Active Learning''. All authors contributed equally to the design of the research and to the development of statistical models. The derivation of the preference kernel Eqn.\ \eqref{} and the approximation to the BALD formula in Eqn.\ \eqref{} are original contributions by Ferenc Husz\'{a}r. Computational experiments were run and the results were interpreted using MATLAB and R by Ferenc Husz\'{a}r, NMTH and JMHL.
+The work presented in this chapter has been carried out in collaboration with Neil M.\ T.\ Houlsby, Jose Miguel Hernandez-Lobato, Zoubin Ghahramani and M\'{a}t\'{e} Lengyel. This work forms the basis of the technical report \citep{Houlsby2011} and the peer-reviewed conference paper \citep{Houlsby2012preference}. In addition, elements of this work have also been presented by FH and NMTH at the NIPS 2011 workshops ``Preference Learning'' and ``Bayesian Optimization and Active Learning''. All authors contributed equally to the design of the research and to the development of statistical models. The derivation of the preference kernel in Section \eqref{sec:prefKernel} and the approximation to the BALD formula in Eqn.\ \eqref{eqn:BALD_GPC} are original contributions by FH. Experiments were mainly implemented and carried out by NMTH. Figures \ref{fig:artificial} and \ref{fig:BALD_GPC_results} are taken from \citep{Houlsby2011}, as published or with slight modification, with the co-authors' consent.
 \end{summarycontributions}
 
 \section{Introduction}
 
-In the previous chapter I have introduced a general framework for Bayesian active learning based on scoring rules. On one hand, the framework is very satisfying in that it highlights the connection between various techniques and optimisation problems that have cropped up in the machine learning literature. On the other hand the information quantities the framework is built on are intractable to calculate and optimise in general, and the framework provides no practical guidance as to how the quantities can be effectively calculated.
+In the previous chapter I introduced a general framework for Bayesian active learning based on scoring rules. On one hand, the framework is very satisfying in that it highlights the connections between various techniques and optimisation problems that have cropped up in the machine learning literature. On the other hand, the information quantities the framework is built on are intractable to calculate and optimise, and the framework provides no practical guidance as to how the quantities can be effectively calculated in practical active learning applications.
 
-In this section I focus on the special case of Bayesian active learning using the Shannon's mutual information (section \ref{sec:active_learning_shannon_information}). I present a practical method that makes active learning possible even in complicated Bayesian models by exploiting the symmetry of Shannon's information (Eqn \eqref{Eqn:mutualinfo_as_KLdivergence}). The method bears resemblance to the principle of maximal disagreement introduced by \citet{seung1992}, hence we call the method Bayesian active learning by Disagreement (BALD).
+In this section I focus on the special case of Bayesian active learning using the Shannon's mutual information (see Section \ref{sec:active_learning_shannon_information}). I present a practical method that makes active learning possible even in complicated Bayesian models by exploiting the symmetry of Shannon's information (Eqn \eqref{eqn:mutualinfo_as_KLdivergence}). The method bears resemblance to the principle of maximal disagreement introduced by \citet{seung1992}, hence we call the method Bayesian Active Learning by Disagreement (BALD).
 
-Experimental results presented in this chapter demonstrate that BALD is a very competitive method for active classification and that it often provides best-in-class performance compared to other myopic active learning methods.
+In the second half of the chapter I derive a Bayesian active learning algorithm for binary classification based on the Gaussian process classification model \citep[Chapter 3]{Rasmussen2006}. I will also discuss how this simple model can be extended and applied to binary preference learning and multi-user preference elicitation problems. Experimental results presented in this chapter demonstrate that BALD is a very competitive method for active classification and that it often provides best-in-class performance compared to other myopic active learning methods.
 
-\section{Bayesian Active Learning by Disagreement}
+\section{Bayesian active learning by disagreement}
 
-Recall the objective function for information theoretic active learning, first proposed in \citep{lindley1956} is to seek the a data point $\x$ that satisfies:
+Recall the objective function for information theoretic active learning, first proposed by \citet{lindley1956}, is to seek a data point $\x$ that satisfies:
 
 \begin{align}	
-	\label{Eqn:ent_change}
-	\argmax_{\x} H[\param | \data] - \expect{\y\sim p(\y|\x\data)} \left[ H[\param| \y, \x,\data] \right] 
+	\label{eqn:ent_change}
+	\argmax_{\x} \genentropy{}{\param | \data} - \expect{\y\sim p(\y|\x\data)} \left[ \genentropy{}{\param| \y, \x,\data} \right] 
 \end{align}
 
-As discussed in section \ref{sec:active_learning_framework}, expectation over the unseen output $\y$ is required because this will not be revealed until the selection of the next input $\x$ is made.
+Recall from Chapter \ref{sec:active_learning_framework} that expectation over the unseen output $\y$ is required because this will not be revealed until the selection of the next input $\x$ is made.
 
-Computationally, Eqn.\ \eqref{Eqn:ent_change} poses two difficulties: Firstly, to consider $k$ different potential queries $\x$, and the output $\y$ may take on $l$ values, one has to apply Bayes' rule and update the posterior $kl$ times to compute the objective for each $\x$ in question. Because updating the posterior is often the computationally most intensive part of Bayesian active learning, performing this step multiple times can be prohibitive.
+Computationally, Eqn.\ \eqref{eqn:ent_change} poses two difficulties: Firstly, to consider $k$ different potential queries $\x$, when the output $\y$ may take on $l$ possible values, one has to apply Bayes' rule and update the posterior $k\cdot l$ times to evaluate the objective for each $\x$--$\y$ pair in question. Because updating the posterior is often the computationally most intensive part of Bayesian active learning, performing this step multiple times can be prohibitive.
 
-Secondly, calculating entropies in parameter space may be hard. Often we may only be able to approximate the posterior via samples, from which estimating entropy is notoriously difficult \citep{panzeri2007}. Worse still, for non-parametric processes parameter space is infinite dimensional so Eqn.\ \eqref{Eqn:ent_change} becomes poorly defined and non-trivial to compute. \citep{mackay1992, krishnapuram2004, lawrence2004} use this objective but must make approximations to the complicated entropy term.
+Secondly, calculating entropies in parameter space may be hard, or intractable. Often we can only approximate the posterior via samples, from which estimating entropy is notoriously difficult \citep{panzeri2007}. Worse still, for non-parametric processes the parameter space has infinite dimensions so Eqn.\ \eqref{eqn:ent_change} becomes poorly defined and non-trivial to compute. \citep{MacKay1992, Krishnapuram2004, Lawrence2004} must therefore make approximations to the complicated entropy term.
 
-To overcome these problems, we can exploit the symmetry of the mutual information and rearrange Eqn.\ \eqref{Eqn:ent_change} in a form that expresses $I[\theta,\y\vert\x,\data]$ in terms of entropies in the output space $\Ye$:
+If we use the logarithmic score to define the entropy in Eqn.\ \eqref{eqn:ent_change} both of these problems can be overcome. As discussed in Chapter \ref{sec:scoring_rules}, Shannon's mutual information, unlike value of information in general, is symmetric. The information variable $X$ provides about $Y$ is the same as the information $Y$ provides about $X$. In this chapter, following \citep{ExactInformation} we expoloit this unique symmetry property and rearrange Eqn.\ \eqref{eqn:ent_change} in a form that expresses $\information{\theta}{\y}{\data;\x}$ in terms of entropies in the output space $\Ye$:
 
 \begin{align}
-\argmax_{\x} H[\y \vert \x, \data] - \expect{\param\sim p(\param|\data)} \left[ H[\y \vert \x,\param] \right] \label{Eqn:rearrangement} 
+	&\argmax_{\x} H[\param | \data] - \expect{\y\sim p(\y|\x\data)} \left[ H[\param| \y, \x,\data] \right] = \tag{\ref{eqn:ent_change}}\\
+	&\argmax_{\x} \conditionalinformation{\mbox{Shannon}}{\theta}{\y}{\data;\x} =\\
+	&\argmax_{\x} \conditionalinformation{\mbox{Shannon}}{\y}{\param}{\data;\x} =\\
+	&\argmax_{\x} H[\y \vert \x, \data] - \expect{\param\sim p(\param|\data)} \left[ H[\y \vert \x,\param] \right] \label{eqn:rearrangement} 
 \end{align}
 
-Eqn.\ \eqref{Eqn:rearrangement} overcomes the aforementioned challenges. Entropies are now calculated in, usually low dimensional, output space. Also $\param$ is now conditioned only on $\data$, so we do not need to update the posterior for every possible outcome, saving a factor of $kl$ posterior updates. Equation \eqref{Eqn:rearrangement} provides us with an intuition about the objective; we seek the $\x$ for which the model is marginally most uncertain about $\y$ (high $H[\y \vert \x, \data]$), but for which individual setting of the parameters are confident (low $\expect{\param\sim p(\param|\data)} \left[ H[\y \vert \x,\param] \right]$). This can be interpreted as seeking the $\x$ for which the parameters under the posterior disagree about the outcome the most, so refer to this objective as Bayesian Active Learning by Disagreement (BALD). We present a way to apply Eqn.\ \eqref{Eqn:rearrangement} directly to GPC and preference learning. This method is inductive, i.e. we do not assume anything about the test set as opposed to transductive algorithms which know the distribution of the test data.
+Eqn.\ \eqref{eqn:rearrangement} overcomes the aforementioned challenges. Entropies are now calculated in the -- usually low dimensional -- output space. Also $\param$ is now conditioned only on $\data$, never on $\x$ and $\y$, so we do not need to update the posterior for every possible outcome, saving a factor of $k\cdot l$ posterior updates.
 
-\section{Related Methodologies}
+Equation \eqref{eqn:rearrangement} provides us with an intuition about the objective; we seek the $\x$ for which the model is marginally most uncertain about $\y$ (high $H[\y \vert \x, \data]$), but for which individual setting of the parameters are confident (low $\expect{\param\sim p(\param|\data)} \left[ H[\y \vert \x,\param] \right]$). This can be interpreted as seeking the $\x$ for which the parameters under the posterior disagree about the outcome the most. Indeed, the objective function can further be written as:
 
-In this section we briefly review some of the very many related algorithms that are applicable to classification and relate them to the full information theoretic objective \eqref{Eqn:rearrangement}.
+\begin{align}
+	&\argmax_{\x} H[\y \vert \x, \data] - \expect{\param\sim p(\param|\data)} \left[ H[\y \vert \x,\param] \right] = \tag{\ref{eqn:rearrangement}}\\
+	&\argmax_{\x} \expect{\param\sim p(\param|\data)}  \divergence{KL}{p(\y\vert\param;\x)}{p(\y\vert\data;\x)}
+\end{align}
 
-\paragraph{Information Theoretic:} Other work that uses rearrangement to data space (Eqn.\ \eqref{Eqn:rearrangement}) include Maximum Entropy Sampling (MES) \citep{sebastiani2000}. MES was proposed for regression models with input-independent observation noise. Although Eqn.\ \eqref{Eqn:rearrangement} is used, the second term is constant because of input independent noise. and so can be ignored. For heteroscedastic regression or classification, MES is inappropriate; it fails to differentiate between model uncertainty and observation uncertainty (about which our model may be confident). Many toy demonstrations show the `information based' active learning criterion performing pathologically in classification by repeatedly querying points close the decision boundary or in regions of high observation uncertainty  e.g. those presented in \citep{dasgupta2008, huang2010}. This is because MES is inappropriate, \ourmethod distinguishes between observatio and model uncertainty and will eliminate these problems as we will show.
+So by maximising the expected reduction in posterior entropy the learner seeks a measurement such that each probable parameter $\theta$ predicts something different for what the outcome $\y$ will be. In the statistics literature this is known as the \emph{principle of maximal disagreement} and provides the theoretical motivation for \emph{query by committee} methods \citep{Freund1997}. We will call the approach of using the rearranged objective in Eqn.\ \eqref{eqn:rearrangement} as Bayesian Active Learning by Disagreement or BALD \citep{Houlsby2011,Houlsby2012preference,Huszar2012quantum}. Note that these rearrangements were only possible because of the symmetry of Shannon's mutual information, hence this interpretation does not hold in general for Bayesian active learning when using a scoring rule other than the logarithmic one.
 
-Further mutual-information based objective functions are presented in \citep{ertin2003,fuhrmann2003}, who seek to maximise mutual information between the variable being measured and the variable of interest. Fuhrmann \citep{fuhrmann2003} applies this to linear Gaussian models and acoustic arrays, Ertin \emph{et al.} \citep{ertin2003} to a communications channel. Although closely related, these objectives do not work with the model parameters and are not applied to classification. \citep{guestrin2005, krause2006, krause2007} also use mutual information. They specify points of interest in advance and maximise the expected mutual information between the points of interest at the observed locations. Although this is a objective is promising for regression, it is not computable for models with input-dependent observation noise, such as classification; furthermore, it is not inductive.
+\section{Related techniques}
 
-Finally, the IVM \citep{lawrence2004} algorithm was designed for sub-sampling a dataset to be used to train a GP. It may not fall under the term `active learning' because all $\y$ values are available a priori. Their objective is Eqn.\ \eqref{Eqn:ent_change}, however the algorithm is not based on a rearrangement to data space (Eqn.\ \eqref{Eqn:rearrangement}). Therefore, posterior entropy calculations are made approximately on the $n$ dimensional subspace corresponding to the $n$ observed datapoints using the GP covariance matrix and $kl$ posterior updates are required (\citep{lawrence2004} proposes using Assumed Density Filtering to do this quickly).
+In this section I briefly review some of several related algorithms that are applicable to active learning and relate them to the BALD information theoretic objective \eqref{eqn:rearrangement}.
 
-We have briefly reviewed several information-theoretic based algorithms, but as far as the authors are aware our paper is the first to develop an efficient algorithm applying the fulll information theoretic criterion (Eqn.\ \eqref{Eqn:rearrangement}) to probabilistic classification.
+Other work that uses rearrangement to observation space (Eqn.\ \eqref{eqn:rearrangement}) include Maximum Entropy Sampling (MES) \citep{sebastiani2000}. MES was proposed for regression models with input-independent observation noise. The MES objective function is similar to Eqn.\ \eqref{eqn:rearrangement} but with its second term ignored. This is theoretically well motivated if the output noise is indeed independent of the input, that is when $H[\y\vert\param,\x]$ is constant in $x$.
 
-\paragraph{Decision theoretic:} We briefly mention a few decision theoretic approaches to classification. Two closely related algorithms, \citep{kapoor2007, zhu2003}, seek to minimize the expected misclassification probability on all seen and future data (sometimes with costs associated). These methods observe the locations of the test points and their objective functions are monotonic in the predictive entropies at the test points. \citep{kapoor2007} also includes an empirical error term that can yield pathological behaviour (we investigate this experimentally). These approaches are computationally expensive, requiring $kl$ posterior updates. They are also they are transductive because they look at the locations of the test data; designing an inductive, decision-theoretic algorithm  is an open, hard problem as it must require potentially expensive integration over possible test data distributions.
+For heteroscedastic regression or other applications such as classification, this assumption is violated, thus MES is inappropriate; it fails to differentiate between model uncertainty and observation uncertainty (about which our model may be confident). Many toy demonstrations show the `information based' active learning criterion behaving pathologically in classification by repeatedly querying points close the decision boundary or in regions of high observation uncertainty, \eg those presented in \citep{dasgupta2008, huang2010}. This is because MES is inappropriate in those circumstances. Using the full BALD objective from Eqn.\ \eqref{eqn:rearrangement} distinguishes between observation and model uncertainty and eliminates these problems.
 
-\paragraph{Non-probabilistic} Certain non-probabilistic methods have close analogues to information theoretic active learning. Perhaps the most ubiquitous is active learning for support vector mactines \citep[SVM,][]{tong2001,seung1992} where the volume of version space is used as a proxy for the posterior entropy. If a uniform (improper) prior is used with a deterministic classification likelihood it is easy to show that the log volume of version space and Bayesian posterior entropy are equivalent. However, just as Bayesian posteriors become intractable after observing many datapoints, version space too can become very complicated. \citep{tong2001} proposes approximating version space with a simple shape, such as a hypersphere. This closely resembles approximating a Bayesian posterior using a Gaussian distribution via the Laplace or EP approximations. \citep{seung1992} sidesteps the problem by working with predictions. The algorithm, Query by Committee (QBC), samples parameters from version space (committee members), they vote on the outcome of each $\x$ in question. The $\x$ with the most balanced vote is selected; this is termed the `principle of maximal disagreement'. If \ourmethod is used with a sampled posterior, query by committee is implemented but with a probabilistic measure of disagreement. QBC's deterministic vote criterion discards confidence in the predictions and so can exhibit the same pathologies as MES.
+The Informative Vector Machine \citep[IVM,][]{Lawrence2004} algorithm was designed for sub-sampling a data set to be used to train a Gaussian process regression or classification model. It may not fall under the term `active learning' because all $\y$ values are revealed to the algorithm a priori. Their objective is based on Shannon's entropy as in Eqn.\ \eqref{eqn:ent_change}, however the algorithm is not based on a rearrangement to data space (Eqn.\ \eqref{eqn:rearrangement}). Posterior entropy calculations are made approximately on the $n$ dimensional subspace corresponding to the $n$ observed data points using the Gaussian process covariance matrix. To chose among a pool of $k$ possible points, $k$ posterior updates are required in each step. \citep{Lawrence2004} proposes a quick method based on Assumed Density Filtering to perform these updates quickly. The IVM essentially optimises the same objective function, but makes different trade-offs and approximations. As we will see, BALD often performs better in practical situations.
+
+Certain non-probabilistic methods have close analogues to information theoretic active learning. Perhaps the most ubiquitous is active learning for support vector machines \citep[SVM,][]{Tong2002,seung1992} where the volume of the version space is used as an objective function. This objective function is in fact closely related to Bayesian active learning. If a uniform (improper) prior is used with a deterministic classification likelihood it can be shown that the logarithmic volume of the version space and Bayesian posterior entropy are equivalent \citep{Freund1997}.
+
+However, just as Bayesian posteriors become intractable after observing many data points, version space too can become very complicated and its volume intractable to compute. \citep{Tong2002} proposes approximating version space with a simple shape, such as a hyper-sphere. This closely resembles approximating a Bayesian posterior using a Gaussian distribution via the Laplace or EP approximations. \citep{seung1992} sidesteps the problem by working in the space of observations, much like BALD does. The algorithm, Query by Committee (QBC), samples parameters from version space (committee members), which vote on the outcome of each possible measurement $\x$ in question. The $\x$ with the most balanced vote is selected; this is termed the `principle of maximal disagreement'. If BALD is used in conjunction with a Monte Carlo approximation to the posterior, the resulting algorithm is very similar to query-by-committee, but with a theoretically sound, probabilistic measure of disagreement. QBC's deterministic vote criterion discards confidence in the predictions and so can exhibit similar pathologies as MES.
 
 %  ######   ########  
 % ##    ##  ##     ## 
@@ -65,71 +76,124 @@ We have briefly reviewed several information-theoretic based algorithms, but as 
 % ##    ##  ##        
 %  ######   ##        
 
-\section{BALD for Gaussian Process Classification}
+\section{BALD for Gaussian Process classification}
 
-BALD exploits the fact that in many active learning applications the output space $\Ye$ is often simpler than the parameter space $\Theta$. Here we consider the problem of active learning for binary clasification, when the output takes one of two possible values $y \in \{-1,1\}$. Given the simplicity of the outputs, binary classification is a highly relevant use-case for BALD.
+BALD exploits the fact that in many active learning applications the output space $\Ye$ is often simpler than the parameter space $\Theta$. Here I consider the problem of active learning for binary classification, when the output takes one of two possible values $y \in \{-1,1\}$. Given the simplicity of the outputs, binary classification is a highly relevant use-case for BALD.
 
-I will use a non-parametric Bayesian classification model, Gaussian process classification \citep[GPC,][]{rasmussen06GP} to demonstrate the usefulness of BALD: GPC appears to be an especially challenging problem for information-theoretic active learning because its parameter space is infinite. Therefore, computing entropy of the posterior involves nontrivial quantities. However, by using the BALD approach and Eqn.\ \eqref{Eqn:rearrangement} we are able to fully calculate the relevant information quantities without having to work out entropies of infinite dimensional objects. 
+I will use a non-parametric Bayesian classification model, Gaussian process classification \citep[GPC,][]{Rasmussen2006} to demonstrate the usefulness of BALD. GPC appears to be an especially challenging problem for information-theoretic active learning because its parameter space is infinite. Therefore, computing entropy of the posterior is non-trivial. However, by using the BALD approach and Eqn.\ \eqref{eqn:rearrangement} we are able to fully calculate the relevant information quantities without having to work out entropies for infinite dimensional objects. 
 
 
 The probabilistic model underlying GPC is as follows:
 
 \begin{align}
-	f \sim \mathrm{GP}(\mu(\cdot),k(\cdot,\cdot)) \qquad \y\vert\x,f \sim\mathrm{Bernoulli}(\Phi(f(\x))) 
+	f \sim \mathrm{GP}(\mu(\cdot),k(\cdot,\cdot)) \qquad \y\vert\x,f \sim\mathrm{Bernoulli}(\Phi(f(\x))) \label{eqn:GPC_model}
 \end{align}
 
 The latent parameter, now called $f$ (previously denoted as $\param$), is a real-valued function $\mathcal{X}\rightarrow\mathbb{R}$, and is assigned a Gaussian process prior with mean $\mu(\cdot)$ and covariance function $k(\cdot,\cdot)$.
 
-We consider the probit case where given the value of $f$, the binary label $y$ takes a Bernoulli distribution with probability $\Phi(f(\x))$, and $\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \citep{rasmussen2005}.
+We consider the probit case where, given the value of $f$, the binary label $y$ takes a Bernoulli distribution with probability $\Phi(f(\x))$, and $\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \citep{Rasmussen2006}.
 
-Posterior inference in the GPC model is intractable; given some observations $\data$, the posterior over $f$ becomes non-Gaussian and complicated. The most commonly used approximate inference methods for Gaussian process classification are expectation propagation \citep[EP,][]{Minka2002}, Laplace's approximation \citep{williams1998}, assumed density filtering \citep[ADF,][]{csato2000} and sparse methods \citep{candela05sparseGP}. These all approximate the non-Gaussian posterior by a Gaussian \citep{Nickisch2008}, but differ in the optimisation criterion and other restrictions. Throughout this chapter I will assume that we are provided with some Gaussian approximation to the GPC posterior resulting from one of these methods, though the active learning method is agnostic as to which method produced this estimate. Given the sequential nature of active learning, fast on-line methods are particualrly well suited for the task \citep{Csato2002}. In our derivation we will use {\scriptsize$\stackrel{1}{\approx}$} to indicate where approximate inference is exploited.
+Posterior inference in the GPC model is intractable; given some observations $\data$, the posterior over $f$ becomes non-Gaussian and complicated. This is addressed by using approximate inference methods. The most commonly used approximate inference methods for Gaussian process classification are expectation propagation \citep[EP,][]{Minka2002}, Laplace's approximation \citep{williams1998}, assumed density filtering \citep[ADF,][]{csato2000} and sparse methods \citep{candela05sparseGP}. These all approximate the non-Gaussian posterior by a Gaussian \citep{Nickisch2008}, but differ in the optimisation criterion and other restrictions. Throughout this chapter I will assume that we are provided with some Gaussian approximation to the GPC posterior resulting from one of these methods, though the active learning method is agnostic as to which method produced this estimate. Given the sequential nature of active learning, fast on-line methods \citep{Csato2002} are particularly well suited for the task. In our derivation we will use {\scriptsize$\stackrel{1}{\approx}$} to indicate where approximate inference is exploited.
 
 \subsection{Computing the value of information}
 
-Now, we will compute the informativeness of a query $\x$ using Eqn.\  \eqref{Eqn:rearrangement}.  The entropy of the binary output variable $y$ given a fixed $f$ can be expressed in terms of the binary entropy function $h$: 
+Now, we will compute the informativeness of a query $\x$ using Eqn.\  \eqref{eqn:rearrangement}. Recall that now the parameter $\param$ is the latent function $f$:
+
 \begin{align}
-H[y\vert\x,f] = h\left(\Phi(f(\x)\right), && h(p)=- p\log p - (1-p)\log(1-p)
-\end{align}
-We now have to compute expectations over the posterior. Using a Gaussian approximation to the posterior, for each $\x$, $f_{\x} = f(\x)$ will follow a Gaussian distribution with mean $\mu_{\x,\data}$ and variance $\sigma_{\x,\data}^2$. To compute the two terms in Eqn.\ \eqref{Eqn:rearrangement} we have to compute two entropy quantities. The first term in Eqn.\ \eqref{Eqn:rearrangement}, $H[y\vert\x,\data]$ can be handled analytically:
-\begin{align}
-	H[y\vert\x,\data] &\stackrel{1}{\approx} h\left( \int \Phi( f_{\x} )  \mathcal{N}(f_{\x}\vert \mu_{\x,\data},\sigma_{\x,\data}^2) df_{\x} \right)  = h \left( \Phi\left( \frac{\mu_{\x,\data}}{\sqrt{\sigma^2_{\x,\data} + 1}} \right)\right)\label{ent_mean}
-\end{align}
-The second term, $\expect{f \sim p(f\vert\data)} \left[ H[\y\vert f] \right]$ can be computed approximately as follows
-\begin{align}
-	\expect{f \sim p(f\vert\data)} \left[ H[\y\vert f] \right] &\stackrel{1}{\approx}\int h(\Phi(f_{\x})) \mathcal{N}(f_{\x}\vert \mu_{\x,\data},\sigma_{\x,\data}^2)df_{\x}\label{Eqn:mean_entropy}\\
-	&\stackrel{2}{\approx} \int \exp\left(-\frac{f_{\x}^2}{\pi\ln2}\right) \mathcal{N}(f_{\x}\vert \mu_{\x,\data},\sigma_{\x,\data}^2)df_{\x}\notag\\	
-	&= \frac{C}{\sqrt{\sigma_{\x,\data}^2 + C^2}}\exp\left(-\frac{\mu_{\x,\data}^2}{2\left(\sigma_{\x,\data}^2 + C^2\right)}\right)\notag
+	&\argmax_{\x} H[\y \vert \x, \data] - \expect{f\sim p(\param|\data)} \left[ H[\y \vert \x,f] \right]
 \end{align}
 
-where $C=\sqrt{\frac{\pi\ln2}{2}}$. The first approximation, {\scriptsize $\stackrel{1}{\approx}$}, reflects the Gaussian approximation to the posterior. The integral in the left hand side of Eqn.\ \eqref{Eqn:mean_entropy} is hard to compute; $h(\Phi(f_{\x}))$ must be integrated against a Gaussian distribution. However, if we perform a Taylor expansion on $\ln h(\Phi(f_{\x}))$ (see supplementary material) we can see that it can be approximated up to $\mathcal{O}(f_{\x}^3)$ by a squared exponential curve, $\exp(-f_{\x}^2/\pi\ln2)$. We will refer to this approximation as {\scriptsize $\stackrel{2}{\approx}$}. Now we can apply the standard convolution formula for Gaussians to finally get a closed form expression for both terms of  Eqn.\ \eqref{Eqn:rearrangement}.
+To evaluate the objective one has to compute expectations over the posterior $p_\data$. As discussed earlier, we use a Gaussian approximation to the posterior, so that for each $\x$, $f_{\x} = f(\x)$ follows a Gaussian distribution with mean $\mu_{\x,\data}$ and variance $\sigma_{\x,\data}^2$. The exact value of $\mu_{\x,\data}$ and $\sigma_{\x,\data}^2$ depend on the approximation scheme used as well as the covariance kernel.
 
-Fig. \ref{fig:trick} depicts the striking accuracy of this simple approximation. The maximum possible error that will be incurred when using this approximation is if $\mathcal{N}(f_{\x}\vert \mu_{\x,\data},\sigma_{\x,\data}^2)$ is centred at $\mu_{\x,\data}=\pm 2.05$  with $\sigma_{\x,\data}^2$ tending to zero (see Fig. \ref{fig:trick}, absolute error \ref{plots:approx_error}); even this yields only a 0.27\% error in the integral in Eqn.\eqref{Eqn:mean_entropy}. The authors are unaware of previous use of this simple and useful approximation in this context.  In Section 5 we investigate experimentally the information lost from approximations {\scriptsize $\stackrel{1}{\approx}$} and {\scriptsize $\stackrel{2}{\approx}$} as compared to the golden standard of extensive Monte Carlo simulation.
+\begin{align}
+	p(f_{\x}\vert\data) \stackrel{1}{\approx} \mathcal{N}(f_{\x}\vert \mu_{\x,\data},\sigma_{\x,\data}^2) 
+\end{align}
 
-To summarise, the \ourmethod algorithm for Gaussian process classification consists of two steps. First it applies an approximate inference algorithm to obtain the posterior predictive mean $\mu_{\x,\data}$ and $\sigma_{\x,\data}$ for each point of interest $\x$. Then, it selects a query $\x$ that maximises the following objective function:
+To compute the two terms in Eqn.\ \eqref{eqn:rearrangement} we have to compute two entropy quantities. $H[y\vert\x,f]$, the entropy of the binary output variable $y$ given a fixed $f$ can be expressed in terms of the binary entropy function $h$: 
+\begin{align}
+	H[y\vert\x,f] &= h\left(\Phi(f(\x)\right)\\
+	h(p)	&=- p\log p - (1-p)\log(1-p)
+\end{align}
+
+Similarly, the first term in Eqn.\ \eqref{eqn:rearrangement}, $H[y\vert\x,\data]$ can be computed analytically:
+
+\begin{align}
+	H[y\vert\x,\data] &= h\left( \int \Phi( f_{\x} ) p(f_{\x}\vert\data) df_{\x} \right)\\
+	&\stackrel{1}{\approx} h\left( \int \Phi( f_{\x} )  \mathcal{N}(f_{\x}\vert \mu_{\x,\data},\sigma_{\x,\data}^2) df_{\x} \right) \\
+	&= h \left( \Phi\left( \frac{\mu_{\x,\data}}{\sqrt{\sigma^2_{\x,\data} + 1}} \right)\right)\label{ent_mean},
+\end{align}
+where we used the fact that the sum of Gaussian variables is Gaussian distributed. This trick is only possible because in probit classification the link function $\Phi(\cdot)$ can be interpreted as the cumulative distribution function of a Normal distribution. In logistic regression, instead of the Gaussian CDF, one would use a logistic sigmoid where the same trick cannot be applied and further approximations are required.
+
+The last quantity needed for evaluating the BALD objective function is the expectation $\expect{f\sim p(\param|\data)} \left[ H[\y \vert \x,f] \right]$. Unfortunately, for GPC this quantity cannot be computed in closed form, even assuming a Gaussian approximation to the posterior. However, with a further approximation (denoted by $\stackrel{2}{\approx}$), the expectation can be accurately approximated as follows.
+
+\begin{align}
+	\expect{f \sim p(f\vert\data)} \left[ H[\y\vert f] \right] &\stackrel{1}{\approx}\int h(\Phi(f_{\x})) \mathcal{N}(f_{\x}\vert \mu_{\x,\data},\sigma_{\x,\data}^2)df_{\x}\label{eqn:mean_entropy}\\
+	&\stackrel{2}{\approx} \int \exp\left(-\frac{f_{\x}^2}{\pi\ln2}\right) \mathcal{N}(f_{\x}\vert \mu_{\x,\data},\sigma_{\x,\data}^2)df_{\x}\\	
+	&= \frac{C}{\sqrt{\sigma_{\x,\data}^2 + C^2}}\exp\left(-\frac{\mu_{\x,\data}^2}{2\left(\sigma_{\x,\data}^2 + C^2\right)}\right),
+\end{align}
+where $C=\sqrt{\frac{\pi\ln2}{2}}$. The first approximation, {\scriptsize $\stackrel{1}{\approx}$}, reflects the Gaussian approximation to the posterior, as before.
+
+The integral in the left hand side of Eqn.\ \eqref{eqn:mean_entropy} is hard to compute; the non-linear function $h(\Phi(\cdot))$ must be integrated against a Gaussian distribution. However, $h(\Phi(t))$ can be approximated accurately by an unnormalised Gaussian curve, $\exp(-t^2/\pi\ln2)$, making the integral trivial to compute via convolution formul\ae for Gaussian distributions.
+
+Consider the Taylor expansion of $g \defeq \log(h(\Phi(\cdot)))$.
+
+\begin{align}
+	g(t) &= g(0) + \frac{g'(0)t}{1!} + \frac{g''(0)t^2}{2!} + \dots
+\end{align}
+
+The derivatives in the formula can be computed in closed form using the chain rule
+
+\begin{align}
+	g(t) &= \log(h(\Phi(t)))\\
+	g'(t) &= -\frac{1}{\log 2}\frac{\Phi'(t)}{h(\Phi(t))}\left[\log\Phi(t) - \log(1-\Phi(t))  \right) \nonumber \\ 
+	f''(t) &= \frac{1}{\log 2}\frac{\Phi'(t)^2}{h(\Phi(t))^2}\left(\log\Phi(t) - \log(1-\Phi(t))  \right)\nonumber\\
+	& \qquad - \frac{1}{\log 2}\frac{\Phi''(t)}{h(\Phi(t))}\left(\log\Phi(t) - \log(1-\Phi(t))  \right) \nonumber\\
+	& \qquad - \frac{1}{\log 2}\frac{\Phi'(t)^2}{h(\Phi(t))}\left(\frac{1}{\Phi(t)} + \frac{1}{(1-\Phi(t)})  \right) \nonumber\\
+\end{align}
+
+Therefore the following Taylor series approximation holds:
+
+\begin{align}
+	\log h(\Phi(t)) &\stackrel{2}{\approx} - \frac{1}{\pi\log 2}t^2
+\end{align}
+
+Consequently, exponentiating both sides we can make the following Gaussian approximation to $h(\Phi(\cdot))$:
 
 \begin{equation}
-	\mathrm{h} \left( \Phi\left( \frac{\mu_{\x,\data}}{\sqrt{\sigma^2_{\x,\data} + 1}} \right)\right) - \frac{C \exp\left(-\frac{\mu_{\x,\data}^2}{2\left(\sigma_{\x,\data}^2 + C^2\right)}\right)}{\sqrt{\sigma_{\x,\data}^2 + C^2}} \label{Eqn:BALD_GPC}
+	h(\Phi(t))\stackrel{2}{\approx}\exp\left({-\frac{t^2}{\pi\log 2}}\right)
 \end{equation}
 
-For most practically relevant kernels, the objective \eqref{Eqn:BALD_GPC} is smooth, and differentiable function of $\x$, so gradient-based optimisation procedures can be used to find the maximally informative query.
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+	\node at (0,0) {
+	\resizebox{.55\columnwidth}{!}{\input{figs/BALD/GPC/gaussian_approx.tikz}}};
+	\node at (.47\columnwidth,0){
+	\resizebox{.45\columnwidth}{!}{
+	\begin{tabular}{|c|c|c|c|}
+	\hline
+	&MCMC&EP ($\stackrel{1}{\approx}$)&Laplace ($\stackrel{1}{\approx}$)\\ \hline
+	\hline
+	MC & 0 & $7.51\pm2.51$ & $41.57\pm4.02$ \\
+	$\stackrel{2}{\approx}$ & $0.16\pm0.05$ & $7.43\pm2.40$ & $40.45\pm3.67$ \\ \hline
+	\end{tabular}
+	}};
+	\end{tikzpicture}
 
-\begin{figure}\centering
-% \begin{tikzpicture}
-% \node at (0,0) {
-% \resizebox{.55\columnwidth}{!}{\input{figs/gaussian_approx.tikz}}};
-% \node at (.47\columnwidth,0){
-% \resizebox{.45\columnwidth}{!}{
-% \begin{tabular}{|c|c|c|c|}
-% \hline
-% &MCMC&EP ($\stackrel{1}{\approx}$)&Laplace ($\stackrel{1}{\approx}$)\\ \hline
-% \hline
-% MC & 0 & $7.51\pm2.51$ & $41.57\pm4.02$ \\
-% $\stackrel{2}{\approx}$ & $0.16\pm0.05$ & $7.43\pm2.40$ & $40.45\pm3.67$ \\ \hline
-% \end{tabular}
-% }};
-% \end{tikzpicture}
-	\caption[Taylor series approximation to the value of information in GP classification]{\emph{Left:} Analytic approximation ({\scriptsize $\stackrel{1}{\approx}$}) to the binary entropy of the error function (\ref{plots:approx_true}) by a squared exponential (\ref{plots:approx_approx}). The absolute error (\ref{plots:approx_error}) remains under $3\cdot 10^{-3}$. \emph{Right:} Percentage approximation error ($\pm$1 s.d.) for different methods of approximate inference (\emph{columns}) and approximation methods for evaluating Eqn.\eqref{Eqn:mean_entropy} (\emph{rows}). The results indicate that {\scriptsize $\stackrel{2}{\approx}$} is a very accurate approximation; EP causes some loss and Laplace significantly more, which is in line with the comparison presented in \citep{Kuss05}. }\label{fig:trick}
+	\caption[Taylor series approximation to the value of information in GP classification]{\emph{Left:} Analytic approximation ({\scriptsize $\stackrel{1}{\approx}$}) to the binary entropy of the error function (\ref{plots:approx_true}) by a squared exponential (\ref{plots:approx_approx}). The absolute error (\ref{plots:approx_error}) remains under $3\cdot 10^{-3}$. \emph{Right:} Percentage approximation error ($\pm$1 s.d.) for different methods of approximate inference (\emph{columns}) and approximation methods for evaluating Eqn.\eqref{eqn:mean_entropy} (\emph{rows}). The results indicate that {\scriptsize $\stackrel{2}{\approx}$} is a very accurate approximation; EP causes some loss and Laplace significantly more, which is in line with the comparison presented in \citep{Kuss2005}. }\label{fig:trick}
 \end{figure}
+
+Fig.\ \ref{fig:trick} depicts the striking accuracy of this approximation. The maximum possible error that will be incurred when using this approximation in the BALD formula is if the approximate posterior $\mathcal{N}(f_{\x}\vert \mu_{\x,\data},\sigma_{\x,\data}^2)$ is centred at $\mu_{\x,\data}=\pm 2.05$  with $\sigma_{\x,\data}^2$ tending to zero (see Fig.\ \ref{fig:trick}, absolute error \ref{plots:approx_error}); even this yields only a 0.27\% error in the integral in Eqn.\eqref{eqn:mean_entropy}.
+
+In subsequent sections we investigate experimentally the information lost from approximations {\scriptsize $\stackrel{1}{\approx}$} and {\scriptsize $\stackrel{2}{\approx}$} as compared to the gold standard of extensive Monte Carlo simulation.
+
+To summarise, the BALD algorithm for Gaussian process classification consists of two steps. First it applies an approximate inference algorithm to obtain the posterior predictive mean $\mu_{\x,\data}$ and $\sigma_{\x,\data}$ for each point of interest $\x$. Then, it selects a query $\x$ that maximises the following objective function:
+
+\begin{equation}
+	\mathrm{h} \left( \Phi\left( \frac{\mu_{\x,\data}}{\sqrt{\sigma^2_{\x,\data} + 1}} \right)\right) - \frac{C \exp\left(-\frac{\mu_{\x,\data}^2}{2\left(\sigma_{\x,\data}^2 + C^2\right)}\right)}{\sqrt{\sigma_{\x,\data}^2 + C^2}} \label{eqn:BALD_GPC}
+\end{equation}
+
+For most practically relevant kernels the objective \eqref{eqn:BALD_GPC} is smooth and differentiable function of $\x$, so gradient-based optimisation procedures can be used to find the maximally informative query.
 	
 % ########  ########  ######  ##     ## ##       ########  ######      ######   ########   ######  
 % ##     ## ##       ##    ## ##     ## ##          ##    ##    ##    ##    ##  ##     ## ##    ## 
@@ -139,73 +203,66 @@ For most practically relevant kernels, the objective \eqref{Eqn:BALD_GPC} is smo
 % ##    ##  ##       ##    ## ##     ## ##          ##    ##    ##    ##    ##  ##        ##    ## 
 % ##     ## ########  ######   #######  ########    ##     ######      ######   ##         ######  
 
-\subsection{Results}
+\section{Experiments and results}
+
+\subsection{Quantifying approximation losses}
+
+Recall that to obtain Eqn.\ \eqref{eqn:BALD_GPC} we made two approximations: we perform approximate inference ({\scriptsize $\stackrel{1}{\approx}$}), and we approximated the binary entropy of the Gaussian CDF by a squared exponential ({\scriptsize $\stackrel{2}{\approx}$}). Both of these can be substituted with extensive Monte Carlo approximation, enabling us to compute a near-exact, unbiased estimate of the expected information gain. Using extensive Monte Carlo as the `gold standard', we can evaluate how much we loose by applying these approximations. We quantify approximation error as: 
+
+\begin{align}
+	\frac{ \max_{\x\in\X} I(\x) - I(\argmax_{\x\in\X}\hat{I}(\x)) }{{\max_{\x\in\X}I(\x) }}\cdot 100\%,
+\end{align}
+where $I$ is the objective computed using Monte Carlo, $\hat{I}$ is the approximate objective. We have run experiments on the Lung Cancer (\emph{cancer}) classification data-set \citep{Hong1991} downloaded from the UCI Machine Learning Repository \citep{UCIRepository}. Results are shown and discussed in Figure \ref{fig:trick}. In general we see that the approximation error from approximate inference ({\scriptsize $\stackrel{1}{\approx}$}) typically outweighs the negligible error introduced by the Taylor-series approximation ({\scriptsize $\stackrel{2}{\approx}$}).
+
+\subsection{Pool based active learning}
+
+We test BALD for GPC and preference learning in the pool-based setting \ie selecting $x$ values from a fixed set of potential query locations. We compare to eight other algorithms discussed in this paper: random sampling, maximum entropy sampling (MES), query by committee (QBC), support vector machine (SVM) with version space approximation \cite{Tong2002}, decision theoretic approaches from \citep{Kapoor2007, Zhu2003} and direct minimisation of expected empirical error. The latter method is not widely used, but is included for analysis of \cite{Kapoor2007}.
+
+First we consider three artificial, but challenging, data-sets in two dimensional input space $\Xe = \mathbb{R}^2$. These data-sets are designed to exaggerate problematic edge cases that often cause active learning methods to fail. The first, \emph{block in the middle}, has a block of noisy, randomly labelled points on the decision boundary between two otherwise clearly separable classes. The second, \emph{block in the corner}, has a block of uninformative points far from the decision boundary. A capable active learning algorithm should avoid these uninformative regions. The third data set, similar to the \emph{checkerboard} dataset used in \cite{Zhu2003}, is designed to test the algorithm's capabilities to find multiple disjoint islands of points from one class. 
+
+The three data-sets and results using each algorithm are depicted in Fig.\ \ref{fig:artificial}. We can see that BALD (\ref{plots:BALD}) handles all three artificial data-sets well. Transductive criteria, \citet{Kapoor2007} (\ref{plots:dec}) and \citet{Zhu2003} (\ref{plots:semi}), struggle on the \emph{block in the middle} data-set, because the random noise added to the central block of points dominates the risk of classification. In the third toy example, \emph{checkerboard}, they are very effective in exploring the centre of each island of data points early on.
 
 \begin{figure}
-	% \begin{center}
-	% \begin{tabular}{ccc}
-	% \input{figs/BALD/GPC/blockinthemiddle_dataset.tikz}&
-	% \input{figs/BALD/GPC/corner_dataset.tikz}&
-	% \input{figs/BALD/GPC/checkerboard_dataset.tikz}\\
-	% \input{figs/BALD/GPC/blockinmiddle2.tikz}&
-	% \input{figs/BALD/GPC/blockincorner2.tikz}&
-	% \input{figs/BALD/GPC/checkerboard2.tikz} \\
-	% \end{tabular}
-	% \end{center}
-	\caption[Evaluation of Bayesian active learning on artificial datasets]{\emph{Top:} Artificial datasets used in our evaluation of active learning methods. Exemplars of the two classes are shown with black squares (\ref{plots:positives}) and red circles (\ref{plots:negatives}). \emph{Bottom:} Results of active learning with nine methods: random query (\ref{plots:rand}), \ourmethod (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with the vote criterion with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), Kapoor \emph{et al.} \citep{Kapoor2007} (\ref{plots:dec}), Zhu \emph{et al.} \citep{Zhu2003} (\ref{plots:semi}) and empirical error (\ref{plots:emp}).}
+	\begin{center}
+	\begin{tabular}{ccc}
+	\input{figs/BALD/GPC/blockinthemiddle_dataset.tikz}&
+	\input{figs/BALD/GPC/corner_dataset.tikz}&
+	\input{figs/BALD/GPC/checkerboard_dataset.tikz}\\
+	\input{figs/BALD/GPC/blockinmiddle2.tikz}&
+	\input{figs/BALD/GPC/blockincorner2.tikz}&
+	\input{figs/BALD/GPC/checkerboard2.tikz} \\
+	\end{tabular}
+	\end{center}
+	\caption[Evaluation of Bayesian active learning on artificial data sets]{\emph{Top:} Artificial data sets used in our evaluation of active learning methods. Exemplars of the two classes are shown with black squares (\ref{plots:positives}) and red circles (\ref{plots:negatives}). \emph{Bottom:} Results of active learning with nine methods: random query (\ref{plots:rand}), BALD (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with the vote criterion with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), \citet{Kapoor2007} (\ref{plots:dec}), \citet{Zhu2003} (\ref{plots:semi}) and empirical error (\ref{plots:emp}).}
 	\label{fig:artificial}
 \end{figure}
 
+In addition to this, we present results on 8 real-world classification data-sets from the UCI Machine Learning Repository \citep{UCIRepository}: \emph{australia, crabs, wine, vehicle, isolet, cancer, letter} and \emph{wdbc}. \emph{Letter} is a multiclass data-set from which we select hard-to-distinguish letters E vs.\ F and D vs.\ P as binary sub-problems. Results on these data sets are plotted in Fig.\ \ref{fig:BALD_GPC_results}.
+
 \begin{figure}
-% 	\begin{center}
-% 	\begin{tabular}{ccc}
-% 	\input{figs/BALD/GPC/crabs2.tikz}&
-% 	\input{figs/BALD/GPC/vehicle2.tikz}&
-% 	\input{figs/BALD/GPC/wine2.tikz}\\
-% 	\input{figs/BALD/GPC/wdbc2.tikz}&
-% 	\input{figs/BALD/GPC/isolet2.tikz}&
-% 	\input{figs/BALD/GPC/austra2.tikz}\\
-% 	\input{figs/BALD/GPC/letterDP2.tikz}&
-% 	\input{figs/BALD/GPC/letterEF2.tikz}&
-% 	\input{figs/BALD/GPC/prefkinem2.tikz}\\
-% 	\input{figs/BALD/GPC/prefcart2.tikz}&
-% 	\input{figs/BALD/GPC/prefcpu2.tikz}&
-% 	\input{figs/BALD/GPC/cancerB2.tikz}\\
-% 	\end{tabular}
-% 	\end{center}
-	\caption[Evaluation of Bayesian active learning on real-world datasets]{Classification accuracy on classification and preference learning datasets. Methods used are random query (\ref{plots:rand}), \ourmethod (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), decision theoretic \citep{Kapoor2007} (\ref{plots:dec}), semi-supervised \citep{Zhu2003} (\ref{plots:semi}) and empicial error (\ref{plots:emp}). The decision theoretic methods took a long time to run, so were not completed for all datasets. Plots (a-h) are GPC datasets, (i-k) are preference learning, plot (l) includes \ourmethod with hyperparameter learning (\ref{plots:opthyper})}.
-	\label{fig:BALD_GPC_results}
+	\begin{center}
+	\begin{tabular}{ccc}
+	\input{figs/BALD/GPC/crabs2.tikz}&
+	\input{figs/BALD/GPC/vehicle2.tikz}&
+	\input{figs/BALD/GPC/wine2.tikz}\\
+	\input{figs/BALD/GPC/wdbc2.tikz}&
+	\input{figs/BALD/GPC/isolet2.tikz}&
+	\input{figs/BALD/GPC/austra2.tikz}\\
+	\input{figs/BALD/GPC/letterDP2.tikz}&
+	\input{figs/BALD/GPC/letterEF2.tikz}&
+	\input{figs/BALD/GPC/cancerB2.tikz}
+	\end{tabular}
+	\end{center}
+	\caption[Evaluation of Bayesian active learning on real-world data sets]{Evaluation of the accuracy of active learning algorithms on various real-world classification data-sets. Methods used are random query (\ref{plots:rand}), BALD (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), decision theoretic \citep{Kapoor2007} (\ref{plots:dec}), semi-supervised \citep{Zhu2003} (\ref{plots:semi}) and empicial error (\ref{plots:emp}). The decision theoretic methods took a long time to run, so were not completed for all data sets. Plots (a-i) correspond to different classification datasets from the UCI Machine Learning Repository. Plot (i) includes BALD with hyper-parameter learning (\ref{plots:opthyper}). See text for analysis. \label{fig:BALD_GPC_results}}
 \end{figure}
 
-\subsection{Conclusions}
+We can see from Figs \ref{fig:artificial} and \ref{fig:BALD_GPC_results} that by using BALD we make significant gains over na\"{i}ve random sampling in both the classification and preference learning domains. Relative to other active learning algorithms BALD performs consistently well across all datasets, particularly when avoiding the block of points in Fig.\ \ref{fig:artificial} (a). Occasionally \eg as Fig.\ \ref{fig:BALD_GPC_results} (i), it performs poorly on the first couple of queries.
 
-\section{Preference elicitation}
+In most of the reported experiments I have fixed the kernel $k$ of the Gaussian process prior to the maximum likelihood estimate on the whole pool. This is of course cheating, as it uses information from the whole dataset before starting to select queries, but it provides us with a fair way of comparing various methods, including those that cannot handle hyper-parameter learning. As described in \citep{Houlsby2011,Houlsby2012preference}, BALD can accommodate active learning of hyper-parameters. In Fig.\ \ref{fig:BALD_GPC_results} (i) we also show the performance of this method, and on the \emph{cancer} dataset it helps to overcome the initial poor performance of BALD.
 
-In this section I address the practical problem of learing peoples' preferences. People have rich knowledge knowledge and information about which products, services, people, items they prefer, find attractive or like. Methods that uncover this private knowledge is invaluable in a number of commercial and science applications. Examples include
-\begin{description}
-	\item [market research and e-commerce:] learning about users' preferences of products, prices, or brands. Preferences can be exploited to maximise user satisfaction and to drive profit
-	\item [social media:] identifying people that their peers find influential, reliable, trustworthy or knowledgable on certain topics
-	\item [recommendation:] on review websites collecting and quantifying user feedback on restaurants, activities, movies, music albums, etc. to power recommendations
-	\item [research:] learning about difficult, subjective concepts such as attractiveness, for example investigating which features determine perceived attractiveness
-	\item [equipment calibration:] calibration of parameters to improve perceived subjective quality. Examples include calibrating sound quality of hearing aid or stereo equipment, high-dimensional parameter optimisation in digital image rendering
-\end{description}
+MES often performs as well as BALD \eg on Fig.\ \ref{fig:artificial}(c), where there is no label noise. It never outperforms BALD though and on noisy datasets (\eg Fig.\ \ref{fig:artificial}(a)) performs particularly poorly as expected. QBC provides a close approximation to BALD and usually provides a small decrement in performance. However, there is a large decrease in performance on the noisy artificial dataset caused by the vote criterion not maintaining a notion of inherent uncertainty, like MES. The IVM occasionally performs well, but often exhibits highly pathological behaviour; by observing $\y$ values in advance it actively chooses noisy or mislabelled points, thinking them informative. The SVM-based approach exhibits variable performance (it does extremely well on Fig.\ \ref{fig:BALD_GPC_results} (f), but very poorly on \ref{fig:artificial} (c)).
 
-Many extisting approaches -- such as traditional market research surveys, restaurant review websites, DVD rental websites, etc -- require human respondents\footnote{Throughout this chapter I will use the words person, respondent and user interchangeably to mean the person whose preferences we are interested in predicting.} to give ratings of items on an absolute scale. Market research surveys often use a scale of 1 to 7, while review websites use star ratings, typically on a scale between 1 to 5 stars. There are multiple problems with this approach.
-\begin{enumerate}
-	\item People's baseline level on the absolute scale may differ. One person's 4 star rating may describe the same level of satisfaction as someone else's 5 star rating. This makes aggregating opinions from many different people a non-trivial task
-	\item The variance of responses may also differ across people: some more conservative reviewers would never use the extreme 1 star or 5 star ratings, whilst other respondents' opinions may be more polarised
-	\item To give informed ratings, the user has to know the distribution of the quality of items ahead of time. They may prefer not to give a maximal 5-star rating to an item, because they don't know if better items exist. Others may give 5-star to a mediocre item, because they have never seen a better alternative.
-\end{enumerate} 
-
-To overcome the limitations of an absolute scale, in an increasing number of applications preference elicitation is done via pairwise item comparisons. In this case, the respondent is presented a pair of items, and they have to judge which of the two alternatives is more preferable. In cognitive science, this type of preference elicitation is known as two-alternative forced choice, or 2AFC for short \citep{2AFC}. The machine learning community often refers to this kind problem as \emph{binary preference elicitation}, preference learning or learning to rank.
-
-Crucially, binary preference elicitation sidesteps most of the problems that eliciting preference on an absolute scale exhibits. Because no absolute scale is used, it does not matter if the scale of ratings used by different respondents are not aligned, as long as there is a mostly monotonic relationship between them. Also, the respondent only needs to be knowledgeable about the two items being compared in order to give an informed responce. This way respondents with much more limited scope of knowledge can provide highly informative data.
-
-Despite these convenient properties, pairwise preference learning has a drawback. When learning preferences over $n$ items, there are $\mathcal{O}(n)$ potential pairs of items that we can ask the respondents to compare. Not only would querying all item-pairs take prohibitively long time, it is also unneccessary. Most binary choices would be predictable from previous choices the respondent or other respondents have already made.
-
-Therefore, in binary preference learning, active learning and optimal experiment design has increased importance, and increased potential to improve over passive learning.
-
-In this section I will extend the BALD framework developed for Gaussian process classification to work on preference learning. I will do this by showing how a popular nonparametric model for preference learning can be interpreted as binary Gaussian process classification with an special positive definite kernel between item-pairs, that I call \emph{the preference kernel}. I also present an extension of the model which can be applied to learn from preference choices expressed by multiple users, even if different users disagree in their preferences. The experimental results presented in this chapter show that the Gaussian-process-based models combined with the BALD framework are very competitive and on many datasets surpass state-of-the art levels of performance.
+On the real datasets though BALD usually performs as well, if not better, than transductive methods of \citet{Kapoor2007} and \citet{Zhu2003}, despite not having access to the locations of the test points and having a significantly lower computational cost. The \citep{Kapoor2007} objective sometimes fails badly, this is likely to be because one term in their objective function is the empirical error. The weighting of this term is determined by the relative sizes of the training and test set. Directly minimising empirical error usually performs very pathologically, picking only `'safe' points; when the \citep{Kapoor2007} objective assigns too much weight to this term it also fails.
 
 % ########  ########  ######## ######## ######## ########  ######## ##    ##  ######  ######## 
 % ##     ## ##     ## ##       ##       ##       ##     ## ##       ###   ## ##    ## ##       
@@ -215,117 +272,97 @@ In this section I will extend the BALD framework developed for Gaussian process 
 % ##        ##    ##  ##       ##       ##       ##    ##  ##       ##   ### ##    ## ##       
 % ##        ##     ## ######## ##       ######## ##     ## ######## ##    ##  ######  ######## 
 
-\subsection{Formal framework\label{sec:prefKernel}}
+\subsection{Summary}
 
-In preference learning each datapoint describes two items, $i$ and $j$, which have been presented to a human judge. It is assumed throughout this thesis that the items are described by their numeric feature vectors $\x_i\in\mathcal{X}$ and $\x_j\in\mathcal{X}$ respectively. Each item is assumed to have a fixed number, $\dim(\mathcal{X})=d$, of features associated with them. Each training datapoint also has a binary label $y\in\{-1,1\}$ such that $y=1$ if the user prefers item $i$ to item $j$, and $y=-1$ otherwise. The primary goal of preference learning is to accurately predict the direction of human preference for a new pair of feature vectors not seen before.
+In this chapter I introduced BALD for Gaussian process classification as a practical algorithm for performing Bayesian active learning in binary classification tasks. The algorithm was based on two approximations: approximate posterior inference and Taylor-series approximation to the BALD information criterion. I showed that these approximations do not result in substantial loss of precision and that BALD performs well in a variety of practical datasets. In the following section I will extend the algorithm to handle problems that cannot be modelled as binary classification and show that the performance of BALD is favourable in those situations as well.
 
-The problem of pairwise preference learning is an instance of binary classification, inasmuch as the main goal is to predict a class label $y\in\{-1,1\}$ given an input feature vector $(\x_i,\x_j)\in\mathcal{X}^2$. However, using a generic classifier, such as an SVM or Gaussian process classifier would be highly inefficient, as these classifiers do not know about the symmetries inherent in the ranking problem. Firslty, if one observes $(\x_i,\x_j)$ pair with a positive label, that implies the pair $(\x_j,\x_i)$ would have a negative label. Furthermore, if one observes $\x_i$ is preferred to $\x_j$ and $\x_j$ is preferred to $\x_k$, one would predict $\x_i$ is preferred to $\x_k$. A generic classifier trained on pairs cannot make such deductions.
+\section{Extension to preference elicitation}
+
+It is possible to extend the above framework to handle a practically highly relevant problem of learning peoples' preferences. People have rich knowledge and information about which products, services, people, items they prefer, find attractive or like. Methods that uncover this knowledge are invaluable in a number of commercial and science applications. Examples include:
+\begin{description}
+	\item [market research and e-commerce:] learning about users' preferences of products, prices, or brands. Preferences can be exploited to maximise user satisfaction and to drive profit
+	\item [social media:] identifying people whom their peers find influential, reliable, trustworthy or knowledgeable in certain topics. This information can be used to find domain experts, or to drive influence marketing
+	\item [recommendation:] on review websites collecting and quantifying user feedback on restaurants, activities, movies, music albums, etc. to power recommendations
+	\item [research:] learning about difficult, subjective concepts such as attractiveness, for example investigating which features determine perceived attractiveness
+	\item [equipment calibration:] calibration of parameters to improve perceived subjective quality. Examples include calibrating sound quality of hearing aids or stereo equipment, high-dimensional parameter optimisation in digital image rendering
+\end{description}
+
+Many existing approaches -- such as traditional market research surveys, restaurant review websites, DVD rental websites, etc -- require human respondents\footnote{Throughout this chapter I will use the words person, respondent and user interchangeably to mean the person whose preferences we are interested in predicting.} to give ratings of items on an absolute scale. Market research surveys often use a scale of 1 to 7, while review websites use star ratings, typically on a scale between 1 to 5 stars. There are multiple problems with this approach.
+\begin{enumerate}
+	\item People's baseline level on the absolute scale may differ. One person's 4 star rating may describe the same level of satisfaction as someone else's 5 stars. This makes aggregating opinions from many different people a non-trivial task
+	\item The variance of responses may also differ across people: some more conservative reviewers would never use the extreme 1 star or 5 star ratings, whilst other respondents' opinions may be more polarised
+	\item To give informed ratings, the user has to know the distribution of the quality of items ahead of time. They may prefer not to give a maximal 5-star rating to an item, because they don't know if better items exist. Others may give 5-star to a mediocre item, because they have never seen a better alternative.
+\end{enumerate} 
+
+To overcome the limitations of an absolute scale, an increasing number of applications are performing preference elicitation via pairwise item comparisons. In this case, the respondent is presented a pair of items, and they have to judge which of the two alternatives is more preferable. In cognitive science, this type of preference elicitation is known as two-alternative forced choice, or 2AFC for short \citep{Fechner1860,Platt1999,Huszar2010}. The machine learning community often refers to this kind problem as \emph{binary preference elicitation}, preference learning or learning to rank \citep{Chu2005,furnkranz2010}.
+
+Crucially, binary preference elicitation sidesteps most of the problems that eliciting preference on an absolute scale exhibits. Because no absolute scale is used, it does not matter if the scale of ratings used by different respondents are not aligned, as long as there is a mostly monotonic relationship between them. Also, the respondent only needs to be knowledgeable about the two items being compared in order to give an informed response. This way respondents with much more limited scope of knowledge can provide highly informative data.
+
+Despite these convenient properties, pairwise preference learning has a drawback. When learning preferences over $n$ items, there are $\mathcal{O}(n^2)$ potential pairs of items that we can ask the respondents to compare. Not only would querying all item-pairs take prohibitively long time, it is also unnecessary. Most binary choices would be predictable from previous choices the respondent or other respondents have already made.
+
+Therefore, in binary preference learning, active learning and optimal experiment design have increased importance, and increased potential to improve over passive learning.
+
+In this section I will extend the BALD framework developed for Gaussian process classification to work on preference learning. I will do this by showing how a popular non-parametric model for preference learning can be interpreted as binary Gaussian process classification with an special positive definite kernel between item-pairs, that I call \emph{the preference kernel}. This idea can be used in other kernel-based classifiers such as SVMs. I present experimental results where I compare BALD to other active learning approaches to this problem.
+
+\subsection{Reduction to classification\label{sec:prefKernel}}
+
+In preference learning each data point describes two items, $i$ and $j$, which have been presented to a human judge. It is assumed that the items are described by their numeric feature vectors $\x_i\in\mathcal{X}$ and $\x_j\in\mathcal{X}$ respectively. Each item is assumed to have a fixed number, $\dim(\mathcal{X})=d$, of features associated with them. Each training data point also has a binary label $y\in\{-1,1\}$ such that $y=1$ if the user prefers item $i$ to item $j$, and $y=-1$ otherwise. The primary goal of preference learning is to accurately predict the direction of human preference for a new pair of feature vectors not seen before.
+
+Pairwise preference learning is a special case of binary classification, inasmuch as the main goal is to predict a class label $y\in\{-1,1\}$ given an input feature vector $(\x_i,\x_j)\in\mathcal{X}^2$, composed by concatenating features of $i$ and $j$. However, using a generic classifier, such as an SVM or Gaussian process classifier would be highly inefficient, as these classifiers do not know about the symmetry inherent in the ranking problem. Firstly, if one observes $(\x_i,\x_j)$ pair with a positive label, that implies the pair $(\x_j,\x_i)$ would have a negative label. Furthermore, if one observes $\x_i$ is preferred to $\x_j$ and $\x_j$ is preferred to $\x_k$, one would predict $\x_i$ is preferred to $\x_k$. A generic classifier trained on pairs cannot make such deductions.
 
 This problem is often addressed by introducing a latent preference function $f:\mathcal{X}\mapsto \mathbb{R}$ such that
-$f(\x_i) > f(\x_j)$ whenever the user prefers item $i$ to item $j$ and $f(\x_i) < f(\x_j)$ otherwise \citep{Chu2005}. This latent representation implies a pre-defined ordering of items. However, the observed data are not always consistent with a single fixed ordering, and sometimes are contradictory. Furthermore peoples' choices may be contaminated by noise, or be inaccurate because of lack of attention. To account for this randomness, the model presented by \citep{Chu2005} assumes that when respondents decide between options, their preference function is contaminated by evaluation noise.
+$f(\x_i) > f(\x_j)$ whenever the user prefers item $i$ to item $j$ and $f(\x_i) < f(\x_j)$ otherwise \citep{Chu2005}. This latent representation implies a pre-defined ordering of items. However, the observed data are not always consistent with a single fixed ordering, and sometimes are contradictory. Furthermore people's choices may be contaminated by noise, or be inaccurate because of lack of attention. To account for this randomness, the model presented by \citet{Chu2005} assumes that when respondents decide between options, their preference function is contaminated by evaluation noise.
 
-When the evaluations of $f$ are contaminated with Gaussian noise with zero mean and (without loss of generality) variance $1/2$, we obtain the following likelihood function for the underlying preference function $f$ given the datapoint $\x_i$, $\x_j$ and corresponding label $y$:
+When the evaluations of $f$ are contaminated with Gaussian noise with zero mean and (without loss of generality) variance $1/2$, we obtain the following likelihood function for the underlying preference function $f$ given the data point $\x_i$, $\x_j$ and corresponding label $y$:
 
 \begin{align}
-\mathcal{P}(y|\x_i,\x_j,f) &= \Phi[(f[\x_i] - f[\x_j])y]\,,\label{Eqn:preference_likelihood}
+\mathbb{P}(y|\x_i,\x_j,f) &= \Phi[(f[\x_i] - f[\x_j])y]\,,\label{eqn:preference_likelihood}
 \end{align}
+where $\Phi$ is the standard Normal cumulative distribution function. The preference learning problem can be solved via Bayesian inference, combining a GP prior on $f$ with the likelihood function in (\ref{eqn:preference_likelihood}) \citep{Chu2005}. The posterior for $f$ can then be used to make predictions on the user preferences for new pairs of items.
 
-where $\Phi$ is the standard Normal cumulative distribution function. The preference learning problem can be solved by combining a GP prior on $f$ with the likelihood function in (\ref{Eqn:preference_likelihood}) \citep{Chu2005}. The posterior for $f$ can
-then be used to make predictions on the user preferences for new pairs of items.
-
-Note that the likelihood (\ref{Eqn:preference_likelihood}) depends only on the difference between $f(\x_i)$ and $f(\x_j)$.
+Note that the likelihood (\ref{eqn:preference_likelihood}) depends only on the difference between $f(\x_i)$ and $f(\x_j)$.
 Let $g:\mathcal{X}^2\mapsto\mathbb{R}$ be the latent function $g(\x_i,\x_j) = f(\x_i) - f(\x_j)$.
-We can recast the inference problem in terms of $g$ and ignore $f$. When the evaluation of $g$ is contaminated with standard Gaussian noise, the likelihood for $g$ given $\x_i$, $\x_j$ and $y$ is
+We can recast the inference problem in terms of $g$ and ignore $f$. When the evaluation of $f$ is contaminated with standard Gaussian noise as before, the likelihood for $g$ given $\x_i$, $\x_j$ and $y$ is
 
 \begin{align}
-\mathcal{P}(y|\x_i,\x_j,g) &= \Phi[g(\x_i, \x_j)y]\,.\label{Eqn:preference_likelihood2}
+\mathbb{P}(y|\x_i,\x_j,g) &= \Phi[g(\x_i, \x_j)y]\,.\label{eqn:preference_likelihood2}
 \end{align}
 
-Since $g$ is obtained from $f$ through a linear operation, the GP prior on $f$ induces a GP prior on $g$.
-The covariance function $k_\text{pref}$ of the GP prior on $g$ can be computed from the covariance function $k$ of the GP on $f$ as $k_\text{pref}((\x_i,\x_j),(\x_k,\x_l)) = k(\x_i,\x_k) + k(\x_j,\x_l) - k(\x_i,\x_l) - k(\x_j,\x_k)$. The derivations can be found in Section 1 of the supplementary material. We call $k_\text{pref}$ the \emph{preference kernel}. The same kernel function can be derived from a large margin classification viewpoint \citep{Furnkranz2010}. However, to our knowledge, the preference kernel has not been used previously for GP-based models.	
-
-The combination of (\ref{Eqn:preference_likelihood2}) with a GP prior based on the preference kernel allows us to transform the pairwise preference learning problem into  binary classification with GPs. This means that state-of-the-art methods for GP binary classification, such as expectation propagation \citep{Minka2001}, can be applied directly to preference learning. Furthermore, the simplified likelihood (\ref{Eqn:preference_likelihood2}) allows us to implement complex methods such as the multi-user approach which is described in the following section.
-
-% ##     ## ##     ## ##       ######## ####         ##     ##  ######  ######## ########  
-% ###   ### ##     ## ##          ##     ##          ##     ## ##    ## ##       ##     ## 
-% #### #### ##     ## ##          ##     ##          ##     ## ##       ##       ##     ## 
-% ## ### ## ##     ## ##          ##     ##  ####### ##     ##  ######  ######   ########  
-% ##     ## ##     ## ##          ##     ##          ##     ##       ## ##       ##   ##   
-% ##     ## ##     ## ##          ##     ##          ##     ## ##    ## ##       ##    ##  
-% ##     ##  #######  ########    ##    ####          #######   ######  ######## ##     ## 
-
-\subsection{Multi-user preference learning}
-
-In the previous chapter we assumed that the data is consitsent with a single user's preferences. However, in many real time applications the data is actually produced by multiple users, whose preferences may deviate from each other. The goal of multi-user preference learning is to devise a model which can model preferences expressed by multiple users. As a na\:{i}ve extension of the single-user learning approach, one could independently model the latent preference function  for each user separately, and carry out inference and prediction that way. 
-
-A more sophisticated approach to the multi-user problem is to assume common structure in the user latent functions. In particular, we assume a set of $D$ shared latent functions, $h_d:\mathcal{X} \mapsto \mathbb{R}$ for $d=1,\ldots,D$, such that the user latent functions are  generated by a linear combination of these functions, namely
-
-\begin{equation}
-	g_{u}(\mathbf{x}_j,\mathbf{x}_k)=\sum_{d=1}^{D}w_{u,d}h_{d}(\mathbf{x}_j,\mathbf{x}_k)\,,\label{Eqn:preference_expressionG}
-\end{equation}
-
-here $w_{u,d}\in \mathbb{R}$ is the weight given to function $h_d$ for user $u$. We place a GP prior over the shared latent functions $h_{1},\ldots,h_{D}$ using the preference kernel described in the previous section. This model allows the preferences of the different users to share some common structure represented by the latent functions $h_{1},\ldots,h_{D}$. This approach is similar to dimensionality reduction methods that are commonly used for addressing collaborative filtering problems \citep{Stern2009,raiko2007}.
-
-We may extend this model further to the case in which, for each user $u$, there is a feature vector $\mathbf{u}_u \in \mathcal{U}$ containing information that might be useful for prediction. We denote by $\mathbf{U}$ the set of all the users' feature vectors, that is, $\mathbf{U} = \{\mathbf{u}_1,\ldots,\mathbf{u}_U\}$. The user features are incorporated now by placing a separate GP prior over the users weights. In particular, we replace the scalars $w_{u,d}$ in (\ref{Eqn:preference_expressionG}) with functions $w_d'(\mathbf{u}_u):\mathcal{U}\rightarrow\mathcal{\mathbb{R}}$.  These weight functions describe the contribution of shared latent function $h_d$ to the user latent function $g_u$ as a function of the user feature vector $\mathbf{u}_u$.
-
-In the multi-user setting we are given a list
-$\List=\{p_1,\ldots,p_P\}$ with all the \emph{pairs} of items evaluated by the users, where $P\leq I(I-1)/2$ (the maximum number of pairs). The data consists of $\List$, the sets of feature vectors for the users $\mathbf{U}$ (if available), the item features $\mathbf{X}=\{\mathbf{x}_1,\ldots,\mathbf{x}_I\}$, and $U$ sets of preference judgements, one for each user, $\mathcal{D}=\{\{z_{u,i},y_{u,i}\}_{i=1}^{M_u}\}_{u=1}^{U}$, where $z_{u,i}$ indexes the $i$-th pair evaluated by user $u$, $y_{i,u}=1$ if this user prefers the first item in the pair to the second and $y_{i,u}=-1$ otherwise. $M_u$ is the number of  preference judgements made by the $u$-th user.
-
-\subsection{Probabilistic description}
-
-To address the task of predicting preference on unseen item pairs we cast the model into a probabilistic framework. Let $\mathbf{G}$ be an $U\times P$ `user-function' matrix, where each row corresponds to a particular user's latent function, that is, the entry in the $u$-th column and $i$-th row is  $g_{u,i}= g_u(\mathbf{x}_{\alpha(i)},\mathbf{x}_{\beta(i)})$ and $\alpha(i)$ and $\beta(i)$ denote respectively the first and second item in the $i$-th pair from $\mathcal{L}$. Let $\mathbf{H}$ be a $D\times P$ `shared-function' matrix, where each row represents the shared latent functions, that is, the entry in the $d$-th row and $i$-th column is  $h_{d,i}= h_d(\mathbf{x}_{\alpha(i)},\mathbf{x}_{\beta(i)})$. Finally, we introduce the $U \times D$ weight matrix $\mathbf{W}$ such that each row contains a user's weights, that is, the entry in the $u$-th row and $d$-th column of this matrix is $w_d'(\mathbf{u}_u)$. Note that $\mathbf{G} = \mathbf{W} \mathbf{H}$ represents equation (\ref{Eqn:preference_expressionG}) in matrix form. Let $\mathbf{T}$ be the $U\times P$ target matrix given by $\mathbf{T} = \text{sign}[\mathbf{G} + \mathbf{E}]$, where $\mathbf{E}$ is an $U \times P$ noise matrix whose entries are sampled i.i.d. from a standard Gaussian distribution and the function ``$\text{sign}$'' retains only the sign of the elements in a matrix.  The observations $y_{u,i}$ in $\mathcal{D}=\{\{z_{u,i},y_{u,i}\}_{i=1}^{M_u}\}_{u=1}^{U}$ are mapped to the corresponding entries of $\mathbf{T}$ using $t_{u,z_{u,i}} = y_{u,i}$. Let $\mathbf{T}^{(\mathcal{D})}$ and $\mathbf{G}^{(\mathcal{D})}$ represent the elements of $\mathbf{T}$ and $\mathbf{G}$ corresponding only to the available observations $y_{u,i}$ in $\mathcal{D}$. Then, the likelihood for $\mathbf{G}^{(\mathcal{D})}$ given $\mathbf{T}^{(\mathcal{D})}$ and conditional distribution for $\mathbf{ }^{(\mathcal{D})}$ given $\mathbf{H}$ and $\mathbf{W}$ are
+Note this likelihood function for $g$ is the same as the probit classification likelihood defined in Eqn.\ \eqref{eqn:GPC_model}. Since $g$ is obtained from $f$ through a linear operation, the GP prior on $f$ induces a GP prior on $g$. The prior covariance function $k_\text{pref}$ of the GP prior on $g$ can be computed from the covariance function $k$ of the GP on $f$ as follows (assuming zero mean prior for $f$).
 
 \begin{align}
-	\mathcal{P}(\mathbf{T}^{(\mathcal{D})}|\mathbf{G}^{(\mathcal{D})}) 
-	= \prod_{u=1}^U \prod_{i=1}^{M_u} \Phi[t_{u,z_{u,i}} g_{u,z_{u,i}}]\,\,\,\text{and}\,\,\,
-	\mathcal{P}(\mathbf{G}^{(\mathcal{D})}|\mathbf{W},\mathbf{H}) = 
-	\prod_{u=1}^{U} \prod_{i=1}^{M_u}\delta[g_{u,z_{u,i}}-\mathbf{w}_u\mathbf{h}_{\cdot,z_{u,i}}]\,
+	k_\text{pref}&((\x_i,\x_j),(\x_k,\x_l)) = \cov{f\sim GP_k}{g(\x_i,\x_j)}{g(\x_k,\x_l)}\\
+	&= \cov{f\sim GP_k}{f(\x_i)-f(\x_j)}{f(\x_k) - f(\x_l)}\\
+	&= \expect{f\sim GP_k}\left[\left(f(\x_i)-f(\x_j)\right)\left(f(\x_k)-f(\x_l)\right)\right]\\
+	&= \expect{f\sim GP_k}f_{\x_i}f_{\x_k} + \expect{f\sim GP_k}f_{\x_j}f_{\x_l} - \expect{f\sim GP_k}f_{\x_i}f_{\x_l} - \expect{f\sim GP_k}f_{\x_j}f_{\x_k}\\
+	&= k(\x_i,\x_k) + k(\x_j,\x_l) - k(\x_i,\x_l) - k(\x_j,\x_k) \label{eqn:preference_kernel}
 \end{align}
 
-respectively, where $\mathbf{w}_u$ is the $u$-th row in $\mathbf{W}$, $\mathbf{h}_{\cdot,i}$ is the $i$-th column in $\mathbf{H}$ and $\delta$ represents a point probability mass at zero. We now select the priors for $\mathbf{W}$ and $\mathbf{H}$.  We assume that each function $w_1',\ldots,w_D'$ is sampled \textit{a priori} from a GP with zero mean and specific covariance function. Let $\mathbf{K}_\text{users}$ be the $U \times U$ covariance matrix for entries in each column of matrix $\mathbf{W}$. Then
+We call $k_\text{pref}$ the \emph{preference kernel}. This kernel function for preference learning is not new: the same kernel has been derived from a large margin classification viewpoint by \citet{furnkranz2010}. However, to our knowledge, the preference kernel has not been used previously in Bayesian, Gaussian process-based models, only in our previous work \citep{Houlsby2011,Houlsby2012preference}
 
-\begin{equation}
-	\mathcal{P}(\mathbf{W}|\mathbf{U})=  
-	\prod_{d=1}^D \mathcal{N}(\mathbf{w}_{\cdot,d}|\mathbf{0},\mathbf{K}_\text{users})\,,\label{Eqn:preference_priorW}
-\end{equation}
+The combination of (\ref{eqn:preference_likelihood2}) with a GP prior based on the preference kernel allows us to transform the pairwise preference learning problem into  binary classification with GPs. This means that state-of-the-art methods for GP binary classification, such as expectation propagation \citep{Minka2001}, can be applied readily to preference learning. Furthermore, the simplified likelihood (\ref{eqn:preference_likelihood2}) allows us to implement complex inference problems such as the multi-user hierarchical model described in \citep{Houlsby2012preference}.
 
-where $\mathbf{w}_{\cdot,d}$ is the $d$-th column in $\mathbf{W}$. If user features are unavailable, $\mathbf{K}_\text{users}$ becomes the identity matrix. Finally, we assume that each shared latent function $h_1,\ldots,h_D$ is sampled \textit{a priori} from a GP with zero mean and covariance function given by a preference kernel.  Let $\mathbf{K}_\text{items}$ be the $P \times P$ preference covariance  matrix for the item pairs in $\List$. The prior for $\mathbf{H}$ is then 
+\subsection{Experiments and results}
 
-\begin{equation}
-	\mathcal{P}(\mathbf{H}|\mathbf{X},\List) = 
-	\prod_{j=1}^{D}\mathcal{N}(\mathbf{h}_j|\mathbf{0},\mathbf{K}_\text{items})\,,\label{Eqn:preference_priorH}
-\end{equation}
+To test the performance of BALD on preference learning we use the \emph{cpu, cart} and \emph{kinematics} regression datasets from the LIACC Machine Learning Data Set Repository \citep{LIACCRepository}. We processed each of these data sets to yield a binary preference task following the procedure described in in \cite{Chu2005}: Pairs of items were randomly selected and regression target values were used to decide the direction of preference to form a pool of training points for pool-based active learning. The performance was tested on a held-out test data set generated in a similar fashion.
 
-where $\mathbf{h}_j$ is the $j$-th row in $\mathbf{H}$. The resulting posterior for $\mathbf{W}$, $\mathbf{H}$ and $\mathbf{G}^{(\mathcal{D})}$ is
+Results on the three datasets are shown in Fig.\ \ref{fig:BALD_pref_results}.  Surprisingly, despite our expectations, we found that random sampling from the pool provides reasonable performance, and active selection of measurements does not radically improve the speed of learning. Across the three data sets all studied methods perform well. BALD seems to struggle in the initial phase of learning on the \emph{cpu} dataset, for which I did not find a convincing explanation. On the \emph{kinematics} dataset the difference between methods is more apparent, and here BALD provides the best performance among all methods tested.
 
-\begin{equation}
-	\mathcal{P}(\mathbf{W},\mathbf{H},\mathbf{G}^{(\mathcal{D})}|\mathbf{T}^{(\mathcal{D})},\mathbf{X},\List) =
-	\frac{\mathcal{P}(\mathbf{T}^{(\mathcal{D})}|\mathbf{G}^{(\mathcal{D})})
-	\mathcal{P}(\mathbf{G}^{(\mathcal{D})}|\mathbf{W},\mathbf{H})\mathcal{P}(\mathbf{W}|\mathbf{U})\mathcal{P}(\mathbf{H}|\mathbf{X},\List)} 
-	{\mathcal{P}(\mathbf{T}^{(\mathcal{D}}|\mathbf{X},\List)}\,.\label{Eqn:preference_post}
-\end{equation}
+In follow-up work we extended BALD to collaborative preference learning, where preference judgements are elicited from multiple experts \citep{Houlsby2012preference}. The interested reader is referred to this paper for further experimental validation involving real-world preference datasets.
+% 
+\begin{figure}
+	\begin{center}
+	\begin{tabular}{ccc}
+	\input{figs/BALD/GPC/prefcpu2.tikz}&
+	\input{figs/BALD/GPC/prefcart2.tikz}&
+	\input{figs/BALD/GPC/prefkinem2.tikz}
+	\end{tabular}
+	\end{center}
+	\caption[Evaluation of Bayesian active learning of binary preference relations]{Evaluation of the accuracy of active learning algorithms on various binary preference learning datasets. Methods used are random query (\ref{plots:rand}), BALD (\ref{plots:BALD}),  MES (\ref{plots:maxent}), QBC with 2 ($\mbox{QBC}_2$, \ref{plots:QBC2}) and 100 ($\mbox{QBC}_{100}$, \ref{plots:QBC100}) committee members, active SVM (\ref{plots:SVM}), IVM (\ref{plots:IVM}), decision theoretic \citep{Kapoor2007} (\ref{plots:dec}). For prediction, each method uses Gaussian process classification or SVM with the preference kernel from Eqn.\ \eqref{eqn:preference_kernel}.  See text for analysis. \label{fig:BALD_pref_results}}
+\end{figure}
 
-Given a new item pair $p_{P+1}$, we can compute the predictive distribution for the preference of the $u$-th user ($1 \leq u \leq U$) on this pair by integrating out the parameters $\mathbf{H},\mathbf{W}$ and $\mathbf{G}^{(\mathcal{D})}$ as follows:
+\section{Summary and conclusions}
 
-\begin{align}
-	\mathcal{P}(t_{u,P+1}|&\mathbf{T}^{(\mathcal{D})},\mathbf{X},\List,p_{P+1}) =
-	\int \mathcal{P}(t_{u,P+1}|g_{u,P+1}) \mathcal{P}(g_{u,P+1}|\mathbf{w}_u,\mathbf{h}_{\cdot,P+1})\notag\\
-	 & \quad \mathcal{P}(\mathbf{h}_{\cdot,P+1}|\mathbf{H},\mathbf{X},\List,p_{P+1})
-	\mathcal{P}(\mathbf{H},\mathbf{W},\mathbf{G}^{(\mathcal{D})}|\mathbf{T}^{(\mathcal{D})},\mathbf{X},\List)
-	\,d\mathbf{H}\,d\mathbf{W}\,d\mathbf{G}^{(\mathcal{D})}\,,
-	\label{Eqn:preference_predictions}
-\end{align}
+In this chapter I presented BALD, or Bayesian active learning by Disagreement, a practical algorithm for Bayesian active learning based on Shannon's mutual information. BALD exploits the symmetry of Shannon's mutual information and expresses the well known criterion in terms of the Shannon entropy of predictive distributions in the observation space. We have shown how BALD can be implemented to perform Bayesian active classification and preference learning in state-of-the art Gaussian process-based models in a computationally efficient way. Our experiments show that BALD compares favourably to other active learning methods, including the popular active SVMs \citep{Tong2002}.
 
-where $\mathcal{P}(t_{u,P+1}|g_{u,P+1})=\Phi[t_{u,P+1}g_{u,P+1}]$, $\mathcal{P}(g_{u,P+1}|\mathbf{w}_u,\mathbf{h}_{\cdot,P+1})=\delta[ g_{u,P+1} - \mathbf{w}_u \mathbf{h}_{\cdot,P+1}]$,
-
-\begin{equation}
-	\mathcal{P}(\mathbf{h}_{\cdot,P+1}|\mathbf{H},\mathbf{X},\List,p_{P+1})
-	=\prod_{d=1}^D \mathcal{N}(h_{d,P+1}|\mathbf{k}_\star^\text{T} \mathbf{K}^{-1}_\text{items} \mathbf{h}_d, k_\star -
-	\mathbf{k}_\star^\text{T}  \mathbf{K}^{-1}_\text{items} \mathbf{k}_\star)
-	\label{Eqn:preference_predictive}
-\end{equation}
-
-$k_\star$ is the prior variance of $h_d(\mathbf{x}_{\alpha(P+1)}, \mathbf{x}_{\beta(P+1)})$ and $\mathbf{k}_\star$ is a $P$-dimensional vector that contains the prior covariances between $h_d(\mathbf{x}_{\alpha(P+1)},  mathbf{x}_{\beta(P+1)})$ and $h_d(\mathbf{x}_{\alpha(1)}, \mathbf{x}_{\beta(1)}),\ldots,h_d(\mathbf{x}_{\alpha(P)}, \mathbf{x}_{\beta(P)})$. Computing (\ref{Eqn:preference_post}) or (\ref{Eqn:preference_predictive}) is infeasible and approximations must be used. For this, we use a combination of expectation propagation (EP) \citep{Minka2001} and variation Bayes (VB) \citep{Ghahramani2001}. Empirical studies show that EP obtains state-of-the-art performance  in the related problem of GP binary classification \citep{Nickisch2008}.
-
-We want to learn user preferences with the proposed model from the least amount of data possible. Therefore we desire to query users actively about their preferences on the most informative pairs of items \citep{Brochu2007active}. Next, we describe a novel method to implement this strategy. This method exploits the preference kernel and so may be trivially generalized to GP binary classification problems also.
-
+Unfortunately, as BALD is built on the unique symmetry property of Shannon's mutual information, it does not generally apply to other instances of the scoring rule-based active learning framework described in Chapter \ref{sec:active_learning_framework}. Indeed, among the examples of scoring rules given in Chapter \ref{sec:scoring_rules}, no other value of information functional is symmetric.

@@ -242,6 +242,23 @@
   \begin{quote} \begin{center}}
 {\end{center} \end{quote} \end{alwayssingle}}
 
+% STATEMENT
+%
+% The declaration environment puts a large, bold, centered 
+% "Declaration of originality" label at the top of the page. The declaration
+% themselves appear in a quote environment, i.e. tabbed in at both sides, and
+% on its own page.
+
+\newenvironment{declaration}
+{\pagestyle{empty}
+\begin{alwayssingle}
+\begin{center}
+\vspace*{1.5cm}
+{\Large \bfseries Declaration of originality}
+\end{center}
+\vspace{0.5cm}
+\begin{quote}}
+{\end{quote}\end{alwayssingle}}
 
 % ACKNOWLEDGEMENTS
 %

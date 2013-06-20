@@ -4,6 +4,46 @@
 		"selected_items":
 		[
 			[
+				"part",
+				"part:2"
+			],
+			[
+				"pa",
+				"part:1"
+			],
+			[
+				"query",
+				"query Selective sampling using the query by committee algorithm"
+			],
+			[
+				"Normal",
+				"fig:Normal_varonly_comparison"
+			],
+			[
+				"kern",
+				"fig:Normal_kernel_comparison"
+			],
+			[
+				"Ber",
+				"fig:Bernoulli_squareddistance"
+			],
+			[
+				"quasi",
+				"quasi Quasi-{N}ewton methods -- a new direction"
+			],
+			[
+				"Minka",
+				"Minka Expectation propagation for approximate {Bayesian} inference"
+			],
+			[
+				"BALD",
+				"sec:BALD"
+			],
+			[
+				"rearra",
+				"eqn:rearrangement"
+			],
+			[
 				"ker",
 				"sec:kernel_score"
 			],
@@ -255,7 +295,7 @@
 			"file": "latex/part1/01_scoring_rules.tex",
 			"settings":
 			{
-				"buffer_size": 61297,
+				"buffer_size": 60731,
 				"line_ending": "Unix"
 			}
 		},
@@ -263,31 +303,49 @@
 			"file": "latex/part3/02_GP_BALD.tex",
 			"settings":
 			{
-				"buffer_size": 47106,
+				"buffer_size": 47783,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "SELECT object_twuser_id,\n    COUNT(DISTINCT subject_twuser_id) AS enno,\n    SUM(1/0.1/99.4991624734\n        + 1/0.1/99.4991624734 * \n        (1-EXP(-90/99.4991624734)) * --this is because we have only 90 days of data\n        retweet_rate\n    ) AS retweets_per_day,\n    SUM(1/0.1/99.4991624734\n        + 1/0.1/99.4991624734 * \n        (1-exp(-90/99.4991624734)) * --this is because we have only 90 days of data\n        mention_rate\n    ) AS mentions_per_day,\n    --SUM(IF retweet_rate>0.5 THEN 1 ELSE 0) AS unique_retweets,\n    --SUM(IF mention_rate>0.5 THEN 1 ELSE 0) AS unique_mentions,\n    -- hard: SUM(retweet_rate) AS total_unique_retweets_per_day,\n    -- hard: SUM(mentions_rate) AS total_unique_mentions_per day,\n    RANK () OVER (ORDER BY enno DESC) AS rnk\nFROM pi0607.influence_graph\nGROUP BY object_twuser_id\nORDER BY enno DESC\nLIMIT 40;",
+			"settings":
+			{
+				"buffer_size": 846,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "expected number of people mentioning someone during a day:\n\nassuming we have seen everyone who's not \n\n1 - exp(-x)\n\nx = 1/0.1/99.5 * u + 1/0.1/99.5",
+			"settings":
+			{
+				"buffer_size": 147,
+				"line_ending": "Unix",
+				"name": "expected number of people mentioning someone durin"
+			}
+		},
+		{
+			"contents": "Yes, interesting, thanks.\n\nBTW: \"Modern psychology recognises five dimensions of personality: extroversion, agreeableness, conscientiousness, neuroticism and openness to experience.\"\nThis theory is like 50 years old, anything but modern :)\nFerenc",
+			"settings":
+			{
+				"buffer_size": 246,
+				"line_ending": "Unix",
+				"name": "Yes, interesting, thanks."
 			}
 		},
 		{
 			"file": "latex/part3/03_quantum.tex",
 			"settings":
 			{
-				"buffer_size": 45192,
+				"buffer_size": 45189,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "latex/part1/01_scoring_rules.tex.bak",
+			"contents": "Searching 87 files for \"\n%!TEX root = main.tex\n%!TEX root = main.tex\n%!TEX root = ../main.tex\"\n\n0 matches across 0 files\n\n\nSearching 87 files for \"\n%!TEX root = main.tex\n%!TEX root = main.tex\nTEX root = ../main.tex\"\n\n0 matches across 0 files\n\n\nSearching 87 files for \"\n%!TEX root = main.tex\n%!TEX root = main.tex\n%!TEX root = main.tex\"\n\n0 matches across 0 files\n\n\nSearching 87 files for \"%!TEX root = main.tex\"\n\n/Users/fhuszar/Dropbox/thesis/latex/conclusions.tex:\n    1: %!TEX root = main.tex\n    2  \n    3  Machine learning is a mess. This thesis finally brings order and clarity to what otherwise appears as a mix of muddled thoughts. Just kidding.\n\n/Users/fhuszar/Dropbox/thesis/latex/introduction.tex:\n    1: %!TEX root = main.tex\n    2  \\lipsum[1-5]\n\n/Users/fhuszar/Dropbox/thesis/latex/notation.tex:\n    1: %!TEX root = main.tex\n    2  \\newcommand{\\TODO}[1]{\\textbf{TODO: #1}}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/part1_main.tex:\n    1: %!TEX root = main.tex\n    2  \\part{Scoring rules, Divergences and Information}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/part2_main.tex:\n    1: %!TEX root = main.tex\n    2  \\part{Approximate Bayesian inference}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/part3_main.tex:\n    1: %!TEX root = main.tex\n    2  \\part{Optimal Experiment Design}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/preamble.tex:\n    1: %!TEX root = main.tex\n    2  \\newtheorem{theorem}{Theorem}\n    3  \\newtheorem{corollary}{Corollary}\n\n7 matches across 7 files\n\n\nSearching 86 files for \"usetikzlibrary\"\n\n/Users/fhuszar/Dropbox/thesis/latex/preamble.tex:\n   11  \\usepackage[paper=a4paper]{geometry}\n   12  \\usepackage{tikz,pgfplots}\n   13: \\usetikzlibrary{external}\\tikzexternalize\n   14  \n   15  \\newtheorem{theorem}{Theorem}\n\n1 match in 1 file\n\n\nSearching 1 file for \"\\label:{fig:\"\n\n0 matches across 0 files\n\n\nSearching 1 file for \"\\label{fig:\"\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex:\n  208  \\includegraphics[width=\\columnwidth]{figs/herding/fig1_v2}\n  209  \\caption[Sequential Bayesian quadrature versus kernel herding]{The first 8 samples from sequential Bayesian quadrature, versus the first 20 samples from herding.  Only 8 weighted \\sbq{} samples are needed to give an estimator with the same maximum mean discrepancy as using 20 herding samples with uniform weights.  Relative sizes of samples indicate their relative weights.}\n  210: \\label{fig:fig1}\n  211  \\end{figure} \n  212  \n  ...\n  290  \\includegraphics[width=\\columnwidth]{figs/herding/bq_intro4}\n  291  \\caption[An illustration of Bayesian quadrature]{An illustration of Bayesian Quadrature.  The function $f(x)$ is sampled at a set of input locations.  This induces a Gaussian process posterior distribution on $f$, which is integrated in closed form against the target density, $p(\\vx)$.  Since the amount of volume under $f$ is uncertain, this gives rise to a (Gaussian) posterior distribution over $Z_{f,p}$.}\n  292: \\label{fig:bq_intro} \\label{fig:fig1}\n  293  \\end{figure}\n  294  \n  ...\n  353  	\\includegraphics[width=\\columnwidth]{figs/herding/weights_v1_n100}\n  354  	\\caption[Empirical distribution of weights in sequential Bayesian quadrature]{A set of optimal weights given by \\bq{}, after 100 \\sbq{} samples were selected on the distribution shown in Figure \\ref{fig:fig1}.  Note that the optimal weights are spread away from the uniform weight ($\\frac{1}{N}$), and that some weights are even negative.  The sum of these weights is 0.93.}\n  355: 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  356  \\end{figure}\n  357  \n  ...\n  365  	\n  366  		\\caption[The concept of shrinkage in Bayesian quadrature]{An example of Bayesian shrinkage in the sample weights.  In this example, the kernel width is approximately $\\nicefrac{1}{20}$ the width of the distribution being considered.  Because the prior over functions is zero mean, in the small sample case the weights are shrunk towards zero.  The weights given by simple Monte Carlo and herding do not exhibit shrinkage. }\n  367: 	\\label{fig:weights_shrinkage} 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  368  \\end{figure}\n  369  \n  ...\n  495  \\includegraphics[width=\\columnwidth]{figs/herding/expected_variance_v7_400}\n  496  \\caption[Discrepancy of Bayesian quadrature, herding and random sampling]{The maximum mean discrepancy, or expected error of several different quadrature methods.  Herding appears to approach a rate close to $\\mathcal{O}(1/N)$.  \\sbq{} appears to attain a faster, but unknown rate.}\n  497: \\label{fig:mmd_curve}\\label{fig:weights_shrinkage} 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  498  \\end{figure}\n  499  %\n  ...\n  522  \\includegraphics[width=\\columnwidth]{figs/herding/error_curve_rkhs_400_v4}\n  523  \\caption[Empirical error of Bayesian quadrature, herding and random sampling]{Within-model error: The empirical error rate in estimating $Z_{f,p}$, for several different sampling methods, averaged over 250 functions randomly drawn from the RKHS corresponding to the kernel used.}\n  524: \\label{fig:error_curve}\\label{fig:mmd_curve}\\label{fig:weights_shrinkage} 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  498  \n  525  \\end{figure}\n  526  %\n  ...\n  532  \\includegraphics[width=\\columnwidth]{figs/herding/bound_curve_rkhs}\n  533  \\caption[Illustrating MMD as an upper bound on empirical error rate]{The empirical error rate in estimating $Z_{f,p}$,  for the \\sbq{} estimator, on 10 random functions drawn from the RKHS corresponding to the kernel used.  Also shown is the upper bound on the error rate implied by the $\\mmd$.}\n  534: \\label{fig:bound_curve}\\label{fig:error_curve}\\label{fig:mmd_curve}\\label{fig:weights_shrinkage} 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  535  \\end{figure}\n  536  \n  ...\n  548  \\includegraphics[width=\\columnwidth]{figs/herding/error_curve_outmodel_400_v3}\n  549  \\caption[Out-of-model error of Bayeisan quadrature, herding and random sampling]{Out-of-model error: The empirical error rates in estimating $Z_{f,p}$, for several different sampling methods, averaged over 250 functions drawn from outside the RKHS corresponding to the kernels used.}\n  550: \\label{fig:error_curve_outmodel}\\label{fig:bound_curve}\\label{fig:error_curve}\\label{fig:mmd_curve}\\label{fig:weights_shrinkage} 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  551  \\end{figure}\n  552  %\n\n8 matches in 1 file\n\n\nSearching 86 files for \"asmussen\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/bibliography/thesis.bib:\n  146  \n  147  @article{quinonero2005,\n  148: 	Author = {Qui{\\~n}onero-Candela, Joaquin and Rasmussen, Carl Edward},\n  149  	Date-Added = {2013-05-12 16:04:56 +0000},\n  150  	Date-Modified = {2013-05-12 16:05:03 +0000},\n  ...\n  773  \n  774  @article{nickisch2008gpc,\n  775: 	Author = {Nickisch, H. and C. E. Rasmussen},\n  776  	Date-Added = {2013-04-16 17:25:49 +0000},\n  777  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  793  \n  794  @article{candela05sparseGP,\n  795: 	Author = {J. Qui{\\`O}onero-Candela and C. E. Rasmussen},\n  796  	Date-Added = {2013-04-16 17:25:49 +0000},\n  797  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  958  	Year = {2002}}\n  959  \n  960: @book{rasmussen06GP,\n  961  	Address = {Cambridge, MA, USA},\n  962: 	Author = {Carl Edward Rasmussen and Christopher K. I. Williams},\n  963  	Date-Added = {2013-04-16 17:25:49 +0000},\n  964  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n 1158  	Year = {2006}}\n 1159  \n 1160: @book{rasmussen2006,\n 1161: 	Author = {Rasmussen, Carl Edward and Williams, Christopher K. I.},\n 1162  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1163  	Date-Modified = {2013-04-16 17:12:02 +0000},\n ....\n 1192  \n 1193  @article{Nickisch2008,\n 1194: 	Author = {Nickisch, Hannes and Rasmussen, Carl Edward},\n 1195  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1196  	Date-Modified = {2013-04-16 17:14:05 +0000},\n ....\n 1623  @incollection{BZMonteCarlo,\n 1624  	Address = {Cambridge, MA},\n 1625: 	Author = {C. E. Rasmussen and Z. Ghahramani},\n 1626  	Booktitle = {Advances in Neural Information Processing Systems},\n 1627  	Date-Added = {2013-04-16 17:05:02 +0000},\n ....\n 1697  	Year = {2012}}\n 1698  \n 1699: @article{rasmussen38gaussian,\n 1700: 	Author = {Rasmussen, C.E. and Williams, CKI},\n 1701  	Date-Added = {2013-04-16 17:05:02 +0000},\n 1702  	Date-Modified = {2013-04-16 17:05:02 +0000},\n ....\n 1741  	Year = {2005}}\n 1742  \n 1743: @article{Rasmussen2005,\n 1744: 	Author = {Rasmussen, C.E. and Williams, C.K.I.},\n 1745  	Date-Added = {2013-04-16 16:35:16 +0000},\n 1746  	Date-Modified = {2013-04-16 16:35:31 +0000},\n ....\n 1881  \n 1882  @inproceedings{Kuss2005,\n 1883: 	Author = {M. Kuss and C. E. Rasmussen},\n 1884  	Booktitle = {NIPS},\n 1885  	Date-Added = {2013-04-16 16:35:16 +0000},\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex:\n   22  The likelihood $p(\\data\\vert\\param)$ describes how data is related to the parameters $\\param$, and $p(\\param)$ is a prior distribution which capture's one a priori expectations about what the value of $\\param$ may be. The posterior distribution $p_\\data = p(\\param\\vert\\data)$ captures all statistically relevant information that the data $\\data$ provides about $\\param$, and it is therefore of central importance.\n   23  \n   24: The marginal likelihood, also called the model evidence $Z = \\int p(\\data\\vert\\param) p(\\param) d\\param$ is also of interest. It is often used to quantify how well a Bayesian model -- the combination of likelihood and prior -- fit the data. When the model involves additinal parameters or hyper-parameters that are not modelled probabilistically via prior distributions, it is common practice to learn their values by maximising model evidence \\citep[see \\eg][Chapter 5]{Rasmussen2006}.\n   25  \n   26  In practically interesting Bayesian models, the posterior distribution and model evidence are often computationally intractable to obtain and therefore one has to resort to approximations. The most popular methods for Bayesian approximate inference are variational inference and Markov chain Monte Carlo.\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex:\n  362  This means that the estimate converges for any bounded measurable function $f$. The speed of convergence, however, may not be as fast.\n  363  \n  364: Therefore it is crucial that the kernel we choose is representative of the function or functions $f$ we will integrate.  For example, in our experiments, the convergence of herding was sensitive to the width of the Gaussian kernel.  One of the major weaknesses of kernel methods in general is the difficulty of setting kernel parameters.  A key benefit of the Bayesian interpretation of herding and MMD presented in this paper is that it provides a recipe for adapting the Hilbert space to the observations $f(x_n)$.  To be precise, we can fit the kernel parameters by maximizing the marginal likelihood of Gaussian process conditioned on the observations.  Details can be found in \\citep{rasmussen38gaussian}.\n  365  \n  366  \\subsection{Computational Complexity}\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex:\n   81  BALD exploits the fact that in many active learning applications the output space $\\Ye$ is often simpler than the parameter space $\\Theta$. Here I consider the problem of active learning for binary classification, when the output takes one of two possible values $y \\in \\{-1,1\\}$. Given the simplicity of the outputs, binary classification is a highly relevant use-case for BALD.\n   82  \n   83: I will use a non-parametric Bayesian classification model, Gaussian process classification \\citep[GPC,][]{rasmussen06GP} to demonstrate the usefulness of BALD: GPC appears to be an especially challenging problem for information-theoretic active learning because its parameter space is infinite. Therefore, computing entropy of the posterior involves nontrivial quantities. However, by using the BALD approach and Eqn.\\ \\eqref{eqn:rearrangement} we are able to fully calculate the relevant information quantities without having to work out entropies of infinite dimensional objects. \n   84  \n   85  \n   ..\n   94  \\TODO{I need an appendix on kernels and Gaussian processes}\n   95  \n   96: We consider the probit case where, given the value of $f$, the binary label $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\citep{rasmussen2005}.\n   97  \n   98  Posterior inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. This is addressed by using approximate inference methods. The most commonly used approximate inference methods for Gaussian process classification are expectation propagation \\citep[EP,][]{Minka2002}, Laplace's approximation \\citep{williams1998}, assumed density filtering \\citep[ADF,][]{csato2000} and sparse methods \\citep{candela05sparseGP}. These all approximate the non-Gaussian posterior by a Gaussian \\citep{Nickisch2008}, but differ in the optimisation criterion and other restrictions. Throughout this chapter I will assume that we are provided with some Gaussian approximation to the GPC posterior resulting from one of these methods, though the active learning method is agnostic as to which method produced this estimate. Given the sequential nature of active learning, fast on-line methods \\citep{Csato2002} are particularly well suited for the task. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where approximate inference is exploited.\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/BALD-GPC/AL_NIPS2011.tex:\n  124  	f \\sim \\mathrm{GP}(\\mu(\\cdot),k(\\cdot,\\cdot)) \\qquad \\y\\vert\\x,f \\sim\\mathrm{Bernoulli}(\\Phi(f(\\x))) \n  125  \\end{align}\n  126: The latent parameter, now called $f$ (previously denoted as $\\param$), is a function $\\mathcal{X}\\rightarrow\\mathbb{R}$, and is assigned a Gaussian process prior with mean $\\mu(\\cdot)$ and covariance function $k(\\cdot,\\cdot)$. We consider the probit case where given the value of $f$, $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\cite{rasmussen2005}.\n  127  \n  128: Inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. The most commonly used approximate inference methods -- EP,  Laplace approximation, Assumed Density Filtering and sparse methods -- all approximate the posterior by a Gaussian \\cite{rasmussen2005}. Throughout this section we will assume that we are provided with such a Gaussian approximation from one of these methods, though the active learning algorithm does not care which. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where such an approximation is exploited.\n  129  \n  130  Now, we will compute the informativeness of a query $\\x$ using Eqn.  \\eqref{eqn:rearrangement}.  The entropy of the binary output variable $y$ given a fixed $f$ can be expressed in terms of the binary entropy function $h$: \n  ...\n  181  \\end{align}\n  182  \n  183: In the context of GP models, hyperparameters typically control the smoothness or spatial length-scale of functions. If we maintain a posterior distribution over these hyperparameters, which we can do e.\\,g.\\ via Hamiltonian Monte Carlo, we can choose either to treat them as nuisance parameters $\\theta^-$ and use Eq.\\ \\ref{eqn:BALD_bipartite}, or to include them in $\\theta^+$ and perform active learning over them as well. In certain cases, such as automatic relevance determination\\cite{rasmussen2005}, it may even make sense to treat hyperparameters as variables of primary interest, and the function $f$ itself as nuisance parameter $\\theta^-$.\n  184  \n  185  \\subsection{Preference Learning}\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/lossBayes/lossBayes.tex:\n  246  \\section{SUPERVISED LEARNING} \\label{s:examples}\n  247  \n  248: In this section, we make our framework more concrete by investigating it in the predictive setting presented in \\secref{ss:predictive}. We recall that in order to apply our framework, we need to specify the loss, the action space, the Bayesian observation model and a tractable family $\\mathcal{Q}$ of approximate distributions over the latent variable $\\theta$. In the predictive setting, an action is a prediction function $h:\\mathcal{X}\\rightarrow\\mathcal{Y}$. We let the action space $\\mathcal{H}$ be the set of all possible such functions here -- we are thus in the non-parametric prediction regime where we are free to make arbitrary pointwise decision on $\\mathcal{X}$. This gives us rich predictive possibilities as well as actually enables us to analytically compute $h_q$, as we will see in the next paragraph. For the observation model, we consider Bayesian non-parametric probabilistic models based on Gaussian processes (GPs), which have been successfully applied to model a wide variety of phenomena in the past~\\citep{rasmussen06GP}. %%OPTIONAL\\footnote{Considering the non-parametric setup reduces the issue of model misspecification. Moreover, GPs are often applied using approximate inference and thus provide a useful illustration for our framework.}.\n  249  In \\secref{ss:GPR}, we first look at Gaussian process regression. In this case, we can obtain an analytic form for $p_\\dataset$ and $\\mathcal{R}_{p_\\dataset}(h_q)$ which gives us some insights about the approximation framework as well as when minimizing the KL divergence can be suboptimal. Because the quadratic cost function is not bounded (and so $M = \\infty$), we cannot directly apply our loss-EM algorithm for regression, but we can nevertheless get useful insights which suggest future research directions for regression with sparse GPs. In section~\\ref{ss:GPC}, we consider Gaussian process classification (GPC) which will provide a test bed for the loss-EM algorithm. In both cases, we use a GP as our prior over parameters and let $\\mathcal{Q}$ also be a family of GPs.\n  250  \n  ...\n  384  To investigate the effect of the test distribution $p(x)$ on our method, we generated three different transductive test sets of size 1000, with inputs sampled from $\\mathcal{U}(0,1)$, $\\mathcal{U}(0.2,1.2)$ and $\\mathcal{U}(0.5,1.5)$ respectively (columns of \\tableref{tab:results}), and repeated these experiments 10 times to get significance results. We used five different loss matrices: the loss for false negatives was constant at $c_{-}=1$, the loss for false positives $c_{+}$ was varied so that the decision threshold $p_{thresh}=\\frac{c_{+}}{c_{-} + c_{+}}$ changed linearly between 0.5 and 0.05 (rows of \\tableref{tab:results}).\n  385  \n  386: For each dataset, we compared three methods for approximate inference: Laplace approximation, expectation propagation (EP) and loss-EM (run separately for each loss and test set combination). Both Laplace and EP are standard approaches to GP classification~\\citep{rasmussen06GP}. To evaluate the performance of the methods, we used the following criterion based on the posterior risk:\n  387  \\addtolength{\\abovedisplayskip}{-1mm}\n  388  \\addtolength{\\belowdisplayskip}{-1mm}\n\n23 matches across 6 files\n\n\nSearching 86 files for \"asmussen\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/bibliography/thesis.bib:\n  146  \n  147  @article{quinonero2005,\n  148: 	Author = {Qui{\\~n}onero-Candela, Joaquin and Rasmussen, Carl Edward},\n  149  	Date-Added = {2013-05-12 16:04:56 +0000},\n  150  	Date-Modified = {2013-05-12 16:05:03 +0000},\n  ...\n  773  \n  774  @article{nickisch2008gpc,\n  775: 	Author = {Nickisch, H. and C. E. Rasmussen},\n  776  	Date-Added = {2013-04-16 17:25:49 +0000},\n  777  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  793  \n  794  @article{candela05sparseGP,\n  795: 	Author = {J. Qui{\\`O}onero-Candela and C. E. Rasmussen},\n  796  	Date-Added = {2013-04-16 17:25:49 +0000},\n  797  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  958  	Year = {2002}}\n  959  \n  960: @book{Rasmussen2006,\n  961  	Address = {Cambridge, MA, USA},\n  962: 	Author = {Carl Edward Rasmussen and Christopher K. I. Williams},\n  963  	Date-Added = {2013-04-16 17:25:49 +0000},\n  964  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n 1158  	Year = {2006}}\n 1159  \n 1160: @book{rasmussen2006,\n 1161: 	Author = {Rasmussen, Carl Edward and Williams, Christopher K. I.},\n 1162  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1163  	Date-Modified = {2013-04-16 17:12:02 +0000},\n ....\n 1192  \n 1193  @article{Nickisch2008,\n 1194: 	Author = {Nickisch, Hannes and Rasmussen, Carl Edward},\n 1195  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1196  	Date-Modified = {2013-04-16 17:14:05 +0000},\n ....\n 1623  @incollection{BZMonteCarlo,\n 1624  	Address = {Cambridge, MA},\n 1625: 	Author = {C. E. Rasmussen and Z. Ghahramani},\n 1626  	Booktitle = {Advances in Neural Information Processing Systems},\n 1627  	Date-Added = {2013-04-16 17:05:02 +0000},\n ....\n 1697  	Year = {2012}}\n 1698  \n 1699: @article{rasmussen38gaussian,\n 1700: 	Author = {Rasmussen, C.E. and Williams, CKI},\n 1701  	Date-Added = {2013-04-16 17:05:02 +0000},\n 1702  	Date-Modified = {2013-04-16 17:05:02 +0000},\n ....\n 1741  	Year = {2005}}\n 1742  \n 1743: @article{Rasmussen2005,\n 1744: 	Author = {Rasmussen, C.E. and Williams, C.K.I.},\n 1745  	Date-Added = {2013-04-16 16:35:16 +0000},\n 1746  	Date-Modified = {2013-04-16 16:35:31 +0000},\n ....\n 1881  \n 1882  @inproceedings{Kuss2005,\n 1883: 	Author = {M. Kuss and C. E. Rasmussen},\n 1884  	Booktitle = {NIPS},\n 1885  	Date-Added = {2013-04-16 16:35:16 +0000},\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex:\n   22  The likelihood $p(\\data\\vert\\param)$ describes how data is related to the parameters $\\param$, and $p(\\param)$ is a prior distribution which capture's one a priori expectations about what the value of $\\param$ may be. The posterior distribution $p_\\data = p(\\param\\vert\\data)$ captures all statistically relevant information that the data $\\data$ provides about $\\param$, and it is therefore of central importance.\n   23  \n   24: The marginal likelihood, also called the model evidence $Z = \\int p(\\data\\vert\\param) p(\\param) d\\param$ is also of interest. It is often used to quantify how well a Bayesian model -- the combination of likelihood and prior -- fit the data. When the model involves additinal parameters or hyper-parameters that are not modelled probabilistically via prior distributions, it is common practice to learn their values by maximising model evidence \\citep[see \\eg][Chapter 5]{Rasmussen2006}.\n   25  \n   26  In practically interesting Bayesian models, the posterior distribution and model evidence are often computationally intractable to obtain and therefore one has to resort to approximations. The most popular methods for Bayesian approximate inference are variational inference and Markov chain Monte Carlo.\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex:\n  362  This means that the estimate converges for any bounded measurable function $f$. The speed of convergence, however, may not be as fast.\n  363  \n  364: Therefore it is crucial that the kernel we choose is representative of the function or functions $f$ we will integrate.  For example, in our experiments, the convergence of herding was sensitive to the width of the Gaussian kernel.  One of the major weaknesses of kernel methods in general is the difficulty of setting kernel parameters.  A key benefit of the Bayesian interpretation of herding and MMD presented in this paper is that it provides a recipe for adapting the Hilbert space to the observations $f(x_n)$.  To be precise, we can fit the kernel parameters by maximizing the marginal likelihood of Gaussian process conditioned on the observations.  Details can be found in \\citep{rasmussen38gaussian}.\n  365  \n  366  \\subsection{Computational Complexity}\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex:\n   81  BALD exploits the fact that in many active learning applications the output space $\\Ye$ is often simpler than the parameter space $\\Theta$. Here I consider the problem of active learning for binary classification, when the output takes one of two possible values $y \\in \\{-1,1\\}$. Given the simplicity of the outputs, binary classification is a highly relevant use-case for BALD.\n   82  \n   83: I will use a non-parametric Bayesian classification model, Gaussian process classification \\citep[GPC,][]{Rasmussen2006} to demonstrate the usefulness of BALD: GPC appears to be an especially challenging problem for information-theoretic active learning because its parameter space is infinite. Therefore, computing entropy of the posterior involves nontrivial quantities. However, by using the BALD approach and Eqn.\\ \\eqref{eqn:rearrangement} we are able to fully calculate the relevant information quantities without having to work out entropies of infinite dimensional objects. \n   84  \n   85  \n   ..\n   94  \\TODO{I need an appendix on kernels and Gaussian processes}\n   95  \n   96: We consider the probit case where, given the value of $f$, the binary label $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\citep{rasmussen2005}.\n   97  \n   98  Posterior inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. This is addressed by using approximate inference methods. The most commonly used approximate inference methods for Gaussian process classification are expectation propagation \\citep[EP,][]{Minka2002}, Laplace's approximation \\citep{williams1998}, assumed density filtering \\citep[ADF,][]{csato2000} and sparse methods \\citep{candela05sparseGP}. These all approximate the non-Gaussian posterior by a Gaussian \\citep{Nickisch2008}, but differ in the optimisation criterion and other restrictions. Throughout this chapter I will assume that we are provided with some Gaussian approximation to the GPC posterior resulting from one of these methods, though the active learning method is agnostic as to which method produced this estimate. Given the sequential nature of active learning, fast on-line methods \\citep{Csato2002} are particularly well suited for the task. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where approximate inference is exploited.\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/BALD-GPC/AL_NIPS2011.tex:\n  124  	f \\sim \\mathrm{GP}(\\mu(\\cdot),k(\\cdot,\\cdot)) \\qquad \\y\\vert\\x,f \\sim\\mathrm{Bernoulli}(\\Phi(f(\\x))) \n  125  \\end{align}\n  126: The latent parameter, now called $f$ (previously denoted as $\\param$), is a function $\\mathcal{X}\\rightarrow\\mathbb{R}$, and is assigned a Gaussian process prior with mean $\\mu(\\cdot)$ and covariance function $k(\\cdot,\\cdot)$. We consider the probit case where given the value of $f$, $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\cite{rasmussen2005}.\n  127  \n  128: Inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. The most commonly used approximate inference methods -- EP,  Laplace approximation, Assumed Density Filtering and sparse methods -- all approximate the posterior by a Gaussian \\cite{rasmussen2005}. Throughout this section we will assume that we are provided with such a Gaussian approximation from one of these methods, though the active learning algorithm does not care which. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where such an approximation is exploited.\n  129  \n  130  Now, we will compute the informativeness of a query $\\x$ using Eqn.  \\eqref{eqn:rearrangement}.  The entropy of the binary output variable $y$ given a fixed $f$ can be expressed in terms of the binary entropy function $h$: \n  ...\n  181  \\end{align}\n  182  \n  183: In the context of GP models, hyperparameters typically control the smoothness or spatial length-scale of functions. If we maintain a posterior distribution over these hyperparameters, which we can do e.\\,g.\\ via Hamiltonian Monte Carlo, we can choose either to treat them as nuisance parameters $\\theta^-$ and use Eq.\\ \\ref{eqn:BALD_bipartite}, or to include them in $\\theta^+$ and perform active learning over them as well. In certain cases, such as automatic relevance determination\\cite{rasmussen2005}, it may even make sense to treat hyperparameters as variables of primary interest, and the function $f$ itself as nuisance parameter $\\theta^-$.\n  184  \n  185  \\subsection{Preference Learning}\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/lossBayes/lossBayes.tex:\n  246  \\section{SUPERVISED LEARNING} \\label{s:examples}\n  247  \n  248: In this section, we make our framework more concrete by investigating it in the predictive setting presented in \\secref{ss:predictive}. We recall that in order to apply our framework, we need to specify the loss, the action space, the Bayesian observation model and a tractable family $\\mathcal{Q}$ of approximate distributions over the latent variable $\\theta$. In the predictive setting, an action is a prediction function $h:\\mathcal{X}\\rightarrow\\mathcal{Y}$. We let the action space $\\mathcal{H}$ be the set of all possible such functions here -- we are thus in the non-parametric prediction regime where we are free to make arbitrary pointwise decision on $\\mathcal{X}$. This gives us rich predictive possibilities as well as actually enables us to analytically compute $h_q$, as we will see in the next paragraph. For the observation model, we consider Bayesian non-parametric probabilistic models based on Gaussian processes (GPs), which have been successfully applied to model a wide variety of phenomena in the past~\\citep{Rasmussen2006}. %%OPTIONAL\\footnote{Considering the non-parametric setup reduces the issue of model misspecification. Moreover, GPs are often applied using approximate inference and thus provide a useful illustration for our framework.}.\n  249  In \\secref{ss:GPR}, we first look at Gaussian process regression. In this case, we can obtain an analytic form for $p_\\dataset$ and $\\mathcal{R}_{p_\\dataset}(h_q)$ which gives us some insights about the approximation framework as well as when minimizing the KL divergence can be suboptimal. Because the quadratic cost function is not bounded (and so $M = \\infty$), we cannot directly apply our loss-EM algorithm for regression, but we can nevertheless get useful insights which suggest future research directions for regression with sparse GPs. In section~\\ref{ss:GPC}, we consider Gaussian process classification (GPC) which will provide a test bed for the loss-EM algorithm. In both cases, we use a GP as our prior over parameters and let $\\mathcal{Q}$ also be a family of GPs.\n  250  \n  ...\n  384  To investigate the effect of the test distribution $p(x)$ on our method, we generated three different transductive test sets of size 1000, with inputs sampled from $\\mathcal{U}(0,1)$, $\\mathcal{U}(0.2,1.2)$ and $\\mathcal{U}(0.5,1.5)$ respectively (columns of \\tableref{tab:results}), and repeated these experiments 10 times to get significance results. We used five different loss matrices: the loss for false negatives was constant at $c_{-}=1$, the loss for false positives $c_{+}$ was varied so that the decision threshold $p_{thresh}=\\frac{c_{+}}{c_{-} + c_{+}}$ changed linearly between 0.5 and 0.05 (rows of \\tableref{tab:results}).\n  385  \n  386: For each dataset, we compared three methods for approximate inference: Laplace approximation, expectation propagation (EP) and loss-EM (run separately for each loss and test set combination). Both Laplace and EP are standard approaches to GP classification~\\citep{Rasmussen2006}. To evaluate the performance of the methods, we used the following criterion based on the posterior risk:\n  387  \\addtolength{\\abovedisplayskip}{-1mm}\n  388  \\addtolength{\\belowdisplayskip}{-1mm}\n\n23 matches across 6 files\n\n\nSearching 86 files for \"asmussen\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/bibliography/thesis.bib:\n  146  \n  147  @article{quinonero2005,\n  148: 	Author = {Qui{\\~n}onero-Candela, Joaquin and Rasmussen, Carl Edward},\n  149  	Date-Added = {2013-05-12 16:04:56 +0000},\n  150  	Date-Modified = {2013-05-12 16:05:03 +0000},\n  ...\n  773  \n  774  @article{nickisch2008gpc,\n  775: 	Author = {Nickisch, H. and C. E. Rasmussen},\n  776  	Date-Added = {2013-04-16 17:25:49 +0000},\n  777  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  793  \n  794  @article{candela05sparseGP,\n  795: 	Author = {J. Qui{\\`O}onero-Candela and C. E. Rasmussen},\n  796  	Date-Added = {2013-04-16 17:25:49 +0000},\n  797  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  958  	Year = {2002}}\n  959  \n  960: @book{Rasmussen2006,\n  961  	Address = {Cambridge, MA, USA},\n  962: 	Author = {Carl Edward Rasmussen and Christopher K. I. Williams},\n  963  	Date-Added = {2013-04-16 17:25:49 +0000},\n  964  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n 1158  	Year = {2006}}\n 1159  \n 1160: @book{rasmussen2006,\n 1161: 	Author = {Rasmussen, Carl Edward and Williams, Christopher K. I.},\n 1162  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1163  	Date-Modified = {2013-04-16 17:12:02 +0000},\n ....\n 1192  \n 1193  @article{Nickisch2008,\n 1194: 	Author = {Nickisch, Hannes and Rasmussen, Carl Edward},\n 1195  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1196  	Date-Modified = {2013-04-16 17:14:05 +0000},\n ....\n 1623  @incollection{BZMonteCarlo,\n 1624  	Address = {Cambridge, MA},\n 1625: 	Author = {C. E. Rasmussen and Z. Ghahramani},\n 1626  	Booktitle = {Advances in Neural Information Processing Systems},\n 1627  	Date-Added = {2013-04-16 17:05:02 +0000},\n ....\n 1697  	Year = {2012}}\n 1698  \n 1699: @article{Rasmussen2006,\n 1700: 	Author = {Rasmussen, C.E. and Williams, CKI},\n 1701  	Date-Added = {2013-04-16 17:05:02 +0000},\n 1702  	Date-Modified = {2013-04-16 17:05:02 +0000},\n ....\n 1741  	Year = {2005}}\n 1742  \n 1743: @article{Rasmussen2005,\n 1744: 	Author = {Rasmussen, C.E. and Williams, C.K.I.},\n 1745  	Date-Added = {2013-04-16 16:35:16 +0000},\n 1746  	Date-Modified = {2013-04-16 16:35:31 +0000},\n ....\n 1881  \n 1882  @inproceedings{Kuss2005,\n 1883: 	Author = {M. Kuss and C. E. Rasmussen},\n 1884  	Booktitle = {NIPS},\n 1885  	Date-Added = {2013-04-16 16:35:16 +0000},\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex:\n   22  The likelihood $p(\\data\\vert\\param)$ describes how data is related to the parameters $\\param$, and $p(\\param)$ is a prior distribution which capture's one a priori expectations about what the value of $\\param$ may be. The posterior distribution $p_\\data = p(\\param\\vert\\data)$ captures all statistically relevant information that the data $\\data$ provides about $\\param$, and it is therefore of central importance.\n   23  \n   24: The marginal likelihood, also called the model evidence $Z = \\int p(\\data\\vert\\param) p(\\param) d\\param$ is also of interest. It is often used to quantify how well a Bayesian model -- the combination of likelihood and prior -- fit the data. When the model involves additinal parameters or hyper-parameters that are not modelled probabilistically via prior distributions, it is common practice to learn their values by maximising model evidence \\citep[see \\eg][Chapter 5]{Rasmussen2006}.\n   25  \n   26  In practically interesting Bayesian models, the posterior distribution and model evidence are often computationally intractable to obtain and therefore one has to resort to approximations. The most popular methods for Bayesian approximate inference are variational inference and Markov chain Monte Carlo.\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex:\n  362  This means that the estimate converges for any bounded measurable function $f$. The speed of convergence, however, may not be as fast.\n  363  \n  364: Therefore it is crucial that the kernel we choose is representative of the function or functions $f$ we will integrate.  For example, in our experiments, the convergence of herding was sensitive to the width of the Gaussian kernel.  One of the major weaknesses of kernel methods in general is the difficulty of setting kernel parameters.  A key benefit of the Bayesian interpretation of herding and MMD presented in this paper is that it provides a recipe for adapting the Hilbert space to the observations $f(x_n)$.  To be precise, we can fit the kernel parameters by maximizing the marginal likelihood of Gaussian process conditioned on the observations.  Details can be found in \\citep{Rasmussen2006}.\n  365  \n  366  \\subsection{Computational Complexity}\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex:\n   81  BALD exploits the fact that in many active learning applications the output space $\\Ye$ is often simpler than the parameter space $\\Theta$. Here I consider the problem of active learning for binary classification, when the output takes one of two possible values $y \\in \\{-1,1\\}$. Given the simplicity of the outputs, binary classification is a highly relevant use-case for BALD.\n   82  \n   83: I will use a non-parametric Bayesian classification model, Gaussian process classification \\citep[GPC,][]{Rasmussen2006} to demonstrate the usefulness of BALD: GPC appears to be an especially challenging problem for information-theoretic active learning because its parameter space is infinite. Therefore, computing entropy of the posterior involves nontrivial quantities. However, by using the BALD approach and Eqn.\\ \\eqref{eqn:rearrangement} we are able to fully calculate the relevant information quantities without having to work out entropies of infinite dimensional objects. \n   84  \n   85  \n   ..\n   94  \\TODO{I need an appendix on kernels and Gaussian processes}\n   95  \n   96: We consider the probit case where, given the value of $f$, the binary label $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\citep{rasmussen2005}.\n   97  \n   98  Posterior inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. This is addressed by using approximate inference methods. The most commonly used approximate inference methods for Gaussian process classification are expectation propagation \\citep[EP,][]{Minka2002}, Laplace's approximation \\citep{williams1998}, assumed density filtering \\citep[ADF,][]{csato2000} and sparse methods \\citep{candela05sparseGP}. These all approximate the non-Gaussian posterior by a Gaussian \\citep{Nickisch2008}, but differ in the optimisation criterion and other restrictions. Throughout this chapter I will assume that we are provided with some Gaussian approximation to the GPC posterior resulting from one of these methods, though the active learning method is agnostic as to which method produced this estimate. Given the sequential nature of active learning, fast on-line methods \\citep{Csato2002} are particularly well suited for the task. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where approximate inference is exploited.\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/BALD-GPC/AL_NIPS2011.tex:\n  124  	f \\sim \\mathrm{GP}(\\mu(\\cdot),k(\\cdot,\\cdot)) \\qquad \\y\\vert\\x,f \\sim\\mathrm{Bernoulli}(\\Phi(f(\\x))) \n  125  \\end{align}\n  126: The latent parameter, now called $f$ (previously denoted as $\\param$), is a function $\\mathcal{X}\\rightarrow\\mathbb{R}$, and is assigned a Gaussian process prior with mean $\\mu(\\cdot)$ and covariance function $k(\\cdot,\\cdot)$. We consider the probit case where given the value of $f$, $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\cite{rasmussen2005}.\n  127  \n  128: Inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. The most commonly used approximate inference methods -- EP,  Laplace approximation, Assumed Density Filtering and sparse methods -- all approximate the posterior by a Gaussian \\cite{rasmussen2005}. Throughout this section we will assume that we are provided with such a Gaussian approximation from one of these methods, though the active learning algorithm does not care which. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where such an approximation is exploited.\n  129  \n  130  Now, we will compute the informativeness of a query $\\x$ using Eqn.  \\eqref{eqn:rearrangement}.  The entropy of the binary output variable $y$ given a fixed $f$ can be expressed in terms of the binary entropy function $h$: \n  ...\n  181  \\end{align}\n  182  \n  183: In the context of GP models, hyperparameters typically control the smoothness or spatial length-scale of functions. If we maintain a posterior distribution over these hyperparameters, which we can do e.\\,g.\\ via Hamiltonian Monte Carlo, we can choose either to treat them as nuisance parameters $\\theta^-$ and use Eq.\\ \\ref{eqn:BALD_bipartite}, or to include them in $\\theta^+$ and perform active learning over them as well. In certain cases, such as automatic relevance determination\\cite{rasmussen2005}, it may even make sense to treat hyperparameters as variables of primary interest, and the function $f$ itself as nuisance parameter $\\theta^-$.\n  184  \n  185  \\subsection{Preference Learning}\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/lossBayes/lossBayes.tex:\n  246  \\section{SUPERVISED LEARNING} \\label{s:examples}\n  247  \n  248: In this section, we make our framework more concrete by investigating it in the predictive setting presented in \\secref{ss:predictive}. We recall that in order to apply our framework, we need to specify the loss, the action space, the Bayesian observation model and a tractable family $\\mathcal{Q}$ of approximate distributions over the latent variable $\\theta$. In the predictive setting, an action is a prediction function $h:\\mathcal{X}\\rightarrow\\mathcal{Y}$. We let the action space $\\mathcal{H}$ be the set of all possible such functions here -- we are thus in the non-parametric prediction regime where we are free to make arbitrary pointwise decision on $\\mathcal{X}$. This gives us rich predictive possibilities as well as actually enables us to analytically compute $h_q$, as we will see in the next paragraph. For the observation model, we consider Bayesian non-parametric probabilistic models based on Gaussian processes (GPs), which have been successfully applied to model a wide variety of phenomena in the past~\\citep{Rasmussen2006}. %%OPTIONAL\\footnote{Considering the non-parametric setup reduces the issue of model misspecification. Moreover, GPs are often applied using approximate inference and thus provide a useful illustration for our framework.}.\n  249  In \\secref{ss:GPR}, we first look at Gaussian process regression. In this case, we can obtain an analytic form for $p_\\dataset$ and $\\mathcal{R}_{p_\\dataset}(h_q)$ which gives us some insights about the approximation framework as well as when minimizing the KL divergence can be suboptimal. Because the quadratic cost function is not bounded (and so $M = \\infty$), we cannot directly apply our loss-EM algorithm for regression, but we can nevertheless get useful insights which suggest future research directions for regression with sparse GPs. In section~\\ref{ss:GPC}, we consider Gaussian process classification (GPC) which will provide a test bed for the loss-EM algorithm. In both cases, we use a GP as our prior over parameters and let $\\mathcal{Q}$ also be a family of GPs.\n  250  \n  ...\n  384  To investigate the effect of the test distribution $p(x)$ on our method, we generated three different transductive test sets of size 1000, with inputs sampled from $\\mathcal{U}(0,1)$, $\\mathcal{U}(0.2,1.2)$ and $\\mathcal{U}(0.5,1.5)$ respectively (columns of \\tableref{tab:results}), and repeated these experiments 10 times to get significance results. We used five different loss matrices: the loss for false negatives was constant at $c_{-}=1$, the loss for false positives $c_{+}$ was varied so that the decision threshold $p_{thresh}=\\frac{c_{+}}{c_{-} + c_{+}}$ changed linearly between 0.5 and 0.05 (rows of \\tableref{tab:results}).\n  385  \n  386: For each dataset, we compared three methods for approximate inference: Laplace approximation, expectation propagation (EP) and loss-EM (run separately for each loss and test set combination). Both Laplace and EP are standard approaches to GP classification~\\citep{Rasmussen2006}. To evaluate the performance of the methods, we used the following criterion based on the posterior risk:\n  387  \\addtolength{\\abovedisplayskip}{-1mm}\n  388  \\addtolength{\\belowdisplayskip}{-1mm}\n\n23 matches across 6 files\n\n\nSearching 89 files for \"\\!\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/lossBayes/lossBayes.tex:\n   37  \\newcommand{\\dataset}{\\mathcal{D}}\n   38  \\newcommand{\\prob}[1]{\\boldsymbol{\\mathbb{#1}}}\n   39: \\newcommand{\\Var}{\\mathbb{V}\\!\\textnormal{ar}}\n   40  \\newcommand{\\fix}[1]{$^\\text{\\textcolor{red}{?}}$\\marginpar[\\raggedleft\\parbox{2.5cm}{\\raggedleft \\tiny{#1}}]{\\parbox{2.5cm}{\\tiny{#1}}}}\n   41  \\newcommand{\\new}{\\marginpar{NEW}}\n   ..\n  220  \\end{equation*}\n  221  \\begin{equation*}\n  222:     \\textrm{(M-step)} \\quad h^{t+1} = \\argmax{h \\in \\mathcal{H}} \\! \\int_\\Theta q^{t+1}(\\theta) \\, \\log U_M(\\theta,h) d\\theta\n  223  \\end{equation*}\n  224  }}\n  ...\n  406  \\begin{align}\n  407      q^{MED} & = \\argmin{q \\in \\mathcal{Q}} KL(q(\\theta) || p(\\theta)) + C \\sum_i \\xi_i \\\\\n  408:     & \\!\\!\\textrm{s.t.} \\,\\, \\xi_i+p_q(y_i|x_i) \\geq p_q(y|x_i)+\\ell(y_i,y) \\,\\, \\forall i, y \\in \\mathcal{Y},\\notag\n  409  \\end{align}\n  410  % Ferenc wrote: although in practice they use $\\int_\\Theta q(\\theta) \\log p(y|x,\\theta) d\\theta$ rather than $p_q(y|x)$ for computational reasons. The MED optimization problem is analogous to our linearized E-step of \\tableref{t:lin-loss-EM} in the following sense: MED uses the data through a hinge upper bound~\\citep{joachims09SVMstruct} on the empirical error (the $\\xi_i$ part) whereas we use the data $\\dataset$ through the observation model $p(\\dataset\\vert\\theta)$ (when evaluating $R_{p_\\dataset}(h^t)$).\n  ...\n  461   \\tilde{p}(y|x,f_\\dataset) & \\doteq\n  462      \\int p(y|x,f) p(f_{\\mathrm{rest}}|f_\\dataset) df_{\\mathrm{rest}} \\\\\n  463:     & =  \\mathcal{N}\\!\\left(y|K_{x\\dataset} K_{\\dataset\\dataset}^{-1} f_\\dataset, \\sigma_x^2\\right).\n  464  \\end{split}\n  465  \\end{equation}\n\n5 matches in 1 file\n\n\nSearching 91 files for \"eqn:Bayesian_argmin_scoring_rule\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/01_introBALD.tex:\n  133  \n  134  \\begin{equation}\n  135: 	\\score_{\\mbox{argmin}}(f,p_\\data) = \\score(\\argmin_{\\x}f,p_{\\argmin}), \\label{eqn:Bayesian_argmin_scoring_rule}\n  136  \\end{equation}\n  137  where $f$ is the objective function which takes the role of $\\param$ as the parameter of interest. $p_\\data$ is a posterior measure over objective functions -- in most recent work this is a Gaussian process measure. $p_{\\argmin} \\in \\probmeasures{\\Xe}$ is the probability distribution that $p_\\data$ implies over the location of the minimum $\\argmin_{x}f$. Note that in \\citep{Hennig2012entropy} $p_{\\argmin}$ is called $p_{\\min}$, I use a different notation for consistency. The scoring rule $\\score$ could be any strictly proper scoring rule, \\citeauthor{Hennig2012entropy} use the logarithmic loss which they derive approximations for.\n  138  \n  139: Equation \\eqref{eqn:Bayesian_argmin_scoring_rule} implies that the goal of optimisation is to find the exact location of the global minimum. In many applications however this is not required, instead, it is sufficient to learn about the value at the minimum. In this case, one could use a scoring rule of the following form.\n  140  \n  141  \\begin{equation}\n  142: 	\\score_{\\mbox{min}}(f,p_\\data) = \\score(\\min_{\\x}f,p_{\\min}), \\label{eqn:Bayesian_argmin_scoring_rule}\n  143  \\end{equation}\n  144  where $\\min_{\\x}f$ is the minimal value of the objective function, $p_{\\min}$ the measure $p_\\data$ induces over the minimal value of $f$.\n  ...\n  152  Note that $\\score_{\\mbox{best}}$ is also a special case of a Bayesian decision score $\\score_{\\loss}$ (section \\ref{sec:loss_scoring_rule}, Equation \\eqref{eqn:loss_scoring_rule}) with actions $\\actionset=\\Xe$ and loss function $\\loss(f,a)=f(a)$.\n  153  \n  154: Information-greedy Bayesian optimisation methods are still in their infancy. Interpreting them in the general scoring-rule-based framework allows one to understand the underlying goals, and propose straightforward extensions. I am not aware of either \\eqref{eqn:Bayesian_argmin_scoring_rule} or \\eqref{eqn:Bayesian_optimisation_scoring_rule} used in previous work in the context of Bayesian optimisation.\n  155  \n  156  \\subsection{Sequential Bayesian quadrature}\n\n4 matches in 1 file\n\n\nSearching 89 files for \"chen2010herding\" (case sensitive)\n\n0 matches across 0 files\n\n\nSearching 89 files for \"chen2010\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex:\n   16  \\section{Introduction}\n   17  \n   18: In this chapter I explore two quasi-Monte Carlo methods: Bayesian quadrature (\\bq{}) \\citep{BZHermiteQuadrature,BZMonteCarlo} (also known as Bayesian Monte Carlo) and kernel herding \\citep{chen2010super}. Both methods can be used for approximate inference, and they are examples of loss-calibrated quasi-Monte Carlo introduced in the previous chapter.\n   19  \n   20  Despite the focus on approximate inference, I am going to present the algorithms more generally context of numerical integration. Bayesian quadrature and kernel herding seek a solution to a central problem in statistical machine learning: to compute expectations of functions over probability distributions:\n   ..\n   27  Bayesian quadrature (\\bq{}) estimates integral \\eqref{eqn:integral} by modelling the function $f$ probabilistically, and inferring a posterior distribution conditioned on the observed function values $y_n = f_{x_n}$. Based on the posterior over $f$, the posterior expectation of $Z_{f,p}$ can be used as an estimate to the integral. The points where the function should be evaluated can be found via Bayesian experimental design, providing a deterministic procedure for selecting sample locations. The sequence of points where the function is querried can be interpreted as pseudo-samples in quasi-Monte Carlo.\n   28  \n   29: Herding, proposed recently by \\cite{chen2010super}, produces pseudosamples by minimising the discrepancy of moments between the sample set and the target distribution. Similarly to traditional Monte Carlo, an estimate is formed by taking the empirical mean over samples $\\hat{Z} = \\frac{1}{N}\\sum_{n=1}^{N}f_{x_n}$. Under certain assumptions, herding has provably fast, $\\mathcal{O}(\\nicefrac{1}{N})$, and has demonstrated strong empirical performance in a variety of tasks. Because herding minimises maximum mean discrepancy from the target distribution $p(x)$, it is a special case of loss-calibrated quasi-Monte Carlo.\n   30  \n   31  In this chapter, I show that the Maximum Mean Discrepancy (MMD) criterion used to choose samples in kernel herding is identical to the expected error in the estimate of the integral $Z_{f,p}$ under a Gaussian process prior for $f$. This expected error is the criterion being minimized when choosing samples for Bayesian quadrature. Because Bayesian quadrature assigns different weights to each of the observed function values $f(\\vx)$, we can view Bayesian quadrature as a weighted version of kernel herding. We show that these weights are optimal in a minimax sense over all functions in the Hilbert space defined by our kernel. This implies that Bayesian quadrature is equivalent to a weighted version kernel herding, and as such it also implements loss-calibrated approximate inference.\n   ..\n   76  The formula \\eqref{eqn:herding_criterion} admits an intuitive interpretation: the first term encourages sampling in areas with high mass under the target distribution $p(\\vx)$. The second term discourages sampling at points close to existing samples. \n   77  \n   78: Evaluating \\eqref{eqn:herding_criterion} requires us to compute $\\expect{\\vx' \\sim p}{k(\\vx, \\vx')} $, that is to integrate the kernel against the target distribution. Throughout the paper we will assume that these integrals can be computed in closed form. Whilst the integration can indeed be carried out analytically in several cases \\citep{Song2008,chen2010super}, this requirement is the most pertinent limitation on applications of kernel herding, Bayesian quadrature and related algorithms.\n   79  \n   80  \\subsection{Complexity and convergence Rates}\n   ..\n   82  Criterion \\eqref{eqn:herding_criterion} for selecting the $n+1$-th sample can be evaluated in only $\\mathcal{O}(n)$ time. Adding these up for all subsequent samples, and assuming that optimisation in each step has $\\mathcal{O}(1)$ complexity, producing $N$ pseudosamples via kernel herding costs $\\mathcal{O}(N^2)$ operations in total.\n   83  \n   84: In finite dimensional Hilbert spaces, the herding algorithm has been shown to reduce $\\mmd$ at a rate $\\mathcal{O}(\\nicefrac{1}{N})$, which compares favourably with the $\\mathcal{O}(\\frac{1}{\\sqrt{N}})$ rate obtained by non-deterministic Monte Carlo samplers \\citep{chen2010super,Bach2012}. However, as pointed out by \\citep{Bach2012}, this fast convergence is not guaranteed in infinite dimensional Hilbert spaces, such as the RKHS corresponding to the Gaussian kernel. These results assume that in each step the optimisation in Eqn.\\ \\ref{eqn:herding_criterion} is solved exactly. In addition, herding is shown to converge even if this maximisation is imperfect \\citep{Gelfand2010}.\n   85  \n   86  % ########   #######  \n   ..\n  297  In this section, we examine empirically the rates of convergence of sequential Bayesian quadrature and herding. We examine both the expected error rates, and the empirical error rates.\n  298  \n  299: In all experiments, the target distribution $p$ is chosen a two dimensional mixture of 20 Gaussians, whose equiprobability contours are shown in Figure \\ref{fig:fig1}. To ensure a comparison fair to herding, the target distribution, and the kernel used by both methods, correspond exactly to the one used in \\citep[Fig.\\ 1]{chen2010super}.\n  300  \n  301  For experimental simplicity, each of the sequential sampling algorithms minimizes the next sample location from a pool of 10000 locations randomly drawn from the base distribution. In practice, one would run a gradint-based local optimizer from each of these candidate locations, however in our experiments we found that this did not make a significant difference in the sample locations chosen. \n  ...\n  309  \\end{figure} \n  310  \n  311: We first extend an experiment from \\citep{chen2010super} designed to illustrate the mode-seeking behavior of herding in comparison to random samples. In the first experiment of \\citep{chen2010super}, it is shown that a small number of i.\\,i.\\,d.\\ samples drawn from a multimodal distribution will tend to, by chance, assign too many samples to some modes, and too few to some other modes. In contrast, herding places pseudo-samples (called super-samples in that paper) in such a way as to avoid regions already well-represented, and seeks modes that are under-represented.\n  312  \n  313  We demonstrate that although herding improves upon i.\\,i.\\,d.\\ sampling, the uniform weighting of super-samples leads to sub-optimal performance. Figure \\ref{fig:fig1} shows the first 20 samples chosen by kernel herding, in comparison with the first 8 samples chosen by \\sbq{}. By weighting the 8 \\sbq{} samples by the quadrature weights in \\eqref{eq:bq_weights}, we can obtain the same MMD value as by using the 20 uniformly-weighted herding samples. \n  ...\n  413  		MCMC & $\\mathcal{O}(N)$ & variable & ergodic theorem\\\\\n  414  		i.i.d. MC & $\\mathcal{O}(N)$ & $\\frac{1}{\\sqrt{N}}$ & law of large numbers\\\\\n  415: 		herding & $\\mathcal{O}(N^2)$ & $\\frac{1}{\\sqrt{N}} \\geq \\cdot \\geq \\frac{1}{N}$ & \\citep{chen2010super,Bach2012} \\\\\n  416  		SBQ & $\\mathcal{O}(N^3)$ & unknown & approximate submodularity\\\\\n  417  		%\\hline\n\n8 matches in 1 file\n\n\nSearching 89 files for \"seung1997\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex:\n   53  \\end{align}\n   54  \n   55: So by maximising the expected reduction in posterior entropy, the learner seeks a measurement, such that each probable parameter $\\theta$ predicts something different for what the outcome $\\y$ will be. In the statistics iterature  this is known as the \\emph{principle of maximal disagreement} and provides the theoretical motivation for \\emph{query by committee} methods \\citep{seung1997}. We will call the approach of using the rearranged objective in Eqn.\\ \\eqref{eqn:rearrangement} as Bayesian Active Learning by Disagreement or BALD \\citep{Houlsby2011,Houlsby2012preference,Huszar2012quantum}. Note that these rearrangements were only possible because of the symmetry of Shannon's mutual information, hence this interpretation does not hold in general for Bayesian active learning when using a scoring rule other than the logarithmic.\n   56  \n   57  \\section{Related techniques}\n\n1 match in 1 file\n\n\nSearching 89 files for \"2AFC\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex:\n  292  \\end{enumerate} \n  293  \n  294: To overcome the limitations of an absolute scale, in an increasing number of applications preference elicitation is done via pairwise item comparisons. In this case, the respondent is presented a pair of items, and they have to judge which of the two alternatives is more preferable. In cognitive science, this type of preference elicitation is known as two-alternative forced choice, or 2AFC for short \\citep{Fechner1860,Platt1999}. The machine learning community often refers to this kind problem as \\emph{binary preference elicitation}, preference learning or learning to rank \\citep{Chu2005,furnkranz2010}.\n  295  \n  296  Crucially, binary preference elicitation sidesteps most of the problems that eliciting preference on an absolute scale exhibits. Because no absolute scale is used, it does not matter if the scale of ratings used by different respondents are not aligned, as long as there is a mostly monotonic relationship between them. Also, the respondent only needs to be knowledgeable about the two items being compared in order to give an informed response. This way respondents with much more limited scope of knowledge can provide highly informative data.\n\n1 match in 1 file\n\n\nSearching 89 files for \"guestrin1\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/bibliography/thesis.bib:\n 1693  	Year = {2000}}\n 1694  \n 1695: @inproceedings{guestrin1,\n 1696  	Address = {Nashville, Tennessee, USA},\n 1697  	Author = {A. Krause and C. Guestrin and A. Gupta and J. Kleinberg},\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex:\n  177  \\end{align}\n  178  %\n  179: where $\\gp$ denotes the gaussian process prior. A similar independence on function values is observed in other optimal experimental design problems involving Gaussian processes \\citep{guestrin1}. This allows the optimal sample locations to be computed ahead of time, without observing any values of $f$ at all \\citep{minka2000dqr}.\n  180  \n  181  We can contrast the \\bq{} objective $\\epsilon^{2}_{\\bq{}}$ in \\eqref{eq:marg_var_symbolic} to the objective being minimized in herding, $\\epsilon^{2}_{herding}$ of Eqn.\\ \\eqref{eq:mmd_assumption}. Just like $\\epsilon^{2}_{herding}$, $\\epsilon^{2}_{\\bq{}}$ expresses a trade-off between accuracy and diversity of samples. On the one hand, as samples get close to high density regions under $p$, the values in $\\vz$ increase, which results in decreasing variance. On the other hand, as samples get closer to each other, eigenvalues of $K$ increase, resulting in an increase in variance. \n\n2 matches across 2 files\n\n\nSearching 89 files for \"reid10risk\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/bibliography/thesis.bib:\n 1099  	Year = {2002}}\n 1100  \n 1101: @unpublished{reid10risk,\n 1102  	Author = {Mark D. Reid and Robet C. Williamson},\n 1103  	Date-Added = {2013-04-16 17:25:49 +0000},\n\n/Users/fhuszar/Dropbox/thesis/latex/part1/01_scoring_rules.tex:\n   19  \\section{Information quantities}\n   20  \n   21: A scoring rule allows us to define useful information quantities, which can be exploited in a variety of applications \\citep[see also][]{Gneiting2007,reid10risk}: these are generalised notions entropy, divergence and value of information.\n   22  \\begin{definition}[Generalised entropy]\n   23  Given a scoring rule $\\score:\\Xe\\times\\probmeasures{\\Xe}\\mapsto\\Reals$, let us define the generalised entropy of a distribution $P\\in\\probmeasures{\\Xe}$ as follows:\n\n2 matches across 2 files\n\n\nSearching 98 files for \"wikipedia\" (case sensitive)\n\n0 matches across 0 files\n\n\nSearching 98 files for \"TODO\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/notation.tex:\n    1  %!TEX root = thesis.tex\n    2: \\newcommand{\\TODO}[1]{\\textbf{TODO: #1}}\n    3  \n    4  \\newcommand{\\eg}{e.\\,g.\\ }\n\n/Users/fhuszar/Dropbox/thesis/latex/part1/01_scoring_rules.tex:\n   73  \\end{definition}\n   74  \n   75: % As we will see, divergences are often used to match or approximate some \\emph{true} or \\emph{ideal} distribution with something \\emph{approximate}, so that the divergence between the truth and the approximation is minimal. As we can measure divergence in both ways, there is a question of which direction of divergence is to be calculated. Definition \\eqref{eqn:def_divergence} suggests that the the first argument, $P$, should take the role of the true distribution, and $Q$ the approximate. \\TODO{elaborate on this.}\n   76  \n   77  The divergence defined in \\eqref{eqn:def_divergence} is a special case of Bregman divergences. Bregman divergences are an important class of divergence functions on complex domains, and include well known measures of distance or dissimilarity such as the Eulidean distance or KL divergence.\n   ..\n  419  \\end{equation}\n  420  \n  421: where $i$ is the imaginary number $i=\\sqrt{-1}$. The characteristic function is known to uniquely characterise any Borel probability measure on the real line. Indeed, it corresponds to an RKHS-embedding with the fourier kernel $k_{Fourier}(x,y) = \\exp(ixy)$, which is an example of characteristic kernels. Note, that the final formula \\eqref{eqn:rkhs-mmd-lastline} assumed a real valued kernel function, therefore it is not valid for the special case of the Fourier kernel. Other, practically more relevant examples of characteristic kernels include the squared exponential, and the Laplacian kernels. \\TODO{If I do this, I need a technical introduction to kernels - as well as probability distributions} As a counterexample, polynomial kernels, and in general kernels corresponding to finite dimensional Hilbert spaces are not characteristic.\n  422  \n  423  The maximum mean discrepancy with characteristic kernels has been applied in various contexts in machine learning. One of the first of these recent applications were two-sample tests. In two-sample testing one is provided i.\\,i.\\,d.\\ samples from two distributions, and one has to determine whether the two distributions are the same or not. \\citet{Gretton2012} developed and analysed efficient empirical methods based on the MMD for this problem.\n\n/Users/fhuszar/Dropbox/thesis/latex/part1/02_embeddings.tex:\n  156  % We note that in this simple example of binary random variables, a map of the manifold could have been drawn exactly, without the need for the numerical approximations used by the ISOMAP technique. It is easy to see that given a scoring rule $\\score$ transforming the real line by the gradient of the entropy function $\\dot{\\mathbb{H}}_{\\score}$ yields an embedding that faithfully represents the statistical manifold induced by $\\score$. For example, the geodesic distance on the Brier manifold is simply the Euclidean distance, and indeed the gradient of the entropy function is essentially the identity $\\dot{\\mathbb{H}}_{Brier}[p] = -p$. The gradient of the Shannon's entropy diverges to infinity $p\\rightarrow 0$ and to negative infinity as $p\\rightarrow 1$, which shows that this statistical manifold spans the entire real line.\n  157  \n  158: % The fact that we can compute an exact embedding allows us to evaluate how well our ISOMAP-based numerical technique works. As the embedding is unique only up to translation and reflection, we \\TODO{do this numerically, maybe}.\n  159  \n  160  \\subsection{Gaussian distributions}\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex:\n  232  \\section{Summary}\n  233  \n  234: \\TODO{So what the F?}\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex:\n  107  Here I derive the \\bq{} estimate of the intergral in Eqn.\\ \\eqref{eqn:integral}. Let us assume we have evaluated the function at certain test locations $\\x_1 \\ldots \\x_N$, collectovely denoted as $X$. The function values $f(\\vx_1) \\ldots f(\\vx_N)$ are collectively denoted as the vector $\\vf(\\vX)$. The Bayesian solution implies a predictive distribution over $Z$. I am now goig to calculate the mean of this distribution, $\\expect{}Z_{f,p}$. This is the optimal Bayesian estimator for a squared loss.\n  108  \n  109: For simplicity, $f$ is assigned a Gaussian process prior with kernel function $k$ and mean $0$. \\TODO{reference appendix on Gaussian processes} Note that the GP assumption is the Bayesian analogoue to the assumption that integrand functions belong to an RKHS made by kernel herding in Eqn.\\ \\eqref{eq:mmd_assumption}. Conveniently, the \\gp{} posterior allows us to compute the expectation of $Z_{f,p}$ in closed form: \n  110  \n  111  \\begin{align}\n\n/Users/fhuszar/Dropbox/thesis/latex/part1/01_scoring_rules.tex.bak:\n   65  \\end{definition}\n   66  \n   67: % As we will see, divergences are often used to match or approximate some \\emph{true} or \\emph{ideal} distribution with something \\emph{approximate}, so that the divergence between the truth and the approximation is minimal. As we can measure divergence in both ways, there is a question of which direction of divergence is to be calculated. Definition \\eqref{eqn:def_divergence} suggests that the the first argument, $P$, should take the role of the true distribution, and $Q$ the approximate. \\TODO{elaborate on this.}\n   68  \n   69  The divergence defined in \\eqref{eqn:def_divergence} is a special case of Bregman divergences. Bregman divergences are an important class of divergence functions on complex domains, and include well known measures of distance or dissimilarity such as the Euclidean distance or KL divergence.\n   ..\n  412  \\end{equation}\n  413  \n  414: where $i$ is the imaginary number $i=\\sqrt{-1}$. The characteristic function is known to uniquely characterise any Borel probability measure on the real line. Indeed, it corresponds to an RKHS-embedding with the fourier kernel $k_{Fourier}(x,y) = \\exp(ixy)$, which is an example of characteristic kernels. Note, that the final formula \\eqref{eqn:rkhs-mmd-lastline} assumed a real valued kernel function, therefore it is not valid for the special case of the Fourier kernel. Other, practically more relevant examples of characteristic kernels include the squared exponential, and the Laplacian kernels (see chapter \\ref{sec:kernels}). \\TODO{If I do this, I need a technical introduction to kernels - as well as probability distributions} As a counterexample, polynomial kernels, and in general kernels corresponding to finite dimensional Hilbert spaces are not characteristic.\n  415  \n  416  The maximum mean discrepancy with characteristic kernels has been applied in various contexts in machine learning. One of the first of these recent applications were two-sample tests. In two-sample testing one is provided i.\\,i.\\,d.\\ samples from two distributions, and one has to determine whether the two distributions are the same or not. \\citet{Gretton2012} developed and analysed efficient empirical methods based on the MMD for this problem.\n\n9 matches across 6 files\n\n\nSearching 98 files for \"TODO\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/notation.tex:\n    1  %!TEX root = thesis.tex\n    2: \\newcommand{\\TODO}[1]{\\textbf{TODO: #1}}\n    3  \n    4  \\newcommand{\\eg}{e.\\,g.\\ }\n\n/Users/fhuszar/Dropbox/thesis/latex/part1/01_scoring_rules.tex:\n   73  \\end{definition}\n   74  \n   75: % As we will see, divergences are often used to match or approximate some \\emph{true} or \\emph{ideal} distribution with something \\emph{approximate}, so that the divergence between the truth and the approximation is minimal. As we can measure divergence in both ways, there is a question of which direction of divergence is to be calculated. Definition \\eqref{eqn:def_divergence} suggests that the the first argument, $P$, should take the role of the true distribution, and $Q$ the approximate. \\TODO{elaborate on this.}\n   76  \n   77  The divergence defined in \\eqref{eqn:def_divergence} is a special case of Bregman divergences. Bregman divergences are an important class of divergence functions on complex domains, and include well known measures of distance or dissimilarity such as the Eulidean distance or KL divergence.\n   ..\n  419  \\end{equation}\n  420  \n  421: where $i$ is the imaginary number $i=\\sqrt{-1}$. The characteristic function is known to uniquely characterise any Borel probability measure on the real line. Indeed, it corresponds to an RKHS-embedding with the fourier kernel $k_{Fourier}(x,y) = \\exp(ixy)$, which is an example of characteristic kernels. Note, that the final formula \\eqref{eqn:rkhs-mmd-lastline} assumed a real valued kernel function, therefore it is not valid for the special case of the Fourier kernel. Other, practically more relevant examples of characteristic kernels include the squared exponential, and the Laplacian kernels. \\TODO{If I do this, I need a technical introduction to kernels - as well as probability distributions} As a counterexample, polynomial kernels, and in general kernels corresponding to finite dimensional Hilbert spaces are not characteristic.\n  422  \n  423  The maximum mean discrepancy with characteristic kernels has been applied in various contexts in machine learning. One of the first of these recent applications were two-sample tests. In two-sample testing one is provided i.\\,i.\\,d.\\ samples from two distributions, and one has to determine whether the two distributions are the same or not. \\citet{Gretton2012} developed and analysed efficient empirical methods based on the MMD for this problem.\n\n/Users/fhuszar/Dropbox/thesis/latex/part1/02_embeddings.tex:\n  156  % We note that in this simple example of binary random variables, a map of the manifold could have been drawn exactly, without the need for the numerical approximations used by the ISOMAP technique. It is easy to see that given a scoring rule $\\score$ transforming the real line by the gradient of the entropy function $\\dot{\\mathbb{H}}_{\\score}$ yields an embedding that faithfully represents the statistical manifold induced by $\\score$. For example, the geodesic distance on the Brier manifold is simply the Euclidean distance, and indeed the gradient of the entropy function is essentially the identity $\\dot{\\mathbb{H}}_{Brier}[p] = -p$. The gradient of the Shannon's entropy diverges to infinity $p\\rightarrow 0$ and to negative infinity as $p\\rightarrow 1$, which shows that this statistical manifold spans the entire real line.\n  157  \n  158: % The fact that we can compute an exact embedding allows us to evaluate how well our ISOMAP-based numerical technique works. As the embedding is unique only up to translation and reflection, we \\TODO{do this numerically, maybe}.\n  159  \n  160  \\subsection{Gaussian distributions}\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex:\n  232  \\section{Summary}\n  233  \n  234: \\TODO{So what the F?}\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex:\n  107  Here I derive the \\bq{} estimate of the intergral in Eqn.\\ \\eqref{eqn:integral}. Let us assume we have evaluated the function at certain test locations $\\x_1 \\ldots \\x_N$, collectovely denoted as $X$. The function values $f(\\vx_1) \\ldots f(\\vx_N)$ are collectively denoted as the vector $\\vf(\\vX)$. The Bayesian solution implies a predictive distribution over $Z$. I am now goig to calculate the mean of this distribution, $\\expect{}Z_{f,p}$. This is the optimal Bayesian estimator for a squared loss.\n  108  \n  109: For simplicity, $f$ is assigned a Gaussian process prior with kernel function $k$ and mean $0$. \\TODO{reference appendix on Gaussian processes} Note that the GP assumption is the Bayesian analogoue to the assumption that integrand functions belong to an RKHS made by kernel herding in Eqn.\\ \\eqref{eq:mmd_assumption}. Conveniently, the \\gp{} posterior allows us to compute the expectation of $Z_{f,p}$ in closed form: \n  110  \n  111  \\begin{align}\n\n/Users/fhuszar/Dropbox/thesis/latex/part1/01_scoring_rules.tex.bak:\n   65  \\end{definition}\n   66  \n   67: % As we will see, divergences are often used to match or approximate some \\emph{true} or \\emph{ideal} distribution with something \\emph{approximate}, so that the divergence between the truth and the approximation is minimal. As we can measure divergence in both ways, there is a question of which direction of divergence is to be calculated. Definition \\eqref{eqn:def_divergence} suggests that the the first argument, $P$, should take the role of the true distribution, and $Q$ the approximate. \\TODO{elaborate on this.}\n   68  \n   69  The divergence defined in \\eqref{eqn:def_divergence} is a special case of Bregman divergences. Bregman divergences are an important class of divergence functions on complex domains, and include well known measures of distance or dissimilarity such as the Euclidean distance or KL divergence.\n   ..\n  412  \\end{equation}\n  413  \n  414: where $i$ is the imaginary number $i=\\sqrt{-1}$. The characteristic function is known to uniquely characterise any Borel probability measure on the real line. Indeed, it corresponds to an RKHS-embedding with the fourier kernel $k_{Fourier}(x,y) = \\exp(ixy)$, which is an example of characteristic kernels. Note, that the final formula \\eqref{eqn:rkhs-mmd-lastline} assumed a real valued kernel function, therefore it is not valid for the special case of the Fourier kernel. Other, practically more relevant examples of characteristic kernels include the squared exponential, and the Laplacian kernels (see chapter \\ref{sec:kernels}). \\TODO{If I do this, I need a technical introduction to kernels - as well as probability distributions} As a counterexample, polynomial kernels, and in general kernels corresponding to finite dimensional Hilbert spaces are not characteristic.\n  415  \n  416  The maximum mean discrepancy with characteristic kernels has been applied in various contexts in machine learning. One of the first of these recent applications were two-sample tests. In two-sample testing one is provided i.\\,i.\\,d.\\ samples from two distributions, and one has to determine whether the two distributions are the same or not. \\citet{Gretton2012} developed and analysed efficient empirical methods based on the MMD for this problem.\n\n9 matches across 6 files\n\n\nSearching 98 files for \"TODO\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/notation.tex:\n    1  %!TEX root = thesis.tex\n    2: \\newcommand{\\TODO}[1]{\\textbf{TODO: #1}}\n    3  \n    4  \\newcommand{\\eg}{e.\\,g.\\ }\n\n/Users/fhuszar/Dropbox/thesis/latex/part1/01_scoring_rules.tex:\n   73  \\end{definition}\n   74  \n   75: % As we will see, divergences are often used to match or approximate some \\emph{true} or \\emph{ideal} distribution with something \\emph{approximate}, so that the divergence between the truth and the approximation is minimal. As we can measure divergence in both ways, there is a question of which direction of divergence is to be calculated. Definition \\eqref{eqn:def_divergence} suggests that the the first argument, $P$, should take the role of the true distribution, and $Q$ the approximate. \\TODO{elaborate on this.}\n   76  \n   77  The divergence defined in \\eqref{eqn:def_divergence} is a special case of Bregman divergences. Bregman divergences are an important class of divergence functions on complex domains, and include well known measures of distance or dissimilarity such as the Eulidean distance or KL divergence.\n   ..\n  419  \\end{equation}\n  420  \n  421: where $i$ is the imaginary number $i=\\sqrt{-1}$. The characteristic function is known to uniquely characterise any Borel probability measure on the real line. Indeed, it corresponds to an RKHS-embedding with the fourier kernel $k_{Fourier}(x,y) = \\exp(ixy)$, which is an example of characteristic kernels. Note, that the final formula \\eqref{eqn:rkhs-mmd-lastline} assumed a real valued kernel function, therefore it is not valid for the special case of the Fourier kernel. Other, practically more relevant examples of characteristic kernels include the squared exponential, and the Laplacian kernels. \\TODO{If I do this, I need a technical introduction to kernels - as well as probability distributions} As a counterexample, polynomial kernels, and in general kernels corresponding to finite dimensional Hilbert spaces are not characteristic.\n  422  \n  423  The maximum mean discrepancy with characteristic kernels has been applied in various contexts in machine learning. One of the first of these recent applications were two-sample tests. In two-sample testing one is provided i.\\,i.\\,d.\\ samples from two distributions, and one has to determine whether the two distributions are the same or not. \\citet{Gretton2012} developed and analysed efficient empirical methods based on the MMD for this problem.\n\n/Users/fhuszar/Dropbox/thesis/latex/part1/02_embeddings.tex:\n  156  % We note that in this simple example of binary random variables, a map of the manifold could have been drawn exactly, without the need for the numerical approximations used by the ISOMAP technique. It is easy to see that given a scoring rule $\\score$ transforming the real line by the gradient of the entropy function $\\dot{\\mathbb{H}}_{\\score}$ yields an embedding that faithfully represents the statistical manifold induced by $\\score$. For example, the geodesic distance on the Brier manifold is simply the Euclidean distance, and indeed the gradient of the entropy function is essentially the identity $\\dot{\\mathbb{H}}_{Brier}[p] = -p$. The gradient of the Shannon's entropy diverges to infinity $p\\rightarrow 0$ and to negative infinity as $p\\rightarrow 1$, which shows that this statistical manifold spans the entire real line.\n  157  \n  158: % The fact that we can compute an exact embedding allows us to evaluate how well our ISOMAP-based numerical technique works. As the embedding is unique only up to translation and reflection, we \\TODO{do this numerically, maybe}.\n  159  \n  160  \\subsection{Gaussian distributions}\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex:\n  232  \\section{Summary}\n  233  \n  234: \\TODO{So what the F?}\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex:\n  107  Here I derive the \\bq{} estimate of the intergral in Eqn.\\ \\eqref{eqn:integral}. Let us assume we have evaluated the function at certain test locations $\\x_1 \\ldots \\x_N$, collectovely denoted as $X$. The function values $f(\\vx_1) \\ldots f(\\vx_N)$ are collectively denoted as the vector $\\vf(\\vX)$. The Bayesian solution implies a predictive distribution over $Z$. I am now goig to calculate the mean of this distribution, $\\expect{}Z_{f,p}$. This is the optimal Bayesian estimator for a squared loss.\n  108  \n  109: For simplicity, $f$ is assigned a Gaussian process prior with kernel function $k$ and mean $0$. \\TODO{reference appendix on Gaussian processes} Note that the GP assumption is the Bayesian analogoue to the assumption that integrand functions belong to an RKHS made by kernel herding in Eqn.\\ \\eqref{eq:mmd_assumption}. Conveniently, the \\gp{} posterior allows us to compute the expectation of $Z_{f,p}$ in closed form: \n  110  \n  111  \\begin{align}\n\n/Users/fhuszar/Dropbox/thesis/latex/part1/01_scoring_rules.tex.bak:\n   65  \\end{definition}\n   66  \n   67: % As we will see, divergences are often used to match or approximate some \\emph{true} or \\emph{ideal} distribution with something \\emph{approximate}, so that the divergence between the truth and the approximation is minimal. As we can measure divergence in both ways, there is a question of which direction of divergence is to be calculated. Definition \\eqref{eqn:def_divergence} suggests that the the first argument, $P$, should take the role of the true distribution, and $Q$ the approximate. \\TODO{elaborate on this.}\n   68  \n   69  The divergence defined in \\eqref{eqn:def_divergence} is a special case of Bregman divergences. Bregman divergences are an important class of divergence functions on complex domains, and include well known measures of distance or dissimilarity such as the Euclidean distance or KL divergence.\n   ..\n  412  \\end{equation}\n  413  \n  414: where $i$ is the imaginary number $i=\\sqrt{-1}$. The characteristic function is known to uniquely characterise any Borel probability measure on the real line. Indeed, it corresponds to an RKHS-embedding with the fourier kernel $k_{Fourier}(x,y) = \\exp(ixy)$, which is an example of characteristic kernels. Note, that the final formula \\eqref{eqn:rkhs-mmd-lastline} assumed a real valued kernel function, therefore it is not valid for the special case of the Fourier kernel. Other, practically more relevant examples of characteristic kernels include the squared exponential, and the Laplacian kernels (see chapter \\ref{sec:kernels}). \\TODO{If I do this, I need a technical introduction to kernels - as well as probability distributions} As a counterexample, polynomial kernels, and in general kernels corresponding to finite dimensional Hilbert spaces are not characteristic.\n  415  \n  416  The maximum mean discrepancy with characteristic kernels has been applied in various contexts in machine learning. One of the first of these recent applications were two-sample tests. In two-sample testing one is provided i.\\,i.\\,d.\\ samples from two distributions, and one has to determine whether the two distributions are the same or not. \\citet{Gretton2012} developed and analysed efficient empirical methods based on the MMD for this problem.\n\n9 matches across 6 files\n\n\nSearching 100 files for \"\\TODO\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/notation.tex:\n    1  %!TEX root = thesis.tex\n    2: \\newcommand{\\TODO}[1]{\\textbf{TODO: #1}}\n    3  \n    4  \\newcommand{\\eg}{e.\\,g.\\ }\n\n/Users/fhuszar/Dropbox/thesis/latex/part1/01_scoring_rules.tex.bak:\n   65  \\end{definition}\n   66  \n   67: % As we will see, divergences are often used to match or approximate some \\emph{true} or \\emph{ideal} distribution with something \\emph{approximate}, so that the divergence between the truth and the approximation is minimal. As we can measure divergence in both ways, there is a question of which direction of divergence is to be calculated. Definition \\eqref{eqn:def_divergence} suggests that the the first argument, $P$, should take the role of the true distribution, and $Q$ the approximate. \\TODO{elaborate on this.}\n   68  \n   69  The divergence defined in \\eqref{eqn:def_divergence} is a special case of Bregman divergences. Bregman divergences are an important class of divergence functions on complex domains, and include well known measures of distance or dissimilarity such as the Euclidean distance or KL divergence.\n   ..\n  412  \\end{equation}\n  413  \n  414: where $i$ is the imaginary number $i=\\sqrt{-1}$. The characteristic function is known to uniquely characterise any Borel probability measure on the real line. Indeed, it corresponds to an RKHS-embedding with the fourier kernel $k_{Fourier}(x,y) = \\exp(ixy)$, which is an example of characteristic kernels. Note, that the final formula \\eqref{eqn:rkhs-mmd-lastline} assumed a real valued kernel function, therefore it is not valid for the special case of the Fourier kernel. Other, practically more relevant examples of characteristic kernels include the squared exponential, and the Laplacian kernels (see chapter \\ref{sec:kernels}). \\TODO{If I do this, I need a technical introduction to kernels - as well as probability distributions} As a counterexample, polynomial kernels, and in general kernels corresponding to finite dimensional Hilbert spaces are not characteristic.\n  415  \n  416  The maximum mean discrepancy with characteristic kernels has been applied in various contexts in machine learning. One of the first of these recent applications were two-sample tests. In two-sample testing one is provided i.\\,i.\\,d.\\ samples from two distributions, and one has to determine whether the two distributions are the same or not. \\citet{Gretton2012} developed and analysed efficient empirical methods based on the MMD for this problem.\n\n3 matches across 2 files\n\n\nSearching 100 files for \"data-set\" (case sensitive)\n\n0 matches across 0 files\n\n\nSearching 100 files for \"data-sets\" (case sensitive)\n\n0 matches across 0 files\n\n\nSearching 101 files for \"Sannon\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/01_introBALD.tex:\n   90  The most commonly used special case of the scoring-rule-based Bayesian active learning framework uses the logarithmic score and hence, Shannon's entropy. \n   91  \n   92: Sannon's entropy is used in a wide range of Bayesian active learning work \\citep{MacKay1992,Lawrence2004,Krause2006,Ji2008,Settles2010,Houlsby2011,Huszar2012quantum}.\n   93  \n   94  As discussed in section \\ref{sec:log_score}, Shannon's mutual information is unique in that it is symmetric in its arguments. In Chapter \\ref{sec:BALD} I explore how this property can be exploited in practical implementations of active learning.\n\n1 match in 1 file\n\n\nSearching 100 files for \"Tomographu\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/03_quantum.tex:\n   25  In current experimental quantum physics, when researchers study properties a new physical implementation of a quantum gate, they have to demonstrate that in multiple situations their equipment produces a state predicted by theory. Often due to noise and other environmental factors these implementations are imperfect and the produced state does not turn out exactly as desired. The degree of discrepancy between the theoretical predictions and the actually produced state is called infidelity. To be able to measure infidelity, experimenters often have to perform full quantum tomography. Therefore any method that speeds these processes up may be of great practical importance.\n   26  \n   27: In this chapter I explore the possibility of speeding up quantum tomography by using state-of-the art Bayesian active learning. I will first introduce the mathematical framework for studying quantum tomography, and provide a Bayesian analysis of the problem. Then I will present an active learning method to perform quantum tomography, that we call Adaptive Bayesian Quantum Tomographu (ABQT). I will present simulated experimental results that show that active learning can speed up the process of tomography by orders of magnitude.\n   28  \n   29  % #### ##    ## ######## ########   #######  \n\n1 match in 1 file\n\n\nSearching 100 files for \"Holst\" (case sensitive)\n\n0 matches across 0 files\n\n\nSearching 100 files for \",Houlsby2012preference\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex:\n   53  \\end{align}\n   54  \n   55: So by maximising the expected reduction in posterior entropy the learner seeks a measurement such that each probable parameter $\\theta$ predicts something different for what the outcome $\\y$ will be. In the statistics literature this is known as the \\emph{principle of maximal disagreement} and provides the theoretical motivation for \\emph{query by committee} methods \\citep{Freund1997}. We will call the approach of using the rearranged objective in Eqn.\\ \\eqref{eqn:rearrangement} as Bayesian Active Learning by Disagreement or BALD \\citep{Houlsby2011,Houlsby2012preference,Huszar2012quantum}. Note that these rearrangements were only possible because of the symmetry of Shannon's mutual information, hence this interpretation does not hold in general for Bayesian active learning when using a scoring rule other than the logarithmic one.\n   56  \n   57  \\section{Related techniques}\n   ..\n  259  We can see from Figs \\ref{fig:artificial} and \\ref{fig:BALD_GPC_results} that by using BALD we make significant gains over na\\\"{i}ve random sampling in both the classification and preference learning domains. Relative to other active learning algorithms BALD performs consistently well across all datasets, particularly when avoiding the block of points in Fig.\\ \\ref{fig:artificial} (a). Occasionally \\eg as Fig.\\ \\ref{fig:BALD_GPC_results} (i), it performs poorly on the first couple of queries.\n  260  \n  261: In most of the reported experiments I have fixed the kernel $k$ of the Gaussian process prior to the maximum likelihood estimate on the whole pool. This is of course cheating, as it uses information from the whole dataset before starting to select queries, but it provides us with a fair way of comparing various methods, including those that cannot handle hyperparameter learning. As described in \\citep{Houlsby2011,Houlsby2012preference}, BALD can accommodate active learning of hyperparameters. In Fig.\\ \\ref{fig:BALD_GPC_results} (i) we also show the performance of this method, and on the \\emph{cancer} dataset it helps to overcome the initial poor performance of BALD.\n  262  \n  263  MES often performs as well as BALD \\eg on Fig.\\ \\ref{fig:artificial}(c), where there is no label noise. It never outperforms BALD though and on noisy datasets (\\eg Fig.\\ \\ref{fig:artificial}(a)) performs particularly poorly as expected. QBC provides a close approximation to BALD and usually provides a small decrement in performance. However, there is a large decrease in performance on the noisy artificial dataset caused by the vote criterion not maintaining a notion of inherent uncertainty, like MES. The IVM occasionally performs well, but often exhibits highly pathological behaviour; by observing $\\y$ values in advance it actively chooses noisy or mislabelled points, thinking them informative. The SVM-based approach exhibits variable performance (it does extremely well on Fig.\\ \\ref{fig:BALD_GPC_results} (f), but very poorly on \\ref{fig:artificial} (c)).\n  ...\n  339  \\end{align}\n  340  \n  341: We call $k_\\text{pref}$ the \\emph{preference kernel}. This kernel function for preference learning is not new: the same kernel has been derived from a large margin classification viewpoint by \\citet{furnkranz2010}. However, to our knowledge, the preference kernel has not been used previously in Bayesian, Gaussian process-based models, only in our previous work \\citep{Houlsby2011,Houlsby2012preference}\n  342  \n  343  The combination of (\\ref{eqn:preference_likelihood2}) with a GP prior based on the preference kernel allows us to transform the pairwise preference learning problem into  binary classification with GPs. This means that state-of-the-art methods for GP binary classification, such as expectation propagation \\citep{Minka2001}, can be applied readily to preference learning. Furthermore, the simplified likelihood (\\ref{eqn:preference_likelihood2}) allows us to implement complex inference problems such as the multi-user hierarchical model described in \\citep{Houlsby2012preference}.\n\n3 matches in 1 file\n",
 			"settings":
 			{
-				"buffer_size": 60573,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Searching 87 files for \"\n%!TEX root = main.tex\n%!TEX root = main.tex\n%!TEX root = ../main.tex\"\n\n0 matches across 0 files\n\n\nSearching 87 files for \"\n%!TEX root = main.tex\n%!TEX root = main.tex\nTEX root = ../main.tex\"\n\n0 matches across 0 files\n\n\nSearching 87 files for \"\n%!TEX root = main.tex\n%!TEX root = main.tex\n%!TEX root = main.tex\"\n\n0 matches across 0 files\n\n\nSearching 87 files for \"%!TEX root = main.tex\"\n\n/Users/fhuszar/Dropbox/thesis/latex/conclusions.tex:\n    1: %!TEX root = main.tex\n    2  \n    3  Machine learning is a mess. This thesis finally brings order and clarity to what otherwise appears as a mix of muddled thoughts. Just kidding.\n\n/Users/fhuszar/Dropbox/thesis/latex/introduction.tex:\n    1: %!TEX root = main.tex\n    2  \\lipsum[1-5]\n\n/Users/fhuszar/Dropbox/thesis/latex/notation.tex:\n    1: %!TEX root = main.tex\n    2  \\newcommand{\\TODO}[1]{\\textbf{TODO: #1}}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/part1_main.tex:\n    1: %!TEX root = main.tex\n    2  \\part{Scoring rules, Divergences and Information}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/part2_main.tex:\n    1: %!TEX root = main.tex\n    2  \\part{Approximate Bayesian inference}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/part3_main.tex:\n    1: %!TEX root = main.tex\n    2  \\part{Optimal Experiment Design}\n    3  \n\n/Users/fhuszar/Dropbox/thesis/latex/preamble.tex:\n    1: %!TEX root = main.tex\n    2  \\newtheorem{theorem}{Theorem}\n    3  \\newtheorem{corollary}{Corollary}\n\n7 matches across 7 files\n\n\nSearching 86 files for \"usetikzlibrary\"\n\n/Users/fhuszar/Dropbox/thesis/latex/preamble.tex:\n   11  \\usepackage[paper=a4paper]{geometry}\n   12  \\usepackage{tikz,pgfplots}\n   13: \\usetikzlibrary{external}\\tikzexternalize\n   14  \n   15  \\newtheorem{theorem}{Theorem}\n\n1 match in 1 file\n\n\nSearching 1 file for \"\\label:{fig:\"\n\n0 matches across 0 files\n\n\nSearching 1 file for \"\\label{fig:\"\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex:\n  208  \\includegraphics[width=\\columnwidth]{figs/herding/fig1_v2}\n  209  \\caption[Sequential Bayesian quadrature versus kernel herding]{The first 8 samples from sequential Bayesian quadrature, versus the first 20 samples from herding.  Only 8 weighted \\sbq{} samples are needed to give an estimator with the same maximum mean discrepancy as using 20 herding samples with uniform weights.  Relative sizes of samples indicate their relative weights.}\n  210: \\label{fig:fig1}\n  211  \\end{figure} \n  212  \n  ...\n  290  \\includegraphics[width=\\columnwidth]{figs/herding/bq_intro4}\n  291  \\caption[An illustration of Bayesian quadrature]{An illustration of Bayesian Quadrature.  The function $f(x)$ is sampled at a set of input locations.  This induces a Gaussian process posterior distribution on $f$, which is integrated in closed form against the target density, $p(\\vx)$.  Since the amount of volume under $f$ is uncertain, this gives rise to a (Gaussian) posterior distribution over $Z_{f,p}$.}\n  292: \\label{fig:bq_intro} \\label{fig:fig1}\n  293  \\end{figure}\n  294  \n  ...\n  353  	\\includegraphics[width=\\columnwidth]{figs/herding/weights_v1_n100}\n  354  	\\caption[Empirical distribution of weights in sequential Bayesian quadrature]{A set of optimal weights given by \\bq{}, after 100 \\sbq{} samples were selected on the distribution shown in Figure \\ref{fig:fig1}.  Note that the optimal weights are spread away from the uniform weight ($\\frac{1}{N}$), and that some weights are even negative.  The sum of these weights is 0.93.}\n  355: 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  356  \\end{figure}\n  357  \n  ...\n  365  	\n  366  		\\caption[The concept of shrinkage in Bayesian quadrature]{An example of Bayesian shrinkage in the sample weights.  In this example, the kernel width is approximately $\\nicefrac{1}{20}$ the width of the distribution being considered.  Because the prior over functions is zero mean, in the small sample case the weights are shrunk towards zero.  The weights given by simple Monte Carlo and herding do not exhibit shrinkage. }\n  367: 	\\label{fig:weights_shrinkage} 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  368  \\end{figure}\n  369  \n  ...\n  495  \\includegraphics[width=\\columnwidth]{figs/herding/expected_variance_v7_400}\n  496  \\caption[Discrepancy of Bayesian quadrature, herding and random sampling]{The maximum mean discrepancy, or expected error of several different quadrature methods.  Herding appears to approach a rate close to $\\mathcal{O}(1/N)$.  \\sbq{} appears to attain a faster, but unknown rate.}\n  497: \\label{fig:mmd_curve}\\label{fig:weights_shrinkage} 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  498  \\end{figure}\n  499  %\n  ...\n  522  \\includegraphics[width=\\columnwidth]{figs/herding/error_curve_rkhs_400_v4}\n  523  \\caption[Empirical error of Bayesian quadrature, herding and random sampling]{Within-model error: The empirical error rate in estimating $Z_{f,p}$, for several different sampling methods, averaged over 250 functions randomly drawn from the RKHS corresponding to the kernel used.}\n  524: \\label{fig:error_curve}\\label{fig:mmd_curve}\\label{fig:weights_shrinkage} 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  498  \n  525  \\end{figure}\n  526  %\n  ...\n  532  \\includegraphics[width=\\columnwidth]{figs/herding/bound_curve_rkhs}\n  533  \\caption[Illustrating MMD as an upper bound on empirical error rate]{The empirical error rate in estimating $Z_{f,p}$,  for the \\sbq{} estimator, on 10 random functions drawn from the RKHS corresponding to the kernel used.  Also shown is the upper bound on the error rate implied by the $\\mmd$.}\n  534: \\label{fig:bound_curve}\\label{fig:error_curve}\\label{fig:mmd_curve}\\label{fig:weights_shrinkage} 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  535  \\end{figure}\n  536  \n  ...\n  548  \\includegraphics[width=\\columnwidth]{figs/herding/error_curve_outmodel_400_v3}\n  549  \\caption[Out-of-model error of Bayeisan quadrature, herding and random sampling]{Out-of-model error: The empirical error rates in estimating $Z_{f,p}$, for several different sampling methods, averaged over 250 functions drawn from outside the RKHS corresponding to the kernels used.}\n  550: \\label{fig:error_curve_outmodel}\\label{fig:bound_curve}\\label{fig:error_curve}\\label{fig:mmd_curve}\\label{fig:weights_shrinkage} 	\\label{fig:weights100} \\label{fig:bq_intro} \\label{fig:fig1}\n  551  \\end{figure}\n  552  %\n\n8 matches in 1 file\n\n\nSearching 86 files for \"asmussen\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/bibliography/thesis.bib:\n  146  \n  147  @article{quinonero2005,\n  148: 	Author = {Qui{\\~n}onero-Candela, Joaquin and Rasmussen, Carl Edward},\n  149  	Date-Added = {2013-05-12 16:04:56 +0000},\n  150  	Date-Modified = {2013-05-12 16:05:03 +0000},\n  ...\n  773  \n  774  @article{nickisch2008gpc,\n  775: 	Author = {Nickisch, H. and C. E. Rasmussen},\n  776  	Date-Added = {2013-04-16 17:25:49 +0000},\n  777  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  793  \n  794  @article{candela05sparseGP,\n  795: 	Author = {J. Qui{\\`O}onero-Candela and C. E. Rasmussen},\n  796  	Date-Added = {2013-04-16 17:25:49 +0000},\n  797  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  958  	Year = {2002}}\n  959  \n  960: @book{rasmussen06GP,\n  961  	Address = {Cambridge, MA, USA},\n  962: 	Author = {Carl Edward Rasmussen and Christopher K. I. Williams},\n  963  	Date-Added = {2013-04-16 17:25:49 +0000},\n  964  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n 1158  	Year = {2006}}\n 1159  \n 1160: @book{rasmussen2006,\n 1161: 	Author = {Rasmussen, Carl Edward and Williams, Christopher K. I.},\n 1162  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1163  	Date-Modified = {2013-04-16 17:12:02 +0000},\n ....\n 1192  \n 1193  @article{Nickisch2008,\n 1194: 	Author = {Nickisch, Hannes and Rasmussen, Carl Edward},\n 1195  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1196  	Date-Modified = {2013-04-16 17:14:05 +0000},\n ....\n 1623  @incollection{BZMonteCarlo,\n 1624  	Address = {Cambridge, MA},\n 1625: 	Author = {C. E. Rasmussen and Z. Ghahramani},\n 1626  	Booktitle = {Advances in Neural Information Processing Systems},\n 1627  	Date-Added = {2013-04-16 17:05:02 +0000},\n ....\n 1697  	Year = {2012}}\n 1698  \n 1699: @article{rasmussen38gaussian,\n 1700: 	Author = {Rasmussen, C.E. and Williams, CKI},\n 1701  	Date-Added = {2013-04-16 17:05:02 +0000},\n 1702  	Date-Modified = {2013-04-16 17:05:02 +0000},\n ....\n 1741  	Year = {2005}}\n 1742  \n 1743: @article{Rasmussen2005,\n 1744: 	Author = {Rasmussen, C.E. and Williams, C.K.I.},\n 1745  	Date-Added = {2013-04-16 16:35:16 +0000},\n 1746  	Date-Modified = {2013-04-16 16:35:31 +0000},\n ....\n 1881  \n 1882  @inproceedings{Kuss2005,\n 1883: 	Author = {M. Kuss and C. E. Rasmussen},\n 1884  	Booktitle = {NIPS},\n 1885  	Date-Added = {2013-04-16 16:35:16 +0000},\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex:\n   22  The likelihood $p(\\data\\vert\\param)$ describes how data is related to the parameters $\\param$, and $p(\\param)$ is a prior distribution which capture's one a priori expectations about what the value of $\\param$ may be. The posterior distribution $p_\\data = p(\\param\\vert\\data)$ captures all statistically relevant information that the data $\\data$ provides about $\\param$, and it is therefore of central importance.\n   23  \n   24: The marginal likelihood, also called the model evidence $Z = \\int p(\\data\\vert\\param) p(\\param) d\\param$ is also of interest. It is often used to quantify how well a Bayesian model -- the combination of likelihood and prior -- fit the data. When the model involves additinal parameters or hyper-parameters that are not modelled probabilistically via prior distributions, it is common practice to learn their values by maximising model evidence \\citep[see \\eg][Chapter 5]{Rasmussen2006}.\n   25  \n   26  In practically interesting Bayesian models, the posterior distribution and model evidence are often computationally intractable to obtain and therefore one has to resort to approximations. The most popular methods for Bayesian approximate inference are variational inference and Markov chain Monte Carlo.\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex:\n  362  This means that the estimate converges for any bounded measurable function $f$. The speed of convergence, however, may not be as fast.\n  363  \n  364: Therefore it is crucial that the kernel we choose is representative of the function or functions $f$ we will integrate.  For example, in our experiments, the convergence of herding was sensitive to the width of the Gaussian kernel.  One of the major weaknesses of kernel methods in general is the difficulty of setting kernel parameters.  A key benefit of the Bayesian interpretation of herding and MMD presented in this paper is that it provides a recipe for adapting the Hilbert space to the observations $f(x_n)$.  To be precise, we can fit the kernel parameters by maximizing the marginal likelihood of Gaussian process conditioned on the observations.  Details can be found in \\citep{rasmussen38gaussian}.\n  365  \n  366  \\subsection{Computational Complexity}\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex:\n   81  BALD exploits the fact that in many active learning applications the output space $\\Ye$ is often simpler than the parameter space $\\Theta$. Here I consider the problem of active learning for binary classification, when the output takes one of two possible values $y \\in \\{-1,1\\}$. Given the simplicity of the outputs, binary classification is a highly relevant use-case for BALD.\n   82  \n   83: I will use a non-parametric Bayesian classification model, Gaussian process classification \\citep[GPC,][]{rasmussen06GP} to demonstrate the usefulness of BALD: GPC appears to be an especially challenging problem for information-theoretic active learning because its parameter space is infinite. Therefore, computing entropy of the posterior involves nontrivial quantities. However, by using the BALD approach and Eqn.\\ \\eqref{eqn:rearrangement} we are able to fully calculate the relevant information quantities without having to work out entropies of infinite dimensional objects. \n   84  \n   85  \n   ..\n   94  \\TODO{I need an appendix on kernels and Gaussian processes}\n   95  \n   96: We consider the probit case where, given the value of $f$, the binary label $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\citep{rasmussen2005}.\n   97  \n   98  Posterior inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. This is addressed by using approximate inference methods. The most commonly used approximate inference methods for Gaussian process classification are expectation propagation \\citep[EP,][]{Minka2002}, Laplace's approximation \\citep{williams1998}, assumed density filtering \\citep[ADF,][]{csato2000} and sparse methods \\citep{candela05sparseGP}. These all approximate the non-Gaussian posterior by a Gaussian \\citep{Nickisch2008}, but differ in the optimisation criterion and other restrictions. Throughout this chapter I will assume that we are provided with some Gaussian approximation to the GPC posterior resulting from one of these methods, though the active learning method is agnostic as to which method produced this estimate. Given the sequential nature of active learning, fast on-line methods \\citep{Csato2002} are particularly well suited for the task. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where approximate inference is exploited.\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/BALD-GPC/AL_NIPS2011.tex:\n  124  	f \\sim \\mathrm{GP}(\\mu(\\cdot),k(\\cdot,\\cdot)) \\qquad \\y\\vert\\x,f \\sim\\mathrm{Bernoulli}(\\Phi(f(\\x))) \n  125  \\end{align}\n  126: The latent parameter, now called $f$ (previously denoted as $\\param$), is a function $\\mathcal{X}\\rightarrow\\mathbb{R}$, and is assigned a Gaussian process prior with mean $\\mu(\\cdot)$ and covariance function $k(\\cdot,\\cdot)$. We consider the probit case where given the value of $f$, $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\cite{rasmussen2005}.\n  127  \n  128: Inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. The most commonly used approximate inference methods -- EP,  Laplace approximation, Assumed Density Filtering and sparse methods -- all approximate the posterior by a Gaussian \\cite{rasmussen2005}. Throughout this section we will assume that we are provided with such a Gaussian approximation from one of these methods, though the active learning algorithm does not care which. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where such an approximation is exploited.\n  129  \n  130  Now, we will compute the informativeness of a query $\\x$ using Eqn.  \\eqref{eqn:rearrangement}.  The entropy of the binary output variable $y$ given a fixed $f$ can be expressed in terms of the binary entropy function $h$: \n  ...\n  181  \\end{align}\n  182  \n  183: In the context of GP models, hyperparameters typically control the smoothness or spatial length-scale of functions. If we maintain a posterior distribution over these hyperparameters, which we can do e.\\,g.\\ via Hamiltonian Monte Carlo, we can choose either to treat them as nuisance parameters $\\theta^-$ and use Eq.\\ \\ref{eqn:BALD_bipartite}, or to include them in $\\theta^+$ and perform active learning over them as well. In certain cases, such as automatic relevance determination\\cite{rasmussen2005}, it may even make sense to treat hyperparameters as variables of primary interest, and the function $f$ itself as nuisance parameter $\\theta^-$.\n  184  \n  185  \\subsection{Preference Learning}\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/lossBayes/lossBayes.tex:\n  246  \\section{SUPERVISED LEARNING} \\label{s:examples}\n  247  \n  248: In this section, we make our framework more concrete by investigating it in the predictive setting presented in \\secref{ss:predictive}. We recall that in order to apply our framework, we need to specify the loss, the action space, the Bayesian observation model and a tractable family $\\mathcal{Q}$ of approximate distributions over the latent variable $\\theta$. In the predictive setting, an action is a prediction function $h:\\mathcal{X}\\rightarrow\\mathcal{Y}$. We let the action space $\\mathcal{H}$ be the set of all possible such functions here -- we are thus in the non-parametric prediction regime where we are free to make arbitrary pointwise decision on $\\mathcal{X}$. This gives us rich predictive possibilities as well as actually enables us to analytically compute $h_q$, as we will see in the next paragraph. For the observation model, we consider Bayesian non-parametric probabilistic models based on Gaussian processes (GPs), which have been successfully applied to model a wide variety of phenomena in the past~\\citep{rasmussen06GP}. %%OPTIONAL\\footnote{Considering the non-parametric setup reduces the issue of model misspecification. Moreover, GPs are often applied using approximate inference and thus provide a useful illustration for our framework.}.\n  249  In \\secref{ss:GPR}, we first look at Gaussian process regression. In this case, we can obtain an analytic form for $p_\\dataset$ and $\\mathcal{R}_{p_\\dataset}(h_q)$ which gives us some insights about the approximation framework as well as when minimizing the KL divergence can be suboptimal. Because the quadratic cost function is not bounded (and so $M = \\infty$), we cannot directly apply our loss-EM algorithm for regression, but we can nevertheless get useful insights which suggest future research directions for regression with sparse GPs. In section~\\ref{ss:GPC}, we consider Gaussian process classification (GPC) which will provide a test bed for the loss-EM algorithm. In both cases, we use a GP as our prior over parameters and let $\\mathcal{Q}$ also be a family of GPs.\n  250  \n  ...\n  384  To investigate the effect of the test distribution $p(x)$ on our method, we generated three different transductive test sets of size 1000, with inputs sampled from $\\mathcal{U}(0,1)$, $\\mathcal{U}(0.2,1.2)$ and $\\mathcal{U}(0.5,1.5)$ respectively (columns of \\tableref{tab:results}), and repeated these experiments 10 times to get significance results. We used five different loss matrices: the loss for false negatives was constant at $c_{-}=1$, the loss for false positives $c_{+}$ was varied so that the decision threshold $p_{thresh}=\\frac{c_{+}}{c_{-} + c_{+}}$ changed linearly between 0.5 and 0.05 (rows of \\tableref{tab:results}).\n  385  \n  386: For each dataset, we compared three methods for approximate inference: Laplace approximation, expectation propagation (EP) and loss-EM (run separately for each loss and test set combination). Both Laplace and EP are standard approaches to GP classification~\\citep{rasmussen06GP}. To evaluate the performance of the methods, we used the following criterion based on the posterior risk:\n  387  \\addtolength{\\abovedisplayskip}{-1mm}\n  388  \\addtolength{\\belowdisplayskip}{-1mm}\n\n23 matches across 6 files\n\n\nSearching 86 files for \"asmussen\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/bibliography/thesis.bib:\n  146  \n  147  @article{quinonero2005,\n  148: 	Author = {Qui{\\~n}onero-Candela, Joaquin and Rasmussen, Carl Edward},\n  149  	Date-Added = {2013-05-12 16:04:56 +0000},\n  150  	Date-Modified = {2013-05-12 16:05:03 +0000},\n  ...\n  773  \n  774  @article{nickisch2008gpc,\n  775: 	Author = {Nickisch, H. and C. E. Rasmussen},\n  776  	Date-Added = {2013-04-16 17:25:49 +0000},\n  777  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  793  \n  794  @article{candela05sparseGP,\n  795: 	Author = {J. Qui{\\`O}onero-Candela and C. E. Rasmussen},\n  796  	Date-Added = {2013-04-16 17:25:49 +0000},\n  797  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  958  	Year = {2002}}\n  959  \n  960: @book{Rasmussen2006,\n  961  	Address = {Cambridge, MA, USA},\n  962: 	Author = {Carl Edward Rasmussen and Christopher K. I. Williams},\n  963  	Date-Added = {2013-04-16 17:25:49 +0000},\n  964  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n 1158  	Year = {2006}}\n 1159  \n 1160: @book{rasmussen2006,\n 1161: 	Author = {Rasmussen, Carl Edward and Williams, Christopher K. I.},\n 1162  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1163  	Date-Modified = {2013-04-16 17:12:02 +0000},\n ....\n 1192  \n 1193  @article{Nickisch2008,\n 1194: 	Author = {Nickisch, Hannes and Rasmussen, Carl Edward},\n 1195  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1196  	Date-Modified = {2013-04-16 17:14:05 +0000},\n ....\n 1623  @incollection{BZMonteCarlo,\n 1624  	Address = {Cambridge, MA},\n 1625: 	Author = {C. E. Rasmussen and Z. Ghahramani},\n 1626  	Booktitle = {Advances in Neural Information Processing Systems},\n 1627  	Date-Added = {2013-04-16 17:05:02 +0000},\n ....\n 1697  	Year = {2012}}\n 1698  \n 1699: @article{rasmussen38gaussian,\n 1700: 	Author = {Rasmussen, C.E. and Williams, CKI},\n 1701  	Date-Added = {2013-04-16 17:05:02 +0000},\n 1702  	Date-Modified = {2013-04-16 17:05:02 +0000},\n ....\n 1741  	Year = {2005}}\n 1742  \n 1743: @article{Rasmussen2005,\n 1744: 	Author = {Rasmussen, C.E. and Williams, C.K.I.},\n 1745  	Date-Added = {2013-04-16 16:35:16 +0000},\n 1746  	Date-Modified = {2013-04-16 16:35:31 +0000},\n ....\n 1881  \n 1882  @inproceedings{Kuss2005,\n 1883: 	Author = {M. Kuss and C. E. Rasmussen},\n 1884  	Booktitle = {NIPS},\n 1885  	Date-Added = {2013-04-16 16:35:16 +0000},\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex:\n   22  The likelihood $p(\\data\\vert\\param)$ describes how data is related to the parameters $\\param$, and $p(\\param)$ is a prior distribution which capture's one a priori expectations about what the value of $\\param$ may be. The posterior distribution $p_\\data = p(\\param\\vert\\data)$ captures all statistically relevant information that the data $\\data$ provides about $\\param$, and it is therefore of central importance.\n   23  \n   24: The marginal likelihood, also called the model evidence $Z = \\int p(\\data\\vert\\param) p(\\param) d\\param$ is also of interest. It is often used to quantify how well a Bayesian model -- the combination of likelihood and prior -- fit the data. When the model involves additinal parameters or hyper-parameters that are not modelled probabilistically via prior distributions, it is common practice to learn their values by maximising model evidence \\citep[see \\eg][Chapter 5]{Rasmussen2006}.\n   25  \n   26  In practically interesting Bayesian models, the posterior distribution and model evidence are often computationally intractable to obtain and therefore one has to resort to approximations. The most popular methods for Bayesian approximate inference are variational inference and Markov chain Monte Carlo.\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex:\n  362  This means that the estimate converges for any bounded measurable function $f$. The speed of convergence, however, may not be as fast.\n  363  \n  364: Therefore it is crucial that the kernel we choose is representative of the function or functions $f$ we will integrate.  For example, in our experiments, the convergence of herding was sensitive to the width of the Gaussian kernel.  One of the major weaknesses of kernel methods in general is the difficulty of setting kernel parameters.  A key benefit of the Bayesian interpretation of herding and MMD presented in this paper is that it provides a recipe for adapting the Hilbert space to the observations $f(x_n)$.  To be precise, we can fit the kernel parameters by maximizing the marginal likelihood of Gaussian process conditioned on the observations.  Details can be found in \\citep{rasmussen38gaussian}.\n  365  \n  366  \\subsection{Computational Complexity}\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex:\n   81  BALD exploits the fact that in many active learning applications the output space $\\Ye$ is often simpler than the parameter space $\\Theta$. Here I consider the problem of active learning for binary classification, when the output takes one of two possible values $y \\in \\{-1,1\\}$. Given the simplicity of the outputs, binary classification is a highly relevant use-case for BALD.\n   82  \n   83: I will use a non-parametric Bayesian classification model, Gaussian process classification \\citep[GPC,][]{Rasmussen2006} to demonstrate the usefulness of BALD: GPC appears to be an especially challenging problem for information-theoretic active learning because its parameter space is infinite. Therefore, computing entropy of the posterior involves nontrivial quantities. However, by using the BALD approach and Eqn.\\ \\eqref{eqn:rearrangement} we are able to fully calculate the relevant information quantities without having to work out entropies of infinite dimensional objects. \n   84  \n   85  \n   ..\n   94  \\TODO{I need an appendix on kernels and Gaussian processes}\n   95  \n   96: We consider the probit case where, given the value of $f$, the binary label $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\citep{rasmussen2005}.\n   97  \n   98  Posterior inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. This is addressed by using approximate inference methods. The most commonly used approximate inference methods for Gaussian process classification are expectation propagation \\citep[EP,][]{Minka2002}, Laplace's approximation \\citep{williams1998}, assumed density filtering \\citep[ADF,][]{csato2000} and sparse methods \\citep{candela05sparseGP}. These all approximate the non-Gaussian posterior by a Gaussian \\citep{Nickisch2008}, but differ in the optimisation criterion and other restrictions. Throughout this chapter I will assume that we are provided with some Gaussian approximation to the GPC posterior resulting from one of these methods, though the active learning method is agnostic as to which method produced this estimate. Given the sequential nature of active learning, fast on-line methods \\citep{Csato2002} are particularly well suited for the task. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where approximate inference is exploited.\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/BALD-GPC/AL_NIPS2011.tex:\n  124  	f \\sim \\mathrm{GP}(\\mu(\\cdot),k(\\cdot,\\cdot)) \\qquad \\y\\vert\\x,f \\sim\\mathrm{Bernoulli}(\\Phi(f(\\x))) \n  125  \\end{align}\n  126: The latent parameter, now called $f$ (previously denoted as $\\param$), is a function $\\mathcal{X}\\rightarrow\\mathbb{R}$, and is assigned a Gaussian process prior with mean $\\mu(\\cdot)$ and covariance function $k(\\cdot,\\cdot)$. We consider the probit case where given the value of $f$, $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\cite{rasmussen2005}.\n  127  \n  128: Inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. The most commonly used approximate inference methods -- EP,  Laplace approximation, Assumed Density Filtering and sparse methods -- all approximate the posterior by a Gaussian \\cite{rasmussen2005}. Throughout this section we will assume that we are provided with such a Gaussian approximation from one of these methods, though the active learning algorithm does not care which. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where such an approximation is exploited.\n  129  \n  130  Now, we will compute the informativeness of a query $\\x$ using Eqn.  \\eqref{eqn:rearrangement}.  The entropy of the binary output variable $y$ given a fixed $f$ can be expressed in terms of the binary entropy function $h$: \n  ...\n  181  \\end{align}\n  182  \n  183: In the context of GP models, hyperparameters typically control the smoothness or spatial length-scale of functions. If we maintain a posterior distribution over these hyperparameters, which we can do e.\\,g.\\ via Hamiltonian Monte Carlo, we can choose either to treat them as nuisance parameters $\\theta^-$ and use Eq.\\ \\ref{eqn:BALD_bipartite}, or to include them in $\\theta^+$ and perform active learning over them as well. In certain cases, such as automatic relevance determination\\cite{rasmussen2005}, it may even make sense to treat hyperparameters as variables of primary interest, and the function $f$ itself as nuisance parameter $\\theta^-$.\n  184  \n  185  \\subsection{Preference Learning}\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/lossBayes/lossBayes.tex:\n  246  \\section{SUPERVISED LEARNING} \\label{s:examples}\n  247  \n  248: In this section, we make our framework more concrete by investigating it in the predictive setting presented in \\secref{ss:predictive}. We recall that in order to apply our framework, we need to specify the loss, the action space, the Bayesian observation model and a tractable family $\\mathcal{Q}$ of approximate distributions over the latent variable $\\theta$. In the predictive setting, an action is a prediction function $h:\\mathcal{X}\\rightarrow\\mathcal{Y}$. We let the action space $\\mathcal{H}$ be the set of all possible such functions here -- we are thus in the non-parametric prediction regime where we are free to make arbitrary pointwise decision on $\\mathcal{X}$. This gives us rich predictive possibilities as well as actually enables us to analytically compute $h_q$, as we will see in the next paragraph. For the observation model, we consider Bayesian non-parametric probabilistic models based on Gaussian processes (GPs), which have been successfully applied to model a wide variety of phenomena in the past~\\citep{Rasmussen2006}. %%OPTIONAL\\footnote{Considering the non-parametric setup reduces the issue of model misspecification. Moreover, GPs are often applied using approximate inference and thus provide a useful illustration for our framework.}.\n  249  In \\secref{ss:GPR}, we first look at Gaussian process regression. In this case, we can obtain an analytic form for $p_\\dataset$ and $\\mathcal{R}_{p_\\dataset}(h_q)$ which gives us some insights about the approximation framework as well as when minimizing the KL divergence can be suboptimal. Because the quadratic cost function is not bounded (and so $M = \\infty$), we cannot directly apply our loss-EM algorithm for regression, but we can nevertheless get useful insights which suggest future research directions for regression with sparse GPs. In section~\\ref{ss:GPC}, we consider Gaussian process classification (GPC) which will provide a test bed for the loss-EM algorithm. In both cases, we use a GP as our prior over parameters and let $\\mathcal{Q}$ also be a family of GPs.\n  250  \n  ...\n  384  To investigate the effect of the test distribution $p(x)$ on our method, we generated three different transductive test sets of size 1000, with inputs sampled from $\\mathcal{U}(0,1)$, $\\mathcal{U}(0.2,1.2)$ and $\\mathcal{U}(0.5,1.5)$ respectively (columns of \\tableref{tab:results}), and repeated these experiments 10 times to get significance results. We used five different loss matrices: the loss for false negatives was constant at $c_{-}=1$, the loss for false positives $c_{+}$ was varied so that the decision threshold $p_{thresh}=\\frac{c_{+}}{c_{-} + c_{+}}$ changed linearly between 0.5 and 0.05 (rows of \\tableref{tab:results}).\n  385  \n  386: For each dataset, we compared three methods for approximate inference: Laplace approximation, expectation propagation (EP) and loss-EM (run separately for each loss and test set combination). Both Laplace and EP are standard approaches to GP classification~\\citep{Rasmussen2006}. To evaluate the performance of the methods, we used the following criterion based on the posterior risk:\n  387  \\addtolength{\\abovedisplayskip}{-1mm}\n  388  \\addtolength{\\belowdisplayskip}{-1mm}\n\n23 matches across 6 files\n\n\nSearching 86 files for \"asmussen\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/bibliography/thesis.bib:\n  146  \n  147  @article{quinonero2005,\n  148: 	Author = {Qui{\\~n}onero-Candela, Joaquin and Rasmussen, Carl Edward},\n  149  	Date-Added = {2013-05-12 16:04:56 +0000},\n  150  	Date-Modified = {2013-05-12 16:05:03 +0000},\n  ...\n  773  \n  774  @article{nickisch2008gpc,\n  775: 	Author = {Nickisch, H. and C. E. Rasmussen},\n  776  	Date-Added = {2013-04-16 17:25:49 +0000},\n  777  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  793  \n  794  @article{candela05sparseGP,\n  795: 	Author = {J. Qui{\\`O}onero-Candela and C. E. Rasmussen},\n  796  	Date-Added = {2013-04-16 17:25:49 +0000},\n  797  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n  958  	Year = {2002}}\n  959  \n  960: @book{Rasmussen2006,\n  961  	Address = {Cambridge, MA, USA},\n  962: 	Author = {Carl Edward Rasmussen and Christopher K. I. Williams},\n  963  	Date-Added = {2013-04-16 17:25:49 +0000},\n  964  	Date-Modified = {2013-04-16 17:25:49 +0000},\n  ...\n 1158  	Year = {2006}}\n 1159  \n 1160: @book{rasmussen2006,\n 1161: 	Author = {Rasmussen, Carl Edward and Williams, Christopher K. I.},\n 1162  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1163  	Date-Modified = {2013-04-16 17:12:02 +0000},\n ....\n 1192  \n 1193  @article{Nickisch2008,\n 1194: 	Author = {Nickisch, Hannes and Rasmussen, Carl Edward},\n 1195  	Date-Added = {2013-04-16 17:12:02 +0000},\n 1196  	Date-Modified = {2013-04-16 17:14:05 +0000},\n ....\n 1623  @incollection{BZMonteCarlo,\n 1624  	Address = {Cambridge, MA},\n 1625: 	Author = {C. E. Rasmussen and Z. Ghahramani},\n 1626  	Booktitle = {Advances in Neural Information Processing Systems},\n 1627  	Date-Added = {2013-04-16 17:05:02 +0000},\n ....\n 1697  	Year = {2012}}\n 1698  \n 1699: @article{Rasmussen2006,\n 1700: 	Author = {Rasmussen, C.E. and Williams, CKI},\n 1701  	Date-Added = {2013-04-16 17:05:02 +0000},\n 1702  	Date-Modified = {2013-04-16 17:05:02 +0000},\n ....\n 1741  	Year = {2005}}\n 1742  \n 1743: @article{Rasmussen2005,\n 1744: 	Author = {Rasmussen, C.E. and Williams, C.K.I.},\n 1745  	Date-Added = {2013-04-16 16:35:16 +0000},\n 1746  	Date-Modified = {2013-04-16 16:35:31 +0000},\n ....\n 1881  \n 1882  @inproceedings{Kuss2005,\n 1883: 	Author = {M. Kuss and C. E. Rasmussen},\n 1884  	Booktitle = {NIPS},\n 1885  	Date-Added = {2013-04-16 16:35:16 +0000},\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/01_approximate_inference.tex:\n   22  The likelihood $p(\\data\\vert\\param)$ describes how data is related to the parameters $\\param$, and $p(\\param)$ is a prior distribution which capture's one a priori expectations about what the value of $\\param$ may be. The posterior distribution $p_\\data = p(\\param\\vert\\data)$ captures all statistically relevant information that the data $\\data$ provides about $\\param$, and it is therefore of central importance.\n   23  \n   24: The marginal likelihood, also called the model evidence $Z = \\int p(\\data\\vert\\param) p(\\param) d\\param$ is also of interest. It is often used to quantify how well a Bayesian model -- the combination of likelihood and prior -- fit the data. When the model involves additinal parameters or hyper-parameters that are not modelled probabilistically via prior distributions, it is common practice to learn their values by maximising model evidence \\citep[see \\eg][Chapter 5]{Rasmussen2006}.\n   25  \n   26  In practically interesting Bayesian models, the posterior distribution and model evidence are often computationally intractable to obtain and therefore one has to resort to approximations. The most popular methods for Bayesian approximate inference are variational inference and Markov chain Monte Carlo.\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex:\n  362  This means that the estimate converges for any bounded measurable function $f$. The speed of convergence, however, may not be as fast.\n  363  \n  364: Therefore it is crucial that the kernel we choose is representative of the function or functions $f$ we will integrate.  For example, in our experiments, the convergence of herding was sensitive to the width of the Gaussian kernel.  One of the major weaknesses of kernel methods in general is the difficulty of setting kernel parameters.  A key benefit of the Bayesian interpretation of herding and MMD presented in this paper is that it provides a recipe for adapting the Hilbert space to the observations $f(x_n)$.  To be precise, we can fit the kernel parameters by maximizing the marginal likelihood of Gaussian process conditioned on the observations.  Details can be found in \\citep{Rasmussen2006}.\n  365  \n  366  \\subsection{Computational Complexity}\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex:\n   81  BALD exploits the fact that in many active learning applications the output space $\\Ye$ is often simpler than the parameter space $\\Theta$. Here I consider the problem of active learning for binary classification, when the output takes one of two possible values $y \\in \\{-1,1\\}$. Given the simplicity of the outputs, binary classification is a highly relevant use-case for BALD.\n   82  \n   83: I will use a non-parametric Bayesian classification model, Gaussian process classification \\citep[GPC,][]{Rasmussen2006} to demonstrate the usefulness of BALD: GPC appears to be an especially challenging problem for information-theoretic active learning because its parameter space is infinite. Therefore, computing entropy of the posterior involves nontrivial quantities. However, by using the BALD approach and Eqn.\\ \\eqref{eqn:rearrangement} we are able to fully calculate the relevant information quantities without having to work out entropies of infinite dimensional objects. \n   84  \n   85  \n   ..\n   94  \\TODO{I need an appendix on kernels and Gaussian processes}\n   95  \n   96: We consider the probit case where, given the value of $f$, the binary label $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\citep{rasmussen2005}.\n   97  \n   98  Posterior inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. This is addressed by using approximate inference methods. The most commonly used approximate inference methods for Gaussian process classification are expectation propagation \\citep[EP,][]{Minka2002}, Laplace's approximation \\citep{williams1998}, assumed density filtering \\citep[ADF,][]{csato2000} and sparse methods \\citep{candela05sparseGP}. These all approximate the non-Gaussian posterior by a Gaussian \\citep{Nickisch2008}, but differ in the optimisation criterion and other restrictions. Throughout this chapter I will assume that we are provided with some Gaussian approximation to the GPC posterior resulting from one of these methods, though the active learning method is agnostic as to which method produced this estimate. Given the sequential nature of active learning, fast on-line methods \\citep{Csato2002} are particularly well suited for the task. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where approximate inference is exploited.\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/BALD-GPC/AL_NIPS2011.tex:\n  124  	f \\sim \\mathrm{GP}(\\mu(\\cdot),k(\\cdot,\\cdot)) \\qquad \\y\\vert\\x,f \\sim\\mathrm{Bernoulli}(\\Phi(f(\\x))) \n  125  \\end{align}\n  126: The latent parameter, now called $f$ (previously denoted as $\\param$), is a function $\\mathcal{X}\\rightarrow\\mathbb{R}$, and is assigned a Gaussian process prior with mean $\\mu(\\cdot)$ and covariance function $k(\\cdot,\\cdot)$. We consider the probit case where given the value of $f$, $y$ takes a Bernoulli distribution with probability $\\Phi(f(\\x))$, and $\\Phi$ is the cumulative distribution function of the normal distribution. For further details on GPC see \\cite{rasmussen2005}.\n  127  \n  128: Inference in the GPC model is intractable; given some observations $\\data$, the posterior over $f$ becomes non-Gaussian and complicated. The most commonly used approximate inference methods -- EP,  Laplace approximation, Assumed Density Filtering and sparse methods -- all approximate the posterior by a Gaussian \\cite{rasmussen2005}. Throughout this section we will assume that we are provided with such a Gaussian approximation from one of these methods, though the active learning algorithm does not care which. In our derivation we will use {\\scriptsize$\\stackrel{1}{\\approx}$} to indicate where such an approximation is exploited.\n  129  \n  130  Now, we will compute the informativeness of a query $\\x$ using Eqn.  \\eqref{eqn:rearrangement}.  The entropy of the binary output variable $y$ given a fixed $f$ can be expressed in terms of the binary entropy function $h$: \n  ...\n  181  \\end{align}\n  182  \n  183: In the context of GP models, hyperparameters typically control the smoothness or spatial length-scale of functions. If we maintain a posterior distribution over these hyperparameters, which we can do e.\\,g.\\ via Hamiltonian Monte Carlo, we can choose either to treat them as nuisance parameters $\\theta^-$ and use Eq.\\ \\ref{eqn:BALD_bipartite}, or to include them in $\\theta^+$ and perform active learning over them as well. In certain cases, such as automatic relevance determination\\cite{rasmussen2005}, it may even make sense to treat hyperparameters as variables of primary interest, and the function $f$ itself as nuisance parameter $\\theta^-$.\n  184  \n  185  \\subsection{Preference Learning}\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/lossBayes/lossBayes.tex:\n  246  \\section{SUPERVISED LEARNING} \\label{s:examples}\n  247  \n  248: In this section, we make our framework more concrete by investigating it in the predictive setting presented in \\secref{ss:predictive}. We recall that in order to apply our framework, we need to specify the loss, the action space, the Bayesian observation model and a tractable family $\\mathcal{Q}$ of approximate distributions over the latent variable $\\theta$. In the predictive setting, an action is a prediction function $h:\\mathcal{X}\\rightarrow\\mathcal{Y}$. We let the action space $\\mathcal{H}$ be the set of all possible such functions here -- we are thus in the non-parametric prediction regime where we are free to make arbitrary pointwise decision on $\\mathcal{X}$. This gives us rich predictive possibilities as well as actually enables us to analytically compute $h_q$, as we will see in the next paragraph. For the observation model, we consider Bayesian non-parametric probabilistic models based on Gaussian processes (GPs), which have been successfully applied to model a wide variety of phenomena in the past~\\citep{Rasmussen2006}. %%OPTIONAL\\footnote{Considering the non-parametric setup reduces the issue of model misspecification. Moreover, GPs are often applied using approximate inference and thus provide a useful illustration for our framework.}.\n  249  In \\secref{ss:GPR}, we first look at Gaussian process regression. In this case, we can obtain an analytic form for $p_\\dataset$ and $\\mathcal{R}_{p_\\dataset}(h_q)$ which gives us some insights about the approximation framework as well as when minimizing the KL divergence can be suboptimal. Because the quadratic cost function is not bounded (and so $M = \\infty$), we cannot directly apply our loss-EM algorithm for regression, but we can nevertheless get useful insights which suggest future research directions for regression with sparse GPs. In section~\\ref{ss:GPC}, we consider Gaussian process classification (GPC) which will provide a test bed for the loss-EM algorithm. In both cases, we use a GP as our prior over parameters and let $\\mathcal{Q}$ also be a family of GPs.\n  250  \n  ...\n  384  To investigate the effect of the test distribution $p(x)$ on our method, we generated three different transductive test sets of size 1000, with inputs sampled from $\\mathcal{U}(0,1)$, $\\mathcal{U}(0.2,1.2)$ and $\\mathcal{U}(0.5,1.5)$ respectively (columns of \\tableref{tab:results}), and repeated these experiments 10 times to get significance results. We used five different loss matrices: the loss for false negatives was constant at $c_{-}=1$, the loss for false positives $c_{+}$ was varied so that the decision threshold $p_{thresh}=\\frac{c_{+}}{c_{-} + c_{+}}$ changed linearly between 0.5 and 0.05 (rows of \\tableref{tab:results}).\n  385  \n  386: For each dataset, we compared three methods for approximate inference: Laplace approximation, expectation propagation (EP) and loss-EM (run separately for each loss and test set combination). Both Laplace and EP are standard approaches to GP classification~\\citep{Rasmussen2006}. To evaluate the performance of the methods, we used the following criterion based on the posterior risk:\n  387  \\addtolength{\\abovedisplayskip}{-1mm}\n  388  \\addtolength{\\belowdisplayskip}{-1mm}\n\n23 matches across 6 files\n\n\nSearching 89 files for \"\\!\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/raw_materials/lossBayes/lossBayes.tex:\n   37  \\newcommand{\\dataset}{\\mathcal{D}}\n   38  \\newcommand{\\prob}[1]{\\boldsymbol{\\mathbb{#1}}}\n   39: \\newcommand{\\Var}{\\mathbb{V}\\!\\textnormal{ar}}\n   40  \\newcommand{\\fix}[1]{$^\\text{\\textcolor{red}{?}}$\\marginpar[\\raggedleft\\parbox{2.5cm}{\\raggedleft \\tiny{#1}}]{\\parbox{2.5cm}{\\tiny{#1}}}}\n   41  \\newcommand{\\new}{\\marginpar{NEW}}\n   ..\n  220  \\end{equation*}\n  221  \\begin{equation*}\n  222:     \\textrm{(M-step)} \\quad h^{t+1} = \\argmax{h \\in \\mathcal{H}} \\! \\int_\\Theta q^{t+1}(\\theta) \\, \\log U_M(\\theta,h) d\\theta\n  223  \\end{equation*}\n  224  }}\n  ...\n  406  \\begin{align}\n  407      q^{MED} & = \\argmin{q \\in \\mathcal{Q}} KL(q(\\theta) || p(\\theta)) + C \\sum_i \\xi_i \\\\\n  408:     & \\!\\!\\textrm{s.t.} \\,\\, \\xi_i+p_q(y_i|x_i) \\geq p_q(y|x_i)+\\ell(y_i,y) \\,\\, \\forall i, y \\in \\mathcal{Y},\\notag\n  409  \\end{align}\n  410  % Ferenc wrote: although in practice they use $\\int_\\Theta q(\\theta) \\log p(y|x,\\theta) d\\theta$ rather than $p_q(y|x)$ for computational reasons. The MED optimization problem is analogous to our linearized E-step of \\tableref{t:lin-loss-EM} in the following sense: MED uses the data through a hinge upper bound~\\citep{joachims09SVMstruct} on the empirical error (the $\\xi_i$ part) whereas we use the data $\\dataset$ through the observation model $p(\\dataset\\vert\\theta)$ (when evaluating $R_{p_\\dataset}(h^t)$).\n  ...\n  461   \\tilde{p}(y|x,f_\\dataset) & \\doteq\n  462      \\int p(y|x,f) p(f_{\\mathrm{rest}}|f_\\dataset) df_{\\mathrm{rest}} \\\\\n  463:     & =  \\mathcal{N}\\!\\left(y|K_{x\\dataset} K_{\\dataset\\dataset}^{-1} f_\\dataset, \\sigma_x^2\\right).\n  464  \\end{split}\n  465  \\end{equation}\n\n5 matches in 1 file\n\n\nSearching 91 files for \"eqn:Bayesian_argmin_scoring_rule\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/01_introBALD.tex:\n  133  \n  134  \\begin{equation}\n  135: 	\\score_{\\mbox{argmin}}(f,p_\\data) = \\score(\\argmin_{\\x}f,p_{\\argmin}), \\label{eqn:Bayesian_argmin_scoring_rule}\n  136  \\end{equation}\n  137  where $f$ is the objective function which takes the role of $\\param$ as the parameter of interest. $p_\\data$ is a posterior measure over objective functions -- in most recent work this is a Gaussian process measure. $p_{\\argmin} \\in \\probmeasures{\\Xe}$ is the probability distribution that $p_\\data$ implies over the location of the minimum $\\argmin_{x}f$. Note that in \\citep{Hennig2012entropy} $p_{\\argmin}$ is called $p_{\\min}$, I use a different notation for consistency. The scoring rule $\\score$ could be any strictly proper scoring rule, \\citeauthor{Hennig2012entropy} use the logarithmic loss which they derive approximations for.\n  138  \n  139: Equation \\eqref{eqn:Bayesian_argmin_scoring_rule} implies that the goal of optimisation is to find the exact location of the global minimum. In many applications however this is not required, instead, it is sufficient to learn about the value at the minimum. In this case, one could use a scoring rule of the following form.\n  140  \n  141  \\begin{equation}\n  142: 	\\score_{\\mbox{min}}(f,p_\\data) = \\score(\\min_{\\x}f,p_{\\min}), \\label{eqn:Bayesian_argmin_scoring_rule}\n  143  \\end{equation}\n  144  where $\\min_{\\x}f$ is the minimal value of the objective function, $p_{\\min}$ the measure $p_\\data$ induces over the minimal value of $f$.\n  ...\n  152  Note that $\\score_{\\mbox{best}}$ is also a special case of a Bayesian decision score $\\score_{\\loss}$ (section \\ref{sec:loss_scoring_rule}, Equation \\eqref{eqn:loss_scoring_rule}) with actions $\\actionset=\\Xe$ and loss function $\\loss(f,a)=f(a)$.\n  153  \n  154: Information-greedy Bayesian optimisation methods are still in their infancy. Interpreting them in the general scoring-rule-based framework allows one to understand the underlying goals, and propose straightforward extensions. I am not aware of either \\eqref{eqn:Bayesian_argmin_scoring_rule} or \\eqref{eqn:Bayesian_optimisation_scoring_rule} used in previous work in the context of Bayesian optimisation.\n  155  \n  156  \\subsection{Sequential Bayesian quadrature}\n\n4 matches in 1 file\n\n\nSearching 89 files for \"chen2010herding\" (case sensitive)\n\n0 matches across 0 files\n\n\nSearching 89 files for \"chen2010\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex:\n   16  \\section{Introduction}\n   17  \n   18: In this chapter I explore two quasi-Monte Carlo methods: Bayesian quadrature (\\bq{}) \\citep{BZHermiteQuadrature,BZMonteCarlo} (also known as Bayesian Monte Carlo) and kernel herding \\citep{chen2010super}. Both methods can be used for approximate inference, and they are examples of loss-calibrated quasi-Monte Carlo introduced in the previous chapter.\n   19  \n   20  Despite the focus on approximate inference, I am going to present the algorithms more generally context of numerical integration. Bayesian quadrature and kernel herding seek a solution to a central problem in statistical machine learning: to compute expectations of functions over probability distributions:\n   ..\n   27  Bayesian quadrature (\\bq{}) estimates integral \\eqref{eqn:integral} by modelling the function $f$ probabilistically, and inferring a posterior distribution conditioned on the observed function values $y_n = f_{x_n}$. Based on the posterior over $f$, the posterior expectation of $Z_{f,p}$ can be used as an estimate to the integral. The points where the function should be evaluated can be found via Bayesian experimental design, providing a deterministic procedure for selecting sample locations. The sequence of points where the function is querried can be interpreted as pseudo-samples in quasi-Monte Carlo.\n   28  \n   29: Herding, proposed recently by \\cite{chen2010super}, produces pseudosamples by minimising the discrepancy of moments between the sample set and the target distribution. Similarly to traditional Monte Carlo, an estimate is formed by taking the empirical mean over samples $\\hat{Z} = \\frac{1}{N}\\sum_{n=1}^{N}f_{x_n}$. Under certain assumptions, herding has provably fast, $\\mathcal{O}(\\nicefrac{1}{N})$, and has demonstrated strong empirical performance in a variety of tasks. Because herding minimises maximum mean discrepancy from the target distribution $p(x)$, it is a special case of loss-calibrated quasi-Monte Carlo.\n   30  \n   31  In this chapter, I show that the Maximum Mean Discrepancy (MMD) criterion used to choose samples in kernel herding is identical to the expected error in the estimate of the integral $Z_{f,p}$ under a Gaussian process prior for $f$. This expected error is the criterion being minimized when choosing samples for Bayesian quadrature. Because Bayesian quadrature assigns different weights to each of the observed function values $f(\\vx)$, we can view Bayesian quadrature as a weighted version of kernel herding. We show that these weights are optimal in a minimax sense over all functions in the Hilbert space defined by our kernel. This implies that Bayesian quadrature is equivalent to a weighted version kernel herding, and as such it also implements loss-calibrated approximate inference.\n   ..\n   76  The formula \\eqref{eqn:herding_criterion} admits an intuitive interpretation: the first term encourages sampling in areas with high mass under the target distribution $p(\\vx)$. The second term discourages sampling at points close to existing samples. \n   77  \n   78: Evaluating \\eqref{eqn:herding_criterion} requires us to compute $\\expect{\\vx' \\sim p}{k(\\vx, \\vx')} $, that is to integrate the kernel against the target distribution. Throughout the paper we will assume that these integrals can be computed in closed form. Whilst the integration can indeed be carried out analytically in several cases \\citep{Song2008,chen2010super}, this requirement is the most pertinent limitation on applications of kernel herding, Bayesian quadrature and related algorithms.\n   79  \n   80  \\subsection{Complexity and convergence Rates}\n   ..\n   82  Criterion \\eqref{eqn:herding_criterion} for selecting the $n+1$-th sample can be evaluated in only $\\mathcal{O}(n)$ time. Adding these up for all subsequent samples, and assuming that optimisation in each step has $\\mathcal{O}(1)$ complexity, producing $N$ pseudosamples via kernel herding costs $\\mathcal{O}(N^2)$ operations in total.\n   83  \n   84: In finite dimensional Hilbert spaces, the herding algorithm has been shown to reduce $\\mmd$ at a rate $\\mathcal{O}(\\nicefrac{1}{N})$, which compares favourably with the $\\mathcal{O}(\\frac{1}{\\sqrt{N}})$ rate obtained by non-deterministic Monte Carlo samplers \\citep{chen2010super,Bach2012}. However, as pointed out by \\citep{Bach2012}, this fast convergence is not guaranteed in infinite dimensional Hilbert spaces, such as the RKHS corresponding to the Gaussian kernel. These results assume that in each step the optimisation in Eqn.\\ \\ref{eqn:herding_criterion} is solved exactly. In addition, herding is shown to converge even if this maximisation is imperfect \\citep{Gelfand2010}.\n   85  \n   86  % ########   #######  \n   ..\n  297  In this section, we examine empirically the rates of convergence of sequential Bayesian quadrature and herding. We examine both the expected error rates, and the empirical error rates.\n  298  \n  299: In all experiments, the target distribution $p$ is chosen a two dimensional mixture of 20 Gaussians, whose equiprobability contours are shown in Figure \\ref{fig:fig1}. To ensure a comparison fair to herding, the target distribution, and the kernel used by both methods, correspond exactly to the one used in \\citep[Fig.\\ 1]{chen2010super}.\n  300  \n  301  For experimental simplicity, each of the sequential sampling algorithms minimizes the next sample location from a pool of 10000 locations randomly drawn from the base distribution. In practice, one would run a gradint-based local optimizer from each of these candidate locations, however in our experiments we found that this did not make a significant difference in the sample locations chosen. \n  ...\n  309  \\end{figure} \n  310  \n  311: We first extend an experiment from \\citep{chen2010super} designed to illustrate the mode-seeking behavior of herding in comparison to random samples. In the first experiment of \\citep{chen2010super}, it is shown that a small number of i.\\,i.\\,d.\\ samples drawn from a multimodal distribution will tend to, by chance, assign too many samples to some modes, and too few to some other modes. In contrast, herding places pseudo-samples (called super-samples in that paper) in such a way as to avoid regions already well-represented, and seeks modes that are under-represented.\n  312  \n  313  We demonstrate that although herding improves upon i.\\,i.\\,d.\\ sampling, the uniform weighting of super-samples leads to sub-optimal performance. Figure \\ref{fig:fig1} shows the first 20 samples chosen by kernel herding, in comparison with the first 8 samples chosen by \\sbq{}. By weighting the 8 \\sbq{} samples by the quadrature weights in \\eqref{eq:bq_weights}, we can obtain the same MMD value as by using the 20 uniformly-weighted herding samples. \n  ...\n  413  		MCMC & $\\mathcal{O}(N)$ & variable & ergodic theorem\\\\\n  414  		i.i.d. MC & $\\mathcal{O}(N)$ & $\\frac{1}{\\sqrt{N}}$ & law of large numbers\\\\\n  415: 		herding & $\\mathcal{O}(N^2)$ & $\\frac{1}{\\sqrt{N}} \\geq \\cdot \\geq \\frac{1}{N}$ & \\citep{chen2010super,Bach2012} \\\\\n  416  		SBQ & $\\mathcal{O}(N^3)$ & unknown & approximate submodularity\\\\\n  417  		%\\hline\n\n8 matches in 1 file\n\n\nSearching 89 files for \"seung1997\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex:\n   53  \\end{align}\n   54  \n   55: So by maximising the expected reduction in posterior entropy, the learner seeks a measurement, such that each probable parameter $\\theta$ predicts something different for what the outcome $\\y$ will be. In the statistics iterature  this is known as the \\emph{principle of maximal disagreement} and provides the theoretical motivation for \\emph{query by committee} methods \\citep{seung1997}. We will call the approach of using the rearranged objective in Eqn.\\ \\eqref{eqn:rearrangement} as Bayesian Active Learning by Disagreement or BALD \\citep{Houlsby2011,Houlsby2012preference,Huszar2012quantum}. Note that these rearrangements were only possible because of the symmetry of Shannon's mutual information, hence this interpretation does not hold in general for Bayesian active learning when using a scoring rule other than the logarithmic.\n   56  \n   57  \\section{Related techniques}\n\n1 match in 1 file\n\n\nSearching 89 files for \"2AFC\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/part3/02_GP_BALD.tex:\n  292  \\end{enumerate} \n  293  \n  294: To overcome the limitations of an absolute scale, in an increasing number of applications preference elicitation is done via pairwise item comparisons. In this case, the respondent is presented a pair of items, and they have to judge which of the two alternatives is more preferable. In cognitive science, this type of preference elicitation is known as two-alternative forced choice, or 2AFC for short \\citep{Fechner1860,Platt1999}. The machine learning community often refers to this kind problem as \\emph{binary preference elicitation}, preference learning or learning to rank \\citep{Chu2005,furnkranz2010}.\n  295  \n  296  Crucially, binary preference elicitation sidesteps most of the problems that eliciting preference on an absolute scale exhibits. Because no absolute scale is used, it does not matter if the scale of ratings used by different respondents are not aligned, as long as there is a mostly monotonic relationship between them. Also, the respondent only needs to be knowledgeable about the two items being compared in order to give an informed response. This way respondents with much more limited scope of knowledge can provide highly informative data.\n\n1 match in 1 file\n\n\nSearching 89 files for \"guestrin1\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/bibliography/thesis.bib:\n 1693  	Year = {2000}}\n 1694  \n 1695: @inproceedings{guestrin1,\n 1696  	Address = {Nashville, Tennessee, USA},\n 1697  	Author = {A. Krause and C. Guestrin and A. Gupta and J. Kleinberg},\n\n/Users/fhuszar/Dropbox/thesis/latex/part2/02_herding.tex:\n  177  \\end{align}\n  178  %\n  179: where $\\gp$ denotes the gaussian process prior. A similar independence on function values is observed in other optimal experimental design problems involving Gaussian processes \\citep{guestrin1}. This allows the optimal sample locations to be computed ahead of time, without observing any values of $f$ at all \\citep{minka2000dqr}.\n  180  \n  181  We can contrast the \\bq{} objective $\\epsilon^{2}_{\\bq{}}$ in \\eqref{eq:marg_var_symbolic} to the objective being minimized in herding, $\\epsilon^{2}_{herding}$ of Eqn.\\ \\eqref{eq:mmd_assumption}. Just like $\\epsilon^{2}_{herding}$, $\\epsilon^{2}_{\\bq{}}$ expresses a trade-off between accuracy and diversity of samples. On the one hand, as samples get close to high density regions under $p$, the values in $\\vz$ increase, which results in decreasing variance. On the other hand, as samples get closer to each other, eigenvalues of $K$ increase, resulting in an increase in variance. \n\n2 matches across 2 files\n\n\nSearching 89 files for \"reid10risk\" (case sensitive)\n\n/Users/fhuszar/Dropbox/thesis/latex/bibliography/thesis.bib:\n 1099  	Year = {2002}}\n 1100  \n 1101: @unpublished{reid10risk,\n 1102  	Author = {Mark D. Reid and Robet C. Williamson},\n 1103  	Date-Added = {2013-04-16 17:25:49 +0000},\n\n/Users/fhuszar/Dropbox/thesis/latex/part1/01_scoring_rules.tex:\n   19  \\section{Information quantities}\n   20  \n   21: A scoring rule allows us to define useful information quantities, which can be exploited in a variety of applications \\citep[see also][]{Gneiting2007,reid10risk}: these are generalised notions entropy, divergence and value of information.\n   22  \\begin{definition}[Generalised entropy]\n   23  Given a scoring rule $\\score:\\Xe\\times\\probmeasures{\\Xe}\\mapsto\\Reals$, let us define the generalised entropy of a distribution $P\\in\\probmeasures{\\Xe}$ as follows:\n\n2 matches across 2 files\n",
-			"settings":
-			{
-				"buffer_size": 61354,
+				"buffer_size": 92237,
 				"line_ending": "Unix",
 				"name": "Find Results",
 				"scratch": true
@@ -297,7 +355,7 @@
 			"file": "latex/discussion.tex",
 			"settings":
 			{
-				"buffer_size": 4650,
+				"buffer_size": 7470,
 				"line_ending": "Unix"
 			}
 		},
@@ -305,7 +363,7 @@
 			"file": "latex/introduction.tex",
 			"settings":
 			{
-				"buffer_size": 3714,
+				"buffer_size": 5578,
 				"line_ending": "Unix"
 			}
 		},
@@ -353,7 +411,7 @@
 			"file": "latex/thesis.tex",
 			"settings":
 			{
-				"buffer_size": 1520,
+				"buffer_size": 1583,
 				"line_ending": "Unix"
 			}
 		},
@@ -361,7 +419,7 @@
 			"file": "latex/part2/02_herding.tex",
 			"settings":
 			{
-				"buffer_size": 42489,
+				"buffer_size": 42457,
 				"line_ending": "Unix"
 			}
 		},
@@ -369,7 +427,126 @@
 			"file": "latex/bibliography/thesis.bib",
 			"settings":
 			{
-				"buffer_size": 93961,
+				"buffer_size": 93523,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part3/01_introBALD.tex",
+			"settings":
+			{
+				"buffer_size": 22591,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Proposed title: The Science of Social Data\n\nThe rapid growth of social data have created enormous new business opportunities. Emerging tools based on cutting-edge data science can give brands 'super powers' allowing them to understand large audiences, to optimise their content strategy and to drive engagement via influencers. In this talk I address these opportunities and highlight interesting research on social data analysis by high-calibre scientists.\n\n\nSocial data have created enormous new business opportunities. I will explain how social media, the study of social influence are valuable to businesses, with particular focus on community analysis, infleuncer marketing and content merketing. Emerging tools based on cutting-edge data science give brands 'super powers' that allow them to make sense of vast social data, understand big audience, and optimise their content strategy to drive engagement via influencers. When demonstrating these concepts, I will draw upon my own work and experiences at PeerIndex. However, my aim of course is to keep the talk neutral and free of branding.\n\nPart II: the science of social data: I will highlight interesting, thought-provoking research from leading academics, which shows the predictive power of social data. Topics I will cover: how to tell social influence is present (by Sinan Aral); the effect of social media in political mobilisaton (by James Fowler); predicting private traits (age, gender, relationship status, psychometrix traits) from social data (by Thore Graepel); inferring tie-strength from data and finding 'best friends' (by James Fowler + own work).\n\nConclusion of the talk: I would like attendees to gain a better understanding of the vast opportunities that lie in making sense of social data, and how these opportunities can be unlocked by data science. Social data is big data, but the most interesting insights often originate from well thought-out experiments, and clever analysis of small data.\n\nA unique feature of the proposed talk is an interactive experiment, engaging the whole audience, taking about 5 minutes in total during the talk or Q&A session. The experiment demonstrates the so called friendship paradox and involves everyone in the audience writing down the name of one conference attendee they know, and placing them in a bag provided. At the end, random slips will be drawn from the bag. The theory predicts that the randomly drawn names will likely belong to highly connected individuals. The game may be combined with sponsored prize giveaways, for which e.g. O'Reilly books would be ideal.\n\nSuggested tags: machine learning, social data, predictive analytics, marketing (business)\n\nSuggested track: \n\nAbout the speaker: I hold (about to defend thesis) a PhD in Machine Learning from Cambridge University, one of the best labs globally. I developed new algorithms for Bayesian machine learning with applications to cognitive psychology and quantum physics. I joined PeerIndex in 2011 as chief data scientist. I lead research into social influence and the dynamics of social cotagion and I am deeply involved in the development of our state-of-the-art data analysis pipeline based on twitter Storm, hadoop, hive and Amazon RedShift. I actively contribute to the London Data Science and Machine Learning communities, most recently I provided the data and problem for the 24-hour London Data Hackathon on kaggle.\n\nAs an ex-academic speaker I am experienced in giving talks to large audiences, and being actively involved in data science meetups I also understand the level of detail appropriate for the Strata audience. The structure of the talk has been 'tested' twice on smaller audiences (Social Media London, ~100 marketing/business people in Feb 2013 and Data Science Budapest ~60 in May 2013). In both cases the talk drew excellent engagement and feedback from the audience, people particularly liked the interactive experiment part.",
+			"settings":
+			{
+				"buffer_size": 3936,
+				"line_ending": "Unix",
+				"name": "Proposed title: The Science of Social Data"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/fhuszar/peerindex/datascience/harlemshake/harlemshake.hql",
+			"settings":
+			{
+				"buffer_size": 1941,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "USE ferenc;\n\nCREATE EXTERNAL TABLE IF NOT EXISTS ml_tweets (\n    twuser_id BIGINT,\n    created_at STRING,\n    txt STRING,\n    json STRING,\n    dt STRING\n)\nROW FORMAT SERDE 'com.cloudera.hive.serde.JSONSerDe'\nSTORED AS TEXTFILE\nLOCATION 's3n://fhuszar/ml_tweets/tweets'\n;\n\nINSERT OVERWRITE TABLE ml_tweets\nSELECT\n    GET_JSON_OBJECT(json,'$.user.id') as twuser_id,\n    GET_JSON_OBJECT(json,'$.created_at') AS created_at,\n    GET_JSON_OBJECT(json,'$.text') AS txt,\n    json,\n    dt\nFROM\n    default.raw_tweets\nWHERE\n    GET_JSON_OBJECT(json,'$.text') RLIKE '.*[Mm]achine [Ll]earning.*'\n;\n\nUSE ferenc;\n\nCREATE EXTERNAL TABLE IF NOT EXISTS ds_tweets (\n    twuser_id BIGINT,\n    created_at STRING,\n    txt STRING,\n    json STRING,\n    dt STRING\n)\nROW FORMAT SERDE 'com.cloudera.hive.serde.JSONSerDe'\nSTORED AS TEXTFILE\nLOCATION 's3n://fhuszar/ds_tweets/tweets'\n;\n\nINSERT OVERWRITE TABLE ds_tweets\nSELECT\n    GET_JSON_OBJECT(json,'$.user.id') as twuser_id,\n    GET_JSON_OBJECT(json,'$.created_at') AS created_at,\n    GET_JSON_OBJECT(json,'$.text') AS txt,\n    json,\n    dt\nFROM\n    default.raw_tweets\nWHERE\n    GET_JSON_OBJECT(json,'$.text') RLIKE '.*[Dd]ata [Ss]cience.*'\n;\n",
+			"settings":
+			{
+				"buffer_size": 1169,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/fhuszar/peerindex/datascience/dbpedia/descendants.py",
+			"settings":
+			{
+				"buffer_size": 2306,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/fhuszar/Downloads/INSERT-oneshot-user_info_update-to-user_info.hql",
+			"settings":
+			{
+				"buffer_size": 1750,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/frontmatter/acknowledgement.tex",
+			"settings":
+			{
+				"buffer_size": 1892,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part1/02_embeddings.tex",
+			"settings":
+			{
+				"buffer_size": 37863,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/part2/01_approximate_inference.tex",
+			"settings":
+			{
+				"buffer_size": 32056,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/preamble.tex",
+			"settings":
+			{
+				"buffer_size": 1783,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/frontmatter/abstract.tex",
+			"settings":
+			{
+				"buffer_size": 2180,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/style/CUEDthesisPSnPDF.cls",
+			"settings":
+			{
+				"buffer_size": 10397,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/frontmatter/declaration.tex",
+			"settings":
+			{
+				"buffer_size": 807,
 				"line_ending": "Unix"
 			}
 		}
@@ -381,12 +558,20 @@
 		"selected_items":
 		[
 			[
-				"inde ta",
-				"Indentation: Convert to Tabs"
+				"sql",
+				"Set Syntax: SQL"
+			],
+			[
+				"indes pac",
+				"Indentation: Convert to Spaces"
 			],
 			[
 				"figle",
 				"Figlet: Add Comment"
+			],
+			[
+				"inde ta",
+				"Indentation: Convert to Tabs"
 			],
 			[
 				"figl",
@@ -726,6 +911,7 @@
 	},
 	"file_history":
 	[
+		"/Users/fhuszar/Dropbox/thesis/latex/part1/01_scoring_rules.tex.bak",
 		"/Users/fhuszar/svn/papers/first-year-report/first-year-report.tex",
 		"/Users/fhuszar/Dropbox/thesis/latex/part3_main.tex",
 		"/Users/fhuszar/Dropbox/thesis/latex/preamble.tex",
@@ -852,8 +1038,7 @@
 		"/Users/fhuszar/peerindex/stream/datamodel/iPhone</a>\",\"in_reply_to_user_id_str\":null,\"favorited\":false,\"in_reply_to_status_id\":null,\"retweet_count\"",
 		"/Users/fhuszar/peerindex/stream/datamodel/Jan",
 		"/Users/fhuszar/peerindex/stream/datamodel/11",
-		"/Users/fhuszar/peerindex/stream/datamodel/16",
-		"/Users/fhuszar/peerindex/stream/datamodel/+0000"
+		"/Users/fhuszar/peerindex/stream/datamodel/16"
 	],
 	"find":
 	{
@@ -890,6 +1075,41 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			",Houlsby2012preference",
+			"Holst",
+			"Tomographu",
+			"Optimization",
+			"Sannon",
+			"data-sets",
+			"data-set",
+			"dedication",
+			"Statement",
+			"statement",
+			"acknowledgements",
+			"framework",
+			"\\TODO",
+			"entropy are equiv",
+			"entropy of the posterior",
+			"contrast the",
+			"objective $",
+			"objective",
+			"weakly a we",
+			"weakly a ",
+			"comutatio",
+			"TODO",
+			"elaborate",
+			"TODO",
+			"closed form",
+			"wikipedia",
+			"demet",
+			"people's preference",
+			"tex",
+			"publish and",
+			"tag",
+			"todo",
+			"TODO",
+			"gaussuan approx",
+			"figure",
 			"tong2001",
 			"Chen2012",
 			"reid10risk",
@@ -982,42 +1202,7 @@
 			"sec:",
 			"sec:experiments",
 			"subsubsection",
-			"\\subsection{",
-			"Bayesian herding",
-			"% defining custom colors\n\\definecolor{mycolor1}{rgb}{1,0,1}",
-			"width= 1.39in,\nheight= 1.2in,",
-			"Eqn:",
-			"\\Gamma",
-			"\\gamma",
-			"\\Gamma",
-			"\\gamma",
-			"\\Gamma",
-			"\\gamma",
-			"tomography",
-			"tomograp",
-			"figure",
-			"because it is",
-			"fig:toy",
-			"black",
-			"blue",
-			"The kernel scoring",
-			"kernel score",
-			"figure",
-			"},\\ref{",
-			"label",
-			"\\label{fig:",
-			"\\label:{fig:",
-			"fig:",
-			"fig:Bloch disk",
-			"fig:",
-			"fig",
-			"single qubit",
-			"usetikzlibrary",
-			"%!TEX root = ../main.tex",
-			"%!TEX root = main.tex",
-			"\n%!TEX root = main.tex\n%!TEX root = main.tex\n%!TEX root = main.tex",
-			"\n%!TEX root = main.tex\n%!TEX root = main.tex\nTEX root = ../main.tex",
-			"\n%!TEX root = main.tex\n%!TEX root = main.tex\n%!TEX root = ../main.tex"
+			"\\subsection{"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1025,6 +1210,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"Tomography",
+			"Optimisation",
+			"Shannon",
+			"dataset",
 			"Tong2002",
 			"Chen2010",
 			"Krause2006",
@@ -1060,7 +1249,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 26,
 			"sheets":
 			[
 				{
@@ -1068,15 +1257,15 @@
 					"file": "latex/part1/01_scoring_rules.tex",
 					"settings":
 					{
-						"buffer_size": 61297,
+						"buffer_size": 60731,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								36973,
-								36973
+								7032,
+								7032
 							]
 						],
 						"settings":
@@ -1085,7 +1274,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 9051.0,
+						"translation.y": 1432.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1095,15 +1284,15 @@
 					"file": "latex/part3/02_GP_BALD.tex",
 					"settings":
 					{
-						"buffer_size": 47106,
+						"buffer_size": 47783,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10661,
-								10661
+								10753,
+								10753
 							]
 						],
 						"settings":
@@ -1112,58 +1301,57 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1932.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "latex/part3/03_quantum.tex",
 					"settings":
 					{
-						"buffer_size": 45192,
+						"buffer_size": 846,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								36109,
-								36109
+								109,
+								109
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/SQL/SQL.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 7566.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "latex/part1/01_scoring_rules.tex.bak",
 					"settings":
 					{
-						"buffer_size": 60573,
+						"buffer_size": 147,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								26,
-								26
+								114,
+								114
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"auto_name": "expected number of people mentioning someone durin",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1175,7 +1363,60 @@
 					"buffer": 4,
 					"settings":
 					{
-						"buffer_size": 61354,
+						"buffer_size": 246,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								246,
+								246
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Yes, interesting, thanks.",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "latex/part3/03_quantum.tex",
+					"settings":
+					{
+						"buffer_size": 45189,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								44726,
+								44726
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"settings":
+					{
+						"buffer_size": 92237,
 						"regions":
 						{
 							"match":
@@ -1614,6 +1855,146 @@
 									[
 										61020,
 										61030
+									],
+									[
+										61585,
+										61589
+									],
+									[
+										61602,
+										61606
+									],
+									[
+										62255,
+										62259
+									],
+									[
+										63232,
+										63236
+									],
+									[
+										65051,
+										65055
+									],
+									[
+										65250,
+										65254
+									],
+									[
+										65951,
+										65955
+									],
+									[
+										66906,
+										66910
+									],
+									[
+										67916,
+										67920
+									],
+									[
+										68797,
+										68801
+									],
+									[
+										68814,
+										68818
+									],
+									[
+										69467,
+										69471
+									],
+									[
+										70444,
+										70448
+									],
+									[
+										72263,
+										72267
+									],
+									[
+										72462,
+										72466
+									],
+									[
+										73163,
+										73167
+									],
+									[
+										74118,
+										74122
+									],
+									[
+										75128,
+										75132
+									],
+									[
+										76009,
+										76013
+									],
+									[
+										76026,
+										76030
+									],
+									[
+										76679,
+										76683
+									],
+									[
+										77656,
+										77660
+									],
+									[
+										79475,
+										79479
+									],
+									[
+										79674,
+										79678
+									],
+									[
+										80375,
+										80379
+									],
+									[
+										81330,
+										81334
+									],
+									[
+										82340,
+										82344
+									],
+									[
+										83222,
+										83227
+									],
+									[
+										83896,
+										83901
+									],
+									[
+										84906,
+										84911
+									],
+									[
+										86088,
+										86094
+									],
+									[
+										87727,
+										87737
+									],
+									[
+										88758,
+										88780
+									],
+									[
+										90032,
+										90054
+									],
+									[
+										91595,
+										91617
 									]
 								],
 								"scope": ""
@@ -1622,14 +2003,14 @@
 						"selection":
 						[
 							[
-								60465,
-								60465
+								88045,
+								88045
 							]
 						],
 						"settings":
 						{
 							"detect_indentation": false,
-							"output_tag": 18,
+							"output_tag": 29,
 							"result_base_dir": "",
 							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
 							"result_line_regex": "^ +([0-9]+):",
@@ -1637,65 +2018,65 @@
 							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 15105.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "latex/discussion.tex",
-					"settings":
-					{
-						"buffer_size": 4650,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								23,
-								23
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "latex/introduction.tex",
-					"settings":
-					{
-						"buffer_size": 3714,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								709,
-								709
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 21823.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 7,
+					"file": "latex/discussion.tex",
+					"settings":
+					{
+						"buffer_size": 7470,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								29,
+								31
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "latex/introduction.tex",
+					"settings":
+					{
+						"buffer_size": 5578,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5398,
+								5577
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 300.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
 					"file": "latex/notation.tex",
 					"settings":
 					{
@@ -1706,8 +2087,8 @@
 						"selection":
 						[
 							[
-								1462,
-								1468
+								120,
+								121
 							]
 						],
 						"settings":
@@ -1715,13 +2096,13 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 370.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 10,
 					"file": "latex/part1_main.tex",
 					"settings":
 					{
@@ -1747,7 +2128,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 11,
 					"file": "latex/part2_main.tex",
 					"settings":
 					{
@@ -1773,7 +2154,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 12,
 					"settings":
 					{
 						"buffer_size": 202,
@@ -1799,7 +2180,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 13,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -1824,19 +2205,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 14,
 					"file": "latex/thesis.tex",
 					"settings":
 					{
-						"buffer_size": 1520,
+						"buffer_size": 1583,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1429,
-								1429
+								1024,
+								1024
 							]
 						],
 						"settings":
@@ -1844,25 +2225,25 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 732.0,
+						"translation.y": 273.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 15,
 					"file": "latex/part2/02_herding.tex",
 					"settings":
 					{
-						"buffer_size": 42489,
+						"buffer_size": 42457,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								37207,
-								37207
+								18462,
+								18462
 							]
 						],
 						"settings":
@@ -1871,25 +2252,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 8739.0,
+						"translation.y": 4027.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 14,
+					"buffer": 16,
 					"file": "latex/bibliography/thesis.bib",
 					"settings":
 					{
-						"buffer_size": 93961,
+						"buffer_size": 93523,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								23429,
-								23429
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1898,7 +2279,409 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 9550.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "latex/part3/01_introBALD.tex",
+					"settings":
+					{
+						"buffer_size": 22591,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8542,
+								8550
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"settings":
+					{
+						"buffer_size": 3936,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3936,
+								3411
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Proposed title: The Science of Social Data",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 85.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 19,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 20,
+					"file": "/Users/fhuszar/peerindex/datascience/harlemshake/harlemshake.hql",
+					"settings":
+					{
+						"buffer_size": 1941,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								679,
+								991
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SQL/SQL.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 188.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 21,
+					"settings":
+					{
+						"buffer_size": 1169,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								950,
+								950
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SQL/SQL.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 275.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 22,
+					"file": "/Users/fhuszar/peerindex/datascience/dbpedia/descendants.py",
+					"settings":
+					{
+						"buffer_size": 2306,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1911,
+								1911
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 23,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 24,
+					"file": "/Users/fhuszar/Downloads/INSERT-oneshot-user_info_update-to-user_info.hql",
+					"settings":
+					{
+						"buffer_size": 1750,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1485,
+								1485
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SQL/SQL.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 25,
+					"file": "latex/frontmatter/acknowledgement.tex",
+					"settings":
+					{
+						"buffer_size": 1892,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1868,
+								1868
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 26,
+					"file": "latex/part1/02_embeddings.tex",
+					"settings":
+					{
+						"buffer_size": 37863,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2738,
+								2747
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 27,
+					"file": "latex/part2/01_approximate_inference.tex",
+					"settings":
+					{
+						"buffer_size": 32056,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								18846,
+								18846
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3580.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 28,
+					"file": "latex/preamble.tex",
+					"settings":
+					{
+						"buffer_size": 1783,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1491,
+								1491
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 475.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 29,
+					"file": "latex/frontmatter/abstract.tex",
+					"settings":
+					{
+						"buffer_size": 2180,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2083,
+								2083
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 30,
+					"file": "latex/style/CUEDthesisPSnPDF.cls",
+					"settings":
+					{
+						"buffer_size": 10397,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7462,
+								7462
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/TeX.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3514.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 31,
+					"file": "latex/frontmatter/declaration.tex",
+					"settings":
+					{
+						"buffer_size": 807,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								603,
+								603
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1939,7 +2722,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 237.0
+		"height": 100.0
 	},
 	"replace":
 	{

@@ -178,7 +178,7 @@ Perhaps surprisingly, the posterior variance of $Z_{f,p}$ does not depend on the
 %
 where $\gp$ denotes the gaussian process prior. A similar independence on function values is observed in other optimal experimental design problems involving Gaussian processes \citep{Krause2006}. This allows the optimal sample locations to be computed ahead of time, without observing any values of $f$ at all \citep{minka2000dqr}.
 
-We can contrast the \bq{} objective $\epsilon^{2}_{\bq{}}$ in \eqref{eq:marg_var_symbolic} to the objective being minimized in herding, $\epsilon^{2}_{herding}$ of Eqn.\ \eqref{eq:mmd_assumption}. Just like $\epsilon^{2}_{herding}$, $\epsilon^{2}_{\bq{}}$ expresses a trade-off between accuracy and diversity of samples. On the one hand, as samples get close to high density regions under $p$, the values in $\vz$ increase, which results in decreasing variance. On the other hand, as samples get closer to each other, eigenvalues of $K$ increase, resulting in an increase in variance. 
+We can contrast the \bq{} objective $\epsilon^{2}_{\bq{}}$ in \eqref{eqn:marg_var_symbolic} to the objective being minimized in herding, $\epsilon^{2}_{herding}$ of Eqn.\ \eqref{eq:mmd_assumption}. Just like $\epsilon^{2}_{herding}$, $\epsilon^{2}_{\bq{}}$ expresses a trade-off between accuracy and diversity of samples. On the one hand, as samples get close to high density regions under $p$, the values in $\vz$ increase, which results in decreasing variance. On the other hand, as samples get closer to each other, eigenvalues of $K$ increase, resulting in an increase in variance. 
 
 In a similar fashion to herding, we may use a greedy method to minimise $\epsilon^{2}_{\bq{}}$, adding one sample at a time. We will call this algorithm \emph{Sequential Bayesian Quadrature} (\sbq{}):
 
@@ -266,7 +266,7 @@ s(A\cup\{x\})-s(A)\geq s(B\cup\{x\})-s(B) - \epsilon
 \end{align}
 
 \begin{proposition}\label{prop:submodularity_SBQ}
-$\epsilon^{2}_{\bq{}}(\emptyset)-\epsilon^{2}_{\bq{}}(\cdot)$ is weakly a weakly submodular set function with constant $\epsilon<4r$, where $r$ is the incoherency
+$\epsilon^{2}_{\bq{}}(\emptyset)-\epsilon^{2}_{\bq{}}(\cdot)$ is a weakly submodular set function with constant $\epsilon<4r$, where $r$ is the incoherency
 %
 \begin{equation}
 	r = \max_{x,x'\in\mathcal{P}\subseteq\mathcal{X}} \frac{k(x,x')}{\sqrt{k(x,x)k(x',x')}}
