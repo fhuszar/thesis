@@ -5,6 +5,7 @@ aspell --mode=tex -t check latex/part1_main.tex
 aspell --mode=tex -t check latex/part2_main.tex
 aspell --mode=tex -t check latex/part3_main.tex
 aspell --mode=tex -t check latex/introduction.tex
+aspell --mode=tex -t check latex/frontmatter/declaration.tex
 aspell --mode=tex -t check latex/frontmatter/dedication.tex
 aspell --mode=tex -t check latex/frontmatter/abstract.tex
 aspell --mode=tex -t check latex/frontmatter/acknowledgement.tex
