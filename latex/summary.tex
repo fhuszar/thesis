@@ -1,0 +1,18 @@
+\documentclass[11pt]{article}
+\usepackage{setspace}
+
+\newenvironment{abstracts}{}{}
+\makeatletter
+\newcommand{\customlabel}[2]{%
+\protected@write \@auxout {}{\string \newlabel {#1}{{#2}{}}}}
+\makeatother
+\begin{document}
+\title{Scoring Rules, Divergences and Information\\ in Bayesian Machine Learning}
+\author{Ferenc Husz\'{a}r}
+\date{} % <--- leave date empty
+\maketitle\thispagestyle{empty}
+\customlabel{part:1}{I}
+\customlabel{part:2}{II}
+\customlabel{part:3}{III}
+\input{frontmatter/abstract.tex}
+\end{document}
