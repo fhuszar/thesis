@@ -1,4 +1,4 @@
-List of changes made
+# List of corrections and changes made
 
 ## Introducuction
 
