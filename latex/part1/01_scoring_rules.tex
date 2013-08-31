@@ -246,7 +246,7 @@ For completeness, I note here that some authors have generalised Shannon's mutua
 Examples of information functionals defined this way are described in \citep{Poczos2011}.
 On one hand, an information functional like $\mathbb{J}$ has several nice properties, most notably that it is always symmetric. On the other hand, in the general case we loose the intuitive meaning of information as ``the extent to which observing the value of one variable is useful for predicting the value of the other one''. Furthermore, if we wanted to use a divergence function corresponding to a scoring rule, the scoring rule should be defined over the joint space $\Xe\times\Ye$, which is often not desired.
 
-\subsection{The pseudo-likelihood}
+\subsection{The pseudo-likelihood\label{sec:pseudolikelihood}}
 
 The idea of maximum pseudo-likelihood estimation was introduced originally by \citet{Besag1977} to estimate parameters of Gaussian random fields. Later it was popularised in the context of parameter estimation in general Markov random fields \citep{Comets1992} and in Boltzmann machines \citep{Hyvarinen2006}. The pseudo-likelihood is particularly useful for estimating parameters of statistical models with intractable normalisation constants.
 
@@ -295,6 +295,50 @@ Here the $d^{\mbox{th}}$ term is a probability conditioned on $d-1$ variables. C
 \end{equation}
 where $\score_d$ are strictly proper scoring rules for each dimension
 
+\cbstart
+
+\subsection{Composite likelihoods\label{sec:composite_likelihood}}
+
+Composite likelihoods were introduced by \citet{Lindsay88}, and they can be thought of as a further generalisation of the pseudo-likelihood. The main motivation behind composite likelihoods is to construct estimators which do not require the evaluation of intractable marginalisation constants which makes logarithmic score infeasible in many practical applications. Instead, composite likelihood scores are constructed as sums of lower dimensional marginal or conditional logarithmic scores which are feasible to compute.
+
+In their most general form, composite likelihood can be described as follows. Let $P\in\probmeasures{\Xe}$ a probability distribution over the variable $X\in\Xe$. Let $\mathcal{A}_1,\cdot,\mathcal{A}_K\subseteq\Xe$ denote measurable events, $w_1,\ldots,w_K$ positive weights. The composite likelihood is a scoring rule of the following form:
+%
+\begin{equation}
+	\score_{CL}(x,P) = \sum_{k=1}^{K} w_k \cdot \log P(x\in\mathcal{A}_k).\label{eqn:composite_likelihood}
+\end{equation}
+
+Because each component is strictly proper, composite likelihoods are proper -- albeit not always strictly proper -- scoring rules. By specifying the sets of events $\mathcal{A}_k$ and corresponding weights, this class generalises the log score, the pseudo-likelihood, as well as other interesting cases. This construction has been referred to by different names in the literature, including composite likelihood \citep{Lindsay88,Varin11}, pseudo-likelihood \citep{Molenberghs05}, qausi-likelihood \citep{Hjort94} and approximate likelihood \citep{Stein04}. Here I adopt the terminology of \citet{Lindsay88}, and reserve the term pseudo-likelihood to refer to the special case covered in the previous section, originally introduced by \citet{Besag1977}.
+
+A review by \citet{Varin11} divides composite likelihood methods into two main branches based on whether they are composed of marginal or conditional probabilities.
+
+\emph{Composite conditional likelihood} methods construct proper scoring rules out of sets of conditional distributions. Besag's pseudolikelihood of Section \ref{sec:pseudolikelihood} is the best known example of this family. \citet{Molenberghs05} considered the following composite likelihood composed of pairwise conditional distributions:
+%
+\begin{equation}
+	\score_{MV05}(x,P) = \sum_{d=1}^{D}\sum_{\substack{e=1\\e\neq d}}^{D} \log P(x_d\vert x_e).
+\end{equation}
+%
+A further example of composite conditional likelihoods is the order-$m$ likelihood estimation technique introduced by \citet{Azzalini83}. This approach works by omitting long-range spatial dependencies in stationary stochastic processes.
+
+In \emph{composite marginal likelihood} methods the scoring rule is constructed from marginal distributions. The simplest of such scoring rules is the \emph{independence likelihood} \citep{Chandler07} of the following form:
+%
+\begin{equation}
+	\score_{independence}(x,P) = \sum_{d=1}^{D} \log P(x_d).
+\end{equation}
+%
+It is clear that the independence likelihood is strictly proper only with respect to distributions that factorise over dimensions. Thus, it only permits unbiased estimation of marginal parameters. More powerful scoring rules attempt to better capture dependencies by considering higher order marginals, such as the pairwise likelihood of \citet{Cox04}:
+%
+\begin{equation}
+	\score_{pairwise}(x,P) = \sum_{d=1}^{D-1} \sum_{e=d+1}^{D} \log P(x_d,x_e).
+\end{equation}
+%
+Further special cases are reviewed in \citep{Varin11}.
+
+A central object of interest in the topic of composite likelihoods is the \emph{sandwich information matrix}, a generalisation of the Fisher information matrix. This matrix is crucial in characterising the convergence properties of statistical estimators based on composite likelihoods. For example, a composite likelihood is strictly proper scoring rule, whenever the corresponding sandwich matrix is of full rank. For definitions, and further details the reader is referred to \citep{Lindsay88} or \citep{Varin11}.
+
+Composite likelihood scores can be generalised further -- along the lines of \citep{Dawid2012} -- by replacing the component likelihoods by arbitrary strictly proper scoring rules. It is unclear wether such generlisations provide any practical benefit, especially as the established theoretical framework based on the sandwich information matrix would not extend to this case.
+
+\cbend
+
 \subsection{The quadratic Brier score\label{sec:Brier_score}}
 
 Another widely used scoring rule is the so-called \emph{Brier score} or quadratic score, originally introduced in \citep{Brier1950}. It was first applied to evaluating probabilistic weather forecasts and it is still widely used in meteorology \citep{Ferro2007} as well as in medicine \citep{Spiegelhalter2006} and epidemiology \citep{Redelmeier1991}. It is also related to the root mean squared error (RMSE) of probabilistic binary classifiers, which is a commonly used loss function for training neural networks \citep{Rumelhart1988}.
@@ -338,45 +382,48 @@ The Brier divergence function becomes the squared norm of the difference between
 	\divergence{Brier}{P}{Q} &= \expect{x \sim P}\left[\customnorm{Q}{2}^2 - 2Q(x) + 1\right] - \genentropy{Brier}{P} \\
 		&= \customnorm{Q}{2}^2 -2 \expect{x \sim P} Q(x) + \customnorm{P}{2}^2 \\
 		&= \customnorm{Q}{2}^2 - 2\scalar{P}{Q} + \customnorm{P}{2}^2\\
-		&= \customnorm{P-Q}{2}^2
+		&= \customnorm{P-Q}{2}^2. \label{eqn:Brier_divergence}
 \end{align}
 
-Interestingly, the Brier divergence is symmetric, and it is analogous to the squared Euclidean distance.
+\cbstart
+Interestingly, the Brier divergence is symmetric, and it is analogous to the squared Euclidean distance. For distributions with continuous densities, the Brier divergence is also known as Integrated Squared Error (ISE). This distance metric has been used for decades in studying convergence properties of nonparametric density estimates, such as Parzen window estimates \citep{Parzen62}. In more modern work it has also been applied as a direct optimisation criterion for fitting parametric density models \citep[see \eg][]{Scott99,Mukherjee99,Girolami03}.
+\cbend
 
-The value of information under the Brier score becomes the following straightforward quantity.
-
+The value of information under the Brier score becomes the following straightforward quantity:
+%
 \begin{align}
-	\information{Brier}{X}{Y} &= \expect{y \sim P_{Y}} \customnorm{P_X - P_{X\vert Y=y}}{2}^2\\
+	\information{Brier}{X}{Y} &= \expect{y \sim P_{Y}} \customnorm{P_X - P_{X\vert Y=y}}{2}^2.
 \end{align}
 
 \subsection{Spherical scoring rules}
 Another example of strictly proper scoring rules, introduced in \citep{Good1971}, is the spherical scoring rule \citep{Dawid2007,Dawid2012}. The spherical score is defined as follows:
-
+%
 \begin{align}
-	\score_{spherical}(x,P) &= 1 -\frac{P(x)}{\customnorm{P}{2}}
+	\score_{spherical}(x,P) &= 1 -\frac{P(x)}{\customnorm{P}{2}}.
 \end{align}
-
+%
 This gives rise to the following entropy and divergence functionals.
-
+%
 \begin{align}
 	\genentropy{spherical}{P} &= 1 -\expect{x \sim P}\frac{P(x)}{\customnorm{P}{2}}\\
-		&= 1 -\customnorm{P}{2} \\
+		&= 1 -\customnorm{P}{2},\\
 	\divergence{spherical}{P}{Q} &= -\expect{x \sim P}\frac{Q(x)}{\customnorm{Q}{2}} + \customnorm{P}{2}\\
 		&= \customnorm{P}{2} - \frac{\scalar{Q}{P}}{\customnorm{Q}{2}}\\
 		&= \customnorm{P}{2}\left( 1 - \cos(P,Q) \right),
 \end{align}
+%
 where $\cos(P,Q) = \frac{\scalar{P}{Q}}{\customnorm{P}{2}\customnorm{Q}{2}}$ is the cosine similarity between distributions $P$ and $Q$.
 
 An interesting property of the spherical score is that it is agnostic to scaling of $P$. That is $\score_{spherical}(x,c\cdot P) = \score_{spherical}(x,P) $. Similarly, $\divergence{spherical}{P}{c\cdot Q} = \divergence{spherical}{P}{Q}$ and $\divergence{spherical}{c\cdot P}{Q} = c \cdot \divergence{spherical}{P}{Q}$. This means that when approximating a fixed distribution $P$ by $Q$ via minimising $\divergence{spherical}{P}{Q}$ we only need to know $P$ and $Q$ up to a normalising constant.
 
 The value of information under the spherical score is
-
+%
 \begin{align}
-	\information{spherical}{X}{Y} &= \customnorm{P_X}{2}\expect{y \sim P_{Y}} \left( 1 - \cos(P_X,P_{X\vert Y=y}) \right)
+	\information{spherical}{X}{Y} &= \customnorm{P_X}{2}\expect{y \sim P_{Y}} \left( 1 - \cos(P_X,P_{X\vert Y=y}) \right).
 \end{align}
 
 \citet{Gneiting2007} and \citet{Jose2008} also introduce generalisations of the spherical score, where the $L_2$ norm is replaced by a general $L_\gamma$ norm:
-
+%
 \begin{align}
 	\genentropy{\gamma,pseudospherical}{P} &= -\customnorm{P}{\gamma}
 \end{align}
@@ -420,7 +467,7 @@ where $i$ is the imaginary number $i=\sqrt{-1}$. The characteristic function is 
 
 The maximum mean discrepancy with characteristic kernels has been applied in various contexts in machine learning. One of the first of these recent applications were two-sample tests. In two-sample testing one is provided i.\,i.\,d.\ samples from two distributions, and one has to determine whether the two distributions are the same or not. \citet{Gretton2012} developed and analysed efficient empirical methods based on the MMD for this problem.
 
-Herding \citep{welling2009herding} and its generalisation kernel herding \citep{Chen2010} have been shown to minimise MMD between a target distribution and the empirical distribution of pseudo-samples. This method is an example of quasi-Monte Carlo methods that are examined in Chapter \ref{sec:approximate_inference}. Lastly, in kernel moment matching \citep{Song2008} MMD is used for density estimation: parameters of a parametric density model are set by minimising MMD from the empirical distribution of data. As we will see shortly, this is a special case of score matching as defined in Definition \ref{def:score_matching}.
+Herding \citep{welling2009herding} and its generalisation kernel herding \citep{Chen2010} have been shown to minimise MMD between a target distribution and the empirical distribution of pseudo-samples. This method is an example of quasi-Monte Carlo methods that are examined in Chapter \ref{sec:approximate_inference}. Lastly, in kernel moment matching \citep{Song2008} MMD is used for density estimation: parameters of a parametric density model are set by minimising MMD from the empirical distribution of data.
 
 The squared MMD in fact conforms to our definition of a generalised divergence in equation \eqref{eqn:def_divergence}, and corresponds to the following scoring rule:
 
@@ -440,6 +487,9 @@ The equivalence can be seen by applying Definition \ref{def:generalised_divergen
 \end{align}
 
 This scoring rule in Equation \eqref{eqn:kernel_scoring_rule} is equivalent to the \emph{kernel scoring rule} introduced originally by \citet{Eaton1982}. The term kernel score was later coined by \citet{Dawid2007}. Further references to this scoring rule can be found in \citep{Eaton1996,Gneiting2007}. The original definitions differed from the formula by a factor of two, and they did not have the leading $k(x,x)$ term. These differences do not make any difference: scoring rules that are equal up to scaling and an additive term that depends only on $x$ but not on the distribution $P$ give rise to exactly the same generalised entropy and divergence functionals, and are hence equivalent \citep{Dawid2007}. Also, the statistics community defined the scores in terms of negative definite kernels, rather than positive definite ones which is the common convention in machine learning. It has also been pointed out that the Brier (quadratic) score is a special case of the kernel score when the kernel is chosen to be the trivial $k(x,x') = \delta(x - x')$, where $\delta$ is the Dirac delta function \citep{Dawid2007}.
+\cbstart
+Thus, methods that minimise the integrated squares error -- \ie the quadratic Brier divergence in Eqn.\ \eqref{eqn:Brier_divergence} -- can also be considered as special cases of kernel moment matching \citep{Scott99,Girolami03,Mukherjee99}.
+\cbend
 
 To my knowledge the connection between kernel scores in statistics and maximum mean discrepancy has not been established before. This interpretation allows one to uncover previously unknown connections between existing machine learning methods and to provide a solid theoretical framework for understanding and generalising them.
 
