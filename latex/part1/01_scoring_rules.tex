@@ -80,9 +80,9 @@ The divergence defined in \eqref{eqn:def_divergence} is a special case of Bregma
 \begin{definition}[Bregman divergence]
 	Let $H$ be a differentiable, strictly concave function on a convex domain $\Theta$. For $P,Q\in\Theta$ 
 	\begin{align}
-		\divergence{Bregman,H}{P}{Q} = H(P) - H(Q) + \scalar{\nabla H(Q)}{Q-P},
+		\divergence{Bregman,H}{P}{Q} = H(Q) - H(P) + \scalar{\nabla H(Q)}{P-Q},
 	\end{align}
-	where $\scalar{f}{g} = \int_{x\in\Xe} f(x)g(x) dx$ denotes scalar product. If P is a probability distribution, one can also write $\scalar{P}{f} = \expect{x\sim P} f(x)$. The symbol $\nabla$ denotes differentiation.
+	where $\scalar{f}{g} = \int_{x\in\Xe} f(x)g(x) dx$ denotes scalar product between functions. If P is a probability distribution, one can also write $\scalar{P}{f} = \expect{x\sim P} f(x)$. The symbol $\nabla$ denotes differentiation.
 \end{definition}
 
 \begin{statement}[Generalised divergences $d_{\score}$ for strictly proper $\score$ are Bregman divergences]
@@ -104,7 +104,7 @@ The divergence defined in \eqref{eqn:def_divergence} is a special case of Bregma
  		 		&= \scalar{S(\cdot,Q)}{P} - \genentropy{S}{P}\\
  		 		&= \divergence{S}{P}{Q}.
  		\end{align}
- 		Concavity of $\genentropy{\score}{P}$ also follows from strictly proper property $\divergence{S}{P}{Q}>0,P\neq Q$.
+ 		Concavity of $\genentropy{\score}{P}$ also follows from the strictly proper property $\divergence{S}{P}{Q}>0,P\neq Q$.
 \end{proof}
 \end{statement}
 
@@ -117,7 +117,7 @@ The divergence defined in \eqref{eqn:def_divergence} is a special case of Bregma
 
 For a more elaborate proof and discussion of Bregman divergences and scoring rules please refer to \citep{Amari2010,Dawid2007}. An intuitive explanation of Bregman divergences is given in Figure \ref{fig:Bregman}.
 
-The information quantities introduced so far only dealt with single random variable $\X$, and comparing probability distributions over the same variable. In the following I will define information quantities that describe the relationship and dependence between more than one variable. A particularly useful quantity is the value of information, which quantifies how much useful information one random variable $Y$ holds about another one $\X$.
+The information quantities introduced so far only dealt with a single random variable $\X$, and they compared probability distributions over the same variable. In the following I will define information quantities that describe the relationship and dependency between more than one variable. A particularly useful quantity is the value of information, which quantifies how much useful information one random variable $Y$ holds about another one $\X$.
 
 \begin{definition}[Generalised value of information]
 	\label{def:value_of_information}
@@ -145,11 +145,11 @@ If the scoring rule is proper, the value of information is always non-negative. 
 	\begin{proof}
 		If $X$ is independent of $Y$, then $\forall y: P_{X\vert Y=y} = P_{X}$, which implies $\forall y:  \divergence{S}{P_{X\vert Y=y}}{P_{X}}=0$, and hence $\information{\score}{X}{Y} = 0$.
 		
-		On the other hand, $\information{\score}{X}{Y} > 0$ implies $\exists y: \divergence{S}{P_{X\vert Y=y}}{P_{X}} > 0$, therefore by strict propriety of $\score$, $\exists y: P_X \neq P_{X\vert Y=y}$, hence $\X$ and $Y$ are dependent.
+		On the other hand, $\information{\score}{X}{Y} > 0$ implies $\exists y: \divergence{S}{P_{X\vert Y=y}}{P_{X}} > 0$, therefore by the strict propriety of $\score$, $\exists y: P_X \neq P_{X\vert Y=y}$, hence $\X$ and $Y$ are dependent.
 	\end{proof}
 \end{theorem}
 
-As a corollary, strictly proper scoring rules are equivalently strong in the sense that if one detects dependence between variables, than any of them will:
+As a corollary, strictly proper scoring rules are equivalently strong in the sense that if one detects dependence between variables, then any of them will:
 
 \begin{corollary}[Weak equivalence of strictly proper scoring rules]
 	Let $\score_1,\score_2:\Xe\times\probmeasures{\Xe}\mapsto\Reals$ be two strictly proper scoring rules over $X$. $X$ and $Y$ are two random variables. Then $\information{\score_1}{X}{Y} > 0$ if and only if $\information{\score_2}{X}{Y} > 0$.
@@ -169,14 +169,14 @@ We can also define a conditional version of this quantity which measures how muc
 	\begin{equation}
 		\conditionalinformation{S}{X}{Y}{Z=z} =  \expect{x\sim P_{X\vert Z=z}}\score(x,P_{X\vert Z=z})- \expect{y\sim P_{Y\vert Z=z}} \expect{x\sim P_{X\vert Y=y, Z=z}}\score(x,P_{X\vert Y=y, Z=z}).
 	\end{equation}
-	Alternatively, we can write information in terms of the generalised entropy or divergence functions
+	Alternatively, we can write conditional information in terms of the generalised entropy or divergence functions
 		\begin{align}
 			\conditionalinformation{\score}{X}{Y}{Z=z} &=  \genentropy{\score}{P_{X\vert Z=z}} - \expect{y \sim P_{Y \vert Z=z}} \genentropy{\score}{P_{X\vert Y=y, Z=z}}\\
 				&= \expect{y\sim P_{Y}}\divergence{S}{P_{X\vert Y=y, Z=z}}{P_{X\vert Z=z}}.
 		\end{align}
 \end{definition}
 
-Just like in the case of non-conditional value of information, the definition only calls for a scoring rule over $X$, not over the other variables $X$ or $Z$. Just like the value of information was related to statistical independence, conditional value of information is related to conditional independence in the following sense.
+Just like in the case of non-conditional value of information, the definition only calls for a scoring rule over $X$, not over the other variables $Y$ or $Z$. Just like the value of information was related to statistical independence, conditional value of information is related to conditional independence in the following sense.
 
 \begin{statement}
 	Let $\score:\Xe\times\probmeasures{\Xe}\mapsto\Reals$ be a strictly proper scoring rule with respect to Borel probability distributions $\probmeasures{\Xe}$, and $P\in\probmeasures{\Xe\times\Ye\times\Ze}$ the joint probability of variables $X$ and $Y$ and $Z$. Then the following two statements are equivalent:
@@ -189,7 +189,7 @@ Just like in the case of non-conditional value of information, the definition on
 
 \section{Examples of scoring rules}
 
-After having discussed general properties of scoring rules and information quantities based on them, let us look at particular examples of scoring rules, entropies and divergences they define. I will review three widely known scoring rules, the logarithmic, Brier (quadratic) and spherical scores. Then I present the kernel scoring rule, which is lesser known in the statistics literature. I establish the connections between the kernel scoring rule to the maximum mean discrepancy, a divergence measure that has gained popularity recently in the machine learning community over the past years \citep{Gretton2012,Sriperumbudur2008}.
+After having discussed general properties of scoring rules and information quantities based on them, let us look at particular examples of scoring rules and the entropies and divergences that they give rise to. I will review three widely known scoring rules, the logarithmic, Brier (quadratic) and spherical scores. Then I present the kernel scoring rule, which is lesser known in the statistics literature. I establish the connections between the kernel scoring rule and the maximum mean discrepancy, a divergence measure that has gained popularity recently in the machine learning community over the past years \citep{Gretton2012,Sriperumbudur2008}.
 
 Following the discussion of kernel scoring rules I define a novel scoring rule, called \emph{spherical kernel scoring rule}, examine its properties, and provide a proof that it is strictly proper. Finally, I show the connections between scoring rules and Bayesian decision theory, and explain how decision problems give rise to scoring rules and associated information quantities.
 
@@ -213,7 +213,7 @@ The associated entropy function is Shannon's entropy, also known as differential
 	\genentropy{Shannon}{P} = - \expect{x\sim P} \log P(x).
 \end{equation}
 
-The divergence function is the Kullback-Leibler (KL) divergence, which is very widely used in approximate Bayesian inference, model selection and active learning:
+The corresponding divergence function is the Kullback-Leibler (KL) divergence, which is widely used in approximate Bayesian inference, model selection and active learning:
 %
 \begin{equation}
 	\KL{P}{Q} = \expect{x\sim P} \log \frac{P(x)}{Q(x)}.\label{eqn:KL_divergence}
@@ -221,7 +221,7 @@ The divergence function is the Kullback-Leibler (KL) divergence, which is very w
 
 The KL divergence is only well-defined when the distribution $Q$ is absolutely continuous with respect to $P$. This is a serious limitation of the KL divergence for our purposes in later chapters: If $P$ is a continuous density, then $Q$ has to be continuous as well for the KL divergence to be defined. Therefore we cannot express the KL divergence between, say, an empirical distribution of samples and a continuous distribution, as we did in Definition \ref{def:score_matching}.
 
-A related problem is that Shannon's entropy of atomic distributions or mixed atomic and continuous distributions is either not well defined or depends only on the relative weight of the atoms but not on their locations. As we will see, information quantities based on other scoring rules remain well defined for wider classes of distributions including atomic ones.
+A related problem is that Shannon's entropy of atomic distributions or mixed atomic and continuous distributions is either not well defined or depends only on the relative weight of the atoms but not on their locations. As we will see, information quantities based on other scoring rules remain well defined for a wider class of distributions including the atomic ones.
 
 These problems are related to a property of the logarithmic score, known as locality: The value of the scoring rule $\score(x,P)$ only depends on the value of the density function evaluated at the point $x$. This is a unique property of the logarithmic score: any strictly proper scoring rule that is local is analogous to the logarithmic score. Note, that there are weaker definitions of locality of scoring rules, which hold for scoring rules other than the logarithmic \citep{Parry2012, Dawid2012}.
 
@@ -230,7 +230,7 @@ These problems are related to a property of the logarithmic score, known as loca
 The Fisher information matrix also plays a central role in the Crem\'{e}r-Rao bound \citep{Cremer99}, which expresses a lower bound for the variance of any estimator of the parameters of a statistical model. In the limit of increasing number of observations the maximum likelihood estimator achieves this lower bound, and is hence it is called assymptotically efficient. Most other scoring rules considered in this chapteres do not yield assymptotically efficient estimators \citep[see \eg][]{Varin11}. These deep connections to information geometry and the theory of statistical estimation make the logarithmic score such an important and ubiquitous example.
 \cbend
 
-The value of information becomes Shannon's mutual information, a crucial quantity in communication and channel coding \citep{Shannon1948, MacKay2002}. Shannon's mutual information has several equivalent definitions. Interestingly, it can be rewritten as the KL divergence between the joint distribution $P_{\X,Y}$ and the product of its marginals $P_{\X}P_{Y}$:
+With the logarithmic score, the value of information becomes Shannon's mutual information, a crucial quantity in communication and channel coding \citep{Shannon1948, MacKay2002}. Shannon's mutual information has several equivalent definitions. Interestingly, it can be rewritten as the KL divergence between the joint distribution $P_{\X,Y}$ and the product of its marginals $P_{\X}P_{Y}$:
 %
 \begin{align}
 	\information{Shannon}{X}{Y} &= \genentropy{Shannon}{X} - \expect{y \sim P_{Y}} \genentropy{Shannon}{P_{X\vert Y=y}}\\
@@ -268,12 +268,12 @@ In the pseudo-likelihood each of the terms is the conditional probability over o
 	p(x_d\vert x_{\neg d}) = \frac{P(x)}{\int P(X_d=y,x_{\neg d}) dy} = \frac{C \cdot P(x)}{\int C \cdot P(X_d=y,x_{\neg d}) dy}.
 \end{equation}
 %
-This can be computed even if the joint probability of all variables $P$ is known only up to a multiplicative constant $C$, which is very often the case.
+This can be computed even if the joint probability of all variables $P$ is known only up to a multiplicative constant $C$, which is often the case.
 
 Take the Boltzmann distribution with parameters $W$ and $b$ as an example. 
 %
 \begin{equation}
-	P(\x) = \frac{1}{Z}\exp(x^{T}Wx + b^{T}x), x\in\{0,1\}^D,
+	P(\x) = \frac{1}{Z}\exp(x^{T}Wx + b^{T}x),\ \ \ \ x\in\{0,1\}^D,
 \end{equation}
 %
 where $Z = \sum_{x\in\{0,1\}^D}\exp(x^{T}Wx + b^{T}x)$ is the partition function or normalisation constant that is analytically intractable to compute in the general case. On the other hand, the conditional distribution of a single component of $x$ conditioned on the rest is easy to compute as follows:
@@ -357,7 +357,7 @@ We will define the Brier score in terms of the $L^2$ norm of probability distrib
 	\customnorm{P}{2} \defeq \sqrt{\expect{x \sim P} P(x)}.
 \end{equation}
 
-The above definition, albeit slightly informal, is well defined and finite for most classes of probability distributions we are concerned with. For continuous distributions, $P(x)$ denotes the probability density, for discrete distributions $P(x)$ denotes the probability of outcome $x$. Similarly, one can define the scalar product between two distributions as follows:
+The above definition, albeit slightly informal, is well defined and finite for most classes of probability distributions that we are concerned with. For continuous distributions, $P(x)$ denotes the probability density function, for discrete distributions $P(x)$ denotes the probability of outcome $x$. Similarly, one can define the scalar product between two distributions as follows:
 %
 \begin{equation}
 	\scalar{P}{Q} \defeq \sqrt{\expect{x \sim P} Q(x)}.
@@ -442,7 +442,7 @@ The value of information under the spherical score is
 
 The kernel scoring rule first appeared in the statistics literature in \citep{Eaton1996}, although the name \emph{kernel scoring rule} was only used in more recent references \citep{Dawid1994,Dawid2007,Gneiting2007}.
 
-Independently, a related concept, derived from different first principles, has become known in the machine learning community as \emph{maximum mean discrepancy} (MMD, \citep{Sriperumbudur2008}). As we will see, MMD is closely related to the kernel scoring rule. MMD has been adopted in a variety of modern applications in machine learning and statistics, including two sample tests \citep{Gretton2012}, kernel moment matching \citep{Song2008}, embedding of probability distributions \citep{Smola2007} and the kernel-based message passing \citep{Fukumizu2010}.
+Independently, a related concept, derived from different first principles, has become known in the machine learning community as \emph{maximum mean discrepancy} (MMD, \citep{Sriperumbudur2008}). As we will see, MMD is closely related to the kernel scoring rule. MMD has been adopted in a variety of modern applications in machine learning and statistics, including two sample tests \citep{Gretton2012}, kernel moment matching \citep{Song2008}, embedding of probability distributions \citep{Smola2007} and kernel-based message passing \citep{Fukumizu2010}.
 
 MMD measures the divergence or distance between two distributions, $P$ and $Q$. It belongs to a rich class of divergences called integral probability metrics \citep{Sriperumbudur2009}, which define the distance between  $P$ and $Q$, with respect to a class of integrand functions $\mathcal{F}$ as follows:
 %
@@ -452,7 +452,7 @@ MMD measures the divergence or distance between two distributions, $P$ and $Q$. 
 	
 Intuitively, if two distributions are close in the integral probability metric sense, then no matter which function $f$ we choose from the function class $\mathcal{F}$, the difference between the expectation of $f$ under $P$ and $Q$ should be small. This class of divergences include the Wasserstein distance \citep{Barrio1999}, the Dudley metric \citep{Dudley1974} and MMD, which differ only in their choice of the function class $\Fe$.
 
-A particularly interesting case is when the function class $\Fe$ is functions of unit norm from a reproducing kernel Hilbert space (RKHS) $\He$. In this case, the MMD between two distributions can be conveniently expressed using expectations of the associated kernel $k(x, x')$ only \citep{Sriperumbudur2008}:
+A particularly interesting case is when the function class $\Fe$ is formed by taking all functions of unit norm in a reproducing kernel Hilbert space (RKHS) $\He$. In this case, the MMD between two distributions can be conveniently expressed using expectations of the associated kernel $k(x, x')$ only \citep{Sriperumbudur2008}:
 %
 \begin{align}
 \mbox{MMD}^2\left(P,Q\right) &= \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left( \expect{x\sim P} f(x) - \expect{x\sim Q} f(x) \right)^2\label{eqn:rkhs-mmd}\\
@@ -507,7 +507,7 @@ Thus, methods that minimise the integrated squares error -- \ie the quadratic Br
 
 To my knowledge the connection between kernel scores in statistics and maximum mean discrepancy has not been established before. This interpretation allows one to uncover previously unknown connections between existing machine learning methods and to provide a solid theoretical framework for understanding and generalising them. For example, novel asymptotic analysis may established using generalisations of the Fisher information matrix or the sandwitch information matrix.
 
-Depending on the choice of kernel, the kernel score can be strictly proper. \citep{Gneiting2007} provide a proof of the propriety of the kernel scoring rule with respect to all Borel probability measures, given that the expectation $\expect{x,x'\sim P} k(x,x')$ is finite. Using the theory developed to study properties of MMD and characteristic kernels we can also see that the scoring rule is strictly proper whenever the kernel is characteristic \citep{Sriperumbudur2008}. \citet{Gneiting2007} showed that many examples of scoring rules, among them the Brier score (see section \ref{sec:Brier_score}), can be interpreted as special cases of the kernel scoring rule.
+Depending on the choice of kernel, the kernel score can be strictly proper. \citet{Gneiting2007} provide a proof of the propriety of the kernel scoring rule with respect to all Borel probability measures, given that the expectation $\expect{x,x'\sim P} k(x,x')$ is finite. Using the theory developed to study properties of MMD and characteristic kernels we can also see that the scoring rule is strictly proper whenever the kernel is characteristic \citep{Sriperumbudur2008}. \citet{Gneiting2007} showed that many examples of scoring rules, among them the Brier score (see section \ref{sec:Brier_score}), can be interpreted as special cases of the kernel scoring rule.
 
 The generalised entropy defined by this scoring rule becomes:
 %
@@ -519,13 +519,13 @@ The generalised entropy defined by this scoring rule becomes:
 
 The entropy function is concave for all positive definite kernels $k$ and strictly concave whenever the kernel is characteristic. Importantly, it has several favourable properties in comparison to Shannon's entropy.
 
-Firstly, if we assume that the kernel $k$ is bounded, then the entropy functional is also bounded. If we further assume that the kernel satisfies $\forall x,y: k(x,x)\geq k(x,y)$, then the entropy is also non-negative. Thus, in most practical cases the entropy functional is bounded both from above and below. Irrespective of kernel choice, the entropy is exactly zero for delta distributions, that is when the distribution $P$ is concentrated on a single point. If the kernel satisfies the strict inequality $\forall x,y: k(x,x) > k(x,y)$, the entropy is strictly positive for all other probability distributions.
+Firstly, if we assume that the kernel $k$ is bounded, then the entropy functional is also bounded. If we further assume that the kernel satisfies $\forall x,y: k(x,x)\geq k(x,y)$, then the entropy is also non-negative. Thus, in most practical cases the entropy functional is bounded both from above and below. Irrespective of kernel choice, the entropy is exactly zero for delta distributions, that is when the distribution $P$ is concentrated on a single point. If the kernel satisfies the strict inequality $\forall x\neq y\in X: k(x,x) > k(x,y)$, the entropy is strictly positive for all other probability distributions.
 
 Secondly, the entropy can be computed for any distribution that one can compute expectations over. This means that any probability distribution, and indeed any Borel measure, has a well-defined entropy of this form. This is not true for the Shannon's differential entropy, where the entropy of atomic distributions or mixtures of atomic and continuous distributions is not defined. This property is useful in applications such as quasi-Monte Carlo as discussed in Chapter \ref{sec:approximate_inference}.
 
 Thirdly, the entropy function has the kernel $k$ as a free parameter, which is mixed blessing. On one hand, this provides extra flexibility: even if we commit to a particular family of kernels, like the square exponential, we can fine-tune the entropy function and corresponding divergence to our needs by adjusting parameters, such as the length-scale parameter \citep{Song2008}. On the other hand there is no principled, general way of choosing the kernel or its parameters if we are unsure what it should be. 
 
-We can use the generalised entropy and divergence defined by the kernel scoring rule to define the value of information a random variable provides about another one:
+We can use the generalised entropy and divergence defined by the kernel scoring rule to define the value of information that a random variable provides about another one:
 %
 \begin{align}
 	\information{k}{X}{Y} &= \expect{y\sim P_{Y}} \divergence{k}{P_{X}}{P_{X\vert Y=y}}\\
@@ -549,7 +549,7 @@ To my knowledge, this kernel-based measure of information has not been defined o
 Based on the cross-covariance operator, one can define various measures of dependence and information. Here I only define the simplest one, the constrained covariance, or COCO:
 
 \begin{definition}[COCO, see \citep{Gretton2005COCO}]
-	In the same notation as above let us define define the constrained covariance between $X$ and $Y$, $COCO_{XY}$, as
+	In the same notation as above let us define the constrained covariance between $X$ and $Y$, $COCO_{XY}$, as
 	%
 	\begin{equation}
 		COCO_{XY}=\sup_{\substack{f\in\He_\Xe, g\in\He_\Ye \\\customnorm{f}{\He_\Xe}=1,\customnorm{g}{\He_\Ye}=1}} \cov{(x,y)\sim P}{f(x)}{g(y)}.
@@ -623,7 +623,7 @@ Using this alternative definition it is easy to see that the kernel value of inf
 		&= \customnorm{I_{X\vert Y}^{\nicefrac{1}{2}}}{HS}.
 \end{align}
 
-It would be interesting future direction to investigate whether this information criterion has any connections to COCO and HSIC, or indeed if it inherits any of their useful properties.
+It would be an interesting future direction to investigate whether this information criterion has any connections to COCO and HSIC, or indeed if it inherits any of their useful properties. Furthermore, for the criterion to be practically useful, one needs to devise a way to estimate it empirically from observed data. Unfortunately, estimating the term $\mu_{X\vert Y=y}$, which is defined by taking expectation over the conditional probability $P_{X\vert Y=y}$ is not a trivial task. Thus, further work is needed to find efficient empirical estimators to this quantity.
 
 \subsection{The spherical kernel score\label{sec:spherical_kernel_score}}
 
