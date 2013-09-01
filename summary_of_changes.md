@@ -1,6 +1,12 @@
 # List of corrections and changes made
 
-## Introducuction
+## General
+ - fixed punctuation of equations
+ - corrected typos
+
+## Abstract and Introducuction
+ - removed unnecessary references to information geometry
+
 
 ## Chapter 1
  - New Section 1.3.3 on Composite likelihoods, with connection to pseudo-likelihood and mention of sandwich operator
@@ -8,5 +14,19 @@
  - added discussion of fundamental likelihood - Fisher info - KL - Cremer Rao connection
  - improved Summary section with references to future research directions, and hints at how this is going to be used in the rest of the thesis
 
-## Appendix A - what used to be Chapter 2
+## Appendix A - what used to be Chapter 2
  - moved to the end, only referenced from summary of Chapter 1
+
+## Chapter 2 - Approximate inference intro
+ - more detailed Summary of Contributions section acknowledging work done by others and myself
+ - second paragraph now discusses model evidence vs. full Bayesian approach [as per Mark's remark]
+ - added remark on EP convergence with references
+
+## Chapter 3 - herding vs Bayesian quadrature
+
+## Chapter 4 - Bayesian active learning intro
+
+## Chapter 5 - BALD
+
+## Chapter 6 - Quantum Tomography
+
