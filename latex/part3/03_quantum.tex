@@ -2,6 +2,7 @@
 
 \begin{summarycontributions}
  The material presented in this chapter is joint work with Neil M.\ T.\ Houlsby. Both authors contributed equally to all aspects of research. The work forms the basis of the journal article `Adaptive Bayesian Quantum Tomography' \citep{Huszar2012quantum}. Figures \ref{fig:Bloch_disk}, \ref{fig:qubit_results} and \ref{fig:two_qubit_results} illustrating experimental results are taken from this paper as published, or with only slight modification, with consent from the co-author.
+ Follow up work with experimental collaborators from Moscow State University is published in \citep*{Kravrsov13PRA}. Details of this paper are not presented here.
 \end{summarycontributions}
 
 \section{Introduction}
@@ -43,71 +44,74 @@ Even a simple quantum system like a photon can be in a variety of states. For ex
 Mathematically, the polarisation state of a photon is fully described by a two-dimensional unit-length complex vector. In this chapter I use the so called Dirac or bra-ket notation \citep{Dirac1939} for complex valued vectors $\vert\x\rangle$, to clearly distinguish them from real valued vectors and variables that appeared in other sections of the thesis. In this notation $\langle\x\vert$ denotes the conjugate transpose of $\vert\x\rangle$, $\langle\x\vert\y\rangle$ the scalar product between $\vert\x\rangle$ and $\vert\y\rangle$. The scalar product between complex vectors is defined as $\langle\x\vert\y\rangle = \sum_{d=1}^{D} x_d \overline{y_d}$, where $\overline{y_d}$ is complex conjugation.
 
 A two-dimensional unit-length complex vector $\vert \phi \rangle$ can be parametrised using three continuous parameters $\theta$, $a_x$ and $a_y$ as follows:
-
+%
 \begin{equation}
 	\vert \phi \rangle = \left(\begin{array}{c}
 		\cos(\theta)\exp(ia_x)\\
-		\sin(\theta)\exp(ia_y)\end{array}\right)
+		\sin(\theta)\exp(ia_y)\end{array}\right).
 \end{equation}
-
+%
 This complex vector may be used to represent the quantum state of the photon. Parameter $\theta$ can be interpreted as the angle of linear polarisation relative to horizontal, with $\theta = 0^{\circ}$ meaning horizontal, $\theta=90^{\circ}$ vertical polarisation:
-
+%
 \begin{equation}
 	\vert H \rangle = \left(\begin{array}{c}
 		1\\
-		0\end{array}\right)
+		0\end{array}\right),
 	\label{eqn:quantum_photon_horizontal}
 \end{equation}
 and
 \begin{equation}
 	\vert V \rangle = \left(\begin{array}{c}
 		0\\
-		1\end{array}\right)
+		1\end{array}\right).
 	\label{eqn:quantum_photon_vertical}
 \end{equation}
-
+%
 Any real valued linear combination of these two basis vectors (as long as unit-norm constraint is preserved) describes a general linearly polarised state at a certain angle. To represent circular polarisation, we need to use complex vectors:
-
+%
 \begin{equation}
 	\vert R \rangle = \frac{1}{\sqrt{2}}\left(\begin{array}{c}
 		1\\
-		i\end{array}\right)
+		i\end{array}\right),
 	\label{eqn:quantum_photon_right}
 \end{equation}
+%
 and
+%
 \begin{equation}
 	\vert L \rangle = \frac{1}{\sqrt{2}}\left(\begin{array}{c}
 		1\\
-		-i\end{array}\right)
+		-i\end{array}\right).
 	\label{eqn:quantum_photon_left}
 \end{equation}
-
+%
 To see how these abstract states relate to real-world observable phenomena, one has to understand how measurements work.
 
 \subsection{Measurements}
 
 The quantum state of a system cannot be directly observed, only via \emph{measurements} performed on the system. Measurements in quantum physics have two distinctive features: the outcome is non-deterministic and performing a measurement alters the state of the system on which the measurement was performed.
 
-An example of a measurement in case of a photon would be letting it pass through a linear polarising filter (like the ones used in LCD displays). Mathematically, the polarising filter is described by a two-dimensional unit-length complex vector $\vert\psi\rangle$, just like a quantum state. Depending on the state of the photon $\vert\phi\rangle$ and the measurement describing the filter $\vert\psi\rangle$, the photon either `bounces back' from the filter or with a certain probability passes trough. By placing a photodetector after the polar filter one can record which one of these two outcomes happened. The probability of the two outcomes is governed by the state of the photon and the measurement itself and follows the following rules.
-
+An example of a measurement in case of a photon would be letting it pass through a linear polarising filter (like the ones used in LCD displays). Mathematically, the polarising filter is described by a two-dimensional unit-length complex vector $\vert\psi\rangle$, just like a quantum state. Depending on the state of the photon $\vert\phi\rangle$ and the measurement describing the filter $\vert\psi\rangle$, the photon either `bounces back' from the filter or with a certain probability passes trough. By placing a photodetector after the polar filter one can record which one of these two outcomes happened. The probability of the two outcomes is governed by the state of the photon and the measurement itself and follows the following rules:
+%
 \begin{align}
-	\mathbb{P}\left( \mbox{pass}\ \vert\ \vert\phi\rangle , \vert\psi\rangle \right) &= \left\vert\langle\psi\vert\phi\rangle\right\vert^2 &= \trace\left(\vert\phi\rangle\langle\phi\vert\right)\left(\vert\psi\rangle\langle\psi\vert\right) \\
-	\mathbb{P}\left( \mbox{bounce}\ \vert\ \vert\phi\rangle , \vert\psi\rangle \right) &= 1 - \left\vert\langle\psi\vert\phi\rangle\right\vert^2 &= \left(\trace\vert\phi\rangle\langle\phi\vert\right)\left(I - \vert\psi\rangle\langle\psi\vert\right)
+	\mathbb{P}\left( \mbox{pass}\ \vert\ \vert\phi\rangle , \vert\psi\rangle \right) &= \left\vert\langle\psi\vert\phi\rangle\right\vert^2 &= \trace\left(\vert\phi\rangle\langle\phi\vert\right)\left(\vert\psi\rangle\langle\psi\vert\right),\\
+	\mathbb{P}\left( \mbox{bounce}\ \vert\ \vert\phi\rangle , \vert\psi\rangle \right) &= 1 - \left\vert\langle\psi\vert\phi\rangle\right\vert^2 &= \left(\trace\vert\phi\rangle\langle\phi\vert\right)\left(I - \vert\psi\rangle\langle\psi\vert\right).
 \end{align}
-
+%
 The outcome probabilities are expressed as straightforward scalar products, or in general, quadratic forms. The unit norm constraint on $\vert\phi\rangle$ and $\vert\psi\rangle$ ensures that the outcome probabilities are always non-negative and sum to one.
 
 Let us look at the outcome probabilities in concrete examples.
 
 \begin{example}
 A linearly polarised photon with polarisation angle $\theta = 30^{\circ}$	 is measured using a horizontally polarised filter. The photon's state is $\vert\phi\rangle = \cos(\theta)\vert H \rangle + \sin(\theta)\vert V \rangle$. The filter is described as $\vert\psi\rangle = \vert H \rangle$. Since $\langle H \vert V \rangle = 0$, we can see that the probability that the photon passes the filter is
-
+%
 \begin{equation}
-	\mathbb{P}\left( \mbox{pass}\ \vert\ \vert\phi\rangle , \vert\psi\rangle \right) = \cos(\theta)\langle H \vert H \rangle + \sin(\theta) \langle H \vert V \rangle = \cos(\theta) = \frac{\sqrt{3}}{2}
+	\mathbb{P}\left( \mbox{pass}\ \vert\ \vert\phi\rangle , \vert\psi\rangle \right) = \cos(\theta)\langle H \vert H \rangle + \sin(\theta) \langle H \vert V \rangle = \cos(\theta) = \frac{\sqrt{3}}{2}.
 \end{equation}\end{example}
 
 \begin{example}
 A linearly polarised photon with polarisation angle $\theta = 30^{\circ}$ from the horizontal is measured using a right circularly polarised filter. The photon's state is $\vert\phi\rangle = \cos(\theta)\vert H \rangle + \sin(\theta)\vert V \rangle$. The filter is described as $\vert\psi\rangle = \vert R \rangle$. Using Eqns.\ \eqref{eqn:quantum_photon_horizontal},\eqref{eqn:quantum_photon_vertical} and \eqref{eqn:quantum_photon_right} one can see that $\langle V \vert R \rangle = \nicefrac{1}{\sqrt{2}}$ , $\langle H \vert R \rangle = \nicefrac{i}{\sqrt{2}}$. Thus, the probability of the photon passing through is
+%
 \begin{equation}
 	\mathbb{P}\left( \mbox{pass}\ \vert\ \vert\phi\rangle , \vert\psi\rangle \right) = \frac{1}{2}\left\vert\cos(\theta) + i\sin(\theta)\right\vert^2 = \frac{1}{2}.
 \end{equation}
@@ -127,15 +131,17 @@ In the previous paragraphs we have seen that quantum measurements are inherently
 Consider two noisy sources of photons. Source A produces a horizontally polarised photon with probability $0.5$ or a vertically polarised one with probability $0.5$. Source B produces the state $\frac{1}{\sqrt{2}}\vert H \rangle + \frac{1}{\sqrt{2}} \vert V \rangle$ with probability $0.5$ or $\frac{1}{\sqrt{2}}\vert H \rangle - \frac{1}{\sqrt{2}} \vert V \rangle$ with probability $0.5$. These correspond to $45^{\circ}$ and $-45^{\circ}$ polarisation angles respectively.
 
 Let us see what happens if we perform a measurement $\langle \psi \vert$ on the two noisy systems. First, for system A the probability is given by
+%
 \begin{equation}
-\mathbb{P}_{A}\left( \mbox{pass} \vert\ \vert\psi\rangle \right) = \frac{1}{2} \langle\psi\vert H\rangle^2 + \frac{1}{2} \langle\psi\vert V\rangle^2
+\mathbb{P}_{A}\left( \mbox{pass} \vert\ \vert\psi\rangle \right) = \frac{1}{2} \langle\psi\vert H\rangle^2 + \frac{1}{2} \langle\psi\vert V\rangle^2.
 \end{equation}
-
+%
 For system B we get
+%
 \begin{align}
 \mathbb{P}_{B}\left( \mbox{pass} \vert\ \vert\psi\rangle \right) &= \frac{1}{2} \left(\frac{1}{\sqrt{2}}\langle\psi\vert H\rangle + \frac{1}{\sqrt{2}}\langle\psi\vert V \rangle\right)^2 + \frac{1}{2} \left(\frac{1}{\sqrt{2}}\langle\psi\vert H\rangle - \frac{1}{\sqrt{2}}\langle\psi\vert V \rangle\right)^2 \\
 	&= \frac{1}{2} \langle\psi\vert H\rangle^2 + \frac{1}{2} \langle\psi\vert V\rangle^2 + \frac{1}{2}\langle\psi\vert H\rangle\langle\psi\vert V\rangle - \frac{1}{2}\langle\psi\vert H\rangle\langle\psi\vert V\rangle \\
-	&= \frac{1}{2} \langle\psi\vert H\rangle^2 + \frac{1}{2} \langle\psi\vert V\rangle^2
+	&= \frac{1}{2} \langle\psi\vert H\rangle^2 + \frac{1}{2} \langle\psi\vert V\rangle^2.
 \end{align}
 
 In both cases the probabilities of observing the photon passing the filter or bouncing back are exactly the same. The probability is only a function of the measurement, but it does not depend on which source the photon came from. So no matter what measurement we make, the two sources are indistinguishable experimentally. I will call these two sources \emph{observationally equivalent}.\footnote{Incidentally, in this example, because $\nicefrac{1}{2} \langle\psi\vert H\rangle^2 + \nicefrac{1}{2} \langle\psi\vert V\rangle^2 = \nicefrac{1}{2}$, the measurement outcome does not even depend on the measurement.}
@@ -148,9 +154,11 @@ We can define equivalence classes of systems, and the goal of quantum tomography
 
 \begin{definition}[Density matrix]
 Consider a random quantum system that is in pure state $\vert\phi\rangle$ with probability $P_{\vert\psi\rangle}$. The density matrix describing this system is defined as the following linear operator:
+%
 \begin{equation}
-	\quantumparam = \expect{\vert\psi\rangle\sim P}{\vert\phi\rangle\langle\phi\vert}
+	\quantumparam = \expect{\vert\psi\rangle\sim P}{\vert\phi\rangle\langle\phi\vert}.
 \end{equation}
+%
 The density matrix is Hermitian and has unit trace.
 \end{definition}
 
@@ -159,11 +167,11 @@ As we have seen, the two noisy systems in Example \ref{empl:two_noisy_systems} w
 Pure states are special cases of mixed states. A system with pure state $\vert \phi \rangle$ can be described by its density matrix $\quantumparam = \vert \phi \rangle \langle \phi \vert$. This follows from the definition, using a probability distribution that concentrates on the single pure state $\vert \phi \rangle$. Density matrices corresponding to pure states are therefore always rank-one.
 
 Similarly to mixed states, measurements also have a more general form. The most general class of measurements considered in this thesis are Positive Operator Valued Measures (POVMs). A POVM is defined by a set, $\mathbb{M}$, of Hermitian operators $M_{\outcome}$, indexed by possible outcomes $\outcome\in\{1,\ldots,D\}$, satisfying $\sum_{\outcome=1}^{D} M_{\outcome} = I$. These Hermitian operators determine the probability of observing outcome $\outcome$ in configuration $\config$ when the measured system is in state $\quantumparam$ via Born's rule:
-
+%
 \begin{equation}
-	\mathbb{P}\left(\outcome\vert\quantumparam,\mathbb{M}\right) = \text{tr}\left\{M_{\outcome}\quantumparam \right\}
+	\mathbb{P}\left(\outcome\vert\quantumparam,\mathbb{M}\right) = \text{tr}\left\{M_{\outcome}\quantumparam \right\}.
 \end{equation}
-
+%
 The condition $\sum_{\outcome=1}^{D} M_{\outcome} = I$ ensures that the probabilities sum to 1, and they are always non-negative because all operators involved are Hermitian.
 
 So far we have only considered probably the simplest two-dimensional model system, the polarised photon. In quantum computing, two-dimensional quantum systems are called qubits. As a generalisation of horizontal and vertical polarisation $\vert H \rangle$ and $\vert V \rangle$ the notation $\vert 0 \rangle$ and $\vert 1 \rangle$ is often used to denote the two most important states.
@@ -185,26 +193,27 @@ Multipartite systems are quantum systems composed of multiple subsystems. Multi-
 Quantum state tomography involves determining from experimental data the quantum state, $\quantumparam$, of a system by performing measurements on several identical copies. As $\quantumparam$ is Hermitian and have unit trace, $D^2-1$ real degrees of freedom must be estimated. Note that the number of degrees of freedom is exponential in the number of qubits in a multi-qubit system.
 
 The apparatus for a tomographic experiment may be configured to perform several different measurements; we use $\config\in\configset$ to index all accessible configurations Each measurement configuration $\config$ is characterised by a positive operator-valued measure (POVM). For each configuration, a measurement results in observing one of $D$ distinguishable outcomes\footnote{In general the number of outcomes does not have to correspond to the dimension of the system, but we can make this assumption without loss of generality }. A POVM is defined by the set, $\mathbb{M}_{\config}$, of Hermitian operators $M_{\config\outcome}$, indexed by possible outcomes $\outcome\in\{1,\ldots,D\}$, satisfying $\sum_{\outcome=1}^{D} M_{\config\outcome} = I$. These POVMs jointly constitute our tomographic model $\mathcal{M}=\{\mathbb{M}_{\config}:\config\in\configset\}$ and determine the probability of observing outcome $\outcome$ in configuration $\config$ when the measured system is in state $\quantumparam$ via Born's rule:
-
+%
 \begin{equation}
-	\mathbb{P}\left(\outcome\vert\quantumparam,\config;\mathcal{M}\right) = \trace\left\{M_{\config\outcome}\quantumparam \right\}\label{eqn:quantum_Born}
+	\mathbb{P}\left(\outcome\vert\quantumparam,\config;\mathcal{M}\right) = \trace\left\{M_{\config\outcome}\quantumparam \right\}.\label{eqn:quantum_Born}
 \end{equation}
 
 State reconstruction has been approached with several methods, the most popular being maximum likelihood estimation (MLE). MLE finds a physically feasible state $\quantumparam$ that is most likely to have produced the observed data, $\mathcal{D}$, by maximising the likelihood, which can be rewritten as:
-
+%
 \begin{equation}
 	\label{eqn:quantum_lik}
 	\mathcal{L}(\quantumparam;\data)=\prod_{n=1}^{N} \mathbb{P}\left(\outcome_n\vert\quantumparam,\config_n\right) = \prod_{\config \in \configset}n_{\config}!\prod_{\outcome=1}^{D}\frac{\mbox{tr}\{M_{\alpha\outcome}\quantumparam\}^{n_{\config\outcome}}}{n_{\config\outcome}!},
 \end{equation}
+%
 where $n_{\config}$ is the number of times configuration $\config$ was used, $n_{\config\outcome}$ is the number of times outcome $\outcome$ was observed in configuration $\config$. All probabilities are conditional on $\mathcal{M}$, for brevity this is omitted.
 
 A well-known drawback of maximum likelihood estimation is that it often yields rank-deficient estimates of $\quantumparam$, and thus assigns zero predictive probability to certain observations\,\citep{BayesianTomography}. This seems an unreasonable conclusion on the basis of a finite sample. This phenomenon is not unusual in maximum likelihood methods, and is related to \emph{over-fitting} in statistics \citep{Hawkins2004}. Additionally, MLE provides no measure of uncertainty in its point estimate.
 
 More sophisticated methods for quantum tomography use Bayesian inference and suffer from neither of these problems\,\cite[][and refs.]{BayesianTomography}. In Bayesian inference a prior probability density, $p(\quantumparam)$, over feasible states is specified. This prior is then augmented with the likelihood from Eqn.\,\eqref{eqn:quantum_lik} using Bayes' rule to yield a posterior distribution:
-
+%
 \begin{equation}
 	\label{eqn:quantum_bayes}
-	p(\quantumparam\vert\data)\propto \mathcal{L}(\quantumparam;\data)p(\quantumparam)
+	p(\quantumparam\vert\data)\propto \mathcal{L}(\quantumparam;\data)p(\quantumparam).
 \end{equation}
 
 Should we want a point estimate, we may report, say, the Bayesian mean estimate (BME) which is known to maximise expected operational divergences\,\citep{BayesianTomography,BayesianOptimality}. But importantly, Bayesian inference also provides \emph{error bars}, and more: the posterior captures richly our remaining uncertainty in the true state having seen the data $\data$. 
@@ -216,16 +225,16 @@ Unfortunately, normalisation of the posterior distribution (Eqn.\,\eqref{eqn:qua
 If we want to implement active learning, inference has to be performed after each measurement or after mini-batches of measurements. Therefore, MCMC methods whose cost increases with the number of measurements are inappropriate. To address this problem we developed a fast sequential importance sampling (SIS) algorithm, with $\mathcal{O}(1)$ likelihood evaluation cost. See \,\citep{SMCBook} for a thorough overview of these techniques.
 
 In SIS, one keeps track of a number of samples, often called particles, $\quantumparam_s,\, (s=1\ldots S)$ and corresponding weights $w_s, \, \left( \sum_s w_s = 1 \right)$  which are updated sequentially, every time a new measurement is made. Assume that after $n$ measurements, having observed data $\data_n$, the particles and weights  $w^{(n)}_s$ constitute an approximation to the posterior:	
-
+%
 \begin{equation}
-	p(\quantumparam\vert\data_n)\approx \sum_{s=1}^{S}w^{(n)}_s\delta(\quantumparam-\quantumparam_s)\label{eqn:quantum_SISapprox}
+	p(\quantumparam\vert\data_n)\approx \sum_{s=1}^{S}w^{(n)}_s\delta(\quantumparam-\quantumparam_s).\label{eqn:quantum_SISapprox}
 \end{equation}
-
+%
 Using this approximation, and Bayes' rule, one can derive an approximation to the next posterior, after observing a new outcome $\outcome_{n+1}$ in configuration $\config_{n+1}$, as:
-
+%
 \begin{align}
 	p(\quantumparam\vert\config_{n+1}&,\outcome_{n+1},\data_n) = \frac{\mathbb{P}(\outcome_{n+1}\vert\quantumparam,\config_{n+1})p(\quantumparam\vert\data_n)}{\int \mathbb{P}(\outcome_{n+1}\vert\quantumparam,\config_{n+1})p(\quantumparam\vert\data_n) d\quantumparam}\label{eqn:quantum_SISupdate}\\
-	&\approx \sum_{s=1}^{S}\underbrace{\frac{\mathbb{P}(\outcome_{n+1}\vert\quantumparam_s,\config_{n+1})w^{(n)}_s}{\sum_{r=1}^{S}\mathbb{P}(\outcome_{n+1}\vert\quantumparam_r,\config_{n+1})w^{(n)}_r}}_{w^{(n+1)}_s}\delta(\quantumparam-\quantumparam_s)\notag
+	&\approx \sum_{s=1}^{S}\underbrace{\frac{\mathbb{P}(\outcome_{n+1}\vert\quantumparam_s,\config_{n+1})w^{(n)}_s}{\sum_{r=1}^{S}\mathbb{P}(\outcome_{n+1}\vert\quantumparam_r,\config_{n+1})w^{(n)}_r}}_{w^{(n+1)}_s}\delta(\quantumparam-\quantumparam_s).
 \end{align}
 
 The new weights $w^{(n+1)}_s$ are the re-normalised product of our current weights $w^{(n)}_s$ and observation probabilities $\mathbb{P}(\outcome_{n+1}\vert\quantumparam_s,\config_{n+1})$. This update is fast, and only requires computing one term of the full likelihood, thus its complexity is independent of how many configurations have been tried before. This computational efficiency comes at a price; as time progresses, several weights decay to almost zero, and thus the quality of our approximation drops. This issue can be detected and handled by monitoring the effective sample size and resampling appropriately\,\citep{SMCBook}.
@@ -246,17 +255,18 @@ Other work,\,\citep{OEDFirst,OEDAverage} considered OED based on the Cram\'{e}r-
 
 In the context of quantum tomography, the active learning approach has been referred to as self-learning measurements \citep{SelfLearning, SelfLearningExperimental}. However, due to the expensive computations that are involved, these methods have been restricted to two dimensional pure quantum states, or experiments with very few measurements. The BALD methodology presented in the previous chapter combined with sequential importance sampling allow us to build a fast, online algorithm that allows self-learning in arbitrary dimensions with many measurements. 
 
-Recall the BALD criterion for information theoretic active learning from Chapter \ref{sec:active_learning_framework}. Now, the mixed state density matrix $\quantumparam$ takes the role of parameters $\param$
+Recall the BALD criterion for information theoretic active learning from Chapter \ref{sec:active_learning_framework}. Now, the mixed state density matrix $\quantumparam$ takes the role of parameters $\param$:
+%
 \begin{equation}
-\argmax_{\config\in\configset} \left\{ \mathbb{H}\left[\mathbb{P}(\outcome|\config,\data)\right] - \mathbb{E}_{p(\quantumparam\vert\data)}\left[\mathbb{H}\left[ \mathbb{P}(\outcome|\config,\quantumparam) \right] \right]\right\}\label{eqn:quantum_rearrangement}
+\argmax_{\config\in\configset} \left\{ \mathbb{H}\left[\mathbb{P}(\outcome|\config,\data)\right] - \mathbb{E}_{p(\quantumparam\vert\data)}\left[\mathbb{H}\left[ \mathbb{P}(\outcome|\config,\quantumparam) \right] \right]\right\}.\label{eqn:quantum_rearrangement}
 \end{equation}
-
+%
 To compute this objective, we can combine Born's rule in Eqn.\ \eqref{eqn:quantum_Born} with the sequential importance sampling approximation from Eqn.\ \eqref{eqn:quantum_SISapprox}:
-
+%
 \begin{equation}
-\argmax_{\config\in\configset} \left\{ \mathbb{H}\left[\sum_{s=1}^{S} w^{(n)}_s \trace\left\{\quantumparam M_{\config,\bullet} \right\} \right] - \sum_{s=1}^{S} w^{(n)}_s \mathbb{H}\left[ \trace\left\{\quantumparam M_{\config,\bullet} \right\} \right] \right\}\label{eqn:quantum_objective_SIS}
+\argmax_{\config\in\configset} \left\{ \mathbb{H}\left[\sum_{s=1}^{S} w^{(n)}_s \trace\left\{\quantumparam M_{\config,\bullet} \right\} \right] - \sum_{s=1}^{S} w^{(n)}_s \mathbb{H}\left[ \trace\left\{\quantumparam M_{\config,\bullet} \right\} \right] \right\}.\label{eqn:quantum_objective_SIS}
 \end{equation}
-
+%
 The above objective function can be evaluated in $\mathcal{DK}$, where $K$ is the rank parameter used to define the prior over $\quantumparam$.
 
 In summary, we propose the following algorithm, called Adaptive Bayesian Quantum Tomography \citep[ABQT, ][]{Huszar2012quantum}. After each single measurement, ABQT updates its approximate posterior via sequential Monte Carlo using Eqn.\ \eqref{eqn:quantum_SISupdate}, then chooses the next measurement by direct numerical maximisation of the BALD information theoretic objective in Eqn.\ \eqref{eqn:quantum_objective_SIS}.
@@ -323,7 +333,7 @@ When not using active learning, we managed to reproduce the results reported in 
 
 In summary, we have presented a new adaptive optimal experimental design framework for quantum tomography based on the BALD methodology. We showed that mutually unbiased bases, widely accepted as \emph{the} optimal measurements, represent only a partial solution and are suboptimal in the adaptive framework. Moreover, the adaptive framework applies regardless of dimensionality, and can be applied to spaces where MUBs do not even exist\,\citep{DimensionSix,ExactInformation}. This motivates a shift in experimental focus from implementing complex entangling measurements to implementing quickly reconfigurable simpler measurements.
 	
-The results presented here are based on simulations. In real quantum experiments involving photons, adaptive Bayesian tomography can be feasibly achieved via mechanically or electronically controlled liquid crystal wave plates. These are optical elements that can alter the polarisation state of photons that pass through them. In follow-up work, \citet{Kravtsov2013} successfully implemented and tested ABQT for single-qubit photon-polarisation states using two mechanically controlled wave plates. The elements are rotated via electronically controlled step-motors giving rise to a large set of possible configurations $\Xe$, covering the whole spectrum of projective measurements.
+The results presented here are based on simulations. In real quantum experiments involving photons, adaptive Bayesian tomography can be feasibly achieved via mechanically or electronically controlled liquid crystal wave plates. These are optical elements that can alter the polarisation state of photons that pass through them. In follow-up work \citep{Kravrsov13PRA}, our collaborators have successfully implemented and tested ABQT for single-qubit photon-polarisation states using two mechanically controlled wave plates. The elements are rotated via electronically controlled step-motors giving rise to a large set of possible configurations $\Xe$, covering the whole spectrum of projective measurements.
 
 
 Although our algorithm demonstrated a substantial leap forward in terms of empirical performance, it is important to keep in mind that it still does not resolve the curse of dimensionality, the size of the parameter space still scales exponentially with the number of qubits in question. Other successful approaches address the question of dimensionality by restricting the search space. Compressed sensing \citep{CompressedSensing} constrains estimation onto a lower-dimensional manifold of rank-deficient states. These simplifying assumptions and smoothness constraints can be incorporated into a Bayesian framework by ways of the prior distribution.

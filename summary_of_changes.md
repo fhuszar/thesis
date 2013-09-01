@@ -26,10 +26,15 @@
  - more explicit Summary of Contributions section precisely detailing original contributions
  - improved introduction emphasizing the main contributions of the chapter
  - added reference to Girolami & He in section 3.3.1 (with discussion of sparse weights) and in 3.7 Summary and Conclusions
- 
+
 ## Chapter 4 - Bayesian active learning intro
+ - more explicit Summary of Contributions section
+ - extended discussion of existing research on Bayesian experiment design and their limitations
 
 ## Chapter 5 - BALD
+ - did not include error bars (would have made figures very crowded) but discussed that most differences are not significant
+ - changed the exposition of results to be more honest
+ - discussed that classification/preference learning are not very challenging problems
 
 ## Chapter 6 - Quantum Tomography
 
