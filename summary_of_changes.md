@@ -2,7 +2,7 @@
 
 ## General
  - fixed punctuation of equations
- - corrected typos
+ - corrected typos and wording
 
 ## Abstract and Introducuction
  - removed unnecessary references to information geometry
@@ -23,7 +23,10 @@
  - added remark on EP convergence with references
 
 ## Chapter 3 - herding vs Bayesian quadrature
-
+ - more explicit Summary of Contributions section precisely detailing original contributions
+ - improved introduction emphasizing the main contributions of the chapter
+ - added reference to Girolami & He in section 3.3.1 (with discussion of sparse weights) and in 3.7 Summary and Conclusions
+ 
 ## Chapter 4 - Bayesian active learning intro
 
 ## Chapter 5 - BALD
