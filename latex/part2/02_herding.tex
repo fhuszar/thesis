@@ -30,7 +30,7 @@ In this chapter I explore two quasi-Monte Carlo algorithms: Bayesian quadrature 
 The main contribution of this chapter is to show that herding and Bayesian quadrature are closely related, and that in fact they are both examples of the loss-calibrated quasi-Monte Carlo introduced in the previous chapter. The main significance of this result is that it establishes connections between and a largely heuristic optimisation algorithm and a fully fledged Bayesian approach.
 \cbend
 
-Despite the focus on approximate inference, in this chapter I am going to present the algorithms more generally context of numerical integration. Bayesian quadrature and kernel herding seek a solution to a central problem in statistical machine learning: to compute expectations of functions over probability distributions:
+Despite the focus on approximate inference, in this chapter I am going to present the algorithms in the more general context of numerical integration. Bayesian quadrature and kernel herding seek a solution to a central problem in statistical machine learning: to compute expectations of functions over probability distributions:
 %
 \begin{equation}
 	Z_{f,p} = \int f(\x) p(\x) d\x. \label{eqn:integral}
@@ -38,9 +38,9 @@ Despite the focus on approximate inference, in this chapter I am going to presen
 
 In addition to approximate inference, examples of related problems include computing marginal distributions, making predictions by marginalizing over parameters, or computing the Bayes risk in a decision problem. In this chapter I will assume that the distribution $p(x)$ is known in analytic form, and $f(x)$ can be evaluated at arbitrary locations\footnote{As \citet{BZMonteCarlo} note, when $p(x)$ is complicated, it can often be replaced by a simpler, tractable distribution, with complexity adsorbed into $f$.}.
 
-Bayesian quadrature (\bq{}) estimates integral \eqref{eqn:integral} by modelling the function $f$ probabilistically, and inferring a posterior distribution conditioned on the observed function values $y_n = f_{x_n}$. Based on the posterior over $f$, the posterior expectation of $Z_{f,p}$ can be used as an estimate to the integral. The points where the function should be evaluated can be found via Bayesian experimental design, providing a deterministic procedure for selecting sample locations. The sequence of points where the function is querried can be interpreted as pseudo-samples in quasi-Monte Carlo.
+Bayesian quadrature (\bq{}) estimates the integral in Eqn.\ \eqref{eqn:integral} by modelling the function $f$ probabilistically, and inferring a posterior distribution conditioned on the observed function values $y_n = f_{x_n}$. Based on the posterior over $f$, the posterior expectation of $Z_{f,p}$ can be used as an estimate of the integral. The points where the function should be evaluated can be found via Bayesian experimental design, providing a deterministic procedure for selecting sample locations. The sequence of points where the function is evaluated can be interpreted as pseudo-samples in quasi-Monte Carlo.
 
-Herding, proposed recently by \cite{Chen2010}, produces pseudosamples by minimising the discrepancy of moments between the sample set and the target distribution. Similarly to traditional Monte Carlo, an estimate is formed by taking the empirical mean over samples $\hat{Z} = \frac{1}{N}\sum_{n=1}^{N}f_{x_n}$. Under certain assumptions, herding has provably fast, $\mathcal{O}(\nicefrac{1}{N})$, and has demonstrated strong empirical performance in a variety of tasks. Because herding minimises maximum mean discrepancy from the target distribution $p(x)$, it is a special case of loss-calibrated quasi-Monte Carlo.
+Herding, proposed recently by \cite{Chen2010}, produces pseudosamples by minimising the discrepancy of moments between the sample set and the target distribution. Similarly to traditional Monte Carlo, an estimate is formed by taking the empirical mean over samples $\hat{Z} = \frac{1}{N}\sum_{n=1}^{N}f_{x_n}$. Under certain assumptions, herding has provably fast convergence, $\mathcal{O}(\nicefrac{1}{N})$, and has demonstrated strong empirical performance in a variety of tasks. Because herding minimises maximum mean discrepancy from the target distribution $p(x)$, it is a special case of loss-calibrated quasi-Monte Carlo.
 
 In this chapter, I show that the Maximum Mean Discrepancy (MMD) criterion used to choose samples in kernel herding is identical to the expected error in the estimate of the integral $Z_{f,p}$ under a Gaussian process prior for $f$. This expected error is the criterion being minimized when choosing samples for Bayesian quadrature. Because Bayesian quadrature assigns different weights to each of the observed function values $f(\vx)$, we can view Bayesian quadrature as a weighted version of kernel herding. We show that these weights are optimal in a minimax sense over all functions in the Hilbert space defined by our kernel. This implies that Bayesian quadrature is equivalent to a weighted version kernel herding, and as such it also implements loss-calibrated approximate inference.
 
@@ -58,7 +58,7 @@ I then demonstrate empirically the relative performance of herding, i.i.d random
 
 \section{Herding} 
 
-Herding was introduced by \citep{welling2009herding} as a method for generating pseudo-samples from a distribution in such a way that certain nonlinear moments of the sample set closely match those of the target distribution. The target distribution can be a Bayesian posterior, but this is not a requirement, the method was introduced with general probability distributions in mind. The empirical mean  $\frac{1}{N}\sum_{n=1}^{N}f_{x_n}$.over the pseudosamples is used to estimate expectations over the distribution.
+Herding was introduced by \citep{welling2009herding} as a method for generating pseudo-samples from a distribution in such a way that certain nonlinear moments of the sample set closely match those of the target distribution. The target distribution can be a Bayesian posterior, but this is not a requirement, the method was introduced with general probability distributions in mind. The empirical mean over the pseudosamples $\frac{1}{N}\sum_{n=1}^{N}f_{x_n}$ is used to estimate expectations over the distribution.
 
 For selecting pseudosamples, herding optimises the maximum mean discrepancy \citep[MMD;\ ][]{Sriperumbudur2008} in a myopic, greedy fashion. Recall from Chapter \ref{sec:scoring_rules} that MMD measures the divergence between two distributions, $p$ and $q$ with respect to a reproducing kernel Hilbert space (RKHS) $\He$ as follows:
 %
@@ -68,18 +68,18 @@ MMD^2(p,q) &= \sup_{\substack{f\in\He\\\Hnorm{f}=1}}\left\vert\int f_x p(x) dx -
 	&=  \expect{x,x'\sim p} k(x,x')	- 2 \expect{x\sim p}\expect{x'\sim q} k(x,x') + \expect{x,x'\sim q} k(x,x'),
 \end{align}
 %
-where $\mu_{p}\in\He$ denotes the mean element associated with distribution $p$. For characteristic kernels, such as the Gaussian kernel, the mapping between a distribution and its mean element is bijective and the associated kernel scoring rule is strictly proper (Section \ref{sec:kernel_score}). As a consequence $\mmd_(p,q)=0$ if and only if $p=q$, making MMD a powerful measure of divergence.
+where $\mu_{p}\in\He$ denotes the mean element associated with distribution $p$. For characteristic kernels, such as the Gaussian kernel, the mapping between a distribution and its mean element is bijective and the associated kernel scoring rule is strictly proper (Section \ref{sec:kernel_score}). As a consequence $\mmd(p,q)=0$ if and only if $p=q$, making MMD a powerful measure of divergence.
 
 Herding uses maximum mean discrepancy to evaluate of how well the set of pseudo-samples $\{\vx_1,\ldots,\vx_{N}\}$ represents the target distribution $p$:
 %
 \begin{align}
 	\epsilon_{herding}&\left(\{\vx_1,\ldots,\vx_{N}\}\right) = \mmd\left(p,\frac{1}{N}\sum_{n=1}^{N}\delta_{x_n}\right)\\
-	&=\iint \expect{x,x'\sim p} k(x,x') - 2 \frac{1}{N}\sum_{n=1}^{N} \expect{x\sim p}k(x,x_n)
+	&= \expect{x,x'\sim p} k(x,x') - 2 \frac{1}{N}\sum_{n=1}^{N} \expect{x\sim p}k(x,x_n)
 		+ \frac{1}{N^2}\sum_{n,m=1}^{N} k(x_n,x_m).
 \label{eq:mmd_assumption}
 \end{align}
 %
-The herding procedure greedily minimizes its objective $\epsilon_{herding}\left(\{\vx_1,\ldots,\vx_{N}\}\right)$ , adding pseudosamples $\vx_n$ one at a time. When selecting the $n+1$-st pseudosample:
+The herding procedure greedily minimizes its objective $\epsilon_{herding}\left(\{\vx_1,\ldots,\vx_{N}\}\right)$ , adding pseudosamples $\vx_n$ one at a time. When selecting the $n+1$-th pseudosample:
 %
 \begin{align}
 \vx_{n+1} &\leftarrow \argmin_{\vx \in \mathcal{X}} \label{eqn:herding_criterion} \epsilon_{herding}\left(\{\vx_1,\ldots,\vx_{n},\vx\}\right)\\
@@ -93,7 +93,7 @@ Evaluating \eqref{eqn:herding_criterion} requires us to compute $\expect{\vx' \s
 
 \subsection{Complexity and convergence Rates}
 
-Criterion \eqref{eqn:herding_criterion} for selecting the $n+1$-th sample can be evaluated in only $\mathcal{O}(n)$ time. Adding these up for all subsequent samples, and assuming that optimisation in each step has $\mathcal{O}(1)$ complexity, producing $N$ pseudosamples via kernel herding costs $\mathcal{O}(N^2)$ operations in total.
+The criterion \eqref{eqn:herding_criterion} for selecting the $n+1$-th sample can be evaluated in only $\mathcal{O}(n)$ time. Adding these costs up for all subsequent samples, and assuming that optimisation in each step has $\mathcal{O}(1)$ complexity, producing $N$ pseudosamples via kernel herding costs $\mathcal{O}(N^2)$ operations in total.
 
 In finite dimensional Hilbert spaces, the herding algorithm has been shown to reduce $\mmd$ at a rate $\mathcal{O}(\nicefrac{1}{N})$, which compares favourably with the $\mathcal{O}(\frac{1}{\sqrt{N}})$ rate obtained by non-deterministic Monte Carlo samplers \citep{Chen2010,Bach2012}. However, as pointed out by \citep{Bach2012}, this fast convergence is not guaranteed in infinite dimensional Hilbert spaces, such as the RKHS corresponding to the Gaussian kernel. These results assume that in each step the optimisation in Eqn.\ \ref{eqn:herding_criterion} is solved exactly. In addition, herding is shown to converge even if this maximisation is imperfect \citep{Gelfand2010}.
 
@@ -118,7 +118,7 @@ In herding, the integral \eqref{eqn:integral} is approximated by the empirical m
 
 In \citep{BZMonteCarlo}, an alternate method is proposed: Bayesian Monte Carlo, or Bayesian quadrature (\bq). \bq{} puts a prior distribution on $f$, then estimates integral \eqref{eqn:integral} by inferring a posterior distribution over the function $f$, conditioned on the observations $f(\vx_n)$ at some query points $\vx_n$. This method allows us to choose sample locations $\vx_n$ in any desired manner, and as we will see assigns non-uniform weight to the function values $f_{x_n}$. See Figure \ref{fig:bq_intro} for an illustration of Bayesian Quadrature.
 
-Here I derive the \bq{} estimate of the intergral in Eqn.\ \eqref{eqn:integral}. Let us assume we have evaluated the function at certain test locations $\x_1 \ldots \x_N$, collectovely denoted as $X$. The function values $f(\vx_1) \ldots f(\vx_N)$ are collectively denoted as the vector $\vf(\vX)$. The Bayesian solution implies a predictive distribution over $Z$. I am now goig to calculate the mean of this distribution, $\expect{}Z_{f,p}$. This is the optimal Bayesian estimator for a squared loss.
+Here I derive the \bq{} estimate of the intergral in Eqn.\ \eqref{eqn:integral}. Let us assume we have evaluated the function at certain test locations $\x_1 \ldots \x_N$, collectively denoted as $X$. The function values $f(\vx_1) \ldots f(\vx_N)$ are collectively denoted as the vector $\vf(\vX)$. The Bayesian solution implies a predictive distribution over $Z$. I am now going to calculate the mean of this distribution, $\expect{}Z_{f,p}$. This is the optimal Bayesian estimator for a squared loss.
 
 For simplicity, $f$ is assigned a Gaussian process prior with kernel function $k$ and mean $0$ \citep{Rasmussen2006}. Note that the GP assumption is the Bayesian analogoue to the assumption that integrand functions belong to an RKHS made by kernel herding in Eqn.\ \eqref{eq:mmd_assumption}. Conveniently, the \gp{} posterior allows us to compute the expectation of $Z_{f,p}$ in closed form: 
 %
@@ -181,7 +181,7 @@ Figure \ref{fig:weights_shrinkage} demonstrates that, in general, the sum of the
 
 \subsection{Sequential sampling for BQ}
 
-Bayesian quadrature provides not only a point estimate of $\hat{Z}(\vX,\vf(\vX))$, but a full Gaussian posterior distribution $Z_{f,p}$. We can quantify the uncertainty or risk of this estimate this distribution over $\var{} \left[ Z_{f,p} \vert \vX, \vf(\vX) \right]$ quantifies our uncertainty in the estimate. When selecting locations to evaluate the function $f$, minimising the posterior variance is a sensible strategy. Below, I give a closed form formula for the posterior variance of $Z_{f,p}$, conditioned on the observations $f_{x_1} \dots f_{x_N}$, which we will denote by $\epsilon^2_{\bq{}}$. For a detaled derivation see \citep{BZMonteCarlo}.
+Bayesian quadrature provides not only a point estimate of $\hat{Z}(\vX,\vf(\vX))$, but a full Gaussian posterior distribution $Z_{f,p}$. Thus, we can quantify the uncertainty or risk of our estimate, for example by looking at the posterior variance $\var{} \left[ Z_{f,p} \vert \vX, \vf(\vX) \right]$. When selecting locations to evaluate the function $f$, minimising the posterior variance is a sensible strategy. Below, I give a closed form formula for the posterior variance of $Z_{f,p}$, conditioned on the observations $f_{x_1} \dots f_{x_N}$, which we will denote by $\epsilon^2_{\bq{}}$. For a detailed derivation see \citep{BZMonteCarlo}.
 \begin{align}
 	\epsilon^{2}_{\bq{}}(\{ \vx_1,\ldots,\vx_N \}) &= \var{} \left[ Z_{f,p} \vert \vX, \vf(\vX) \right]\\
 	&= \expect{f\vert X,\vf(X)} \left( \hat{Z}(\vX,\vf(\vX)) - Z_{f,p} \right)^2\\
@@ -198,7 +198,7 @@ Perhaps surprisingly, the posterior variance of $Z_{f,p}$ does not depend on the
 \expect{f\vert X,\vf(X)} \left( Z_{f,p} - \hat{Z}(\vX,\vf(\vX))  \right)^2 &= \expect{f\sim\gp} \left( Z_{f,p} - \hat{Z}(\vX,\vf(\vX)) \right)^2,\label{eqn:variance_independent}
 \end{align}
 %
-where $\gp$ denotes the gaussian process prior. A similar independence on function values is observed in other optimal experimental design problems involving Gaussian processes \citep{Krause2006}. This allows the optimal sample locations to be computed ahead of time, without observing any values of $f$ at all \citep{minka2000dqr}.
+where $\gp$ denotes the gaussian process prior. A similar independence on function values is observed in other optimal experimental design problems involving Gaussian processes \citep{Krause2006}. This allows the optimal sample locations to be computed ahead of time, without observing any values of $f$ at all \citep{minka2000dqr}. I note that this convenient independence on observations disappears as soon as we consider more complicated models of the function $f$, or if we wish to infer hyperparameters of the kernel $k$. For these cases, more elaborate approximate inference methods have been developed \citep[see \eg][]{Osborne2012}.
 
 We can contrast the \bq{} objective $\epsilon^{2}_{\bq{}}$ in \eqref{eqn:marg_var_symbolic} to the objective being minimized in herding, $\epsilon^{2}_{herding}$ of Eqn.\ \eqref{eq:mmd_assumption}. Just like $\epsilon^{2}_{herding}$, $\epsilon^{2}_{\bq{}}$ expresses a trade-off between accuracy and diversity of samples. On the one hand, as samples get close to high density regions under $p$, the values in $\vz$ increase, which results in decreasing variance. On the other hand, as samples get closer to each other, eigenvalues of $K$ increase, resulting in an increase in variance. 
 
@@ -299,7 +299,7 @@ $\epsilon^{2}_{\bq{}} = \inf_{w\in\mathbb{R}^N}\Hnorm{\mu_p - \sum_{n=1}^N w^{(n
 \end{proof}
 \end{proposition}
 
-Unfortunately, weak submodularity does not provide the strong near-optimality guarantees as submodularity does . If $s:2^\mathcal{X} \mapsto \mathbb{R}$ is a weakly submodular function with constant $\epsilon$, and $\vert\mathcal{A}_n\vert=n$ is the result of greedy optimisation of $s$, then
+Unfortunately, weak submodularity does not provide the strong near-optimality guarantees as submodularity does. If $s:2^\mathcal{X} \mapsto \mathbb{R}$ is a weakly submodular function with constant $\epsilon$, and $\vert\mathcal{A}_n\vert=n$ is the result of greedy optimisation of $s$, then
 \begin{equation}
 	s(\mathcal{A}_n) \geq \left(1-\frac{1}{e}\right)\max_{\vert\mathcal{A}\vert\leq n}s(\mathcal{A}) - n\epsilon.
 \end{equation}
@@ -318,9 +318,9 @@ As pointed out by \citet{KrauseCevher10}, this guarantee is very weak, as in our
 
 In this section, we examine empirically the rates of convergence of sequential Bayesian quadrature and herding. We examine both the expected error rates, and the empirical error rates.
 
-In all experiments, the target distribution $p$ is chosen a two dimensional mixture of 20 Gaussians, whose equiprobability contours are shown in Figure \ref{fig:fig1}. To ensure a comparison fair to herding, the target distribution, and the kernel used by both methods, correspond exactly to the one used in \citep[Fig.\ 1]{Chen2010}.
+In all experiments, the target distribution $p$ is a two dimensional mixture of 20 Gaussians, whose equiprobability contours are shown in Figure \ref{fig:fig1}. To ensure a comparison fair to herding, the target distribution, and the kernel used by both methods, correspond exactly to the one used in \citep[Fig.\ 1]{Chen2010}.
 
-For experimental simplicity, each of the sequential sampling algorithms minimizes the next sample location from a pool of 10000 locations randomly drawn from the base distribution. In practice, one would run a gradint-based local optimizer from each of these candidate locations, however in our experiments we found that this did not make a significant difference in the sample locations chosen. 
+For experimental simplicity, each of the sequential sampling algorithms minimizes the next sample location from a pool of 10000 locations randomly drawn from the base distribution. In practice, one would run a gradient-based local optimizer from each of these candidate locations, however in our experiments we found that this did not make a significant difference in the sample locations chosen. 
 
 \subsection{Matching a distribution}
 
@@ -330,7 +330,7 @@ For experimental simplicity, each of the sequential sampling algorithms minimize
 \caption[Sequential Bayesian quadrature versus kernel herding]{The first 8 samples from sequential Bayesian quadrature, versus the first 20 samples from herding. Only 8 weighted \sbq{} samples are needed to give an estimator with the same maximum mean discrepancy as using 20 herding samples with uniform weights. Relative sizes of samples indicate their relative weights.\label{fig:fig1}}
 \end{figure} 
 
-We first extend an experiment from \citep{Chen2010} designed to illustrate the mode-seeking behavior of herding in comparison to random samples. In the first experiment of \citep{Chen2010}, it is shown that a small number of i.\,i.\,d.\ samples drawn from a multimodal distribution will tend to, by chance, assign too many samples to some modes, and too few to some other modes. In contrast, herding places pseudo-samples (called super-samples in that paper) in such a way as to avoid regions already well-represented, and seeks modes that are under-represented.
+We first extend an experiment from \citep{Chen2010} designed to illustrate the mode-seeking behavior of herding in comparison to random samples. In the first experiment of \citep{Chen2010}, it is illustrated that a small number of i.\,i.\,d.\ samples drawn randomly from a multimodal distribution will tend to, by chance, assign too many samples to some modes, and too few to some other modes. In contrast, herding places pseudo-samples (called super-samples in that paper) in such a way as to avoid regions already well-represented, and seeks modes that are under-represented.
 
 We demonstrate that although herding improves upon i.\,i.\,d.\ sampling, the uniform weighting of super-samples leads to sub-optimal performance. Figure \ref{fig:fig1} shows the first 20 samples chosen by kernel herding, in comparison with the first 8 samples chosen by \sbq{}. By weighting the 8 \sbq{} samples by the quadrature weights in \eqref{eq:bq_weights}, we can obtain the same MMD value as by using the 20 uniformly-weighted herding samples. 
 
@@ -377,14 +377,14 @@ That is, these functions belonged exactly to the unit ball of the RKHS defined b
 
 Figure \ref{fig:error_curve} shows the empirical error versus the number of samples, on the distribution shown in Figure \ref{fig:fig1}. The empirical rates attained by the method appear to be similar to the MMD rates in Figure \ref{fig:mmd_curve}.
 
-By definition, MMD provides a upper bound on the estimation error in the integral of any function in the unit ball of the RKHS (Eqn.\ \eqref{eqn:rkhs-mmd}), including the Bayesian estimator, \sbq{}. Figure \ref{fig:bound_curve} demonstrates this quickly decreasing bound on the \sbq{} empirical error.
+By definition, MMD provides an upper bound on the estimation error in the integral of any function in the unit ball of the RKHS (Eqn.\ \eqref{eqn:rkhs-mmd}), including the Bayesian estimator, \sbq{}. Figure \ref{fig:bound_curve} demonstrates this quickly decreasing bound on the \sbq{} empirical error.
 
 \subsection{Out-of-model performance}
 
-A central assumption underlying both kernel herding and\sbq{} is that the integrand function belongs to the RKHS specified by the kernel. To see how performance is effected if this assumption is violated, we performed empirical tests with functions chosen from outside the RKHS. We drew 100 functions of the form:
+A central assumption underlying both kernel herding and \sbq{} is that the integrand function belongs to the RKHS specified by the kernel. To see how performance is affected if this assumption is violated, we performed empirical tests with functions chosen from outside the RKHS. We drew 100 functions of the form:
 %
 \begin{align}
-f(\vx) & = \sum_{i=1}^{10} \alpha_i \exp(-\frac{1}{2} (\vx -\vc_i)^T \Sigma_i^{-1} (\vx -\vc_i),
+f(\vx) & = \sum_{i=1}^{10} \alpha_i \exp\left(-\frac{1}{2} (\vx -\vc_i)^T \Sigma_i^{-1} (\vx -\vc_i)\right),
 \end{align}
 %
 where each $\alpha_i$ $\vc_i$ $\Sigma_i$ were drawn from broad distributions. This ensured that the drawn functions had features such as narrow bumps and ridges which would not be well modelled by functions belonging to the isotropic kernel defined by $k$.
@@ -410,7 +410,7 @@ Figure \ref{fig:error_curve_outmodel} shows that, on functions drawn from outsid
 
 In this chapter, I presented two quasi-Monte Carlo methods, kernel herding and sequential Bayesian quadrature. I showed that the discrepancy minimized by both methods when selecting pseudosample locations is the maximum mean discrepancy in a reproducing kernel Hilbert space. MMD is an example of Bregman divergences and is related to the kernel score introduced in section \ref{sec:kernel_score}. Therefore, kernel herding and Bayesian quadrature are examples of loss-calibrated approximate inference.
 
-Importantly, the results also imply that sequential Bayesian quadrature can viewed as an optimally-weighted version of kernel herding, and therefore that BQ achieves superior convergence rates. I empirically demonstrated this superior rate of convergence, and demonstrated how MMD provides an upper bound on the empirical error of the Bayesian quadrature estimate.
+Importantly, the results also imply that sequential Bayesian quadrature can be viewed as an optimally-weighted version of kernel herding, and therefore that BQ achieves superior convergence rates. I empirically demonstrated this superior rate of convergence, and demonstrated how MMD provides an upper bound on the empirical error of the Bayesian quadrature estimate.
 
 Despite their attractive performance and properties, these kernel-based QMC methods have a serious drawback: they rely on expectations of the form $\expect{x\sim p} k(\cdot,x)$ to be calculated. This limits their applicability to approximate inference, where these expectations are usually not available in closed form.
 
