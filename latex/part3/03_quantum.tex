@@ -293,16 +293,16 @@ Within the Bayesian framework, one could consider other measures of uncertainty 
 \end{figure}
 
 \begin{figure}
-	% \input{figs/BALD/quantum/one_qubit_combined.tikz}
+	\input{figs/BALD/quantum/one_qubit_combined.tikz}
 	\caption[Single-qubit adaptive tomography using projective measurements.]{One qubit tomography using projective measurements. \textbf{(a)}  Improvement of mean posterior fidelity as the experiment progresses. Results are shown for uniformly sampled measurements (\ref{leg:rand}), uniformly sampled Pauli measurements ( \ref{leg:MUB}), ABQT selecting adaptively amongst the 3 Pauli measurements (\ref{leg:aMUB}) and ABQT picking general measurements (\ref{leg:aFlex}). Adaptive optimisation of measurements allows for an almost $n^{-1}$ rate of convergence, while other methods are more consistent with a $n^{-\frac{1}{2}}$ rate. \textbf{(b)}  Final value of the mean posterior infidelity after 6000 measurements using the four methods as before, as a function of purity of the state to be estimated. The advantage of ABQT is greatest for purer states. \label{fig:qubit_results}}
 \end{figure}
 
 \begin{figure}
 	\begin{center}
-		% \input{figs/BALD/quantum/case1.tikz}
-		% \input{figs/BALD/quantum/case2.tikz}\\
-		% \input{figs/BALD/quantum/case3.tikz}
-		% \input{figs/BALD/quantum/case5b.tikz}
+		\input{figs/BALD/quantum/case1.tikz}
+		\input{figs/BALD/quantum/case2.tikz}\\
+		\input{figs/BALD/quantum/case3.tikz}
+		\input{figs/BALD/quantum/case5b.tikz}
 	\end{center}
 	\caption[Performance of the adaptive Bayesian method in two-qubit tomography]{Comparing active and passive learning in two qubit quantum state tomography. The methods shown are passive learning with measurements uniformly chosen amongst MUB (\ref{leg:MUB}) or SSQT bases (\ref{leg:SSQT}); and ABQT picking from the same set of MUBs (\ref{leg:aMUB}),  SSQT bases (\ref{leg:aSSQT}) or a more flexible set of 81 separable bases (\ref{leg:fSSQT}). Cases (a)-(c) are the same as those in\ \citep{MUBExperiment}, (d) shows average results over 20 randomly generated entangled pure states. \textbf{(a)} As expected, for the maximally mixed state (\eg unpolarised light) the choice of measurement strategy has no significant effect. \textbf{(b)} On the entangled state $(\vert HH\rangle+\vert VV\rangle)/\sqrt{2}$ MUB outperforms SSQT in passive learning, but by allowing for adaptivity we can close the performance gap. \textbf{(c)} SSQT outperforms MUBs on the separable state $\vert HV \rangle$, but again, picking measurements adaptively the two sets or measurements perform similarly. \textbf{(d)} For random pure states a large improvement in performance is made when performing ABQT with the flexible set of separable measurements. Using this set, ABQT only needs $10^4$ measurements to achieve $\approx98.7\%$ mean fidelity for which MUB needs $10^5$ measurements. \label{fig:two_qubit_results}}
 \end{figure}

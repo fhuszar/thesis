@@ -1,29 +1,30 @@
 %!TEX root = ../thesis.tex
 \begin{summarycontributions}
-The material presented in this chapter is based on otherwise unpublished, original contributions by Ferenc Husz\'{a}r unless otherwise indicated by citations.
+The material presented here is based on otherwise unpublished, original contributions by Ferenc Husz\'{a}r unless otherwise indicated by citations.
 \end{summarycontributions}
 \section{Introduction}
 
-Strictly proper scoring rules and associated Bregman divergences determine a unique \emph{information geometry} of probability distributions \citep{Dawid2007,Amari2010}. Different scoring rules are sensitive to different properties of distributions. Consider measuring divergence between Normal distributions, some divergences are more sensitive to small changes in the variance, while others are agnostic to the variance but sensitive to changes in the mean. In this section I aim to develop an understanding of these differences by visualising the geometric structures common scoring rules give rise to.
+Strictly proper scoring rules and associated Bregman divergences determine a unique \emph{information geometry} of probability distributions \citep{Dawid2007,Amari2010}. Different scoring rules are sensitive to different properties of distributions. Consider measuring divergence between Normal distributions, some divergences are more sensitive to small changes in the variance, while others are agnostic to the variance but sensitive to changes in the mean. In this appendix I aim to develop an understanding of these differences by visualising the geometric structures common scoring rules give rise to.
 
 The central object of interest in information geometry is the smooth Riemannian manifold of probability distributions that the divergence function induces, called the \emph{statistical manifold}. In this section, my
 goal is to create low-dimensional maps of these statistical manifolds in such a way that distances measured between points on the map correspond to geodesic distances measured on the manifold as precisely as possible. In particular, we will focus on one and two-dimensional maps of families of distributions parametrised by one or two continuous parameters.
 
 First, it is important to note that a perfect embedding of this sort does not always exist. As an illustration, think of the well-known practical problem of creating a two-dimensional map of the surface of the Earth. The surface of Earth is approximately a sphere, which is a smooth two-dimensional Riemannian manifold, just like the statistical manifolds we would like to map in this chapter. The sphere can be parametrised by two parameters, longitude and latitude. Still, it is impossible to stretch this surface out and represent it faithfully in two dimensional Cartesian coordinate system. This problem -- representing the surface of a three-dimensional object as part of a two-dimensional plane -- is in fact at the core of cartography, and is called \emph{map projection}. When drawing a full map of the surface of the Earth, usually the manifold has to be cut up at certain places, but even then, the embedding is only approximate, and distances are only correct locally. This is why on Google maps Finland appears about twice as large as France, even though in reality it is only about half the size of France. There are various map projections used in cartography, and the purpose for which the map is used dictates what kind of distortions are tolerable, and what is not \citep{Fenna2007}.
 
-Having understood that a perfect map of two-dimensional statistical manifolds cannot necessarily be produced, I will resort to approximate embedding techniques developed in the machine learning community. These approximate embedding procedures numerically find a low-dimensional map that best represents distances on the statistical manifold defined by a particular scoring rule and divergence, optimising an appropriately defined objective function. In this chapter I will employ an algorithm analogous to the ISOMAP algorithm \citep{Tenenbaum2000}, originally developed for dimensionality reduction and visualisation of high-dimensional data.
+Having understood that a perfect map of two-dimensional statistical manifolds cannot necessarily be produced, I will resort to approximate embedding techniques developed in the machine learning community. These approximate embedding procedures numerically find a low-dimensional map that best represents distances on the statistical manifold defined by a particular scoring rule and divergence, optimising an appropriately defined objective function. In this appendix I will employ an algorithm analogous to the ISOMAP algorithm \citep{Tenenbaum2000}, originally developed for dimensionality reduction and visualisation of high-dimensional data.
 
-This chapter is organised as follows. I will first review crucial mathematical concepts in information geometry. Then I will introduce a general algorithm for numerically mapping out Riemannian manifolds induced by strictly proper scoring rules. Finally, I show maps of one- and two-parameter exponential families of distributions with respect to various divergence metrics introduced in Chapter \ref{sec:scoring_rules}.
+This appendix is organised as follows. I will first review crucial mathematical concepts in information geometry. Then I will introduce a general algorithm for numerically mapping out Riemannian manifolds induced by strictly proper scoring rules. Finally, I show maps of one- and two-parameter exponential families of distributions with respect to various divergence metrics introduced in Chapter \ref{sec:scoring_rules}.
 
 \section{Information geometry}
 
 Strictly proper scoring rules and their associated divergence functions induce a geometry over probability distributions, that I will call the information geometry. Under suitable smoothness assumptions, probability distributions form a smooth Riemannian manifold \citep{Dawid2007,Amari2010}, on which the squared local distance is
-
+%
 \begin{equation}
 	ds^2(P) = \frac{1}{2} \scalar{P}{\ddot{H}(P)P},
 \end{equation}
-Where $\ddot{H(P)}$ is the Hamiltonian of the entropy function $H(P) = \mathbb{H}_{\score}$ at $P$. For discrete distributions, when $\Xe={1,2,\ldots}$, denoting $p_i\defeq P[X=i]$ we can write this squared distance as
-
+%
+where $\ddot{H(P)}$ is the Hamiltonian of the entropy function $H(P) = \mathbb{H}_{\score}$ at $P$. For discrete distributions, when $\Xe={1,2,\ldots}$, denoting $p_i\defeq P[X=i]$ we can write this squared distance as
+%
 \begin{equation}
 	ds^2 = \frac{1}{2} \sum_{i,j} \frac{\partial^2 H}{\partial p_i\partial p_j} dp_{i} dp_{j}.
 \end{equation}
@@ -33,7 +34,7 @@ The local distance between distributions is therefore controlled by the curvatur
 \begin{statement}[Taylor expansion of Bregman divergences]
 	Let $H:\Theta\mapsto\Reals$ be a smooth, strictly concave function and $\divergence{H}{\cdot}{\cdot}$ the Bregman divergence it induces. For infinitesimally small $dP\in\Theta$ the following approximation holds:
 	\begin{equation}
-		\divergence{H}{P}{P+ dP} \approx \frac{1}{2} \sum_{i,j} \frac{\partial^2 \mathbb{H}_{\score}}{\partial p_i\partial p_j} dp_{i} dp_{j} \approx   \divergence{H}{P + dP}{P}
+		\divergence{H}{P}{P+ dP} \approx \frac{1}{2} \sum_{i,j} \frac{\partial^2 \mathbb{H}_{\score}}{\partial p_i\partial p_j} dp_{i} dp_{j} \approx   \divergence{H}{P + dP}{P}.
 	\end{equation}
 	\begin{proof}
 		We prove the left-hand equation first:
@@ -41,30 +42,36 @@ The local distance between distributions is therefore controlled by the curvatur
 			\frac{\partial}{\partial q_i} \divergence{H}{P}{Q} &=  -\frac{\partial}{\partial q_i} H(Q) +    \frac{\partial}{\partial q_i}\scalar{\nabla_{Q} H(Q)}{Q-P}\\
 				&=  - \frac{\partial}{\partial q_i} H(Q) +  \frac{\partial}{\partial q_i}\sum_{j} \frac{\partial}{\partial q_j} H(Q) (q_j - p_j)\\
 				&= - \frac{\partial}{\partial q_i} H(Q)  + \frac{\partial}{\partial q_i} H(Q) + \sum_{j} \frac{\partial^2}{\partial q_i \partial q_j} H(Q) (q_j - p_j)\\
-				&= \sum_{j} \frac{\partial^2}{\partial q_i \partial q_j} H(Q) (q_j - p_j)
+				&= \sum_{j} \frac{\partial^2}{\partial q_i \partial q_j} H(Q) (q_j - p_j),
 		\end{align}
+		%
 		hence by first order Taylor expansion around $P$:
+		%
 		\begin{align}
 			\divergence{H}{P}{P+dP} &\approx  \divergence{H}{P}{P+dP}+ \frac{1}{2}\scalar{dP}{\left.\nabla_{Q}\divergence{H}{P}{Q}\right\rvert_{Q=P}}\\
 				&= \frac{1}{2} \sum_{i} dp_i \sum_{j} \frac{\partial^2 H(P)}{\partial p_i\partial p_j} dp_j \\
-				&= \frac{1}{2} \sum_{i,j} \frac{\partial^2 H(P)}{\partial p_i\partial p_j} dp_{i} dp_j
+				&= \frac{1}{2} \sum_{i,j} \frac{\partial^2 H(P)}{\partial p_i\partial p_j} dp_{i} dp_j.
 		\end{align}
 		
-		Similarly in the other direction
+		Similarly, in the other direction
+		%
 			\begin{align}
 					\frac{\partial}{\partial q_i} \divergence{H}{Q}{P} &=  \frac{\partial}{\partial q_i} H(Q) +     \frac{\partial}{\partial q_i}\scalar{\nabla_{P} H(P)}{P - Q}\\
 						&=  \frac{\partial}{\partial q_i} H(Q) + \frac{\partial}{\partial q_i}\sum_{j} \frac{\partial}{\partial p_j} H(P) (p_j - q_j)\\
 						&=  \frac{\partial}{\partial q_i} H(Q)  - \frac{\partial}{\partial p_i} H(P)\\
-						&= \dot{H}(Q) - \dot{H}(P)
+						&= \dot{H}(Q) - \dot{H}(P).
 			\end{align}
+			%
 			Note that for small deviation $dP$, the derivative can be written as
 			\begin{align}
-				\frac{\partial}{\partial dP} \divergence{H}{P+dP}{P} = \dot{H}(P+dP) - \dot{H}(P) \approx  \ddot{H}(P) dP
+				\frac{\partial}{\partial dP} \divergence{H}{P+dP}{P} = \dot{H}(P+dP) - \dot{H}(P) \approx  \ddot{H}(P) dP.
 			\end{align}
-			therefore, via Taylor expansion we get that for small $dP$
+			%
+			Therefore, via Taylor expansion we get that for small $dP$
+			%
 			\begin{align}
 				\divergence{H}{P}{P+dP} &\approx \frac{1}{2} \scalar{dP}{\ddot{H}(P)dP}\\
-					&= \frac{1}{2} \sum_{i,j} \frac{\partial^2 H(P)}{\partial p_i\partial p_j} dp_{i} dp_j
+					&= \frac{1}{2} \sum_{i,j} \frac{\partial^2 H(P)}{\partial p_i\partial p_j} dp_{i} dp_j.
 			\end{align}
 	\end{proof}
 \end{statement}
@@ -72,9 +79,10 @@ The local distance between distributions is therefore controlled by the curvatur
 Hence, the distance on the manifold can be approximated locally as half the square-root of the divergence function. Even though a Bregman divergence function is generally asymmetric, for infinitesimally small differences it becomes symmetric, and therefore it does not matter which direction we use if we want to approximate local distances on the manifold. In this chapter I will use the following local approximation:
 
 \begin{corollary}[Local approximation to geodesic distance]
-	The geodesic distance between distributions $P$ and $Q$ on the statistical manifold defined by the scoring rule $S$ can be approximated as follows.
+	The geodesic distance between distributions $P$ and $Q$ on the statistical manifold defined by the scoring rule $S$ can be approximated as follows:
+	%
 	\begin{equation}
-		\mbox{distance}(P,Q) \approx \sqrt{\divergence{S}{P}{Q} + \divergence{S}{Q}{P}} \label{eqn:local_approximation}
+		\mbox{distance}(P,Q) \approx \sqrt{\divergence{S}{P}{Q} + \divergence{S}{Q}{P}}. \label{eqn:local_approximation}
 	\end{equation}
 \end{corollary}
 
@@ -82,9 +90,11 @@ Another core concept in information geometry is that of geodesics and geodesic d
 
 \begin{definition}[Riemannian geodesic]
 	Let $P_1$ and $P_2$ be two probability distributions and $d_H$ a Bregman divergence. Let $\mathcal{P}=\{P(t),t\in[0,1]\}$ a smooth, differentiable path on the manifold such that $P(0)=P_1$ and $P(1)=P_2$. The length of the curve $\mathcal{P}$ is defined as
+	%
 	\begin{equation}
-		l(\mathcal{P}) = \int_{0}^{1} \sqrt{ \scalar{\dot{P}(t)}{\ddot{H}(P(t))\dot{P}(t)}} dt \label{eqn:Riemannian_length}
+		l(\mathcal{P}) = \int_{0}^{1} \sqrt{ \scalar{\dot{P}(t)}{\ddot{H}(P(t))\dot{P}(t)}} dt. \label{eqn:Riemannian_length}
 	\end{equation}
+	%
 	A Riemannian geodesic between $P_1$ and $P_2$ is a path, whose length is minimal. The length of such a path is called the geodesic distance between $P_1$ and $P_2$.
 \end{definition}
 
@@ -158,9 +168,9 @@ In Figure \ref{fig:Bernoulli_squareddistance} I plotted the local distance $\sqr
 Gaussian distributions are probably the most important family of distributions due to their convenient analytic properties. They are often used in density estimation, regression, approximate inference and more advanced non-parametric models such as Gaussian process regression.
 
 The KL divergence between two univariate Gaussian distributions is available in a closed form and is given by the following formula:
-
+%
 \begin{equation}
-	\KL{\Normal_{\mu_1,\sigma_1}}{\Normal_{\mu_2,\sigma_2}} = \frac{\left(\mu_1 - \mu_2\right)^2}{2\sigma_2^2} + \frac{1}{2}\left(\frac{\sigma_1^2}{\sigma_2^2} - 1 - \log\frac{\sigma_1^2}{\sigma_2^2}\right)
+	\KL{\Normal_{\mu_1,\sigma_1}}{\Normal_{\mu_2,\sigma_2}} = \frac{\left(\mu_1 - \mu_2\right)^2}{2\sigma_2^2} + \frac{1}{2}\left(\frac{\sigma_1^2}{\sigma_2^2} - 1 - \log\frac{\sigma_1^2}{\sigma_2^2}\right).
 \end{equation}
 
 In this case as Gaussian distributions have two parameters, the distributions are going to conform to a two dimensional statistical manifold, as illustrated in Figure \ref{fig:Normal_meanvar}. We used the ISOMAP technique on a linearly spaced grid of parameters to produce this approximate embedding. We can observe that assuming that $P$ and $Q$ have the same mean, the larger their variance, the easier it becomes to distinguish between them. Otherwise the manifold structure is symmetrical.
@@ -209,26 +219,26 @@ In this case as Gaussian distributions have two parameters, the distributions ar
 The main purpose of this section is to visualise differences between the geometries induced by various divergence measures over the same set of distributions. A particularly interesting divergence that we will use in subsequent chapters is that induced by the (quadratic) kernel scoring rule from (section \ref{sec:kernel_score}). The kernel scoring rule itself is very flexible, and its properties are dictated by the choice of kernel function.
 
 For several well-known kernels the divergence between univariate Gaussians can be computed in closed form \citep{Song2008}. For the squared exponential kernel $k_{\ell}(x,x')=\nicefrac{1}{\ell}\exp(-\frac{(x-x')^2}{\ell^2})$ the divergence is given by the following formula:
-
+%
 \begin{equation}
-	\divergence{k_{\ell}}{\Normal_{\mu_1,\sigma_1}}{\Normal_{\mu_2,\sigma_2}} = \frac{1}{\sqrt{\ell^2+2\sigma_1^2}} + \frac{1}{\sqrt{\ell^2+2\sigma_2^2}} - \frac{2}{\sqrt{\ell^2+\sigma_1^2 + \sigma_2^2}}\exp\left(-\frac{(\mu_1 - \mu_2)^2}{2(\ell^2 + \sigma_1^2 + \sigma_2^2)}\right)
+	\divergence{k_{\ell}}{\Normal_{\mu_1,\sigma_1}}{\Normal_{\mu_2,\sigma_2}} = \frac{1}{\sqrt{\ell^2+2\sigma_1^2}} + \frac{1}{\sqrt{\ell^2+2\sigma_2^2}} - \frac{2}{\sqrt{\ell^2+\sigma_1^2 + \sigma_2^2}}\exp\left(-\frac{(\mu_1 - \mu_2)^2}{2(\ell^2 + \sigma_1^2 + \sigma_2^2)}\right).
 \end{equation}
-
+%
 The above formula can be derived from the following general expression for the inner product between mean embeddings:
-
+%
 \begin{align}
 	\scalar{\mu_{\Normal(\mu_1,\sigma_1)}}{\mu_{\Normal(\mu_2,\sigma_2)}}_{k_{\ell}} &= \expect{x\sim \Normal(\mu_1,\sigma_1)}\expect{x' \sim \Normal(\mu_1,\sigma_1)} k_{\ell}(x,x')\\
-	&= \frac{1}{\sqrt{\ell^2 + \sigma_1^2 + \sigma_2^2}}\exp\left(-\frac{(\mu_1 - \mu_2)^2}{2(\ell^2 + \sigma_1^2 + \sigma_2^2)}\right)
+	&= \frac{1}{\sqrt{\ell^2 + \sigma_1^2 + \sigma_2^2}}\exp\left(-\frac{(\mu_1 - \mu_2)^2}{2(\ell^2 + \sigma_1^2 + \sigma_2^2)}\right).
 \end{align} 
 
 The first fact one may observe is that unlike the KL divergence, the kernel divergence is bounded from above by $\nicefrac{2}{\ell}$. This upper bound is approached when computing divergence between two infinitesimally narrow Gaussians $\sigma_1,\sigma_2\approx 0$ that are far apart $\vert \mu_1 - \mu_2 \vert > 0$. The divergence is also bounded from below by $0$ and it is $0$ exactly when the two distributions are identical, confirming that this kernel function gives rise to a strictly proper scoring rule.
 
 The Brier score is a special case of this divergence as the length-scale of the kernel $\ell$ decreases to $0$. In that case we obtain the following expression:
-
+%
 \begin{equation}
-	\divergence{Brier}{\Normal_{\mu_1,\sigma_1}}{\Normal_{\mu_2,\sigma_2}} = \frac{1}{\sqrt{2\sigma_1^2}} + \frac{1}{\sqrt{2\sigma_2^2}} - \frac{2}{\sqrt{\sigma_1^2 + \sigma_2^2}}\exp\left(-\frac{(\mu_1 - \mu_2)^2}{2(\sigma_1^2 + \sigma_2^2)}\right)
+	\divergence{Brier}{\Normal_{\mu_1,\sigma_1}}{\Normal_{\mu_2,\sigma_2}} = \frac{1}{\sqrt{2\sigma_1^2}} + \frac{1}{\sqrt{2\sigma_2^2}} - \frac{2}{\sqrt{\sigma_1^2 + \sigma_2^2}}\exp\left(-\frac{(\mu_1 - \mu_2)^2}{2(\sigma_1^2 + \sigma_2^2)}\right).
 \end{equation}
-
+%
 We can immediately see that unlike the kernel score with a positive length-scale, the Brier score is not bounded from above. It diverges for very small values of the variances $\sigma_1$ and $\sigma_2$. It is still non-negative and strictly proper.
 
 To illustrate the differences between the various divergences between Gaussian distributions, we first applied the ISOMAP embedding technique to the one-dimensional manifold of zero-mean Gaussians, whose sole free parameter is the standard deviation. I chose a logarithmically spaced grid of standard deviation values, then used the ISOMAP algorithm to embed the distributions on the real line. The logarithmic spacing is useful as the KL divergence now depends only on the difference in the logarithm of variances, therefore when these distributions are embedded according to the KL divergence, we expect to get a uniform, linearly spaced grid.
@@ -244,17 +254,17 @@ These figures highlight how the choice of the kernel allows us to fine-tune prop
 \subsection{Gamma distributions}
 
 We can look at the geometry Shannon's entropy induces within another two-parameter family of continuous distributions, Gamma distributions. Gamma distributions are strictly positive, their probability density function of Gamma distributions is as follows:
-
+%
 \begin{equation}
-(x) = \beta^{\alpha}\frac{1}{\Gamma(\alpha)} x^{\alpha-1} \exp(-\beta x)
+(x) = \beta^{\alpha}\frac{1}{\Gamma(\alpha)} x^{\alpha-1} \exp(-\beta x),
 \end{equation}
-
+%
 where $\alpha,\beta > 0$ are called shape and rate parameters respectively. Special cases of Gamma distributions are exponential distributions when $\alpha=1$.
 
 The KL divergence between Gamma distributions can be computed in closed form and is given by the following formula:
-
+%
 \begin{equation}
-	\KL{\Gamma_{\alpha_1,\beta_1}}{\Gamma_{\alpha_2,\beta_2}} = \left(\alpha_1 - \alpha_2\right)\psi\left(\alpha_1\right) - \log\frac{\Gamma(\alpha_1)}{\Gamma(\alpha_2)} + \alpha_1\log\frac{\beta_1}{\beta_2} + \alpha_1\frac{\beta_2 - \beta_1}{\beta_1} \label{eqn:KL_Gamma}
+	\KL{\Gamma_{\alpha_1,\beta_1}}{\Gamma_{\alpha_2,\beta_2}} = \left(\alpha_1 - \alpha_2\right)\psi\left(\alpha_1\right) - \log\frac{\Gamma(\alpha_1)}{\Gamma(\alpha_2)} + \alpha_1\log\frac{\beta_1}{\beta_2} + \alpha_1\frac{\beta_2 - \beta_1}{\beta_1}. \label{eqn:KL_Gamma}
 \end{equation}
 
 \begin{figure}[t] % Gamma distribution - Shannon information statistical manifold
@@ -268,19 +278,19 @@ The KL divergence between Gamma distributions can be computed in closed form and
 
 
 For large values of $\alpha$ the standard deviation of the distribution shrinks, and by the central limit theorem, the distribution converges to a Gaussian. We can illustrate this convergence in the manifold structure. For this we first reparametrise the Gamma distribution in terms of its mean and standard deviation. The mean and standard deviation of a Gamma distribution with parameters $\alpha$ and $\beta$ are given by the following formulae:
-
+%
 \begin{align}
-	\mu &= \frac{\alpha}{\beta}\\
-	\sigma^2 &= \frac{\alpha}{\beta^2}
+	\mu &= \frac{\alpha}{\beta},\\
+	\sigma^2 &= \frac{\alpha}{\beta^2}.
 \end{align}
-
+%
 Solving for $\alpha$ and $\beta$ in these equations we get
-
+%
 \begin{align}
-	\alpha &= \frac{\mu^2}{\sigma^2}\\
-	\beta &= \frac{\mu}{\sigma^2}
+	\alpha &= \frac{\mu^2}{\sigma^2},\\
+	\beta &= \frac{\mu}{\sigma^2}.
 \end{align}
-
+%
 Plugging these into Eqn.\ \eqref{eqn:KL_Gamma} we can now map Gamma distributions with particular mean and variance. Figure \ref{fig:Gamma_meanvar} illustrates the manifold of Gamma distributions with mean $\mu\in[1,2]$ and standard deviation $\sigma\in[0.1,1]$. We can observe that as the variance increases, the manifold of Gamma distributions shows a fan-like structure very similarly that of Normal distributions in Figure \ref{fig:Normal_meanvar}. However, for larger variance, the distributions look less Gaussian, and the manifold becomes more asymmetric. The effect of the central limit theorem would perhaps be even more prominent for smaller values of $\sigma$, but for those cases that case Eqn.\ \eqref{eqn:KL_Gamma} becomes numerically imprecise making the approximate map projection harder to achieve.
 
 \section{Summary and conclusions}
@@ -289,7 +299,7 @@ Strictly proper scoring rules and associated Bregman divergences give rise to ri
 
 The visualisation of manifolds highlights key difference between scoring rules. As seen on Figures \ref{fig:Bernoulli_comparison} and \ref{fig:Bernoulli_squareddistance}, the logarithmic score is very sensitive to small probabilities. When this sensitivity is not desired, the Brier divergence is may be a better choice.
 
-As we will see in Chapters \ref{sec:approximate_inference} and \ref{sec:herding}, in certain applications, such as in quasi-Monte Carlo, the KL divergence cannot be used. Instead, algorithms like kernel herding use the maximum mean discrepancy. When using a squared exponential kernel, the kernel scoring rule and maximum mean discrepancy behave similarly to the logarithmic score and KL divergence (Fig.\ \ref{fig:Normal_kernel_comparison}). Hence, we can expect the algorithms minimising MMD to behave similarly to those that minimise KL divergence.
+As we see in Chapters \ref{sec:approximate_inference} and \ref{sec:herding}, in certain applications, such as in quasi-Monte Carlo, the KL divergence cannot be used. Instead, algorithms like kernel herding use the maximum mean discrepancy. When using a squared exponential kernel, the kernel scoring rule and maximum mean discrepancy behave similarly to the logarithmic score and KL divergence (Fig.\ \ref{fig:Normal_kernel_comparison}). Hence, we can expect the algorithms minimising MMD to behave similarly to those that minimise KL divergence.
 
 The freedom to choose the kernel provides additional control over the behaviour of the divergence. By selecting the length-scale of a squared exponential kernel, one can fine-tune the divergence to the task at hand, as illustrated in Figures \ref{fig:Normal_kernel_comparison} and \ref{fig:Normal_varonly_comparison}. This also poses a practical problem, as there are currently no general methods for choosing the ideal kernel based on data.
 

@@ -7,7 +7,6 @@
 ## Abstract and Introducuction
  - removed unnecessary references to information geometry
 
-
 ## Chapter 1
  - New Section 1.3.3 on Composite likelihoods, with connection to pseudo-likelihood and mention of sandwich operator
  - mentioned Integral Squared Error (ISE) in section 1.3.4 (Brier score) section 1.3.6 (kernel score, MMD)
@@ -35,6 +34,3 @@
  - did not include error bars (would have made figures very crowded) but discussed that most differences are not significant
  - changed the exposition of results to be more honest
  - discussed that classification/preference learning are not very challenging problems
-
-## Chapter 6 - Quantum Tomography
-
