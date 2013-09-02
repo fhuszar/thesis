@@ -1,6 +1,7 @@
 # List of corrections and changes made
 
 ## General
+ - toned down information geometry angle
  - fixed punctuation of equations
  - corrected typos and wording
 
