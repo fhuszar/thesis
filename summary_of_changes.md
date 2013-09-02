@@ -35,3 +35,6 @@
  - did not include error bars (would have made figures very crowded) but discussed that most differences are not significant
  - changed the exposition of results to be more honest
  - discussed that classification/preference learning are not very challenging problems
+
+## Chapter 6 - quantum tomography
+ - added reference to experimental follow-up study that has since been published (in Physical Review A as well)
